@@ -1,0 +1,36 @@
+---
+const testimonials = [
+  {
+    text: "Big fan of your themes. They're well-organized, look clean, and are fast.",
+    name: "Kevin Focke",
+    role: "Developer",
+  },
+  {
+    text: "Amazing resource using @astrodotbuild and @tailwindcss! I got it a week ago and have found the contents really useful. 5/5",
+    name: "Alonso",
+    role: "Entrepreneur",
+  },
+];
+---
+
+<div
+  class="shadow-xl dark:shadow-dark rounded-3xl p-8 2xl:p-12 lg:row-start-4 h-full flex flex-col justify-between bg-zinc-100 dark:bg-zinc-900"
+>
+  <p class="text-xl font-medium text-zinc-950 dark:text-zinc-100 2xl::text-6xl">
+    Testimonials
+  </p>
+  <div class="md:grid md:grid-cols-2 gap-6 lg:grid-cols-1">
+    {
+      testimonials.map((testimonial) => (
+        <div class="mt-4">
+          <p class="text-xl text-zinc-500 dark:text-zinc-300 2xl:text-3xl">
+            {testimonial.text}
+          </p>
+          <p class="text-base 2xl:text-lg mt-2 text-zinc-400 dark:text-zinc-50">
+            {testimonial.name} —{testimonial.role}
+          </p>
+        </div>
+      ))
+    }
+  </div>
+</div>

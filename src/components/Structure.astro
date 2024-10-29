@@ -1,0 +1,34 @@
+---
+import Intro from "./Intro.astro";
+import Socials from "./Socials.astro";
+import Resume from "./Resume.astro";
+import ProjectOne from "./ProjectOne.astro";
+import ProjectTwo from "./ProjectTwo.astro";
+import FigmaCta from "./FigmaCta.astro";
+import Testimonials from "./Testimonials.astro";
+import Outro from "./Outro.astro";
+import Newsletter from "./Newsletter.astro";
+---
+
+<section>
+  <div class="p-4">
+    <div
+      class="grid grid-cols-1 gap-4 list-none lg:grid-cols-3 lg:grid-rows-3 xl:grid-cols-4 xl:grid-rows-4"
+    >
+      <!----
+    // Keep the cards in this order to avoid breaking the layout.
+    //
+    // To adjust the card order, modify the layout within the component itself.
+    ---->
+      <Intro />
+      <Socials />
+      <ProjectTwo />
+      <Resume />
+      <FigmaCta />
+      <ProjectOne />
+      <Newsletter />
+      <Testimonials />
+      <Outro />
+    </div>
+  </div>
+</section>

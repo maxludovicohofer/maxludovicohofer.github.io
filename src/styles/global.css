@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@theme {
+  --border-radius-4xl: 2rem;
+  --border-radius-5xl: 3rem;
+  --border-radius-6xl: 5rem;
+  --box-shadow-dark: 0px 7px 32px rgb(0 0 0 / 35%);
+  --font-sans: Inter , sans-serif;
+}
