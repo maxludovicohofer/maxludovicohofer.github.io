@@ -1,8 +1,33 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Structure from "../components/Structure.astro";
+import Page from "@layouts/Page.astro";
+import Intro from "@components/index/Intro.astro";
+import Socials from "@components/index/Socials.astro";
+import Resume from "@components/index/Resume.astro";
+import ProjectOne from "@components/index/ProjectOne.astro";
+import ProjectTwo from "@components/index/ProjectTwo.astro";
+import FigmaCta from "@components/index/FigmaCta.astro";
+import Testimonials from "@components/index/Testimonials.astro";
+import Outro from "@components/index/Outro.astro";
+import Newsletter from "@components/index/Newsletter.astro";
 ---
 
-<Layout title="Welcome to Astro.">
-  <Structure />
-</Layout>
+<Page title="Max Hofer \\ Game Designer">
+  <div
+    class="grid grid-cols-1 gap-4 list-none lg:grid-cols-3 lg:grid-rows-3 xl:grid-cols-4 xl:grid-rows-4"
+  >
+    <!----
+    // Keep the cards in this order to avoid breaking the layout.
+    //
+    // To adjust the card order, modify the layout within the component itself.
+    ---->
+    <Intro />
+    <Socials />
+    <ProjectTwo />
+    <Resume />
+    <FigmaCta />
+    <ProjectOne />
+    <Newsletter />
+    <Testimonials />
+    <Outro />
+  </div>
+</Page>
