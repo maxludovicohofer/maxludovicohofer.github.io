@@ -1,0 +1,13 @@
+---
+interface Props {
+  tailwind?: string;
+}
+
+const { tailwind } = Astro.props;
+---
+
+<div
+  class=`rounded-3xl bg-zinc-100 dark:bg-zinc-900 shadow-xl dark:shadow-dark p-8 2xl:p-12 ${tailwind ?? ""}`
+>
+  <slot />
+</div>

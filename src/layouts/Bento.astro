@@ -1,0 +1,22 @@
+---
+import Card from "@layouts/Card.astro";
+// TODO CONTINUA A SOSTITUIRE I DIV CON CARD
+---
+
+<div
+  class="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-3 xl:grid-cols-4 xl:grid-rows-4 gap-4"
+>
+  <Card tailwind="lg:row-span-2">
+    <slot name="main-text" />
+  </Card>
+  <Card>
+    <slot name="buttons" />
+  </Card>
+  <slot name="project" />
+  <slot name="call-to-action" />
+  <slot name="call-to-action2" />
+  <slot name="project2" />
+  <slot name="call-to-action3" />
+  <slot name="buttons2" />
+  <slot name="end-text" />
+</div>

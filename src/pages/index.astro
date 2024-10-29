@@ -9,25 +9,19 @@ import FigmaCta from "@components/index/FigmaCta.astro";
 import Testimonials from "@components/index/Testimonials.astro";
 import Outro from "@components/index/Outro.astro";
 import Newsletter from "@components/index/Newsletter.astro";
+import Bento from "@layouts/Bento.astro";
 ---
 
 <Page title="Max Hofer \\ Game Designer">
-  <div
-    class="grid grid-cols-1 gap-4 list-none lg:grid-cols-3 lg:grid-rows-3 xl:grid-cols-4 xl:grid-rows-4"
-  >
-    <!----
-    // Keep the cards in this order to avoid breaking the layout.
-    //
-    // To adjust the card order, modify the layout within the component itself.
-    ---->
-    <Intro />
-    <Socials />
-    <ProjectTwo />
-    <Resume />
-    <FigmaCta />
-    <ProjectOne />
-    <Newsletter />
-    <Testimonials />
-    <Outro />
-  </div>
+  <Bento>
+    <Intro slot="main-text" />
+    <Socials slot="buttons" />
+    <ProjectTwo slot="project" />
+    <Resume slot="call-to-action" />
+    <FigmaCta slot="call-to-action2" />
+    <ProjectOne slot="project2" />
+    <Newsletter slot="call-to-action3" />
+    <Testimonials slot="buttons2" />
+    <Outro slot="end-text" />
+  </Bento>
 </Page>
