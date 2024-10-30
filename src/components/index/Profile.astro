@@ -10,8 +10,9 @@ import LinkedIn from "@images/logos/linkedin.svg?raw";
 <div class="flex items-center gap-x-4">
   <Image
     src={Picture}
-    alt="Picture of Max Ludovico Hofer"
+    alt="Close up of Max Ludovico Hofer"
     class="rounded-full size-14 2xl:size-20"
+    loading="eager"
   />
   <div class="text-sm 2xl:text-xl leading-6">
     <Text title>Max Ludovico Hofer</Text>
@@ -19,7 +20,7 @@ import LinkedIn from "@images/logos/linkedin.svg?raw";
       <Link
         href="https://linkedin.com/in/maxludovicohofer"
         className="size-6 2xl:size-24 hover:scale-125 duration-50"
-        ><Fragment set:html={LinkedIn} alt="The LinkedIn logo" /></Link
+        ><Fragment set:html={LinkedIn} /></Link
       >
     </div>
   </div>
