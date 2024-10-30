@@ -1,0 +1,14 @@
+---
+interface Props {
+  inline?: boolean;
+  className?: string;
+}
+
+const { inline, className } = Astro.props;
+
+const finalClass = `rounded-lg h-12 2xl:h-16 bg-zinc-950 hover:bg-zinc-950/10 dark:bg-zinc-100 dark:hover:bg-zinc-100/5 text-sm 2xl:text-lg font-semibold text-zinc-100 hover:text-zinc-950 dark:text-zinc-950 dark:hover:text-zinc-100  duration-150 focus:ring-2 focus:ring-offset-2 focus:ring-inline-flex ${inline ? "" : "w-full"} ${className}`;
+---
+
+<button type="button" class={finalClass}>
+  <slot />
+</button>

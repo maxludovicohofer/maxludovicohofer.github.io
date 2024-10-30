@@ -1,0 +1,37 @@
+---
+import { Image } from "astro:assets";
+import Picture from "@images/profile-picture.png";
+import Link from "@layouts/Link.astro";
+import Text from "@layouts/Text.astro";
+import Button from "@layouts/Button.astro";
+
+//! Resume should not have contact info
+---
+
+<div class="flex items-center gap-x-4">
+  <Image
+    src={Picture}
+    alt="Picture of Max Ludovico Hofer"
+    class="rounded-full size-14 2xl:size-20"
+  />
+  <div class="text-sm 2xl:text-xl leading-6">
+    <Text title>Max Ludovico Hofer</Text>
+    <div class="flex gap-2">
+      <Link href="https://linkedin.com/in/maxludovicohofer">LinkedIn</Link>
+    </div>
+  </div>
+</div>
+<Text title className="mt-6 text-3xl lg:text-4xl 2xl:text-7xl"
+  >Creating fun is both a science and an art</Text
+>
+<Text className="mt-6 text-xl 2xl:text-3xl"
+  >Innovative game designer with experience in leadership, specializing in core
+  mechanics, combat, AI and systems.
+  <br />
+  <br />
+  I strive to design deeply involving experiences which evolve the concept of videogame,
+  using the latest tech and research available.</Text
+>
+<Link href="public-resume.pdf">
+  <Button className="mt-10">View my resume</Button></Link
+>

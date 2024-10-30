@@ -1,27 +1,27 @@
 ---
 import Page from "@layouts/Page.astro";
-import Intro from "@components/index/Intro.astro";
-import Socials from "@components/index/Socials.astro";
-import Resume from "@components/index/Resume.astro";
-import ProjectOne from "@components/index/ProjectOne.astro";
-import ProjectTwo from "@components/index/ProjectTwo.astro";
-import FigmaCta from "@components/index/FigmaCta.astro";
-import Testimonials from "@components/index/Testimonials.astro";
-import Outro from "@components/index/Outro.astro";
-import Newsletter from "@components/index/Newsletter.astro";
 import Bento from "@layouts/Bento.astro";
+import Profile from "@components/index/Profile.astro";
+import Showreel from "@components/index/Showreel.astro";
+import Style from "@components/index/Style.astro";
+import HighlightProject from "@components/index/HighlightProject.astro";
+import Post from "@components/index/Post.astro";
+import ImportantProject from "@components/index/ImportantProject.astro";
+import Tech from "@components/index/Tech.astro";
+import Projects from "@components/index/Projects.astro";
+import Opinions from "@components/index/Opinions.astro";
 ---
 
 <Page title="Max Hofer \\ Game Designer">
   <Bento>
-    <Intro slot="1-medium" />
-    <Socials slot="2-small" />
-    <Resume slot="3-small" />
-    <ProjectTwo slot="4-large" />
-    <FigmaCta slot="5-small" />
-    <ProjectOne slot="6-medium" />
-    <Newsletter slot="7-medium" />
-    <Testimonials slot="8-small" />
-    <Outro slot="9-large" />
+    <Profile slot="1-medium" />
+    <Showreel slot="2-small" />
+    <Style slot="3-small" />
+    <HighlightProject slot="4-large" />
+    <Post slot="5-small" />
+    <ImportantProject slot="6-medium" />
+    <Projects slot="7-medium" />
+    <Tech slot="8-small" />
+    <Opinions slot="9-large" />
   </Bento>
 </Page>
