@@ -7,7 +7,7 @@ const { tailwind } = Astro.props;
 ---
 
 <div
-  class=`rounded-3xl bg-zinc-100 dark:bg-zinc-900 shadow-xl dark:shadow-dark p-8 2xl:p-12 ${tailwind ?? ""}`
+  class=`rounded-3xl bg-zinc-100 dark:bg-zinc-900 shadow-xl dark:shadow-dark p-8 2xl:p-12 overflow-hidden ${tailwind ?? ""}`
 >
   <slot />
 </div>

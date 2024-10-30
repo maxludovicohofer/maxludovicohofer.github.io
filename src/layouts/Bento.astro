@@ -12,10 +12,18 @@ import Card from "@layouts/Card.astro";
   <Card>
     <slot name="buttons" />
   </Card>
-  <slot name="project" />
-  <slot name="call-to-action" />
-  <slot name="call-to-action2" />
-  <slot name="project2" />
+  <Card tailwind="lg:row-start-2 lg:row-span-2  lg:col-start-2 lg:col-span-2">
+    <slot name="project" />
+  </Card>
+  <Card>
+    <slot name="call-to-action" />
+  </Card>
+  <Card tailwind="lg:row-start-3">
+    <slot name="call-to-action2" />
+  </Card>
+  <Card tailwind="lg:row-span-2">
+    <slot name="project2" />
+  </Card>
   <slot name="call-to-action3" />
   <slot name="buttons2" />
   <slot name="end-text" />
