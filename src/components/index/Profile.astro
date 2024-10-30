@@ -4,8 +4,7 @@ import Picture from "@images/profile-picture.png";
 import Link from "@layouts/Link.astro";
 import Text from "@layouts/Text.astro";
 import Button from "@layouts/Button.astro";
-
-//! Resume should not have contact info
+import LinkedIn from "@images/logos/linkedin.svg?raw";
 ---
 
 <div class="flex items-center gap-x-4">
@@ -17,7 +16,11 @@ import Button from "@layouts/Button.astro";
   <div class="text-sm 2xl:text-xl leading-6">
     <Text title>Max Ludovico Hofer</Text>
     <div class="flex gap-2">
-      <Link href="https://linkedin.com/in/maxludovicohofer">LinkedIn</Link>
+      <Link
+        href="https://linkedin.com/in/maxludovicohofer"
+        className="size-6 2xl:size-24 hover:scale-125 duration-50"
+        ><Fragment set:html={LinkedIn} alt="The LinkedIn logo" /></Link
+      >
     </div>
   </div>
 </div>
