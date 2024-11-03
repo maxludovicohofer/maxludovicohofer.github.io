@@ -5,37 +5,36 @@ import Link from "@layouts/Link.astro";
 import Text from "@layouts/Text.astro";
 import Button from "@layouts/Button.astro";
 import LinkedIn from "@images/logos/linkedin.svg?raw";
+import Post from "@layouts/Post.astro";
 ---
 
-<div class="flex items-center gap-x-4">
-  <Image
-    src={Picture}
-    alt="Close up of Max Ludovico Hofer"
-    class="rounded-full size-14 2xl:size-20"
-    loading="eager"
-  />
-  <div class="text-sm 2xl:text-xl leading-6">
-    <Text title>Max Ludovico Hofer</Text>
-    <div class="flex gap-2">
-      <Link
-        href="https://linkedin.com/in/maxludovicohofer"
-        className="size-6 2xl:size-24 hover:scale-125 duration-50"
-        ><Fragment set:html={LinkedIn} /></Link
-      >
+<Post>
+  <div slot="header" class="flex items-center gap-x-4">
+    <Image
+      src={Picture}
+      alt="Close up of Max Ludovico Hofer"
+      class="rounded-full size-14 2xl:size-20"
+      loading="eager"
+    />
+    <div>
+      <Text title>Max Ludovico Hofer</Text>
+      <div class="flex gap-2">
+        <Link
+          href="https://linkedin.com/in/maxludovicohofer"
+          className="size-6 2xl:size-24 hover:scale-125 duration-50"
+          ><Fragment set:html={LinkedIn} /></Link
+        >
+      </div>
     </div>
   </div>
-</div>
-<Text title className="mt-6 text-3xl lg:text-4xl 2xl:text-7xl"
-  >Creating fun is both a science and an art</Text
->
-<Text className="mt-6 text-xl 2xl:text-3xl"
-  >Innovative game designer with experience in leadership, specializing in core
-  mechanics, combat, AI and systems.
+  <Fragment slot="title">Creating fun is both a science and an art</Fragment>
+  Innovative game designer with experience in leadership, specializing in core mechanics,
+  combat, AI and systems.
   <br />
   <br />
   I strive to design deeply involving experiences which evolve the concept of videogame,
-  using the latest tech and research available.</Text
->
-<Link href="public-resume.pdf">
-  <Button className="mt-10">View my resume</Button></Link
->
+  using the latest tech and research available.
+  <Link href="public-resume.pdf">
+    <Button className="mt-10">View my resume</Button></Link
+  >
+</Post>

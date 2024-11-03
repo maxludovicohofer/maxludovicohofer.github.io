@@ -1,12 +1,13 @@
 ---
 interface Props {
   inline?: boolean;
+  readMore?: boolean;
   className?: string;
 }
 
-const { inline, className } = Astro.props;
+const { inline, readMore, className } = Astro.props;
 
-const finalClass = `rounded-lg h-12 2xl:h-16 bg-zinc-950 hover:bg-zinc-950/10 dark:bg-zinc-100 dark:hover:bg-zinc-100/5 text-sm 2xl:text-lg font-semibold text-zinc-100 hover:text-zinc-950 dark:text-zinc-950 dark:hover:text-zinc-100 duration-50 focus:ring-2 focus:ring-offset-2 focus:ring-inline-flex ${inline ? "" : "w-full"} ${className}`;
+const finalClass = `${readMore ? "" : "rounded-lg"} h-10 2xl:h-14 bg-zinc-950 hover:bg-yellow-600 dark:bg-zinc-100 dark:hover:bg-yellow-300 text-sm 2xl:text-lg font-semibold text-zinc-100 dark:text-zinc-950 duration-50 focus:ring-2 focus:ring-offset-2 focus:ring-inline-flex ${inline ? "" : "w-full"} ${className}`;
 ---
 
 <button type="button" class={finalClass}>

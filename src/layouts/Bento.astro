@@ -3,7 +3,7 @@ import Card from "@layouts/Card.astro";
 ---
 
 <div
-  class="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-3 xl:grid-cols-4 xl:grid-rows-4 gap-4"
+  class="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-3 xl:grid-cols-4 xl:grid-rows-4 gap-4 max-h-[150rem]"
 >
   <Card className="lg:row-span-2">
     <slot name="1-medium" />
@@ -11,25 +11,28 @@ import Card from "@layouts/Card.astro";
   <Card fill>
     <slot name="2-small" />
   </Card>
-  <Card>
+  <Card readMore>
     <slot name="3-small" />
   </Card>
-  <Card className="lg:row-start-2 lg:row-span-2 lg:col-start-2 lg:col-span-2">
+  <Card
+    className="lg:row-start-2 lg:row-span-2 lg:col-start-2 lg:col-span-2"
+    readMore
+  >
     <slot name="4-large" />
   </Card>
-  <Card className="lg:row-start-3">
+  <Card className="lg:row-start-3" readMore>
     <slot name="5-small" />
   </Card>
-  <Card className="lg:row-start-4 lg:col-span-2">
+  <Card className="lg:row-start-4 lg:col-span-2" readMore>
     <slot name="6-medium" />
   </Card>
-  <Card className="lg:row-span-2">
+  <Card className="lg:row-span-2" readMore>
     <slot name="7-medium" />
   </Card>
-  <Card className="lg:row-start-4">
+  <Card className="lg:row-start-4" readMore>
     <slot name="8-small" />
   </Card>
-  <Card className="lg:row-span-2 lg:col-span-2 xl:col-span-1">
+  <Card className="lg:row-span-2 lg:col-span-2 xl:col-span-1" readMore>
     <slot name="9-large" />
   </Card>
 </div>
