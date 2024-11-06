@@ -8,7 +8,7 @@ import LinkedIn from "@images/logos/linkedin.svg?raw";
 import Post from "@layouts/Post.astro";
 ---
 
-<Post>
+<Post importance={1}>
   <div slot="header" class="flex items-center gap-x-4">
     <Image
       src={Picture}
@@ -21,8 +21,7 @@ import Post from "@layouts/Post.astro";
       <div class="flex gap-2">
         <Link
           href="https://linkedin.com/in/maxludovicohofer"
-          className="size-6 2xl:size-24 hover:scale-125 duration-50"
-          ><Fragment set:html={LinkedIn} /></Link
+          className="size-6 2xl:size-12"><Fragment set:html={LinkedIn} /></Link
         >
       </div>
     </div>

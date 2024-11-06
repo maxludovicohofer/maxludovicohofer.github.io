@@ -8,12 +8,18 @@ interface Props {
   loop?: boolean;
 }
 
-const { title, youtubeID, color, autoplay, mute, loop } = Astro.props;
+const {
+  title,
+  youtubeID = "",
+  color = "white",
+  autoplay = true,
+  mute = true,
+  loop = true,
+} = Astro.props;
 
-const boolToAPIParam = (value: boolean | undefined, defaultValue?: boolean) =>
-  (value ?? defaultValue) ? 1 : 0;
+const boolToInt = (value: boolean) => (value ? 1 : 0);
 
-const src = `https://www.youtube.com/embed/${youtubeID}?color=${color ?? "white"}&autoplay=${boolToAPIParam(autoplay, true)}&mute=${boolToAPIParam(mute, true)}&loop=${boolToAPIParam(loop, true)}&playlist=${youtubeID}`;
+const src = `https://www.youtube.com/embed/${youtubeID}?color=${color}&autoplay=${boolToInt(autoplay)}&mute=${boolToInt(mute)}&loop=${boolToInt(loop)}&playlist=${youtubeID}`;
 ---
 
 <iframe title={title} src={src} class="size-full aspect-video" allowfullscreen

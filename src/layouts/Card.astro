@@ -7,11 +7,13 @@ interface Props {
   className?: string;
 }
 
-const { fill, readMore, className } = Astro.props;
+const { fill, readMore, className = "" } = Astro.props;
 
-const outerClass = `rounded-3xl bg-zinc-100 dark:bg-zinc-900 shadow-xl dark:shadow-dark overflow-hidden relative ${className ?? ""}`;
+const outerClass = `rounded-3xl bg-zinc-100 dark:bg-zinc-900 shadow-xl dark:shadow-dark overflow-hidden relative group ${className}`;
 
 const innerClass = `size-full ${fill ? "" : "p-8 2xl:p-12"}`;
+
+// TODO EVALUATE READ TIME AUTOMATICALLY BASED ON POST LENGTH
 ---
 
 <div class={outerClass}>
@@ -21,7 +23,8 @@ const innerClass = `size-full ${fill ? "" : "p-8 2xl:p-12"}`;
   {
     readMore && (
       <Button readMore className="absolute bottom-0">
-        ▼
+        Read in 1 min
+        <br />▼
       </Button>
     )
   }

@@ -12,6 +12,8 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/tailwind": "^5.1.2",
+    "@sentry/astro": "^8.37.1",
+    "@spotlightjs/astro": "^2.1.11",
     "astro": "^4.16.7",
     "tailwindcss": "^3.4.14",
     "typescript": "^5.6.3"
