@@ -5,6 +5,9 @@ const projects = defineCollection({
   schema: z.object({
     draft: z.boolean().optional(),
     title: z.string(),
+    description: z.string(),
+    roles: z.array(z.string()),
+    engine: z.enum(["Unreal Engine", "Unity"]),
   }),
 });
 

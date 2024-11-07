@@ -14,14 +14,23 @@ const { Content, remarkPluginFrontmatter } = content
   ? await content.render()
   : { Content: undefined };
 
+// It is assumed that a person reads for approximately 1 minute before clicking read more
+const minutesAlreadySpentReading = 1;
+
 const minutesToRead = remarkPluginFrontmatter
-  ? Math.max(Math.round(remarkPluginFrontmatter.minutesRead), 1)
+  ? Math.max(
+      Math.round(remarkPluginFrontmatter.minutesRead) -
+        minutesAlreadySpentReading,
+      1
+    )
   : 0;
 
 const titleClass =
   importance == 1
-    ? "text-3xl md:text-2xl 2xl:text-3xl"
-    : "text-3xl 2xl:text-5xl";
+    ? "text-3xl lg:text-2xl 2xl:text-3xl"
+    : importance == 2
+      ? "text-3xl 2xl:text-5xl"
+      : "text-3xl lg:text-5xl 2xl:text-8xl";
 ---
 
 {
