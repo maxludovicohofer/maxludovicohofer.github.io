@@ -1,9 +1,12 @@
 ---
 import Text from "@layouts/Text.astro";
+import Prose from "@layouts/Prose.astro";
 
 interface Props {
   importance?: 1 | 2 | 3;
 }
+
+// TODO PROSE AND TEXT SHOULD BE IN THE SAME COMPONENT??
 
 const { importance = 2 } = Astro.props;
 
@@ -21,4 +24,4 @@ const titleClass =
   )
 }
 <Text title className={titleClass}><slot name="title" /></Text>
-<Text className="mt-6 text-xl 2xl:text-3xl"><slot /></Text>
+<Text className="mt-6 text-xl 2xl:text-3xl"><Prose><slot /></Prose></Text>

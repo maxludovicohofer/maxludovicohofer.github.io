@@ -6,6 +6,7 @@ interface Props {
   autoplay?: boolean;
   mute?: boolean;
   loop?: boolean;
+  loading?: "eager" | "lazy";
 }
 
 const {
@@ -15,6 +16,7 @@ const {
   autoplay = true,
   mute = true,
   loop = true,
+  loading,
 } = Astro.props;
 
 const boolToInt = (value: boolean) => (value ? 1 : 0);
@@ -22,5 +24,9 @@ const boolToInt = (value: boolean) => (value ? 1 : 0);
 const src = `https://www.youtube.com/embed/${youtubeID}?color=${color}&autoplay=${boolToInt(autoplay)}&mute=${boolToInt(mute)}&loop=${boolToInt(loop)}&playlist=${youtubeID}`;
 ---
 
-<iframe title={title} src={src} class="size-full aspect-video" allowfullscreen
-></iframe>
+<iframe
+  title={title}
+  src={src}
+  class="size-full aspect-video"
+  allowfullscreen
+  loading={loading}></iframe>
