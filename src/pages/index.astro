@@ -2,24 +2,32 @@
 import Page from "@layouts/Page.astro";
 import Bento from "@layouts/Bento.astro";
 import Profile from "@components/index/Profile.astro";
-import Showreel from "@components/index/Showreel.astro";
-import Style from "@components/index/Style.astro";
-import HighlightProject from "@components/index/HighlightProject.astro";
-import Post from "@components/index/Post.astro";
-import ImportantProject from "@components/index/ImportantProject.astro";
+import Post from "@layouts/Post.astro";
 import Tech from "@components/index/Tech.astro";
 import Projects from "@components/index/Projects.astro";
 import Opinions from "@components/index/Opinions.astro";
+import { getEntry } from "astro:content";
+import Video from "@layouts/Video.astro";
+
+const style = await getEntry("thoughts", "style");
+const highlightProject = await getEntry("projects", "steelsilk-championship");
+const latestThought = await getEntry("thoughts", "debugging-fun");
+const latestProject = await getEntry("projects", "hexelied");
 ---
 
 <Page title="Max Hofer \\ Game Designer">
   <Bento>
     <Profile slot="1-medium" />
-    <Showreel slot="2-small" />
-    <Style slot="3-small" />
-    <HighlightProject slot="4-large" />
-    <Post slot="5-small" />
-    <ImportantProject slot="6-medium" />
+    <Video
+      slot="2-small"
+      title="Showreel"
+      youtubeID="m0KhK_J0LiQ"
+      loading="lazy"
+    />
+    <Post slot="3-small" content={style} />
+    <Post slot="4-large" content={highlightProject} importance={3} />
+    <Post slot="5-small" content={latestThought} />
+    <Post slot="6-medium" content={latestProject} />
     <Projects slot="7-medium" />
     <Tech slot="8-small" />
     <Opinions slot="9-large" />

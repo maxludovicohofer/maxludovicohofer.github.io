@@ -1,14 +1,23 @@
 ---
 import Text from "@layouts/Text.astro";
-import Prose from "@layouts/Prose.astro";
+import type { CollectionEntry } from "astro:content";
+import { undefined } from "astro:schema";
+import Button from "./Button.astro";
 
 interface Props {
+  content?: CollectionEntry<"thoughts"> | CollectionEntry<"projects">;
   importance?: 1 | 2 | 3;
 }
 
-// TODO PROSE AND TEXT SHOULD BE IN THE SAME COMPONENT??
+const { importance = 2, content } = Astro.props;
 
-const { importance = 2 } = Astro.props;
+const { Content, remarkPluginFrontmatter } = content
+  ? await content.render()
+  : { Content: undefined };
+
+const minutesToRead = remarkPluginFrontmatter
+  ? Math.max(Math.round(remarkPluginFrontmatter.minutesRead), 1)
+  : 0;
 
 const titleClass =
   importance == 1
@@ -23,5 +32,17 @@ const titleClass =
     </div>
   )
 }
-<Text title className={titleClass}><slot name="title" /></Text>
-<Text className="mt-6 text-xl 2xl:text-3xl"><Prose><slot /></Prose></Text>
+<Text title className={titleClass}
+  >{content?.data.title ?? <slot name="title" />}</Text
+>
+<Text className="mt-6 text-xl 2xl:text-3xl" markdown={!!Content}
+  >{Content ? <Content /> : <slot />}</Text
+>
+{
+  content && (
+    <Button readMore className="absolute bottom-0 -mx-8">
+      Read in {minutesToRead} min
+      <br />▼
+    </Button>
+  )
+}

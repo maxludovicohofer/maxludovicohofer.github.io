@@ -11,28 +11,25 @@ import Card from "@layouts/Card.astro";
   <Card fill>
     <slot name="2-small" />
   </Card>
-  <Card readMore>
+  <Card>
     <slot name="3-small" />
   </Card>
-  <Card
-    className="lg:row-start-2 lg:row-span-2 lg:col-start-2 lg:col-span-2"
-    readMore
-  >
+  <Card className="lg:row-start-2 lg:row-span-2 lg:col-start-2 lg:col-span-2">
     <slot name="4-large" />
   </Card>
-  <Card className="lg:row-start-3" readMore>
+  <Card className="lg:row-start-3">
     <slot name="5-small" />
   </Card>
-  <Card className="lg:row-start-4 lg:col-span-2" readMore>
+  <Card className="lg:row-start-4 lg:col-span-2">
     <slot name="6-medium" />
   </Card>
-  <Card className="lg:row-span-2" readMore>
+  <Card className="lg:row-span-2">
     <slot name="7-medium" />
   </Card>
-  <Card className="lg:row-start-4" readMore>
+  <Card className="lg:row-start-4">
     <slot name="8-small" />
   </Card>
-  <Card className="lg:row-span-2 lg:col-span-2 xl:col-span-1" readMore>
+  <Card className="lg:row-span-2 lg:col-span-2 xl:col-span-1">
     <slot name="9-large" />
   </Card>
 </div>

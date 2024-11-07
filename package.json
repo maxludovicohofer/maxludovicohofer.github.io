@@ -15,6 +15,8 @@
     "@sentry/astro": "^8.37.1",
     "@spotlightjs/astro": "^2.1.11",
     "astro": "^4.16.7",
+    "mdast-util-to-string": "^4.0.0",
+    "reading-time": "^1.5.0",
     "tailwindcss": "^3.4.14",
     "typescript": "^5.6.3"
   },
