@@ -1,32 +1,188 @@
 ---
-const testimonials = [
+import Post from "@layouts/Post.astro";
+import Text from "@layouts/Text.astro";
+
+interface TechFunction {
+  name: string;
+  experienceYears: number;
+}
+
+const tech: {
+  name: string;
+  experienceYears?: number;
+  functions: string[] | TechFunction[];
+}[] = [
   {
-    text: "Big fan of your themes. They're well-organized, look clean, and are fast.",
-    name: "Kevin Focke",
-    role: "Developer",
+    name: "Unreal Engine",
+    experienceYears: 5,
+    functions: [
+      "Landscape / foliage",
+      "Modeling",
+      "Visual scripting / editor extensions",
+      "Online / local multiplayer scripting",
+      "C++ scripting / engine extensions",
+      "Materials / shaders / textures",
+      "Niagara",
+      "Retargeting",
+      "UI",
+      "AI",
+      "Profiling",
+      "Source control",
+      "Level editor",
+      "Lighting",
+      "UV editor / mesh editor",
+      "Runtime virtual textures",
+      "Nanite",
+      "Procedural animation / Control rig",
+      "Animation blueprints / state machines / montages",
+      "MetaSound / audio",
+      "Cinematics / sequencer",
+    ],
   },
   {
-    text: "Amazing resource using @astrodotbuild and @tailwindcss! I got it a week ago and have found the contents really useful. 5/5",
-    name: "Alonso",
-    role: "Entrepreneur",
+    name: "Unity",
+    experienceYears: 1,
+    functions: [
+      "Scripting",
+      "Visual scripting",
+      "2D sprite painting",
+      "Custom decision tree AI system",
+    ],
+  },
+  {
+    name: "Programming languages / stacks:",
+    functions: [
+      { name: "C++", experienceYears: 5 },
+      { name: "C#", experienceYears: 5 },
+      { name: "Blueprints", experienceYears: 3 },
+      { name: "HLSL", experienceYears: 1 },
+      { name: "Python", experienceYears: 3 },
+      { name: "X86 assembly", experienceYears: 1 },
+      { name: "Full stack web development", experienceYears: 5 },
+      { name: "Mobile development", experienceYears: 2 },
+      { name: "Java", experienceYears: 2 },
+      { name: "SQL", experienceYears: 5 },
+      { name: "Amazon Web Services", experienceYears: 5 },
+    ],
+  },
+  {
+    name: "Houdini",
+    experienceYears: 0.5,
+    functions: ["Complex simulations", "Offline rendering", "Offline lighting"],
+  },
+  {
+    name: "Maya",
+    experienceYears: 1,
+    functions: [
+      "Modeling",
+      "UV",
+      "Retopology",
+      "Hard surface rigging",
+      "Animation",
+      "Blend shapes",
+      "Grooming with cards",
+    ],
+  },
+  {
+    name: "ZBrush",
+    experienceYears: 1,
+    functions: ["Sculpting", "Exporting maps"],
+  },
+  {
+    name: "Marvelous designer",
+    experienceYears: 0.5,
+    functions: ["Character clothing", "Cloth simulation"],
+  },
+  {
+    name: "Substance designer",
+    experienceYears: 0.5,
+    functions: ["Exporting maps", "Smart materials for painter"],
+  },
+  {
+    name: "Substance painter",
+    experienceYears: 0.5,
+    functions: ["Texturing", "Baking maps"],
+  },
+  {
+    name: "Photoshop",
+    experienceYears: 3,
+    functions: ["Creating alphas", "Modifying textures", "Editing pictures"],
+  },
+  {
+    name: "Illustrator",
+    experienceYears: 3,
+    functions: ["Creating UI elements"],
+  },
+  { name: "Krita", experienceYears: 0.5, functions: ["Concept drawings"] },
+  {
+    name: "After effects",
+    experienceYears: 3,
+    functions: ["Compositing", "Video effects"],
+  },
+  { name: "Premiere", experienceYears: 3, functions: ["Video editing"] },
+  { name: "FontLab", experienceYears: 1, functions: ["Creating custom fonts"] },
+  { name: "Gaea", experienceYears: 0.5, functions: ["Landscape generation"] },
+  {
+    name: "TouchDesigner",
+    experienceYears: 2,
+    functions: ["Real time VFX synced to sound"],
+  },
+  {
+    name: "FL Studio",
+    experienceYears: 15,
+    functions: [
+      "Music production",
+      "Sound design",
+      "Recording",
+      "Mixing & mastering",
+    ],
   },
 ];
+
+const isTechFunction = (func: string | TechFunction): func is TechFunction =>
+  !!(func as TechFunction).name;
 ---
 
-<p class="text-xl font-medium text-zinc-950 dark:text-zinc-100 2xl::text-6xl">
-  Testimonials
-</p>
-<div class="md:grid md:grid-cols-2 gap-6 lg:grid-cols-1">
-  {
-    testimonials.map((testimonial) => (
-      <div class="mt-4">
-        <p class="text-xl text-zinc-500 dark:text-zinc-300 2xl:text-3xl">
-          {testimonial.text}
-        </p>
-        <p class="text-base 2xl:text-lg mt-2 text-zinc-400 dark:text-zinc-50">
-          {testimonial.name} —{testimonial.role}
-        </p>
-      </div>
-    ))
-  }
-</div>
+<Post importance={1} readMore="link" divTag>
+  <Fragment slot="title">Tech</Fragment>
+  <ol class="space-y-4">
+    {
+      tech?.map(({ name, experienceYears, functions }) => (
+        <li>
+          <Text title className="inline">
+            {name}
+          </Text>
+          {experienceYears && (
+            <Text subtitle className="inline">
+              {experienceYears < 1
+                ? `${Math.round(experienceYears * 12)} months`
+                : experienceYears == 1
+                  ? `${experienceYears} year`
+                  : `${Math.round(experienceYears)} years`}{" "}
+              of experience
+            </Text>
+          )}
+          <ol class="ml-8">
+            {functions.map((func) => (
+              <li>
+                <Text className="inline">
+                  {isTechFunction(func) ? func.name : func}
+                </Text>
+                {isTechFunction(func) && (
+                  <Text subtitle className="inline">
+                    {func.experienceYears < 1
+                      ? `${Math.round(func.experienceYears * 12)} months`
+                      : func.experienceYears == 1
+                        ? `${func.experienceYears} year`
+                        : `${Math.round(func.experienceYears)} years`}{" "}
+                    of experience
+                  </Text>
+                )}
+              </li>
+            ))}
+          </ol>
+        </li>
+      ))
+    }
+  </ol>
+</Post>
