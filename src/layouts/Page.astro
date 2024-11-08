@@ -18,5 +18,10 @@ const { title } = Astro.props;
   </head>
   <body class="dark:bg-zinc-950 bg-zinc-200 p-4">
     <slot />
+    <script
+      is:inline
+      defer
+      src="https://unpkg.com/tailwindcss-intersect@2.x.x/dist/observer.min.js"
+    ></script>
   </body>
 </html>

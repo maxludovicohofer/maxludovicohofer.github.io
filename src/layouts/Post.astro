@@ -1,7 +1,9 @@
 ---
 import Text from "@layouts/Text.astro";
 import type { CollectionEntry } from "astro:content";
+import type { ImageMetadata } from "astro";
 import Button from "./Button.astro";
+import { Image } from "astro:assets";
 
 interface Props {
   content?: CollectionEntry<"thoughts"> | CollectionEntry<"projects">;
@@ -25,6 +27,24 @@ const minutesToRead = remarkPluginFrontmatter
     )
   : 0;
 
+// Load project related info
+const project = content?.collection == "projects" ? content : undefined;
+
+const imageFolder = "/src/images/projects/";
+const images =
+  project &&
+  import.meta.glob<{ default: ImageMetadata }>(
+    "/src/images/projects/*.{jpeg,jpg,png,gif}"
+  );
+const imagePath = images && `${imageFolder}${project.slug}.png`;
+
+if (images && !images[imagePath!]) {
+  throw new Error(
+    `"${imagePath}" does not exist in pattern: "${imageFolder}*.{jpeg,jpg,png,gif}"`
+  );
+}
+
+// Evaluate classes
 const titleClass =
   importance == 1
     ? "text-3xl lg:text-2xl 2xl:text-3xl"
@@ -40,6 +60,7 @@ const titleClass =
     </div>
   )
 }
+
 <Text title className={titleClass}
   >{content?.data.title ?? <slot name="title" />}</Text
 >
@@ -52,5 +73,14 @@ const titleClass =
       Read in {minutesToRead} min
       <br />▼
     </Button>
+  )
+}
+{
+  images && (
+    <Image
+      src={images[imagePath!]!()}
+      class="absolute inset-0 -z-10 size-full object-cover opacity-0 group-hover:opacity-15 intersect:opacity-15 lg:intersect:opacity-0 intersect-half duration-700"
+      alt={project.data.description}
+    />
   )
 }
