@@ -2,12 +2,6 @@
 import Post from "@layouts/Post.astro";
 import Text from "@layouts/Text.astro";
 
-interface Props {
-  importance?: 1 | 2 | 3;
-}
-
-const { importance } = Astro.props;
-
 export const title = "Tech";
 
 interface TechFunction {
@@ -58,7 +52,7 @@ const tech: {
     ],
   },
   {
-    name: "Programming languages / stacks:",
+    name: "Programming languages / stacks",
     functions: [
       { name: "C++", experienceYears: 5 },
       { name: "C#", experienceYears: 5 },
@@ -151,7 +145,7 @@ const isTechFunction = (func: string | TechFunction): func is TechFunction =>
   !!(func as TechFunction).name;
 ---
 
-<Post importance={importance} readMore="tech" divTag>
+<Post importance={1} readMore="tech" divTag>
   <Fragment slot="title">{title}</Fragment>
   <ol class="space-y-4">
     {

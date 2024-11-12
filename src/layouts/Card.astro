@@ -1,14 +1,15 @@
 ---
 interface Props {
   fill?: boolean;
+  fullscreen?: boolean;
   className?: string;
 }
 
-const { fill, className = "" } = Astro.props;
+const { fill, fullscreen, className = "" } = Astro.props;
 
-const outerClass = `rounded-3xl bg-zinc-100 dark:bg-zinc-900 shadow-xl dark:shadow-dark overflow-hidden relative group z-10 ${className}`;
+const outerClass = `${fullscreen ? "flex flex-col items-center" : "rounded-3xl"} bg-zinc-100 dark:bg-zinc-900 shadow-xl dark:shadow-dark overflow-hidden relative group z-10 ${className}`;
 
-const innerClass = `size-full ${fill ? "" : "p-8 2xl:p-12"}`;
+const innerClass = `${fullscreen ? "max-w-[40rem] 2xl:max-w-[80rem] min-h-screen" : "size-full"} ${fill ? "" : "p-8 2xl:p-12"}`;
 ---
 
 <div class={outerClass}>

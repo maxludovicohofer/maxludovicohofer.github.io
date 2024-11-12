@@ -6,6 +6,7 @@ import Button from "./Button.astro";
 import { Image } from "astro:assets";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import type { ComponentProps } from "astro/types";
 
 interface Props {
   content?: CollectionEntry<"thoughts"> | CollectionEntry<"projects">;
@@ -21,8 +22,20 @@ const { Content, remarkPluginFrontmatter } = content
   ? await content.render()
   : {};
 
+// Time assumed to be already spent reading before clicking read more
+const minutesAlreadySpentReading = 0.5;
+
+const realMinutesToRead =
+  remarkPluginFrontmatter &&
+  remarkPluginFrontmatter.minutesRead - minutesAlreadySpentReading;
+
+const minutesToRead =
+  realMinutesToRead !== undefined && Math.max(Math.round(realMinutesToRead), 1);
+
 const readMoreLink =
-  readMore ?? (content && `${content.collection}/${content.slug}`);
+  realMinutesToRead && realMinutesToRead < 0
+    ? undefined
+    : (readMore ?? (content && `${content.collection}/${content.slug}`));
 
 const cleanPathName =
   Astro.url.pathname.at(-1) === "/"
@@ -34,23 +47,14 @@ const activeReadMoreLink =
     ? readMoreLink
     : undefined;
 
-// It is assumed that a person reads for approximately 1 minute before clicking read more
-const minutesAlreadySpentReading = 1;
-
-const minutesToRead =
-  remarkPluginFrontmatter &&
-  Math.max(
-    Math.round(remarkPluginFrontmatter.minutesRead) -
-      minutesAlreadySpentReading,
-    1
-  );
+const isReadingMore = readMoreLink && !activeReadMoreLink;
 
 dayjs.extend(utc);
 
 const lastModifiedTime =
   remarkPluginFrontmatter &&
   !hideDate &&
-  dayjs.utc(remarkPluginFrontmatter.lastModified);
+  dayjs.utc(remarkPluginFrontmatter.lastModified).format("D MMMM YYYY");
 
 // Load project related info
 const project = content?.collection === "projects" ? content : undefined;
@@ -69,17 +73,40 @@ if (images && !images[imagePath!]) {
   );
 }
 
+// If reading more, default importance
+const correctedImportance = isReadingMore ? 2 : importance;
+
 // Evaluate classes
 const titleClass =
-  importance === 1
+  correctedImportance === 1
     ? "text-3xl lg:text-xl 2xl:text-3xl"
-    : importance === 2
+    : correctedImportance === 2
       ? "text-3xl 2xl:text-5xl"
       : "text-3xl lg:text-5xl 2xl:text-8xl";
 
-const contentClass = `${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl ${activeReadMoreLink ? "max-h-96" : ""}`;
+const timeClass = "mt-1 xl:mt-3";
+const timeProps: ComponentProps<typeof Text> = {
+  subtitle: true,
+  className: timeClass,
+};
+
+const imageClass = isReadingMore
+  ? "rounded-3xl shadow-xl dark:shadow-dark mb-8"
+  : "absolute inset-0 -z-10 size-full object-cover opacity-0 group-hover:opacity-15 intersect:opacity-15 lg:intersect:opacity-0 intersect-half duration-700";
+
+const contentClass = `${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl ${activeReadMoreLink ? "max-h-60" : ""}`;
 ---
 
+{
+  images && (
+    <Image
+      src={images[imagePath!]!()}
+      class={imageClass}
+      alt={project.data.description}
+      loading={isReadingMore ? "eager" : undefined}
+    />
+  )
+}
 {
   Astro.slots.has("header") && (
     <Text subtitle className="mb-6" divTag>
@@ -91,10 +118,11 @@ const contentClass = `${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl
   >{content?.data.title ?? <slot name="title" />}</Text
 >
 {
-  lastModifiedTime && (
-    <Text subtitle>{lastModifiedTime.format("D MMMM YYYY")}</Text>
+  lastModifiedTime && !isReadingMore && (
+    <Text {...timeProps}>{lastModifiedTime}</Text>
   )
 }
+
 <Text className={contentClass} markdown={!!Content} divTag={divTag}
   >{Content ? <Content /> : <slot />}</Text
 >
@@ -112,11 +140,7 @@ const contentClass = `${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl
   )
 }
 {
-  images && (
-    <Image
-      src={images[imagePath!]!()}
-      class="absolute inset-0 -z-10 size-full object-cover opacity-0 group-hover:opacity-15 intersect:opacity-15 lg:intersect:opacity-0 intersect-half duration-700"
-      alt={project.data.description}
-    />
+  lastModifiedTime && isReadingMore && (
+    <Text {...timeProps}>{lastModifiedTime}</Text>
   )
 }
