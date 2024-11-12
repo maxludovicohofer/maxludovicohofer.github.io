@@ -24,8 +24,13 @@ const { Content, remarkPluginFrontmatter } = content
 const readMoreLink =
   readMore ?? (content && `${content.collection}/${content.slug}`);
 
+const cleanPathName =
+  Astro.url.pathname.at(-1) === "/"
+    ? Astro.url.pathname.slice(0, -1)
+    : Astro.url.pathname;
+
 const activeReadMoreLink =
-  readMoreLink && Astro.url.pathname !== `/${readMoreLink}`
+  readMoreLink && cleanPathName !== `/${readMoreLink}`
     ? readMoreLink
     : undefined;
 
