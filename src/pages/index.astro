@@ -13,15 +13,13 @@ const style = await getEntry("thoughts", "style");
 const highlightProject = await getEntry("projects", "steelsilk-championship");
 const latestThought = await getEntry("thoughts", "debugging-fun");
 const latestProject = await getEntry("projects", "hexelied");
-
-// TODO ADD IMAGES AS BACKGROUND FOR PROJECTS
 ---
 
 <Page title="Max Hofer \\ Game Designer">
   <Bento>
     <Profile slot="1-medium" />
     <Video slot="2-small" title="Showreel" youtubeID="m0KhK_J0LiQ" />
-    <Post slot="3-small" content={style} />
+    <Post slot="3-small" content={style} hideDate />
     <Post slot="4-large" content={highlightProject} importance={3} />
     <Post slot="5-small" content={latestThought} />
     <Post slot="6-medium" content={latestProject} importance={3} />

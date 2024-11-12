@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import { remarkReadingTime } from './remark-reading-time.mjs';
+import { remarkModifiedTime } from './remark-modified-time.mjs';
 
 import tailwind from '@astrojs/tailwind';
 
@@ -12,6 +13,6 @@ export default defineConfig({
   integrations: [tailwind(), sentry(), spotlightjs()],
   site: 'https://maxludovicohofer.github.io',
   markdown: {
-    remarkPlugins: [remarkReadingTime],
+    remarkPlugins: [remarkReadingTime, remarkModifiedTime],
   },
 });

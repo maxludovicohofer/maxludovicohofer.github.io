@@ -4,30 +4,40 @@ import type { CollectionEntry } from "astro:content";
 import type { ImageMetadata } from "astro";
 import Button from "./Button.astro";
 import { Image } from "astro:assets";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 
 interface Props {
   content?: CollectionEntry<"thoughts"> | CollectionEntry<"projects">;
   readMore?: string;
   importance?: 1 | 2 | 3;
   divTag?: boolean;
+  hideDate?: boolean;
 }
 
-const { importance = 2, content, readMore, divTag } = Astro.props;
+const { importance = 2, content, readMore, divTag, hideDate } = Astro.props;
 
 const { Content, remarkPluginFrontmatter } = content
   ? await content.render()
-  : { Content: undefined };
+  : {};
 
 // It is assumed that a person reads for approximately 1 minute before clicking read more
 const minutesAlreadySpentReading = 1;
 
-const minutesToRead = remarkPluginFrontmatter
-  ? Math.max(
-      Math.round(remarkPluginFrontmatter.minutesRead) -
-        minutesAlreadySpentReading,
-      1
-    )
-  : 0;
+const minutesToRead =
+  remarkPluginFrontmatter &&
+  Math.max(
+    Math.round(remarkPluginFrontmatter.minutesRead) -
+      minutesAlreadySpentReading,
+    1
+  );
+
+dayjs.extend(utc);
+
+const lastModifiedTime =
+  remarkPluginFrontmatter &&
+  !hideDate &&
+  dayjs.utc(remarkPluginFrontmatter.lastModified);
 
 // Load project related info
 const project = content?.collection == "projects" ? content : undefined;
@@ -56,12 +66,12 @@ const titleClass =
 
 const hasReadMore = Content || readMore;
 
-const contentClass = `mt-6 text-xl 2xl:text-3xl ${hasReadMore ? "max-h-96" : ""}`;
+const contentClass = `${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl ${hasReadMore ? "max-h-96" : ""}`;
 ---
 
 {
   Astro.slots.has("header") && (
-    <Text subtitle className="mb-6 leading-6" divTag>
+    <Text subtitle className="mb-6" divTag>
       <slot name="header" />
     </Text>
   )
@@ -69,13 +79,18 @@ const contentClass = `mt-6 text-xl 2xl:text-3xl ${hasReadMore ? "max-h-96" : ""}
 <Text title className={titleClass}
   >{content?.data.title ?? <slot name="title" />}</Text
 >
+{
+  lastModifiedTime && (
+    <Text subtitle>{lastModifiedTime.format("D MMMM YYYY")}</Text>
+  )
+}
 <Text className={contentClass} markdown={!!Content} divTag={divTag}
   >{Content ? <Content /> : <slot />}</Text
 >
 {
   hasReadMore && (
     <Button readMore className="absolute bottom-0 -mx-8">
-      {Content ? `Read in ${minutesToRead} min` : "Read more"}
+      {minutesToRead ? `Read in ${minutesToRead} min` : "Read more"}
       <br />▼
     </Button>
   )
