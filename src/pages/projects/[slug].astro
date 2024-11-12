@@ -1,0 +1,21 @@
+---
+import Card from "@layouts/Card.astro";
+import Page from "@layouts/Page.astro";
+import Post from "@layouts/Post.astro";
+import { getCollection } from "astro:content";
+
+// Generate a new path for every collection entry
+export const getStaticPaths = async () =>
+  (await getCollection("projects")).map((content) => ({
+    params: { slug: content.slug },
+    props: { content },
+  }));
+
+const { content } = Astro.props;
+
+const description = `${content.body.split(/[.?!](?=\s+)/, 1)[0]!.trimStart()}.`;
+---
+
+<Page title={content.data.title} description={description}
+  ><Card className="min-h-screen"><Post content={content} /></Card></Page
+>

@@ -3,7 +3,7 @@ import Page from "@layouts/Page.astro";
 import Bento from "@layouts/Bento.astro";
 import Profile from "@components/index/Profile.astro";
 import Post from "@layouts/Post.astro";
-import Tech from "@components/index/Tech.astro";
+import Tech from "@components/Tech.astro";
 import Projects from "@components/index/Projects.astro";
 import Opinions from "@components/index/Opinions.astro";
 import { getEntry } from "astro:content";
@@ -15,7 +15,10 @@ const latestThought = await getEntry("thoughts", "debugging-fun");
 const latestProject = await getEntry("projects", "hexelied");
 ---
 
-<Page title="Max Hofer \\ Game Designer">
+<Page
+  title="Game Designer"
+  description="Max Hofer's game design portfolio and blog."
+>
   <Bento>
     <Profile slot="1-medium" />
     <Video slot="2-small" title="Showreel" youtubeID="m0KhK_J0LiQ" />
@@ -24,7 +27,7 @@ const latestProject = await getEntry("projects", "hexelied");
     <Post slot="5-small" content={latestThought} />
     <Post slot="6-medium" content={latestProject} importance={3} />
     <Projects slot="7-medium" />
-    <Tech slot="8-small" />
+    <Tech slot="8-small" importance={1} />
     <Opinions slot="9-large" />
   </Bento>
 </Page>

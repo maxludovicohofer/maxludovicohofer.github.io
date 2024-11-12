@@ -10,7 +10,7 @@ import utc from "dayjs/plugin/utc";
 interface Props {
   content?: CollectionEntry<"thoughts"> | CollectionEntry<"projects">;
   readMore?: string;
-  importance?: 1 | 2 | 3;
+  importance?: 1 | 2 | 3 | undefined;
   divTag?: boolean;
   hideDate?: boolean;
 }
@@ -20,6 +20,14 @@ const { importance = 2, content, readMore, divTag, hideDate } = Astro.props;
 const { Content, remarkPluginFrontmatter } = content
   ? await content.render()
   : {};
+
+const readMoreLink =
+  readMore ?? (content && `${content.collection}/${content.slug}`);
+
+const activeReadMoreLink =
+  readMoreLink && Astro.url.pathname !== `/${readMoreLink}`
+    ? readMoreLink
+    : undefined;
 
 // It is assumed that a person reads for approximately 1 minute before clicking read more
 const minutesAlreadySpentReading = 1;
@@ -40,7 +48,7 @@ const lastModifiedTime =
   dayjs.utc(remarkPluginFrontmatter.lastModified);
 
 // Load project related info
-const project = content?.collection == "projects" ? content : undefined;
+const project = content?.collection === "projects" ? content : undefined;
 
 const imageFolder = "/src/images/projects/";
 const images =
@@ -58,15 +66,13 @@ if (images && !images[imagePath!]) {
 
 // Evaluate classes
 const titleClass =
-  importance == 1
+  importance === 1
     ? "text-3xl lg:text-xl 2xl:text-3xl"
-    : importance == 2
+    : importance === 2
       ? "text-3xl 2xl:text-5xl"
       : "text-3xl lg:text-5xl 2xl:text-8xl";
 
-const hasReadMore = Content || readMore;
-
-const contentClass = `${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl ${hasReadMore ? "max-h-96" : ""}`;
+const contentClass = `${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl ${activeReadMoreLink ? "max-h-96" : ""}`;
 ---
 
 {
@@ -88,8 +94,13 @@ const contentClass = `${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl
   >{Content ? <Content /> : <slot />}</Text
 >
 {
-  hasReadMore && (
-    <Button readMore className="absolute bottom-0 -mx-8">
+  activeReadMoreLink && (
+    <Button
+      readMore
+      className="absolute bottom-0 -mx-8"
+      href={activeReadMoreLink}
+      openInCurrentPage
+    >
       {minutesToRead ? `Read in ${minutesToRead} min` : "Read more"}
       <br />▼
     </Button>

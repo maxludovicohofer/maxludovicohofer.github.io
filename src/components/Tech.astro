@@ -2,6 +2,14 @@
 import Post from "@layouts/Post.astro";
 import Text from "@layouts/Text.astro";
 
+interface Props {
+  importance?: 1 | 2 | 3;
+}
+
+const { importance } = Astro.props;
+
+export const title = "Tech";
+
 interface TechFunction {
   name: string;
   experienceYears: number;
@@ -143,8 +151,8 @@ const isTechFunction = (func: string | TechFunction): func is TechFunction =>
   !!(func as TechFunction).name;
 ---
 
-<Post importance={1} readMore="link" divTag>
-  <Fragment slot="title">Tech</Fragment>
+<Post importance={importance} readMore="tech" divTag>
+  <Fragment slot="title">{title}</Fragment>
   <ol class="space-y-4">
     {
       tech?.map(({ name, experienceYears, functions }) => (
@@ -156,7 +164,7 @@ const isTechFunction = (func: string | TechFunction): func is TechFunction =>
             <Text subtitle className="inline">
               {experienceYears < 1
                 ? `${Math.round(experienceYears * 12)} months`
-                : experienceYears == 1
+                : experienceYears === 1
                   ? `${experienceYears} year`
                   : `${Math.round(experienceYears)} years`}{" "}
               of experience
@@ -172,7 +180,7 @@ const isTechFunction = (func: string | TechFunction): func is TechFunction =>
                   <Text subtitle className="inline">
                     {func.experienceYears < 1
                       ? `${Math.round(func.experienceYears * 12)} months`
-                      : func.experienceYears == 1
+                      : func.experienceYears === 1
                         ? `${func.experienceYears} year`
                         : `${Math.round(func.experienceYears)} years`}{" "}
                     of experience
