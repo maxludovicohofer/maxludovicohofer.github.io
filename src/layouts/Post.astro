@@ -55,7 +55,7 @@ dayjs.extend(utc);
 const lastModifiedTime =
   remarkPluginFrontmatter &&
   !hideDate &&
-  dayjs(remarkPluginFrontmatter.lastModified).utc().format("D MMMM YYYY");
+  dayjs.utc(remarkPluginFrontmatter.lastModified).format("D MMMM YYYY");
 
 // Load project related info
 const project = content?.collection === "projects" ? content : undefined;
