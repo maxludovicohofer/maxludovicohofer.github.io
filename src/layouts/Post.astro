@@ -49,12 +49,13 @@ const activeReadMoreLink =
 
 const isReadingMore = readMoreLink && !activeReadMoreLink;
 
+// TODO FIX
 dayjs.extend(utc);
 
 const lastModifiedTime =
   remarkPluginFrontmatter &&
   !hideDate &&
-  dayjs.utc(remarkPluginFrontmatter.lastModified).format("D MMMM YYYY");
+  dayjs(remarkPluginFrontmatter.lastModified).utc().format("D MMMM YYYY");
 
 // Load project related info
 const project = content?.collection === "projects" ? content : undefined;
@@ -90,6 +91,7 @@ const timeProps: ComponentProps<typeof Text> = {
   className: timeClass,
 };
 
+// TODO MAKE IMAGE FULL WIDTH IF READING MORE (LIKE A BANNER)
 const imageClass = isReadingMore
   ? "rounded-3xl shadow-xl dark:shadow-dark mb-8"
   : "absolute inset-0 -z-10 size-full object-cover opacity-0 group-hover:opacity-15 intersect:opacity-15 lg:intersect:opacity-0 intersect-half duration-700";
