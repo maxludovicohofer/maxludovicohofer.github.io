@@ -9,7 +9,7 @@ const { fill, fullscreen, className = "" } = Astro.props;
 ---
 
 <div
-  class={`${fullscreen ? "flex flex-col items-center" : "rounded-3xl"} bg-zinc-100 dark:bg-zinc-900 shadow-xl dark:shadow-dark overflow-hidden relative group z-10 ${className}`}
+  class={`${fullscreen ? "flex flex-col items-center" : "rounded-3xl"} bg-zinc-100 dark:bg-zinc-900 shadow-xl dark:shadow-dark overflow-hidden relative group ${className}`}
 >
   <div
     class={`${fullscreen ? "max-w-full min-h-screen" : "size-full"} ${fill ? "" : "p-8 2xl:p-12"}`}
