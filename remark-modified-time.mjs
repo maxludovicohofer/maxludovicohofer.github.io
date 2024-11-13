@@ -3,10 +3,10 @@ import { execSync } from "child_process";
 export function remarkModifiedTime() {
   return function (tree, file) {
     const filepath = file.history[0];
-    console.log(filepath);
     const result = execSync(`git log -1 --pretty="format:%cI" "${filepath}"`);
-    const otherResult = execSync(`git log main --pretty="format:%cI" "${filepath}"`);
-    console.log(otherResult.toString());
+    console.log(filepath);
+    console.log(execSync(`git branch`).toString());
+    console.log(execSync(`git log "${filepath}"`).toString());
     file.data.astro.frontmatter.lastModified = result.toString();
   };
 }
