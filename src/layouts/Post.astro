@@ -101,7 +101,7 @@ const readMoreClass = "lg:max-w-[45rem] 2xl:max-w-[75rem]";
         src={images[imagePath!]!()}
         class={
           isReadingMore
-            ? `lg:rounded-3xl shadow-xl dark:shadow-dark w-screen h-[40vh] object-cover lg:mt-16 ${readMoreClass}`
+            ? `lg:rounded-3xl shadow-xl dark:shadow-dark w-screen h-[40vh] object-cover mb-6 md:mb-6 lg:mb-0 lg:mt-16 ${readMoreClass}`
             : "absolute inset-0 -z-10 size-full object-cover opacity-0 group-hover:opacity-15 intersect:opacity-15 lg:intersect:opacity-0 intersect-half duration-700"
         }
         alt={project.data.description}
@@ -110,7 +110,7 @@ const readMoreClass = "lg:max-w-[45rem] 2xl:max-w-[75rem]";
     )
   }
   <div
-    class={`${isReadingMore && !fullWidth ? `max-w-[45rem] m-8 2xl:m-12 ${readMoreClass}` : ""} `}
+    class={`${isReadingMore && !fullWidth ? `max-w-[45rem] mx-6 md:my-2 lg:my-8 2xl:my-12 ${readMoreClass}` : ""} `}
   >
     {
       Astro.slots.has("header") && (
