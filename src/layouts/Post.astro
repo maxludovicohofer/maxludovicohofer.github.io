@@ -89,21 +89,19 @@ const timeProps: ComponentProps<typeof Text> = {
   className: "mt-1 xl:mt-3",
 };
 
-// TODO MAKE IMAGE FULL WIDTH IF READING MORE (LIKE A BANNER)
-
 // TODO MAKE IMAGES FULLSCREENABLE
+
+const readMoreClass = "lg:max-w-[45rem] 2xl:max-w-[75rem]";
 ---
 
-<div
-  class={`${isReadingMore && !fullWidth ? "max-w-[45rem] 2xl:max-w-[75rem]" : ""}`}
->
+<div class={isReadingMore ? "flex flex-col items-center" : ""}>
   {
     images && (
       <Image
         src={images[imagePath!]!()}
         class={
           isReadingMore
-            ? "rounded-3xl shadow-xl dark:shadow-dark mb-8 size-full"
+            ? `lg:rounded-3xl shadow-xl dark:shadow-dark w-screen h-[40vh] object-cover lg:mt-16 ${readMoreClass}`
             : "absolute inset-0 -z-10 size-full object-cover opacity-0 group-hover:opacity-15 intersect:opacity-15 lg:intersect:opacity-0 intersect-half duration-700"
         }
         alt={project.data.description}
@@ -111,49 +109,52 @@ const timeProps: ComponentProps<typeof Text> = {
       />
     )
   }
-  {
-    Astro.slots.has("header") && (
-      <Text subtitle className="mb-6" divTag>
-        <slot name="header" />
-      </Text>
-    )
-  }
-  <Text
-    title
-    className={correctedImportance === 1
-      ? "text-3xl lg:text-xl 2xl:text-3xl"
-      : correctedImportance === 2
-        ? "text-3xl 2xl:text-5xl"
-        : "text-3xl lg:text-5xl 2xl:text-8xl"}
-    >{content?.data.title ?? <slot name="title" />}</Text
+  <div
+    class={`${isReadingMore && !fullWidth ? `max-w-[45rem] m-8 2xl:m-12 ${readMoreClass}` : ""} `}
   >
-  {
-    lastModifiedTime && !isReadingMore && (
-      <Text {...timeProps}>{lastModifiedTime}</Text>
-    )
-  }
-
-  <Text
-    className={`${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl ${activeReadMoreLink ? "max-h-72" : ""}`}
-    markdown={!!Content}
-    divTag={divTag}>{Content ? <Content /> : <slot />}</Text
-  >
-  {
-    activeReadMoreLink && (
-      <Button
-        readMore
-        className="absolute bottom-0 -mx-8"
-        href={activeReadMoreLink}
-        openInCurrentPage
-      >
-        {minutesToRead ? `Read in ${minutesToRead} min` : "Read more"}
-        <br />▼
-      </Button>
-    )
-  }
-  {
-    lastModifiedTime && isReadingMore && (
-      <Text {...timeProps}>{lastModifiedTime}</Text>
-    )
-  }
+    {
+      Astro.slots.has("header") && (
+        <Text subtitle className="mb-6" divTag>
+          <slot name="header" />
+        </Text>
+      )
+    }
+    <Text
+      title
+      className={correctedImportance === 1
+        ? "text-3xl lg:text-xl 2xl:text-3xl"
+        : correctedImportance === 2
+          ? "text-3xl 2xl:text-5xl"
+          : "text-3xl lg:text-5xl 2xl:text-8xl"}
+      >{content?.data.title ?? <slot name="title" />}</Text
+    >
+    {
+      lastModifiedTime && !isReadingMore && (
+        <Text {...timeProps}>{lastModifiedTime}</Text>
+      )
+    }
+    <Text
+      className={`${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl ${activeReadMoreLink ? "max-h-72" : ""}`}
+      markdown={!!Content}
+      divTag={divTag}>{Content ? <Content /> : <slot />}</Text
+    >
+    {
+      activeReadMoreLink && (
+        <Button
+          readMore
+          className="absolute bottom-0 -mx-8"
+          href={activeReadMoreLink}
+          openInCurrentPage
+        >
+          {minutesToRead ? `Read in ${minutesToRead} min` : "Read more"}
+          <br />▼
+        </Button>
+      )
+    }
+    {
+      lastModifiedTime && isReadingMore && (
+        <Text {...timeProps}>{lastModifiedTime}</Text>
+      )
+    }
+  </div>
 </div>
