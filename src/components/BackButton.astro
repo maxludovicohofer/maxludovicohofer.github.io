@@ -1,3 +1,20 @@
 ---
-
+import Button from "@layouts/Button.astro";
 ---
+
+<Button
+  className=`back-button fixed left-8 bottom-8 lg:top-11 max-w-fit px-3 text-2xl`
+  href="/"
+  openInCurrentPage
+>
+  ◂
+</Button>
+<script>
+  import { navigate } from "astro:transitions/client";
+
+  addEventListener("astro:page-load", () => {
+    document
+      .querySelector("button.back-button")
+      ?.addEventListener("click", () => navigate("/"));
+  });
+</script>

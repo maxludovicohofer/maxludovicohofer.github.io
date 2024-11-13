@@ -1,6 +1,6 @@
 ---
 import ViewTransitions from "astro/components/ViewTransitions.astro";
-import Button from "./Button.astro";
+import BackButton from "@components/BackButton.astro";
 
 interface Props {
   title: string;
@@ -35,15 +35,24 @@ const completeTitle = `Max Hofer \\ ${title}`;
   </head>
   <body class="bg-zinc-200 dark:bg-zinc-950">
     <slot />
-    <Button
-      className={`back-button fixed left-8 bottom-8 w-16 ${Astro.url.pathname !== "/" ? "" : "invisible"}`}
-      href="/"
-      openInCurrentPage>Back</Button
-    >
+    {Astro.url.pathname !== "/" && <BackButton />}
     <script>
-      document.addEventListener("astro:page-load", () => {
-        const element = document.querySelector("button.back-button");
-        element!.addEventListener("click", () => history.back());
+      // This code adds scroll restoration functionality
+      document.addEventListener("astro:before-swap", () =>
+        sessionStorage.setItem(location.pathname, JSON.stringify(history.state))
+      );
+
+      document.addEventListener("astro:after-swap", () => {
+        const state = sessionStorage.getItem(location.pathname);
+
+        if (state) {
+          const { scrollX, scrollY } = JSON.parse(state) as {
+            scrollX: number;
+            scrollY: number;
+          };
+
+          scrollTo({ left: scrollX, top: scrollY, behavior: "instant" });
+        }
       });
     </script>
   </body>

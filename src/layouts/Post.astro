@@ -86,10 +86,12 @@ const correctedImportance = isReadingMore ? 2 : importance;
 
 const timeProps: ComponentProps<typeof Text> = {
   subtitle: true,
-  className: "mt-1 xl:mt-3",
+  className: "mt-0.5 xl:mt-3",
 };
 
 // TODO MAKE IMAGES FULLSCREENABLE
+
+// TODO MAKE BANNER PARALLAX
 
 const readMoreClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
 ---
@@ -101,7 +103,7 @@ const readMoreClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
         src={images[imagePath!]!()}
         class={
           isReadingMore
-            ? `lg:rounded-3xl shadow-xl dark:shadow-dark w-screen h-[35vh] object-cover mb-2 lg:mb-4 lg:mt-14 ${readMoreClass}`
+            ? `lg:rounded-3xl lg:shadow-md w-screen h-[25vh] lg:h-[40vh] object-cover mb-2 lg:mb-4 lg:mt-14 ${readMoreClass}`
             : "absolute inset-0 size-full object-cover opacity-0 group-hover:opacity-15 intersect:opacity-15 lg:intersect:opacity-0 intersect-half duration-700 pointer-events-none"
         }
         alt={project.data.description}
@@ -110,7 +112,7 @@ const readMoreClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
     )
   }
   <div
-    class={`${isReadingMore ? `${fullWidth ? "" : `max-w-[40rem] ${readMoreClass}`} mx-6 mt-4 2xl:mt-12 ${images ? "mb-12" : "mb-4"}` : ""}`}
+    class={`${isReadingMore ? `${fullWidth ? "lg:mx-20" : `max-w-[40rem] ${readMoreClass}`} mt-4 2xl:mt-12 ${images ? "mb-24 lg:mb-12 mx-6" : "mb-16 lg:mb-6 -m-2"}` : ""}`}
   >
     {
       Astro.slots.has("header") && (
