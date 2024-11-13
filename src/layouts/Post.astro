@@ -14,9 +14,17 @@ interface Props {
   importance?: 1 | 2 | 3 | undefined;
   divTag?: boolean;
   hideDate?: boolean;
+  fullWidth?: boolean | undefined;
 }
 
-const { importance = 2, content, readMore, divTag, hideDate } = Astro.props;
+const {
+  importance = 2,
+  content,
+  readMore,
+  divTag,
+  hideDate,
+  fullWidth,
+} = Astro.props;
 
 const { Content, remarkPluginFrontmatter } = content
   ? await content.render()
@@ -76,72 +84,76 @@ if (images && !images[imagePath!]) {
 // If reading more, default importance
 const correctedImportance = isReadingMore ? 2 : importance;
 
-// Evaluate classes
-const titleClass =
-  correctedImportance === 1
-    ? "text-3xl lg:text-xl 2xl:text-3xl"
-    : correctedImportance === 2
-      ? "text-3xl 2xl:text-5xl"
-      : "text-3xl lg:text-5xl 2xl:text-8xl";
-
-const timeClass = "mt-1 xl:mt-3";
 const timeProps: ComponentProps<typeof Text> = {
   subtitle: true,
-  className: timeClass,
+  className: "mt-1 xl:mt-3",
 };
 
 // TODO MAKE IMAGE FULL WIDTH IF READING MORE (LIKE A BANNER)
-const imageClass = isReadingMore
-  ? "rounded-3xl shadow-xl dark:shadow-dark mb-8"
-  : "absolute inset-0 -z-10 size-full object-cover opacity-0 group-hover:opacity-15 intersect:opacity-15 lg:intersect:opacity-0 intersect-half duration-700";
 
-const contentClass = `${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl ${activeReadMoreLink ? "max-h-60" : ""}`;
+// TODO MAKE IMAGES FULLSCREENABLE
 ---
 
-{
-  images && (
-    <Image
-      src={images[imagePath!]!()}
-      class={imageClass}
-      alt={project.data.description}
-      loading={isReadingMore ? "eager" : undefined}
-    />
-  )
-}
-{
-  Astro.slots.has("header") && (
-    <Text subtitle className="mb-6" divTag>
-      <slot name="header" />
-    </Text>
-  )
-}
-<Text title className={titleClass}
-  >{content?.data.title ?? <slot name="title" />}</Text
+<div
+  class={`${isReadingMore && !fullWidth ? "max-w-[45rem] 2xl:max-w-[75rem]" : ""}`}
 >
-{
-  lastModifiedTime && !isReadingMore && (
-    <Text {...timeProps}>{lastModifiedTime}</Text>
-  )
-}
+  {
+    images && (
+      <Image
+        src={images[imagePath!]!()}
+        class={
+          isReadingMore
+            ? "rounded-3xl shadow-xl dark:shadow-dark mb-8 size-full"
+            : "absolute inset-0 -z-10 size-full object-cover opacity-0 group-hover:opacity-15 intersect:opacity-15 lg:intersect:opacity-0 intersect-half duration-700"
+        }
+        alt={project.data.description}
+        loading={isReadingMore ? "eager" : undefined}
+      />
+    )
+  }
+  {
+    Astro.slots.has("header") && (
+      <Text subtitle className="mb-6" divTag>
+        <slot name="header" />
+      </Text>
+    )
+  }
+  <Text
+    title
+    className={correctedImportance === 1
+      ? "text-3xl lg:text-xl 2xl:text-3xl"
+      : correctedImportance === 2
+        ? "text-3xl 2xl:text-5xl"
+        : "text-3xl lg:text-5xl 2xl:text-8xl"}
+    >{content?.data.title ?? <slot name="title" />}</Text
+  >
+  {
+    lastModifiedTime && !isReadingMore && (
+      <Text {...timeProps}>{lastModifiedTime}</Text>
+    )
+  }
 
-<Text className={contentClass} markdown={!!Content} divTag={divTag}
-  >{Content ? <Content /> : <slot />}</Text
->
-{
-  activeReadMoreLink && (
-    <Button
-      readMore
-      className="absolute bottom-0 -mx-8"
-      href={activeReadMoreLink}
-      openInCurrentPage
-    >
-      {minutesToRead ? `Read in ${minutesToRead} min` : "Read more"}
-      <br />▼
-    </Button>
-  )
-}
-{
-  lastModifiedTime && isReadingMore && (
-    <Text {...timeProps}>{lastModifiedTime}</Text>
-  )
-}
+  <Text
+    className={`${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl ${activeReadMoreLink ? "max-h-72" : ""}`}
+    markdown={!!Content}
+    divTag={divTag}>{Content ? <Content /> : <slot />}</Text
+  >
+  {
+    activeReadMoreLink && (
+      <Button
+        readMore
+        className="absolute bottom-0 -mx-8"
+        href={activeReadMoreLink}
+        openInCurrentPage
+      >
+        {minutesToRead ? `Read in ${minutesToRead} min` : "Read more"}
+        <br />▼
+      </Button>
+    )
+  }
+  {
+    lastModifiedTime && isReadingMore && (
+      <Text {...timeProps}>{lastModifiedTime}</Text>
+    )
+  }
+</div>
