@@ -24,14 +24,15 @@ const completeTitle = `Max Hofer \\ ${title}`;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <ViewTransitions />
-  </head>
-  <body class="bg-zinc-200 dark:bg-zinc-950">
-    <slot />
+
     <script
       is:inline
       data-astro-rerun
       async
       src="https://unpkg.com/tailwindcss-intersect@2.x.x/dist/observer.min.js"
     ></script>
+  </head>
+  <body class="bg-zinc-200 dark:bg-zinc-950">
+    <slot />
   </body>
 </html>
