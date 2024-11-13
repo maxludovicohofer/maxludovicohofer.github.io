@@ -9,8 +9,6 @@ interface Props {
 const { title, description } = Astro.props;
 
 const completeTitle = `Max Hofer \\ ${title}`;
-
-// TODO FIX INTERSECTION OBSERVER WHEN PAGE CHANGES (MOBILE)
 ---
 
 <!doctype html>
@@ -31,7 +29,8 @@ const completeTitle = `Max Hofer \\ ${title}`;
     <slot />
     <script
       is:inline
-      defer
+      data-astro-rerun
+      async
       src="https://unpkg.com/tailwindcss-intersect@2.x.x/dist/observer.min.js"
     ></script>
   </body>

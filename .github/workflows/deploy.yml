@@ -21,7 +21,7 @@ jobs:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
         with:
-          # These two lines allow the use of git commands on the server
+          # These two lines fix the output of the git log command
           fetch-depth: 0
           fetch-tags: true
       - name: Install, build, and upload your site

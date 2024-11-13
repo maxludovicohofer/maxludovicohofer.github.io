@@ -22,8 +22,6 @@ const {
 const boolToInt = (value: boolean) => (value ? 1 : 0);
 
 const src = `https://www.youtube.com/embed/${youtubeID}?color=${color}&autoplay=${boolToInt(autoplay)}&mute=${boolToInt(mute)}&loop=${boolToInt(loop)}&playlist=${youtubeID}`;
-
-// TODO START PLAYING AGAIN WHEN PAGE REGAINS FOCUS AFTER SWITCHING TO ANOTHER TAB (MOBILE)
 ---
 
 <iframe
