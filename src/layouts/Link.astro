@@ -9,7 +9,7 @@ const { href, className = "", openInCurrentPage } = Astro.props;
 ---
 
 <a
-  class={`underline text-zinc-500 hover:text-yellow-400 active:text-yellow-500 dark:text-zinc-400 dark:hover:text-yellow-200 dark:active:text-yellow-400 hover:scale-125 active:scale-90 duration-150 ${className}`}
+  class={`underline text-zinc-500 hover:text-yellow-400 intersect:text-yellow-400 active:text-yellow-500 dark:text-zinc-400 dark:hover:text-yellow-200 dark:intersect:text-yellow-200 dark:active:text-yellow-400 hover:scale-125 intersect:scale-125 active:scale-90 duration-150 ${className}`}
   href={href}
   target={openInCurrentPage ? "_self" : "_blank"}
 >
