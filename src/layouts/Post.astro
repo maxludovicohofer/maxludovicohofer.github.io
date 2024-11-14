@@ -106,7 +106,7 @@ const readMoreClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
         class={
           isReadingMore
             ? `lg:rounded-3xl lg:shadow-md w-screen h-[25vh] lg:h-[40vh] object-cover mb-2 lg:mb-4 lg:mt-14 ${readMoreClass}`
-            : "absolute inset-0 size-full object-cover opacity-0 group-hover:opacity-15 intersect:opacity-15 lg:intersect:opacity-0 intersect-full duration-700 pointer-events-none"
+            : "absolute inset-0 size-full object-cover opacity-0 group-hover:opacity-15 intersect:opacity-15 lg:intersect:opacity-0 intersect-half duration-700 pointer-events-none"
         }
         alt={project.data.description}
         loading={isReadingMore ? "eager" : undefined}
