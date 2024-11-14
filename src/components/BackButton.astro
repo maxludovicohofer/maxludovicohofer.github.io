@@ -1,15 +1,13 @@
 ---
 import Button from "@layouts/Button.astro";
-
-// TODO MAKE ROUND AND BIGGER TEXT ON MOBILE
 ---
 
 <Button
-  className=`back-button fixed left-8 bottom-8 lg:top-11 max-w-fit px-3 text-2xl`
+  className="back-button !rounded-full !text-3xl fixed left-6 lg:left-9 bottom-8 lg:top-12 w-10 h-10"
   href="/"
   openInCurrentPage
 >
-  ◂
+  <p class="mt-[-0.2rem] ml-[-0.2rem]">◂</p>
 </Button>
 <script>
   import { navigate } from "astro:transitions/client";
