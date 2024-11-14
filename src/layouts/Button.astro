@@ -8,6 +8,7 @@ interface Props {
   href?: string | undefined;
   openInCurrentPage?: boolean;
   rounded?: boolean;
+  intersectAsHover?: boolean;
 }
 
 const {
@@ -17,13 +18,16 @@ const {
   href,
   openInCurrentPage,
   rounded,
+  intersectAsHover,
 } = Astro.props;
+
+// TODO USE NEGATIVE INTERSECT ON READ MORE, INSTEAD OF LG:
 ---
 
 <Link href={href} openInCurrentPage={openInCurrentPage}>
   <button
     type="button"
-    class={`${readMore ? "h-1/3 bg-gradient-to-t from-zinc-200 from-20% hover:from-yellow-300 intersect:from-yellow-300 active:from-yellow-400 dark:from-zinc-950 dark:hover:from-yellow-200 dark:intersect:from-yellow-200 dark:active:from-yellow-300 text-zinc-950 dark:text-zinc-100" : `${rounded ? "rounded-full" : "rounded-lg"} h-11 2xl:h-16 bg-zinc-950 hover:bg-yellow-400 intersect:bg-yellow-400  active:bg-yellow-500 dark:bg-zinc-100 dark:hover:bg-yellow-200 dark:intersect:bg-yellow-200 dark:active:bg-yellow-400 text-zinc-100  dark:text-zinc-950 hover:scale-105 intersect:scale-105 active:scale-95 focus:ring-2 focus:ring-offset-2 focus:ring-inline-flex`} hover:text-zinc-950 intersect:text-zinc-950 shadow-md hover:shadow-lg intersect:shadow-lg active:shadow text-base 2xl:text-3xl font-semibold intersect-full duration-150 ${inline ? "" : "w-full"} ${className}`}
+    class={`${readMore ? `h-1/3 bg-gradient-to-t from-zinc-200 from-20% hover:from-yellow-300 active:from-yellow-400 dark:from-zinc-950 dark:hover:from-yellow-200 dark:active:from-yellow-300 text-zinc-950 dark:text-zinc-100 ${intersectAsHover ? "intersect:from-yellow-300 dark:intersect:from-yellow-200" : ""}` : `${rounded ? "rounded-full" : "rounded-lg"} h-11 2xl:h-16 bg-zinc-950 hover:bg-yellow-400 active:bg-yellow-500 dark:bg-zinc-100 dark:hover:bg-yellow-200 dark:active:bg-yellow-400 text-zinc-100 dark:text-zinc-950 hover:scale-105 active:scale-95 focus:ring-2 focus:ring-offset-2 focus:ring-inline-flex ${intersectAsHover ? "intersect:bg-yellow-400 dark:intersect:bg-yellow-200 intersect:scale-105" : ""}`} hover:text-zinc-950 shadow-md hover:shadow-lg active:shadow text-base 2xl:text-3xl font-semibold duration-150 ${inline ? "" : "w-full"} ${intersectAsHover ? "intersect:text-zinc-950 intersect:shadow-lg intersect-full" : ""} ${className}`}
   >
     {
       readMore ? (
