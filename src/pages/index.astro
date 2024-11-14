@@ -21,7 +21,12 @@ const latestProject = await getEntry("projects", "hexelied");
 >
   <Bento>
     <Profile slot="1-medium" />
-    <Video slot="2-small" title="Showreel" youtubeID="m0KhK_J0LiQ" />
+    <Video
+      slot="2-small"
+      title="Showreel"
+      youtubeID="m0KhK_J0LiQ"
+      className="aspect-[16/10]"
+    />
     <Post slot="3-small" content={style} hideDate />
     <Post slot="4-large" content={highlightProject} importance={3} hideDate />
     <Post slot="5-small" content={latestThought} />
