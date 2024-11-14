@@ -30,22 +30,28 @@ const completeTitle = `Max Hofer \\ ${title}`;
     <slot />
     {Astro.url.pathname !== "/" && <BackButton />}
     <script>
-      // This code adds scroll restoration functionality
-      document.addEventListener("astro:before-swap", () =>
-        sessionStorage.setItem(location.pathname, JSON.stringify(history.state))
-      );
+      // This code fixes Astro scroll restoration
+      document.addEventListener("astro:before-swap", () => {
+        const { scrollX, scrollY } = history.state as {
+          scrollX: number;
+          scrollY: number;
+        };
+
+        sessionStorage.setItem(
+          location.pathname,
+          JSON.stringify({
+            left: scrollX,
+            top: scrollY,
+          } satisfies ScrollToOptions)
+        );
+      });
 
       document.addEventListener("astro:after-swap", () => {
         const state = sessionStorage.getItem(location.pathname);
 
-        if (state) {
-          const { scrollX, scrollY } = JSON.parse(state) as {
-            scrollX: number;
-            scrollY: number;
-          };
+        if (!state) return;
 
-          scrollTo({ left: scrollX, top: scrollY, behavior: "instant" });
-        }
+        scrollTo({ ...JSON.parse(state), behavior: "instant" });
       });
     </script>
     <script
