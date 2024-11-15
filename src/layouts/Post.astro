@@ -107,6 +107,6 @@ const contentWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
 
     if (!image) return;
 
-    image.style.opacity = `${1 - Math.min(scrollY / (image.height / 2), 1)}`;
+    image.style.opacity = `${1 - Math.min(scrollY / image.height, 1)}`;
   });
 </script>
