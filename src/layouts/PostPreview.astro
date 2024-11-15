@@ -1,11 +1,9 @@
 ---
 import Text from "@layouts/Text.astro";
 import type { CollectionEntry } from "astro:content";
-import type { ImageMetadata } from "astro";
 import Button from "./Button.astro";
 import { Image } from "astro:assets";
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
+import { getLastModifiedTime, getPostImage } from "./Post.astro";
 
 interface Props {
   content?: CollectionEntry<"thoughts"> | CollectionEntry<"projects">;
@@ -36,27 +34,10 @@ const readMoreLink =
     ? undefined
     : (readMore ?? (content && `${content.collection}/${content.slug}`));
 
-dayjs.extend(utc);
-
 const lastModifiedTime =
-  remarkPluginFrontmatter &&
-  !hideDate &&
-  dayjs.utc(remarkPluginFrontmatter.lastModified).format("D MMMM YYYY");
+  !hideDate && getLastModifiedTime(remarkPluginFrontmatter);
 
-const imageFolder = "/src/images/content/";
-const images =
-  content &&
-  import.meta.glob<{ default: ImageMetadata }>(
-    "/src/images/content/*.{jpeg,jpg,png,gif}"
-  );
-const imagePath = images && `${imageFolder}${content.slug}.png`;
-const image = images?.[imagePath!];
-
-if (content?.collection === "projects" && !image) {
-  throw new Error(
-    `"${imagePath}" does not exist in pattern: "${imageFolder}*.{jpeg,jpg,png,gif}"`
-  );
-}
+const image = getPostImage(content);
 ---
 
 {

@@ -2,90 +2,54 @@
 import Text from "@layouts/Text.astro";
 import type { CollectionEntry } from "astro:content";
 import type { ImageMetadata } from "astro";
-import Button from "./Button.astro";
 import { Image } from "astro:assets";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
-import type { ComponentProps } from "astro/types";
 
 interface Props {
   content?: CollectionEntry<"thoughts"> | CollectionEntry<"projects">;
-  readMore?: string;
-  importance?: 1 | 2 | 3 | undefined;
   divTag?: boolean;
-  hideDate?: boolean;
   fullWidth?: boolean | undefined;
 }
 
-const {
-  importance = 2,
-  content,
-  readMore,
-  divTag,
-  hideDate,
-  fullWidth,
-} = Astro.props;
+const { content, divTag, fullWidth } = Astro.props;
 
 const { Content, remarkPluginFrontmatter } = content
   ? await content.render()
   : {};
 
-// Time assumed to be already spent reading before clicking read more
-const minutesAlreadySpentReading = 0.5;
+export const getLastModifiedTime = (
+  frontmatter: typeof remarkPluginFrontmatter
+) => {
+  dayjs.extend(utc);
 
-const realMinutesToRead =
-  remarkPluginFrontmatter &&
-  remarkPluginFrontmatter.minutesRead - minutesAlreadySpentReading;
-
-const minutesToRead =
-  realMinutesToRead !== undefined && Math.max(Math.round(realMinutesToRead), 1);
-
-const readMoreLink =
-  realMinutesToRead && realMinutesToRead < 0
-    ? undefined
-    : (readMore ?? (content && `${content.collection}/${content.slug}`));
-
-const cleanPathName =
-  Astro.url.pathname.at(-1) === "/"
-    ? Astro.url.pathname.slice(0, -1)
-    : Astro.url.pathname;
-
-const activeReadMoreLink =
-  readMoreLink && cleanPathName !== `/${readMoreLink}`
-    ? readMoreLink
-    : undefined;
-
-const isReadingMore = readMoreLink && !activeReadMoreLink;
-
-dayjs.extend(utc);
-
-const lastModifiedTime =
-  remarkPluginFrontmatter &&
-  !hideDate &&
-  dayjs.utc(remarkPluginFrontmatter.lastModified).format("D MMMM YYYY");
-
-const imageFolder = "/src/images/content/";
-const images =
-  content &&
-  import.meta.glob<{ default: ImageMetadata }>(
-    "/src/images/content/*.{jpeg,jpg,png,gif}"
+  return (
+    frontmatter && dayjs.utc(frontmatter.lastModified).format("D MMMM YYYY")
   );
-const imagePath = images && `${imageFolder}${content.slug}.png`;
-const image = images?.[imagePath!];
-
-if (content?.collection === "projects" && !image) {
-  throw new Error(
-    `"${imagePath}" does not exist in pattern: "${imageFolder}*.{jpeg,jpg,png,gif}"`
-  );
-}
-
-// If reading more, default importance
-const correctedImportance = isReadingMore ? 2 : importance;
-
-const timeProps: ComponentProps<typeof Text> = {
-  subtitle: true,
-  className: "mt-0.5 xl:mt-3",
 };
+
+const lastModifiedTime = getLastModifiedTime(remarkPluginFrontmatter);
+
+export const getPostImage = (post: typeof content) => {
+  const imageFolder = "/src/images/content/";
+  const images =
+    post &&
+    import.meta.glob<{ default: ImageMetadata }>(
+      "/src/images/content/*.{jpeg,jpg,png,gif}"
+    );
+  const imagePath = images && `${imageFolder}${post.slug}.png`;
+  const image = images?.[imagePath!];
+
+  if (post?.collection === "projects" && !image) {
+    throw new Error(
+      `"${imagePath}" does not exist in pattern: "${imageFolder}*.{jpeg,jpg,png,gif}"`
+    );
+  }
+
+  return image;
+};
+
+const image = getPostImage(content);
 
 // TODO MAKE CONTENT WITH IMAGE A CARD (ROUNDED ANGLES) ONLY ON TOP, WITH THE CARD (WITH SHADOW) OVER THE IMMAGE
 // TODO MAKE BANNER PARALLAX
@@ -96,26 +60,22 @@ const readMoreClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
 
 {
   image && (
-    <div class={isReadingMore ? "flex flex-col items-center" : ""}>
+    <div class="flex flex-col items-center">
       <Image
         src={image()}
-        class={
-          isReadingMore
-            ? `lg:rounded-3xl lg:shadow-md w-screen h-[30vh] lg:h-[40vh] object-cover mb-5 lg:mb-4 lg:mt-14 ${readMoreClass}`
-            : "absolute inset-0 size-full object-cover opacity-0 group-hover:opacity-15 intersect:opacity-15 lg:intersect:opacity-0 intersect-half duration-700 pointer-events-none"
-        }
+        class={`lg:rounded-3xl lg:shadow-md w-screen h-[30vh] lg:h-[40vh] object-cover mb-5 lg:mb-4 lg:mt-14 ${readMoreClass}`}
         alt={
           content?.collection === "projects"
             ? content.data.description
             : `Graphic explanation of "${content!.data.title}"`
         }
-        loading={isReadingMore ? "eager" : undefined}
+        loading="eager"
       />
     </div>
   )
 }
 <div
-  class={`${isReadingMore ? `${fullWidth ? "lg:mx-20" : `max-w-[40rem] ${readMoreClass}`} lg:mt-4 2xl:-mt-2 ${image ? "mb-24 lg:mb-12 mx-6" : "mb-16 lg:mb-6 -m-2"}` : ""}`}
+  class={`${fullWidth ? "lg:mx-20" : `max-w-[40rem] ${readMoreClass}`} lg:mt-4 2xl:-mt-2 ${image ? "mb-24 lg:mb-12 mx-6" : "mb-16 lg:mb-6 -m-2"}`}
 >
   {
     Astro.slots.has("header") && (
@@ -124,41 +84,19 @@ const readMoreClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
       </Text>
     )
   }
-  <Text
-    title
-    className={correctedImportance === 1
-      ? "text-3xl lg:text-xl 2xl:text-3xl"
-      : correctedImportance === 2
-        ? "text-3xl 2xl:text-5xl"
-        : "text-3xl lg:text-5xl 2xl:text-8xl"}
+  <Text title className="text-3xl 2xl:text-5xl"
     >{content?.data.title ?? <slot name="title" />}</Text
   >
-  {
-    lastModifiedTime && !isReadingMore && (
-      <Text {...timeProps}>{lastModifiedTime}</Text>
-    )
-  }
   <Text
-    className={`${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl ${activeReadMoreLink ? "max-h-72" : ""}`}
+    className={`${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl`}
     markdown={!!Content}
     divTag={divTag}>{Content ? <Content /> : <slot />}</Text
   >
   {
-    activeReadMoreLink && (
-      <Button
-        readMore
-        className="absolute bottom-0 -mx-8"
-        href={activeReadMoreLink}
-        navigate
-      >
-        {minutesToRead ? `Read in ${minutesToRead} min` : "Read more"}
-        <br />▼
-      </Button>
-    )
-  }
-  {
-    lastModifiedTime && isReadingMore && (
-      <Text {...timeProps}>{lastModifiedTime}</Text>
+    lastModifiedTime && (
+      <Text subtitle className="mt-0.5 xl:mt-3">
+        {lastModifiedTime}
+      </Text>
     )
   }
 </div>
