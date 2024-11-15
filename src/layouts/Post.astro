@@ -90,6 +90,7 @@ const timeProps: ComponentProps<typeof Text> = {
 };
 
 // TODO AUGMENT MX BY 2 ON MOBILE
+// TODO IMPROVE MT ON MOBILE
 // TODO REPLACE "PROJECT" WITH "HAS IMAGE"
 // TODO MAKE CONTENT WITH IMAGE A CARD (ROUNDED ANGLES) ONLY ON TOP, WITH THE CARD (WITH SHADOW) OVER THE IMMAGE
 // TODO MAKE BANNER PARALLAX
@@ -114,7 +115,7 @@ const readMoreClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
     )
   }
   <div
-    class={`${isReadingMore ? `${fullWidth ? "lg:mx-20" : `max-w-[40rem] ${readMoreClass}`} mt-4 2xl:-mt-2 ${images ? "mb-24 lg:mb-12 mx-6" : "mb-16 lg:mb-6 -m-2"}` : ""}`}
+    class={`${isReadingMore ? `${fullWidth ? "lg:mx-20" : `max-w-[40rem] ${readMoreClass}`} mt-4 2xl:-mt-2 ${images ? "mb-24 lg:mb-12 mx-6" : "mb-16 lg:mb-6 -m-0"}` : ""}`}
   >
     {
       Astro.slots.has("header") && (
