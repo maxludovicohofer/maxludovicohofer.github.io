@@ -107,6 +107,6 @@ const contentWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
 
     if (!image) return;
 
-    image.style.filter = `blur(${Math.min(scrollY, 200) / 10}px)`;
+    image.style.opacity = `${1 - Math.min(scrollY, 200) / 200}`;
   });
 </script>
