@@ -32,16 +32,17 @@ export const getLastModifiedTime = (
 const lastModifiedTime = getLastModifiedTime(remarkPluginFrontmatter);
 
 export const getPostImage = (post: typeof content) => {
-  const imageFolder = "/src/images/content/";
-  const images =
-    post &&
-    import.meta.glob<{ default: ImageMetadata }>(
-      "/src/images/content/*.{jpeg,jpg,png,gif}"
-    );
-  const imagePath = images && `${imageFolder}${post.slug}.png`;
-  const image = images?.[imagePath!];
+  if (!post) return;
 
-  if (post?.collection === "projects" && !image) {
+  const imageFolder = `/src/content/${post.collection}/`;
+  const images = import.meta.glob<{ default: ImageMetadata }>(
+    "/src/content/**/*.{jpeg,jpg,png,gif}"
+  );
+  const imagePath = `${imageFolder}${post.slug}.png`;
+  const image = images[imagePath];
+
+  if (post.collection === "projects" && !image) {
+    // Projects require image
     throw new Error(
       `"${imagePath}" does not exist in pattern: "${imageFolder}*.{jpeg,jpg,png,gif}"`
     );
@@ -53,6 +54,7 @@ export const getPostImage = (post: typeof content) => {
 const image = getPostImage(content);
 
 // TODO MAKE IMAGES FULLSCREENABLE
+// TODO REPLACE POST IMAGES WITH LOOPED VIDEOS (BUT ALSO GIVE THE OPTION TO USE IMAGES)
 
 const contentWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
 ---
