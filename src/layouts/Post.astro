@@ -107,6 +107,7 @@ const contentWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
 
     if (!image) return;
 
-    image.style.opacity = `${1 - Math.min(scrollY / image.height, 1)}`;
+    //? Based on Card translate-y class
+    image.style.opacity = `${1 - Math.min(scrollY / (0.26 * screen.height), 1)}`;
   });
 </script>
