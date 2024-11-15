@@ -15,7 +15,7 @@ import Button from "@layouts/Button.astro";
 
   addEventListener("astro:page-load", () => {
     document
-      .querySelector("button.back-button")
+      .querySelector<HTMLButtonElement>("button.back-button")
       ?.addEventListener("click", () => navigate("/"));
   });
 </script>
