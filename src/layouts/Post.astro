@@ -64,18 +64,16 @@ const lastModifiedTime =
   !hideDate &&
   dayjs.utc(remarkPluginFrontmatter.lastModified).format("D MMMM YYYY");
 
-// Load project related info
-const project = content?.collection === "projects" ? content : undefined;
-
-const imageFolder = "/src/images/projects/";
+const imageFolder = "/src/images/content/";
 const images =
-  project &&
+  content &&
   import.meta.glob<{ default: ImageMetadata }>(
-    "/src/images/projects/*.{jpeg,jpg,png,gif}"
+    "/src/images/content/*.{jpeg,jpg,png,gif}"
   );
-const imagePath = images && `${imageFolder}${project.slug}.png`;
+const imagePath = images && `${imageFolder}${content.slug}.png`;
+const image = images?.[imagePath!];
 
-if (images && !images[imagePath!]) {
+if (content?.collection === "projects" && !image) {
   throw new Error(
     `"${imagePath}" does not exist in pattern: "${imageFolder}*.{jpeg,jpg,png,gif}"`
   );
@@ -89,7 +87,6 @@ const timeProps: ComponentProps<typeof Text> = {
   className: "mt-0.5 xl:mt-3",
 };
 
-// TODO REPLACE "PROJECT" WITH "HAS IMAGE" (CHECK FOR IMAGE ALSO ON THOUGHT)
 // TODO MAKE CONTENT WITH IMAGE A CARD (ROUNDED ANGLES) ONLY ON TOP, WITH THE CARD (WITH SHADOW) OVER THE IMMAGE
 // TODO MAKE BANNER PARALLAX
 // TODO MAKE IMAGES FULLSCREENABLE
@@ -97,67 +94,71 @@ const timeProps: ComponentProps<typeof Text> = {
 const readMoreClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
 ---
 
-<div class={isReadingMore ? "flex flex-col items-center" : ""}>
-  {
-    images && (
+{
+  image && (
+    <div class={isReadingMore ? "flex flex-col items-center" : ""}>
       <Image
-        src={images[imagePath!]!()}
+        src={image()}
         class={
           isReadingMore
-            ? `lg:rounded-3xl lg:shadow-md w-screen h-[25vh] lg:h-[40vh] object-cover mb-5 lg:mb-4 lg:mt-14 ${readMoreClass}`
+            ? `lg:rounded-3xl lg:shadow-md w-screen h-[30vh] lg:h-[40vh] object-cover mb-5 lg:mb-4 lg:mt-14 ${readMoreClass}`
             : "absolute inset-0 size-full object-cover opacity-0 group-hover:opacity-15 intersect:opacity-15 lg:intersect:opacity-0 intersect-half duration-700 pointer-events-none"
         }
-        alt={project.data.description}
+        alt={
+          content?.collection === "projects"
+            ? content.data.description
+            : `Graphic explanation of "${content!.data.title}"`
+        }
         loading={isReadingMore ? "eager" : undefined}
       />
+    </div>
+  )
+}
+<div
+  class={`${isReadingMore ? `${fullWidth ? "lg:mx-20" : `max-w-[40rem] ${readMoreClass}`} lg:mt-4 2xl:-mt-2 ${image ? "mb-24 lg:mb-12 mx-6" : "mb-16 lg:mb-6 -m-2"}` : ""}`}
+>
+  {
+    Astro.slots.has("header") && (
+      <Text subtitle className="mb-6" divTag>
+        <slot name="header" />
+      </Text>
     )
   }
-  <div
-    class={`${isReadingMore ? `${fullWidth ? "lg:mx-20" : `max-w-[40rem] ${readMoreClass}`} lg:mt-4 2xl:-mt-2 ${images ? "mb-24 lg:mb-12 mx-6" : "mb-16 lg:mb-6 -m-2"}` : ""}`}
+  <Text
+    title
+    className={correctedImportance === 1
+      ? "text-3xl lg:text-xl 2xl:text-3xl"
+      : correctedImportance === 2
+        ? "text-3xl 2xl:text-5xl"
+        : "text-3xl lg:text-5xl 2xl:text-8xl"}
+    >{content?.data.title ?? <slot name="title" />}</Text
   >
-    {
-      Astro.slots.has("header") && (
-        <Text subtitle className="mb-6" divTag>
-          <slot name="header" />
-        </Text>
-      )
-    }
-    <Text
-      title
-      className={correctedImportance === 1
-        ? "text-3xl lg:text-xl 2xl:text-3xl"
-        : correctedImportance === 2
-          ? "text-3xl 2xl:text-5xl"
-          : "text-3xl lg:text-5xl 2xl:text-8xl"}
-      >{content?.data.title ?? <slot name="title" />}</Text
-    >
-    {
-      lastModifiedTime && !isReadingMore && (
-        <Text {...timeProps}>{lastModifiedTime}</Text>
-      )
-    }
-    <Text
-      className={`${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl ${activeReadMoreLink ? "max-h-72" : ""}`}
-      markdown={!!Content}
-      divTag={divTag}>{Content ? <Content /> : <slot />}</Text
-    >
-    {
-      activeReadMoreLink && (
-        <Button
-          readMore
-          className="absolute bottom-0 -mx-8"
-          href={activeReadMoreLink}
-          openInCurrentPage
-        >
-          {minutesToRead ? `Read in ${minutesToRead} min` : "Read more"}
-          <br />▼
-        </Button>
-      )
-    }
-    {
-      lastModifiedTime && isReadingMore && (
-        <Text {...timeProps}>{lastModifiedTime}</Text>
-      )
-    }
-  </div>
+  {
+    lastModifiedTime && !isReadingMore && (
+      <Text {...timeProps}>{lastModifiedTime}</Text>
+    )
+  }
+  <Text
+    className={`${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl ${activeReadMoreLink ? "max-h-72" : ""}`}
+    markdown={!!Content}
+    divTag={divTag}>{Content ? <Content /> : <slot />}</Text
+  >
+  {
+    activeReadMoreLink && (
+      <Button
+        readMore
+        className="absolute bottom-0 -mx-8"
+        href={activeReadMoreLink}
+        navigate
+      >
+        {minutesToRead ? `Read in ${minutesToRead} min` : "Read more"}
+        <br />▼
+      </Button>
+    )
+  }
+  {
+    lastModifiedTime && isReadingMore && (
+      <Text {...timeProps}>{lastModifiedTime}</Text>
+    )
+  }
 </div>

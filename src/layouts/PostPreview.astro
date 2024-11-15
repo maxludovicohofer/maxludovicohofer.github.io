@@ -1,0 +1,115 @@
+---
+import Text from "@layouts/Text.astro";
+import type { CollectionEntry } from "astro:content";
+import type { ImageMetadata } from "astro";
+import Button from "./Button.astro";
+import { Image } from "astro:assets";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
+interface Props {
+  content?: CollectionEntry<"thoughts"> | CollectionEntry<"projects">;
+  readMore?: string;
+  importance?: 1 | 2 | 3 | undefined;
+  divTag?: boolean;
+  hideDate?: boolean;
+}
+
+const { importance = 2, content, readMore, divTag, hideDate } = Astro.props;
+
+const { Content, remarkPluginFrontmatter } = content
+  ? await content.render()
+  : {};
+
+// Time assumed to be already spent reading before clicking read more
+const minutesAlreadySpentReading = 0.5;
+
+const realMinutesToRead =
+  remarkPluginFrontmatter &&
+  remarkPluginFrontmatter.minutesRead - minutesAlreadySpentReading;
+
+const minutesToRead =
+  realMinutesToRead !== undefined && Math.max(Math.round(realMinutesToRead), 1);
+
+const readMoreLink =
+  realMinutesToRead && realMinutesToRead < 0
+    ? undefined
+    : (readMore ?? (content && `${content.collection}/${content.slug}`));
+
+dayjs.extend(utc);
+
+const lastModifiedTime =
+  remarkPluginFrontmatter &&
+  !hideDate &&
+  dayjs.utc(remarkPluginFrontmatter.lastModified).format("D MMMM YYYY");
+
+const imageFolder = "/src/images/content/";
+const images =
+  content &&
+  import.meta.glob<{ default: ImageMetadata }>(
+    "/src/images/content/*.{jpeg,jpg,png,gif}"
+  );
+const imagePath = images && `${imageFolder}${content.slug}.png`;
+const image = images?.[imagePath!];
+
+if (content?.collection === "projects" && !image) {
+  throw new Error(
+    `"${imagePath}" does not exist in pattern: "${imageFolder}*.{jpeg,jpg,png,gif}"`
+  );
+}
+---
+
+{
+  Astro.slots.has("header") && (
+    <Text subtitle className="mb-6" divTag>
+      <slot name="header" />
+    </Text>
+  )
+}
+<Text
+  title
+  className={importance === 1
+    ? "text-3xl lg:text-xl 2xl:text-3xl"
+    : importance === 2
+      ? "text-3xl 2xl:text-5xl"
+      : "text-3xl lg:text-5xl 2xl:text-8xl"}
+  >{content?.data.title ?? <slot name="title" />}</Text
+>
+{
+  lastModifiedTime && (
+    <Text subtitle className="mt-0.5 xl:mt-3">
+      {lastModifiedTime}
+    </Text>
+  )
+}
+<Text
+  className={`${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl ${readMoreLink ? "max-h-72" : ""}`}
+  markdown={!!Content}
+  divTag={divTag}>{Content ? <Content /> : <slot />}</Text
+>
+{
+  readMoreLink && (
+    <Button
+      readMore
+      className="absolute bottom-0 -mx-8"
+      href={readMoreLink}
+      navigate
+    >
+      {minutesToRead ? `Read in ${minutesToRead} min` : "Read more"}
+      <br />▼
+    </Button>
+  )
+}
+{
+  image && (
+    <Image
+      src={image()}
+      class="absolute inset-0 size-full object-cover opacity-0 group-hover:opacity-15 intersect:opacity-15 lg:intersect:opacity-0 intersect-half duration-700 pointer-events-none"
+      alt={
+        content?.collection === "projects"
+          ? content.data.description
+          : `Graphic explanation of "${content!.data.title}"`
+      }
+    />
+  )
+}
