@@ -89,9 +89,7 @@ const timeProps: ComponentProps<typeof Text> = {
   className: "mt-0.5 xl:mt-3",
 };
 
-// TODO AUGMENT MX BY 2 ON MOBILE
-// TODO IMPROVE MT ON MOBILE
-// TODO REPLACE "PROJECT" WITH "HAS IMAGE"
+// TODO ADD IMAGE AS OPTIONAL ON THOUGHT, AND REPLACE "PROJECT" WITH "HAS IMAGE"
 // TODO MAKE CONTENT WITH IMAGE A CARD (ROUNDED ANGLES) ONLY ON TOP, WITH THE CARD (WITH SHADOW) OVER THE IMMAGE
 // TODO MAKE BANNER PARALLAX
 // TODO MAKE IMAGES FULLSCREENABLE
@@ -106,7 +104,7 @@ const readMoreClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
         src={images[imagePath!]!()}
         class={
           isReadingMore
-            ? `lg:rounded-3xl lg:shadow-md w-screen h-[25vh] lg:h-[40vh] object-cover mb-2 lg:mb-4 lg:mt-14 ${readMoreClass}`
+            ? `lg:rounded-3xl lg:shadow-md w-screen h-[25vh] lg:h-[40vh] object-cover mb-6 lg:mb-4 lg:mt-14 ${readMoreClass}`
             : "absolute inset-0 size-full object-cover opacity-0 group-hover:opacity-15 intersect:opacity-15 lg:intersect:opacity-0 intersect-half duration-700 pointer-events-none"
         }
         alt={project.data.description}
@@ -115,7 +113,7 @@ const readMoreClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
     )
   }
   <div
-    class={`${isReadingMore ? `${fullWidth ? "lg:mx-20" : `max-w-[40rem] ${readMoreClass}`} mt-4 2xl:-mt-2 ${images ? "mb-24 lg:mb-12 mx-7" : "mb-16 lg:mb-6 -m-1"}` : ""}`}
+    class={`${isReadingMore ? `${fullWidth ? "lg:mx-20" : `max-w-[40rem] ${readMoreClass}`} lg:mt-4 2xl:-mt-2 ${images ? "mb-24 lg:mb-12 mx-8" : "mb-16 lg:mb-6"}` : ""}`}
   >
     {
       Astro.slots.has("header") && (
