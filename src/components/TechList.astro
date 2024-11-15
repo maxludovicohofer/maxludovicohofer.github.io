@@ -1,14 +1,5 @@
 ---
-import Post from "@layouts/Post.astro";
 import Text from "@layouts/Text.astro";
-
-interface Props {
-  isReadingMore?: boolean;
-}
-
-const { isReadingMore } = Astro.props;
-
-export const title = "Tech";
 
 interface TechFunction {
   name: string;
@@ -151,54 +142,47 @@ const isTechFunction = (func: string | TechFunction): func is TechFunction =>
   !!(func as TechFunction).name;
 ---
 
-<Post importance={1} readMore="tech" divTag fullWidth={isReadingMore}>
-  <Fragment slot="title">{title}</Fragment>
-  <ol
-    class={`grid grid-cols-1 gap-4 ${isReadingMore ? "lg:grid-cols-3 xl:grid-cols-4 lg:min-h-screen" : ""}`}
-  >
-    {
-      tech?.map(({ name, experienceYears, functions }) => {
-        const rowSpan = functions.length / 8;
+{
+  tech?.map(({ name, experienceYears, functions }) => {
+    const rowSpan = functions.length / 8;
 
-        return (
-          <li
-            class={`${rowSpan < 2 ? "row-span-1" : rowSpan < 3 ? "row-span-2" : rowSpan < 4 ? "row-span-3" : rowSpan < 5 ? "row-span-4" : "row-span-5"}`}
-          >
-            <Text title className="inline">
-              {name}
-            </Text>
-            {experienceYears && (
-              <Text subtitle className="inline">
-                {experienceYears < 1
-                  ? `${Math.round(experienceYears * 12)} months`
-                  : experienceYears === 1
-                    ? `${experienceYears} year`
-                    : `${Math.round(experienceYears)} years`}{" "}
-                of experience
+    return (
+      <li
+        class={`${rowSpan < 2 ? "row-span-1" : rowSpan < 3 ? "row-span-2" : rowSpan < 4 ? "row-span-3" : rowSpan < 5 ? "row-span-4" : "row-span-5"}`}
+      >
+        <Text title className="inline">
+          {name}
+        </Text>
+        {experienceYears && (
+          <Text subtitle className="inline">
+            {experienceYears < 1
+              ? `${Math.round(experienceYears * 12)} months`
+              : experienceYears === 1
+                ? `${experienceYears} year`
+                : `${Math.round(experienceYears)} years`}{" "}
+            of experience
+          </Text>
+        )}
+        <ol class="ml-8">
+          {functions.map((func) => (
+            <li>
+              <Text className="inline">
+                {isTechFunction(func) ? func.name : func}
               </Text>
-            )}
-            <ol class="ml-8">
-              {functions.map((func) => (
-                <li>
-                  <Text className="inline">
-                    {isTechFunction(func) ? func.name : func}
-                  </Text>
-                  {isTechFunction(func) && (
-                    <Text subtitle className="inline">
-                      {func.experienceYears < 1
-                        ? `${Math.round(func.experienceYears * 12)} months`
-                        : func.experienceYears === 1
-                          ? `${func.experienceYears} year`
-                          : `${Math.round(func.experienceYears)} years`}{" "}
-                      of experience
-                    </Text>
-                  )}
-                </li>
-              ))}
-            </ol>
-          </li>
-        );
-      })
-    }
-  </ol>
-</Post>
+              {isTechFunction(func) && (
+                <Text subtitle className="inline">
+                  {func.experienceYears < 1
+                    ? `${Math.round(func.experienceYears * 12)} months`
+                    : func.experienceYears === 1
+                      ? `${func.experienceYears} year`
+                      : `${Math.round(func.experienceYears)} years`}{" "}
+                  of experience
+                </Text>
+              )}
+            </li>
+          ))}
+        </ol>
+      </li>
+    );
+  })
+}

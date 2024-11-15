@@ -1,9 +1,20 @@
 ---
 import Page from "@layouts/Page.astro";
-import TechContent, { title } from "@components/Tech.astro";
+import TechList from "@components/TechList.astro";
 import Card from "@layouts/Card.astro";
+import Post from "@layouts/Post.astro";
+
+export const title = "Tech";
 ---
 
 <Page title={title} description="Max Hofer's tech stack."
-  ><Card fullscreen><TechContent isReadingMore /></Card></Page
->
+  ><Card fullscreen
+    ><Post divTag fullWidth
+      ><Fragment slot="title">{title}</Fragment><ol
+        class="grid grid-cols-1 gap-4 lg:grid-cols-3 xl:grid-cols-4 lg:min-h-screen"
+      >
+        <TechList />
+      </ol></Post
+    ></Card
+  >
+</Page>

@@ -5,10 +5,17 @@ import Link from "@layouts/Link.astro";
 import Text from "@layouts/Text.astro";
 import Button from "@layouts/Button.astro";
 import LinkedIn from "@images/logos/linkedin.svg?raw";
-import Post from "@layouts/Post.astro";
+import PostPreview from "@layouts/PostPreview.astro";
+import type { ComponentProps } from "astro/types";
+
+interface Props {
+  importance?: ComponentProps<typeof PostPreview>["importance"];
+}
+
+const { importance } = Astro.props;
 ---
 
-<Post importance={1}>
+<PostPreview importance={importance}>
   <div slot="header" class="flex items-center gap-x-4">
     <Image
       src={Picture}
@@ -35,4 +42,4 @@ import Post from "@layouts/Post.astro";
   I strive to design deeply involving experiences which evolve the concept of videogame,
   using the latest tech and research available.
   <Button href="public-resume.pdf" className="mt-10">View my resume</Button>
-</Post>
+</PostPreview>

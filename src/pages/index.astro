@@ -2,12 +2,12 @@
 import Page from "@layouts/Page.astro";
 import Bento from "@layouts/Bento.astro";
 import Profile from "@components/index/Profile.astro";
-import Tech from "@components/Tech.astro";
 import Projects from "@components/index/Projects.astro";
 import Opinions from "@components/index/Opinions.astro";
 import { getEntry } from "astro:content";
 import Video from "@layouts/Video.astro";
 import PostPreview from "@layouts/PostPreview.astro";
+import TechPreview from "@components/index/TechPreview.astro";
 
 const style = await getEntry("thoughts", "style");
 const highlightProject = await getEntry("projects", "steelsilk-championship");
@@ -20,7 +20,7 @@ const latestProject = await getEntry("projects", "hexelied");
   description="Max Hofer's game design portfolio and blog."
 >
   <Bento>
-    <Profile slot="1-medium" />
+    <Profile slot="1-medium" importance={1} />
     <Video
       slot="2-small"
       title="Showreel"
@@ -37,7 +37,7 @@ const latestProject = await getEntry("projects", "hexelied");
     <PostPreview slot="5-small" content={latestThought} />
     <PostPreview slot="6-medium" content={latestProject} importance={3} />
     <Projects slot="7-medium" />
-    <Tech slot="8-small" />
+    <TechPreview slot="8-small" importance={1} />
     <Opinions slot="9-large" />
   </Bento>
 </Page>

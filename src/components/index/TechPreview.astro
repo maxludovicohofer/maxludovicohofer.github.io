@@ -1,0 +1,19 @@
+---
+import PostPreview from "@layouts/PostPreview.astro";
+import type { ComponentProps } from "astro/types";
+import { title } from "@pages/tech.astro";
+import TechList from "@components/TechList.astro";
+
+interface Props {
+  importance?: ComponentProps<typeof PostPreview>["importance"];
+}
+
+const { importance } = Astro.props;
+---
+
+<PostPreview importance={importance} readMore="tech" divTag>
+  <Fragment slot="title">{title}</Fragment>
+  <ol class="grid grid-cols-1 gap-4">
+    <TechList />
+  </ol>
+</PostPreview>
