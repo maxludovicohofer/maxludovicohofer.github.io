@@ -4,16 +4,28 @@ import type { CollectionEntry } from "astro:content";
 import Button from "./Button.astro";
 import { Image } from "astro:assets";
 import { getLastModifiedTime, getPostImage } from "./Post.astro";
+import type { ComponentProps } from "astro/types";
 
 interface Props {
-  content?: CollectionEntry<"thoughts"> | CollectionEntry<"projects">;
+  content?:
+    | CollectionEntry<"thoughts">
+    | CollectionEntry<"projects">
+    | undefined;
   readMore?: string;
   importance?: 1 | 2 | 3 | undefined;
-  divTag?: boolean;
+  tag?: ComponentProps<typeof Text>["tag"];
   hideDate?: boolean;
+  container?: boolean;
 }
 
-const { importance = 2, content, readMore, divTag, hideDate } = Astro.props;
+const {
+  importance = 2,
+  content,
+  readMore,
+  tag,
+  hideDate,
+  container,
+} = Astro.props;
 
 const { Content, remarkPluginFrontmatter } = content
   ? await content.render()
@@ -35,14 +47,15 @@ const readMoreLink =
     : (readMore ?? (content && `${content.collection}/${content.slug}`));
 
 const lastModifiedTime =
-  !hideDate && getLastModifiedTime(remarkPluginFrontmatter);
+  !hideDate &&
+  getLastModifiedTime(remarkPluginFrontmatter)?.format("D MMMM YYYY");
 
 const image = getPostImage(content);
 ---
 
 {
   Astro.slots.has("header") && (
-    <Text subtitle className="mb-6" divTag>
+    <Text subtitle className="mb-6" tag="div">
       <slot name="header" />
     </Text>
   )
@@ -64,9 +77,10 @@ const image = getPostImage(content);
   )
 }
 <Text
-  className={`${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl ${readMoreLink ? "max-h-72" : ""}`}
+  className={`${lastModifiedTime ? "mt-4" : Content || Astro.slots.has("title") ? "mt-6" : ""} text-xl 2xl:text-3xl ${container ? "max-h-[25rem]" : readMoreLink ? "max-h-72" : ""}`}
   markdown={!!Content}
-  divTag={divTag}>{Content ? <Content /> : <slot />}</Text
+  tag={tag ?? (container ? "div" : undefined)}
+  >{Content ? <Content /> : <slot />}</Text
 >
 {
   readMoreLink && (
@@ -75,6 +89,7 @@ const image = getPostImage(content);
       className="absolute bottom-0 left-0"
       href={readMoreLink}
       navigate
+      container={container}
     >
       {minutesToRead ? `Read in ${minutesToRead} min` : "Read more"}
       <br />▼
@@ -85,13 +100,12 @@ const image = getPostImage(content);
   image && (
     <Image
       src={image()}
-      class="absolute inset-0 size-full object-cover opacity-0 group-hover:opacity-15 intersect:opacity-15 lg:intersect:opacity-0 intersect-half duration-700 pointer-events-none"
+      class={`absolute inset-0 size-full object-cover opacity-0 ${container ? "group-hover/container-card:opacity-15" : "group-hover/card:opacity-15"} intersect:opacity-15 lg:intersect:opacity-0 intersect-half duration-700 pointer-events-none`}
       alt={
         content?.collection === "projects"
           ? content.data.description
           : `Graphic explanation of "${content!.data.title}"`
       }
     />
-    //
   )
 }

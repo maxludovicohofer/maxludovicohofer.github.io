@@ -5,10 +5,12 @@ import { getCollection } from "astro:content";
 
 // Generate a new path for every collection entry
 export const getStaticPaths = async () =>
-  (await getCollection("projects")).map((content) => ({
-    params: { slug: content.slug },
-    props: { content },
-  }));
+  (await getCollection("projects", ({ data: { draft } }) => !draft)).map(
+    (content) => ({
+      params: { slug: content.slug },
+      props: { content },
+    })
+  );
 
 const { content } = Astro.props;
 ---

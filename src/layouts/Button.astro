@@ -9,6 +9,7 @@ interface Props {
   navigate?: boolean;
   rounded?: boolean;
   intersectAsHover?: boolean;
+  container?: boolean | undefined;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   navigate,
   rounded,
   intersectAsHover,
+  container,
 } = Astro.props;
 ---
 
@@ -29,7 +31,9 @@ const {
   >
     {
       readMore ? (
-        <div class="size-full flex flex-col justify-end pb-5 group-hover:animate-pulse intersect:animate-pulse lg:intersect:animate-none intersect-full">
+        <div
+          class={`size-full flex flex-col justify-end pb-5 ${container ? "group-hover/container-card:animate-pulse" : "group-hover/card:animate-pulse"} intersect:animate-pulse lg:intersect:animate-none intersect-full`}
+        >
           <slot />
         </div>
       ) : (

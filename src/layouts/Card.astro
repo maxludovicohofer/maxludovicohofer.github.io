@@ -1,13 +1,17 @@
 ---
 interface Props {
+  container?: boolean;
   className?: string;
+  tag?: "li";
 }
 
-const { className = "" } = Astro.props;
+const { container, className = "", tag } = Astro.props;
+
+const Element = tag ?? "div";
 ---
 
-<div
-  class={`rounded-3xl bg-zinc-100 dark:bg-zinc-900 shadow-md overflow-hidden relative group p-8 2xl:p-12 ${className}`}
+<Element
+  class={`rounded-3xl shadow-md overflow-hidden relative ${container ? "group/container-card" : "group/card bg-zinc-100 dark:bg-zinc-900 p-8 2xl:p-12"} ${className}`}
 >
   <slot />
-</div>
+</Element>

@@ -6,14 +6,15 @@ import { Image } from "astro:assets";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import Card from "./Card.astro";
+import type { ComponentProps } from "astro/types";
 
 interface Props {
   content?: CollectionEntry<"thoughts"> | CollectionEntry<"projects">;
-  divTag?: boolean;
+  tag?: ComponentProps<typeof Text>["tag"];
   fullWidth?: boolean | undefined;
 }
 
-const { content, divTag, fullWidth } = Astro.props;
+const { content, tag, fullWidth } = Astro.props;
 
 const { Content, remarkPluginFrontmatter } = content
   ? await content.render()
@@ -22,14 +23,16 @@ const { Content, remarkPluginFrontmatter } = content
 export const getLastModifiedTime = (
   frontmatter: typeof remarkPluginFrontmatter
 ) => {
+  if (!frontmatter) return;
+
   dayjs.extend(utc);
 
-  return (
-    frontmatter && dayjs.utc(frontmatter.lastModified).format("D MMMM YYYY")
-  );
+  return dayjs.utc(frontmatter.lastModified);
 };
 
-const lastModifiedTime = getLastModifiedTime(remarkPluginFrontmatter);
+const lastModifiedTime = getLastModifiedTime(remarkPluginFrontmatter)?.format(
+  "D MMMM YYYY"
+);
 
 export const getPostImage = (post: typeof content) => {
   if (!post) return;
@@ -53,8 +56,9 @@ export const getPostImage = (post: typeof content) => {
 
 const image = getPostImage(content);
 
+// TODO ALSO DISPLAY ROLES AND ENGINE
 // TODO MAKE IMAGES FULLSCREENABLE
-// TODO REPLACE POST IMAGES WITH LOOPED VIDEOS (BUT ALSO GIVE THE OPTION TO USE IMAGES). FOLLOW THE ASTRO GUIDE ON CLOUDINARY VIDEO PLAYER
+// TODO REPLACE POST IMAGES WITH LOOPED VIDEOS (BUT ALSO GIVE THE OPTION TO USE IMAGES)
 
 const contentWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
 ---
@@ -81,7 +85,7 @@ const contentWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
   >
     {
       Astro.slots.has("header") && (
-        <Text subtitle className="mb-6" divTag>
+        <Text subtitle className="mb-6" tag="div">
           <slot name="header" />
         </Text>
       )
@@ -92,7 +96,7 @@ const contentWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
     <Text
       className={`${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl`}
       markdown={!!Content}
-      divTag={divTag}>{Content ? <Content /> : <slot />}</Text
+      tag={tag}>{Content ? <Content /> : <slot />}</Text
     >
     {
       lastModifiedTime && (
