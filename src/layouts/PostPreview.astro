@@ -51,7 +51,7 @@ const minutesToRead =
 const readMoreLink =
   noReadMore || (realMinutesToRead && realMinutesToRead < 0)
     ? undefined
-    : (readMore ?? (content && `${content.collection}/${content.slug}`));
+    : (readMore ?? (content && `/${content.collection}/${content.slug}`));
 
 const lastModifiedTime =
   !hideDate &&
