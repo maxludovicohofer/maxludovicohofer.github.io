@@ -1,0 +1,18 @@
+---
+import AllProjects from "@components/index/AllProjects.astro";
+import Page from "@layouts/Page.astro";
+import Post from "@layouts/Post.astro";
+
+// TODO MAKE (FOR EXAMPLE FIX HOVER)
+// TODO BACK SHOULD GO TO PROJECTS IF COMING FROM PROJECTS
+---
+
+<Page
+  title="Projects"
+  description="All my games, prototypes and secondary projects."
+>
+  <Post>
+    <Fragment slot="title">Projects</Fragment>
+    <AllProjects />
+  </Post>
+</Page>

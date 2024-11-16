@@ -11,7 +11,12 @@ interface Props {
     | CollectionEntry<"thoughts">
     | CollectionEntry<"projects">
     | undefined;
+  descriptionAsContent?: boolean;
   readMore?: string;
+  readMoreText?: string;
+  noReadMore?: boolean;
+  fullHeightReadMore?: boolean;
+  minutesAlreadySpentReading?: number;
   importance?: 1 | 2 | 3 | undefined;
   tag?: ComponentProps<typeof Text>["tag"];
   hideDate?: boolean;
@@ -21,18 +26,20 @@ interface Props {
 const {
   importance = 2,
   content,
+  descriptionAsContent,
   readMore,
+  readMoreText,
+  noReadMore,
+  fullHeightReadMore,
   tag,
   hideDate,
   container,
+  minutesAlreadySpentReading = 0.5, // Time assumed to be already spent reading before clicking read more
 } = Astro.props;
 
 const { Content, remarkPluginFrontmatter } = content
   ? await content.render()
   : {};
-
-// Time assumed to be already spent reading before clicking read more
-const minutesAlreadySpentReading = 0.5;
 
 const realMinutesToRead =
   remarkPluginFrontmatter &&
@@ -42,7 +49,7 @@ const minutesToRead =
   realMinutesToRead !== undefined && Math.max(Math.round(realMinutesToRead), 1);
 
 const readMoreLink =
-  realMinutesToRead && realMinutesToRead < 0
+  noReadMore || (realMinutesToRead && realMinutesToRead < 0)
     ? undefined
     : (readMore ?? (content && `${content.collection}/${content.slug}`));
 
@@ -51,6 +58,12 @@ const lastModifiedTime =
   getLastModifiedTime(remarkPluginFrontmatter)?.format("D MMMM YYYY");
 
 const image = getPostImage(content);
+
+const description = content
+  ? content.collection === "projects"
+    ? content.data.description
+    : undefined
+  : undefined;
 ---
 
 {
@@ -77,22 +90,35 @@ const image = getPostImage(content);
   )
 }
 <Text
-  className={`${lastModifiedTime ? "mt-4" : Content || Astro.slots.has("title") ? "mt-6" : ""} text-xl 2xl:text-3xl ${container ? "max-h-[25rem]" : readMoreLink ? "max-h-72" : ""}`}
+  className={`${lastModifiedTime ? "mt-4" : Content || Astro.slots.has("title") ? "mt-6" : ""} text-xl 2xl:text-3xl ${container ? "max-h-[25.6rem]" : readMoreLink ? "max-h-72" : ""}`}
   markdown={!!Content}
   tag={tag ?? (container ? "div" : undefined)}
-  >{Content ? <Content /> : <slot />}</Text
+  >{
+    descriptionAsContent && description ? (
+      description
+    ) : Content ? (
+      <Content />
+    ) : (
+      <slot />
+    )
+  }</Text
 >
 {
   readMoreLink && (
     <Button
-      readMore
-      className="absolute bottom-0 left-0"
+      cardButton
+      className={`absolute bottom-0 left-0 ${fullHeightReadMore ? "h-full" : "h-1/3"}`}
       href={readMoreLink}
       navigate
-      container={container}
+      minimalStyle={fullHeightReadMore}
     >
-      {minutesToRead ? `Read in ${minutesToRead} min` : "Read more"}
-      <br />▼
+      <div
+        class={`size-full flex flex-col justify-end pb-5 ${container ? "group-hover/container-card:animate-pulse" : "group-hover/card:animate-pulse"} intersect:animate-pulse lg:intersect:animate-none intersect-full`}
+      >
+        {readMoreText ??
+          (minutesToRead ? `Read in ${minutesToRead} min` : "Read more")}
+        <br />▼
+      </div>
     </Button>
   )
 }
@@ -101,11 +127,7 @@ const image = getPostImage(content);
     <Image
       src={image()}
       class={`absolute inset-0 size-full object-cover opacity-0 ${container ? "group-hover/container-card:opacity-15" : "group-hover/card:opacity-15"} intersect:opacity-15 lg:intersect:opacity-0 intersect-half duration-700 pointer-events-none`}
-      alt={
-        content?.collection === "projects"
-          ? content.data.description
-          : `Graphic explanation of "${content!.data.title}"`
-      }
+      alt={description ?? `Graphic explanation of "${content!.data.title}"`}
     />
   )
 }

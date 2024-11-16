@@ -1,0 +1,26 @@
+---
+import Card from "@layouts/Card.astro";
+import PostPreview from "@layouts/PostPreview.astro";
+import { getCollection } from "astro:content";
+
+// TODO SORT BY LATEST FIRST (EXCLUDING HIGHLIGHT AND LATEST), THEN ADD HIGHLIGHT AND LATEST AT THE END
+const thoughts = await getCollection(
+  "thoughts",
+  ({ data: { draft } }) => !draft
+);
+---
+
+<ol class="grid grid-cols-1 gap-4">
+  {
+    thoughts.map((thought) => (
+      <Card tag="li" className="max-h-48 xl:max-h-none">
+        <PostPreview
+          importance={1}
+          content={thought}
+          fullHeightReadMore
+          minutesAlreadySpentReading={0}
+        />
+      </Card>
+    ))
+  }
+</ol>

@@ -1,0 +1,18 @@
+---
+import AllThoughts from "@components/index/AllThoughts.astro";
+import Page from "@layouts/Page.astro";
+import Post from "@layouts/Post.astro";
+
+// TODO MAKE (FOR EXAMPLE FIX HOVER)
+// TODO BACK SHOULD GO TO THOUGHTS IF COMING FROM THOUGHTS
+---
+
+<Page
+  title="Thoughts"
+  description="All my blog posts and thoughts about videogames, the industry and work."
+>
+  <Post>
+    <Fragment slot="title">Thoughts</Fragment>
+    <AllThoughts />
+  </Post>
+</Page>

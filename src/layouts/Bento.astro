@@ -23,13 +23,13 @@ import Card from "@layouts/Card.astro";
   <Card className="lg:row-start-4 lg:col-span-2">
     <slot name="6-medium" />
   </Card>
-  <Card className="lg:row-span-2 lg:col-span-2 xl:col-span-1" container>
-    <slot name="7-large" />
-  </Card>
   <Card className="lg:row-start-4">
-    <slot name="8-small" />
+    <slot name="7-small" />
   </Card>
-  <Card className="lg:row-start-5 xl:row-start-auto lg:row-span-2">
+  <Card className="lg:row-span-2 lg:col-span-2 xl:col-span-1" container>
+    <slot name="8-large" />
+  </Card>
+  <Card className="lg:row-start-5 xl:row-start-auto lg:row-span-2" container>
     <slot name="9-medium" />
   </Card>
 </div>

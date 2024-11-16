@@ -2,8 +2,8 @@
 import Page from "@layouts/Page.astro";
 import Bento from "@layouts/Bento.astro";
 import Profile from "@components/index/Profile.astro";
-import Projects from "@components/index/Projects.astro";
-import Opinions from "@components/index/Opinions.astro";
+import AllProjects from "@components/index/AllProjects.astro";
+import AllThoughts from "@components/index/AllThoughts.astro";
 import { getEntry } from "astro:content";
 import Video from "@layouts/Video.astro";
 import PostPreview from "@layouts/PostPreview.astro";
@@ -41,7 +41,7 @@ const getLatestContent = async <C extends CollectionKey>(collection: C) => {
 const latestThought = await getLatestContent("thoughts");
 const latestProject = await getLatestContent("projects");
 
-// TODO TECH SHOULD GO BEFORE "ALL PROJECTS" IN MOBILE
+// TODO MOVE ALL THOUGHTS AND ALL PROJECTS INSIDE THEIR FILES (DO NOT KEEP THEM HERE ON INDEX)
 ---
 
 <Page
@@ -65,8 +65,24 @@ const latestProject = await getLatestContent("projects");
     />
     <PostPreview slot="5-small" content={latestThought} />
     <PostPreview slot="6-medium" content={latestProject} importance={3} />
-    <Projects slot="7-large" />
-    <TechPreview slot="8-small" importance={1} />
-    <Opinions slot="9-medium" />
+    <TechPreview slot="7-small" importance={1} />
+    <PostPreview
+      slot="8-large"
+      readMore="projects"
+      container
+      readMoreText="See all projects"
+    >
+      <span slot="title" class="pl-8 2xl:pl-12">Projects</span>
+      <AllProjects />
+    </PostPreview>
+    <PostPreview
+      slot="9-medium"
+      readMore="thoughts"
+      container
+      readMoreText="See all thoughts"
+    >
+      <span slot="title" class="pl-8 2xl:pl-12">Thoughts</span>
+      <AllThoughts />
+    </PostPreview>
   </Bento>
 </Page>

@@ -2,22 +2,24 @@
 interface Props {
   href?: string | undefined;
   className?: string;
-  openInCurrentPage?: boolean | undefined;
+  navigate?: boolean | undefined;
   intersectAsHover?: boolean;
+  noStyle?: boolean;
 }
 
 const {
   href,
   className = "",
-  openInCurrentPage,
+  navigate,
   intersectAsHover,
+  noStyle,
 } = Astro.props;
 ---
 
 <a
-  class={`underline text-zinc-500 hover:text-yellow-400 active:text-yellow-500 dark:text-zinc-400 dark:hover:text-yellow-200 dark:active:text-yellow-400 hover:scale-125 active:scale-90 duration-150 ${intersectAsHover ? "intersect:text-yellow-400 dark:intersect:text-yellow-200 intersect:scale-125 intersect-full" : ""} ${className}`}
+  class={`${noStyle ? "" : `underline text-zinc-500 hover:text-yellow-400 active:text-yellow-500 dark:text-zinc-400 dark:hover:text-yellow-200 dark:active:text-yellow-400 hover:scale-125 active:scale-90 duration-150 ${intersectAsHover ? "intersect:text-yellow-400 dark:intersect:text-yellow-200 intersect:scale-125 intersect-full" : ""}`} ${className}`}
   href={href}
-  target={openInCurrentPage ? "_self" : "_blank"}
+  target={navigate ? "_self" : "_blank"}
 >
   <slot />
 </a>
