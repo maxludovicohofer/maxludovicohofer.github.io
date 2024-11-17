@@ -17,7 +17,7 @@ import type { CollectionKey } from "astro:content";
 const highlightThought = await getEntry("thoughts", "style");
 const highlightProject = await getEntry("projects", "steelsilk-championship");
 
-const getLatestContent = async <C extends CollectionKey>(collection: C) => {
+const getLatestEntry = async <C extends CollectionKey>(collection: C) => {
   const entries = await getCollection(
     collection,
     ({ data: { draft }, id }) =>
@@ -38,8 +38,8 @@ const getLatestContent = async <C extends CollectionKey>(collection: C) => {
     : undefined;
 };
 
-const latestThought = await getLatestContent("thoughts");
-const latestProject = await getLatestContent("projects");
+const latestThought = await getLatestEntry("thoughts");
+const latestProject = await getLatestEntry("projects");
 
 // TODO MOVE ALL THOUGHTS AND ALL PROJECTS INSIDE THEIR FILES (DO NOT KEEP THEM HERE ON INDEX)
 ---
@@ -56,15 +56,15 @@ const latestProject = await getLatestContent("projects");
       youtubeID="m0KhK_J0LiQ"
       className="!aspect-[16/10]"
     />
-    <PostPreview slot="3-small" content={highlightThought} hideDate />
+    <PostPreview slot="3-small" entry={highlightThought} hideDate />
     <PostPreview
       slot="4-large"
-      content={highlightProject}
+      entry={highlightProject}
       importance={3}
       hideDate
     />
-    <PostPreview slot="5-small" content={latestThought} />
-    <PostPreview slot="6-medium" content={latestProject} importance={3} />
+    <PostPreview slot="5-small" entry={latestThought} />
+    <PostPreview slot="6-medium" entry={latestProject} importance={3} />
     <TechPreview slot="7-small" importance={1} />
     <PostPreview
       slot="8-large"

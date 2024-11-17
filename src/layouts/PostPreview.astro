@@ -7,11 +7,8 @@ import { getLastModifiedTime, getPostImage } from "./Post.astro";
 import type { ComponentProps } from "astro/types";
 
 interface Props {
-  content?:
-    | CollectionEntry<"thoughts">
-    | CollectionEntry<"projects">
-    | undefined;
-  descriptionAsContent?: boolean;
+  entry?: CollectionEntry<"thoughts"> | CollectionEntry<"projects"> | undefined;
+  descriptionAsBody?: boolean;
   readMore?: string;
   readMoreText?: string;
   noReadMore?: boolean;
@@ -25,8 +22,8 @@ interface Props {
 
 const {
   importance = 2,
-  content,
-  descriptionAsContent,
+  entry,
+  descriptionAsBody,
   readMore,
   readMoreText,
   noReadMore,
@@ -37,9 +34,7 @@ const {
   minutesAlreadySpentReading = 0.5, // Time assumed to be already spent reading before clicking read more
 } = Astro.props;
 
-const { Content, remarkPluginFrontmatter } = content
-  ? await content.render()
-  : {};
+const { Content, remarkPluginFrontmatter } = entry ? await entry.render() : {};
 
 const realMinutesToRead =
   remarkPluginFrontmatter &&
@@ -51,17 +46,17 @@ const minutesToRead =
 const readMoreLink =
   noReadMore || (realMinutesToRead && realMinutesToRead < 0)
     ? undefined
-    : (readMore ?? (content && `/${content.collection}/${content.slug}`));
+    : (readMore ?? (entry && `/${entry.collection}/${entry.slug}`));
 
 const lastModifiedTime =
   !hideDate &&
   getLastModifiedTime(remarkPluginFrontmatter)?.format("D MMMM YYYY");
 
-const image = getPostImage(content);
+const image = getPostImage(entry);
 
-const description = content
-  ? content.collection === "projects"
-    ? content.data.description
+const description = entry
+  ? entry.collection === "projects"
+    ? entry.data.description
     : undefined
   : undefined;
 ---
@@ -80,7 +75,7 @@ const description = content
     : importance === 2
       ? "text-3xl 2xl:text-5xl"
       : "text-3xl lg:text-5xl 2xl:text-8xl"}
-  >{content?.data.title ?? <slot name="title" />}</Text
+  >{entry?.data.title ?? <slot name="title" />}</Text
 >
 {
   lastModifiedTime && (
@@ -94,7 +89,7 @@ const description = content
   markdown={!!Content}
   tag={tag ?? (container ? "div" : undefined)}
   >{
-    descriptionAsContent && description ? (
+    descriptionAsBody && description ? (
       description
     ) : Content ? (
       <Content />
@@ -127,7 +122,7 @@ const description = content
     <Image
       src={image()}
       class={`absolute inset-0 size-full object-cover opacity-0 ${container ? "group-hover/container-card:opacity-15" : "group-hover/card:opacity-15"} intersect:opacity-15 lg:intersect:opacity-0 intersect-half duration-700 pointer-events-none`}
-      alt={description ?? `Graphic explanation of "${content!.data.title}"`}
+      alt={description ?? `Graphic explanation of "${entry!.data.title}"`}
     />
   )
 }

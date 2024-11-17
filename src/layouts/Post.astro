@@ -9,16 +9,14 @@ import Card from "./Card.astro";
 import type { ComponentProps } from "astro/types";
 
 interface Props {
-  content?: CollectionEntry<"thoughts"> | CollectionEntry<"projects">;
+  entry?: CollectionEntry<"thoughts"> | CollectionEntry<"projects">;
   tag?: ComponentProps<typeof Text>["tag"];
   fullWidth?: boolean | undefined;
 }
 
-const { content, tag, fullWidth } = Astro.props;
+const { entry, tag, fullWidth } = Astro.props;
 
-const { Content, remarkPluginFrontmatter } = content
-  ? await content.render()
-  : {};
+const { Content, remarkPluginFrontmatter } = entry ? await entry.render() : {};
 
 export const getLastModifiedTime = (
   frontmatter: typeof remarkPluginFrontmatter
@@ -34,7 +32,7 @@ const lastModifiedTime = getLastModifiedTime(remarkPluginFrontmatter)?.format(
   "D MMMM YYYY"
 );
 
-export const getPostImage = (post: typeof content) => {
+export const getPostImage = (post: typeof entry) => {
   if (!post) return;
 
   const imageFolder = `/src/content/${post.collection}/`;
@@ -54,24 +52,25 @@ export const getPostImage = (post: typeof content) => {
   return image;
 };
 
-const image = getPostImage(content);
+const image = getPostImage(entry);
 
+// TODO FIX SHADOWS (WHEN IMAGE ONLY TOP SHADOW, AND ONLY TOP ROUNDED). WATCH IN LIGHT THEME
 // TODO ALSO DISPLAY ROLES AND ENGINE
 // TODO MAKE IMAGES FULLSCREENABLE
 // TODO REPLACE POST IMAGES WITH LOOPED VIDEOS (BUT ALSO GIVE THE OPTION TO USE IMAGES)
 
-const contentWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
+const bodyWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
 ---
 
 {
   image && (
     <Image
       src={image()}
-      class={`header-image lg:rounded-3xl lg:shadow-md fixed lg:absolute lg:z-10 lg:left-0 lg:right-0 lg:mx-auto lg:mt-12 w-full lg:max-h-[40vh] lg:h-auto object-cover ${contentWidthClass}`}
+      class={`header-image lg:rounded-3xl lg:shadow-md fixed lg:absolute lg:z-10 lg:left-0 lg:right-0 lg:mx-auto lg:mt-12 w-full lg:max-h-[40vh] lg:h-auto object-cover ${bodyWidthClass}`}
       alt={
-        content?.collection === "projects"
-          ? content.data.description
-          : `Graphic explanation of "${content!.data.title}"`
+        entry?.collection === "projects"
+          ? entry.data.description
+          : `Graphic explanation of "${entry!.data.title}"`
       }
       loading="eager"
     />
@@ -81,7 +80,7 @@ const contentWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
   className=`!bg-opacity-0 ${image ? "lg:rounded-none translate-y-[26vh] lg:translate-y-0" : "rounded-none"} !p-6 !pt-7 md:!pt-12 bg-gradient-to-b from-zinc-100 dark:from-zinc-900 to-zinc-200 dark:to-zinc-950 flex flex-col items-center`
 >
   <div
-    class={`mb-16 lg:mb-6 ${image ? "lg:mt-[43vh]" : "2xl:-mt-2"} ${fullWidth ? "lg:mx-20" : `max-w-[40rem] ${contentWidthClass}`}`}
+    class={`mb-16 lg:mb-6 ${image ? "lg:mt-[43vh]" : "2xl:-mt-2"} ${fullWidth ? "lg:mx-20" : `max-w-[40rem] ${bodyWidthClass}`}`}
   >
     {
       Astro.slots.has("header") && (
@@ -91,7 +90,7 @@ const contentWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
       )
     }
     <Text title className="text-3xl 2xl:text-5xl"
-      >{content?.data.title ?? <slot name="title" />}</Text
+      >{entry?.data.title ?? <slot name="title" />}</Text
     >
     <Text
       className={`${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl`}
