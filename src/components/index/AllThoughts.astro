@@ -1,6 +1,7 @@
 ---
 import ContentList from "@components/ContentList.astro";
 import PostPreview from "@layouts/PostPreview.astro";
+import { highlightThought, latestThought } from "@pages/index.astro";
 import { title } from "@pages/thoughts/index.astro";
 import type { ComponentProps } from "astro/types";
 
@@ -9,6 +10,10 @@ interface Props {
 }
 
 const { importance } = Astro.props;
+
+const alreadyVisible = [highlightThought, latestThought].filter(
+  (entry) => !!entry
+);
 ---
 
 <PostPreview
@@ -18,5 +23,10 @@ const { importance } = Astro.props;
   importance={importance}
 >
   <Fragment slot="title">{title}</Fragment>
-  <ContentList collection="thoughts" />
+  <ContentList
+    collection="thoughts"
+    short
+    exclude={alreadyVisible}
+    additional={alreadyVisible}
+  />
 </PostPreview>

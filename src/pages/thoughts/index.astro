@@ -1,10 +1,6 @@
 ---
-import ContentList from "@components/ContentList.astro";
+import Thoughts from "@components/Thoughts.astro";
 import Page from "@layouts/Page.astro";
-import Post from "@layouts/Post.astro";
-
-// TODO MAKE (FOR EXAMPLE FIX HOVER)
-// TODO BACK SHOULD GO TO THOUGHTS IF COMING FROM THOUGHTS
 
 export const title = "Thoughts";
 ---
@@ -13,11 +9,5 @@ export const title = "Thoughts";
   title={title}
   description="All my blog posts and thoughts about videogames, the industry and work."
 >
-  <Post>
-    <Fragment slot="title">{title}</Fragment>
-    <ContentList
-      collection="thoughts"
-      className="md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-1"
-    />
-  </Post>
+  <Thoughts />
 </Page>

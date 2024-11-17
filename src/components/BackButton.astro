@@ -4,18 +4,19 @@ import Button from "@layouts/Button.astro";
 
 <Button
   className="back-button !text-3xl fixed left-6 lg:left-9 bottom-5 lg:top-12 max-w-14 lg:max-w-10 min-h-14 lg:min-h-fit lg:max-h-10"
-  href="/"
   rounded
-  navigate
 >
   <p class="mt-[-0.2rem] ml-[-0.1rem] lg:ml-[-0.2rem]">◂</p>
 </Button>
 <script>
   import { navigate } from "astro:transitions/client";
 
-  addEventListener("astro:page-load", () => {
+  document.addEventListener("astro:page-load", () => {
+    console.log("ei");
     document
       .querySelector<HTMLButtonElement>("button.back-button")
-      ?.addEventListener("click", () => navigate("/"));
+      ?.addEventListener("click", () =>
+        document.referrer ? navigate("/") : history.back()
+      );
   });
 </script>

@@ -12,8 +12,8 @@ interface Props {
   readMore?: string;
   readMoreText?: string;
   noReadMore?: boolean;
-  fullHeightReadMore?: boolean;
-  minutesAlreadySpentReading?: number;
+  fullHeightReadMore?: boolean | undefined;
+  minutesAlreadySpentReading?: number | undefined;
   importance?: 1 | 2 | 3 | undefined;
   tag?: ComponentProps<typeof Text>["tag"];
   hideDate?: boolean;

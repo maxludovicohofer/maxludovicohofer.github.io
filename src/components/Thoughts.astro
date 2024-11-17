@@ -1,0 +1,24 @@
+---
+import ContentList from "@components/ContentList.astro";
+import Post from "@layouts/Post.astro";
+import { title } from "@pages/thoughts/index.astro";
+import type { ComponentProps } from "astro/types";
+
+interface Props {
+  exclude?: ComponentProps<typeof ContentList>["exclude"];
+}
+
+const { exclude } = Astro.props;
+---
+
+<Post container>
+  <Fragment slot="title"
+    >{exclude?.length ? `Other ${title.toLowerCase()}` : title}</Fragment
+  >
+  <ContentList
+    collection="thoughts"
+    short
+    className="md:grid-cols-1 xl:grid-cols-2"
+    exclude={exclude}
+  />
+</Post>

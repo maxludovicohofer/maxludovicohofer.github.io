@@ -1,6 +1,6 @@
 ---
 interface Props {
-  container?: boolean;
+  container?: boolean | undefined;
   className?: string;
   tag?: "li";
 }
@@ -11,7 +11,7 @@ const Element = tag ?? "div";
 ---
 
 <Element
-  class={`${container ? "rounded-b-3xl drop-shadow-md" : "rounded-3xl shadow-md"} overflow-hidden relative ${container ? "group/container-card" : "group/card bg-zinc-100 dark:bg-zinc-900 p-8 2xl:p-12"} ${className}`}
+  class={`${container ? "group/container-card rounded-b-3xl drop-shadow-md" : "group/card rounded-3xl shadow-md bg-zinc-100 dark:bg-zinc-900 p-8 2xl:p-12"} overflow-hidden relative ${className}`}
 >
   <slot />
 </Element>

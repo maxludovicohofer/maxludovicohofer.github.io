@@ -1,6 +1,7 @@
 ---
 import ContentList from "@components/ContentList.astro";
 import PostPreview from "@layouts/PostPreview.astro";
+import { highlightProject, latestProject } from "@pages/index.astro";
 import { title } from "@pages/projects/index.astro";
 import type { ComponentProps } from "astro/types";
 
@@ -9,6 +10,10 @@ interface Props {
 }
 
 const { importance } = Astro.props;
+
+const alreadyVisible = [highlightProject, latestProject].filter(
+  (entry) => !!entry
+);
 ---
 
 <PostPreview
@@ -20,7 +25,9 @@ const { importance } = Astro.props;
   <Fragment slot="title">{title}</Fragment>
   <ContentList
     collection="projects"
-    descriptionAsBody
-    className="md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-1"
+    short
+    className="md:grid-cols-2 xl:grid-cols-1"
+    exclude={alreadyVisible}
+    additional={alreadyVisible}
   />
 </PostPreview>

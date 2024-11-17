@@ -12,9 +12,10 @@ interface Props {
   entry?: CollectionEntry<"thoughts"> | CollectionEntry<"projects">;
   tag?: ComponentProps<typeof Text>["tag"];
   fullWidth?: boolean | undefined;
+  container?: boolean;
 }
 
-const { entry, tag, fullWidth } = Astro.props;
+const { entry, tag, fullWidth, container } = Astro.props;
 
 const { Content, remarkPluginFrontmatter } = entry ? await entry.render() : {};
 
@@ -25,7 +26,7 @@ export const getLastModifiedDate = (
 
   dayjs.extend(utc);
 
-  return dayjs.utc(frontmatter.lastModified);
+  return dayjs.utc(frontmatter.lastModified || undefined);
 };
 
 const lastModifiedTime = getLastModifiedDate(remarkPluginFrontmatter)?.format(
@@ -76,7 +77,8 @@ const bodyWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
   )
 }
 <Card
-  className=`!bg-opacity-0 !p-6 !pt-7 md:!pt-12 shadow-none ${image ? "rounded-b-none lg:rounded-none translate-y-[26vh] lg:translate-y-0" : "rounded-none"} bg-gradient-to-b from-zinc-100 dark:from-zinc-900 to-zinc-200 dark:to-zinc-950 flex flex-col items-center`
+  container={container}
+  className=`!bg-opacity-0 !p-6 !pt-7 md:!pt-12 shadow-none ${image ? "rounded-b-none lg:rounded-none translate-y-[26vh] lg:translate-y-0" : "rounded-none"} ${container ? "" : "bg-gradient-to-b from-zinc-100 dark:from-zinc-900 to-zinc-200 dark:to-zinc-950"} flex flex-col items-center`
 >
   <div
     class={`mb-16 lg:mb-6 ${image ? "lg:mt-[43vh]" : "2xl:-mt-2"} ${fullWidth ? "lg:mx-20" : `max-w-[40rem] ${bodyWidthClass}`}`}
