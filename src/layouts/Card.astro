@@ -8,12 +8,10 @@ interface Props {
 const { container, className = "", tag } = Astro.props;
 
 const Element = tag ?? "div";
-
-// TODO FIX CONTAINER SHADOW, SHOULD HAVE ONLY BOTTOM (WATCH IN LIGHT THEME)
 ---
 
 <Element
-  class={`${container ? "rounded-b-3xl" : "rounded-3xl"} shadow-md overflow-hidden relative ${container ? "group/container-card" : "group/card bg-zinc-100 dark:bg-zinc-900 p-8 2xl:p-12"} ${className}`}
+  class={`${container ? "rounded-b-3xl drop-shadow-md" : "rounded-3xl shadow-md"} overflow-hidden relative ${container ? "group/container-card" : "group/card bg-zinc-100 dark:bg-zinc-900 p-8 2xl:p-12"} ${className}`}
 >
   <slot />
 </Element>

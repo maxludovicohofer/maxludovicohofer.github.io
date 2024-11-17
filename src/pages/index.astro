@@ -9,15 +9,20 @@ import Video from "@layouts/Video.astro";
 import PostPreview from "@layouts/PostPreview.astro";
 import TechPreview from "@components/index/TechPreview.astro";
 import { getCollection } from "astro:content";
-import { getLastModifiedTime } from "@layouts/Post.astro";
+import { getLastModifiedDate } from "@layouts/Post.astro";
 import dayjs from "dayjs";
 import minMax from "dayjs/plugin/minMax";
 import type { CollectionKey } from "astro:content";
 
-const highlightThought = await getEntry("thoughts", "style");
-const highlightProject = await getEntry("projects", "steelsilk-championship");
+export const highlightThought = await getEntry("thoughts", "style");
+export const highlightProject = await getEntry(
+  "projects",
+  "steelsilk-championship"
+);
 
-const getLatestEntry = async <C extends CollectionKey>(collection: C) => {
+export const getLatestEntry = async <C extends CollectionKey>(
+  collection: C
+) => {
   const entries = await getCollection(
     collection,
     ({ data: { draft }, id }) =>
@@ -27,7 +32,7 @@ const getLatestEntry = async <C extends CollectionKey>(collection: C) => {
   const collectionDates = await Promise.all(
     entries.map(
       async ({ render }) =>
-        getLastModifiedTime((await render()).remarkPluginFrontmatter)!
+        getLastModifiedDate((await render()).remarkPluginFrontmatter)!
     )
   );
 
@@ -38,10 +43,8 @@ const getLatestEntry = async <C extends CollectionKey>(collection: C) => {
     : undefined;
 };
 
-const latestThought = await getLatestEntry("thoughts");
-const latestProject = await getLatestEntry("projects");
-
-// TODO MOVE ALL THOUGHTS AND ALL PROJECTS INSIDE THEIR FILES (DO NOT KEEP THEM HERE ON INDEX)
+export const latestThought = await getLatestEntry("thoughts");
+export const latestProject = await getLatestEntry("projects");
 ---
 
 <Page
@@ -66,23 +69,7 @@ const latestProject = await getLatestEntry("projects");
     <PostPreview slot="5-small" entry={latestThought} />
     <PostPreview slot="6-medium" entry={latestProject} importance={3} />
     <TechPreview slot="7-small" importance={1} />
-    <PostPreview
-      slot="8-large"
-      readMore="projects"
-      container
-      readMoreText="See all projects"
-    >
-      <span slot="title" class="pl-8 2xl:pl-12">Projects</span>
-      <AllProjects />
-    </PostPreview>
-    <PostPreview
-      slot="9-medium"
-      readMore="thoughts"
-      container
-      readMoreText="See all thoughts"
-    >
-      <span slot="title" class="pl-8 2xl:pl-12">Thoughts</span>
-      <AllThoughts />
-    </PostPreview>
+    <AllProjects slot="8-large" />
+    <AllThoughts slot="9-medium" />
   </Bento>
 </Page>

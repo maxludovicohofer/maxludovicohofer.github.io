@@ -1,0 +1,70 @@
+---
+import Card from "@layouts/Card.astro";
+import { getLastModifiedDate } from "@layouts/Post.astro";
+import PostPreview from "@layouts/PostPreview.astro";
+import {
+  highlightProject,
+  latestProject,
+  highlightThought,
+  latestThought,
+} from "@pages/index.astro";
+import type { CollectionEntry } from "astro:content";
+import type { CollectionKey } from "astro:content";
+import { getCollection } from "astro:content";
+
+interface Props {
+  collection: CollectionKey;
+  descriptionAsBody?: boolean;
+  className?: string;
+}
+
+const { collection, descriptionAsBody, className } = Astro.props;
+
+// TODO CHECK IF SORTS CORRECTLY BY LATEST
+
+const alreadyVisible = (
+  collection === "projects"
+    ? [highlightProject, latestProject]
+    : collection === "thoughts"
+      ? [highlightThought, latestThought]
+      : []
+).filter((entry) => !!entry);
+
+// Exclude highlight and latest, will be added again at the end
+const entries = await getCollection(
+  collection,
+  ({ data: { draft }, id }) =>
+    !draft && alreadyVisible.every((entry) => id !== entry.id)
+);
+
+// Sort by latest first
+const sortedEntries: CollectionEntry<typeof collection>[] = (
+  await Promise.all(
+    entries.map(async (entry) => ({
+      ...entry,
+      lastModifiedDate: getLastModifiedDate(
+        (await entry.render()).remarkPluginFrontmatter
+      )!,
+    }))
+  )
+).toSorted((a, b) => (a.lastModifiedDate.isAfter(b.lastModifiedDate) ? 1 : -1));
+
+// Add already visible at the end
+sortedEntries.push(...alreadyVisible);
+---
+
+<ol class={`grid grid-cols-1 gap-4 ${className}`}>
+  {
+    sortedEntries.map((entry) => (
+      <Card tag="li" className="max-h-48 xl:max-h-none">
+        <PostPreview
+          importance={1}
+          entry={entry}
+          fullHeightReadMore
+          minutesAlreadySpentReading={0}
+          descriptionAsBody={descriptionAsBody}
+        />
+      </Card>
+    ))
+  }
+</ol>

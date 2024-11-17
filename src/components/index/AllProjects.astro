@@ -1,27 +1,26 @@
 ---
-import Card from "@layouts/Card.astro";
+import ContentList from "@components/ContentList.astro";
 import PostPreview from "@layouts/PostPreview.astro";
-import { getCollection } from "astro:content";
+import { title } from "@pages/projects/index.astro";
+import type { ComponentProps } from "astro/types";
 
-// TODO SORT BY LATEST FIRST (EXCLUDING HIGHLIGHT AND LATEST), THEN ADD HIGHLIGHT AND LATEST AT THE END
-const projects = await getCollection(
-  "projects",
-  ({ data: { draft } }) => !draft
-);
+interface Props {
+  importance?: ComponentProps<typeof PostPreview>["importance"];
+}
+
+const { importance } = Astro.props;
 ---
 
-<ol class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-1 gap-4">
-  {
-    projects.map((project) => (
-      <Card tag="li" className="max-h-48 xl:max-h-none">
-        <PostPreview
-          importance={1}
-          entry={project}
-          fullHeightReadMore
-          minutesAlreadySpentReading={0}
-          descriptionAsBody
-        />
-      </Card>
-    ))
-  }
-</ol>
+<PostPreview
+  container
+  readMore="projects"
+  readMoreText="See all projects"
+  importance={importance}
+>
+  <Fragment slot="title">{title}</Fragment>
+  <ContentList
+    collection="projects"
+    descriptionAsBody
+    className="md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-1"
+  />
+</PostPreview>

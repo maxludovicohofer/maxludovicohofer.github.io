@@ -3,12 +3,12 @@ import Text from "@layouts/Text.astro";
 import type { CollectionEntry } from "astro:content";
 import Button from "./Button.astro";
 import { Image } from "astro:assets";
-import { getLastModifiedTime, getPostImage } from "./Post.astro";
+import { getLastModifiedDate, getPostImage } from "./Post.astro";
 import type { ComponentProps } from "astro/types";
 
 interface Props {
   entry?: CollectionEntry<"thoughts"> | CollectionEntry<"projects"> | undefined;
-  descriptionAsBody?: boolean;
+  descriptionAsBody?: boolean | undefined;
   readMore?: string;
   readMoreText?: string;
   noReadMore?: boolean;
@@ -50,7 +50,7 @@ const readMoreLink =
 
 const lastModifiedTime =
   !hideDate &&
-  getLastModifiedTime(remarkPluginFrontmatter)?.format("D MMMM YYYY");
+  getLastModifiedDate(remarkPluginFrontmatter)?.format("D MMMM YYYY");
 
 const image = getPostImage(entry);
 
