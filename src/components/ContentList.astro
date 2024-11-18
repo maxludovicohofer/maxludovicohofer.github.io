@@ -22,6 +22,8 @@ const {
   additional = [],
 } = Astro.props;
 
+// TODO PLACE READ POSTS AT THE END OF THE LIST ORDERED BY LATEST (ALSO CHANGE LATEST ON LANDING PAGE BASED ON THIS ALGORITHM)
+
 // Exclude highlight and latest, will be added again at the end
 const entries = await getCollection(
   collection,
@@ -43,8 +45,6 @@ const sortedEntries: CollectionEntry<typeof collection>[] = (
 
 // Add already visible at the end
 sortedEntries.push(...additional);
-
-// TODO SAVE READ CONTENT IN LOCALSTORAGE, AND PLACE THEM AT THE END OF THE LIST ORDERED BY LATEST (ALSO CHANGE LATEST ON LANDING PAGE BASED ON THIS ALGORITHM)
 ---
 
 <ol class={`grid grid-cols-1 gap-4 mb-4 ${className}`}>

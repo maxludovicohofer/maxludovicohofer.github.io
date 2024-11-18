@@ -119,24 +119,34 @@ const bodyWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
     image.style.opacity = `${1 - Math.min(scrollY / (0.26 * screen.height), 1)}`;
   });
 
-  // TODO SAVE COLLECTION AS WELL
   //? Save read posts
   document.addEventListener("astro:page-load", () => {
     const isEntry = document.querySelector<HTMLDivElement>("div.is-entry");
 
     if (!isEntry) return;
 
+    // TODO REPLACE WITH LOCALSTORAGE
     const readPostsString = sessionStorage.getItem("readPosts");
 
-    const readPosts: string[] = readPostsString
+    const readPosts: [collection: string, slug: string][] = readPostsString
       ? JSON.parse(readPostsString)
       : [];
 
-    const slug = location.pathname.split("/").at(-1)!;
+    const [collection, slug] = location.pathname.split("/").slice(-2);
 
-    if (readPosts.includes(slug)) return;
+    if (
+      readPosts.some(
+        (readPost) => readPost[0] === collection && readPost[1] === slug
+      )
+    ) {
+      return;
+    }
 
+    // TODO REPLACE WITH LOCALSTORAGE
     // Saved ordered by latest first
-    sessionStorage.setItem("readPosts", JSON.stringify([slug, ...readPosts]));
+    sessionStorage.setItem(
+      "readPosts",
+      JSON.stringify([[collection, slug], ...readPosts])
+    );
   });
 </script>
