@@ -14,14 +14,14 @@ interface Props {
   noReadMore?: boolean;
   fullHeightReadMore?: boolean | undefined;
   minutesAlreadySpentReading?: number | undefined;
-  importance?: 1 | 2 | 3 | undefined;
+  importance?: 1 | 2 | 3 | 4 | undefined;
   tag?: ComponentProps<typeof Text>["tag"];
   hideDate?: boolean;
   container?: boolean;
 }
 
 const {
-  importance = 2,
+  importance = 3,
   entry,
   descriptionAsBody,
   readMore,
@@ -73,8 +73,10 @@ const description = entry
   className={importance === 1
     ? "text-3xl lg:text-xl 2xl:text-3xl"
     : importance === 2
-      ? "text-3xl 2xl:text-5xl"
-      : "text-3xl lg:text-5xl 2xl:text-8xl"}
+      ? "text-2xl 2xl:text-3xl"
+      : importance === 3
+        ? "text-3xl 2xl:text-5xl"
+        : "text-3xl lg:text-5xl 2xl:text-8xl"}
   >{entry?.data.title ?? <slot name="title" />}</Text
 >
 {

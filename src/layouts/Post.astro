@@ -96,7 +96,7 @@ const bodyWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
       >{entry?.data.title ?? <slot name="title" />}</Text
     >
     <Text
-      className={`${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl`}
+      className={`${Content ? "is-entry" : ""} ${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl`}
       markdown={!!Content}
       tag={tag}>{Content ? <Content /> : <slot />}</Text
     >
@@ -117,5 +117,26 @@ const bodyWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
 
     //? Based on Card translate-y class
     image.style.opacity = `${1 - Math.min(scrollY / (0.26 * screen.height), 1)}`;
+  });
+
+  // TODO SAVE COLLECTION AS WELL
+  //? Save read posts
+  document.addEventListener("astro:page-load", () => {
+    const isEntry = document.querySelector<HTMLDivElement>("div.is-entry");
+
+    if (!isEntry) return;
+
+    const readPostsString = sessionStorage.getItem("readPosts");
+
+    const readPosts: string[] = readPostsString
+      ? JSON.parse(readPostsString)
+      : [];
+
+    const slug = location.pathname.split("/").at(-1)!;
+
+    if (readPosts.includes(slug)) return;
+
+    // Saved ordered by latest first
+    sessionStorage.setItem("readPosts", JSON.stringify([slug, ...readPosts]));
   });
 </script>

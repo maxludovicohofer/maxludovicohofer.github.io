@@ -11,12 +11,29 @@ import Button from "@layouts/Button.astro";
 <script>
   import { navigate } from "astro:transitions/client";
 
-  document.addEventListener("astro:page-load", () => {
-    console.log("ei");
+  document.addEventListener("astro:page-load", () =>
     document
       .querySelector<HTMLButtonElement>("button.back-button")
-      ?.addEventListener("click", () =>
-        document.referrer ? navigate("/") : history.back()
-      );
-  });
+      ?.addEventListener("click", () => {
+        if (document.referrer) {
+          navigate("/");
+        } else {
+          // This code fixes Astro scroll restoration
+          const { scrollX, scrollY } = history.state as {
+            scrollX: number;
+            scrollY: number;
+          };
+
+          sessionStorage.setItem(
+            location.pathname,
+            JSON.stringify({
+              left: scrollX,
+              top: scrollY,
+            } satisfies ScrollToOptions)
+          );
+
+          history.back();
+        }
+      })
+  );
 </script>

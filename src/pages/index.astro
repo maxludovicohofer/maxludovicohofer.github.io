@@ -45,8 +45,6 @@ export const getLatestEntry = async <C extends CollectionKey>(
 
 export const latestThought = await getLatestEntry("thoughts");
 export const latestProject = await getLatestEntry("projects");
-
-// TODO RECHECK ALL IMPORTANCES (FOR EXAMPLE PROJECTS AND THOUGHTS COULD BE IMPORTANCE 1, AND OTHER PROJECTS AND OTHER THOUGHTS AS WELL. CONTAINER CARD TITLE IN GENERAL COULD BE 1. OR 1 COULD BE SINGLE CONTENTLIST ITEMS)
 ---
 
 <Page
@@ -54,7 +52,7 @@ export const latestProject = await getLatestEntry("projects");
   description="Max Hofer's game design portfolio and blog."
 >
   <Bento>
-    <Profile slot="1-medium" importance={1} />
+    <Profile slot="1-medium" importance={2} />
     <Video
       slot="2-small"
       title="Showreel"
@@ -65,12 +63,12 @@ export const latestProject = await getLatestEntry("projects");
     <PostPreview
       slot="4-large"
       entry={highlightProject}
-      importance={3}
+      importance={4}
       hideDate
     />
     <PostPreview slot="5-small" entry={latestThought} />
-    <PostPreview slot="6-medium" entry={latestProject} importance={3} />
-    <TechPreview slot="7-small" importance={1} />
+    <PostPreview slot="6-medium" entry={latestProject} importance={4} />
+    <TechPreview slot="7-small" importance={2} />
     <AllProjects slot="8-large" />
     <AllThoughts slot="9-medium" />
   </Bento>
