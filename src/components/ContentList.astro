@@ -47,7 +47,7 @@ sortedEntries.push(...additional);
 // TODO SAVE READ CONTENT IN LOCALSTORAGE, AND PLACE THEM AT THE END OF THE LIST ORDERED BY LATEST (ALSO CHANGE LATEST ON LANDING PAGE BASED ON THIS ALGORITHM)
 ---
 
-<ol class={`grid grid-cols-1 gap-4 mb-2 ${className}`}>
+<ol class={`grid grid-cols-1 gap-4 mb-4 ${className}`}>
   {
     sortedEntries.map((entry) => (
       <Card tag="li" className={short ? "min-h-60 max-h-72 xl:max-h-none" : ""}>
