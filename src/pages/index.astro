@@ -39,12 +39,14 @@ export const getLatestEntry = async <C extends CollectionKey>(
   dayjs.extend(minMax);
 
   return entries.length
-    ? entries[collectionDates.indexOf(dayjs.min(collectionDates)!)]
+    ? entries[collectionDates.indexOf(dayjs.max(collectionDates)!)]
     : undefined;
 };
 
 export const latestThought = await getLatestEntry("thoughts");
 export const latestProject = await getLatestEntry("projects");
+
+// TODO RECHECK ALL IMPORTANCES (FOR EXAMPLE PROJECTS AND THOUGHTS COULD BE IMPORTANCE 1, AND OTHER PROJECTS AND OTHER THOUGHTS AS WELL. CONTAINER CARD TITLE IN GENERAL COULD BE 1. OR 1 COULD BE SINGLE CONTENTLIST ITEMS)
 ---
 
 <Page

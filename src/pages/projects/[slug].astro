@@ -16,10 +16,9 @@ export const getStaticPaths = async () =>
 const { entry } = Astro.props;
 ---
 
-<Page title={entry.data.title} description={entry.data.description}
-  ><Post entry={entry} /><div
-    class="translate-y-[26vh] lg:translate-y-0 -mt-24 lg:-mt-20"
-  >
+<Page title={entry.data.title} description={entry.data.description}>
+  <Post entry={entry} followedByOther />
+  <div class="-mt-24 lg:-mt-20">
     <Projects exclude={[entry]} />
-  </div></Page
->
+  </div>
+</Page>

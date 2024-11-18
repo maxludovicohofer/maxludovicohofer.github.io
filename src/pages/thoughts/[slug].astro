@@ -19,7 +19,7 @@ const { entry } = Astro.props;
 <Page
   title={entry.data.title}
   description={`${entry.body.split(/[.?!](?=\s+)/, 1)[0]!.trimStart()}.`}
-  ><Post entry={entry} /><div class="-mt-24 lg:-mt-20">
+  ><Post entry={entry} followedByOther /><div class="-mt-24 lg:-mt-20">
     <Thoughts exclude={[entry]} />
   </div></Page
 >
