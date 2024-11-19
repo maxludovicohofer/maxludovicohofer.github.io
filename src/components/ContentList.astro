@@ -22,7 +22,7 @@ const {
   additional = [],
 } = Astro.props;
 
-// TODO PLACE READ POSTS AT THE END OF THE LIST ORDERED BY LATEST (ALSO CHANGE LATEST ON LANDING PAGE BASED ON THIS ALGORITHM)
+// TODO ALSO CHANGE LATEST ON LANDING PAGE BASED ON THIS ALGORITHM
 
 // Exclude highlight and latest, will be added again at the end
 const entries = await getCollection(
@@ -30,6 +30,8 @@ const entries = await getCollection(
   ({ data: { draft }, id }) =>
     !draft && exclude.every((entry) => id !== entry.id)
 );
+
+// TODO SEPARATE ALREADY READ ENTRIES FROM ENTRIES
 
 // Sort by latest first
 const sortedEntries: CollectionEntry<typeof collection>[] = (
@@ -43,7 +45,11 @@ const sortedEntries: CollectionEntry<typeof collection>[] = (
   )
 ).toSorted((a, b) => (b.lastModifiedDate.isAfter(a.lastModifiedDate) ? 1 : -1));
 
-// Add already visible at the end
+// TODO SORT ALREADY READ
+
+// TODO READD ALREADY READ ENTRIES AT THE END OF SORTED
+
+// Add additional at the end
 sortedEntries.push(...additional);
 ---
 
