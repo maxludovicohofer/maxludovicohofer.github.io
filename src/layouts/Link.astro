@@ -3,21 +3,14 @@ interface Props {
   href?: string | undefined;
   className?: string;
   navigate?: boolean | undefined;
-  intersectAsHover?: boolean;
   noStyle?: boolean;
 }
 
-const {
-  href,
-  className = "",
-  navigate,
-  intersectAsHover,
-  noStyle,
-} = Astro.props;
+const { href, className = "", navigate, noStyle } = Astro.props;
 ---
 
 <a
-  class={`${noStyle ? "" : `underline text-zinc-500 hover:text-yellow-400 active:text-yellow-500 dark:text-zinc-400 dark:hover:text-yellow-200 dark:active:text-yellow-400 hover:scale-125 active:scale-90 duration-150 ${intersectAsHover ? "intersect:text-yellow-400 dark:intersect:text-yellow-200 intersect:scale-125 intersect-full" : ""}`} ${className}`}
+  class={`${noStyle ? "" : "underline text-zinc-500 dark:text-zinc-400 hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 hover:scale-125 active:scale-90 duration-150"} ${className}`}
   href={href}
   target={navigate ? "_self" : "_blank"}
 >

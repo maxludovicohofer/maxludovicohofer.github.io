@@ -8,8 +8,6 @@ interface Props {
   href?: string | undefined;
   navigate?: boolean;
   rounded?: boolean;
-  intersectAsHover?: boolean;
-  minimalStyle?: boolean | undefined;
 }
 
 const {
@@ -19,15 +17,13 @@ const {
   href,
   navigate,
   rounded,
-  intersectAsHover,
-  minimalStyle,
 } = Astro.props;
 ---
 
 <Link href={href} navigate={navigate}>
   <button
     type="button"
-    class={`${cardButton ? `bg-gradient-to-t from-20% from-zinc-200 dark:from-zinc-950 text-zinc-950 dark:text-zinc-100 ${minimalStyle ? "" : `hover:from-yellow-300 active:from-yellow-400 dark:hover:from-yellow-200 dark:active:from-yellow-300 ${intersectAsHover ? "intersect:from-yellow-300 dark:intersect:from-yellow-200" : ""}`}` : `${rounded ? "rounded-full" : "rounded-lg"} h-11 2xl:h-16 bg-zinc-950 hover:bg-yellow-400 active:bg-yellow-500 dark:bg-zinc-100 dark:hover:bg-yellow-200 dark:active:bg-yellow-400 text-zinc-100 dark:text-zinc-950 hover:scale-105 active:scale-95 focus:ring-2 focus:ring-offset-2 focus:ring-inline-flex ${intersectAsHover ? "intersect:bg-yellow-400 dark:intersect:bg-yellow-200 intersect:scale-105" : ""}`} ${minimalStyle ? "" : `hover:text-zinc-950 ${intersectAsHover ? "intersect:text-zinc-950" : ""} shadow-md hover:shadow-lg active:shadow ${intersectAsHover ? "intersect:shadow-lg intersect-full" : ""}`} text-base 2xl:text-3xl font-semibold duration-150 ${inline ? "" : "w-full"} ${className}`}
+    class={`${cardButton ? `rounded-3xl text-zinc-950 dark:text-zinc-100 bg-gradient-to-t from-25% from-zinc-100 dark:from-zinc-900 hover:from-yellow-300 active:from-yellow-600 hover:bg-opacity-50 active:bg-opacity-50 dark:hover:from-yellow-200 dark:active:from-yellow-400 dark:hover:bg-opacity-50 dark:active:bg-opacity-50` : `${rounded ? "rounded-3xl" : "rounded-xl"} h-11 2xl:h-16 bg-zinc-950 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-950 hover:scale-105 active:scale-95 focus:ring-2 focus:ring-offset-2 focus:ring-inline-flex`} hover:text-zinc-950 shadow-md hover:shadow-lg active:shadow hover:bg-yellow-400 active:bg-yellow-600 dark:hover:bg-yellow-200 dark:active:bg-yellow-400 text-base 2xl:text-3xl font-semibold duration-150 ${inline ? "" : "w-full"} ${className}`}
   >
     <slot />
   </button>
