@@ -22,9 +22,9 @@ const {
   additional = [],
 } = Astro.props;
 
-export const getSortedEntries = async (
-  entryCollection: typeof collection,
-  excluded: typeof exclude = []
+export const getSortedEntries = async <C extends CollectionKey>(
+  entryCollection: C,
+  excluded: CollectionEntry<CollectionKey>[] = []
 ) => {
   // Exclude highlight and latest, will be added again at the end
   const entries = await getCollection(
@@ -47,8 +47,6 @@ export const getSortedEntries = async (
     b.lastModifiedDate.isAfter(a.lastModifiedDate) ? 1 : -1
   );
 };
-
-// TODO FIX BUG WITH DOUBLE STEELSILK
 
 const sortedEntries: CollectionEntry<typeof collection>[] =
   await getSortedEntries(collection, exclude);

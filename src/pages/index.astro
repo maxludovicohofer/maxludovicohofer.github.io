@@ -15,8 +15,12 @@ export const highlightProject = await getEntry(
   "projects",
   "steelsilk-championship"
 );
-export const latestThought = (await getSortedEntries("thoughts"))[0];
-export const latestProject = (await getSortedEntries("projects"))[0];
+export const latestThought = (
+  await getSortedEntries("thoughts", [highlightThought])
+)[0];
+export const latestProject = (
+  await getSortedEntries("projects", [highlightProject])
+)[0];
 ---
 
 <Page
