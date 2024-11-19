@@ -7,7 +7,7 @@ const projects = defineCollection({
     title: z.string(),
     description: z.string(),
     roles: z.array(z.string()),
-    engine: z.enum(["Unreal Engine", "Unity"]),
+    tech: z.array(z.string()),
   }),
 });
 

@@ -22,32 +22,34 @@ const {
   additional = [],
 } = Astro.props;
 
-// TODO ALSO CHANGE LATEST ON LANDING PAGE BASED ON THIS ALGORITHM
+export const getSortedEntries = async (
+  entryCollection: typeof collection,
+  excluded: typeof exclude = []
+) => {
+  // Exclude highlight and latest, will be added again at the end
+  const entries = await getCollection(
+    entryCollection,
+    ({ data: { draft }, id }) =>
+      !draft && excluded.every((entry) => id !== entry.id)
+  );
 
-// Exclude highlight and latest, will be added again at the end
-const entries = await getCollection(
-  collection,
-  ({ data: { draft }, id }) =>
-    !draft && exclude.every((entry) => id !== entry.id)
-);
+  // Sort by latest first
+  return (
+    await Promise.all(
+      entries.map(async (entry) => ({
+        ...entry,
+        lastModifiedDate: getLastModifiedDate(
+          (await entry.render()).remarkPluginFrontmatter
+        )!,
+      }))
+    )
+  ).toSorted((a, b) =>
+    b.lastModifiedDate.isAfter(a.lastModifiedDate) ? 1 : -1
+  );
+};
 
-// TODO SEPARATE ALREADY READ ENTRIES FROM ENTRIES
-
-// Sort by latest first
-const sortedEntries: CollectionEntry<typeof collection>[] = (
-  await Promise.all(
-    entries.map(async (entry) => ({
-      ...entry,
-      lastModifiedDate: getLastModifiedDate(
-        (await entry.render()).remarkPluginFrontmatter
-      )!,
-    }))
-  )
-).toSorted((a, b) => (b.lastModifiedDate.isAfter(a.lastModifiedDate) ? 1 : -1));
-
-// TODO SORT ALREADY READ
-
-// TODO READD ALREADY READ ENTRIES AT THE END OF SORTED
+const sortedEntries: CollectionEntry<typeof collection>[] =
+  await getSortedEntries(collection, exclude);
 
 // Add additional at the end
 sortedEntries.push(...additional);

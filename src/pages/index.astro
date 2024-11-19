@@ -8,44 +8,15 @@ import { getEntry } from "astro:content";
 import Video from "@layouts/Video.astro";
 import PostPreview from "@layouts/PostPreview.astro";
 import TechPreview from "@components/index/TechPreview.astro";
-import { getCollection } from "astro:content";
-import { getLastModifiedDate } from "@layouts/Post.astro";
-import dayjs from "dayjs";
-import minMax from "dayjs/plugin/minMax";
-import type { CollectionKey } from "astro:content";
+import { getSortedEntries } from "@components/ContentList.astro";
 
 export const highlightThought = await getEntry("thoughts", "style");
 export const highlightProject = await getEntry(
   "projects",
   "steelsilk-championship"
 );
-
-// TODO REPLACE WITH CONTENTLIST ALGORITHM
-export const getLatestEntry = async <C extends CollectionKey>(
-  collection: C
-) => {
-  const entries = await getCollection(
-    collection,
-    ({ data: { draft }, id }) =>
-      !draft && id !== highlightThought.id && id !== highlightProject.id
-  );
-
-  const collectionDates = await Promise.all(
-    entries.map(
-      async ({ render }) =>
-        getLastModifiedDate((await render()).remarkPluginFrontmatter)!
-    )
-  );
-
-  dayjs.extend(minMax);
-
-  return entries.length
-    ? entries[collectionDates.indexOf(dayjs.max(collectionDates)!)]
-    : undefined;
-};
-
-export const latestThought = await getLatestEntry("thoughts");
-export const latestProject = await getLatestEntry("projects");
+export const latestThought = (await getSortedEntries("thoughts"))[0];
+export const latestProject = (await getSortedEntries("projects"))[0];
 ---
 
 <Page

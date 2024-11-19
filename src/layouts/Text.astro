@@ -4,7 +4,7 @@ interface Props {
   title?: boolean;
   subtitle?: boolean;
   markdown?: boolean;
-  tag?: "div" | undefined;
+  tag?: "div" | "b" | "u" | undefined;
 }
 
 const { className = "", title, subtitle, markdown, tag } = Astro.props;

@@ -56,7 +56,6 @@ export const getPostImage = (post: typeof entry) => {
 
 const image = getPostImage(entry);
 
-// TODO ALSO DISPLAY ROLES AND ENGINE
 // TODO MAKE IMAGES FULLSCREENABLE
 // TODO REPLACE POST IMAGES WITH LOOPED VIDEOS (BUT ALSO GIVE THE OPTION TO USE IMAGES)
 // TODO ADD ALL CONTENT
@@ -85,21 +84,22 @@ const bodyWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
   <div
     class={`mb-16 lg:mb-6 ${image ? "lg:mt-[43vh]" : "2xl:-mt-2"} ${fullWidth ? "lg:mx-20" : `max-w-[40rem] ${bodyWidthClass}`}`}
   >
-    {
-      Astro.slots.has("header") && (
-        <Text subtitle className="mb-6" tag="div">
-          <slot name="header" />
-        </Text>
-      )
-    }
     <Text title className="text-3xl 2xl:text-5xl"
       >{entry?.data.title ?? <slot name="title" />}</Text
     >
+
     <Text
       className={`${Content ? "is-entry" : ""} ${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl`}
       markdown={!!Content}
       tag={tag}>{Content ? <Content /> : <slot />}</Text
     >
+    {
+      Astro.slots.has("header") && (
+        <Text subtitle className="mt-2 mb-1.5 xl:-mb-1" tag="div">
+          <slot name="header" />
+        </Text>
+      )
+    }
     {
       lastModifiedTime && (
         <Text subtitle className="mt-0.5 xl:mt-3">
@@ -117,36 +117,5 @@ const bodyWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
 
     //? Based on Card translate-y class
     image.style.opacity = `${1 - Math.min(scrollY / (0.26 * screen.height), 1)}`;
-  });
-
-  //? Save read posts
-  document.addEventListener("astro:page-load", () => {
-    const isEntry = document.querySelector<HTMLDivElement>("div.is-entry");
-
-    if (!isEntry) return;
-
-    // TODO REPLACE WITH LOCALSTORAGE
-    const readPostsString = sessionStorage.getItem("readPosts");
-
-    const readPosts: [collection: string, slug: string][] = readPostsString
-      ? JSON.parse(readPostsString)
-      : [];
-
-    const [collection, slug] = location.pathname.split("/").slice(-2);
-
-    if (
-      readPosts.some(
-        (readPost) => readPost[0] === collection && readPost[1] === slug
-      )
-    ) {
-      return;
-    }
-
-    // TODO REPLACE WITH LOCALSTORAGE
-    // Saved ordered by latest first
-    sessionStorage.setItem(
-      "readPosts",
-      JSON.stringify([[collection, slug], ...readPosts])
-    );
   });
 </script>
