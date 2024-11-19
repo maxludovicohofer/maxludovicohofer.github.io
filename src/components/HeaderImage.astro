@@ -1,0 +1,40 @@
+---
+import FullImage from "@layouts/FullImage.astro";
+import type { CollectionKey } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  image: () => Promise<{
+    default: ImageMetadata;
+  }>;
+  bodyWidthClass: string;
+  entry: CollectionEntry<CollectionKey> | undefined;
+  mobile?: boolean;
+}
+
+const { image, bodyWidthClass, entry, mobile } = Astro.props;
+---
+
+<FullImage
+  src={image()}
+  className={`header-image ${mobile ? "lg:invisible active:rounded-3xl fixed" : "invisible lg:visible rounded-3xl absolute top-12 left-0 right-0 mx-auto"} ${bodyWidthClass}`}
+  imageClassName={`active:rounded-3xl lg:rounded-3xl object-cover w-full lg:max-h-[40vh]`}
+  alt={entry?.collection === "projects"
+    ? entry.data.description
+    : `Graphic explanation of "${entry!.data.title}"`}
+  loading="eager"
+/>
+<script>
+  addEventListener("scroll", () => {
+    const headers = document.querySelectorAll<HTMLButtonElement>(
+      "button.header-image"
+    );
+
+    headers.forEach((header) => {
+      if (!header.checkVisibility()) return;
+
+      //? Based on Card translate-y class
+      header.style.opacity = `${1 - Math.min(scrollY / (0.26 * screen.height), 1)}`;
+    });
+  });
+</script>

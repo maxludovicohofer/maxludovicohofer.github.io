@@ -27,6 +27,7 @@ const completeTitle = `Max Hofer \\ ${title}`;
     <ViewTransitions />
   </head>
   <body class="bg-zinc-200 dark:bg-zinc-950">
+    <div class="modal"></div>
     <slot />
     {Astro.url.pathname !== "/" && <BackButton />}
     <script>

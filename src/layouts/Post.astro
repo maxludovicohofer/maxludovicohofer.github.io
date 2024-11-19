@@ -2,11 +2,11 @@
 import Text from "@layouts/Text.astro";
 import type { CollectionEntry } from "astro:content";
 import type { ImageMetadata } from "astro";
-import { Image } from "astro:assets";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import Card from "./Card.astro";
 import type { ComponentProps } from "astro/types";
+import HeaderImage from "@components/HeaderImage.astro";
 
 interface Props {
   entry?: CollectionEntry<"thoughts"> | CollectionEntry<"projects">;
@@ -65,15 +65,11 @@ const bodyWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
 
 {
   image && (
-    <Image
-      src={image()}
-      class={`header-image lg:rounded-3xl lg:shadow-md fixed lg:absolute lg:z-10 lg:left-0 lg:right-0 lg:mx-auto lg:mt-12 w-full lg:max-h-[40vh] lg:h-auto object-cover ${bodyWidthClass}`}
-      alt={
-        entry?.collection === "projects"
-          ? entry.data.description
-          : `Graphic explanation of "${entry!.data.title}"`
-      }
-      loading="eager"
+    <HeaderImage
+      mobile
+      image={image}
+      bodyWidthClass={bodyWidthClass}
+      entry={entry}
     />
   )
 }
@@ -109,13 +105,8 @@ const bodyWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
     }
   </div>
 </Card>
-<script>
-  addEventListener("scroll", () => {
-    const image = document.querySelector<HTMLImageElement>("img.header-image");
-
-    if (!image) return;
-
-    //? Based on Card translate-y class
-    image.style.opacity = `${1 - Math.min(scrollY / (0.26 * screen.height), 1)}`;
-  });
-</script>
+{
+  image && (
+    <HeaderImage image={image} bodyWidthClass={bodyWidthClass} entry={entry} />
+  )
+}

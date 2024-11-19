@@ -48,6 +48,8 @@ export const getSortedEntries = async (
   );
 };
 
+// TODO FIX BUG WITH DOUBLE STEELSILK
+
 const sortedEntries: CollectionEntry<typeof collection>[] =
   await getSortedEntries(collection, exclude);
 
