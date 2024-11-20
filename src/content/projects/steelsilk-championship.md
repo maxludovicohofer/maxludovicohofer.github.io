@@ -1,6 +1,7 @@
 ---
 title: Steelsilk Championship
 description: Couch co-op rougelite shoot ‘em up, made in Unreal in 45 days by a team of 26.
+type: Game
 roles:
     - Game director
     - Agile team lead
@@ -17,6 +18,8 @@ roles:
 tech:
     - Unreal Engine
     - Maya
+downloadLinks:
+    - https://drive.google.com/drive/folders/1eU3kL2_YhVMNNCa8zElcuc01JsbKb_mA
 ---
 
 This is the master thesis of my game dev class. A game outline was authored for us by our professors and the concept art class.

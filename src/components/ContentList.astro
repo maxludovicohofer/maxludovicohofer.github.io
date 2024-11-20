@@ -55,10 +55,15 @@ const sortedEntries: CollectionEntry<typeof collection>[] =
 sortedEntries.push(...additional);
 ---
 
-<ol class={`grid grid-cols-1 gap-4 mb-4 ${className}`}>
+<ol
+  class={`content-list/${collection} ${className} grid grid-cols-1 gap-4 mb-4`}
+>
   {
     sortedEntries.map((entry) => (
-      <Card tag="li" className={short ? "min-h-60 max-h-72 xl:max-h-none" : ""}>
+      <Card
+        tag="li"
+        className={`content-slug/${entry.slug} ${short ? "min-h-60 max-h-72 xl:max-h-none" : ""}`}
+      >
         <PostPreview
           importance={2}
           entry={entry}
@@ -69,3 +74,35 @@ sortedEntries.push(...additional);
     ))
   }
 </ol>
+<script>
+  import type { CollectionKey } from "astro:content";
+
+  document.addEventListener("astro:page-load", () => {
+    const lists = document.querySelectorAll<HTMLOListElement>(
+      "ol[class^=content-list]"
+    );
+
+    // TODO REPLACE WITH LOCALSTORAGE
+    const readEntriesString = sessionStorage.getItem("readEntries");
+
+    const readEntries: Partial<Record<CollectionKey, string[]>> =
+      readEntriesString ? JSON.parse(readEntriesString) : {};
+
+    lists.forEach((list) => {
+      const readEntrySlugs =
+        readEntries[list.classList[0]?.split("/").at(-1) as CollectionKey];
+
+      if (!readEntrySlugs) return;
+
+      readEntrySlugs.forEach((readSlug) => {
+        for (const item of list.children) {
+          if (item.classList[0]?.split("/").at(-1) !== readSlug) continue;
+
+          // Move to end
+          list.append(item);
+          return;
+        }
+      });
+    });
+  });
+</script>

@@ -12,11 +12,13 @@ interface Props {
 }
 
 const { src, alt, className, imageClassName, loading } = Astro.props;
+
+// TODO MAKE IMAGES FULLSCREENABLE
 ---
 
 {
   src && (
-    <Button noFocus fullHeight className={`!bg-transparent ${className}`}>
+    <Button noFocus fullHeight className={`${className} !bg-transparent`}>
       <Image
         src={src}
         class={`${imageClassName}`}

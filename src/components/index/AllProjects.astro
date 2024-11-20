@@ -14,6 +14,8 @@ const { importance } = Astro.props;
 const alreadyVisible = [highlightProject, latestProject].filter(
   (entry) => !!entry
 );
+
+// TODO PHASE 2 ADD FILTER FOR PROJECT TYPE (FIXED IN RIGHT BOTTOM CORNER ON MOBILE, TO THE RIGHT OF TITLE IN LARGE)
 ---
 
 <PostPreview

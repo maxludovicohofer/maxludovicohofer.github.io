@@ -34,6 +34,7 @@ const lastModifiedTime = getLastModifiedDate(remarkPluginFrontmatter)?.format(
   "D MMMM YYYY"
 );
 
+// TODO REPLACE POST IMAGES WITH LOOPED VIDEOS (BUT ALSO GIVE THE OPTION TO USE IMAGES)
 export const getPostImage = (post: typeof entry) => {
   if (!post) return;
 
@@ -56,8 +57,7 @@ export const getPostImage = (post: typeof entry) => {
 
 const image = getPostImage(entry);
 
-// TODO MAKE IMAGES FULLSCREENABLE
-// TODO REPLACE POST IMAGES WITH LOOPED VIDEOS (BUT ALSO GIVE THE OPTION TO USE IMAGES)
+// TODO ADD PROJECT TYPE TO POST AND POSTPREVIEW AND LINKS TO POST
 // TODO ADD ALL CONTENT
 
 const bodyWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
@@ -90,9 +90,9 @@ const bodyWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
       tag={tag}>{Content ? <Content /> : <slot />}</Text
     >
     {
-      Astro.slots.has("header") && (
+      Astro.slots.has("footer") && (
         <Text subtitle className="mt-2 mb-1.5 xl:-mb-1" tag="div">
-          <slot name="header" />
+          <slot name="footer" />
         </Text>
       )
     }
@@ -110,3 +110,39 @@ const bodyWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
     <HeaderImage image={image} bodyWidthClass={bodyWidthClass} entry={entry} />
   )
 }
+<script>
+  import type { CollectionKey } from "astro:content";
+
+  //? Save read entries
+  document.addEventListener("astro:page-load", () => {
+    const isEntry = document.querySelector<HTMLDivElement>("div.is-entry");
+
+    if (!isEntry) return;
+
+    // TODO REPLACE WITH LOCALSTORAGE
+    const readEntriesString = sessionStorage.getItem("readEntries");
+
+    const readEntries: Partial<Record<CollectionKey, string[]>> =
+      readEntriesString ? JSON.parse(readEntriesString) : {};
+
+    const [collection, slug] = location.pathname.split("/").slice(-2) as [
+      CollectionKey,
+      string,
+    ];
+
+    if (readEntries[collection]?.includes(slug)) {
+      // Reorder
+      readEntries[collection].splice(readEntries[collection].indexOf(slug), 1);
+    }
+
+    // TODO REPLACE WITH LOCALSTORAGE
+    // Saved ordered by latest first
+    sessionStorage.setItem(
+      "readEntries",
+      JSON.stringify({
+        ...readEntries,
+        [collection]: [slug, ...(readEntries[collection] ?? [])],
+      })
+    );
+  });
+</script>

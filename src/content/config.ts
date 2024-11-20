@@ -1,22 +1,26 @@
 import { defineCollection, z } from "astro:content";
+
+const post = {
+  draft: z.boolean().optional(),
+  title: z.string(),
+};
+
 // Define your collection(s)
 const projects = defineCollection({
   type: "content",
   schema: z.object({
-    draft: z.boolean().optional(),
-    title: z.string(),
+    ...post,
     description: z.string(),
+    type: z.enum(["Game", "Prototype", "Tool"]),
     roles: z.array(z.string()),
     tech: z.array(z.string()),
+    downloadLinks: z.array(z.string().url()).optional(),
   }),
 });
 
 const thoughts = defineCollection({
   type: "content",
-  schema: z.object({
-    draft: z.boolean().optional(),
-    title: z.string(),
-  }),
+  schema: z.object(post),
 });
 
 // Export a single `collections` object to register your collection(s)

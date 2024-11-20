@@ -19,7 +19,7 @@ const { entry } = Astro.props;
 
 <Page title={entry.data.title} description={entry.data.description}>
   <Post entry={entry} followedByOther>
-    <Fragment slot="header"
+    <Fragment slot="footer"
       ><Text tag="b" className="font-normal">Roles</Text>
       {entry.data.roles.join(", ")}<br /><Text tag="b" className="font-normal"
         >Tech</Text

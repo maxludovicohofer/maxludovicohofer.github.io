@@ -11,7 +11,7 @@ const Element = tag ?? "div";
 ---
 
 <Element
-  class={`${container ? "group/container-card rounded-b-3xl shadow-[0_10px_6px_-6px_rgba(0,0,0,0.1)]" : "group/card rounded-3xl shadow-md bg-zinc-100 dark:bg-zinc-900 p-8 2xl:p-12"} overflow-hidden relative ${className}`}
+  class={`${className} ${container ? "group/container-card rounded-b-3xl shadow-[0_10px_6px_-6px_rgba(0,0,0,0.1)]" : "group/card rounded-3xl shadow-md bg-zinc-100 dark:bg-zinc-900 p-8 2xl:p-12"} overflow-hidden relative`}
 >
   <slot />
 </Element>
