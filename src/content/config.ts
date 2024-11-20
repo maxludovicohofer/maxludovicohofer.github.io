@@ -11,7 +11,7 @@ const projects = defineCollection({
   schema: z.object({
     ...post,
     description: z.string(),
-    type: z.enum(["Game", "Prototype", "Tool"]),
+    category: z.enum(["Game", "Prototype", "Tool"]),
     roles: z.array(z.string()),
     tech: z.array(z.string()),
     downloadLinks: z.array(z.string().url()).optional(),

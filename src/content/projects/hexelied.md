@@ -1,7 +1,7 @@
 ---
 title: WIP Horror Game
 description: Online multiplayer horror game inspired by norwegian black metal.
-type: Prototype
+category: Prototype
 roles:
     - Solo dev
 tech:

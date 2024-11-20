@@ -3,7 +3,12 @@ import Text from "@layouts/Text.astro";
 import type { CollectionEntry } from "astro:content";
 import Button from "./Button.astro";
 import { Image } from "astro:assets";
-import { getLastModifiedDate, getPostImage } from "./Post.astro";
+import {
+  getCategory,
+  getDescription,
+  getLastModifiedDate,
+  getPostImage,
+} from "./Post.astro";
 import type { ComponentProps } from "astro/types";
 
 interface Props {
@@ -46,17 +51,14 @@ const readMoreLink =
     ? undefined
     : (readMore ?? (entry && `/${entry.collection}/${entry.slug}`));
 
+const image = getPostImage(entry);
+const description = getDescription(entry);
+const category = getCategory(entry);
 const lastModifiedTime =
   !hideDate &&
   getLastModifiedDate(remarkPluginFrontmatter)?.format("D MMMM YYYY");
 
-const image = getPostImage(entry);
-
-const description = entry
-  ? entry.collection === "projects"
-    ? entry.data.description
-    : undefined
-  : undefined;
+const subtitle = [category, lastModifiedTime].filter((part) => !!part);
 ---
 
 {
@@ -80,9 +82,9 @@ const description = entry
   >{entry?.data.title ?? <slot name="title" />}</Text
 >
 {
-  lastModifiedTime && (
+  subtitle.length !== 0 && (
     <Text subtitle className="mt-0.5 xl:mt-3">
-      {lastModifiedTime}
+      {subtitle.join(" \\ ")}
     </Text>
   )
 }

@@ -6,19 +6,21 @@ import type { ComponentProps } from "astro/types";
 
 interface Props {
   exclude?: ComponentProps<typeof ContentList>["exclude"];
+  isNotFullpage?: boolean;
 }
 
-const { exclude } = Astro.props;
+const { exclude, isNotFullpage } = Astro.props;
 ---
 
 <Post container>
   <Fragment slot="title"
-    >{exclude?.length ? `Other ${title.toLowerCase()}` : title}</Fragment
+    >{isNotFullpage ? `Other ${title.toLowerCase()}` : title}</Fragment
   >
   <ContentList
     collection="thoughts"
     short
     className="md:grid-cols-1 xl:grid-cols-2"
     exclude={exclude}
+    numberOfItemsToLoadEager={isNotFullpage ? undefined : 2}
   />
 </Post>

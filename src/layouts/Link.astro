@@ -10,7 +10,7 @@ const { href, className = "", navigate, noStyle } = Astro.props;
 ---
 
 <a
-  class={`${className} ${noStyle ? "" : "underline text-zinc-500 dark:text-zinc-400 hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 hover:scale-125 active:scale-90 duration-150"}`}
+  class={`${className} ${noStyle ? "" : "underline text-zinc-500 dark:text-zinc-400 hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 hover:scale-125 hover:text-lg 2xl:hover:text-2xl active:scale-90 active:text-xs 2xl:active:text-lg duration-150"}`}
   href={href}
   target={navigate ? "_self" : "_blank"}
 >
