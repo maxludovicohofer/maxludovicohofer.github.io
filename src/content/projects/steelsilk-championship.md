@@ -19,7 +19,7 @@ tech:
     - Unreal Engine
     - Maya
 downloadLinks:
-    - https://drive.google.com/drive/folders/1eU3kL2_YhVMNNCa8zElcuc01JsbKb_mA
+    - https://0ry0.itch.io/steelsilk
 ---
 
 This is the master thesis of my game dev class. A game outline was authored for us by our professors and the concept art class.
