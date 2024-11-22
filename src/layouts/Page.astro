@@ -1,6 +1,8 @@
 ---
 import ViewTransitions from "astro/components/ViewTransitions.astro";
 import BackButton from "@components/BackButton.astro";
+import FullImage from "./FullImage.astro";
+import Picture from "@images/profile-picture.png";
 
 interface Props {
   title: string;
@@ -27,7 +29,15 @@ const completeTitle = `Max Hofer \\ ${title}`;
     <ViewTransitions />
   </head>
   <body class="bg-zinc-200 dark:bg-zinc-950">
-    <div class="modal"></div>
+    <div class="invisible modal absolute z-10 left-[50%] top-[50%]">
+      <FullImage
+        src={Picture}
+        alt="Close up of Max Ludovico Hofer"
+        className="!size-full !size-14 2xl:!size-20 !rounded-full hover:scale-125"
+        imageClassName="rounded-full"
+        loading="eager"
+      />
+    </div>
     <slot />
     {Astro.url.pathname !== "/" && <BackButton />}
     <script>

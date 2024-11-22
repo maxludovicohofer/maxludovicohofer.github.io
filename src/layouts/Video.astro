@@ -8,6 +8,8 @@ interface Props {
   loop?: boolean;
   loading?: "eager" | "lazy";
   className?: string;
+  noControls?: boolean;
+  iframeClassName?: string;
 }
 
 const {
@@ -19,14 +21,20 @@ const {
   loop = true,
   loading,
   className = "",
+  noControls,
+  iframeClassName,
 } = Astro.props;
 
-const boolToInt = (value: boolean) => (value ? 1 : 0);
+const boolToInt = (value?: boolean) => (value ? 1 : 0);
 ---
 
-<iframe
-  title={title}
-  src={`https://www.youtube.com/embed/${youtubeID}?color=${color}&autoplay=${boolToInt(autoplay)}&mute=${boolToInt(mute)}&loop=${boolToInt(loop)}&playlist=${youtubeID}`}
-  class={`${className} size-full aspect-video`}
-  allowfullscreen
-  loading={loading}></iframe>
+<div
+  class={`${className} size-full aspect-video overflow-hidden ${noControls ? "pointer-events-none" : ""}`}
+>
+  <iframe
+    title={title}
+    src={`https://www.youtube.com/embed/${youtubeID}?color=${color}&autoplay=${boolToInt(autoplay)}&mute=${boolToInt(mute)}&loop=${boolToInt(loop)}&playlist=${youtubeID}&controls=${boolToInt(!noControls)}&disablekb=${boolToInt(noControls)}`}
+    class={`${iframeClassName} ${noControls ? "w-[300%] h-full ml-[-100%]" : "size-full"}`}
+    allowfullscreen
+    loading={loading}></iframe>
+</div>
