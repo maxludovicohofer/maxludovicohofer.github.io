@@ -9,6 +9,7 @@ import type { ComponentProps } from "astro/types";
 import HeaderImage from "@components/HeaderImage.astro";
 import type { CollectionKey } from "astro:content";
 import Link from "./Link.astro";
+import Button from "./Button.astro";
 
 interface Props {
   entry?: CollectionEntry<"thoughts"> | CollectionEntry<"projects">;
@@ -84,7 +85,7 @@ export const getCategory = <C extends CollectionKey>(
     ? (entry.data.category as CollectionEntry<"projects">["data"]["category"])
     : undefined;
 
-  return categoryEnum === "Game" ? "Finished game" : categoryEnum;
+  return categoryEnum === "Game" ? "Published game" : categoryEnum;
 };
 
 const category = getCategory(entry);
@@ -114,6 +115,8 @@ const toTitleCase = (word: string) =>
 
 const bodyWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
 
+const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
+
 // TODO ADD ALL CONTENT
 ---
 
@@ -132,41 +135,39 @@ const bodyWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
   className={`!bg-opacity-0 !p-6 !pt-7 md:!pt-12 !shadow-none ${image ? `rounded-b-none lg:rounded-none translate-y-[26vh] lg:translate-y-0 ${followedByOther ? "mb-[26vh] lg:mb-0" : ""}` : "rounded-none"} ${container ? "" : "bg-gradient-to-b from-zinc-100 dark:from-zinc-900 to-zinc-200 dark:to-zinc-950"} flex flex-col items-center`}
 >
   <div
-    class={`mb-16 lg:mb-6 ${image ? "lg:mt-[43vh]" : "2xl:-mt-2"} ${fullWidth ? "lg:mx-20" : `max-w-[40rem] ${bodyWidthClass}`}`}
+    class={`w-full mb-16 lg:mb-6 ${image ? "lg:mt-[43vh]" : "2xl:-mt-2"} ${fullWidth ? "lg:mx-20" : `max-w-[40rem] ${bodyWidthClass}`}`}
   >
-    {
-      (category || downloadsPresent) && (
-        <Text subtitle className="-mt-1 lg:mt-0">
-          {category}
-          {downloadsPresent ? " \\ " : ""}
-          {downloadLinks?.map((link, index) => {
-            const linkTitle = toTitleCase(
-              new URL(link).host.split(".").at(-2)!
-            );
-
-            // TODO REPLACE DOWNLOAD LINKS WITH A "PLAY" BUTTON UNDER THE TITLE (OR AT THE END OF CONTENT). THIS IS ONLY THE FIRST LINK, THE FOLLOWING SHOULD BE LINKS UNDER THIS BUTTONS, SUGGESTED AS ALTERNATIVES
-
-            return (
-              <>
-                <Link href={link}>
-                  {linkTitle}
-                  {downloadLinks.length === 1 && " download"}
-                </Link>
-                {index !== downloadLinks.length - 1 ? ", " : ""}
-              </>
-            );
-          })}
-        </Text>
-      )
-    }
-    <Text title className="text-3xl 2xl:text-5xl"
-      >{entry?.data.title ?? <slot name="title" />}</Text
-    >
+    <Text title className="text-3xl 2xl:text-5xl">
+      {entry?.data.title ?? <slot name="title" />}
+    </Text>
+    {category && <Text subtitle>{category}</Text>}
     <Text
       className={`${Content ? "is-entry" : ""} ${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl`}
       markdown={!!Content}
       tag={tag}>{Content ? <Content /> : <slot />}</Text
     >
+    {
+      downloadsPresent && (
+        <div class="flex flex-col items-center mt-8 mb-7">
+          <Button href={downloadLinks[0]} linkClassName={buttonWidthClass}>
+            Play
+          </Button>
+          {downloadLinks.length > 1 && (
+            <Text subtitle className={`-mb-4 w-full ${buttonWidthClass}`}>
+              Or
+              {downloadLinks.slice(1).map((link, index, { length }) => (
+                <>
+                  <Link href={link}>
+                    {toTitleCase(new URL(link).host.split(".").at(-2)!)}
+                  </Link>
+                  {index !== length - 1 ? ", " : ""}
+                </>
+              ))}
+            </Text>
+          )}
+        </div>
+      )
+    }
     {
       Astro.slots.has("footer") && (
         <Text subtitle className="mt-2 mb-1.5 xl:-mb-1" tag="div">

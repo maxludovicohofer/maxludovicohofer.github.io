@@ -15,6 +15,7 @@ const projects = defineCollection({
     roles: z.array(z.string()),
     tech: z.array(z.string()),
     downloadLinks: z.array(z.string().url()).optional(),
+    awards: z.array(z.string()).optional(),
   }),
 });
 

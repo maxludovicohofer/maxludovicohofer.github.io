@@ -6,6 +6,7 @@ interface Props {
   inline?: boolean;
   cardButton?: boolean;
   className?: string;
+  linkClassName?: string;
   href?: string | undefined;
   navigate?: boolean;
   rounded?: boolean;
@@ -14,18 +15,23 @@ interface Props {
   fullHeight?: boolean;
 }
 
-const { href, navigate } = Astro.props;
+const { href, navigate, linkClassName, ...buttonProps } = Astro.props;
 ---
 
 {
   href ? (
-    <Link href={href} navigate={navigate}>
-      <LinkButton {...Astro.props}>
+    <Link
+      href={href}
+      navigate={navigate}
+      noStyle
+      className={`${linkClassName} w-full`}
+    >
+      <LinkButton {...buttonProps}>
         <slot />
       </LinkButton>
     </Link>
   ) : (
-    <LinkButton {...Astro.props}>
+    <LinkButton {...buttonProps}>
       <slot />
     </LinkButton>
   )

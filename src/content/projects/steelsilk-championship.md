@@ -20,6 +20,8 @@ tech:
     - Maya
 downloadLinks:
     - https://0ry0.itch.io/steelsilk
+awards:
+    - Rookie awards 2024 "Game of the year - People's choice"
 ---
 
 This is the master thesis of my game dev class. A game outline was authored for us by our professors and the concept art class.

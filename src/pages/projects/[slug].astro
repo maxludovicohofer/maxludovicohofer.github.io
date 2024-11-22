@@ -19,13 +19,24 @@ const { entry } = Astro.props;
 
 <Page title={entry.data.title} description={entry.data.description}>
   <Post entry={entry} followedByOther>
-    <Fragment slot="footer"
-      ><Text tag="b" className="font-normal">Roles</Text>
-      {entry.data.roles.join(", ")}<br /><Text tag="b" className="font-normal"
-        >Tech</Text
-      >
-      {entry.data.tech.join(", ")}</Fragment
-    >
+    <Fragment slot="footer">
+      <Text tag="b" className="font-normal">Roles</Text>
+      {entry.data.roles.join(", ")}
+      <br />
+      <Text tag="b" className="font-normal">Tech</Text>
+      {entry.data.tech.join(", ")}
+      {
+        entry.data.awards && entry.data.awards.length !== 0 && (
+          <>
+            <br />
+            <Text tag="b" className="font-normal">
+              Awards
+            </Text>
+            {entry.data.awards!.join(", ")}
+          </>
+        )
+      }
+    </Fragment>
   </Post>
   <div class="-mt-24 lg:-mt-20">
     <Projects isNotFullpage exclude={[entry]} />
