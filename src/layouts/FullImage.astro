@@ -18,8 +18,39 @@ const { src, alt, className, imageClassName, loading } = Astro.props;
 
 {
   src && (
-    <Button noFocus fullHeight className={`${className} !bg-transparent`}>
+    <Button
+      noFocus
+      fullHeight
+      className={`can-fullscreen ${className} !bg-transparent`}
+    >
       <Image src={src} class={imageClassName} alt={alt} loading={loading} />
     </Button>
+    // <Button
+    //   noFocus
+    //   fullHeight
+    //   className={`is-fullscreen ${className} !bg-transparent opacity-0 w-auto hover:scale-100 active:scale-100`}
+    // >
+    //   <Image src={src} class={`${imageClassName} h-screen w-auto`} alt={alt} loading={loading} />
+    // </Button>
   )
 }
+<script>
+  const modal = document.querySelector<HTMLDivElement>("div.modal");
+
+  document.addEventListener("astro:page-load", () =>
+    document
+      .querySelectorAll<HTMLButtonElement>("button.can-fullscreen")
+      ?.forEach((fullImage) =>
+        fullImage.addEventListener("click", () => {
+          modal!.parentElement!.className = `${modal!.parentElement!.className} !visible`;
+
+          fullImage.className = `${fullImage.className} w-auto hover:scale-100 active:scale-100`;
+
+          // ${fullImage.firstElementChild!.className}
+          fullImage.firstElementChild!.className = ` !h-screen !w-auto`;
+
+          modal!.append(fullImage);
+        })
+      )
+  );
+</script>
