@@ -50,7 +50,12 @@ const { src, alt, className, imageClassName, loading } = Astro.props;
 
           modalImage.className = `${modalImage.className} !visible !opacity-100 !size-auto hover:!scale-100 active:!scale-100 !max-w-none !relative !inset-0 !m-0 flex flex-col items-center justify-center`;
 
-          modalImage.firstElementChild!.className = `${modalImage.firstElementChild!.className} !h-screen !w-auto !object-cover !max-h-[85vh] !max-w-[85vw] rounded-3xl`;
+          const image = modalImage.firstElementChild as HTMLImageElement;
+
+          const imageAspect = image.width / image.height;
+          const screenAspect = screen.width / screen.height;
+
+          image.className = `${image.className} ${imageAspect > screenAspect ? "!h-auto !w-screen" : "!h-screen !w-auto"} !object-cover !max-h-[90vh] lg:!max-h-[80vh] !max-w-[90vw] lg:!max-w-[80vw] rounded-3xl`;
 
           activateModal(modalImage);
         })
