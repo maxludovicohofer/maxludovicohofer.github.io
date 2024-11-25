@@ -1,25 +1,21 @@
 ---
 interface Props {
-  title?: string;
   youtubeID?: string;
   color?: "red" | "white";
   autoplay?: boolean;
   mute?: boolean;
   loop?: boolean;
-  loading?: "eager" | "lazy";
   className?: string;
   noControls?: boolean;
   iframeClassName?: string;
 }
 
 const {
-  title,
   youtubeID = "",
   color = "white",
-  autoplay = true,
+  autoplay = false,
   mute = true,
   loop = true,
-  loading,
   className = "",
   noControls,
   iframeClassName,
@@ -31,10 +27,74 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 <div
   class={`${className} size-full aspect-video overflow-hidden ${noControls ? "pointer-events-none" : ""}`}
 >
-  <iframe
-    title={title}
-    src={`https://www.youtube.com/embed/${youtubeID}?color=${color}&autoplay=${boolToInt(autoplay)}&mute=${boolToInt(mute)}&loop=${boolToInt(loop)}&playlist=${youtubeID}&controls=${boolToInt(!noControls)}&disablekb=${boolToInt(noControls)}`}
-    class={`${iframeClassName} ${noControls ? "w-[300%] h-full ml-[-100%]" : "size-full"}`}
-    allowfullscreen
-    loading={loading}></iframe>
+  <div
+    id={`yt-player/${youtubeID}`}
+    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} ${noControls ? "w-[300%] h-full ml-[-100%]" : "size-full"}`}
+  >
+  </div>
 </div>
+<script>
+  //? Insert script
+  const tag = document.createElement("script");
+  tag.src = "https://www.youtube.com/iframe_api";
+  const firstScriptTag = document.getElementsByTagName("script")[0]!;
+  firstScriptTag.parentNode!.insertBefore(tag, firstScriptTag);
+</script>
+<script is:inline>
+  //? Control player
+  function onYouTubeIframeAPIReady() {
+    const iframeToPlayer = {};
+
+    document.addEventListener("astro:page-load", () => {
+      //? Pause video when not looking
+      const observer = new IntersectionObserver((entries) =>
+        entries.forEach((entry) => {
+          const player = iframeToPlayer[entry.target.id];
+          if (entry.isIntersecting) player.playVideo();
+          else player.pauseVideo();
+        })
+      );
+
+      const players = document.querySelectorAll("div[class^=yt-player]");
+
+      players.forEach((divPlayer) => {
+        const iframeId = divPlayer.id;
+        const videoId = iframeId.split("/").at(1);
+        const [color, autoplay, mute, loop, controls, disablekb] =
+          divPlayer.classList[0]
+            .split("/")
+            .slice(1)
+            .filter((_, index) => index % 2 === 1);
+
+        const player = new YT.Player(divPlayer, {
+          videoId,
+          playerVars: {
+            playlist: videoId,
+            color,
+            autoplay,
+            mute,
+            loop,
+            controls,
+            disablekb,
+            start: sessionStorage.getItem(iframeId),
+          },
+          events: {
+            onReady: (event) => {
+              iframeToPlayer[iframeId] = event.target;
+              observer.observe(event.target.getIframe());
+            },
+          },
+        });
+      });
+    });
+
+    function savePlayerTimes() {
+      Object.entries(iframeToPlayer).forEach(([iframeId, player]) =>
+        sessionStorage.setItem(iframeId, player.getCurrentTime().toFixed())
+      );
+    }
+
+    document.addEventListener("astro:before-swap", () => savePlayerTimes());
+    addEventListener("beforeunload", () => savePlayerTimes());
+  }
+</script>
