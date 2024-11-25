@@ -2,13 +2,40 @@
 import BackButton from "@components/BackButton.astro";
 ---
 
-<div class="fixed z-10 inset-0 size-full pointer-events-none">
+<div class="modal-slot fixed inset-0 pointer-events-none">
   <div
-    class="size-full -z-10 absolute inset-0 bg-white/75 dark:bg-black/75 opacity-0 duration-700"
+    class="modal-back size-full bg-white/75 dark:bg-black/75 opacity-0 duration-700"
   >
   </div>
-  <div class="modal h-full flex flex-col items-center justify-center"></div>
+  <div
+    class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
+  >
+    <div class="modal pointer-events-auto"></div>
+  </div>
   <div class="opacity-0">
-    <BackButton modalBack />
+    <BackButton buttonName="modal-back" />
   </div>
 </div>
+<script>
+  const deactivateModal = () => {
+    const modalSlot = document.querySelector<HTMLDivElement>("div.modal-slot")!;
+    modalSlot.classList.remove("!pointer-events-auto");
+
+    const backButton = modalSlot.lastElementChild!;
+    backButton.classList.remove("!opacity-100");
+
+    const modal = backButton.previousElementSibling!.firstElementChild!;
+    modal.replaceChildren();
+
+    const backdrop = modalSlot.firstElementChild!;
+    backdrop.classList.remove("!opacity-100");
+  };
+
+  document.addEventListener("astro:page-load", () =>
+    document
+      .querySelectorAll<HTMLDivElement>(".modal-back")
+      .forEach((element) =>
+        element.addEventListener("click", () => deactivateModal())
+      )
+  );
+</script>

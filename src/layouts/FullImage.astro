@@ -12,8 +12,6 @@ interface Props {
 }
 
 const { src, alt, className, imageClassName, loading } = Astro.props;
-
-// TODO MAKE IMAGES FULLSCREENABLE
 ---
 
 {
@@ -29,18 +27,18 @@ const { src, alt, className, imageClassName, loading } = Astro.props;
 }
 <script>
   const activateModal = (content: Node) => {
-    const modal = document.querySelector<HTMLDivElement>("div.modal");
+    const modalSlot = document.querySelector<HTMLDivElement>("div.modal-slot")!;
 
-    const modalSlot = modal!.parentElement!;
     modalSlot.className = `${modalSlot.className} !pointer-events-auto`;
 
-    const backdrop = modal!.previousElementSibling!;
+    const backdrop = modalSlot.firstElementChild!;
     backdrop.className = `${backdrop.className} !opacity-100`;
 
-    const backButton = modal!.nextElementSibling!;
+    const backButton = modalSlot.lastElementChild!;
     backButton.className = `${backButton.className} !opacity-100`;
 
-    modal!.append(content);
+    const modal = backButton.previousElementSibling!.firstElementChild!;
+    modal.append(content);
   };
 
   document.addEventListener("astro:page-load", () =>
@@ -50,9 +48,9 @@ const { src, alt, className, imageClassName, loading } = Astro.props;
         fullImage.addEventListener("click", () => {
           const modalImage = fullImage.cloneNode(true) as HTMLElement;
 
-          modalImage.className = `${modalImage.className} !size-auto hover:!scale-100 active:!scale-100`;
+          modalImage.className = `${modalImage.className} !visible !opacity-100 !size-auto hover:!scale-100 active:!scale-100 !max-w-none !relative !inset-0 !m-0 flex flex-col items-center justify-center`;
 
-          modalImage.firstElementChild!.className = ` ${modalImage.firstElementChild!.className} !h-screen !w-auto !object-cover`;
+          modalImage.firstElementChild!.className = `${modalImage.firstElementChild!.className} !h-screen !w-auto !object-cover !max-h-[85vh] !max-w-[85vw] rounded-3xl`;
 
           activateModal(modalImage);
         })

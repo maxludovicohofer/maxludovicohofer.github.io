@@ -3,14 +3,14 @@ import Button from "@layouts/Button.astro";
 
 interface Props {
   className?: string;
-  modalBack?: boolean;
+  buttonName?: string;
 }
 
-const { className, modalBack } = Astro.props;
+const { className, buttonName } = Astro.props;
 ---
 
 <Button
-  className={`${modalBack ? `modal-back-button` : `back-button`} ${className} !text-3xl fixed left-6 lg:left-9 bottom-5 lg:top-12 max-w-14 lg:max-w-10 min-h-14 lg:min-h-fit lg:max-h-10 hover:scale-110 active:scale-75`}
+  className={`${buttonName ?? "back-button"} ${className} !text-3xl fixed left-6 lg:left-9 bottom-5 lg:top-12 max-w-14 lg:max-w-10 min-h-14 lg:min-h-fit lg:max-h-10 hover:scale-110 active:scale-75`}
   rounded
 >
   <p class="mt-[-0.2rem] ml-[-0.1rem] lg:ml-[-0.2rem]">◂</p>
@@ -18,22 +18,7 @@ const { className, modalBack } = Astro.props;
 <script>
   import { navigate } from "astro:transitions/client";
 
-  const deactivateModal = () => {
-    const modal = document.querySelector<HTMLDivElement>("div.modal");
-
-    modal!.replaceChildren();
-
-    const backButton = modal!.nextElementSibling!;
-    backButton.classList.remove("!opacity-100");
-
-    const backdrop = modal!.previousElementSibling!;
-    backdrop.classList.remove("!opacity-100");
-
-    const modalSlot = modal!.parentElement!;
-    modalSlot.classList.remove("!pointer-events-auto");
-  };
-
-  document.addEventListener("astro:page-load", () => {
+  document.addEventListener("astro:page-load", () =>
     document
       .querySelector<HTMLButtonElement>("button.back-button")
       ?.addEventListener("click", () => {
@@ -56,10 +41,6 @@ const { className, modalBack } = Astro.props;
 
           history.back();
         }
-      });
-
-    document
-      .querySelector<HTMLButtonElement>("button.modal-back-button")
-      ?.addEventListener("click", () => deactivateModal());
-  });
+      })
+  );
 </script>

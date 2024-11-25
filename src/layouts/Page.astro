@@ -28,9 +28,9 @@ const completeTitle = `Max Hofer \\ ${title}`;
     <ViewTransitions />
   </head>
   <body class="bg-zinc-200 dark:bg-zinc-950">
-    <ModalSlot />
     <slot />
     {Astro.url.pathname !== "/" && <BackButton />}
+    <ModalSlot />
     <script>
       // This code fixes Astro scroll restoration
       document.addEventListener("astro:before-swap", () => {
