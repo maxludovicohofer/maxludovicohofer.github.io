@@ -1,0 +1,14 @@
+---
+import BackButton from "@components/BackButton.astro";
+---
+
+<div class="fixed z-10 inset-0 size-full pointer-events-none">
+  <div
+    class="size-full -z-10 absolute inset-0 bg-white/75 dark:bg-black/75 opacity-0 duration-700"
+  >
+  </div>
+  <div class="modal h-full flex flex-col items-center justify-center"></div>
+  <div class="opacity-0">
+    <BackButton modalBack />
+  </div>
+</div>

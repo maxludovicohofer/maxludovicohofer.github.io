@@ -25,31 +25,36 @@ const { src, alt, className, imageClassName, loading } = Astro.props;
     >
       <Image src={src} class={imageClassName} alt={alt} loading={loading} />
     </Button>
-    // <Button
-    //   noFocus
-    //   fullHeight
-    //   className={`is-fullscreen ${className} !bg-transparent opacity-0 w-auto hover:scale-100 active:scale-100`}
-    // >
-    //   <Image src={src} class={`${imageClassName} h-screen w-auto`} alt={alt} loading={loading} />
-    // </Button>
   )
 }
 <script>
-  const modal = document.querySelector<HTMLDivElement>("div.modal");
+  const activateModal = (content: Node) => {
+    const modal = document.querySelector<HTMLDivElement>("div.modal");
+
+    const modalSlot = modal!.parentElement!;
+    modalSlot.className = `${modalSlot.className} !pointer-events-auto`;
+
+    const backdrop = modal!.previousElementSibling!;
+    backdrop.className = `${backdrop.className} !opacity-100`;
+
+    const backButton = modal!.nextElementSibling!;
+    backButton.className = `${backButton.className} !opacity-100`;
+
+    modal!.append(content);
+  };
 
   document.addEventListener("astro:page-load", () =>
     document
       .querySelectorAll<HTMLButtonElement>("button.can-fullscreen")
       ?.forEach((fullImage) =>
         fullImage.addEventListener("click", () => {
-          modal!.parentElement!.className = `${modal!.parentElement!.className} !visible`;
+          const modalImage = fullImage.cloneNode(true) as HTMLElement;
 
-          fullImage.className = `${fullImage.className} w-auto hover:scale-100 active:scale-100`;
+          modalImage.className = `${modalImage.className} !size-auto hover:!scale-100 active:!scale-100`;
 
-          // ${fullImage.firstElementChild!.className}
-          fullImage.firstElementChild!.className = ` !h-screen !w-auto`;
+          modalImage.firstElementChild!.className = ` ${modalImage.firstElementChild!.className} !h-screen !w-auto !object-cover`;
 
-          modal!.append(fullImage);
+          activateModal(modalImage);
         })
       )
   );
