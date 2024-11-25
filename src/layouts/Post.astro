@@ -205,7 +205,7 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
     const readEntries: Partial<Record<CollectionKey, string[]>> =
       readEntriesString ? JSON.parse(readEntriesString) : {};
 
-    const [collection, slug] = location.pathname.split("/").slice(-2) as [
+    const [collection, slug] = location.pathname.split("/").filter((part) => !!part).slice(-2) as [
       CollectionKey,
       string,
     ];
