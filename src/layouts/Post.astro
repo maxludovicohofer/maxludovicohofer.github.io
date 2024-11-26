@@ -10,6 +10,7 @@ import Cover from "@components/Cover.astro";
 import type { CollectionKey } from "astro:content";
 import Link from "./Link.astro";
 import Button from "./Button.astro";
+import type Video from "./Video.astro";
 
 interface Props {
   entry?: CollectionEntry<"thoughts"> | CollectionEntry<"projects">;
@@ -41,7 +42,11 @@ const lastModifiedTime = getLastModifiedDate(remarkPluginFrontmatter)?.format(
 export const getPostCover = (post: typeof entry) => {
   if (!post) return;
 
-  if (post.data.youTubeID) return post.data.youTubeID;
+  if (post.data.youTubeID)
+    return {
+      id: post.data.youTubeID,
+      aspect: post.data.youTubeAspectRatio ?? "16/9",
+    } satisfies ComponentProps<typeof Video>["youTubeInfo"];
 
   const imageFolder = `/src/content/${post.collection}/`;
   const images = import.meta.glob<{ default: ImageMetadata }>(

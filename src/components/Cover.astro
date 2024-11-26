@@ -2,6 +2,7 @@
 import FullImage from "@layouts/FullImage.astro";
 import type { getPostCover } from "@layouts/Post.astro";
 import Video from "@layouts/Video.astro";
+import type { ComponentProps } from "astro/types";
 import type { CollectionKey } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
@@ -14,7 +15,13 @@ interface Props {
 
 const { cover, bodyWidthClass, entry, mobile } = Astro.props;
 
-const coverClassName = `cover-media ${mobile ? "lg:invisible active:rounded-3xl fixed" : "invisible lg:visible rounded-3xl absolute top-12 left-0 right-0 mx-auto"} ${bodyWidthClass}`;
+export function isVideoCover(
+  cover: ReturnType<typeof getPostCover>
+): cover is ComponentProps<typeof Video>["youTubeInfo"] {
+  return !!(cover as ComponentProps<typeof Video>["youTubeInfo"])?.id;
+}
+
+const coverClassName = `cover-media ${mobile ? "lg:invisible active:rounded-3xl fixed -top-[35%]" : "invisible lg:visible rounded-3xl absolute top-12 left-0 right-0 mx-auto"} ${bodyWidthClass}`;
 
 const imageClassName = `active:rounded-3xl lg:rounded-3xl object-cover w-full lg:max-h-[40vh]`;
 
@@ -22,9 +29,9 @@ const imageClassName = `active:rounded-3xl lg:rounded-3xl object-cover w-full lg
 ---
 
 {
-  typeof cover === "string" ? (
+  isVideoCover(cover) ? (
     <Video
-      youTubeID={cover}
+      youTubeInfo={cover}
       noControls
       className={`${coverClassName} ${imageClassName}`}
     />

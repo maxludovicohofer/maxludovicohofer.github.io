@@ -4,6 +4,7 @@ const post = {
   draft: z.boolean().optional(),
   title: z.string(),
   youTubeID: z.string().optional(),
+  youTubeAspectRatio: z.enum(["16/9", "16/10"]).optional(),
 };
 
 // Define your collection(s)

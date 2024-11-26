@@ -11,6 +11,7 @@ import {
 } from "./Post.astro";
 import type { ComponentProps } from "astro/types";
 import Video from "./Video.astro";
+import { isVideoCover } from "@components/Cover.astro";
 
 interface Props {
   entry?: CollectionEntry<"thoughts"> | CollectionEntry<"projects"> | undefined;
@@ -125,8 +126,8 @@ const coverClass = `absolute inset-0 size-full object-cover opacity-0 ${containe
 }
 {
   cover &&
-    (typeof cover === "string" ? (
-      <Video noControls youTubeID={cover} className={coverClass} />
+    (isVideoCover(cover) ? (
+      <Video noControls youTubeInfo={cover} className={coverClass} />
     ) : (
       <Image
         src={cover()}

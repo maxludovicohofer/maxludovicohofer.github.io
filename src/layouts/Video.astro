@@ -1,6 +1,8 @@
 ---
+import type { ComponentProps } from "astro/types";
+
 interface Props {
-  youTubeID?: string;
+  youTubeInfo?: { id: string; aspect: "16/9" | "16/10" };
   color?: "red" | "white";
   autoplay?: boolean;
   mute?: boolean;
@@ -11,7 +13,9 @@ interface Props {
 }
 
 const {
-  youTubeID = "",
+  youTubeInfo = { id: "", aspect: "16/9" } satisfies ComponentProps<
+    typeof Video
+  >["youTubeInfo"],
   color = "white",
   autoplay = false,
   mute = true,
@@ -25,20 +29,46 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 ---
 
 <div
-  class={`${className} size-full aspect-video overflow-hidden ${noControls ? "pointer-events-none" : ""}`}
+  class={`${className} size-full ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"} overflow-hidden ${noControls ? "pointer-events-none" : ""}`}
 >
   <div
-    id={`yt-player/${youTubeID}`}
-    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} ${noControls ? "!w-[300%] !h-full !ml-[-100%]" : "!size-full"}`}
+    id={`yt-player/${youTubeInfo.id}`}
+    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} absolute top-0 bottom-0 m-auto ${noControls ? "no-black-bands" : "size-full"}`}
   >
   </div>
 </div>
 <script>
-  //? Assign unique IDs
+  //? Init divs for iframe
   document.addEventListener("astro:page-load", () =>
     document
       .querySelectorAll<HTMLDivElement>("div[class^=yt-player]")
-      .forEach((div, key) => (div.id = `${div.id}/${key}`))
+      .forEach((div, key) => {
+        // Assign unique IDs
+        div.id = `${div.id}/${key}`;
+
+        if (!div.classList.contains("no-black-bands")) return;
+
+        // Remove black bands
+
+        // TODO ADD H-300 OR W-FULL BASED ON ASPECT RATIO OF VIDEO RELATIVE TO ASPECT RATIO OF DIV
+        const container = div.parentElement!;
+        const videoAspectEnum = container.classList
+          .values()
+          .find((part) => part.startsWith("aspect"))!
+          .split("-")
+          .at(-1)!
+          .replace(/[\[\]']+/g, "");
+
+        const videoAspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
+        const containerAspectRatio =
+          container.clientWidth / container.clientHeight;
+
+        div.classList.add(
+          ...(containerAspectRatio > videoAspectRatio
+            ? ["w-full", "h-[300%]"]
+            : ["h-full", "w-[300%]", "ml-[-100%]"])
+        );
+      })
   );
 </script>
 <script is:inline src="https://www.youtube.com/iframe_api" defer></script>
@@ -58,7 +88,6 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
       );
 
       document.querySelectorAll("div[class^=yt-player]").forEach((div) => {
-        // TODO ADD H-300 OR W-FULL BASED ON ASPECT RATIO OF VIDEO RELATIVE TO ASPECT RATIO OF DIV
         const iframeId = div.id;
         const videoId = iframeId.split("/").at(1);
         const [color, autoplay, mute, loop, controls, disablekb] =
