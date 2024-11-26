@@ -18,7 +18,7 @@ const coverClassName = `cover-media ${mobile ? "lg:invisible active:rounded-3xl 
 
 const imageClassName = `active:rounded-3xl lg:rounded-3xl object-cover w-full lg:max-h-[40vh]`;
 
-// TODO MAKE VIDEO PAUSABLE AND FULLSCREENABLE IN POST
+// TODO MAKE VIDEO PAUSABLE AND FULLSCREENABLE IN POST, ALSO SAME INTERACTIVITY AS FULLIMAGE
 ---
 
 {
@@ -44,9 +44,7 @@ const imageClassName = `active:rounded-3xl lg:rounded-3xl object-cover w-full lg
 }
 <script>
   addEventListener("scroll", () => {
-    const covers = document.querySelectorAll<HTMLButtonElement>(".cover-media");
-
-    covers.forEach((cover) => {
+    document.querySelectorAll<HTMLElement>(".cover-media").forEach((cover) => {
       if (!cover.checkVisibility()) return;
 
       //? Based on Card translate-y class

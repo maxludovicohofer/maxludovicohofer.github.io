@@ -1,7 +1,6 @@
 ---
 interface Props {
   youTubeID?: string;
-  aspect?: number;
   color?: "red" | "white";
   autoplay?: boolean;
   mute?: boolean;
@@ -35,12 +34,14 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
   </div>
 </div>
 <script>
-  //? Insert script
-  const tag = document.createElement("script");
-  tag.src = "https://www.youtube.com/iframe_api";
-  const firstScriptTag = document.getElementsByTagName("script")[0]!;
-  firstScriptTag.parentNode!.insertBefore(tag, firstScriptTag);
+  //? Assign unique IDs
+  document.addEventListener("astro:page-load", () =>
+    document
+      .querySelectorAll<HTMLDivElement>("div[class^=yt-player]")
+      .forEach((div, key) => (div.id = `${div.id}/${key}`))
+  );
 </script>
+<script is:inline src="https://www.youtube.com/iframe_api" defer></script>
 <script is:inline>
   //? Control player
   function onYouTubeIframeAPIReady() {
@@ -56,19 +57,17 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
         })
       );
 
-      const players = document.querySelectorAll("div[class^=yt-player]");
-
-      players.forEach((divPlayer) => {
+      document.querySelectorAll("div[class^=yt-player]").forEach((div) => {
         // TODO ADD H-300 OR W-FULL BASED ON ASPECT RATIO OF VIDEO RELATIVE TO ASPECT RATIO OF DIV
-        const iframeId = divPlayer.id;
+        const iframeId = div.id;
         const videoId = iframeId.split("/").at(1);
         const [color, autoplay, mute, loop, controls, disablekb] =
-          divPlayer.classList[0]
+          div.classList[0]
             .split("/")
             .slice(1)
             .filter((_, index) => index % 2 === 1);
 
-        const player = new YT.Player(divPlayer, {
+        const player = new YT.Player(div, {
           videoId,
           playerVars: {
             playlist: videoId,
@@ -81,22 +80,21 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
             start: sessionStorage.getItem(iframeId),
           },
           events: {
-            onReady: (event) => {
-              iframeToPlayer[iframeId] = event.target;
-              observer.observe(event.target.getIframe());
+            onReady: ({ target }) => {
+              iframeToPlayer[iframeId] = target;
+              observer.observe(target.getIframe());
             },
           },
         });
       });
     });
 
-    function savePlayerTimes() {
+    //? Save times to restore start times
+    const savePlayerTimes = () =>
       Object.entries(iframeToPlayer).forEach(([iframeId, player]) =>
         sessionStorage.setItem(iframeId, player.getCurrentTime().toFixed())
       );
-    }
-
-    document.addEventListener("astro:before-swap", () => savePlayerTimes());
-    addEventListener("beforeunload", () => savePlayerTimes());
+    document.addEventListener("astro:before-swap", savePlayerTimes);
+    addEventListener("beforeunload", savePlayerTimes);
   }
 </script>

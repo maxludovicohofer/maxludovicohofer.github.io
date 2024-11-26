@@ -4,7 +4,7 @@ import BackButton from "@components/BackButton.astro";
 
 <div class="modal-slot fixed inset-0 pointer-events-none">
   <div
-    class="modal-back size-full bg-white/75 dark:bg-black/75 opacity-0 duration-700"
+    class="modal-back size-full bg-white/85 dark:bg-black/85 opacity-0 duration-700"
   >
   </div>
   <div
@@ -33,7 +33,7 @@ import BackButton from "@components/BackButton.astro";
 
   document.addEventListener("astro:page-load", () =>
     document
-      .querySelectorAll<HTMLDivElement>(".modal-back")
+      .querySelectorAll<HTMLElement>(".modal-back")
       .forEach((element) =>
         element.addEventListener("click", () => deactivateModal())
       )
