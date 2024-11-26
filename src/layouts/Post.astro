@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import Card from "./Card.astro";
 import type { ComponentProps } from "astro/types";
-import HeaderImage from "@components/HeaderImage.astro";
+import Cover from "@components/Cover.astro";
 import type { CollectionKey } from "astro:content";
 import Link from "./Link.astro";
 import Button from "./Button.astro";
@@ -38,8 +38,10 @@ const lastModifiedTime = getLastModifiedDate(remarkPluginFrontmatter)?.format(
 );
 
 // TODO REPLACE POST IMAGES WITH LOOPED VIDEOS (BUT ALSO GIVE THE OPTION TO USE IMAGES)
-export const getPostImage = (post: typeof entry) => {
+export const getPostCover = (post: typeof entry) => {
   if (!post) return;
+
+  if (post.data.youTubeID) return post.data.youTubeID;
 
   const imageFolder = `/src/content/${post.collection}/`;
   const images = import.meta.glob<{ default: ImageMetadata }>(
@@ -58,7 +60,7 @@ export const getPostImage = (post: typeof entry) => {
   return image;
 };
 
-const image = getPostImage(entry);
+const cover = getPostCover(entry);
 
 export const getDescription = <C extends CollectionKey>(
   entry?: CollectionEntry<C>
@@ -117,25 +119,24 @@ const bodyWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
 
 const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
 
+const coverProps =
+  cover &&
+  ({
+    cover,
+    bodyWidthClass,
+    entry,
+  } satisfies ComponentProps<typeof Cover>);
+
 // TODO ADD ALL CONTENT
 ---
 
-{
-  image && (
-    <HeaderImage
-      mobile
-      image={image}
-      bodyWidthClass={bodyWidthClass}
-      entry={entry}
-    />
-  )
-}
+{coverProps && <Cover mobile {...coverProps} />}
 <Card
   container={container}
-  className={`!bg-opacity-0 !p-6 !pt-7 md:!pt-12 !shadow-none ${image ? `rounded-b-none lg:rounded-none translate-y-[26vh] lg:translate-y-0 ${followedByOther ? "mb-[26vh] lg:mb-0" : ""}` : "rounded-none"} ${container ? "" : "bg-gradient-to-b from-zinc-100 dark:from-zinc-900 to-zinc-200 dark:to-zinc-950"} flex flex-col items-center`}
+  className={`!bg-opacity-0 !p-6 !pt-7 md:!pt-12 !shadow-none ${cover ? `rounded-b-none lg:rounded-none translate-y-[26vh] lg:translate-y-0 ${followedByOther ? "mb-[26vh] lg:mb-0" : ""}` : "rounded-none"} ${container ? "" : "bg-gradient-to-b from-zinc-100 dark:from-zinc-900 to-zinc-200 dark:to-zinc-950"} flex flex-col items-center`}
 >
   <div
-    class={`w-full mb-16 lg:mb-6 ${image ? "lg:mt-[43vh]" : "2xl:-mt-2"} ${fullWidth ? "lg:mx-20" : `max-w-[40rem] ${bodyWidthClass}`}`}
+    class={`w-full mb-16 lg:mb-6 ${cover ? "lg:mt-[43vh]" : "2xl:-mt-2"} ${fullWidth ? "lg:mx-20" : `max-w-[40rem] ${bodyWidthClass}`}`}
   >
     <Text title className="text-3xl 2xl:text-5xl">
       {entry?.data.title ?? <slot name="title" />}
@@ -184,15 +185,9 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
     }
   </div>
 </Card>
-{
-  image && (
-    <HeaderImage image={image} bodyWidthClass={bodyWidthClass} entry={entry} />
-  )
-}
+{coverProps && <Cover {...coverProps} />}
 <script>
   import type { CollectionKey } from "astro:content";
-
-  // TODO PHASE 2 DOES NOT WORK ON MOBILE, FIX
 
   //? Save read entries
   document.addEventListener("astro:page-load", () => {
@@ -205,10 +200,10 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
     const readEntries: Partial<Record<CollectionKey, string[]>> =
       readEntriesString ? JSON.parse(readEntriesString) : {};
 
-    const [collection, slug] = location.pathname.split("/").filter((part) => !!part).slice(-2) as [
-      CollectionKey,
-      string,
-    ];
+    const [collection, slug] = location.pathname
+      .split("/")
+      .filter((part) => !!part)
+      .slice(-2) as [CollectionKey, string];
 
     if (readEntries[collection]?.includes(slug)) {
       // Reorder

@@ -1,6 +1,7 @@
 ---
 interface Props {
-  youtubeID?: string;
+  youTubeID?: string;
+  aspect?: number;
   color?: "red" | "white";
   autoplay?: boolean;
   mute?: boolean;
@@ -11,7 +12,7 @@ interface Props {
 }
 
 const {
-  youtubeID = "",
+  youTubeID = "",
   color = "white",
   autoplay = false,
   mute = true,
@@ -28,8 +29,8 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
   class={`${className} size-full aspect-video overflow-hidden ${noControls ? "pointer-events-none" : ""}`}
 >
   <div
-    id={`yt-player/${youtubeID}`}
-    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} ${noControls ? "w-[300%] h-full ml-[-100%]" : "size-full"}`}
+    id={`yt-player/${youTubeID}`}
+    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} ${noControls ? "!w-[300%] !h-full !ml-[-100%]" : "!size-full"}`}
   >
   </div>
 </div>
@@ -58,6 +59,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
       const players = document.querySelectorAll("div[class^=yt-player]");
 
       players.forEach((divPlayer) => {
+        // TODO ADD H-300 OR W-FULL BASED ON ASPECT RATIO OF VIDEO RELATIVE TO ASPECT RATIO OF DIV
         const iframeId = divPlayer.id;
         const videoId = iframeId.split("/").at(1);
         const [color, autoplay, mute, loop, controls, disablekb] =

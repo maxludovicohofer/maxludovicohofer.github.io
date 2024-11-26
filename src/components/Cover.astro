@@ -1,0 +1,56 @@
+---
+import FullImage from "@layouts/FullImage.astro";
+import type { getPostCover } from "@layouts/Post.astro";
+import Video from "@layouts/Video.astro";
+import type { CollectionKey } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  cover: NonNullable<ReturnType<typeof getPostCover>>;
+  bodyWidthClass: string;
+  entry: CollectionEntry<CollectionKey> | undefined;
+  mobile?: boolean;
+}
+
+const { cover, bodyWidthClass, entry, mobile } = Astro.props;
+
+const coverClassName = `cover-media ${mobile ? "lg:invisible active:rounded-3xl fixed" : "invisible lg:visible rounded-3xl absolute top-12 left-0 right-0 mx-auto"} ${bodyWidthClass}`;
+
+const imageClassName = `active:rounded-3xl lg:rounded-3xl object-cover w-full lg:max-h-[40vh]`;
+
+// TODO MAKE VIDEO PAUSABLE AND FULLSCREENABLE IN POST
+---
+
+{
+  typeof cover === "string" ? (
+    <Video
+      youTubeID={cover}
+      noControls
+      className={`${coverClassName} ${imageClassName}`}
+    />
+  ) : (
+    <FullImage
+      src={cover()}
+      className={coverClassName}
+      imageClassName={imageClassName}
+      alt={
+        entry?.collection === "projects"
+          ? entry.data.description
+          : `Graphic explanation of "${entry!.data.title}"`
+      }
+      loading="eager"
+    />
+  )
+}
+<script>
+  addEventListener("scroll", () => {
+    const covers = document.querySelectorAll<HTMLButtonElement>(".cover-media");
+
+    covers.forEach((cover) => {
+      if (!cover.checkVisibility()) return;
+
+      //? Based on Card translate-y class
+      cover.style.opacity = `${1 - Math.min(scrollY / (0.26 * screen.height), 1)}`;
+    });
+  });
+</script>

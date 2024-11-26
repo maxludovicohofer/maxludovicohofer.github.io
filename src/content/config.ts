@@ -3,7 +3,7 @@ import { defineCollection, z } from "astro:content";
 const post = {
   draft: z.boolean().optional(),
   title: z.string(),
-  youTubeVideoId: z.string().url().optional()
+  youTubeID: z.string().optional(),
 };
 
 // Define your collection(s)

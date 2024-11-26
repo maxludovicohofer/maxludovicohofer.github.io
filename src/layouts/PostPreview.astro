@@ -7,9 +7,10 @@ import {
   getCategory,
   getDescription,
   getLastModifiedDate,
-  getPostImage,
+  getPostCover,
 } from "./Post.astro";
 import type { ComponentProps } from "astro/types";
+import Video from "./Video.astro";
 
 interface Props {
   entry?: CollectionEntry<"thoughts"> | CollectionEntry<"projects"> | undefined;
@@ -51,7 +52,7 @@ const readMoreLink =
     ? undefined
     : (readMore ?? (entry && `/${entry.collection}/${entry.slug}`));
 
-const image = getPostImage(entry);
+const cover = getPostCover(entry);
 const description = getDescription(entry);
 const category = getCategory(entry);
 const lastModifiedTime =
@@ -59,6 +60,8 @@ const lastModifiedTime =
   getLastModifiedDate(remarkPluginFrontmatter)?.format("D MMMM YYYY");
 
 const subtitle = [category, lastModifiedTime].filter((part) => !!part);
+
+const coverClass = `absolute inset-0 size-full object-cover opacity-0 ${container ? "group-hover/container-card:opacity-15" : "group-hover/card:opacity-15"} intersect:opacity-15 intersect-half duration-700 pointer-events-none`;
 ---
 
 {
@@ -121,11 +124,14 @@ const subtitle = [category, lastModifiedTime].filter((part) => !!part);
   )
 }
 {
-  image && (
-    <Image
-      src={image()}
-      class={`absolute inset-0 size-full object-cover opacity-0 ${container ? "group-hover/container-card:opacity-15" : "group-hover/card:opacity-15"} intersect:opacity-15 intersect-half duration-700 pointer-events-none`}
-      alt={description ?? `Graphic explanation of "${entry!.data.title}"`}
-    />
-  )
+  cover &&
+    (typeof cover === "string" ? (
+      <Video noControls youTubeID={cover} className={coverClass} />
+    ) : (
+      <Image
+        src={cover()}
+        class={coverClass}
+        alt={description ?? `Graphic explanation of "${entry!.data.title}"`}
+      />
+    ))
 }
