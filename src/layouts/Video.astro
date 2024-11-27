@@ -29,11 +29,11 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 ---
 
 <div
-  class={`${className} size-full overflow-hidden flex items-center justify-center  ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"} ${noControls ? "pointer-events-none" : ""}`}
+  class={`${className} size-full overflow-hidden flex items-center justify-center -translate-y-[36%] ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"} ${noControls ? "pointer-events-none" : ""}`}
 >
   <div
     id={`yt-player/${youTubeInfo.id}`}
-    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} -mt-[100%] ${noControls ? "no-black-bands" : "size-full"}`}
+    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} ${noControls ? "no-black-bands" : "size-full"}`}
   >
   </div>
 </div>
@@ -57,13 +57,14 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
           "h-[300%]",
           "h-full",
           "w-[300%]",
-          "ml-[-100%]"
+          "-ml-[100%]",
+          "-mt-[100%]"
         );
 
         target.firstElementChild!.classList.add(
           ...(videoAspectRatio > aspectRatio
             ? ["h-full", "w-[300%]"]
-            : ["w-full", "h-[300%]"])
+            : ["w-full", "h-[300%]", "-ml-[100%]"])
         );
       })
     );
