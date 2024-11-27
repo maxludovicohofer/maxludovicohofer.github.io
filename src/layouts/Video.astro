@@ -29,11 +29,11 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 ---
 
 <div
-  class={`${className} size-full ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"} ${noControls ? "pointer-events-none" : ""} overflow-hidden`}
+  class={`${className} size-full flex items-center justify-center ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"} ${noControls ? "pointer-events-none" : ""} overflow-hidden`}
 >
   <div
     id={`yt-player/${youTubeInfo.id}`}
-    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} flex items-center justify-center ${noControls ? "no-black-bands" : "size-full"}`}
+    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} ${noControls ? "no-black-bands" : "size-full"}`}
   >
   </div>
 </div>
