@@ -33,43 +33,52 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 >
   <div
     id={`yt-player/${youTubeInfo.id}`}
-    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} absolute top-0 bottom-0 m-auto ${noControls ? "no-black-bands" : "size-full"}`}
+    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} absolute inset-0 m-auto ${noControls ? "no-black-bands" : "size-full"}`}
   >
   </div>
 </div>
 <script>
   //? Init divs for iframe
-  document.addEventListener("astro:page-load", () =>
+  document.addEventListener("astro:page-load", () => {
+    const observer = new ResizeObserver((entries) =>
+      entries.forEach(({ target }) => {
+        const aspectRatio = target.clientWidth / target.clientHeight;
+
+        const videoAspectEnum = target.classList
+          .values()
+          .find((part) => part.startsWith("aspect"))!
+          .split("-")
+          .at(-1)!
+          .replace(/[\[\]']+/g, "");
+        const videoAspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
+
+        target.firstElementChild!.classList.remove(
+          "w-full",
+          "h-[300%]",
+          "h-full",
+          "w-[300%]",
+          "ml-[-100%]"
+        );
+
+        target.firstElementChild!.classList.add(
+          ...(aspectRatio > videoAspectRatio
+            ? ["w-full", "h-[300%]"]
+            : ["h-full", "w-[300%]", "ml-[-100%]"])
+        );
+      })
+    );
+
     document
       .querySelectorAll<HTMLDivElement>("div[class^=yt-player]")
       .forEach((div, key) => {
         // Assign unique IDs
         div.id = `${div.id}/${key}`;
 
-        if (!div.classList.contains("no-black-bands")) return;
-
         // Remove black bands
-
-        // TODO ADD H-300 OR W-FULL BASED ON ASPECT RATIO OF VIDEO RELATIVE TO ASPECT RATIO OF DIV
-        const container = div.parentElement!;
-        const videoAspectEnum = container.classList
-          .values()
-          .find((part) => part.startsWith("aspect"))!
-          .split("-")
-          .at(-1)!
-          .replace(/[\[\]']+/g, "");
-
-        const videoAspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
-        const containerAspectRatio =
-          container.clientWidth / container.clientHeight;
-
-        div.classList.add(
-          ...(containerAspectRatio > videoAspectRatio
-            ? ["w-full", "h-[300%]"]
-            : ["h-full", "w-[300%]", "ml-[-100%]"])
-        );
-      })
-  );
+        if (!div.classList.contains("no-black-bands")) return;
+        observer.observe(div.parentElement!);
+      });
+  });
 </script>
 <script is:inline src="https://www.youtube.com/iframe_api" defer></script>
 <script is:inline>
