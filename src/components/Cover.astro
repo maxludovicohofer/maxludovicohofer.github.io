@@ -8,12 +8,12 @@ import type { CollectionEntry } from "astro:content";
 
 interface Props {
   cover: NonNullable<ReturnType<typeof getPostCover>>;
-  bodyWidthClass: string;
+  coverClassName: string;
   entry: CollectionEntry<CollectionKey> | undefined;
   mobile?: boolean;
 }
 
-const { cover, bodyWidthClass, entry, mobile } = Astro.props;
+const { cover, coverClassName, entry, mobile } = Astro.props;
 
 export function isVideoCover(
   cover: ReturnType<typeof getPostCover>
@@ -21,9 +21,9 @@ export function isVideoCover(
   return !!(cover as ComponentProps<typeof Video>["youTubeInfo"])?.id;
 }
 
-const coverClassName = `cover-media ${mobile ? "lg:invisible active:rounded-3xl fixed" : "invisible lg:visible rounded-3xl absolute top-12 left-0 right-0 mx-auto"} ${bodyWidthClass}`;
+const coverClass = `cover-media ${mobile ? "lg:invisible active:rounded-3xl fixed h-[45vh] flex items-center" : "invisible lg:visible rounded-3xl absolute top-12 left-0 right-0 mx-auto max-h-[40vh] flex items-center"} ${coverClassName}`;
 
-const imageClassName = `active:rounded-3xl lg:rounded-3xl object-cover w-screen lg:max-h-[40vh] -translate-y-[calc(50%-14vh)]`;
+const imageClass = `active:rounded-3xl lg:rounded-3xl object-cover ${mobile ? "!w-screen " : ""}`;
 
 // TODO MAKE VIDEO PAUSABLE AND FULLSCREENABLE IN POST, ALSO SAME INTERACTIVITY AS FULLIMAGE
 ---
@@ -33,15 +33,15 @@ const imageClassName = `active:rounded-3xl lg:rounded-3xl object-cover w-screen 
     <Video
       youTubeInfo={cover}
       noControls
-      noBlackBands={!mobile}
-      className={coverClassName}
-      iframeClassName={imageClassName}
+      noBlackBands
+      className={coverClass}
+      iframeClassName={imageClass}
     />
   ) : (
     <FullImage
       src={cover()}
-      className={`${coverClassName} ${mobile ? "-translate-y-[20%]" : ""}`}
-      imageClassName={imageClassName}
+      className={coverClass}
+      imageClassName={imageClass}
       alt={
         entry?.collection === "projects"
           ? entry.data.description

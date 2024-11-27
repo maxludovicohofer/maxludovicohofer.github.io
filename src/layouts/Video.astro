@@ -28,10 +28,12 @@ const {
 } = Astro.props;
 
 const boolToInt = (value?: boolean) => (value ? 1 : 0);
+
+// ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"}
 ---
 
 <div
-  class={`${className} overflow-hidden ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"} ${noControls ? "pointer-events-none" : ""}`}
+  class={`${className} overflow-hidden ${noControls ? "pointer-events-none" : ""}`}
 >
   <div
     id={`yt-player/${youTubeInfo.id}`}
@@ -44,29 +46,23 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
   document.addEventListener("astro:page-load", () => {
     const observer = new ResizeObserver((entries) =>
       entries.forEach(({ target }) => {
-        const aspectRatio = target.clientWidth / target.clientHeight;
-
-        const videoAspectEnum = target.classList
-          .values()
-          .find((part) => part.startsWith("aspect"))!
-          .split("-")
-          .at(-1)!
-          .replace(/[\[\]']+/g, "");
-        const videoAspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
+        const iFrame = target.firstElementChild! as HTMLIFrameElement;
 
         target.firstElementChild!.classList.remove(
-          "w-full",
-          "h-[300%]",
-          "h-full",
-          "w-[300%]",
-          "-ml-[100%]",
-          "-mt-[100%]"
+          "!h-screen",
+          "!w-[200vw]",
+          "!-ml-[50vw]"
         );
 
+        console.log(target.clientWidth);
+
         target.firstElementChild!.classList.add(
-          ...(videoAspectRatio > aspectRatio
-            ? ["h-full", "w-[300%]", "-ml-[100%]"]
-            : ["w-full", "h-[300%]", "-mt-[100%]"])
+          //? Only works for aspect ratios > 1
+          ...(target.clientWidth > Number(iFrame.width) &&
+          target.clientWidth / target.clientHeight >
+            Number(iFrame.width) / Number(iFrame.height)
+            ? ["h-screen", "w-[200vw]"]
+            : [])
         );
       })
     );
