@@ -127,7 +127,12 @@ const coverClass = `absolute inset-0 size-full object-cover opacity-0 ${containe
 {
   cover &&
     (isVideoCover(cover) ? (
-      <Video noControls youTubeInfo={cover} className={coverClass} />
+      <Video
+        noControls
+        noBlackBands
+        youTubeInfo={cover}
+        className={coverClass}
+      />
     ) : (
       <Image
         src={cover()}

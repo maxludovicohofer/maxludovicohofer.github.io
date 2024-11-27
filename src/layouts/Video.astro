@@ -29,15 +29,17 @@ const {
 
 const boolToInt = (value?: boolean) => (value ? 1 : 0);
 
-// ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"}
+// TODO FIX POST PREVIEW
+// TODO FIX IMAGES
+// TODO FIX FULLSCREEN IMAGES (MAX-H-NONE ECC)
 ---
 
 <div
-  class={`${className} overflow-hidden ${noControls ? "pointer-events-none" : ""}`}
+  class={`${className} ${noControls ? "pointer-events-none" : ""} ${noBlackBands ? "" : "size-full"}`}
 >
   <div
     id={`yt-player/${youTubeInfo.id}`}
-    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} ${noBlackBands ? "no-black-bands" : ""}`}
+    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} ${noBlackBands ? "no-black-bands" : "size-full"}`}
   >
   </div>
 </div>
@@ -48,20 +50,16 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
       entries.forEach(({ target }) => {
         const iFrame = target.firstElementChild! as HTMLIFrameElement;
 
-        target.firstElementChild!.classList.remove(
-          "!h-screen",
-          "!w-[200vw]",
-          "!-ml-[50vw]"
-        );
+        const landscapeResizeClasses = ["h-[200vh]", "w-full"];
 
-        console.log(target.clientWidth);
+        target.firstElementChild!.classList.remove(...landscapeResizeClasses);
 
         target.firstElementChild!.classList.add(
           //? Only works for aspect ratios > 1
           ...(target.clientWidth > Number(iFrame.width) &&
           target.clientWidth / target.clientHeight >
             Number(iFrame.width) / Number(iFrame.height)
-            ? ["h-screen", "w-[200vw]"]
+            ? landscapeResizeClasses
             : [])
         );
       })
