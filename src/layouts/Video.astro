@@ -64,7 +64,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
         target.firstElementChild!.classList.add(
           ...(videoAspectRatio > aspectRatio
             ? ["h-full", "w-[300%]", "-ml-[100%]"]
-            : ["w-full", "h-[300%]", "-mt-[100%]"])
+            : ["w-full", "h-[300%]"])
         );
       })
     );
