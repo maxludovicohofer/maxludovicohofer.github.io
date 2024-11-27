@@ -9,6 +9,7 @@ interface Props {
   loop?: boolean;
   className?: string;
   noControls?: boolean;
+  noBlackBands?: boolean;
   iframeClassName?: string;
 }
 
@@ -22,6 +23,7 @@ const {
   loop = true,
   className = "",
   noControls,
+  noBlackBands,
   iframeClassName,
 } = Astro.props;
 
@@ -33,7 +35,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 >
   <div
     id={`yt-player/${youTubeInfo.id}`}
-    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} ${noControls ? "no-black-bands" : "size-full"}`}
+    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} ${noBlackBands ? "no-black-bands" : "size-full"}`}
   >
   </div>
 </div>
