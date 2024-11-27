@@ -38,8 +38,8 @@ const imageClassName = `active:rounded-3xl lg:rounded-3xl object-cover w-full lg
   ) : (
     <FullImage
       src={cover()}
-      className={coverClassName}
-      imageClassName={`${imageClassName} ${mobile ? "-translate-y-[20%]" : ""}`}
+      className={`${coverClassName} ${mobile ? "-translate-y-[20%]" : ""}`}
+      imageClassName={imageClassName}
       alt={
         entry?.collection === "projects"
           ? entry.data.description
