@@ -29,7 +29,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 ---
 
 <div
-  class={`${className} size-full overflow-hidden ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"} ${noControls ? "pointer-events-none" : ""}`}
+  class={`${className} size-full overflow-hidden ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"} -mt-[37vh] ${noControls ? "pointer-events-none" : ""}`}
 >
   <div
     id={`yt-player/${youTubeInfo.id}`}
