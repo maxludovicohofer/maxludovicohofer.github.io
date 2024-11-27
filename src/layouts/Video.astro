@@ -33,7 +33,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 >
   <div
     id={`yt-player/${youTubeInfo.id}`}
-    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} absolute left-1/2 ${noControls ? "no-black-bands" : "size-full"}`}
+    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} absolute -left-[100%] ${noControls ? "no-black-bands" : "size-full"}`}
   >
   </div>
 </div>
@@ -62,7 +62,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 
         target.firstElementChild!.classList.add(
           ...(videoAspectRatio > aspectRatio
-            ? ["h-full", "w-[300%]", "ml-[-100%]"]
+            ? ["h-full", "w-[300%]"]
             : ["w-full", "h-[300%]"])
         );
       })
