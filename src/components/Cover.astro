@@ -21,7 +21,7 @@ export function isVideoCover(
   return !!(cover as ComponentProps<typeof Video>["youTubeInfo"])?.id;
 }
 
-const coverClassName = `cover-media ${mobile ? "lg:invisible active:rounded-3xl fixed -translate-y-[37vh]" : "invisible lg:visible rounded-3xl absolute top-12 left-0 right-0 mx-auto"} ${bodyWidthClass}`;
+const coverClassName = `cover-media ${mobile ? "lg:invisible active:rounded-3xl fixed -translate-y-[calc(50%-15vh)]" : "invisible lg:visible rounded-3xl absolute top-12 left-0 right-0 mx-auto"} ${bodyWidthClass}`;
 
 const imageClassName = `active:rounded-3xl lg:rounded-3xl object-cover w-full lg:max-h-[40vh]`;
 
