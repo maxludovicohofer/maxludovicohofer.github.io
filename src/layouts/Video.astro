@@ -29,7 +29,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 ---
 
 <div
-  class={`${className} size-full overflow-hidden flex items-center justify-center -translate-y-[36%] ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"} ${noControls ? "pointer-events-none" : ""}`}
+  class={`${className} size-full overflow-hidden ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"} ${noControls ? "pointer-events-none" : ""}`}
 >
   <div
     id={`yt-player/${youTubeInfo.id}`}
@@ -63,8 +63,8 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 
         target.firstElementChild!.classList.add(
           ...(videoAspectRatio > aspectRatio
-            ? ["h-full", "w-[300%]"]
-            : ["w-full", "h-[300%]", "-ml-[100%]"])
+            ? ["h-full", "w-[300%]", "-ml-[100%]"]
+            : ["w-full", "h-[300%]", "-mt-[100%]"])
         );
       })
     );
