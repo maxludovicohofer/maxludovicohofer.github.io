@@ -21,9 +21,9 @@ export function isVideoCover(
   return !!(cover as ComponentProps<typeof Video>["youTubeInfo"])?.id;
 }
 
-const coverClass = `cover-media ${mobile ? "lg:invisible active:rounded-3xl fixed h-[45vh] flex items-center" : "invisible lg:visible rounded-3xl absolute top-12 left-0 right-0 mx-auto max-h-[40vh] flex items-center"} ${coverClassName}`;
+const coverClass = `cover-media flex items-center ${mobile ? "lg:invisible active:rounded-3xl fixed h-[45vh] -mt-[9vh]" : "invisible lg:visible rounded-3xl absolute top-12 left-0 right-0 mx-auto max-h-[40vh]"} ${coverClassName}`;
 
-const imageClass = `active:rounded-3xl lg:rounded-3xl object-cover ${mobile ? "!w-screen " : ""}`;
+const imageClass = `active:rounded-3xl lg:rounded-3xl object-cover ${mobile ? "!w-screen" : ""}`;
 
 // TODO MAKE VIDEO PAUSABLE AND FULLSCREENABLE IN POST, ALSO SAME INTERACTIVITY AS FULLIMAGE
 ---
