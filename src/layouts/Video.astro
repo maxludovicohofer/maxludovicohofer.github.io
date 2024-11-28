@@ -24,18 +24,14 @@ const {
   className = "",
   noControls,
   noBlackBands,
-  iframeClassName,
+  iframeClassName = "",
 } = Astro.props;
 
 const boolToInt = (value?: boolean) => (value ? 1 : 0);
-
-// TODO FIX POST PREVIEW
-// TODO FIX IMAGES
-// TODO FIX FULLSCREEN IMAGES (MAX-H-NONE ECC)
 ---
 
 <div
-  class={`${className} ${noControls ? "pointer-events-none" : ""} ${noBlackBands ? "" : "size-full"}`}
+  class={`${className} size-full ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"} ${noControls ? "pointer-events-none" : ""}`}
 >
   <div
     id={`yt-player/${youTubeInfo.id}`}
@@ -44,23 +40,47 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
   </div>
 </div>
 <script>
-  //? Init divs for iframe
+  //? Init divs for iframe and resize dynamically
   document.addEventListener("astro:page-load", () => {
     const observer = new ResizeObserver((entries) =>
       entries.forEach(({ target }) => {
         const iFrame = target.firstElementChild! as HTMLIFrameElement;
 
-        const landscapeResizeClasses = ["h-[200vh]", "w-full"];
+        const containerAspectRatio = target.clientWidth / target.clientHeight;
+        const iFrameWidth = Number(iFrame.width) - 30;
+        const iFrameHeight = Number(iFrame.height);
 
-        target.firstElementChild!.classList.remove(...landscapeResizeClasses);
+        const idealAspectEnum = target.classList
+          .values()
+          .find((part) => part.startsWith("aspect"))!
+          .split("-")
+          .at(-1)!
+          .replace(/[\[\]']+/g, "");
+        const idealAspectRatio = idealAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
+
+        const widthResize = ["h-[300%]", "w-full"];
+        const heightResize = [
+          "absolute",
+          "inset-0",
+          "h-full",
+          "w-[300%]",
+          "-ml-[100%]",
+        ];
+
+        target.firstElementChild!.classList.remove(
+          ...widthResize,
+          ...heightResize
+        );
 
         target.firstElementChild!.classList.add(
           //? Only works for aspect ratios > 1
-          ...(target.clientWidth > Number(iFrame.width) &&
-          target.clientWidth / target.clientHeight >
-            Number(iFrame.width) / Number(iFrame.height)
-            ? landscapeResizeClasses
-            : [])
+          ...(containerAspectRatio > idealAspectRatio
+            ? target.clientWidth > iFrameWidth
+              ? widthResize
+              : []
+            : target.clientHeight > iFrameHeight
+              ? heightResize
+              : [])
         );
       })
     );

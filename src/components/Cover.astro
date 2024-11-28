@@ -13,7 +13,7 @@ interface Props {
   mobile?: boolean;
 }
 
-const { cover, coverClassName, entry, mobile } = Astro.props;
+const { cover, coverClassName = "", entry, mobile } = Astro.props;
 
 export function isVideoCover(
   cover: ReturnType<typeof getPostCover>
@@ -21,7 +21,7 @@ export function isVideoCover(
   return !!(cover as ComponentProps<typeof Video>["youTubeInfo"])?.id;
 }
 
-const coverClass = `cover-media flex items-center overflow-hidden ${mobile ? "lg:invisible active:rounded-3xl fixed h-[45vh] -mt-[9vh]" : "invisible lg:visible rounded-3xl absolute top-12 left-0 right-0 mx-auto max-h-[40vh]"} ${coverClassName}`;
+const coverClass = `cover-media flex items-center justify-center overflow-hidden ${mobile ? "lg:invisible active:rounded-3xl fixed h-[45vh] -mt-[9vh]" : "invisible lg:visible rounded-3xl absolute top-12 left-0 right-0 mx-auto max-h-[40vh]"} ${coverClassName}`;
 
 const imageClass = `active:rounded-3xl lg:rounded-3xl object-cover ${mobile ? "!w-screen" : ""}`;
 

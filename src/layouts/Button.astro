@@ -15,7 +15,7 @@ interface Props {
   fullHeight?: boolean;
 }
 
-const { href, navigate, linkClassName, ...buttonProps } = Astro.props;
+const { href, navigate, linkClassName = "", ...buttonProps } = Astro.props;
 ---
 
 {
