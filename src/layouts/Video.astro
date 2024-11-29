@@ -59,13 +59,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
         const idealAspectRatio = idealAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
 
         const widthResize = ["h-[300%]", "w-full"];
-        const heightResize = [
-          "absolute",
-          "inset-0",
-          "h-full",
-          "w-[300%]",
-          "-ml-[100%]",
-        ];
+        const heightResize = ["h-full", "w-[300%]"];
 
         target.firstElementChild!.classList.remove(
           ...widthResize,

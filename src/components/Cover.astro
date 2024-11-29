@@ -8,12 +8,12 @@ import type { CollectionEntry } from "astro:content";
 
 interface Props {
   cover: NonNullable<ReturnType<typeof getPostCover>>;
-  coverClassName: string;
+  className: string;
   entry: CollectionEntry<CollectionKey> | undefined;
   mobile?: boolean;
 }
 
-const { cover, coverClassName = "", entry, mobile } = Astro.props;
+const { cover, className = "", entry, mobile } = Astro.props;
 
 export function isVideoCover(
   cover: ReturnType<typeof getPostCover>
@@ -21,43 +21,44 @@ export function isVideoCover(
   return !!(cover as ComponentProps<typeof Video>["youTubeInfo"])?.id;
 }
 
-const coverClass = `cover-media flex items-center justify-center ${mobile ? "lg:invisible active:rounded-3xl fixed h-[45vh] -mt-[9vh]" : "invisible lg:visible rounded-3xl absolute top-12 left-0 right-0 mx-auto max-h-[40vh] overflow-hidden"} ${coverClassName}`;
-
-const imageClass = `active:rounded-3xl lg:rounded-3xl object-cover ${mobile ? "!w-screen" : ""}`;
+const coverClass = `flex items-center justify-center ${mobile ? "w-screen h-[45vh] -mt-[9vh] active:rounded-3xl" : "rounded-3xl max-h-[40vh] overflow-hidden"}`;
 
 // TODO MAKE VIDEO PAUSABLE AND FULLSCREENABLE IN POST, ALSO SAME INTERACTIVITY AS FULLIMAGE
 ---
 
-{
-  isVideoCover(cover) ? (
-    <Video
-      youTubeInfo={cover}
-      noControls
-      noBlackBands
-      className={coverClass}
-      iframeClassName={imageClass}
-    />
-  ) : (
-    <FullImage
-      src={cover()}
-      className={coverClass}
-      imageClassName={`${imageClass} size-full`}
-      alt={
-        entry?.collection === "projects"
-          ? entry.data.description
-          : `Graphic explanation of "${entry!.data.title}"`
-      }
-      loading="eager"
-    />
-  )
-}
+<div
+  class={`cover-media ${className} ${mobile ? "lg:invisible fixed" : "invisible lg:visible absolute top-12 left-0 right-0 mx-auto"}`}
+>
+  {
+    isVideoCover(cover) ? (
+      <Video
+        youTubeInfo={cover}
+        noControls
+        noBlackBands
+        className={coverClass}
+      />
+    ) : (
+      <FullImage
+        src={cover()}
+        className={coverClass}
+        imageClassName="size-full object-cover"
+        alt={
+          entry?.collection === "projects"
+            ? entry.data.description
+            : `Graphic explanation of "${entry!.data.title}"`
+        }
+        loading="eager"
+      />
+    )
+  }
+</div>
 <script>
   addEventListener("scroll", () => {
     document.querySelectorAll<HTMLElement>(".cover-media").forEach((cover) => {
       if (!cover.checkVisibility()) return;
 
       //? Based on Card translate-y class
-      cover.style.opacity = `${1 - Math.min(scrollY / (0.26 * screen.height), 1)}`;
+      cover.style.opacity = `${1 - Math.min(scrollY / cover.offsetHeight, 1)}`;
     });
   });
 </script>
