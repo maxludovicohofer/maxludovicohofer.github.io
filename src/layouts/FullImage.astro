@@ -19,7 +19,7 @@ const { src, alt, className = "", imageClassName = "", loading } = Astro.props;
     <Button
       noFocus
       fullHeight
-      className={`can-fullscreen ${className} flex items-center justify-center !bg-transparent`}
+      className={`can-fullscreen ${className} flex items-center justify-center overflow-hidden !bg-transparent`}
     >
       <Image src={src} class={imageClassName} alt={alt} loading={loading} />
     </Button>
