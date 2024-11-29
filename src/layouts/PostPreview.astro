@@ -62,9 +62,7 @@ const lastModifiedTime =
 
 const subtitle = [category, lastModifiedTime].filter((part) => !!part);
 
-// TODO FIX BACKGROUND IMAGE MOBILE
-
-const coverClass = `absolute inset-0 flex items-center justify-center opacity-0 intersect:opacity-15 intersect-half duration-700 pointer-events-none ${container ? "group-hover/container-card:opacity-15" : "group-hover/card:opacity-15"}`;
+// TODO FIX BACKGROUND IMAGE MOBILE (based on card aspect vs video aspect, should use top-0 bottom 0 or left 0 right 0)
 ---
 
 {
@@ -112,7 +110,7 @@ const coverClass = `absolute inset-0 flex items-center justify-center opacity-0 
   readMoreLink && (
     <Button
       cardButton
-      className={`absolute bottom-0 left-0 h-1/3`}
+      className="absolute bottom-0 left-0 h-1/3"
       href={readMoreLink}
       navigate
     >
@@ -127,19 +125,21 @@ const coverClass = `absolute inset-0 flex items-center justify-center opacity-0 
   )
 }
 {
-  cover &&
-    (isVideoCover(cover) ? (
-      <Video
-        noControls
-        noBlackBands
-        youTubeInfo={cover}
-        className={coverClass}
-      />
-    ) : (
-      <Image
-        src={cover()}
-        class={coverClass}
-        alt={description ?? `Graphic explanation of "${entry!.data.title}"`}
-      />
-    ))
+  cover && (
+    <div
+      class={`flex items-center justify-center opacity-0 intersect:opacity-15 intersect-half duration-700 pointer-events-none ${container ? "group-hover/container-card:opacity-15" : "group-hover/card:opacity-15"}`}
+    >
+      {isVideoCover(cover) ? (
+        <div class="absolute top-0 bottom-0">
+          <Video noControls noBlackBands youTubeInfo={cover} />
+        </div>
+      ) : (
+        <Image
+          src={cover()}
+          class="absolute inset-0 size-full object-cover"
+          alt={description ?? `Graphic explanation of "${entry!.data.title}"`}
+        />
+      )}
+    </div>
+  )
 }

@@ -31,7 +31,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 ---
 
 <div
-  class={`${className} size-full ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"} ${noControls ? "pointer-events-none" : ""}`}
+  class={`${className} size-full flex items-center justify-center ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"} ${noBlackBands ? "overflow-hidden" : ""} ${noControls ? "pointer-events-none" : ""}`}
 >
   <div
     id={`yt-player/${youTubeInfo.id}`}
@@ -58,8 +58,8 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
           .replace(/[\[\]']+/g, "");
         const idealAspectRatio = idealAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
 
-        const widthResize = ["h-[300%]", "w-full"];
-        const heightResize = ["h-full", "w-[300%]"];
+        const widthResize = ["h-[300vh]", "w-full"];
+        const heightResize = ["h-full", "w-[300vw]"];
 
         target.firstElementChild!.classList.remove(
           ...widthResize,
