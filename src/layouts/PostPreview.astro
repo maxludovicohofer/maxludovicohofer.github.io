@@ -130,7 +130,7 @@ const subtitle = [category, lastModifiedTime].filter((part) => !!part);
       class={`flex items-center justify-center opacity-0 intersect:opacity-15 intersect-half duration-700 pointer-events-none ${container ? "group-hover/container-card:opacity-15" : "group-hover/card:opacity-15"}`}
     >
       {isVideoCover(cover) ? (
-        <div class="absolute top-0 bottom-0">
+        <div class="absolute top-0 bottom-0 flex items-center justify-center">
           <Video noControls noBlackBands youTubeInfo={cover} />
         </div>
       ) : (
