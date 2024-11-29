@@ -47,8 +47,6 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
         const iFrame = target.firstElementChild! as HTMLIFrameElement;
 
         const containerAspectRatio = target.clientWidth / target.clientHeight;
-        const iFrameWidth = Number(iFrame.width) - 30;
-        const iFrameHeight = Number(iFrame.height);
 
         const idealAspectEnum = target.classList
           .values()
@@ -66,13 +64,16 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
         iFrame.classList.add(
           //? Only works for aspect ratios > 1
           ...(containerAspectRatio > idealAspectRatio
-            ? target.clientWidth > iFrameWidth
+            ? target.clientWidth > 700
               ? widthResize
               : []
-            : target.clientHeight > iFrameHeight
+            : target.clientHeight > 300
               ? heightResize
               : [])
         );
+
+        iFrame.width = `5000`;
+        iFrame.height = `5000`;
       })
     );
 
