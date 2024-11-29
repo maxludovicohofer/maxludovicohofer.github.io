@@ -31,7 +31,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 ---
 
 <div
-  class={`${className} size-full flex items-center justify-center ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"} ${noBlackBands ? "overflow-hidden" : ""} ${noControls ? "pointer-events-none" : ""}`}
+  class={`${className}  flex items-center justify-center ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"} ${noBlackBands ? "overflow-hidden" : ""} ${noControls ? "pointer-events-none" : ""}`}
 >
   <div
     id={`yt-player/${youTubeInfo.id}`}
@@ -58,15 +58,12 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
           .replace(/[\[\]']+/g, "");
         const idealAspectRatio = idealAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
 
-        const widthResize = ["h-[2000%]", "w-full"];
-        const heightResize = ["h-full", "w-[2000%]"];
+        const widthResize = ["h-[300vh]", "w-full"];
+        const heightResize = ["h-full", "w-[300vw]"];
 
-        target.firstElementChild!.classList.remove(
-          ...widthResize,
-          ...heightResize
-        );
+        iFrame.classList.remove(...widthResize, ...heightResize);
 
-        target.firstElementChild!.classList.add(
+        iFrame.classList.add(
           //? Only works for aspect ratios > 1
           ...(containerAspectRatio > idealAspectRatio
             ? target.clientWidth > iFrameWidth
