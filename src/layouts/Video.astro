@@ -71,9 +71,6 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
               ? heightResize
               : [])
         );
-
-        iFrame.width = `5000`;
-        iFrame.height = `5000`;
       })
     );
 
@@ -116,6 +113,8 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 
         const player = new YT.Player(div, {
           videoId,
+          height: 5000,
+          width: 5000,
           playerVars: {
             playlist: videoId,
             color,
