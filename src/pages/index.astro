@@ -32,10 +32,12 @@ export const latestProject = (
 >
   <Bento>
     <Profile slot="1-medium" importance={2} />
-    <Video
-      slot="2-small"
-      youTubeInfo={{ id: "m0KhK_J0LiQ", aspect: "16/10" }}
-    />
+    <div slot="2-small" class="w-[300vw]">
+      <Video
+        noBlackBands
+        youTubeInfo={{ id: "m0KhK_J0LiQ", aspect: "16/10" }}
+      />
+    </div>
     <PostPreview slot="3-small" entry={highlightThought} hideDate />
     <PostPreview
       slot="4-large"

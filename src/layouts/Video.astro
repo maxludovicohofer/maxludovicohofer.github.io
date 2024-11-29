@@ -31,7 +31,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 ---
 
 <div
-  class={`${className} size-full flex items-center justify-center ${youTubeInfo.aspect === "16/10" ? "aspectcake-[16/10]" : "aspectcake-video"} ${noBlackBands ? "overflow-hidden" : ""} ${noControls ? "pointer-events-none" : ""}`}
+  class={`${className} size-full flex items-center justify-center ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"} ${noBlackBands ? "overflow-hidden" : ""} ${noControls ? "pointer-events-none" : ""}`}
 >
   <div
     id={`yt-player/${youTubeInfo.id}`}
@@ -64,6 +64,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
         iFrame.classList.remove(...widthResize, ...heightResize);
 
         iFrame.classList.add(
+          //? Only works for aspect ratios > 1
           ...(containerAspectRatio > idealAspectRatio
             ? target.clientWidth > iFrameWidth
               ? widthResize
