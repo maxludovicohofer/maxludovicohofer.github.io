@@ -112,21 +112,27 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
             .slice(1)
             .filter((_, index) => index % 2 === 1);
 
-        // const container = div.parentElement;
-        // const videoAspectEnum = container.classList
-        //   .values()
-        //   .find((part) => part.startsWith("aspect"))
-        //   .split("-")
-        //   .at(-1)
-        //   .replace(/[\[\]']+/g, "");
-        // const videoAspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
-        // const containerAspectRatio =
-        //   container.clientWidth / container.clientHeight;
+        const container = div.parentElement;
+        const videoAspectEnum = container.classList
+          .values()
+          .find((part) => part.startsWith("aspect"))
+          .split("-")
+          .at(-1)
+          .replace(/[\[\]']+/g, "");
+        const videoAspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
+        const containerAspectRatio =
+          container.clientWidth / container.clientHeight;
 
         const player = new YT.Player(div, {
           videoId,
           width: 800,
+          // containerAspectRatio > videoAspectRatio
+          //   ? container.clientWidth
+          //   : videoAspectRatio * container.clientHeight,
           height: 800,
+          // containerAspectRatio > videoAspectRatio
+          //   ? videoAspectRatio * container.clientWidth
+          //   : container.clientHeight,
           playerVars: {
             playlist: videoId,
             color,
