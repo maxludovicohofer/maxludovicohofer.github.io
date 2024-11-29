@@ -18,7 +18,7 @@ const {
     typeof Video
   >["youTubeInfo"],
   color = "white",
-  autoplay = false,
+  autoplay,
   mute = true,
   loop = true,
   className = "",
@@ -44,33 +44,40 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
   document.addEventListener("astro:page-load", () => {
     const observer = new ResizeObserver((entries) =>
       entries.forEach(({ target }) => {
-        const iFrame = target.firstElementChild! as HTMLIFrameElement;
-
-        const containerAspectRatio = target.clientWidth / target.clientHeight;
-
-        const idealAspectEnum = target.classList
+        const videoAspectEnum = target.classList
           .values()
           .find((part) => part.startsWith("aspect"))!
           .split("-")
           .at(-1)!
           .replace(/[\[\]']+/g, "");
-        const idealAspectRatio = idealAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
+        const videoAspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
 
-        const widthResize = ["h-[300vh]", "w-full"];
-        const heightResize = ["h-full", "w-[300vw]"];
+        const widthResize = ["w-full"];
+        const heightResize = ["h-full"];
 
-        iFrame.classList.remove(...widthResize, ...heightResize);
+        if (target.classList.contains("absolute")) {
+          //? Special logic for absolute
+          widthResize.push("h-auto", "top-0", "bottom-0", "my-auto");
+          heightResize.push("w-auto", "top-0");
 
-        iFrame.classList.add(
-          //? Only works for aspect ratios > 1
-          ...(containerAspectRatio > idealAspectRatio
-            ? target.clientWidth > 700
+          target.classList.remove(...widthResize, ...heightResize);
+          target.classList.add(
+            //? Only works for aspect ratios > 1
+            ...(target.clientWidth / target.clientHeight > videoAspectRatio
               ? widthResize
-              : []
-            : target.clientHeight > 300
-              ? heightResize
-              : [])
-        );
+              : heightResize)
+          );
+        } else {
+          const iFrame = target.firstElementChild! as HTMLIFrameElement;
+
+          iFrame.classList.remove(...widthResize, ...heightResize);
+          iFrame.classList.add(
+            //? Only works for aspect ratios > 1
+            ...(target.clientWidth / target.clientHeight > videoAspectRatio
+              ? widthResize
+              : heightResize)
+          );
+        }
       })
     );
 
@@ -113,8 +120,8 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 
         const player = new YT.Player(div, {
           videoId,
-          height: 5000,
-          width: 5000,
+          width: 10 * screen.width,
+          height: 10 * screen.height,
           playerVars: {
             playlist: videoId,
             color,
