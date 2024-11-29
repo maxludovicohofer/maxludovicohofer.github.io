@@ -124,14 +124,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 
         const player = new YT.Player(div, {
           videoId,
-          width:
-            containerAspectRatio > videoAspectRatio
-              ? div.parentElement.clientWidth
-              : videoAspectRatio * div.parentElement.clientHeight,
-          height:
-            containerAspectRatio > videoAspectRatio
-              ? videoAspectRatio * div.parentElement.clientWidth
-              : div.parentElement.clientHeight,
+
           playerVars: {
             playlist: videoId,
             color,
