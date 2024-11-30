@@ -119,7 +119,8 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
           .find((part) => part.startsWith("aspect"))
           .split("-")
           .at(-1)
-          .replace(/[\[\]]/g, "");
+          .replace("[", "")
+          .replace("]", "");
 
         console.log(videoAspectEnum);
         // const videoAspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
