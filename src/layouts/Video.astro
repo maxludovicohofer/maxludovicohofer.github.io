@@ -116,7 +116,8 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
         const container = div.parentElement;
         const videoAspectEnum = container.classList
           .values()
-          .find((containerClass) => containerClass.startsWith("aspect"));
+          .toArray()
+          .find((part) => part.startsWith("aspect"));
         // .split("-")
         // .at(-1)
         // .replace(/[\[\]']+/g, "");
