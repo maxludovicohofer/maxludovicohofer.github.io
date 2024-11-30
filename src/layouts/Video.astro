@@ -114,11 +114,11 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 
         // TODO PROBLEM IS HERE
         const container = div.parentElement;
-        const videoAspectEnum = container.classList
-          .values()
-          .find((part) => part.startsWith("aspect"))
-          .split("-")[1]
-          .replace(/[\[\]']+/g, "");
+        const videoAspectEnum = container.classList.values();
+        // .find((part) => part.startsWith("aspect"))
+        // .split("-")
+        // .at(-1)
+        // .replace(/[\[\]']+/g, "");
 
         console.log(videoAspectEnum);
         // const videoAspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
