@@ -21,7 +21,7 @@ export function isVideoCover(
   return !!(cover as ComponentProps<typeof Video>["youTubeInfo"])?.id;
 }
 
-const coverClass = `${mobile ? "w-screen h-[45vh] -mt-[9vh] active:rounded-3xl" : "rounded-3xl max-h-[40vh]"}`;
+const coverClass = `object-cover ${mobile ? "w-screen h-[45vh] -mt-[9vh] active:rounded-3xl" : "rounded-3xl max-h-[40vh]"}`;
 
 // TODO MAKE VIDEO PAUSABLE AND FULLSCREENABLE IN POST, ALSO SAME INTERACTIVITY AS FULLIMAGE
 ---
@@ -31,12 +31,7 @@ const coverClass = `${mobile ? "w-screen h-[45vh] -mt-[9vh] active:rounded-3xl" 
 >
   {
     isVideoCover(cover) ? (
-      <Video
-        youTubeInfo={cover}
-        noControls
-        noBlackBands
-        className={coverClass}
-      />
+      <Video youTubeInfo={cover} className={coverClass} />
     ) : (
       <FullImage
         src={cover()}

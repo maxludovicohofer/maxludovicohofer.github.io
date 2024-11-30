@@ -8,8 +8,6 @@ interface Props {
   mute?: boolean;
   loop?: boolean;
   className?: string;
-  noControls?: boolean;
-  noBlackBands?: boolean;
   iframeClassName?: string;
 }
 
@@ -22,20 +20,20 @@ const {
   mute = true,
   loop = true,
   className = "",
-  noControls,
-  noBlackBands,
   iframeClassName = "",
 } = Astro.props;
 
 const boolToInt = (value?: boolean) => (value ? 1 : 0);
+
+const noControls = className.includes("pointer-events-none");
 ---
 
 <div
-  class={`${className} size-full flex items-center justify-center ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"} ${noBlackBands ? "overflow-hidden" : ""} ${noControls ? "pointer-events-none" : ""}`}
+  class={`${className} size-full overflow-hidden flex items-center justify-center ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"}`}
 >
   <div
     id={`yt-player/${youTubeInfo.id}`}
-    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} ${noBlackBands ? "no-black-bands" : "size-full"}`}
+    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} ${className.includes("object-cover") ? "object-cover" : "size-full"}`}
   >
   </div>
 </div>
@@ -81,7 +79,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
         div.id = `${div.id}/${key}`;
 
         // Remove black bands
-        if (!div.classList.contains("no-black-bands")) return;
+        if (!div.classList.contains("object-cover")) return;
         observer.observe(div.parentElement!);
       });
   });
@@ -90,21 +88,23 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 <script is:inline>
   //? Control player
   function onYouTubeIframeAPIReady() {
-    const iframeToPlayer = {};
+    const iFrameToPlayer = {};
+
+    const getVideoId = (iFrameId) => iFrameId.split("/").at(1);
 
     document.addEventListener("astro:page-load", () => {
       //? Pause video when not looking
       const observer = new IntersectionObserver((entries) =>
         entries.forEach((entry) => {
-          const player = iframeToPlayer[entry.target.id];
+          const player = iFrameToPlayer[entry.target.id];
           if (entry.isIntersecting) player.playVideo();
           else player.pauseVideo();
         })
       );
 
       document.querySelectorAll("div[class^=yt-player]").forEach((div) => {
-        const iframeId = div.id;
-        const videoId = iframeId.split("/").at(1);
+        const iFrameId = div.id;
+        const videoId = getVideoId(iFrameId);
         const [color, autoplay, mute, loop, controls, disablekb] =
           div.classList[0]
             .split("/")
@@ -121,11 +121,11 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
             loop,
             controls,
             disablekb,
-            start: sessionStorage.getItem(iframeId),
+            start: `video/${videoId}`,
           },
           events: {
             onReady: ({ target }) => {
-              iframeToPlayer[iframeId] = target;
+              iFrameToPlayer[iFrameId] = target;
               observer.observe(target.getIframe());
             },
           },
@@ -135,8 +135,11 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 
     //? Save times to restore start times
     const savePlayerTimes = () =>
-      Object.entries(iframeToPlayer).forEach(([iframeId, player]) =>
-        sessionStorage.setItem(iframeId, player.getCurrentTime().toFixed())
+      Object.entries(iFrameToPlayer).forEach(([iFrameId, player]) =>
+        sessionStorage.setItem(
+          `video/${getVideoId(iFrameId)}`,
+          player.getCurrentTime().toFixed()
+        )
       );
     document.addEventListener("astro:before-swap", savePlayerTimes);
     addEventListener("beforeunload", savePlayerTimes);
