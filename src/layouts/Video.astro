@@ -116,6 +116,9 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
         const containerAspectRatio =
           container.clientWidth / container.clientHeight;
 
+        const tryEnum = Array.from(container.classList).find((part) =>
+          part.startsWith("aspect")
+        );
         let videoAspectRatio = 16 / 9;
         for (const part of container.classList) {
           // Find aspect ratio class
