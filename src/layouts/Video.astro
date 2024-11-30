@@ -125,7 +125,7 @@ const noControls = className.includes("pointer-events-none");
             loop,
             controls,
             disablekb,
-            start: `video/${videoId}`,
+            start: sessionStorage.getItem(`video/${videoId}`),
           },
           events: {
             onReady: ({ target }) => {
@@ -138,13 +138,28 @@ const noControls = className.includes("pointer-events-none");
     });
 
     //? Save times to restore start times
-    const savePlayerTimes = () =>
-      Object.entries(iFrameToPlayer).forEach(([iFrameId, player]) =>
-        sessionStorage.setItem(
-          `video/${getVideoId(iFrameId)}`,
-          player.getCurrentTime().toFixed()
-        )
+    const savePlayerTimes = () => {
+      const videoData = Object.groupBy(
+        Object.entries(iFrameToPlayer),
+        ([iFrameId]) => getVideoId(iFrameId)
       );
+
+      // Save longest time watched
+      for (const videoId in videoData) {
+        const players = videoData[videoId];
+
+        players.sort(
+          ([, playerA], [, playerB]) =>
+            playerB.getCurrentTime() - playerA.getCurrentTime()
+        );
+
+        sessionStorage.setItem(
+          `video/${videoId}`,
+          players[0][1].getCurrentTime().toFixed()
+        );
+      }
+    };
+
     document.addEventListener("astro:before-swap", savePlayerTimes);
     addEventListener("beforeunload", savePlayerTimes);
   }
