@@ -52,7 +52,7 @@ const coverClass = `object-cover ${mobile ? "w-screen h-[45vh] -mt-[9vh] active:
     document.querySelectorAll<HTMLElement>(".cover-media").forEach((cover) => {
       if (!cover.checkVisibility()) return;
 
-      //? Based on Card translate-y class
+      // TODO PHASE 2 PARALLAX (MOVE WITH TRANSLATE Y ON SCROLL)
       cover.style.opacity = `${1 - Math.min(scrollY / cover.offsetHeight, 1)}`;
     });
   });

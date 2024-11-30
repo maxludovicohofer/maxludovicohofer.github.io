@@ -59,6 +59,8 @@ const noControls = className.includes("pointer-events-none");
 
         const iFrame = target.firstElementChild! as HTMLIFrameElement;
 
+        // TODO PHASE 2 USE H FULL AND W FULL INSTEAD OF CALCULATING WIDTH AND HEIGHT
+
         iFrame.width = `${
           containerAspectRatio > videoAspectRatio
             ? target.clientWidth
@@ -113,6 +115,8 @@ const noControls = className.includes("pointer-events-none");
 
         const player = new YT.Player(div, {
           videoId,
+          width: 0,
+          height: 0,
           playerVars: {
             playlist: videoId,
             color,
