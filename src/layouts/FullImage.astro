@@ -48,14 +48,17 @@ const { src, alt, className = "", imageClassName = "", loading } = Astro.props;
         fullImage.addEventListener("click", () => {
           const modalImage = fullImage.cloneNode(true) as HTMLElement;
 
-          modalImage.className = `${modalImage.className} !visible !opacity-100 hover:!scale-100 active:!scale-100 !w-full !max-w-none !h-full !max-h-none !relative !inset-0 !m-0 flex flex-col items-center justify-center`;
+          const removeSize = (className: string) =>
+            className.replace(/size-|w-|h-/g, "");
+
+          modalImage.className = `${removeSize(modalImage.className)} !visible !opacity-100 hover:!scale-100 active:!scale-100 w-full max-w-none h-full max-h-none !relative !inset-0 !m-0 flex flex-col items-center justify-center`;
 
           const image = modalImage.firstElementChild as HTMLImageElement;
 
           const imageAspect = image.width / image.height;
           const screenAspect = screen.width / screen.height;
 
-          image.className = `${image.className} !object-cover !max-h-[90vh] lg:!max-h-[80vh] !max-w-[90vw] lg:!max-w-[80vw] rounded-3xl ${imageAspect > screenAspect ? "!h-auto !w-screen" : "!h-screen !w-auto"} `;
+          image.className = `${removeSize(image.className)} !object-cover max-h-[90vh] lg:max-h-[80vh] max-w-[90vw] lg:max-w-[80vw] rounded-3xl ${imageAspect > screenAspect ? "h-auto w-screen" : "h-screen w-auto"} `;
 
           activateModal(modalImage);
         })
