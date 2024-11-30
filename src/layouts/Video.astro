@@ -115,8 +115,8 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
         // TODO PROBLEM IS HERE
         const container = div.parentElement;
         const videoAspectEnum = container.classList
-          .values()
-          .find((p) => p.startsWith("aspect"));
+          .entries()
+          .find(([, p]) => p.startsWith("aspect"));
 
         for (const part of container.classList) {
           if (!part.startsWith("aspect")) continue;
