@@ -116,22 +116,12 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
         const containerAspectRatio =
           container.clientWidth / container.clientHeight;
 
-        const tryEnum = Array.from(container.classList).find((part) =>
-          part.startsWith("aspect")
-        );
-        let videoAspectRatio = 16 / 9;
-        for (const part of container.classList) {
-          // Find aspect ratio class
-          if (!part.startsWith("aspect")) continue;
-
-          const videoAspectEnum = part
-            .split("-")
-            .at(-1)
-            .replace(/[\[\]']+/g, "");
-          videoAspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
-
-          break;
-        }
+        const videoAspectEnum = Array.from(container.classList)
+          .find((part) => part.startsWith("aspect"))
+          .split("-")
+          .at(-1)
+          .replace(/[\[\]']+/g, "");
+        const videoAspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
 
         const player = new YT.Player(div, {
           videoId,
