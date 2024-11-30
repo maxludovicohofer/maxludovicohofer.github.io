@@ -118,7 +118,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 
         let videoAspectRatio = 16 / 9;
         for (const part of container.classList) {
-          //? Find aspect ratio class
+          // Find aspect ratio class
           if (!part.startsWith("aspect")) continue;
 
           const videoAspectEnum = part
@@ -132,14 +132,14 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 
         const player = new YT.Player(div, {
           videoId,
-          width: 800,
-          // containerAspectRatio > videoAspectRatio
-          //   ? container.clientWidth
-          //   : videoAspectRatio * container.clientHeight,
-          height: 800,
-          // containerAspectRatio > videoAspectRatio
-          //   ? videoAspectRatio * container.clientWidth
-          //   : container.clientHeight,
+          width:
+            containerAspectRatio > videoAspectRatio
+              ? container.clientWidth
+              : videoAspectRatio * container.clientHeight,
+          height:
+            containerAspectRatio > videoAspectRatio
+              ? videoAspectRatio * container.clientWidth
+              : container.clientHeight,
           playerVars: {
             playlist: videoId,
             color,
