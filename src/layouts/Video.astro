@@ -42,38 +42,37 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 <script>
   //? Init divs for iframe and resize dynamically
   document.addEventListener("astro:page-load", () => {
-    // const observer = new ResizeObserver((entries) =>
-    //   entries.forEach(({ target }) => {
-    //     const videoAspectEnum = target.classList
-    //       .values()
-    //       .find((part) => part.startsWith("aspect"))!
-    //       .split("-")
-    //       .at(-1)!
-    //       .replace(/[\[\]']+/g, "");
-    //     const videoAspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
+    const observer = new ResizeObserver((entries) =>
+      entries.forEach(({ target }) => {
+        const videoAspectEnum = Array.from(target.classList)
+          .find((part) => part.startsWith("aspect"))!
+          .split("-")
+          .at(-1)!
+          .replace(/[\[\]']+/g, "");
+        const videoAspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
 
-    //     const heightResizeCalc = ["w-auto"];
-    //     target.classList.remove(...heightResizeCalc);
+        const heightResizeCalc = ["w-auto"];
+        target.classList.remove(...heightResizeCalc);
 
-    //     const containerAspectRatio = target.clientWidth / target.clientHeight;
-    //     target.classList.add(
-    //       ...(containerAspectRatio > videoAspectRatio ? [] : heightResizeCalc)
-    //     );
+        const containerAspectRatio = target.clientWidth / target.clientHeight;
+        target.classList.add(
+          ...(containerAspectRatio > videoAspectRatio ? [] : heightResizeCalc)
+        );
 
-    //     const iFrame = target.firstElementChild! as HTMLIFrameElement;
+        const iFrame = target.firstElementChild! as HTMLIFrameElement;
 
-    //     iFrame.width = `${
-    //       containerAspectRatio > videoAspectRatio
-    //         ? target.clientWidth
-    //         : videoAspectRatio * target.clientHeight
-    //     }`;
-    //     iFrame.height = `${
-    //       containerAspectRatio > videoAspectRatio
-    //         ? videoAspectRatio * target.clientWidth
-    //         : target.clientHeight
-    //     }`;
-    //   })
-    // );
+        iFrame.width = `${
+          containerAspectRatio > videoAspectRatio
+            ? target.clientWidth
+            : videoAspectRatio * target.clientHeight
+        }`;
+        iFrame.height = `${
+          containerAspectRatio > videoAspectRatio
+            ? videoAspectRatio * target.clientWidth
+            : target.clientHeight
+        }`;
+      })
+    );
 
     document
       .querySelectorAll<HTMLDivElement>("div[class^=yt-player]")
@@ -83,7 +82,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 
         // Remove black bands
         if (!div.classList.contains("no-black-bands")) return;
-        // observer.observe(div.parentElement!);
+        observer.observe(div.parentElement!);
       });
   });
 </script>
