@@ -6,7 +6,8 @@ import Button from "@layouts/Button.astro";
 import LinkedIn from "@images/logos/linkedin.svg?raw";
 import PostPreview from "@layouts/PostPreview.astro";
 import type { ComponentProps } from "astro/types";
-import FullImage from "@layouts/FullImage.astro";
+import Fullscreenable from "@layouts/Fullscreenable.astro";
+import { Image } from "astro:assets";
 
 interface Props {
   importance?: ComponentProps<typeof PostPreview>["importance"];
@@ -17,13 +18,16 @@ const { importance } = Astro.props;
 
 <PostPreview importance={importance}>
   <div slot="header" class="flex items-center gap-x-4">
-    <FullImage
-      src={Picture}
-      alt="Close up of Max Ludovico Hofer"
+    <Fullscreenable
       className="!size-14 2xl:!size-20 !rounded-full hover:scale-125"
-      imageClassName="rounded-full"
-      loading="eager"
-    />
+    >
+      <Image
+        src={Picture}
+        class="rounded-full"
+        alt="Close up of Max Ludovico Hofer"
+        loading="eager"
+      />
+    </Fullscreenable>
     <div>
       <Text title>Max Ludovico Hofer</Text>
       <div class="flex gap-2 -ml-0.5 2xl:-ml-1">

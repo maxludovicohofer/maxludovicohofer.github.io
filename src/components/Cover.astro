@@ -1,8 +1,9 @@
 ---
-import FullImage from "@layouts/FullImage.astro";
+import Fullscreenable from "@layouts/Fullscreenable.astro";
 import type { getPostCover } from "@layouts/Post.astro";
 import Video from "@layouts/Video.astro";
 import type { ComponentProps } from "astro/types";
+import { Image } from "astro:assets";
 import type { CollectionKey } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
@@ -33,17 +34,18 @@ const coverClass = `object-cover ${mobile ? "w-screen h-[45vh] -mt-[9vh] active:
     isVideoCover(cover) ? (
       <Video youTubeInfo={cover} className={coverClass} />
     ) : (
-      <FullImage
-        src={cover()}
-        className={coverClass}
-        imageClassName="size-full object-cover"
-        alt={
-          entry?.collection === "projects"
-            ? entry.data.description
-            : `Graphic explanation of "${entry!.data.title}"`
-        }
-        loading="eager"
-      />
+      <Fullscreenable className={coverClass}>
+        <Image
+          src={cover()}
+          class="size-full object-cover"
+          alt={
+            entry?.collection === "projects"
+              ? entry.data.description
+              : `Graphic explanation of "${entry!.data.title}"`
+          }
+          loading="eager"
+        />
+      </Fullscreenable>
     )
   }
 </div>

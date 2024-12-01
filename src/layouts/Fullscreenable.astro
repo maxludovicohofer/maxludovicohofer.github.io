@@ -1,30 +1,20 @@
 ---
-import type { ComponentProps } from "astro/types";
-import { Image } from "astro:assets";
 import Button from "./Button.astro";
 
 interface Props {
-  src?: Exclude<ComponentProps<typeof Image>["src"], string>;
-  alt?: string;
   className?: string;
-  imageClassName?: string;
-  loading?: ComponentProps<typeof Image>["loading"];
 }
 
-const { src, alt, className = "", imageClassName = "", loading } = Astro.props;
+const { className = "" } = Astro.props;
 ---
 
-{
-  src && (
-    <Button
-      noFocus
-      fullHeight
-      className={`can-fullscreen ${className} flex items-center justify-center overflow-hidden !bg-transparent`}
-    >
-      <Image src={src} class={imageClassName} alt={alt} loading={loading} />
-    </Button>
-  )
-}
+<Button
+  noFocus
+  fullHeight
+  className={`can-fullscreen ${className} flex items-center justify-center overflow-hidden !bg-transparent`}
+>
+  <slot />
+</Button>
 <script>
   const activateModal = (content: Node) => {
     const modalSlot = document.querySelector<HTMLDivElement>("div.modal-slot")!;
