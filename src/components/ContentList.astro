@@ -67,7 +67,7 @@ sortedEntries.push(...additional);
         className={`content-slug/${entry.slug} ${short ? "min-h-60 max-h-72 xl:max-h-none" : ""}`}
       >
         <PostPreview
-          importance={2}
+          importance="container-item"
           entry={entry}
           minutesAlreadySpentReading={short ? 0 : undefined}
           descriptionAsBody={short}

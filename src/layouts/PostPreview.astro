@@ -20,14 +20,14 @@ interface Props {
   readMoreText?: string;
   noReadMore?: boolean;
   minutesAlreadySpentReading?: number | undefined;
-  importance?: 1 | 2 | 3 | 4 | undefined;
+  importance?: "low" | "medium" | "high" | "container-item" | undefined;
   tag?: ComponentProps<typeof Text>["tag"];
   hideDate?: boolean;
   container?: boolean;
 }
 
 const {
-  importance = 3,
+  importance = "medium",
   entry,
   descriptionAsBody,
   readMore,
@@ -75,11 +75,11 @@ const backgroundClass = `absolute object-cover pointer-events-none`;
 <Text
   title
   className={`${
-    importance === 1
-      ? "text-3xl lg:text-xl 2xl:text-3xl"
-      : importance === 2
-        ? "text-2xl 2xl:text-3xl"
-        : importance === 3
+    importance === "container-item"
+      ? "text-2xl 2xl:text-3xl"
+      : importance === "low"
+        ? "text-3xl lg:text-2xl 2xl:text-3xl"
+        : importance === "medium"
           ? "text-3xl 2xl:text-5xl"
           : "text-3xl lg:text-5xl 2xl:text-8xl"
   } ${container ? "lg:ml-4 mt-1 lg:mt-0" : ""}`}

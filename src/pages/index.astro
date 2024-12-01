@@ -31,7 +31,7 @@ export const latestProject = (
   description="Max Hofer's game design portfolio and blog."
 >
   <Bento>
-    <Profile slot="1-medium" importance={2} />
+    <Profile slot="1-medium" importance="low" />
     <Video
       slot="2-small"
       youTubeInfo={{ id: "m0KhK_J0LiQ", aspect: "16/10" }}
@@ -40,12 +40,12 @@ export const latestProject = (
     <PostPreview
       slot="4-large"
       entry={highlightProject}
-      importance={4}
+      importance="high"
       hideDate
     />
     <PostPreview slot="5-small" entry={latestThought} />
-    <PostPreview slot="6-medium" entry={latestProject} importance={4} />
-    <TechPreview slot="7-small" importance={2} />
+    <PostPreview slot="6-medium" entry={latestProject} importance="high" />
+    <TechPreview slot="7-small" importance="low" />
     <AllProjects slot="8-large" />
     <AllThoughts slot="9-medium" />
   </Bento>
