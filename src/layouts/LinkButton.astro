@@ -2,11 +2,12 @@
 interface Props {
   inline?: boolean;
   cardButton?: boolean;
-  className?: string;
+  className?: string | undefined;
   rounded?: boolean;
   noFocus?: boolean;
   noShadow?: boolean;
   fullHeight?: boolean;
+  noRounding?: boolean;
 }
 
 const {
@@ -17,12 +18,13 @@ const {
   noFocus,
   fullHeight,
   noShadow,
+  noRounding,
 } = Astro.props;
 ---
 
 <button
   type="button"
-  class={`${className} ${cardButton ? `rounded-3xl text-zinc-950 dark:text-zinc-100 bg-gradient-to-t from-25% from-zinc-100 dark:from-zinc-900 hover:from-yellow-300 active:from-yellow-600 hover:bg-opacity-50 active:bg-opacity-50 dark:hover:from-yellow-200 dark:active:from-yellow-400 dark:hover:bg-opacity-50 dark:active:bg-opacity-50` : `${rounded ? "rounded-3xl" : "rounded-xl"} ${fullHeight ? "" : "h-11 2xl:h-16"} bg-zinc-950 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-950 hover:scale-105 active:scale-95 ${noFocus ? "" : "focus:ring-2 focus:ring-offset-2 focus:ring-inline-flex"}`} hover:text-zinc-950 ${noShadow ? "drop-shadow-md hover:drop-shadow-lg active:drop-shadow" : "shadow-md hover:shadow-lg active:shadow"} hover:bg-yellow-400 active:bg-yellow-600 dark:hover:bg-yellow-200 dark:active:bg-yellow-400 text-base 2xl:text-3xl font-semibold duration-150 ${inline ? "" : "w-full"}`}
+  class={`${className} ${cardButton ? `${noRounding ? "" : "rounded-3xl"} text-zinc-950 dark:text-zinc-100 bg-gradient-to-t from-25% from-zinc-100 dark:from-zinc-900 hover:from-yellow-300 active:from-yellow-600 hover:bg-opacity-50 active:bg-opacity-50 dark:hover:from-yellow-200 dark:active:from-yellow-400 dark:hover:bg-opacity-50 dark:active:bg-opacity-50` : `${rounded ? "rounded-3xl" : `${noRounding ? "" : "rounded-xl"}`} ${fullHeight ? "" : "h-11 2xl:h-16"} bg-zinc-950 dark:bg-zinc-100 text-zinc-100 dark:text-zinc-950 hover:scale-105 active:scale-95 ${noFocus ? "" : "focus:ring-2 focus:ring-offset-2 focus:ring-inline-flex"}`} hover:text-zinc-950 ${noShadow ? "drop-shadow-md hover:drop-shadow-lg active:drop-shadow" : "shadow-md hover:shadow-lg active:shadow"} hover:bg-yellow-400 active:bg-yellow-600 dark:hover:bg-yellow-200 dark:active:bg-yellow-400 text-base 2xl:text-3xl font-semibold duration-150 ${inline ? "" : "w-full"}`}
 >
   <slot />
 </button>

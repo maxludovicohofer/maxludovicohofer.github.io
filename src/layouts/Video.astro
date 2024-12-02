@@ -23,17 +23,20 @@ const {
   iframeClassName = "",
 } = Astro.props;
 
-const boolToInt = (value?: boolean) => (value ? 1 : 0);
-
 const noControls = className.includes("pointer-events-none");
+const resize = className.includes("object-cover");
+const aspectRatio =
+  youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video";
+
+const boolToInt = (value?: boolean) => (value ? 1 : 0);
 ---
 
 <div
-  class={`${className} size-full overflow-hidden flex items-center justify-center ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"}`}
+  class={`${className} size-full overflow-hidden flex items-center justify-center  ${resize ? "absolute" : ""}`}
 >
   <div
     id={`yt-player/${youTubeInfo.id}`}
-    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} ${className.includes("object-cover") ? "object-cover" : "size-full"}`}
+    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} ${aspectRatio} ${resize ? "object-cover" : "size-full"}`}
   >
   </div>
 </div>
@@ -42,7 +45,9 @@ const noControls = className.includes("pointer-events-none");
   document.addEventListener("astro:page-load", () => {
     const observer = new ResizeObserver((entries) =>
       entries.forEach(({ target }) => {
-        const videoAspectEnum = Array.from(target.classList)
+        const iFrame = target.firstElementChild! as HTMLIFrameElement;
+
+        const videoAspectEnum = Array.from(iFrame.classList)
           .find((part) => part.startsWith("aspect"))!
           .split("-")
           .at(-1)!
@@ -57,20 +62,15 @@ const noControls = className.includes("pointer-events-none");
           ...(containerAspectRatio > videoAspectRatio ? [] : heightResizeCalc)
         );
 
-        const iFrame = target.firstElementChild! as HTMLIFrameElement;
+        const widthResize = ["h-[200vh]", "w-full"];
+        const heightResize = ["h-full", "w-[200vw]"];
+        target.classList.remove(...widthResize, ...widthResize);
 
-        // TODO PHASE 2 USE H FULL AND W FULL INSTEAD OF CALCULATING WIDTH AND HEIGHT
-
-        iFrame.width = `${
-          containerAspectRatio > videoAspectRatio
-            ? target.clientWidth
-            : videoAspectRatio * target.clientHeight
-        }`;
-        iFrame.height = `${
-          containerAspectRatio > videoAspectRatio
-            ? videoAspectRatio * target.clientWidth
-            : target.clientHeight
-        }`;
+        iFrame.classList.add(
+          ...(containerAspectRatio > videoAspectRatio
+            ? widthResize
+            : heightResize)
+        );
       })
     );
 

@@ -1,18 +1,12 @@
 ---
+import type { ComponentProps } from "astro/types";
 import Link from "./Link.astro";
 import LinkButton from "./LinkButton.astro";
 
-interface Props {
-  inline?: boolean;
-  cardButton?: boolean;
-  className?: string;
+interface Props
+  extends ComponentProps<typeof Link>,
+    ComponentProps<typeof LinkButton> {
   linkClassName?: string;
-  href?: string | undefined;
-  navigate?: boolean;
-  rounded?: boolean;
-  noFocus?: boolean;
-  noShadow?: boolean;
-  fullHeight?: boolean;
 }
 
 const { href, navigate, linkClassName = "", ...buttonProps } = Astro.props;

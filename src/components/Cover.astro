@@ -22,35 +22,31 @@ export function isVideoCover(
   return !!(cover as ComponentProps<typeof Video>["youTubeInfo"])?.id;
 }
 
-const coverClass = `${mobile ? "w-screen h-[45vh] -mt-[9vh] active:rounded-3xl" : "rounded-3xl max-h-[40vh]"}`;
-
-const coverMediaClass = "object-cover size-full pointer-events-none";
+const coverMediaClass = "object-cover pointer-events-none";
 
 // TODO MAKE VIDEO PAUSABLE AND FULLSCREENABLE IN POST, ALSO SAME INTERACTIVITY AS FULLIMAGE
 ---
 
-<div
-  class={`cover-media ${className} ${mobile ? "lg:invisible fixed" : "invisible lg:visible absolute top-12 left-0 right-0 mx-auto"}`}
+<Fullscreenable
+  className={`cover-media ${className} ${mobile ? "lg:invisible fixed left-0 right-0 mx-auto active:rounded-xl h-[45vh] -mt-[9vh]" : "invisible lg:visible rounded-3xl h-[40vh] absolute top-12 left-0 right-0 mx-auto"}`}
 >
-  <Fullscreenable className={coverClass}>
-    {
-      isVideoCover(cover) ? (
-        <Video youTubeInfo={cover} className={coverMediaClass} />
-      ) : (
-        <Image
-          src={cover()}
-          class={coverMediaClass}
-          alt={
-            entry?.collection === "projects"
-              ? entry.data.description
-              : `Graphic explanation of "${entry!.data.title}"`
-          }
-          loading="eager"
-        />
-      )
-    }
-  </Fullscreenable>
-</div>
+  {
+    isVideoCover(cover) ? (
+      <Video youTubeInfo={cover} className={coverMediaClass} />
+    ) : (
+      <Image
+        src={cover()}
+        class={coverMediaClass}
+        alt={
+          entry?.collection === "projects"
+            ? entry.data.description
+            : `Graphic explanation of "${entry!.data.title}"`
+        }
+        loading="eager"
+      />
+    )
+  }
+</Fullscreenable>
 <script>
   addEventListener("scroll", () => {
     document.querySelectorAll<HTMLElement>(".cover-media").forEach((cover) => {
