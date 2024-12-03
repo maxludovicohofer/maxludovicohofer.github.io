@@ -65,6 +65,7 @@ const { className = "" } = Astro.props;
               document.querySelector<HTMLDivElement>("div.modal-slot")!;
 
             // TODO FIX THIS USING CLIENTHEIGHT
+            // TODO ADD CONTROLS AND PLAY VIDEO
 
             if (modalSlot.clientWidth / modalSlot.clientHeight > aspectRatio) {
               fullscreenMedia.height = 0.8 * modalSlot.clientHeight;
