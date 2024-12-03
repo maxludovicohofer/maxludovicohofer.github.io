@@ -44,34 +44,38 @@ const { className = "" } = Astro.props;
             | HTMLVideoElement
             | HTMLIFrameElement;
 
-          // const aspectRatio =
-          // fullscreenMedia.clientWidth / fullscreenMedia.clientHeight;
-
-          // console.log(
-          //   fullscreenMedia.clientWidth / fullscreenMedia.clientHeight
-          // );
-
           const cleanClass = (className: string) =>
             className.replace(
               /(^|\s)(\S*-)*(size-|w-|h-|pointer-events-|object-)\S*/g,
               ""
             );
 
-          fullscreenMedia.className = `${cleanClass(fullscreenMedia.className)} pointer-events-auto max-h-[90vh] lg:max-h-[80vh] max-w-[90vw] lg:max-w-[80vw] rounded-3xl`;
+          fullscreenMedia.className = `${cleanClass(fullscreenMedia.className)} max-h-[90vh] lg:max-h-[80vh] max-w-[90vw] lg:max-w-[80vw] rounded-3xl`;
+
+          const videoAspectEnum = Array.from(fullscreenMedia.classList)
+            .find((part) => part.startsWith("fullscreen-aspect"))
+            ?.split("-")
+            .at(-1)!
+            .replace(/[\[\]']+/g, "");
+
+          if (videoAspectEnum) {
+            const aspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
+
+            const modalSlot =
+              document.querySelector<HTMLDivElement>("div.modal-slot")!;
+
+            // TODO FIX THIS USING CLIENTHEIGHT
+
+            if (modalSlot.clientWidth / modalSlot.clientHeight > aspectRatio) {
+              fullscreenMedia.height = 0.8 * modalSlot.clientHeight;
+              fullscreenMedia.width = aspectRatio * fullscreenMedia.height;
+            } else {
+              fullscreenMedia.width = 0.8 * modalSlot.clientWidth;
+              fullscreenMedia.height = fullscreenMedia.width / aspectRatio;
+            }
+          }
 
           activateModal(fullscreenMedia);
-
-          // const screenAspectRatio = screen.width / screen.height;
-
-          // if (screenAspectRatio > aspectRatio) {
-          //   fullscreenMedia.height = screen.height;
-          //   fullscreenMedia.width =
-          //     Number(fullscreenMedia.clientHeight) / aspectRatio;
-          // } else {
-          //   fullscreenMedia.width = screen.width;
-          //   fullscreenMedia.height =
-          //     Number(fullscreenMedia.clientWidth) / aspectRatio;
-          // }
         })
       )
   );
