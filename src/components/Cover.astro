@@ -50,8 +50,14 @@ const coverMediaClass = "size-full object-cover pointer-events-none";
     document.querySelectorAll<HTMLElement>(".cover-media").forEach((cover) => {
       if (!cover.checkVisibility()) return;
 
-      // TODO PHASE 2 PARALLAX (MOVE WITH TRANSLATE Y ON SCROLL)
-      cover.style.opacity = `${1 - Math.min(scrollY / cover.offsetHeight, 1)}`;
+      const scrollPercent = Math.min(scrollY / cover.offsetHeight, 1);
+      cover.style.opacity = `${1 - scrollPercent}`;
+
+      const parallaxSpeed = 7;
+      cover.style.transform =
+        scrollPercent < 0.3
+          ? "" // This threshold is used to allow button animations
+          : `translateY(-${parallaxSpeed * scrollPercent}rem)`;
     });
   });
 </script>
