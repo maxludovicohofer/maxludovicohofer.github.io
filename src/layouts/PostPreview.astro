@@ -112,9 +112,7 @@ const backgroundClass = "object-cover pointer-events-none";
       class={`absolute inset-0 pointer-events-none opacity-0 intersect:opacity-15 intersect-half duration-700 ${container ? "group-hover/container-card:opacity-15" : "group-hover/card:opacity-15"}`}
     >
       {isVideoCover(cover) ? (
-        <div class="size-full flex items-center justify-center">
-          <Video className={backgroundClass} youTubeInfo={cover} />
-        </div>
+        <Video className={backgroundClass} youTubeInfo={cover} />
       ) : (
         <Image
           src={cover()}

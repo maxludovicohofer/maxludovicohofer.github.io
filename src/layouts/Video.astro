@@ -8,7 +8,6 @@ interface Props {
   mute?: boolean;
   loop?: boolean;
   className?: string;
-  iframeClassName?: string;
 }
 
 const {
@@ -20,22 +19,25 @@ const {
   mute = true,
   loop = true,
   className = "",
-  iframeClassName = "",
 } = Astro.props;
 
 const noControls = className.includes("pointer-events-none");
 const resize = className.includes("object-cover");
+const aspect =
+  youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video";
 
 const boolToInt = (value?: boolean) => (value ? 1 : 0);
 ---
 
 <div
-  class={`${className} size-full overflow-hidden flex items-center justify-center ${youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video"} ${resize ? "absolute" : ""}`}
+  class={`size-full overflow-hidden flex items-center justify-center ${aspect}`}
 >
-  <div
-    id={`yt-player/${youTubeInfo.id}`}
-    class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${iframeClassName} fullscreen-aspect-${youTubeInfo.aspect === "16/10" ? "[16/10]" : "video"} ${resize ? "object-cover" : "size-full"}`}
-  >
+  <div class="absolute size-full">
+    <div
+      id={`yt-player/${youTubeInfo.id}`}
+      class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${className} ${aspect} ${resize ? "" : "size-full"}`}
+    >
+    </div>
   </div>
 </div>
 <script>
@@ -43,8 +45,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
   document.addEventListener("astro:page-load", () => {
     const observer = new ResizeObserver((entries) =>
       entries.forEach(({ target }) => {
-        const iFrame = target.firstElementChild! as HTMLIFrameElement;
-
+        const containerAspectRatio = target.clientWidth / target.clientHeight;
         const videoAspectEnum = Array.from(target.classList)
           .find((part) => part.startsWith("aspect"))!
           .split("-")
@@ -52,22 +53,27 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
           .replace(/[\[\]']+/g, "");
         const videoAspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
 
-        const heightResizeCalc = ["w-auto"];
-        target.classList.remove(...heightResizeCalc);
+        const resizingDiv = target.firstElementChild! as HTMLDivElement;
 
-        const containerAspectRatio = target.clientWidth / target.clientHeight;
-        target.classList.add(
-          ...(containerAspectRatio > videoAspectRatio ? [] : heightResizeCalc)
+        const resizeWidth = ["h-auto"];
+        const resizeHeight = ["w-auto"];
+        resizingDiv.classList.remove(...resizeWidth, ...resizeHeight);
+
+        resizingDiv.classList.add(
+          ...(containerAspectRatio > videoAspectRatio
+            ? resizeWidth
+            : resizeHeight)
         );
 
-        const widthResize = ["h-[200vh]", "w-full"];
-        const heightResize = ["h-full", "w-[200vw]"];
-        target.classList.remove(...widthResize, ...widthResize);
+        const iFrame = resizingDiv.firstElementChild! as HTMLIFrameElement;
 
+        const expandWidth = ["h-[200vh]", "w-full"];
+        const expandHeight = ["h-full", "w-[200vw]"];
+        iFrame.classList.remove(...expandWidth, ...expandWidth);
         iFrame.classList.add(
           ...(containerAspectRatio > videoAspectRatio
-            ? widthResize
-            : heightResize)
+            ? expandWidth
+            : expandHeight)
         );
       })
     );
@@ -80,7 +86,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 
         // Remove black bands
         if (!div.classList.contains("object-cover")) return;
-        observer.observe(div.parentElement!);
+        observer.observe(div.parentElement!.parentElement!);
       });
   });
 </script>
