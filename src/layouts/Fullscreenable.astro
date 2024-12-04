@@ -68,19 +68,27 @@ const { className = "" } = Astro.props;
             const videoAspectEnum = getCssValue(fullscreenMedia, "aspect");
             const aspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
 
-            const modalSlot =
-              document.querySelector<HTMLDivElement>("div.modal-slot")!;
+            const observer = new ResizeObserver((entries) =>
+              entries.forEach(({ target }) => {
+                const expandWidth = ["h-[90vh]", "lg:h-[80vh]"];
+                const expandHeight = ["w-[90vw]", "lg:w-[80vw]"];
 
-            const expandWidth = ["h-[90vh]", "lg:h-[80vh]"];
-            const expandHeight = ["w-[90vw]", "lg:w-[80vw]"];
+                fullscreenMedia.classList.remove(
+                  ...expandWidth,
+                  ...expandHeight
+                );
 
-            fullscreenMedia.classList.add(
-              ...(modalSlot.clientWidth / modalSlot.clientHeight > aspectRatio
-                ? expandWidth
-                : expandHeight)
+                fullscreenMedia.classList.add(
+                  ...(target.clientWidth / target.clientHeight > aspectRatio
+                    ? expandWidth
+                    : expandHeight)
+                );
+              })
             );
 
-            // TODO ADD RESIZE OBSERVER
+            observer.observe(
+              document.querySelector<HTMLDivElement>("div.modal-slot")!
+            );
 
             const startTime = getCssValue(fullscreenMedia, "current-time");
 
