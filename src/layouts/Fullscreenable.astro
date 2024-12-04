@@ -80,6 +80,8 @@ const { className = "" } = Astro.props;
                 : expandHeight)
             );
 
+            // TODO ADD RESIZE OBSERVER
+
             const startTime = getCssValue(fullscreenMedia, "current-time");
 
             if (startTime) {
@@ -94,6 +96,12 @@ const { className = "" } = Astro.props;
               .replace("disablekb=1", "disablekb=0")
               .replace("mute=1", "mute=0")
               .replace("autoplay=0", "autoplay=1");
+
+            new YT.Player(fullscreenMedia, {
+              events: {
+                onReady: ({ target }) => target.playVideo(),
+              },
+            });
           } else {
             fullscreenMedia.classList.add("size-full");
           }
