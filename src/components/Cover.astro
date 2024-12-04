@@ -53,9 +53,9 @@ const coverMediaClass = "size-full object-cover pointer-events-none";
       const scrollPercent = Math.min(scrollY / cover.offsetHeight, 1);
       cover.style.opacity = `${1 - scrollPercent}`;
 
-      const parallaxSpeed = 7;
+      const parallaxSpeed = 6;
       cover.style.transform =
-        scrollPercent < 0.3
+        scrollPercent < 0.2
           ? "" // This threshold is used to allow button animations
           : `translateY(-${parallaxSpeed * scrollPercent}rem)`;
     });
