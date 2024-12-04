@@ -99,7 +99,7 @@ const { className = "" } = Astro.props;
 
             new YT.Player(fullscreenMedia, {
               events: {
-                onReady: ({ target }) => target.playVideo(),
+                onReady: ({ target }) => target.unMute(),
               },
             });
           } else {
