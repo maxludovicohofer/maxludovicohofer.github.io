@@ -93,7 +93,7 @@ const backgroundClass = "object-cover pointer-events-none";
   )
 }
 <Text
-  className={`${lastModifiedTime ? "mt-4" : Content || Astro.slots.has("title") ? "mt-6" : ""} text-xl 2xl:text-3xl ${container ? "max-h-[25.6rem]" : readMoreLink ? "max-h-72" : ""}`}
+  className={`${lastModifiedTime ? "mt-4" : Content || Astro.slots.has("title") ? "mt-6" : ""} text-xl 2xl:text-3xl ${container ? "max-h-[32rem]" : readMoreLink ? "h-64" : ""}`}
   markdown={!!Content}
   tag={tag ?? (container ? "div" : undefined)}
   >{

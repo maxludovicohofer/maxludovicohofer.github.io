@@ -12,7 +12,7 @@ const projects = defineCollection({
   type: "content",
   schema: z.object({
     ...post,
-    description: z.string(),
+    description: z.string().max(120),
     category: z.enum(["Game", "Prototype", "Tool"]),
     developmentTime: z.string().duration(),
     team: z.number().int().positive().optional(),

@@ -48,16 +48,20 @@ export const getPostCover = (post: typeof entry) => {
     } satisfies ComponentProps<typeof Video>["youTubeInfo"];
 
   const imageFolder = `/src/content/${post.collection}/`;
+  const extensions = ["png", "jpg", "jpeg", "gif"];
   const images = import.meta.glob<{ default: ImageMetadata }>(
     "/src/content/**/*.{jpeg,jpg,png,gif}"
   );
-  const imagePath = `${imageFolder}${post.slug}.png`;
-  const image = images[imagePath];
+  const imagePath = `${imageFolder}${post.slug}`;
+  const image =
+    images[
+      `${imagePath}.${extensions.find((extension) => images[`${imagePath}.${extension}`])}`
+    ];
 
   if (post.collection === "projects" && !image) {
     // Projects require image
     throw new Error(
-      `"${imagePath}" does not exist in pattern: "${imageFolder}*.{jpeg,jpg,png,gif}"`
+      `An image for "${imagePath}" does not exist in pattern: "${imageFolder}*.{${extensions.join(",")}}". Import an image, or preferably a video.`
     );
   }
 

@@ -1,6 +1,6 @@
 ---
 title: Lolita
-description: Narrative stealth-action hybrid, where the characters can transform in a multitude of animals.
+description: Narrative stealth-action hybrid, where the character can transform in a multitude of animals.
 category: Prototype
 developmentTime: P1W
 tech:

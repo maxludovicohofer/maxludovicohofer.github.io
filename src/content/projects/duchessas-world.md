@@ -1,6 +1,6 @@
 ---
 title: Duchessa's World
-description: Cartoon mobile sidescroller, where the platforming is achieved by swapping between the "cat world" and the "human world".
+description: Mobile sidescroller, where the platforming is achieved by swapping between the "cat world" and the "human world".
 category: Prototype
 developmentTime: P5D
 team: 5
