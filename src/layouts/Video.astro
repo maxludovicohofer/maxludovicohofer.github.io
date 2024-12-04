@@ -60,7 +60,6 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
         const resizeWidth = ["h-auto"];
         const resizeHeight = ["w-auto"];
         resizingDiv.classList.remove(...resizeWidth, ...resizeHeight);
-
         resizingDiv.classList.add(
           ...(containerIsWider ? resizeWidth : resizeHeight)
         );
@@ -69,7 +68,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 
         const expandWidth = ["h-[500vh]", "w-full"];
         const expandHeight = ["h-full", "w-[500vw]"];
-        iFrame.classList.remove(...expandWidth, ...expandWidth);
+        iFrame.classList.remove(...expandWidth, ...expandHeight);
         iFrame.classList.add(
           ...(containerIsWider ? expandWidth : expandHeight)
         );
