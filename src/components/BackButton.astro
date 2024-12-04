@@ -22,6 +22,7 @@ const { className = "", buttonName } = Astro.props;
     document
       .querySelector<HTMLButtonElement>("button.back-button")
       ?.addEventListener("click", () => {
+        // TODO FIX BACK BUTTON CLICKING TWICE IN PRODUCTION
         if (document.referrer) {
           navigate("/");
         } else {
