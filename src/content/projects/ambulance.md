@@ -1,7 +1,7 @@
 ---
 title: Ambulance
 description: Save lives by driving an out of control ambulance, involuntarily running over pedestrians.
-category: Game
+category: Prototype
 developmentTime: P3D
 team: 5
 roles:
