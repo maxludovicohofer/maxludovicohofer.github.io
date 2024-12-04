@@ -32,7 +32,7 @@ const coverMediaClass = "size-full object-cover pointer-events-none";
 >
   {
     isVideoCover(cover) ? (
-      <Video youTubeInfo={cover} className={coverMediaClass} />
+      <Video youTubeInfo={cover} className={coverMediaClass} trackTime />
     ) : (
       <Image
         src={cover()}

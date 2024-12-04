@@ -8,6 +8,7 @@ interface Props {
   mute?: boolean;
   loop?: boolean;
   className?: string;
+  trackTime?: boolean;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   mute = true,
   loop = true,
   className = "",
+  trackTime,
 } = Astro.props;
 
 const noControls = className.includes("pointer-events-none");
@@ -34,7 +36,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
   <div class="absolute size-full">
     <div
       id={`yt-player/${youTubeInfo.id}`}
-      class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} size-full ${className} ${aspect}`}
+      class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} size-full ${className} ${aspect} ${trackTime ? "current-time-0" : ""}`}
     >
     </div>
   </div>
@@ -130,7 +132,18 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
           events: {
             onReady: ({ target }) => {
               iFrameToPlayer[iFrameId] = target;
-              observer.observe(target.getIframe());
+              const iFrame = target.getIframe();
+              observer.observe(iFrame);
+
+              if (!iFrame.className.includes("current-time")) return;
+              setInterval(
+                () =>
+                  (iFrame.className = iFrame.className.replace(
+                    /current-time-\d+/,
+                    `current-time-${target.getCurrentTime().toFixed()}`
+                  )),
+                1000
+              );
             },
           },
         });

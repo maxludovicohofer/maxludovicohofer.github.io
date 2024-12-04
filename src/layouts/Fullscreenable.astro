@@ -22,13 +22,14 @@ const { className = "" } = Astro.props;
 
     modalSlot.className = `${modalSlot.className} !pointer-events-auto`;
 
-    const backdrop = modalSlot.querySelector("div.modal-back")!;
+    const backdrop = modalSlot.querySelector<HTMLDivElement>("div.modal-back")!;
     backdrop.className = `${backdrop.className} !opacity-100`;
 
-    const backButton = modalSlot.querySelector("button.modal-back")!;
+    const backButton =
+      modalSlot.querySelector<HTMLButtonElement>("button.modal-back")!;
     backButton.className = `${backButton.className} !opacity-100`;
 
-    const modal = modalSlot.querySelector("div.modal")!;
+    const modal = modalSlot.querySelector<HTMLDivElement>("div.modal")!;
     modal.append(content);
   };
 
@@ -37,6 +38,10 @@ const { className = "" } = Astro.props;
       .querySelectorAll<HTMLButtonElement>("button.can-fullscreen")
       ?.forEach((fullImage) =>
         fullImage.addEventListener("click", () => {
+          const modal = document.querySelector("div.modal")!;
+
+          if (modal.childElementCount) return;
+
           const fullscreenMedia = fullImage
             .querySelector("img, iframe, video")!
             .cloneNode(true) as
@@ -53,11 +58,14 @@ const { className = "" } = Astro.props;
           fullscreenMedia.className = cleanClass(fullscreenMedia.className);
 
           if (fullscreenMedia.tagName === "IFRAME") {
-            const videoAspectEnum = Array.from(fullscreenMedia.classList)
-              .find((part) => part.startsWith("aspect"))
-              ?.split("-")
-              .at(-1)!
-              .replace(/[\[\]']+/g, "");
+            const getCssValue = (element: HTMLElement, key: string) =>
+              Array.from(element.classList)
+                .find((part) => part.startsWith(key))
+                ?.split("-")
+                .at(-1)!
+                .replace(/[\[\]']+/g, "");
+
+            const videoAspectEnum = getCssValue(fullscreenMedia, "aspect");
             const aspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
 
             const modalSlot =
@@ -72,32 +80,22 @@ const { className = "" } = Astro.props;
                 : expandHeight)
             );
 
+            const startTime = getCssValue(fullscreenMedia, "current-time");
+
+            if (startTime) {
+              fullscreenMedia.src = fullscreenMedia.src.replace(
+                /start=\d+/,
+                `start=${startTime}`
+              );
+            }
+
             fullscreenMedia.src = fullscreenMedia.src
-              .replace("autoplay=1", "autoplay=0")
-              .replace("mute=1", "mute=0")
               .replace("controls=0", "controls=1")
-              .replace("disablekb=1", "disablekb=0");
-
-            // TODO SET CORRECT START TIME
-
-            new YT.Player(fullscreenMedia, {
-              events: {
-                onReady: ({ target }) => {
-                  target.playVideo();
-                  // fullscreenMedia.src = fullscreenMedia.src
-                  //   .replace(
-                  //     /start=\d+/,
-                  //     `start=${target.getCurrentTime().toFixed()}`
-                  //   )
-                  //   .replace("autoplay=0", "autoplay=1")
-                  //   .replace("mute=1", "mute=0")
-                  //   .replace("controls=0", "controls=1")
-                  //   .replace("disablekb=1", "disablekb=0");
-                },
-              },
-            });
-
-            // TODO ADD CONTROLS AND PLAY VIDEO
+              .replace("disablekb=1", "disablekb=0")
+              .replace("mute=1", "mute=0")
+              .replace("autoplay=0", "autoplay=1");
+          } else {
+            fullscreenMedia.classList.add("size-full");
           }
 
           activateModal(fullscreenMedia);
