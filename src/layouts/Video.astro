@@ -51,6 +51,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
           .at(-1)!
           .replace(/[\[\]']+/g, "");
         const videoAspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
+        const containerIsWider = containerAspectRatio > videoAspectRatio;
 
         const resizingDiv = target.firstElementChild! as HTMLDivElement;
 
@@ -59,9 +60,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
         resizingDiv.classList.remove(...resizeWidth, ...resizeHeight);
 
         resizingDiv.classList.add(
-          ...(containerAspectRatio > videoAspectRatio
-            ? resizeWidth
-            : resizeHeight)
+          ...(containerIsWider ? resizeWidth : resizeHeight)
         );
 
         const iFrame = resizingDiv.firstElementChild! as HTMLIFrameElement;
@@ -70,9 +69,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
         const expandHeight = ["h-full", "w-[200vw]"];
         iFrame.classList.remove(...expandWidth, ...expandWidth);
         iFrame.classList.add(
-          ...(containerAspectRatio > videoAspectRatio
-            ? expandWidth
-            : expandHeight)
+          ...(containerIsWider ? expandWidth : expandHeight)
         );
       })
     );

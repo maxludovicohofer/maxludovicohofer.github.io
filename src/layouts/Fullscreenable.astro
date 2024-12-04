@@ -22,13 +22,13 @@ const { className = "" } = Astro.props;
 
     modalSlot.className = `${modalSlot.className} !pointer-events-auto`;
 
-    const backdrop = modalSlot.firstElementChild!;
+    const backdrop = modalSlot.querySelector("div.modal-back")!;
     backdrop.className = `${backdrop.className} !opacity-100`;
 
-    const backButton = modalSlot.lastElementChild!;
+    const backButton = modalSlot.querySelector("button.modal-back")!;
     backButton.className = `${backButton.className} !opacity-100`;
 
-    const modal = backButton.previousElementSibling!.firstElementChild!;
+    const modal = modalSlot.querySelector("div.modal")!;
     modal.append(content);
   };
 
@@ -50,30 +50,54 @@ const { className = "" } = Astro.props;
               ""
             );
 
-          fullscreenMedia.className = `${cleanClass(fullscreenMedia.className)} max-h-[90vh] lg:max-h-[80vh] max-w-[90vw] lg:max-w-[80vw] rounded-3xl`;
+          fullscreenMedia.className = cleanClass(fullscreenMedia.className);
 
-          const videoAspectEnum = Array.from(fullscreenMedia.classList)
-            .find((part) => part.startsWith("aspect"))
-            ?.split("-")
-            .at(-1)!
-            .replace(/[\[\]']+/g, "");
-
-          if (videoAspectEnum) {
+          if (fullscreenMedia.tagName === "IFRAME") {
+            const videoAspectEnum = Array.from(fullscreenMedia.classList)
+              .find((part) => part.startsWith("aspect"))
+              ?.split("-")
+              .at(-1)!
+              .replace(/[\[\]']+/g, "");
             const aspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
 
             const modalSlot =
               document.querySelector<HTMLDivElement>("div.modal-slot")!;
 
-            // TODO FIX THIS USING CLIENTHEIGHT
-            // TODO ADD CONTROLS AND PLAY VIDEO
+            const expandWidth = ["h-[90vh]", "lg:h-[80vh]"];
+            const expandHeight = ["w-[90vw]", "lg:w-[80vw]"];
 
-            if (modalSlot.clientWidth / modalSlot.clientHeight > aspectRatio) {
-              fullscreenMedia.height = 0.8 * modalSlot.clientHeight;
-              fullscreenMedia.width = aspectRatio * fullscreenMedia.height;
-            } else {
-              fullscreenMedia.width = 0.8 * modalSlot.clientWidth;
-              fullscreenMedia.height = fullscreenMedia.width / aspectRatio;
-            }
+            fullscreenMedia.classList.add(
+              ...(modalSlot.clientWidth / modalSlot.clientHeight > aspectRatio
+                ? expandWidth
+                : expandHeight)
+            );
+
+            fullscreenMedia.src = fullscreenMedia.src
+              .replace("autoplay=1", "autoplay=0")
+              .replace("mute=1", "mute=0")
+              .replace("controls=0", "controls=1")
+              .replace("disablekb=1", "disablekb=0");
+
+            // TODO SET CORRECT START TIME
+
+            new YT.Player(fullscreenMedia, {
+              events: {
+                onReady: ({ target }) => {
+                  target.playVideo();
+                  // fullscreenMedia.src = fullscreenMedia.src
+                  //   .replace(
+                  //     /start=\d+/,
+                  //     `start=${target.getCurrentTime().toFixed()}`
+                  //   )
+                  //   .replace("autoplay=0", "autoplay=1")
+                  //   .replace("mute=1", "mute=0")
+                  //   .replace("controls=0", "controls=1")
+                  //   .replace("disablekb=1", "disablekb=0");
+                },
+              },
+            });
+
+            // TODO ADD CONTROLS AND PLAY VIDEO
           }
 
           activateModal(fullscreenMedia);
