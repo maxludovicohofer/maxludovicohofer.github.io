@@ -1,0 +1,12 @@
+---
+import Text from "@layouts/Text.astro";
+
+interface Props {
+  value: string | string[];
+}
+
+const { value } = Astro.props;
+---
+
+<Text tag="b" className="font-normal"><slot /></Text>
+{Array.isArray(value) ? value.join(", ") : value}
