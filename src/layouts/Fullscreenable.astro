@@ -53,7 +53,7 @@ const { className = "" } = Astro.props;
           fullscreenMedia.className = `${cleanClass(fullscreenMedia.className)} max-h-[90vh] lg:max-h-[80vh] max-w-[90vw] lg:max-w-[80vw] rounded-3xl`;
 
           const videoAspectEnum = Array.from(fullscreenMedia.classList)
-            .find((part) => part.startsWith("fullscreen-aspect"))
+            .find((part) => part.startsWith("aspect"))
             ?.split("-")
             .at(-1)!
             .replace(/[\[\]']+/g, "");

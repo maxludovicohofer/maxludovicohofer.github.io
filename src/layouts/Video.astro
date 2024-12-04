@@ -22,7 +22,6 @@ const {
 } = Astro.props;
 
 const noControls = className.includes("pointer-events-none");
-const resize = className.includes("object-cover");
 const aspect =
   youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video";
 
@@ -35,7 +34,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
   <div class="absolute size-full">
     <div
       id={`yt-player/${youTubeInfo.id}`}
-      class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} ${className} ${aspect} ${resize ? "" : "size-full"}`}
+      class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} size-full ${className} ${aspect}`}
     >
     </div>
   </div>

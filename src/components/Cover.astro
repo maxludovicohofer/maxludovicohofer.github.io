@@ -22,7 +22,7 @@ export function isVideoCover(
   return !!(cover as ComponentProps<typeof Video>["youTubeInfo"])?.id;
 }
 
-const coverMediaClass = "object-cover pointer-events-none";
+const coverMediaClass = "size-full object-cover pointer-events-none";
 
 // TODO MAKE VIDEO PAUSABLE AND FULLSCREENABLE IN POST, ALSO SAME INTERACTIVITY AS FULLIMAGE
 ---
