@@ -16,6 +16,6 @@ export default defineConfig({
   site: 'https://maxludovicohofer.github.io',
   markdown: {
     remarkPlugins: [remarkReadingTime, remarkModifiedTime, remarkMath],
-    rehypePlugins: [rehypeKatex]
+    rehypePlugins: [[rehypeKatex, {macros: {"\\ ": "\\allowbreak\\,"}}]]
   },
 });
