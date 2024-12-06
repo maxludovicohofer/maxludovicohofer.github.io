@@ -10,6 +10,8 @@ interface Props {
 const { className = "", title, subtitle, markdown, tag } = Astro.props;
 
 const Element = tag ?? (markdown ? "div" : "p");
+
+if (markdown) import("katex/dist/katex.min.css");
 ---
 
 <Element

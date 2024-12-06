@@ -2,6 +2,8 @@
 import { defineConfig } from 'astro/config';
 import { remarkReadingTime } from './remark-reading-time.mjs';
 import { remarkModifiedTime } from './remark-modified-time.mjs';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 import tailwind from '@astrojs/tailwind';
 
@@ -13,6 +15,7 @@ export default defineConfig({
   integrations: [tailwind(), sentry(), spotlightjs()],
   site: 'https://maxludovicohofer.github.io',
   markdown: {
-    remarkPlugins: [remarkReadingTime, remarkModifiedTime],
+    remarkPlugins: [remarkReadingTime, remarkModifiedTime, remarkMath],
+    rehypePlugins: [rehypeKatex]
   },
 });
