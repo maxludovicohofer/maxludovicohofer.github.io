@@ -2,9 +2,9 @@
 title: Debugging fun
 ---
 
-"What is fun?". This is the most important question for a game designer. The way I see it, is that fun is a very complex word, indicating every activity that provokes happiness in the brain of a person. As a matter of fact, I think fun is an objective quality of a videogame, that can be programmed and therefore debugged.
+"What is fun?" is the most important question for a game designer. The way I see it, fun is a fairly complex idea, indicating any activity provoking happiness in the brain of a person. As a matter of fact, I think fun is an objective, somehow measurable quality, that can be deterministically programmed and even debugged.
 
-While coming up with fun and innovative games can be a daunting task, I thought about a formula useful to evaluate the fun of a concept:
+While coming up with original and innovative games can be a daunting creative task, I came up with a formula useful to evaluate the fun of a concept:
 
 $ fun = achievement + association + other\ needs $
 
@@ -14,7 +14,7 @@ $ achievement = stress * prospect\ of\ a\ reward * intuitiveness\ of\ the\ game 
 
 $ association = relax * coolness\ of\ the\ aesthetic * agency * individual\ need\ to\ associate\ with\ something $
 
-$Other\ needs$ would be additional human cravings, such as humor, sex, movement, food, vertigo, needs of the Maslow hierarchy. These are generally less explored, but are in my opinion equally as valid for the concept of fun.
+$other\ needs$ would be additional human cravings, such as humor, sex, movement, food, vertigo, needs of the Maslow hierarchy. These are generally less explored, but are in my opinion equally as valid for the concept of fun.
 
 As a game designer, I think there are some parameters that should be considered when designing a videogame. In order of importance:
 
