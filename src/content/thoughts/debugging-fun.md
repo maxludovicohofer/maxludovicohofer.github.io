@@ -4,11 +4,19 @@ title: Debugging fun
 
 "What is fun?". This is the most important question for a game designer. The way I see it, is that fun is a very complex word, indicating every activity that provokes happiness in the brain of a person. As a matter of fact, I think fun is an objective quality of a videogame, that can be programmed and therefore debugged.
 
-While coming up with fun and innovative games can be a daunting task, I thought about a formula useful to evaluate the fun of a concept. This formula goes as follows:
+While coming up with fun and innovative games can be a daunting task, I thought about a formula useful to evaluate the fun of a concept:
 
-$ \text{fun} = (\text{stress} * \text{prospect of a reward} * \text{intuitiveness of the game} * \text{need for achievement}) + (\text{relax} * \text{coolness of the aesthetic} * \text{agency} * \text{need to associate with something}) + \text{other needs} \text{(e.g. humor, sex, movement, food, vertigo, needs of the Maslow hierarchy)} $
+$ fun = achievement + association + other~needs $
 
-The need for achievement and impersonation are the two most explored needs of videogames, the first encompassing needs of completion, order and challenge, and the second needs of impersonation, relating, escape and sociality. I think every human need has its own multipliers. As a game designer, I think there are some parameters that should be considered when designing a videogame. In order of importance:
+The need for achievement and association are the two most explored needs of videogames, the first encompassing needs of completion, order and challenge, and the second needs of impersonation, relating, escape and sociality. They can be evaluated as follows:
+
+$ achievement = stress * prospect~of~a~reward * intuitiveness~of~the~game * individual\,need\,for\,\allowbreak achievement $
+
+$ association = relax * coolness~of~the~aesthetic * agency * individual~need~to~associate~with~something $
+
+$Other\,needs$ would be additional human cravings, such as humor, sex, movement, food, vertigo, needs of the Maslow hierarchy. These are generally less explored, but are in my opinion equally as valid for the concept of fun.
+
+As a game designer, I think there are some parameters that should be considered when designing a videogame. In order of importance:
 
 * Rewards (should be proportional to fun and increase other modifiers to create a loop)
 * Stress / relax (risk / tension / urgency)
