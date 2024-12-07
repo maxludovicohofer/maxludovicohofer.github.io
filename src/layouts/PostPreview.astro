@@ -1,6 +1,6 @@
 ---
 import Text from "@layouts/Text.astro";
-import type { CollectionEntry } from "astro:content";
+import { render, type CollectionEntry } from "astro:content";
 import Button from "./Button.astro";
 import { Image } from "astro:assets";
 import {
@@ -8,14 +8,14 @@ import {
   getDescription,
   getLastModifiedDate,
   getPostCover,
+  type PostCollection,
 } from "./Post.astro";
 import type { ComponentProps } from "astro/types";
 import Video from "./Video.astro";
 import { isVideoCover } from "@components/Cover.astro";
-import { render } from "astro:content";
 
 interface Props {
-  entry?: CollectionEntry<"thoughts"> | CollectionEntry<"projects"> | undefined;
+  entry?: CollectionEntry<PostCollection> | undefined;
   descriptionAsBody?: boolean | undefined;
   readMore?: string;
   readMoreText?: string;

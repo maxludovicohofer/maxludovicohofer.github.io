@@ -5,18 +5,17 @@ category: Prototype
 developmentTime: P3D
 team: 5
 roles:
-    - Game designer
-    - Team lead
-    - Programmer
-    - UI designer
-    - Technical artist
-
+- Game designer
+- Team lead
+- Programmer
+- UI designer
+- Technical artist
 tech:
-    - Unity
-    - Maya
-    - Illustrator
-    - Photoshop
-    - FL Studio
+- Unity
+- Maya
+- Illustrator
+- Photoshop
+- FL Studio
 youTubeID: sTfZB0OFbb4
 youTubeAspectRatio: 16/10
 ---

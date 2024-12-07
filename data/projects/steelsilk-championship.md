@@ -5,27 +5,27 @@ category: Game
 developmentTime: P1M3W
 team: 26
 roles:
-    - Game director
-    - Agile team lead
-    - Balance lead
-    - Performance optimization lead
-    - QA lead
-    - Sound lead
-    - Camera lead
-    - UI/UX lead
-    - Technical art lead
-    - Technical animation lead
-    - Programmer
-    - IT
+- Game director
+- Agile team lead
+- Balance lead
+- Performance optimization lead
+- QA lead
+- Sound lead
+- Camera lead
+- UI/UX lead
+- Technical art lead
+- Technical animation lead
+- Programmer
+- IT
 tech:
-    - Unreal Engine
-    - Maya
-    - ZBrush
-    - FL Studio
+- Unreal Engine
+- Maya
+- ZBrush
+- FL Studio
 downloadLinks:
-    - https://0ry0.itch.io/steelsilk
+- https://0ry0.itch.io/steelsilk
 awards:
-    - Rookie awards 2024 "Game of the year - People's choice"
+- Rookie awards 2024 "Game of the year - People's choice"
 ---
 
 This is the master thesis of my game dev class. A game outline was authored for us by our professors and the concept art class.

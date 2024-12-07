@@ -1,16 +1,15 @@
 ---
 import Fullscreenable from "@layouts/Fullscreenable.astro";
-import type { getPostCover } from "@layouts/Post.astro";
+import type { getPostCover, PostCollection } from "@layouts/Post.astro";
 import Video from "@layouts/Video.astro";
 import type { ComponentProps } from "astro/types";
 import { Image } from "astro:assets";
-import type { CollectionKey } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
   cover: NonNullable<ReturnType<typeof getPostCover>>;
   className: string;
-  entry: CollectionEntry<CollectionKey> | undefined;
+  entry: CollectionEntry<PostCollection> | undefined;
   mobile?: boolean;
 }
 

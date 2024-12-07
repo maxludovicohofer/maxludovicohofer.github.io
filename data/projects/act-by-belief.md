@@ -4,7 +4,7 @@ description: An AI structure and tooling that prioritizes actions based on an ag
 category: Tool
 developmentTime: P2W
 tech:
-    - Unity
+- Unity
 youTubeID: wYkGjcrDOOs
 youTubeAspectRatio: 16/9
 ---

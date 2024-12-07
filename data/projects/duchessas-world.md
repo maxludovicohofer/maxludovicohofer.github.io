@@ -5,17 +5,17 @@ category: Prototype
 developmentTime: P5D
 team: 5
 roles:
-    - Game designer
-    - Team lead
-    - Programmer
-    - Sound artist
-    - Technical artist
+- Game designer
+- Team lead
+- Programmer
+- Sound artist
+- Technical artist
 tech:
-    - Unreal Engine
-    - Maya
-    - Illustrator
-    - Photoshop
-    - FL Studio
+- Unreal Engine
+- Maya
+- Illustrator
+- Photoshop
+- FL Studio
 ---
 
 This prototype was commissioned by a company, requesting a mobile platformer-like game, featuring an odd-eyed cat character. Also, particular emphasis was placed on the technical aspects of the game and making the character’s unique features shine.

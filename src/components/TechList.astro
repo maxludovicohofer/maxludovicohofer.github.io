@@ -1,189 +1,66 @@
 ---
 import Text from "@layouts/Text.astro";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { toTitleCase } from "src/utils";
 
-interface TechFunction {
-  name: string;
-  experienceYears: number;
-}
-
-const tech: {
-  name: string;
-  experienceYears?: number;
-  functions: string[] | TechFunction[];
-}[] = [
-  {
-    name: "Unreal Engine",
-    experienceYears: 5,
-    functions: [
-      "Landscape \\ foliage",
-      "Modeling",
-      "Visual scripting \\ editor extensions",
-      "Online \\ local multiplayer scripting",
-      "C++ scripting \\ engine extensions",
-      "Materials \\ shaders \\ textures",
-      "Niagara",
-      "Retargeting",
-      "UI",
-      "AI",
-      "Profiling",
-      "Source control",
-      "Level editor",
-      "Lighting",
-      "UV editor \\ mesh editor",
-      "Runtime virtual textures",
-      "Nanite",
-      "Procedural animation \\ Control rig",
-      "Animation blueprints \\ state machines \\ montages",
-      "MetaSound \\ audio",
-      "Cinematics \\ sequencer",
-    ],
-  },
-  {
-    name: "Unity",
-    experienceYears: 1,
-    functions: [
-      "Scripting",
-      "Visual scripting",
-      "2D sprite painting",
-      "Custom decision tree AI system",
-    ],
-  },
-  {
-    name: "Programming languages \\ stacks",
-    functions: [
-      { name: "C++", experienceYears: 5 },
-      { name: "C#", experienceYears: 5 },
-      { name: "Blueprints", experienceYears: 3 },
-      { name: "HLSL", experienceYears: 1 },
-      { name: "Python", experienceYears: 3 },
-      { name: "X86 assembly", experienceYears: 1 },
-      { name: "Full stack web development", experienceYears: 5 },
-      { name: "Mobile development", experienceYears: 2 },
-      { name: "Java", experienceYears: 2 },
-      { name: "SQL", experienceYears: 5 },
-      { name: "Amazon Web Services", experienceYears: 5 },
-    ],
-  },
-  {
-    name: "Houdini",
-    experienceYears: 0.5,
-    functions: ["Complex simulations", "Offline rendering", "Offline lighting"],
-  },
-  {
-    name: "Maya",
-    experienceYears: 1,
-    functions: [
-      "Modeling",
-      "UV",
-      "Retopology",
-      "Hard surface rigging",
-      "Animation",
-      "Blend shapes",
-      "Grooming with cards",
-    ],
-  },
-  {
-    name: "ZBrush",
-    experienceYears: 1,
-    functions: ["Sculpting", "Exporting maps"],
-  },
-  {
-    name: "Marvelous designer",
-    experienceYears: 0.5,
-    functions: ["Character clothing", "Cloth simulation"],
-  },
-  {
-    name: "Substance designer",
-    experienceYears: 0.5,
-    functions: ["Exporting maps", "Smart materials for painter"],
-  },
-  {
-    name: "Substance painter",
-    experienceYears: 0.5,
-    functions: ["Texturing", "Baking maps"],
-  },
-  {
-    name: "Photoshop",
-    experienceYears: 3,
-    functions: ["Creating alphas", "Modifying textures", "Editing pictures"],
-  },
-  {
-    name: "Illustrator",
-    experienceYears: 3,
-    functions: ["Creating UI elements"],
-  },
-  { name: "Krita", experienceYears: 0.5, functions: ["Concept drawings"] },
-  {
-    name: "After effects",
-    experienceYears: 3,
-    functions: ["Compositing", "Video effects"],
-  },
-  { name: "Premiere", experienceYears: 3, functions: ["Video editing"] },
-  { name: "FontLab", experienceYears: 1, functions: ["Creating custom fonts"] },
-  { name: "Gaea", experienceYears: 0.5, functions: ["Landscape generation"] },
-  {
-    name: "TouchDesigner",
-    experienceYears: 2,
-    functions: ["Real time VFX synced to sound"],
-  },
-  {
-    name: "FL Studio",
-    experienceYears: 15,
-    functions: [
-      "Music production",
-      "Sound design",
-      "Recording",
-      "Mixing & mastering",
-    ],
-  },
-];
+const tech = await getCollection("tech");
 
 // TODO PHASE 2 REFERENCE PROJECTS WHERE THE TECH IS USED. MOST LIKELY SHOW THEM ON HOVER/INTERSECT (MOBILE).
 
-const isTechFunction = (func: string | TechFunction): func is TechFunction =>
-  !!(func as TechFunction).name;
+const isTechItem = (
+  func: NonNullable<CollectionEntry<"tech">["data"]["functionalities"]>[number]
+): func is Exclude<
+  NonNullable<CollectionEntry<"tech">["data"]["functionalities"]>[number],
+  string
+> =>
+  !!(
+    func as Exclude<
+      NonNullable<CollectionEntry<"tech">["data"]["functionalities"]>[number],
+      string
+    >
+  ).id;
+
+dayjs.extend(duration);
+dayjs.extend(relativeTime);
 ---
 
 {
-  tech?.map(({ name, experienceYears, functions }) => {
-    const rowSpan = functions.length / 8;
+  tech?.map(({ id, data: { experience, functionalities } }) => {
+    const rowSpan = (functionalities?.length ?? 0) / 8;
 
     return (
       <li
         class={`${rowSpan < 2 ? "row-span-1" : rowSpan < 3 ? "row-span-2" : rowSpan < 4 ? "row-span-3" : rowSpan < 5 ? "row-span-4" : "row-span-5"}`}
       >
         <Text title className="inline">
-          {name}
+          {id}
         </Text>
-        {experienceYears && (
+        {experience && (
           <Text subtitle className="inline">
-            {experienceYears < 1
-              ? `${Math.round(experienceYears * 12)} months`
-              : experienceYears === 1
-                ? `${experienceYears} year`
-                : `${Math.round(experienceYears)} years`}{" "}
-            of experience
+            {toTitleCase(dayjs.duration(experience).humanize())} of experience
           </Text>
         )}
-        <ol class="ml-8">
-          {functions.map((func) => (
-            <li>
-              <Text className="inline">
-                {isTechFunction(func) ? func.name : func}
-              </Text>
-              {isTechFunction(func) && (
-                <Text subtitle className="inline">
-                  {func.experienceYears < 1
-                    ? `${Math.round(func.experienceYears * 12)} months`
-                    : func.experienceYears === 1
-                      ? `${func.experienceYears} year`
-                      : `${Math.round(func.experienceYears)} years`}{" "}
-                  of experience
+        {functionalities && functionalities.length !== 0 && (
+          <ol class="ml-8">
+            {functionalities.map((func) => (
+              <li>
+                <Text className="inline">
+                  {isTechItem(func) ? func.id : func}
                 </Text>
-              )}
-            </li>
-          ))}
-        </ol>
+                {isTechItem(func) && (
+                  <Text subtitle className="inline">
+                    {toTitleCase(dayjs.duration(func.experience).humanize())} of
+                    experience
+                  </Text>
+                )}
+              </li>
+            ))}
+          </ol>
+        )}
       </li>
     );
   })

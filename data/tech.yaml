@@ -1,0 +1,133 @@
+- id: Unreal Engine
+  experience: P5Y
+  functionalities:
+  - Landscape \ foliage
+  - Modeling
+  - Visual scripting \ editor extensions
+  - Online \ local multiplayer scripting
+  - C++ scripting \ engine extensions
+  - Materials \ shaders \ textures
+  - Niagara
+  - Retargeting
+  - UI
+  - AI
+  - Profiling
+  - Source control
+  - Level editor
+  - Lighting
+  - UV editor \ mesh editor
+  - Runtime virtual textures
+  - Nanite
+  - Procedural animation \ Control rig
+  - Animation blueprints \ state machines \ montages
+  - MetaSound \ audio
+  - Cinematics \ sequencer
+- id: Unity
+  experience: P1Y
+  functionalities:
+  - Scripting
+  - Visual scripting
+  - 2D sprite painting
+  - Custom decision tree AI system
+- id: Programming languages \ stacks
+  functionalities:
+  - id: C++
+    experience: P5Y
+  - id: C#
+    experience: P5Y
+  - id: Blueprints
+    experience: P3Y
+  - id: HLSL
+    experience: P1Y
+  - id: Python
+    experience: P3Y
+  - id: X86 assembly
+    experience: P1Y
+  - id: Full stack web development
+    experience: P5Y
+  - id: Mobile development
+    experience: P2Y
+  - id: Java
+    experience: P2Y
+  - id: SQL
+    experience: P5Y
+  - id: Amazon Web Services
+    experience: P5Y
+- id: Houdini
+  experience: P6M
+  functionalities:
+  - Complex simulations
+  - Offline rendering
+  - Offline lighting
+- id: Maya
+  experience: P1Y
+  functionalities:
+  - Modeling
+  - UV
+  - Retopology
+  - Hard surface rigging
+  - Animation
+  - Blend shapes
+  - Grooming with cards
+- id: ZBrush
+  experience: P1Y
+  functionalities:
+  - Sculpting
+  - Exporting maps
+- id: Marvelous designer
+  experience: P6M
+  functionalities:
+  - Character clothing
+  - Cloth simulation
+- id: Substance designer
+  experience: P6M
+  functionalities:
+  - Exporting maps
+  - Smart materials for painter
+- id: Substance painter
+  experience: P6M
+  functionalities:
+  - Texturing
+  - Baking maps
+- id: Photoshop
+  experience: P3Y
+  functionalities:
+  - Creating alphas
+  - Modifying textures
+  - Editing pictures
+- id: Illustrator
+  experience: P3Y
+  functionalities:
+  - Creating UI elements
+- id: Krita
+  experience: P6M
+  functionalities:
+  - Concept drawings
+- id: After effects
+  experience: P3Y
+  functionalities:
+  - Compositing
+  - Video effects
+- id: Premiere
+  experience: P3Y
+  functionalities:
+  - Video editing
+- id: FontLab
+  experience: P1Y
+  functionalities:
+  - Creating custom fonts
+- id: Gaea
+  experience: P6M
+  functionalities:
+  - Landscape generation
+- id: TouchDesigner
+  experience: P2Y
+  functionalities:
+  - Real time VFX synced to sound
+- id: FL Studio
+  experience: P15Y
+  functionalities:
+  - Music production
+  - Sound design
+  - Recording
+  - Mixing & mastering

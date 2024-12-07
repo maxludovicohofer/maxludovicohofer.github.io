@@ -4,9 +4,9 @@ description: Online match-based sci-fi third person shooter, based on gravitatio
 category: Prototype
 developmentTime: P2W
 tech:
-    - Unreal Engine
-    - Illustrator
-    - Photoshop
+- Unreal Engine
+- Illustrator
+- Photoshop
 ---
 
 This prototype was made to evolve my multiplayer and art skills. It is a solo project focused on making the coolest game I possibly can.

@@ -1,16 +1,15 @@
 ---
 import Card from "@layouts/Card.astro";
-import { getLastModifiedDate } from "@layouts/Post.astro";
+import { getLastModifiedDate, type PostCollection } from "@layouts/Post.astro";
 import PostPreview from "@layouts/PostPreview.astro";
-import type { CollectionKey, CollectionEntry } from "astro:content";
-import { render, getCollection } from "astro:content";
+import { render, getCollection, type CollectionEntry } from "astro:content";
 
 interface Props {
-  collection: CollectionKey;
+  collection: PostCollection;
   short?: boolean;
   className?: string;
-  exclude?: CollectionEntry<CollectionKey>[] | undefined;
-  additional?: CollectionEntry<CollectionKey>[];
+  exclude?: CollectionEntry<PostCollection>[] | undefined;
+  additional?: CollectionEntry<PostCollection>[];
   numberOfItemsToLoadEager?: number | undefined;
 }
 
@@ -23,9 +22,9 @@ const {
   numberOfItemsToLoadEager = 0,
 } = Astro.props;
 
-export const getSortedEntries = async <C extends CollectionKey>(
+export const getSortedEntries = async <C extends PostCollection>(
   entryCollection: C,
-  excluded: CollectionEntry<CollectionKey>[] = []
+  excluded: CollectionEntry<C>[] = []
 ) => {
   // Exclude highlight and latest, will be added again at the end
   const entries = await getCollection(
@@ -49,8 +48,10 @@ export const getSortedEntries = async <C extends CollectionKey>(
   );
 };
 
-const sortedEntries: CollectionEntry<typeof collection>[] =
-  await getSortedEntries(collection, exclude);
+const sortedEntries: CollectionEntry<PostCollection>[] = await getSortedEntries(
+  collection,
+  exclude
+);
 
 // Add additional at the end
 sortedEntries.push(...additional);

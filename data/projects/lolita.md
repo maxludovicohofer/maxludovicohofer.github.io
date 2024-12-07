@@ -4,10 +4,10 @@ description: Narrative stealth-action hybrid, where the character can transform 
 category: Prototype
 developmentTime: P1W
 tech:
-    - Unreal Engine
-    - Illustrator
-    - Photoshop
-    - FL Studio
+- Unreal Engine
+- Illustrator
+- Photoshop
+- FL Studio
 ---
 
 This is a prototype I made for a personal project, specifically to improve my AI, storytelling and immersion design.

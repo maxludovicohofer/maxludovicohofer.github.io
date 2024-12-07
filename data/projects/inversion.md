@@ -5,18 +5,18 @@ category: Prototype
 developmentTime: P5D
 team: 5
 roles:
-    - Game designer
-    - Team lead
-    - Programmer
-    - Sound artist
-    - Shader artist
-    - Lighting artist
-    - Screenplay writer
+- Game designer
+- Team lead
+- Programmer
+- Sound artist
+- Shader artist
+- Lighting artist
+- Screenplay writer
 tech:
-    - Unreal Engine
-    - Maya
-    - Photoshop
-    - FL Studio
+- Unreal Engine
+- Maya
+- Photoshop
+- FL Studio
 ---
 
 This is a prototype I designed for the level design class at school. The planimetry of the environment was provided for us, and our team decided to create a slow paced cosmic horror puzzle game. I used this opportunity to focus more on the artistic side of game design, and use a simple gameplay to aid the story.

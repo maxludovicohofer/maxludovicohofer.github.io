@@ -73,8 +73,8 @@ const { className = "" } = Astro.props;
             const observer = new ResizeObserver((entries) =>
               entries.forEach(({ target }) => {
                 // Follows modal slot expansion
-                const expandWidth = ["h-[90%]", "lg:h-[80%]"];
-                const expandHeight = ["w-[90%]", "lg:w-[80%]"];
+                const expandWidth = ["h-[90vh]", "lg:h-[80vh]"];
+                const expandHeight = ["w-[90vw]", "lg:w-[80vw]"];
 
                 fullscreenMedia.classList.remove(
                   ...expandWidth,
