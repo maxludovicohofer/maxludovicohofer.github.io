@@ -1,6 +1,6 @@
 ---
 title: Steelsilk Championship
-description: Couch co-op rougelite shoot ‘em up, where victory is achieved after resisting three hoardes.
+description: Couch co-op rougelite shoot ‘em up, where victory is acheived by resisting three hoardes.
 category: Game
 developmentTime: P1M3W
 team: 26
