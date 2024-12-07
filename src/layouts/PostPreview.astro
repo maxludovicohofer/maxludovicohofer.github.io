@@ -12,6 +12,7 @@ import {
 import type { ComponentProps } from "astro/types";
 import Video from "./Video.astro";
 import { isVideoCover } from "@components/Cover.astro";
+import { render } from "astro:content";
 
 interface Props {
   entry?: CollectionEntry<"thoughts"> | CollectionEntry<"projects"> | undefined;
@@ -39,7 +40,7 @@ const {
   minutesAlreadySpentReading = 0.5, // Time assumed to be already spent reading before clicking read more
 } = Astro.props;
 
-const { Content, remarkPluginFrontmatter } = entry ? await entry.render() : {};
+const { Content, remarkPluginFrontmatter } = entry ? await render(entry) : {};
 
 const realMinutesToRead =
   remarkPluginFrontmatter &&
@@ -51,7 +52,7 @@ const minutesToRead =
 const readMoreLink =
   noReadMore || (realMinutesToRead && realMinutesToRead < 0)
     ? undefined
-    : (readMore ?? (entry && `/${entry.collection}/${entry.slug}`));
+    : (readMore ?? (entry && `/${entry.collection}/${entry.id}`));
 
 const cover = getPostCover(entry);
 const description = getDescription(entry);

@@ -2,9 +2,8 @@
 import Card from "@layouts/Card.astro";
 import { getLastModifiedDate } from "@layouts/Post.astro";
 import PostPreview from "@layouts/PostPreview.astro";
-import type { CollectionEntry } from "astro:content";
-import type { CollectionKey } from "astro:content";
-import { getCollection } from "astro:content";
+import type { CollectionKey, CollectionEntry } from "astro:content";
+import { render, getCollection } from "astro:content";
 
 interface Props {
   collection: CollectionKey;
@@ -41,7 +40,7 @@ export const getSortedEntries = async <C extends CollectionKey>(
       entries.map(async (entry) => ({
         ...entry,
         lastModifiedDate: getLastModifiedDate(
-          (await entry.render()).remarkPluginFrontmatter
+          (await render(entry)).remarkPluginFrontmatter
         )!,
       }))
     )
@@ -64,7 +63,7 @@ sortedEntries.push(...additional);
     sortedEntries.map((entry) => (
       <Card
         tag="li"
-        className={`content-slug/${entry.slug} ${short ? "h-64 xl:max-h-none" : ""}`}
+        className={`content-slug/${entry.id} ${short ? "h-64 xl:max-h-none" : ""}`}
       >
         <PostPreview
           importance="container-item"

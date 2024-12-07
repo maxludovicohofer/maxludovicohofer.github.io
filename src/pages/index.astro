@@ -10,11 +10,11 @@ import PostPreview from "@layouts/PostPreview.astro";
 import TechPreview from "@components/index/TechPreview.astro";
 import { getSortedEntries } from "@components/ContentList.astro";
 
-export const highlightThought = await getEntry("thoughts", "style");
+export const highlightThought = await getEntry("thoughts", "style")!;
 export const highlightProject = await getEntry(
   "projects",
   "steelsilk-championship"
-);
+)!;
 export const latestThought = (
   await getSortedEntries("thoughts", [highlightThought])
 )[0];
@@ -22,7 +22,6 @@ export const latestProject = (
   await getSortedEntries("projects", [highlightProject])
 )[0];
 
-// TODO PHASE 2 UPDATE TO ASTRO 5 AND TAILWIND 4
 // TODO PHASE 2 I18N ENG/JAP. ADD LANG SELECTION ON TOP OF PAGE (TWO UNDERLINED LINKS WITH LANG ICONS).
 // TODO PHASE 2 SHOW PROJECTS AND THOUGHTS AS CAROUSEL ON MOBILE, AND REMOVE HIGHLIGHT AND LATEST (BUT SHOW THEM BEFORE THE OTHERS). ALSO OTHER THOUGHTS/PROJECTS SHOULD BE CAROUSEL. (NO LINKS TO PROJECTS/THOUGHTS PAGE). ALSO FILTER SHOULD BE DIRECTLY IN THIS CAROUSEL. THEN, MOVE THESE CAROUSELS RIGHT AFTER SHOWREEL. MAYBE SOMETHING SIMILAR ALSO FOR DESKTOP.
 ---

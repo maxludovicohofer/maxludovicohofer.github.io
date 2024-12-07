@@ -17,20 +17,22 @@ const { className = "" } = Astro.props;
   <slot />
 </Button>
 <script>
-  const activateModal = (content: Node) => {
+  const activateModal = (content: HTMLElement) => {
     const modalSlot = document.querySelector<HTMLDivElement>("div.modal-slot")!;
-
-    modalSlot.className = `${modalSlot.className} !pointer-events-auto`;
+    modalSlot.classList.add("!pointer-events-auto");
 
     const backdrop = modalSlot.querySelector<HTMLDivElement>("div.modal-back")!;
-    backdrop.className = `${backdrop.className} !opacity-100`;
+    backdrop.classList.add("!opacity-100");
 
     const backButton =
       modalSlot.querySelector<HTMLButtonElement>("button.modal-back")!;
-    backButton.className = `${backButton.className} !opacity-100`;
+    backButton.classList.add("!opacity-100");
 
     const modal = modalSlot.querySelector<HTMLDivElement>("div.modal")!;
     modal.append(content);
+
+    content.className.replace(/(^|\s)(\S*-)*(pointer-events-)\S*/g, "");
+    content.classList.add("pointer-events-auto");
   };
 
   document.addEventListener("astro:page-load", () =>

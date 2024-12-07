@@ -1,5 +1,5 @@
 ---
-import ViewTransitions from "astro/components/ViewTransitions.astro";
+import { ClientRouter } from "astro:transitions";
 import BackButton from "@components/BackButton.astro";
 import ModalSlot from "./ModalSlot.astro";
 
@@ -25,7 +25,7 @@ const completeTitle = `Max Hofer \\ ${title}`;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body class="bg-zinc-200 dark:bg-zinc-950">
     <slot />

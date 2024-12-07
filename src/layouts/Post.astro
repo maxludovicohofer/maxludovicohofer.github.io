@@ -1,13 +1,13 @@
 ---
 import Text from "@layouts/Text.astro";
-import type { CollectionEntry } from "astro:content";
+import type { CollectionKey, CollectionEntry } from "astro:content";
+import { render } from "astro:content";
 import type { ImageMetadata } from "astro";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import Card from "./Card.astro";
 import type { ComponentProps } from "astro/types";
 import Cover from "@components/Cover.astro";
-import type { CollectionKey } from "astro:content";
 import Link from "./Link.astro";
 import Button from "./Button.astro";
 import type Video from "./Video.astro";
@@ -22,7 +22,7 @@ interface Props {
 
 const { entry, tag, fullWidth, container, followedByOther } = Astro.props;
 
-const { Content, remarkPluginFrontmatter } = entry ? await entry.render() : {};
+const { Content, remarkPluginFrontmatter } = entry ? await render(entry) : {};
 
 export const getLastModifiedDate = (
   frontmatter: typeof remarkPluginFrontmatter
@@ -52,7 +52,7 @@ export const getPostCover = (post: typeof entry) => {
   const images = import.meta.glob<{ default: ImageMetadata }>(
     "/src/content/**/*.{jpeg,jpg,png,gif}"
   );
-  const imagePath = `${imageFolder}${post.slug}`;
+  const imagePath = `${imageFolder}${post.id}`;
   const image =
     images[
       `${imagePath}.${extensions.find((extension) => images[`${imagePath}.${extension}`])}`

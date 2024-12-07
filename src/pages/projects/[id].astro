@@ -12,7 +12,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 export const getStaticPaths = async () =>
   (await getCollection("projects", ({ data: { draft } }) => !draft)).map(
     (entry) => ({
-      params: { slug: entry.slug },
+      params: { id: entry.id },
       props: { entry },
     })
   );

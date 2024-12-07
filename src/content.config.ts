@@ -1,4 +1,5 @@
 import { defineCollection, z } from "astro:content";
+import { glob } from "astro/loaders";
 
 const post = {
   draft: z.boolean().optional(),
@@ -9,7 +10,7 @@ const post = {
 
 // Define your collection(s)
 const projects = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/projects" }),
   schema: z.object({
     ...post,
     description: z.string().max(120),
@@ -24,7 +25,7 @@ const projects = defineCollection({
 });
 
 const thoughts = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/thoughts" }),
   schema: z.object(post),
 });
 

@@ -8,7 +8,7 @@ import { getCollection } from "astro:content";
 export const getStaticPaths = async () =>
   (await getCollection("thoughts", ({ data: { draft } }) => !draft)).map(
     (entry) => ({
-      params: { slug: entry.slug },
+      params: { id: entry.id },
       props: { entry },
     })
   );
@@ -18,7 +18,7 @@ const { entry } = Astro.props;
 
 <Page
   title={entry.data.title}
-  description={`${entry.body.split(/[.?!](?=\s+)/, 1)[0]!.trimStart()}.`}
+  description={`${entry.body!.split(/[.?!](?=\s+)/, 1)[0]!.trimStart()}.`}
   ><Post entry={entry} followedByOther /><div class="-mt-24 lg:-mt-20">
     <Thoughts isNotFullpage exclude={[entry]} />
   </div></Page
