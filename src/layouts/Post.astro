@@ -123,30 +123,36 @@ export const getDownloadLinks = <C extends CollectionKey>(
 const downloadLinks = getDownloadLinks(entry);
 const downloadsPresent = downloadLinks && downloadLinks.length !== 0;
 
-const bodyWidthClass = "lg:max-w-[40rem] 2xl:max-w-[75rem]";
-
 const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
 
-const coverProps =
-  cover &&
-  ({
-    cover,
-    className: bodyWidthClass,
-    entry,
-  } satisfies ComponentProps<typeof Cover>);
-
 // TODO MAKE VIDEOS FOR PROJECTS, THEN WRITE THOUGHTS
-// TODO PHASE 2 MOVE LG COVER INSIDE CARD AND MAKE RELATIVE
 ---
 
-{coverProps && <Cover mobile {...coverProps} />}
+{
+  cover && (
+    <Cover
+      cover={cover}
+      entry={entry}
+      className="lg:hidden fixed left-0 right-0 mx-auto active:rounded-xl h-[55vh] -mt-[14vh]"
+    />
+  )
+}
 <Card
   container={container}
   className={`!bg-opacity-0 !p-6 !pt-7 md:!pt-12 !shadow-none ${cover ? `rounded-b-none lg:rounded-none translate-y-[26vh] lg:translate-y-0 ${followedByOther ? "mb-[34%] lg:mb-0" : ""}` : "rounded-none"} ${container ? "" : "bg-gradient-to-b from-zinc-100 dark:from-zinc-900 to-zinc-200 dark:to-zinc-950"} flex flex-col items-center`}
 >
   <div
-    class={`w-full mb-16 lg:mb-6 ${cover ? "lg:mt-[46vh]" : "2xl:-mt-2"} ${fullWidth ? "lg:px-20" : `max-w-[40rem] ${bodyWidthClass}`}`}
+    class={`mb-16 lg:mb-6 ${fullWidth ? "w-full lg:px-20" : "max-w-[40rem] 2xl:max-w-[70rem]"}`}
   >
+    {
+      cover && (
+        <Cover
+          cover={cover}
+          entry={entry}
+          className={`hidden lg:inline rounded-3xl h-[40vh] mb-6`}
+        />
+      )
+    }
     <Text title className="text-3xl 2xl:text-5xl">
       {entry?.data.title ?? <slot name="title" />}
     </Text>
@@ -194,7 +200,6 @@ const coverProps =
     }
   </div>
 </Card>
-{coverProps && <Cover {...coverProps} />}
 <script>
   import type { CollectionKey } from "astro:content";
 

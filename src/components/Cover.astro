@@ -10,10 +10,9 @@ interface Props {
   cover: NonNullable<ReturnType<typeof getPostCover>>;
   className: string;
   entry: CollectionEntry<PostCollection> | undefined;
-  mobile?: boolean;
 }
 
-const { cover, className = "", entry, mobile } = Astro.props;
+const { cover, className = "", entry } = Astro.props;
 
 export function isVideoCover(
   cover: ReturnType<typeof getPostCover>
@@ -24,9 +23,7 @@ export function isVideoCover(
 const coverMediaClass = "size-full object-cover pointer-events-none";
 ---
 
-<Fullscreenable
-  className={`cover-media ${className} ${mobile ? "lg:hidden fixed left-0 right-0 mx-auto active:rounded-xl h-[45%] -mt-[9%]" : "hidden lg:inline rounded-3xl h-[40%] absolute top-12 left-0 right-0 mx-auto"}`}
->
+<Fullscreenable className={`cover-media ${className}`}>
   {
     isVideoCover(cover) ? (
       <Video youTubeInfo={cover} className={coverMediaClass} trackTime />
@@ -45,19 +42,30 @@ const coverMediaClass = "size-full object-cover pointer-events-none";
   }
 </Fullscreenable>
 <script>
-  addEventListener("scroll", () => {
-    document.querySelectorAll<HTMLElement>(".cover-media").forEach((cover) => {
-      if (!cover.checkVisibility()) return;
+  const updateCover = (cover: HTMLElement) => {
+    if (!cover.checkVisibility()) return;
 
-      const scrollPercent = Math.min(scrollY / cover.offsetHeight, 1);
-      cover.style.opacity = `${1 - scrollPercent}`;
+    const scrollPercent = Math.min(scrollY / cover.offsetHeight, 1);
+    cover.style.opacity = `${1 - scrollPercent}`;
 
-      const parallaxSpeed = 6;
-      cover.style.setProperty(
-        "--tw-translate-y",
-        `-${parallaxSpeed * scrollPercent}rem`
-      );
-      cover.style.transform = `translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))`;
-    });
+    const parallaxSpeed = 6;
+    cover.style.setProperty(
+      "--tw-translate-y",
+      `-${parallaxSpeed * scrollPercent}rem`
+    );
+    cover.style.transform = `translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))`;
+  };
+
+  document.addEventListener("astro:page-load", () => {
+    const observer = new ResizeObserver((entries) =>
+      entries.forEach(({ target }) => updateCover(target as HTMLElement))
+    );
+
+    const covers = document.querySelectorAll<HTMLElement>(".cover-media");
+    covers.forEach((cover) => observer.observe(cover));
+
+    addEventListener("scroll", () =>
+      covers.forEach((cover) => updateCover(cover))
+    );
   });
 </script>
