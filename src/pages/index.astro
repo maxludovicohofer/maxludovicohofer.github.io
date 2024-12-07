@@ -1,13 +1,13 @@
 ---
 import Page from "@layouts/Page.astro";
 import Bento from "@layouts/Bento.astro";
-import Profile from "@components/index/Profile.astro";
-import AllProjects from "@components/index/AllProjects.astro";
-import AllThoughts from "@components/index/AllThoughts.astro";
+import Profile from "@components/Profile.astro";
+import AllProjects from "@components/AllProjects.astro";
+import AllThoughts from "@components/AllThoughts.astro";
 import { getEntry } from "astro:content";
 import Video from "@layouts/Video.astro";
 import PostPreview from "@layouts/PostPreview.astro";
-import TechPreview from "@components/index/TechPreview.astro";
+import TechPreview from "@components/TechPreview.astro";
 import { getSortedEntries } from "@components/ContentList.astro";
 
 export const highlightThought = await getEntry("thoughts", "style")!;
