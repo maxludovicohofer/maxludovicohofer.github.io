@@ -2,7 +2,7 @@
 import Projects from "@components/Projects.astro";
 import Page from "@layouts/Page.astro";
 import Post from "@layouts/Post.astro";
-import { getCollection } from "astro:content";
+import { getCollection, getEntries } from "astro:content";
 import PostFooter from "@components/PostFooter.astro";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
@@ -20,6 +20,8 @@ export const getStaticPaths = async () =>
 const { entry } = Astro.props;
 const { title, description, roles, tech, awards, team, developmentTime } =
   entry.data;
+
+const techData = await getEntries(tech);
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
@@ -44,7 +46,9 @@ const developmentDuration = dayjs.duration(developmentTime).humanize();
         )
       }
       <br />
-      <PostFooter value={tech}>Tech</PostFooter>
+      <PostFooter value={techData.map(({ data: { id } }) => id)}
+        >Tech</PostFooter
+      >
       {
         awards && awards.length !== 0 && (
           <>
