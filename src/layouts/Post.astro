@@ -142,10 +142,10 @@ const coverProps =
 {coverProps && <Cover mobile {...coverProps} />}
 <Card
   container={container}
-  className={`!bg-opacity-0 !p-6 !pt-7 md:!pt-12 !shadow-none ${cover ? `rounded-b-none lg:rounded-none translate-y-[26vh] lg:translate-y-0 ${followedByOther ? "mb-[26vh] lg:mb-0" : ""}` : "rounded-none"} ${container ? "" : "bg-gradient-to-b from-zinc-100 dark:from-zinc-900 to-zinc-200 dark:to-zinc-950"} flex flex-col items-center`}
+  className={`!bg-opacity-0 !p-6 !pt-7 md:!pt-12 !shadow-none ${cover ? `rounded-b-none lg:rounded-none translate-y-[26vh] lg:translate-y-0 ${followedByOther ? "mb-[34%] lg:mb-0" : ""}` : "rounded-none"} ${container ? "" : "bg-gradient-to-b from-zinc-100 dark:from-zinc-900 to-zinc-200 dark:to-zinc-950"} flex flex-col items-center`}
 >
   <div
-    class={`w-full mb-16 lg:mb-6 ${cover ? "lg:mt-[43vh]" : "2xl:-mt-2"} ${fullWidth ? "lg:px-20" : `max-w-[40rem] ${bodyWidthClass}`}`}
+    class={`w-full mb-16 lg:mb-6 ${cover ? "lg:mt-[46vh]" : "2xl:-mt-2"} ${fullWidth ? "lg:px-20" : `max-w-[40rem] ${bodyWidthClass}`}`}
   >
     <Text title className="text-3xl 2xl:text-5xl">
       {entry?.data.title ?? <slot name="title" />}
