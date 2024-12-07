@@ -8,6 +8,8 @@ tech:
 - Illustrator
 - Photoshop
 - FL Studio
+youTubeID: g_7fFIQiXZE
+youTubeAspectRatio: 16/10
 ---
 
 This is a prototype I made for a personal project, specifically to improve my AI, storytelling and immersion design.

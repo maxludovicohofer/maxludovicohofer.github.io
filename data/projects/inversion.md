@@ -17,6 +17,8 @@ tech:
 - Maya
 - Photoshop
 - FL Studio
+youTubeID: Od0iaa6HiEA
+youTubeAspectRatio: 16/10
 ---
 
 This is a prototype I designed for the level design class at school. The planimetry of the environment was provided for us, and our team decided to create a slow paced cosmic horror puzzle game. I used this opportunity to focus more on the artistic side of game design, and use a simple gameplay to aid the story.
