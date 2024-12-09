@@ -1,6 +1,6 @@
 ---
 import Card from "@layouts/Card.astro";
-import { getLastModifiedDate, type PostCollection } from "@layouts/Post.astro";
+import { getPublishingDate, type PostCollection } from "@layouts/Post.astro";
 import PostPreview from "@layouts/PostPreview.astro";
 import { render, getCollection, type CollectionEntry } from "astro:content";
 
@@ -38,14 +38,12 @@ export const getSortedEntries = async <C extends PostCollection>(
     await Promise.all(
       entries.map(async (entry) => ({
         ...entry,
-        lastModifiedDate: getLastModifiedDate(
+        publishingDate: getPublishingDate(
           (await render(entry)).remarkPluginFrontmatter
         )!,
       }))
     )
-  ).toSorted((a, b) =>
-    b.lastModifiedDate.isAfter(a.lastModifiedDate) ? 1 : -1
-  );
+  ).toSorted((a, b) => (b.publishingDate.isAfter(a.publishingDate) ? 1 : -1));
 };
 
 const sortedEntries: CollectionEntry<PostCollection>[] = await getSortedEntries(

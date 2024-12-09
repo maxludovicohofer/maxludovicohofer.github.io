@@ -27,17 +27,17 @@ export type PostCollection = Extract<CollectionKey, "projects" | "thoughts">;
 
 const { Content, remarkPluginFrontmatter } = entry ? await render(entry) : {};
 
-export const getLastModifiedDate = (
+export const getPublishingDate = (
   frontmatter: typeof remarkPluginFrontmatter
 ) => {
   if (!frontmatter) return;
 
   dayjs.extend(utc);
 
-  return dayjs.utc(frontmatter.lastModified || undefined);
+  return dayjs.utc(frontmatter.created || undefined);
 };
 
-const lastModifiedTime = getLastModifiedDate(remarkPluginFrontmatter)?.format(
+const publishingDate = getPublishingDate(remarkPluginFrontmatter)?.format(
   "D MMMM YYYY"
 );
 
@@ -147,7 +147,7 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
         <Cover
           cover={cover}
           entry={entry}
-          className={`hidden lg:inline rounded-3xl h-[40vh] mb-6`}
+          className="hidden lg:inline rounded-3xl h-[40vh] mb-6"
         />
       )
     }
@@ -156,7 +156,7 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
     </Text>
     {category && <Text subtitle>{category}</Text>}
     <Text
-      className={`${Content ? "is-entry" : ""} ${lastModifiedTime ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl`}
+      className={`${Content ? "is-entry" : ""} ${publishingDate ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl`}
       markdown={!!Content}
       tag={tag}>{Content ? <Content /> : <slot />}</Text
     >
@@ -190,9 +190,9 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
       )
     }
     {
-      lastModifiedTime && (
+      publishingDate && (
         <Text subtitle className="mt-0.5 xl:mt-3">
-          {lastModifiedTime}
+          {publishingDate}
         </Text>
       )
     }

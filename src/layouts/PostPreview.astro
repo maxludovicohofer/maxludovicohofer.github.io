@@ -6,7 +6,7 @@ import { Image } from "astro:assets";
 import {
   getCategory,
   getDescription,
-  getLastModifiedDate,
+  getPublishingDate,
   getPostCover,
   type PostCollection,
 } from "./Post.astro";
@@ -57,11 +57,11 @@ const readMoreLink =
 const cover = getPostCover(entry);
 const description = getDescription(entry);
 const category = getCategory(entry);
-const lastModifiedTime =
+const publishingDate =
   !hideDate &&
-  getLastModifiedDate(remarkPluginFrontmatter)?.format("D MMMM YYYY");
+  getPublishingDate(remarkPluginFrontmatter)?.format("D MMMM YYYY");
 
-const subtitle = [category, lastModifiedTime].filter((part) => !!part);
+const subtitle = [category, publishingDate].filter((part) => !!part);
 
 const backgroundClass = "object-cover pointer-events-none";
 ---
@@ -94,7 +94,7 @@ const backgroundClass = "object-cover pointer-events-none";
   )
 }
 <Text
-  className={`${lastModifiedTime ? "mt-4" : Content || Astro.slots.has("title") ? "mt-6" : ""} text-xl 2xl:text-3xl ${container ? "max-h-[32rem]" : readMoreLink ? "h-64" : ""}`}
+  className={`${publishingDate ? "mt-4" : Content || Astro.slots.has("title") ? "mt-6" : ""} text-xl 2xl:text-3xl ${container ? "max-h-[32rem]" : readMoreLink ? "h-64" : ""}`}
   markdown={!!Content}
   tag={tag ?? (container ? "div" : undefined)}
   >{
