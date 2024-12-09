@@ -26,7 +26,7 @@ downloadLinks:
 - https://0ry0.itch.io/steelsilk
 awards:
 - Rookie awards 2024 "Game of the year - People's choice"
-youTubeID: GnYk13OdS4s
+youTubeID: B3AP58YL1cI
 youTubeAspectRatio: 16/9
 ---
 
