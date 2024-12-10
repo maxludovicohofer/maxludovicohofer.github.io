@@ -56,13 +56,13 @@ sortedEntries.push(...additional);
 ---
 
 <ol
-  class={`content-list/${collection} content-list-size/${numberOfItemsToLoadEager} ${className} grid grid-cols-1 gap-4 mb-4`}
+  class={`content-list/${collection} content-list-size/${numberOfItemsToLoadEager} ${className} grid grid-flow-col md:grid-flow-row md:grid-cols-1 gap-4 mb-4 overflow-x-scroll scrollbar-hide`}
 >
   {
     sortedEntries.map((entry) => (
       <Card
         tag="li"
-        className={`content-slug/${entry.id} ${short ? "h-64 xl:max-h-none" : ""}`}
+        className={`content-slug/${entry.id} w-[80vw] md:w-auto scale-90 md:scale-100 intersect:scale-100 intersect-half duration-200 ${short ? "h-80 md:h-64" : ""}`}
       >
         <PostPreview
           importance="container-item"
@@ -77,15 +77,56 @@ sortedEntries.push(...additional);
 <script>
   import type { CollectionKey } from "astro:content";
 
+  const carouselEvents: {
+    [K in keyof HTMLElementEventMap]?: (
+      this: HTMLElement,
+      e: HTMLElementEventMap[K]
+    ) => any;
+  } = {
+    mouseenter: function () {
+      this.style.cursor = "grab";
+    },
+    mousedown: function (e) {
+      // Prevent selection of text
+      e.preventDefault();
+    },
+    mousemove: function (e) {
+      // Move only if mouse clicked and not right click
+      if (!e.buttons || e.buttons === 2) return;
+      this.scrollLeft = this.scrollLeft - e.movementX;
+      this.style.cursor = "grabbing";
+    },
+    mouseup: function () {
+      this.style.cursor = "grab";
+    },
+  };
+
   document.addEventListener("astro:page-load", () => {
     const readEntriesString = localStorage.getItem("readEntries");
 
     const readEntries: Partial<Record<CollectionKey, string[]>> =
       readEntriesString ? JSON.parse(readEntriesString) : {};
 
+    const observer = new ResizeObserver((entries) =>
+      entries.forEach(({ target }) => {
+        const list = target as HTMLElement;
+
+        for (const event in carouselEvents) {
+          list[
+            list.scrollWidth > list.offsetWidth
+              ? "addEventListener"
+              : "removeEventListener"
+          ](event, carouselEvents[event as keyof typeof carouselEvents] as any);
+        }
+      })
+    );
+
     document
       .querySelectorAll<HTMLOListElement>("ol[class^=content-list]")
       .forEach((list) => {
+        observer.observe(list);
+
+        // Order entries
         const readEntrySlugs =
           readEntries[list.classList[0]?.split("/").at(-1) as CollectionKey];
 

@@ -19,6 +19,7 @@ interface Props {
   descriptionAsBody?: boolean | undefined;
   readMore?: string;
   readMoreText?: string;
+  readMoreClassName?: string;
   noReadMore?: boolean;
   minutesAlreadySpentReading?: number | undefined;
   importance?: "low" | "medium" | "high" | "container-item" | undefined;
@@ -34,6 +35,7 @@ const {
   readMore,
   readMoreText,
   noReadMore,
+  readMoreClassName = "",
   tag,
   hideDate,
   container,
@@ -128,7 +130,7 @@ const backgroundClass = "object-cover pointer-events-none";
   readMoreLink && (
     <Button
       cardButton
-      className="absolute bottom-0 left-0 h-1/3"
+      className={`absolute bottom-0 left-0 h-1/3 ${readMoreClassName}`}
       href={readMoreLink}
       navigate
     >

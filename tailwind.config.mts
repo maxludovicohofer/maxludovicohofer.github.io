@@ -7,5 +7,6 @@ export default {
   plugins: [
     require("@tailwindcss/typography"),
     require("tailwindcss-intersect"),
+    require("tailwind-scrollbar-hide"),
   ],
 };
