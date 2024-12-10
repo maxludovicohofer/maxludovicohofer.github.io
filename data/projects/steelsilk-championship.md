@@ -28,6 +28,7 @@ awards:
 - Rookie awards 2024 "Game of the year - People's choice"
 youTubeID: B3AP58YL1cI
 youTubeAspectRatio: 16/9
+publishingDate: 2024-04-01
 ---
 
 This is the master thesis of my game dev class. A game outline was authored for us by our professors and the concept art class.

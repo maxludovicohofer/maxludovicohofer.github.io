@@ -61,7 +61,7 @@ const description = getDescription(entry);
 const category = getCategory(entry);
 const publishingDate =
   !hideDate &&
-  getPublishingDate(remarkPluginFrontmatter)?.format("D MMMM YYYY");
+  getPublishingDate(entry, remarkPluginFrontmatter)?.format("D MMMM YYYY");
 
 const subtitle = [category, publishingDate].filter((part) => !!part);
 

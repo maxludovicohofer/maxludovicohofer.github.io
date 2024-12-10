@@ -39,6 +39,7 @@ export const getSortedEntries = async <C extends PostCollection>(
       entries.map(async (entry) => ({
         ...entry,
         publishingDate: getPublishingDate(
+          entry,
           (await render(entry)).remarkPluginFrontmatter
         )!,
       }))

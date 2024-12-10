@@ -9,6 +9,7 @@ tech:
 - Photoshop
 youTubeID: BRUzX8aHcfs
 youTubeAspectRatio: 16/10
+publishingDate: 2024-05-12
 ---
 
 This prototype was made to evolve my multiplayer and art skills. It is a solo project focused on making the coolest game I possibly can.

@@ -28,8 +28,11 @@ export type PostCollection = Extract<CollectionKey, "projects" | "thoughts">;
 const { Content, remarkPluginFrontmatter } = entry ? await render(entry) : {};
 
 export const getPublishingDate = (
+  post: typeof entry,
   frontmatter: typeof remarkPluginFrontmatter
 ) => {
+  if (post?.data.publishingDate) return dayjs(post.data.publishingDate);
+
   if (!frontmatter) return;
 
   dayjs.extend(utc);
@@ -37,9 +40,12 @@ export const getPublishingDate = (
   return dayjs.utc(frontmatter.created || undefined);
 };
 
-const publishingDate = getPublishingDate(remarkPluginFrontmatter)?.format(
-  "D MMMM YYYY"
-);
+const publishingDate = getPublishingDate(
+  entry,
+  remarkPluginFrontmatter
+)?.format("D MMMM YYYY");
+
+console.log(entry?.data.publishingDate);
 
 export const getPostCover = (post: typeof entry) => {
   if (!post) return;

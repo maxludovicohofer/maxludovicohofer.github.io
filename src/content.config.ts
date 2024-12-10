@@ -4,6 +4,7 @@ import { file, glob } from "astro/loaders";
 const post = z.object({
   draft: z.boolean().optional(),
   title: z.string(),
+  publishingDate: z.date().optional(),
   youTubeID: z.string().optional(),
   youTubeAspectRatio: z.enum(["16/9", "16/10"]).optional(),
 });
