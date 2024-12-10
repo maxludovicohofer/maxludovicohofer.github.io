@@ -45,8 +45,6 @@ const publishingDate = getPublishingDate(
   remarkPluginFrontmatter
 )?.format("D MMMM YYYY");
 
-console.log(entry?.data.publishingDate);
-
 export const getPostCover = (post: typeof entry) => {
   if (!post) return;
 
