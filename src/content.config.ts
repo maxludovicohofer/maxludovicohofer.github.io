@@ -3,6 +3,7 @@ import { file, glob } from "astro/loaders";
 
 const post = z.object({
   draft: z.boolean().optional(),
+  highlight: z.boolean().optional(),
   title: z.string(),
   publishingDate: z.date().optional(),
   youTubeID: z.string().optional(),

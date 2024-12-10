@@ -8,8 +8,9 @@ interface Props {
   collection: PostCollection;
   short?: boolean;
   className?: string;
-  exclude?: CollectionEntry<PostCollection>[] | undefined;
-  additional?: CollectionEntry<PostCollection>[];
+  exclude?: string[] | undefined;
+  disableHighlight?: true;
+  append?: CollectionEntry<PostCollection>[];
   numberOfItemsToLoadEager?: number | undefined;
 }
 
@@ -18,19 +19,19 @@ const {
   short,
   className = "",
   exclude = [],
-  additional = [],
+  append = [],
+  disableHighlight,
   numberOfItemsToLoadEager = 0,
 } = Astro.props;
 
 export const getSortedEntries = async <C extends PostCollection>(
   entryCollection: C,
-  excluded: CollectionEntry<C>[] = []
+  excluded: string[] = []
 ) => {
-  // Exclude highlight and latest, will be added again at the end
   const entries = await getCollection(
     entryCollection,
     ({ data: { draft }, id }) =>
-      !draft && excluded.every((entry) => id !== entry.id)
+      !draft && excluded.every((entry) => id !== entry)
   );
 
   // Sort by latest first
@@ -53,26 +54,30 @@ const sortedEntries: CollectionEntry<PostCollection>[] = await getSortedEntries(
 );
 
 // Add additional at the end
-sortedEntries.push(...additional);
+sortedEntries.push(...append);
 ---
 
 <ol
   class={`content-list/${collection} content-list-size/${numberOfItemsToLoadEager} ${className} grid grid-flow-col md:grid-flow-row md:grid-cols-1 gap-4 mb-4 overflow-x-scroll scrollbar-hide`}
 >
   {
-    sortedEntries.map((entry) => (
-      <Card
-        tag="li"
-        className={`content-slug/${entry.id} w-[70vw] md:w-auto scale-90 md:scale-100 intersect:scale-100 intersect-half duration-200 ${short ? "h-80 md:h-64" : ""}`}
-      >
-        <PostPreview
-          importance="container-item"
-          entry={entry}
-          minutesAlreadySpentReading={short ? 0 : undefined}
-          descriptionAsBody={short}
-        />
-      </Card>
-    ))
+    sortedEntries.map((entry) => {
+      const isHighlight = !disableHighlight && entry.data.highlight;
+
+      return (
+        <Card
+          tag="li"
+          className={`content-slug/${entry.id} w-[75vw] md:w-auto scale-90 md:scale-100 intersect:scale-100 intersect-half duration-200 ${short ? `h-80 ${isHighlight ? "md:h-auto" : "md:h-64 2xl:h-80"}` : ""} ${isHighlight ? "row-start-1 col-span-full" : ""}`}
+        >
+          <PostPreview
+            importance="container-item"
+            entry={entry}
+            minutesAlreadySpentReading={short && !isHighlight ? 0 : undefined}
+            descriptionAsBody={short && !isHighlight}
+          />
+        </Card>
+      );
+    })
   }
 </ol>
 <script>
@@ -136,6 +141,9 @@ sortedEntries.push(...additional);
         readEntrySlugs.forEach((readSlug) => {
           for (const item of list.children) {
             if (item.classList[0]?.split("/").at(-1) !== readSlug) continue;
+
+            // Do not move highlights
+            if (item.classList.contains("row-start-1")) return;
 
             // Move to end
             list.append(item);

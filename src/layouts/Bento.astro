@@ -3,33 +3,21 @@ import Card from "@layouts/Card.astro";
 ---
 
 <div
-  class="grid grid-cols-1 lg:grid-cols-3 lg:grid-rows-3 xl:grid-cols-4 xl:grid-rows-4 gap-4 lg:min-h-screen p-4"
+  class="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 2xl:min-h-screen gap-4 p-4"
 >
-  <Card className="lg:row-span-2">
-    <slot name="1-medium" />
-  </Card>
-  <Card className="!p-0">
-    <slot name="2-small" />
-  </Card>
   <Card>
-    <slot name="3-small" />
+    <slot name="1-small" />
   </Card>
-  <Card className="lg:row-start-2 lg:row-span-2 lg:col-start-2 lg:col-span-2">
-    <slot name="4-large" />
+  <Card className="!p-0 lg:col-span-2 2xl:row-span-2">
+    <slot name="2-medium" />
   </Card>
-  <Card className="lg:row-start-3">
-    <slot name="5-small" />
+  <Card container className="lg:row-span-3 lg:col-span-2 2xl:col-span-1">
+    <slot name="3-large" />
   </Card>
-  <Card className="lg:row-start-4 lg:col-span-2">
-    <slot name="6-medium" />
+  <Card className="2xl:row-span-2">
+    <slot name="4-small" />
   </Card>
-  <Card className="lg:row-start-4">
-    <slot name="7-small" />
-  </Card>
-  <Card className="lg:row-span-2 lg:col-span-2 xl:col-span-1" container>
-    <slot name="8-large" />
-  </Card>
-  <Card className="lg:row-start-5 xl:row-start-auto lg:row-span-2" container>
-    <slot name="9-medium" />
+  <Card container className="lg:row-span-2 2xl:row-span-1 2xl:col-span-2">
+    <slot name="5-medium" />
   </Card>
 </div>

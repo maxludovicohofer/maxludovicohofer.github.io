@@ -19,6 +19,7 @@ const { exclude, isNotFullpage } = Astro.props;
   <ContentList
     collection="projects"
     short
+    disableHighlight
     className="md:grid-cols-1 xl:grid-cols-2"
     exclude={exclude}
     numberOfItemsToLoadEager={isNotFullpage ? undefined : 2}

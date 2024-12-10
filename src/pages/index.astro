@@ -4,27 +4,10 @@ import Bento from "@layouts/Bento.astro";
 import Profile from "@components/Profile.astro";
 import AllProjects from "@components/AllProjects.astro";
 import AllThoughts from "@components/AllThoughts.astro";
-import { getEntry } from "astro:content";
 import Video from "@layouts/Video.astro";
-import PostPreview from "@layouts/PostPreview.astro";
 import TechPreview from "@components/TechPreview.astro";
-import { getSortedEntries } from "@components/ContentList.astro";
-
-export const highlightThought = await getEntry("thoughts", "style")!;
-export const highlightProject = await getEntry(
-  "projects",
-  "steelsilk-championship"
-)!;
-export const latestThought = (
-  await getSortedEntries("thoughts", [highlightThought])
-)[0];
-export const latestProject = (
-  await getSortedEntries("projects", [highlightProject])
-)[0];
 
 // TODO PHASE 2 I18N ENG/JAP. ADD LANG SELECTION ON TOP OF PAGE (TWO UNDERLINED LINKS WITH LANG ICONS).
-// TODO PHASE 2 ON DESKTOP/LG, SHOWREEL SHOULD BE COLSPAN 2
-// TODO PHASE 2 SHOW PROJECTS AND THOUGHTS AS CAROUSEL ON MOBILE, AND REMOVE HIGHLIGHT AND LATEST (BUT SHOW THEM BEFORE THE OTHERS). ALSO OTHER THOUGHTS/PROJECTS SHOULD BE CAROUSEL. (NO LINKS TO PROJECTS/THOUGHTS PAGE). ALSO FILTER SHOULD BE DIRECTLY IN THIS CAROUSEL. THEN, MOVE THESE CAROUSELS RIGHT AFTER SHOWREEL. MAYBE SOMETHING SIMILAR ALSO FOR DESKTOP.
 ---
 
 <Page
@@ -32,22 +15,13 @@ export const latestProject = (
   description="Max Hofer's game design portfolio and blog."
 >
   <Bento>
-    <Profile slot="1-medium" importance="low" />
+    <Profile slot="1-small" importance="low" />
     <Video
-      slot="2-small"
+      slot="2-medium"
       youTubeInfo={{ id: "m0KhK_J0LiQ", aspect: "16/10" }}
     />
-    <PostPreview slot="3-small" entry={highlightThought} hideDate />
-    <PostPreview
-      slot="4-large"
-      entry={highlightProject}
-      importance="high"
-      hideDate
-    />
-    <PostPreview slot="5-small" entry={latestThought} />
-    <PostPreview slot="6-medium" entry={latestProject} importance="high" />
-    <TechPreview slot="7-small" importance="low" />
-    <AllProjects slot="8-large" />
-    <AllThoughts slot="9-medium" />
+    <AllProjects slot="3-large" />
+    <TechPreview slot="4-small" importance="low" />
+    <AllThoughts slot="5-medium" />
   </Bento>
 </Page>

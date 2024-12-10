@@ -1,7 +1,6 @@
 ---
 import ContentList from "@components/ContentList.astro";
 import PostPreview from "@layouts/PostPreview.astro";
-import { highlightProject, latestProject } from "@pages/index.astro";
 import { title } from "@pages/projects/index.astro";
 import type { ComponentProps } from "astro/types";
 
@@ -10,10 +9,6 @@ interface Props {
 }
 
 const { importance } = Astro.props;
-
-const alreadyVisible = [highlightProject, latestProject].filter(
-  (entry) => !!entry
-);
 
 // TODO PHASE 2 ADD FILTER FOR PROJECT TYPE (FIXED IN RIGHT BOTTOM CORNER ON MOBILE, TO THE RIGHT OF TITLE IN LARGE)
 ---
@@ -29,8 +24,6 @@ const alreadyVisible = [highlightProject, latestProject].filter(
   <ContentList
     collection="projects"
     short
-    className="md:grid-cols-2 xl:grid-cols-1"
-    exclude={alreadyVisible}
-    additional={alreadyVisible}
+    className="md:grid-cols-2 2xl:grid-cols-1"
   />
 </PostPreview>

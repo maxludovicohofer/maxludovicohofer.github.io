@@ -1,7 +1,6 @@
 ---
 import ContentList from "@components/ContentList.astro";
 import PostPreview from "@layouts/PostPreview.astro";
-import { highlightThought, latestThought } from "@pages/index.astro";
 import { title } from "@pages/thoughts/index.astro";
 import type { ComponentProps } from "astro/types";
 
@@ -10,10 +9,6 @@ interface Props {
 }
 
 const { importance } = Astro.props;
-
-const alreadyVisible = [highlightThought, latestThought].filter(
-  (entry) => !!entry
-);
 ---
 
 <PostPreview
@@ -27,7 +22,7 @@ const alreadyVisible = [highlightThought, latestThought].filter(
   <ContentList
     collection="thoughts"
     short
-    exclude={alreadyVisible}
-    additional={alreadyVisible}
+    disableHighlight
+    className="2xl:grid-cols-2"
   />
 </PostPreview>
