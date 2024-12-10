@@ -72,7 +72,7 @@ let highlightSet = false;
       return (
         <Card
           tag="li"
-          className={`content-slug/${entry.id} w-[75vw] md:w-auto scale-90 md:scale-100 intersect:scale-100 intersect-half duration-300 ${short ? `h-80 2xl:h-80 ${isHighlight ? "md:h-[23.5rem]" : "md:h-64"}` : ""} ${isHighlight ? "row-start-1 col-span-full" : ""}`}
+          className={`content-slug/${entry.id} w-[75vw] md:w-auto ${short ? `h-80 2xl:h-80 ${isHighlight ? "md:h-[23.5rem]" : "md:h-64"}` : ""} ${isHighlight ? "row-start-1 col-span-full" : ""}`}
         >
           <PostPreview
             importance="container-item"
