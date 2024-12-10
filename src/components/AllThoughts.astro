@@ -19,10 +19,5 @@ const { importance } = Astro.props;
   importance={importance}
 >
   <Fragment slot="title">{title}</Fragment>
-  <ContentList
-    collection="thoughts"
-    short
-    disableHighlight
-    className="2xl:grid-cols-2"
-  />
+  <ContentList collection="thoughts" short className="2xl:grid-cols-2" />
 </PostPreview>

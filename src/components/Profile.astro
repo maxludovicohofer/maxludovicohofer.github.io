@@ -13,8 +13,6 @@ interface Props {
   importance?: ComponentProps<typeof PostPreview>["importance"];
 }
 
-// TODO PHASE 2 SPACE TEXT EVENLY
-
 const { importance } = Astro.props;
 ---
 
@@ -44,5 +42,7 @@ const { importance } = Astro.props;
   <Fragment slot="title">Creating fun is both a science and an art</Fragment>
   Innovative game designer with experience in leadership, specializing in core mechanics,
   combat, AI and systems.
-  <Button href="/public-resume.pdf" className="mt-10">View my resume</Button>
+  <Button slot="footer" className="mt-4" href="/public-resume.pdf"
+    >View my resume</Button
+  >
 </PostPreview>

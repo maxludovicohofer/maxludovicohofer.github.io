@@ -68,48 +68,58 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
 const backgroundClass = "object-cover pointer-events-none";
 ---
 
-{
-  Astro.slots.has("header") && (
-    <Text subtitle className="mb-6" tag="div">
-      <slot name="header" />
-    </Text>
-  )
-}
-<Text
-  title
-  className={`${
-    importance === "container-item"
-      ? "text-2xl 2xl:text-3xl"
-      : importance === "low"
-        ? "text-3xl lg:text-2xl 2xl:text-3xl"
-        : importance === "medium"
-          ? "text-3xl 2xl:text-5xl"
-          : "text-3xl lg:text-5xl 2xl:text-8xl"
-  } ${container ? "lg:ml-4 mt-1 lg:mt-0" : ""}`}
-  >{entry?.data.title ?? <slot name="title" />}</Text
->
-{
-  subtitle.length !== 0 && (
-    <Text subtitle className="xl:mt-3">
-      {subtitle.join(" \\ ")}
-    </Text>
-  )
-}
-<Text
-  className={`${publishingDate ? "mt-4" : Content || Astro.slots.has("title") ? "mt-6" : ""} text-xl 2xl:text-3xl ${container ? "max-h-[32rem]" : readMoreLink ? "h-64" : ""}`}
-  markdown={!!Content}
-  tag={tag ?? (container ? "div" : undefined)}
-  >{
-    descriptionAsBody && description ? (
-      description
-    ) : Content ? (
-      <Content />
-    ) : (
-      <slot />
+<div class="flex flex-col h-full justify-between">
+  <div>
+    {
+      Astro.slots.has("header") && (
+        <Text subtitle className="mb-6" tag="div">
+          <slot name="header" />
+        </Text>
+      )
+    }
+    <Text
+      title
+      className={`${
+        importance === "container-item"
+          ? "text-2xl 2xl:text-3xl"
+          : importance === "low"
+            ? "text-3xl lg:text-2xl 2xl:text-3xl"
+            : importance === "medium"
+              ? "text-3xl 2xl:text-5xl"
+              : "text-3xl lg:text-5xl 2xl:text-8xl"
+      } ${container ? "lg:ml-4 mt-1 lg:mt-0" : ""}`}
+      >{entry?.data.title ?? <slot name="title" />}</Text
+    >
+    {
+      subtitle.length !== 0 && (
+        <Text subtitle className="xl:mt-3">
+          {subtitle.join(" \\ ")}
+        </Text>
+      )
+    }
+    <Text
+      className={`${publishingDate ? "mt-4" : Content || Astro.slots.has("title") ? "mt-6" : ""} text-xl 2xl:text-3xl ${container ? "max-h-[32rem]" : readMoreLink ? "h-64" : ""}`}
+      markdown={!!Content}
+      tag={tag ?? (container ? "div" : undefined)}
+      >{
+        descriptionAsBody && description ? (
+          description
+        ) : Content ? (
+          <Content />
+        ) : (
+          <slot />
+        )
+      }</Text
+    >
+  </div>
+  {
+    Astro.slots.has("footer") && (
+      <Text subtitle className="mt-6" tag="div">
+        <slot name="footer" />
+      </Text>
     )
-  }</Text
->
-
+  }
+</div>
 {
   cover && (
     <div

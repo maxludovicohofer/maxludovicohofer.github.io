@@ -55,6 +55,8 @@ const sortedEntries: CollectionEntry<PostCollection>[] = await getSortedEntries(
 
 // Add additional at the end
 sortedEntries.push(...append);
+
+let highlightSet = false;
 ---
 
 <ol
@@ -62,12 +64,15 @@ sortedEntries.push(...append);
 >
   {
     sortedEntries.map((entry) => {
-      const isHighlight = !disableHighlight && entry.data.highlight;
+      const isHighlight =
+        !disableHighlight && !highlightSet && entry.data.highlight;
+
+      if (isHighlight) highlightSet = true;
 
       return (
         <Card
           tag="li"
-          className={`content-slug/${entry.id} w-[75vw] md:w-auto scale-90 md:scale-100 intersect:scale-100 intersect-half duration-300 ${short ? `h-80 ${isHighlight ? "md:h-auto" : "md:h-64 2xl:h-80"}` : ""} ${isHighlight ? "row-start-1 col-span-full" : ""}`}
+          className={`content-slug/${entry.id} w-[75vw] md:w-auto scale-90 md:scale-100 intersect:scale-100 intersect-half duration-300 ${short ? `h-80 2xl:h-80 ${isHighlight ? "md:h-[23.5rem]" : "md:h-64"}` : ""} ${isHighlight ? "row-start-1 col-span-full" : ""}`}
         >
           <PostPreview
             importance="container-item"
@@ -142,8 +147,8 @@ sortedEntries.push(...append);
           for (const item of list.children) {
             if (item.classList[0]?.split("/").at(-1) !== readSlug) continue;
 
-            // Do not move highlights
-            if (item.classList.contains("row-start-1")) return;
+            // Remove highlight classes
+            item.classList.remove("row-start-1", "col-span-full");
 
             // Move to end
             list.append(item);
