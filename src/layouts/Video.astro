@@ -64,8 +64,8 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 
         const iFrame = resizingDiv.firstElementChild! as HTMLIFrameElement;
 
-        const expandWidth = ["h-[300vw]", "w-full"];
-        const expandHeight = ["h-full", "w-[300vh]"];
+        const expandWidth = ["h-[300dvw]", "w-full"];
+        const expandHeight = ["h-full", "w-[300dvh]"];
         iFrame.classList.remove(...expandWidth, ...expandHeight);
         iFrame.classList.add(
           ...(containerIsWider ? expandWidth : expandHeight)

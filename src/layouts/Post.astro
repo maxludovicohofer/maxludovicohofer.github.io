@@ -135,13 +135,13 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
     <Cover
       cover={cover}
       entry={entry}
-      className="lg:hidden fixed left-0 right-0 mx-auto active:rounded-xl h-[55vh] -mt-[14vh]"
+      className="lg:hidden fixed left-0 right-0 mx-auto active:rounded-xl h-[55dvh] -mt-[14dvh]"
     />
   )
 }
 <Card
   container={container}
-  className={`!bg-opacity-0 !p-6 !pt-7 md:!pt-12 !shadow-none ${cover ? `rounded-b-none lg:rounded-none translate-y-[26vh] lg:translate-y-0 ${followedByOther ? "mb-[25vh] lg:mb-0" : ""}` : "rounded-none"} ${container ? "" : "bg-gradient-to-b from-zinc-100 dark:from-zinc-900 to-zinc-200 dark:to-zinc-950"} flex flex-col items-center`}
+  className={`!bg-opacity-0 !p-6 !pt-7 md:!pt-12 !shadow-none ${cover ? `rounded-b-none lg:rounded-none translate-y-[26dvh] lg:translate-y-0 ${followedByOther ? "mb-[25dvh] lg:mb-0" : ""}` : "rounded-none"} ${container ? "" : "bg-gradient-to-b from-zinc-100 dark:from-zinc-900 to-zinc-200 dark:to-zinc-950"} flex flex-col items-center`}
 >
   <div
     class={`w-full mb-16 lg:mb-6 ${fullWidth ? "lg:px-20" : "max-w-[40rem] 2xl:max-w-[70rem]"}`}
@@ -151,7 +151,7 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
         <Cover
           cover={cover}
           entry={entry}
-          className="hidden lg:inline rounded-3xl h-[40vh] mb-6"
+          className="hidden lg:inline rounded-3xl h-[40dvh] mb-6"
         />
       )
     }
