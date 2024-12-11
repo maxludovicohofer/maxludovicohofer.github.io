@@ -42,16 +42,14 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
   </div>
 </div>
 <script>
+  import { getCssValue } from "src/utils";
+
   //? Init divs for iframe and resize dynamically
   document.addEventListener("astro:page-load", () => {
     const observer = new ResizeObserver((entries) =>
       entries.forEach(({ target }) => {
         const containerAspectRatio = target.clientWidth / target.clientHeight;
-        const videoAspectEnum = Array.from(target.classList)
-          .find((part) => part.startsWith("aspect"))!
-          .split("-")
-          .at(-1)!
-          .replace(/[\[\]']+/g, "");
+        const videoAspectEnum = getCssValue(target, "aspect");
         const videoAspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
         const containerIsWider = containerAspectRatio > videoAspectRatio;
 

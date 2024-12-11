@@ -89,7 +89,7 @@ const backgroundClass = "object-cover pointer-events-none";
       (entry?.data.title || Astro.slots.has("title")) && (
         <Text
           title
-          className={`${
+          className={`preview-title ${
             importance === "container-item"
               ? "text-2xl 2xl:text-3xl"
               : importance === "container-highlight"

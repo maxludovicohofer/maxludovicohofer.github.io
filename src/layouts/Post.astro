@@ -207,9 +207,7 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
 
   //? Save read entries
   document.addEventListener("astro:page-load", () => {
-    const isEntry = document.querySelector<HTMLDivElement>("div.is-entry");
-
-    if (!isEntry) return;
+    if (!document.querySelector(".is-entry")) return;
 
     const readEntriesString = localStorage.getItem("readEntries");
 

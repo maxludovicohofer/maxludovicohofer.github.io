@@ -56,9 +56,6 @@ const sortedEntries: CollectionEntry<PostCollection>[] = await getSortedEntries(
 // Add additional at the end
 sortedEntries.push(...append);
 
-const hasProperty = (property: string, className: string) =>
-  className.split(" ").includes(property);
-
 let highlightSet = false;
 ---
 
@@ -75,7 +72,7 @@ let highlightSet = false;
       return (
         <Card
           tag="li"
-          className={`content-slug/${entry.id} w-[75vw] md:w-auto ${short ? `h-[17rem] ${isHighlight ? `${hasProperty("md:grid-cols-2", className) ? "" : "md:h-[22rem]"} ${hasProperty("2xl:grid-cols-2", className) ? "" : "2xl:h-[34rem]"}` : ""}` : ""} ${isHighlight ? "row-start-1 col-span-full" : ""}`}
+          className={`content-slug/${entry.id} w-[75vw] md:w-auto h-[17rem] ${isHighlight ? `row-start-1 col-span-full md:h-[25rem]` : ""}`}
         >
           <PostPreview
             importance={isHighlight ? "container-highlight" : "container-item"}
@@ -90,6 +87,7 @@ let highlightSet = false;
 </ol>
 <script>
   import type { CollectionKey } from "astro:content";
+  import { hasProperty, removeFromClass } from "src/utils";
 
   const carouselEvents: {
     [K in keyof HTMLElementEventMap]?: (
@@ -150,14 +148,25 @@ let highlightSet = false;
           for (const item of list.children) {
             if (item.classList[0]?.split("/").at(-1) !== readSlug) continue;
 
-            // TODO FIX HIGHLIGHT INCREASED TEXT SIZE
-            // Remove highlight classes
-            item.classList.remove(
-              "row-start-1",
-              "col-span-full",
-              "md:h-[23.5rem]"
-            );
-            item.classList.add("md:h-64");
+            if (hasProperty("row-start-1", item.className)) {
+              // Remove highlight classes
+              item.className = removeFromClass(item.className, [
+                "row-start",
+                "col-span",
+                "md:h",
+              ]);
+
+              const highlightTitle = item.querySelector<HTMLElement>(
+                "[class^=preview-title]"
+              )!;
+
+              // Add normal text
+              highlightTitle.className = removeFromClass(
+                highlightTitle.className,
+                ["text"]
+              );
+              highlightTitle.classList.add("text-2xl", "2xl:text-3xl");
+            }
 
             // Move to end
             list.append(item);
@@ -169,7 +178,9 @@ let highlightSet = false;
 
         if (!itemsToLoadEager) return;
 
-        const images = list.querySelectorAll<HTMLImageElement>("img");
+        const images = list.querySelectorAll<
+          HTMLImageElement | HTMLIFrameElement
+        >("img, iframe");
 
         for (
           let index = 0;

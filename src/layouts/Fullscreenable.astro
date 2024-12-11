@@ -17,7 +17,7 @@ const { className = "" } = Astro.props;
   <slot />
 </Button>
 <script>
-  import { activateModal } from "src/utils";
+  import { activateModal, removeFromClass, getCssValue } from "src/utils";
 
   function setFullscreenMedia(this: HTMLButtonElement) {
     const modal = document.querySelector("div.modal")!;
@@ -28,22 +28,15 @@ const { className = "" } = Astro.props;
       true
     ) as HTMLImageElement | HTMLVideoElement | HTMLIFrameElement;
 
-    const cleanClass = (className: string) =>
-      className.replace(
-        /(^|\s)(\S*-)*(size-|w-|h-|pointer-events-|object-)\S*/g,
-        ""
-      );
-
-    fullscreenMedia.className = cleanClass(fullscreenMedia.className);
+    fullscreenMedia.className = removeFromClass(fullscreenMedia.className, [
+      "size",
+      "w",
+      "h",
+      "pointer-events",
+      "object",
+    ]);
 
     if (fullscreenMedia.tagName === "IFRAME") {
-      const getCssValue = (element: HTMLElement, key: string) =>
-        Array.from(element.classList)
-          .find((part) => part.startsWith(key))
-          ?.split("-")
-          .at(-1)!
-          .replace(/[\[\]']+/g, "");
-
       const videoAspectEnum = getCssValue(fullscreenMedia, "aspect");
       const aspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
 

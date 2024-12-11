@@ -38,3 +38,22 @@ export const deactivateModal = () => {
 //? Text
 export const toTitleCase = (word: string) =>
   word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+
+export const removeFromClass = (className: string, remove: string[]) =>
+  className.replace(
+    new RegExp(
+      `(^|\\s)(\\S*[:-])*(${remove.map((part) => `${part}-`).join("|")})\\S*`,
+      "g"
+    ),
+    ""
+  );
+
+export const getCssValue = (element: Element, key: string) =>
+  Array.from(element.classList)
+    .find((part) => part.startsWith(key))
+    ?.split("-")
+    .at(-1)!
+    .replace(/[[\]']+/g, "");
+
+export const hasProperty = (property: string, className: string) =>
+  className.split(" ").includes(property);
