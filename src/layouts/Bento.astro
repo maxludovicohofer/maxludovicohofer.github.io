@@ -22,7 +22,10 @@ import Card from "@layouts/Card.astro";
   >
     <slot name="4-large" />
   </Card>
-  <Card container className="lg:row-span-2 2xl:row-span-1 2xl:col-span-2">
+  <Card
+    container
+    className="-mt-4 md:mt-0 lg:row-span-2 2xl:row-span-1 2xl:col-span-2"
+  >
     <slot name="5-medium" />
   </Card>
 </div>

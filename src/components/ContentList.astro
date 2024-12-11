@@ -63,7 +63,7 @@ let highlightSet = false;
 ---
 
 <ol
-  class={`content-list/${collection} content-list-size/${numberOfItemsToLoadEager} ${className} grid grid-flow-col md:grid-flow-row gap-4 pb-4 overflow-x-scroll scrollbar-hide`}
+  class={`content-list/${collection} content-list-size/${numberOfItemsToLoadEager} ${className} grid grid-flow-col md:grid-flow-row gap-4 overflow-x-scroll scrollbar-hide`}
 >
   {
     sortedEntries.map((entry) => {
@@ -78,10 +78,10 @@ let highlightSet = false;
           className={`content-slug/${entry.id} w-[75vw] md:w-auto ${short ? `h-[17rem] ${isHighlight ? `${hasProperty("md:grid-cols-2", className) ? "" : "md:h-[22rem]"} ${hasProperty("2xl:grid-cols-2", className) ? "" : "2xl:h-[34rem]"}` : ""}` : ""} ${isHighlight ? "row-start-1 col-span-full" : ""}`}
         >
           <PostPreview
-            importance="container-item"
+            importance={isHighlight ? "container-highlight" : "container-item"}
             entry={entry}
             minutesAlreadySpentReading={short && !isHighlight ? 0 : undefined}
-            descriptionAsBody={short && !isHighlight}
+            descriptionAsBody={short}
           />
         </Card>
       );
