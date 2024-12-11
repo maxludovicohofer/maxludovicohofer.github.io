@@ -17,101 +17,89 @@ const { className = "" } = Astro.props;
   <slot />
 </Button>
 <script>
-  const activateModal = (content: HTMLElement) => {
-    const modalSlot = document.querySelector<HTMLDivElement>("div.modal-slot")!;
-    modalSlot.classList.add("!pointer-events-auto");
+  import { activateModal } from "src/utils";
 
-    const backdrop = modalSlot.querySelector<HTMLDivElement>("div.modal-back")!;
-    backdrop.classList.add("!opacity-100");
+  function setFullscreenMedia(this: HTMLButtonElement) {
+    const modal = document.querySelector("div.modal")!;
 
-    const backButton =
-      modalSlot.querySelector<HTMLButtonElement>("button.modal-back")!;
-    backButton.classList.add("!opacity-100");
+    if (modal.childElementCount) return;
 
-    const modal = modalSlot.querySelector<HTMLDivElement>("div.modal")!;
-    modal.append(content);
+    const fullscreenMedia = this.querySelector("img, iframe, video")!.cloneNode(
+      true
+    ) as HTMLImageElement | HTMLVideoElement | HTMLIFrameElement;
 
-    content.className.replace(/(^|\s)(\S*-)*(pointer-events-)\S*/g, "");
-    content.classList.add("pointer-events-auto");
-  };
+    const cleanClass = (className: string) =>
+      className.replace(
+        /(^|\s)(\S*-)*(size-|w-|h-|pointer-events-|object-)\S*/g,
+        ""
+      );
+
+    fullscreenMedia.className = cleanClass(fullscreenMedia.className);
+
+    if (fullscreenMedia.tagName === "IFRAME") {
+      const getCssValue = (element: HTMLElement, key: string) =>
+        Array.from(element.classList)
+          .find((part) => part.startsWith(key))
+          ?.split("-")
+          .at(-1)!
+          .replace(/[\[\]']+/g, "");
+
+      const videoAspectEnum = getCssValue(fullscreenMedia, "aspect");
+      const aspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
+
+      const observer = new ResizeObserver((entries) =>
+        entries.forEach(({ target }) => {
+          // Follows modal slot expansion
+          const expandWidth = ["h-[90vh]", "lg:h-[80vh]"];
+          const expandHeight = ["w-[90vw]", "lg:w-[80vw]"];
+
+          fullscreenMedia.classList.remove(...expandWidth, ...expandHeight);
+
+          fullscreenMedia.classList.add(
+            ...(target.clientWidth / target.clientHeight > aspectRatio
+              ? expandWidth
+              : expandHeight)
+          );
+        })
+      );
+
+      observer.observe(
+        document.querySelector<HTMLDivElement>("div.modal-slot")!
+      );
+
+      const startTime = getCssValue(fullscreenMedia, "current-time");
+
+      if (startTime) {
+        fullscreenMedia.src = fullscreenMedia.src.replace(
+          /start=\d+/,
+          `start=${startTime}`
+        );
+      }
+
+      fullscreenMedia.src = fullscreenMedia.src
+        .replace("controls=0", "controls=1")
+        .replace("disablekb=1", "disablekb=0")
+        .replace("autoplay=0", "autoplay=1");
+    } else {
+      fullscreenMedia.classList.add("size-full");
+    }
+
+    activateModal(fullscreenMedia);
+  }
 
   document.addEventListener("astro:page-load", () =>
     document
       .querySelectorAll<HTMLButtonElement>("button.can-fullscreen")
-      ?.forEach((fullImage) =>
-        fullImage.addEventListener("click", () => {
-          const modal = document.querySelector("div.modal")!;
+      .forEach((fullImage) =>
+        fullImage.addEventListener("click", setFullscreenMedia)
+      )
+  );
 
-          if (modal.childElementCount) return;
-
-          const fullscreenMedia = fullImage
-            .querySelector("img, iframe, video")!
-            .cloneNode(true) as
-            | HTMLImageElement
-            | HTMLVideoElement
-            | HTMLIFrameElement;
-
-          const cleanClass = (className: string) =>
-            className.replace(
-              /(^|\s)(\S*-)*(size-|w-|h-|pointer-events-|object-)\S*/g,
-              ""
-            );
-
-          fullscreenMedia.className = cleanClass(fullscreenMedia.className);
-
-          if (fullscreenMedia.tagName === "IFRAME") {
-            const getCssValue = (element: HTMLElement, key: string) =>
-              Array.from(element.classList)
-                .find((part) => part.startsWith(key))
-                ?.split("-")
-                .at(-1)!
-                .replace(/[\[\]']+/g, "");
-
-            const videoAspectEnum = getCssValue(fullscreenMedia, "aspect");
-            const aspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
-
-            const observer = new ResizeObserver((entries) =>
-              entries.forEach(({ target }) => {
-                // Follows modal slot expansion
-                const expandWidth = ["h-[90vh]", "lg:h-[80vh]"];
-                const expandHeight = ["w-[90vw]", "lg:w-[80vw]"];
-
-                fullscreenMedia.classList.remove(
-                  ...expandWidth,
-                  ...expandHeight
-                );
-
-                fullscreenMedia.classList.add(
-                  ...(target.clientWidth / target.clientHeight > aspectRatio
-                    ? expandWidth
-                    : expandHeight)
-                );
-              })
-            );
-
-            observer.observe(
-              document.querySelector<HTMLDivElement>("div.modal-slot")!
-            );
-
-            const startTime = getCssValue(fullscreenMedia, "current-time");
-
-            if (startTime) {
-              fullscreenMedia.src = fullscreenMedia.src.replace(
-                /start=\d+/,
-                `start=${startTime}`
-              );
-            }
-
-            fullscreenMedia.src = fullscreenMedia.src
-              .replace("controls=0", "controls=1")
-              .replace("disablekb=1", "disablekb=0")
-              .replace("autoplay=0", "autoplay=1");
-          } else {
-            fullscreenMedia.classList.add("size-full");
-          }
-
-          activateModal(fullscreenMedia);
-        })
+  document.addEventListener("astro:before-swap", () =>
+    document
+      .querySelectorAll<HTMLButtonElement>("button.can-fullscreen")
+      .forEach((fullImage) =>
+        fullImage.removeEventListener("click", setFullscreenMedia)
       )
   );
 </script>

@@ -18,29 +18,37 @@ const { className = "", buttonName } = Astro.props;
 <script>
   import { navigate } from "astro:transitions/client";
 
+  const back = () => {
+    if (document.referrer) {
+      navigate("/");
+    } else {
+      // This code fixes Astro scroll restoration
+      const { scrollX, scrollY } = history.state as {
+        scrollX: number;
+        scrollY: number;
+      };
+
+      sessionStorage.setItem(
+        location.pathname,
+        JSON.stringify({
+          left: scrollX,
+          top: scrollY,
+        } satisfies ScrollToOptions)
+      );
+
+      history.back();
+    }
+  };
+
   document.addEventListener("astro:page-load", () =>
     document
-      .querySelector<HTMLButtonElement>("button.back-button")
-      ?.addEventListener("click", () => {
-        if (document.referrer) {
-          navigate("/");
-        } else {
-          // This code fixes Astro scroll restoration
-          const { scrollX, scrollY } = history.state as {
-            scrollX: number;
-            scrollY: number;
-          };
+      .querySelectorAll<HTMLButtonElement>("button.back-button")
+      .forEach((button) => button.addEventListener("click", back))
+  );
 
-          sessionStorage.setItem(
-            location.pathname,
-            JSON.stringify({
-              left: scrollX,
-              top: scrollY,
-            } satisfies ScrollToOptions)
-          );
-
-          history.back();
-        }
-      })
+  document.addEventListener("astro:before-swap", () =>
+    document
+      .querySelectorAll<HTMLButtonElement>("button.back-button")
+      .forEach((button) => button.removeEventListener("click", back))
   );
 </script>

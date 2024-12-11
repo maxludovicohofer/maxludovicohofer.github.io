@@ -150,6 +150,7 @@ let highlightSet = false;
           for (const item of list.children) {
             if (item.classList[0]?.split("/").at(-1) !== readSlug) continue;
 
+            // TODO FIX HIGHLIGHT INCREASED TEXT SIZE
             // Remove highlight classes
             item.classList.remove(
               "row-start-1",

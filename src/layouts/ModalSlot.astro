@@ -18,26 +18,19 @@ import BackButton from "@components/BackButton.astro";
   <BackButton buttonName="modal-back" className="opacity-0" />
 </div>
 <script>
-  const deactivateModal = () => {
-    const modalSlot = document.querySelector<HTMLDivElement>("div.modal-slot")!;
-    modalSlot.classList.remove("!pointer-events-auto");
-
-    const backButton =
-      modalSlot.querySelector<HTMLButtonElement>("button.modal-back")!;
-    backButton.classList.remove("!opacity-100");
-
-    const modal = modalSlot.querySelector<HTMLDivElement>("div.modal")!;
-    modal.replaceChildren();
-
-    const backdrop = modalSlot.querySelector<HTMLDivElement>("div.modal-back")!;
-    backdrop.classList.remove("!opacity-100");
-  };
+  import { deactivateModal } from "src/utils";
 
   document.addEventListener("astro:page-load", () =>
     document
       .querySelectorAll<HTMLElement>(".modal-back")
+      .forEach((element) => element.addEventListener("click", deactivateModal))
+  );
+
+  document.addEventListener("astro:before-swap", () =>
+    document
+      .querySelectorAll<HTMLElement>(".modal-back")
       .forEach((element) =>
-        element.addEventListener("click", () => deactivateModal())
+        element.removeEventListener("click", deactivateModal)
       )
   );
 </script>
