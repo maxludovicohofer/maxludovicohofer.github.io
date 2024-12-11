@@ -78,7 +78,7 @@ const backgroundClass = "object-cover pointer-events-none";
       )
     }
     {
-      Astro.slots.has("title") && (
+      (entry?.data.title || Astro.slots.has("title")) && (
         <Text
           title
           className={`${
