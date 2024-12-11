@@ -133,14 +133,15 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
                   observer.observe(iFrame);
 
                   if (!iFrame.className.includes("current-time")) return;
-                  setInterval(
-                    () =>
-                      (iFrame.className = iFrame.className.replace(
-                        /current-time-\d+/,
-                        `current-time-${target.getCurrentTime().toFixed()}`
-                      )),
-                    1000
-                  );
+
+                  const setCurrentTime = () =>
+                    (iFrame.className = iFrame.className.replace(
+                      /current-time-\d+/,
+                      `current-time-${target.getCurrentTime().toFixed()}`
+                    ));
+
+                  setCurrentTime();
+                  setInterval(setCurrentTime, 1000);
                 },
               },
             });
