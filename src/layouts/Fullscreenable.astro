@@ -24,9 +24,11 @@ const { className = "" } = Astro.props;
 
     if (modal.childElementCount) return;
 
-    const fullscreenMedia = this.querySelector("img, iframe, video")!.cloneNode(
+    const fullscreenMedia = this.querySelector("img, iframe, video")?.cloneNode(
       true
-    ) as HTMLImageElement | HTMLVideoElement | HTMLIFrameElement;
+    ) as HTMLImageElement | HTMLVideoElement | HTMLIFrameElement | undefined;
+
+    if (!fullscreenMedia) return;
 
     fullscreenMedia.className = removeFromClass(fullscreenMedia.className, [
       "size",

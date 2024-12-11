@@ -92,6 +92,26 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
     const getVideoId = (iFrameId) => iFrameId.split("/").at(1);
 
     let iFrameToPlayer = {};
+    let currentTimeInterval;
+
+    const currentTimeRegex = /current-time-\d+/;
+
+    const setCurrentTime = (element, time) =>
+      (element.className = element.className.replace(
+        currentTimeRegex,
+        `current-time-${time}`
+      ));
+
+    const setCurrentTimes = () => {
+      if (!Object.keys(iFrameToPlayer).length) {
+        clearInterval(currentTimeInterval);
+        currentTimeInterval = undefined;
+        return;
+      }
+
+      for (const player of Object.values(iFrameToPlayer))
+        setCurrentTime(player.getIframe(), player.getCurrentTime().toFixed());
+    };
 
     document.addEventListener("astro:page-load", () => {
       const observer = new IntersectionObserver((entries) =>
@@ -112,6 +132,9 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
                 .slice(1)
                 .filter((_, index) => index % 2 === 1);
 
+            const start = sessionStorage.getItem(`video/${videoId}`);
+            setCurrentTime(entry.target, start ?? 0);
+
             const player = new YT.Player(entry.target, {
               videoId,
               width: 0,
@@ -124,7 +147,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
                 loop,
                 controls,
                 disablekb,
-                start: sessionStorage.getItem(`video/${videoId}`),
+                start,
               },
               events: {
                 onReady: ({ target }) => {
@@ -132,16 +155,9 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
                   const iFrame = target.getIframe();
                   observer.observe(iFrame);
 
-                  if (!iFrame.className.includes("current-time")) return;
+                  if (!iFrame.className.match(currentTimeRegex)) return;
 
-                  const setCurrentTime = () =>
-                    (iFrame.className = iFrame.className.replace(
-                      /current-time-\d+/,
-                      `current-time-${target.getCurrentTime().toFixed()}`
-                    ));
-
-                  setCurrentTime();
-                  setInterval(setCurrentTime, 1000);
+                  currentTimeInterval ??= setInterval(setCurrentTimes, 1000);
                 },
               },
             });
