@@ -10,7 +10,7 @@ const { className = "", buttonName } = Astro.props;
 ---
 
 <Button
-  className={`${buttonName ?? "back-button"} ${className} !text-3xl fixed left-6 lg:left-9 bottom-5 lg:top-12 max-w-14 lg:max-w-10 min-h-14 lg:min-h-fit lg:max-h-10 hover:scale-110 active:scale-75`}
+  className={`${buttonName ?? "back-button"} ${className} !text-3xl fixed left-6 lg:left-9 top-[calc(100dvh-5rem)] lg:top-12 max-w-14 lg:max-w-10 min-h-14 lg:min-h-fit lg:max-h-10 hover:scale-110 active:scale-75`}
   rounded
 >
   <p class="mt-[-0.2rem] ml-[-0.1rem] lg:ml-[-0.2rem]">◂</p>
