@@ -7,9 +7,12 @@ import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { toTitleCase } from "src/utils";
 
-const tech = await getCollection("tech");
+interface Props {
+  className?: string;
+  compact?: boolean;
+}
 
-// TODO PHASE 2 REFERENCE PROJECTS WHERE THE TECH IS USED. MOST LIKELY SHOW THEM ON HOVER/INTERSECT (MOBILE).
+const { className = "", compact } = Astro.props;
 
 const isTechItem = (
   func: NonNullable<CollectionEntry<"tech">["data"]["functionalities"]>[number]
@@ -24,44 +27,66 @@ const isTechItem = (
     >
   ).id;
 
+const tech = (await getCollection("tech")).flatMap(({ data }) =>
+  compact &&
+  data.functionalities &&
+  data.functionalities.length !== 0 &&
+  !data.experience
+    ? (data.functionalities.filter(
+        isTechItem
+      ) as unknown as CollectionEntry<"tech">["data"])
+    : data
+);
+
+// TODO PHASE 2 REFERENCE PROJECTS WHERE THE TECH IS USED. MOST LIKELY SHOW THEM ON HOVER/INTERSECT (MOBILE).
+
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
 ---
 
-{
-  tech?.map(({ data: { id, experience, functionalities } }) => {
-    const rowSpan = (functionalities?.length ?? 0) / 8;
+<ol class={`grid ${className}`}>
+  {
+    tech?.map(({ id, experience, functionalities }) => {
+      const rowSpan = compact ? 1 : (functionalities?.length ?? 0) / 8;
 
-    return (
-      <li
-        class={`${rowSpan < 2 ? "row-span-1" : rowSpan < 3 ? "row-span-2" : rowSpan < 4 ? "row-span-3" : rowSpan < 5 ? "row-span-4" : "row-span-5"}`}
-      >
-        <Text title className="inline">
-          {id}
-        </Text>
-        {experience && (
-          <Text subtitle className="inline">
-            {toTitleCase(dayjs.duration(experience).humanize())} of experience
+      return (
+        <li
+          class={`${rowSpan < 2 ? "row-span-1" : rowSpan < 3 ? "row-span-2" : rowSpan < 4 ? "row-span-3" : rowSpan < 5 ? "row-span-4" : "row-span-5"}`}
+        >
+          <Text title={!compact} className="inline">
+            {id}
           </Text>
-        )}
-        {functionalities && functionalities.length !== 0 && (
-          <ol class="ml-8">
-            {functionalities.map((func) => (
-              <li>
-                <Text className="inline">
-                  {isTechItem(func) ? func.id : func}
+          {!compact && (
+            <>
+              {experience && (
+                <Text subtitle className="inline">
+                  {toTitleCase(dayjs.duration(experience).humanize())} of
+                  experience
                 </Text>
-                {isTechItem(func) && (
-                  <Text subtitle className="inline">
-                    {toTitleCase(dayjs.duration(func.experience).humanize())} of
-                    experience
-                  </Text>
-                )}
-              </li>
-            ))}
-          </ol>
-        )}
-      </li>
-    );
-  })
-}
+              )}
+              {functionalities && functionalities.length !== 0 && (
+                <ol class={compact ? "" : "ml-8"}>
+                  {functionalities.map((func) => (
+                    <li>
+                      <Text className="inline">
+                        {isTechItem(func) ? func.id : func}
+                      </Text>
+                      {isTechItem(func) && (
+                        <Text subtitle className="inline">
+                          {toTitleCase(
+                            dayjs.duration(func.experience).humanize()
+                          )}{" "}
+                          of experience
+                        </Text>
+                      )}
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </>
+          )}
+        </li>
+      );
+    })
+  }
+</ol>

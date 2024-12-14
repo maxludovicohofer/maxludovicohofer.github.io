@@ -3,7 +3,7 @@ import Card from "@layouts/Card.astro";
 ---
 
 <div
-  class="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 2xl:min-h-screen gap-4 p-4"
+  class="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-4 p-4 min-h-screen"
 >
   <Card>
     <slot name="1-small" />
@@ -12,20 +12,17 @@ import Card from "@layouts/Card.astro";
     <slot name="2-medium" />
   </Card>
   <Card
-    className="lg:row-start-2 lg:col-start-3 2xl:col-start-1 2xl:row-span-2"
-  >
-    <slot name="3-small" />
-  </Card>
-  <Card
     container
     className="lg:row-span-3 lg:col-span-2 2xl:row-start-1 2xl:col-start-4 2xl:col-span-1"
   >
-    <slot name="4-large" />
+    <slot name="3-large" />
   </Card>
   <Card
-    container
-    className="-mt-4 md:mt-0 lg:row-span-2 2xl:row-span-1 2xl:col-span-2"
+    className="lg:row-start-2 lg:col-start-3 2xl:row-start-3 2xl:col-start-2 2xl:col-span-2"
   >
+    <slot name="4-small" />
+  </Card>
+  <Card container className="lg:row-span-2">
     <slot name="5-medium" />
   </Card>
 </div>
