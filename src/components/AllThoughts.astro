@@ -19,5 +19,9 @@ const { importance } = Astro.props;
   importance={importance}
 >
   <Fragment slot="title">{title}</Fragment>
-  <ContentList collection="thoughts" short />
+  <ContentList
+    collection="thoughts"
+    short
+    className="md:grid-cols-2 lg:grid-cols-1"
+  />
 </PostPreview>
