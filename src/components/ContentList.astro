@@ -60,7 +60,7 @@ let highlightSet = false;
 ---
 
 <ol
-  class={`content-list/${collection} content-list-size/${numberOfItemsToLoadEager} ${className} grid grid-flow-col md:grid-flow-row gap-4 overflow-x-scroll scrollbar-hide pb-4 md:pb-0`}
+  class={`content-list/${collection} content-list-size/${numberOfItemsToLoadEager} ${className} grid grid-flow-col md:grid-flow-row gap-4 overflow-x-scroll scrollbar-hide snap-x snap-mandatory pb-4 md:pb-0`}
 >
   {
     sortedEntries.map((entry) => {
@@ -72,7 +72,7 @@ let highlightSet = false;
       return (
         <Card
           tag="li"
-          className={`content-slug/${entry.id} w-[75dvw] md:w-auto h-[17rem] ${isHighlight ? `row-start-1 col-span-full md:h-[23.6rem]` : ""}`}
+          className={`content-slug/${entry.id} snap-center w-[75dvw] md:w-auto h-[17rem] ${isHighlight ? `row-start-1 col-span-full md:h-[23.6rem]` : ""}`}
         >
           <PostPreview
             importance={isHighlight ? "container-highlight" : "container-item"}
@@ -105,7 +105,15 @@ let highlightSet = false;
     mousemove: function (e) {
       // Move only if mouse clicked and not right click
       if (!e.buttons || e.buttons === 2) return;
-      this.scrollLeft = this.scrollLeft - e.movementX;
+      const scrollTarget = this.scrollLeft - e.movementX;
+      this.scrollLeft = scrollTarget;
+
+      if (this.scrollLeft !== scrollTarget) {
+        // Disable snaps when it misbehaves
+        this.classList.remove("snap-x");
+        this.scrollLeft = scrollTarget;
+      }
+
       this.style.cursor = "grabbing";
     },
     mouseup: function () {
