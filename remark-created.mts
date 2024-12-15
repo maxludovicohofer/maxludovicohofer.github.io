@@ -1,11 +1,10 @@
 import { execSync } from "child_process";
+import type { RemarkPlugins } from "astro";
 
-export function remarkCreated() {
-  return function (_: any, file: any) {
-    const filepath = file.history[0];
-    const result = execSync(
-      `git log --reverse --pretty="format:%cI" "${filepath}"`
-    );
-    file.data.astro.frontmatter.created = result.toString().split("\n")[0];
-  };
-}
+export const remarkCreated: RemarkPlugins[number] = () => (_, file) => {
+  file.data.astro!.frontmatter!.created = execSync(
+    `git log --reverse --pretty="format:%cI" "${file.history[0]}"`
+  )
+    .toString()
+    .split("\n")[0];
+};
