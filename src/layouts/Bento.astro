@@ -13,7 +13,7 @@ import Card from "@layouts/Card.astro";
   </Card>
   <Card
     container
-    className="lg:row-span-3 lg:col-span-2 2xl:row-start-1 2xl:col-start-4 2xl:col-span-1"
+    className="lg:row-span-3 lg:col-span-2 2xl:row-start-1 2xl:col-start-4 2xl:col-span-1 -mx-4 md:mx-0"
   >
     <slot name="3-large" />
   </Card>
@@ -22,7 +22,7 @@ import Card from "@layouts/Card.astro";
   >
     <slot name="4-small" />
   </Card>
-  <Card container className="lg:row-span-2">
+  <Card container className="lg:row-span-2 -mx-4 md:mx-0">
     <slot name="5-medium" />
   </Card>
 </div>

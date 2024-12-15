@@ -19,9 +19,17 @@ interface Props {
   fullWidth?: boolean | undefined;
   container?: boolean;
   followedByOther?: boolean;
+  className?: string;
 }
 
-const { entry, tag, fullWidth, container, followedByOther } = Astro.props;
+const {
+  entry,
+  tag,
+  fullWidth,
+  container,
+  followedByOther,
+  className = "",
+} = Astro.props;
 
 export type PostCollection = Extract<CollectionKey, "projects" | "thoughts">;
 
@@ -144,7 +152,7 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
   className={`!bg-opacity-0 !p-6 !pt-7 md:!pt-12 !shadow-none ${cover ? "rounded-b-none lg:rounded-none translate-y-[26vh] lg:translate-y-0" : "rounded-none"} ${followedByOther ? (cover ? "mb-[25vh]" : "mb-0") : "mb-4"} lg:mb-0 ${container ? "" : "bg-gradient-to-b from-zinc-100 dark:from-zinc-900 to-zinc-200 dark:to-zinc-950"} flex flex-col items-center`}
 >
   <div
-    class={`w-full mb-16 lg:mb-6 ${fullWidth ? "lg:px-20" : "max-w-[40rem] 2xl:max-w-[70rem]"}`}
+    class={`${className} w-full mb-16 lg:mb-6 ${fullWidth ? "lg:px-20" : "max-w-[40rem] 2xl:max-w-[70rem]"}`}
   >
     {
       cover && (
