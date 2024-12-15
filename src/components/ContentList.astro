@@ -109,7 +109,7 @@ let highlightSet = false;
       this.scrollLeft = scrollTarget;
 
       if (this.scrollLeft !== scrollTarget) {
-        // Disable snaps when it misbehaves
+        // Disable scroll snap when it misbehaves
         this.classList.remove("snap-x");
         this.scrollLeft = scrollTarget;
       }

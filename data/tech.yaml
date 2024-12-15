@@ -29,30 +29,39 @@
   - Visual scripting
   - 2D sprite painting
   - Custom decision tree AI system
-- id: Programming
-  functionalities:
-  - id: C++
-    experience: P5Y
-  - id: C#
-    experience: P5Y
-  - id: Blueprints
-    experience: P3Y
-  - id: HLSL
-    experience: P1Y
-  - id: Python
-    experience: P3Y
-  - id: X86 assembly
-    experience: P1Y
-  - id: Full stack web development
-    experience: P5Y
-  - id: Mobile development
-    experience: P2Y
-  - id: Java
-    experience: P2Y
-  - id: SQL
-    experience: P5Y
-  - id: Amazon Web Services
-    experience: P5Y
+- id: C++
+  experience: P5Y
+  group: Programming
+- id: C#
+  experience: P5Y
+  group: Programming
+- id: Blueprints
+  experience: P3Y
+  group: Programming
+- id: HLSL
+  experience: P1Y
+  group: Programming
+- id: Python
+  experience: P3Y
+  group: Programming
+- id: X86 assembly
+  experience: P1Y
+  group: Programming
+- id: Full stack web development
+  experience: P5Y
+  group: Programming
+- id: Mobile development
+  experience: P2Y
+  group: Programming
+- id: Java
+  experience: P2Y
+  group: Programming
+- id: SQL
+  experience: P5Y
+  group: Programming
+- id: Amazon Web Services
+  experience: P5Y
+  group: Programming
 - id: Houdini
   experience: P6M
   functionalities:

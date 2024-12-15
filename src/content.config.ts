@@ -34,17 +34,9 @@ const tech = defineCollection({
   loader: file("data/tech.yaml"),
   schema: z.object({
     id: z.string(),
-    experience: z.string().duration().optional(),
-    functionalities: z
-      .string()
-      .or(
-        z.object({
-          id: z.string(),
-          experience: z.string().duration(),
-        })
-      )
-      .array()
-      .optional(),
+    experience: z.string().duration(),
+    group: z.string().optional(),
+    functionalities: z.string().array().optional(),
   }),
 });
 

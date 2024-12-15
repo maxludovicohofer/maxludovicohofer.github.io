@@ -1,6 +1,5 @@
 ---
 import Text from "@layouts/Text.astro";
-import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
@@ -14,29 +13,9 @@ interface Props {
 
 const { className = "", compact } = Astro.props;
 
-const isTechItem = (
-  func: NonNullable<CollectionEntry<"tech">["data"]["functionalities"]>[number]
-): func is Exclude<
-  NonNullable<CollectionEntry<"tech">["data"]["functionalities"]>[number],
-  string
-> =>
-  !!(
-    func as Exclude<
-      NonNullable<CollectionEntry<"tech">["data"]["functionalities"]>[number],
-      string
-    >
-  ).id;
+const tech = await getCollection("tech");
 
-const tech = (await getCollection("tech")).flatMap(({ data }) =>
-  compact &&
-  data.functionalities &&
-  data.functionalities.length !== 0 &&
-  !data.experience
-    ? (data.functionalities.filter(
-        isTechItem
-      ) as unknown as CollectionEntry<"tech">["data"])
-    : data
-);
+const renderedGroups: string[] = [];
 
 // TODO PHASE 2 REFERENCE PROJECTS WHERE THE TECH IS USED. MOST LIKELY SHOW THEM ON HOVER/INTERSECT (MOBILE).
 
@@ -46,35 +25,50 @@ dayjs.extend(relativeTime);
 
 <ol class={`grid ${className}`}>
   {
-    tech?.map(({ id, experience, functionalities }) => {
-      const rowSpan = compact ? 1 : (functionalities?.length ?? 0) / 8;
+    tech.map(({ data: { id, experience, group, functionalities } }) => {
+      const isGroup = group && !compact;
+
+      if (isGroup) {
+        if (renderedGroups.includes(group)) return;
+        else renderedGroups.push(group);
+      }
+
+      const content = isGroup
+        ? tech.filter(
+            ({ data: { group: groupToCheck } }) => groupToCheck === group
+          )
+        : (functionalities?.map((functionality) => ({
+            id: functionality,
+            data: undefined,
+          })) ?? []);
+
+      const rowSpan = (compact ? 1 : content.length) / 8;
+      const title = isGroup ? group : id;
 
       return (
         <li
           class={`${rowSpan < 2 ? "row-span-1" : rowSpan < 3 ? "row-span-2" : rowSpan < 4 ? "row-span-3" : rowSpan < 5 ? "row-span-4" : "row-span-5"}`}
         >
           <Text title={!compact} className="inline">
-            {id}
+            {title}
           </Text>
           {!compact && (
             <>
-              {experience && (
+              {experience && !isGroup && (
                 <Text subtitle className="inline">
                   {toTitleCase(dayjs.duration(experience).humanize())} of
                   experience
                 </Text>
               )}
-              {functionalities && functionalities.length !== 0 && (
-                <ol class={compact ? "" : "ml-8"}>
-                  {functionalities.map((func) => (
+              {content.length !== 0 && (
+                <ol class="ml-8">
+                  {content.map((item) => (
                     <li>
-                      <Text className="inline">
-                        {isTechItem(func) ? func.id : func}
-                      </Text>
-                      {isTechItem(func) && (
+                      <Text className="inline">{item.id}</Text>
+                      {item.data && (
                         <Text subtitle className="inline">
                           {toTitleCase(
-                            dayjs.duration(func.experience).humanize()
+                            dayjs.duration(item.data.experience).humanize()
                           )}{" "}
                           of experience
                         </Text>
