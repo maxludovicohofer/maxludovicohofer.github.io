@@ -60,7 +60,7 @@ let highlightSet = false;
 ---
 
 <ol
-  class={`content-list/${collection} content-list-size/${numberOfItemsToLoadEager} ${className} grid grid-flow-col md:grid-flow-row gap-4 overflow-x-scroll scrollbar-hide snap-x snap-mandatory pb-4 md:pb-0`}
+  class={`content-list/${collection} content-list-size/${numberOfItemsToLoadEager} ${className} grid grid-flow-col md:grid-flow-row gap-4 overflow-x-scroll scrollbar-hide snap-mandatory pb-4 md:pb-0`}
 >
   {
     sortedEntries.map((entry) => {
@@ -188,6 +188,9 @@ let highlightSet = false;
             return;
           }
         });
+
+        // Add snap
+        list.classList.add("snap-x");
 
         const itemsToLoadEager = Number(list.classList[1]?.split("/").at(-1));
 
