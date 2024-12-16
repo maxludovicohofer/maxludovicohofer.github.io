@@ -6,9 +6,10 @@ import ModalSlot from "./ModalSlot.astro";
 interface Props {
   title: string;
   description: string;
+  backHref?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, backHref } = Astro.props;
 
 const completeTitle = `Max Hofer \\ ${title}`;
 ---
@@ -29,7 +30,11 @@ const completeTitle = `Max Hofer \\ ${title}`;
   </head>
   <body class="bg-zinc-200 dark:bg-zinc-950">
     <slot />
-    {Astro.url.pathname !== "/" && <BackButton />}
+    {
+      Astro.url.pathname !== "/" && (
+        <BackButton href={backHref} prefetch="load" />
+      )
+    }
     <ModalSlot />
     <script>
       // This code fixes Astro scroll restoration
@@ -57,10 +62,9 @@ const completeTitle = `Max Hofer \\ ${title}`;
       });
     </script>
     <script
-      is:inline
-      data-astro-rerun
-      defer
       src="https://unpkg.com/tailwindcss-intersect@2.x.x/dist/observer.min.js"
-    ></script>
+      defer
+      is:inline
+      data-astro-rerun></script>
   </body>
 </html>

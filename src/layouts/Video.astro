@@ -3,7 +3,7 @@ import type { ComponentProps } from "astro/types";
 
 interface Props {
   youTubeInfo?: { id: string; aspect: "16/9" | "16/10" };
-  color?: "red" | "white";
+  color?: YT.ProgressBarColor;
   autoplay?: boolean;
   mute?: boolean;
   loop?: boolean;
@@ -46,9 +46,33 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 <script>
   import { getCssValue } from "src/utils";
 
-  //? Init divs for iframe and resize dynamically
-  document.addEventListener("astro:page-load", () => {
-    const observer = new ResizeObserver((entries) =>
+  const getVideoId = (iFrameId: string) => iFrameId.split("/").at(1)!;
+
+  let iFrameToPlayer: Record<string, YT.Player> = {};
+
+  let currentTimeInterval: NodeJS.Timeout | undefined;
+  const currentTimeRegex = /current-time-\d+/;
+
+  const setCurrentTime = (element: Element, seconds: number) =>
+    (element.className = element.className.replace(
+      currentTimeRegex,
+      `current-time-${seconds.toFixed()}`
+    ));
+
+  const setCurrentTimes = () => {
+    if (!Object.keys(iFrameToPlayer).length) {
+      clearInterval(currentTimeInterval);
+      currentTimeInterval = undefined;
+      return;
+    }
+
+    for (const player of Object.values(iFrameToPlayer))
+      setCurrentTime(player.getIframe(), player.getCurrentTime());
+  };
+
+  const loadVideos = () => {
+    //? Init divs for iframe and resize dynamically
+    const containerObserver = new ResizeObserver((entries) =>
       entries.forEach(({ target }) => {
         const containerAspectRatio = target.clientWidth / target.clientHeight;
         const videoAspectEnum = getCssValue(target, "aspect");
@@ -83,127 +107,110 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
 
         // Remove black bands
         if (!div.classList.contains("object-cover")) return;
-        observer.observe(div.parentElement!.parentElement!);
+        containerObserver.observe(div.parentElement!.parentElement!);
       });
+
+    // Handle players
+    const playerObserver = new IntersectionObserver((entries) =>
+      entries.forEach((entry) => {
+        const iFrameId = entry.target.id;
+        const player = iFrameToPlayer[iFrameId];
+
+        if (!player) {
+          if (!entry.isIntersecting) return;
+
+          // Lazily initialize player
+          playerObserver.unobserve(entry.target);
+
+          const videoId = getVideoId(iFrameId);
+          const [color, autoplay, mute, loop, controls, disablekb] =
+            entry.target.classList[0]!.split("/")
+              .slice(1)
+              .filter((_, index) => index % 2 === 1);
+
+          const start = Number(sessionStorage.getItem(`video/${videoId}`) ?? 0);
+          setCurrentTime(entry.target, start);
+
+          new YT.Player(iFrameId, {
+            videoId,
+            width: 0,
+            height: 0,
+            playerVars: {
+              playlist: videoId,
+              color: color as YT.ProgressBarColor,
+              autoplay: Number(autoplay),
+              mute: Number(mute),
+              loop: Number(loop),
+              controls: Number(controls),
+              disablekb: Number(disablekb),
+              start,
+            },
+            events: {
+              onReady: ({ target }) => {
+                iFrameToPlayer[iFrameId] = target;
+                const iFrame = target.getIframe();
+                playerObserver.observe(iFrame);
+
+                if (!iFrame.className.match(currentTimeRegex)) return;
+
+                currentTimeInterval ??= setInterval(setCurrentTimes, 1000);
+              },
+            },
+          });
+        } else {
+          // Play or pause player
+          if (entry.isIntersecting) player.playVideo();
+          else player.pauseVideo();
+        }
+      })
+    );
+
+    document
+      .querySelectorAll("div[class^=yt-player]")
+      .forEach((div) => playerObserver.observe(div));
+  };
+
+  addEventListener("youTubeAPIReady", () => loadVideos());
+  document.addEventListener("astro:page-load", () => {
+    if (!sessionStorage.getItem("youTubeAPIReady")) return;
+
+    loadVideos();
   });
+
+  //? Save times to restore start times
+  const savePlayerTimes = () => {
+    const videoData = Object.groupBy(
+      Object.entries(iFrameToPlayer),
+      ([iFrameId]) => getVideoId(iFrameId)
+    );
+
+    // Save longest time watched
+    for (const videoId in videoData) {
+      const players = videoData[videoId]!;
+
+      players.sort(
+        ([, playerA], [, playerB]) =>
+          playerB.getCurrentTime() - playerA.getCurrentTime()
+      );
+
+      sessionStorage.setItem(
+        `video/${videoId}`,
+        players[0]![1].getCurrentTime().toFixed()
+      );
+    }
+  };
+
+  document.addEventListener("astro:before-swap", () => {
+    savePlayerTimes();
+    // Cleanup before page change
+    iFrameToPlayer = {};
+  });
+  addEventListener("beforeunload", savePlayerTimes);
 </script>
-<script is:inline src="https://www.youtube.com/iframe_api" defer></script>
 <script is:inline>
-  //? Control player
   function onYouTubeIframeAPIReady() {
-    const getVideoId = (iFrameId) => iFrameId.split("/").at(1);
-
-    let iFrameToPlayer = {};
-    let currentTimeInterval;
-
-    const currentTimeRegex = /current-time-\d+/;
-
-    const setCurrentTime = (element, time) =>
-      (element.className = element.className.replace(
-        currentTimeRegex,
-        `current-time-${time}`
-      ));
-
-    const setCurrentTimes = () => {
-      if (!Object.keys(iFrameToPlayer).length) {
-        clearInterval(currentTimeInterval);
-        currentTimeInterval = undefined;
-        return;
-      }
-
-      for (const player of Object.values(iFrameToPlayer))
-        setCurrentTime(player.getIframe(), player.getCurrentTime().toFixed());
-    };
-
-    document.addEventListener("astro:page-load", () => {
-      const observer = new IntersectionObserver((entries) =>
-        entries.forEach((entry) => {
-          const iFrameId = entry.target.id;
-          const player = iFrameToPlayer[iFrameId];
-
-          if (!player) {
-            if (!entry.isIntersecting) return;
-
-            // Lazily initialize player
-            observer.unobserve(entry.target);
-
-            const videoId = getVideoId(iFrameId);
-            const [color, autoplay, mute, loop, controls, disablekb] =
-              entry.target.classList[0]
-                .split("/")
-                .slice(1)
-                .filter((_, index) => index % 2 === 1);
-
-            const start = sessionStorage.getItem(`video/${videoId}`);
-            setCurrentTime(entry.target, start ?? 0);
-
-            const player = new YT.Player(entry.target, {
-              videoId,
-              width: 0,
-              height: 0,
-              playerVars: {
-                playlist: videoId,
-                color,
-                autoplay,
-                mute,
-                loop,
-                controls,
-                disablekb,
-                start,
-              },
-              events: {
-                onReady: ({ target }) => {
-                  iFrameToPlayer[iFrameId] = target;
-                  const iFrame = target.getIframe();
-                  observer.observe(iFrame);
-
-                  if (!iFrame.className.match(currentTimeRegex)) return;
-
-                  currentTimeInterval ??= setInterval(setCurrentTimes, 1000);
-                },
-              },
-            });
-          } else {
-            // Play or pause player
-            if (entry.isIntersecting) player.playVideo();
-            else player.pauseVideo();
-          }
-        })
-      );
-
-      document
-        .querySelectorAll("div[class^=yt-player]")
-        .forEach((div) => observer.observe(div));
-    });
-
-    //? Save times to restore start times
-    const savePlayerTimes = () => {
-      const videoData = Object.groupBy(
-        Object.entries(iFrameToPlayer),
-        ([iFrameId]) => getVideoId(iFrameId)
-      );
-
-      // Save longest time watched
-      for (const videoId in videoData) {
-        const players = videoData[videoId];
-
-        players.sort(
-          ([, playerA], [, playerB]) =>
-            playerB.getCurrentTime() - playerA.getCurrentTime()
-        );
-
-        sessionStorage.setItem(
-          `video/${videoId}`,
-          players[0][1].getCurrentTime().toFixed()
-        );
-      }
-    };
-
-    document.addEventListener("astro:before-swap", () => {
-      savePlayerTimes();
-      // Cleanup before page change
-      iFrameToPlayer = {};
-    });
-    addEventListener("beforeunload", savePlayerTimes);
+    sessionStorage.setItem("youTubeAPIReady", true);
+    dispatchEvent(new Event("youTubeAPIReady"));
   }
 </script>
+<script src="https://www.youtube.com/iframe_api" defer is:inline></script>

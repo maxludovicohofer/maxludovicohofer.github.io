@@ -4,14 +4,22 @@ interface Props {
   className?: string | undefined;
   navigate?: boolean | undefined;
   noStyle?: boolean;
+  prefetch?: "viewport" | "load" | "hover";
 }
 
-const { href, className = "", navigate, noStyle } = Astro.props;
+const {
+  href,
+  className = "",
+  navigate,
+  noStyle,
+  prefetch = "viewport",
+} = Astro.props;
 ---
 
 <a
   class={`${className} ${noStyle ? "" : "underline hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 hover:scale-125 hover:text-base 2xl:hover:text-2xl active:scale-90 active:text-xs 2xl:active:text-lg duration-150"}`}
   href={href}
+  data-astro-prefetch={prefetch}
   target={navigate ? "_self" : "_blank"}
 >
   <slot />

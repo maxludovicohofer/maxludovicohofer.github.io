@@ -9,7 +9,13 @@ interface Props
   linkClassName?: string;
 }
 
-const { href, navigate, linkClassName = "", ...buttonProps } = Astro.props;
+const {
+  href,
+  navigate,
+  className,
+  linkClassName = "",
+  ...buttonProps
+} = Astro.props;
 ---
 
 {
@@ -19,13 +25,14 @@ const { href, navigate, linkClassName = "", ...buttonProps } = Astro.props;
       navigate={navigate}
       noStyle
       className={`${linkClassName} w-full`}
+      {...buttonProps}
     >
-      <LinkButton {...buttonProps}>
+      <LinkButton className={className} {...buttonProps}>
         <slot />
       </LinkButton>
     </Link>
   ) : (
-    <LinkButton {...buttonProps}>
+    <LinkButton className={className} {...buttonProps}>
       <slot />
     </LinkButton>
   )
