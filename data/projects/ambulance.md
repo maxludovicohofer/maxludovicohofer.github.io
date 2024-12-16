@@ -18,6 +18,7 @@ tech:
 - FL Studio
 youTubeID: sTfZB0OFbb4
 youTubeAspectRatio: 16/10
+publishingDate: 2023-10-06
 ---
 
 This game was made for a school game jam, with a theme of “unfortunately, you’re the bad guy”. We figured a silly game would make up for the lack of polish and go well with our target audience.

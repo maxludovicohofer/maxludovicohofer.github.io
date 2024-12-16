@@ -18,6 +18,7 @@ tech:
 - FL Studio
 youTubeID: P7M4caBlQzk
 youTubeAspectRatio: 16/10
+publishingDate: 2023-12-27
 ---
 
 This prototype was commissioned by a company, requesting a mobile platformer-like game, featuring an odd-eyed cat character. Also, particular emphasis was placed on the technical aspects of the game and making the character’s unique features shine.

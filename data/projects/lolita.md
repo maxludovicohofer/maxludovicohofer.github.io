@@ -10,6 +10,7 @@ tech:
 - FL Studio
 youTubeID: g_7fFIQiXZE
 youTubeAspectRatio: 16/10
+publishingDate: 2024-07-22
 ---
 
 This is a prototype I made for a personal project, specifically to improve my AI, storytelling and immersion design.
