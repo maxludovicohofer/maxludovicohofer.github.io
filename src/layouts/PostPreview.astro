@@ -79,9 +79,13 @@ const backgroundClass = "object-cover pointer-events-none";
 <div class={`${className} flex flex-col h-full justify-between`}>
   <div>
     {
-      Astro.slots.has("header") && (
-        <Text subtitle className="mb-6" tag="div">
-          <slot name="header" />
+      (Astro.slots.has("header") || entry?.data.draft) && (
+        <Text subtitle tag="div">
+          {entry?.data.draft ? (
+            "Draft (not visible in production)"
+          ) : (
+            <slot name="header" />
+          )}
         </Text>
       )
     }

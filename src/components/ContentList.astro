@@ -31,7 +31,7 @@ export const getSortedEntries = async <C extends PostCollection>(
   const entries = await getCollection(
     entryCollection,
     ({ data: { draft }, id }) =>
-      !draft && excluded.every((entry) => id !== entry)
+      (import.meta.env.DEV || !draft) && excluded.every((entry) => id !== entry)
   );
 
   // Sort by latest first
