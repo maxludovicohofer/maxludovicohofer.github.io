@@ -10,12 +10,15 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 // Generate a new path for every collection entry
 export const getStaticPaths = async () =>
-  (await getCollection("projects", ({ data: { draft } }) => !draft)).map(
-    (entry) => ({
-      params: { id: entry.id },
-      props: { entry },
-    })
-  );
+  (
+    await getCollection(
+      "projects",
+      ({ data: { draft } }) => import.meta.env.DEV || !draft
+    )
+  ).map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
 
 const { entry } = Astro.props;
 const { title, description, roles, tech, awards, team, developmentTime } =

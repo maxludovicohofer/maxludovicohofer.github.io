@@ -163,6 +163,18 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
         />
       )
     }
+    {
+      Astro.slots.has("header") ||
+        (entry?.data.draft && (
+          <Text subtitle tag="div">
+            {entry?.data.draft ? (
+              "Draft (not visible in production)"
+            ) : (
+              <slot name="header" />
+            )}
+          </Text>
+        ))
+    }
     <Text title className="text-3xl 2xl:text-5xl">
       {entry?.data.title ?? <slot name="title" />}
     </Text>

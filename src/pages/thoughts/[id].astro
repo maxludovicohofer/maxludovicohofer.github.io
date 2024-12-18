@@ -6,12 +6,15 @@ import { getCollection } from "astro:content";
 
 // Generate a new path for every collection entry
 export const getStaticPaths = async () =>
-  (await getCollection("thoughts", ({ data: { draft } }) => !draft)).map(
-    (entry) => ({
-      params: { id: entry.id },
-      props: { entry },
-    })
-  );
+  (
+    await getCollection(
+      "thoughts",
+      ({ data: { draft } }) => import.meta.env.DEV || !draft
+    )
+  ).map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
 
 const { entry } = Astro.props;
 ---

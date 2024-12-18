@@ -20,7 +20,7 @@ const { className = "" } = Astro.props;
   import { activateModal, removeFromClass, getCssValue } from "src/utils";
 
   function setFullscreenMedia(this: HTMLButtonElement) {
-    const modal = document.querySelector("div.modal")!;
+    const modal = document.querySelector<HTMLDivElement>("div.modal")!;
 
     if (modal.childElementCount) return;
 

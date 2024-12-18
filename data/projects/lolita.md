@@ -1,4 +1,5 @@
 ---
+draft: true
 title: Lolita
 description: Narrative stealth-action hybrid, where the character can transform into a multitude of animals.
 category: Prototype
@@ -13,7 +14,10 @@ youTubeAspectRatio: 16/10
 publishingDate: 2024-07-22
 ---
 
-This is a prototype I made for a personal project, specifically to improve my AI, storytelling and immersion design.
+I developed Lolita specifically to improve my immersive design, AI and narrative skills. The concepting phase was a collaborative effort with artistically inclined former classmates. We gathered reference art and wrote down both the story of the character and the ideal gameplay. To challenge ourselves with a unique design, we envisioned our target audience to be a more artsy group of people, more interested in the story and the artstyle than the fun in itself. Although the focus of the game is elsewhere, this definitely would not make up an excuse for poor gameplay.
+
+## The game
+
 The challenge of the gameplay was to design skills that could be used for both stealth and action, and communicate a feeling of fear and inferiority in stealth situations, while expressing power in action. I figured having skills as potentially involuntary actions could create tension for the player, where every step must be calculated precisely in order to avoid triggering skills. The game also starts out by encouraging stealth gameplay, in order to express a feeling of restraint, in accordance with the story of a young innocent girl that gradually becomes a powerful evil being. As the game progresses, new skills are acquired and the gameplay naturally evolves into action, as being caught is not as punishing.
 
 In this case, all documents were made to sell the script and game idea to possible colleagues and stakeholders. Therefore, the GDD is more focused on getting the concept and feeling of the ideal player across. It has some degree of technicality, but specifics are rather viewed through the prototype, than through the document. Thought boards have been set up to develop a unique art style and connect the whole vision together.
