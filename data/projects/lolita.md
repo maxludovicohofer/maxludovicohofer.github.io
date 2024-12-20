@@ -14,7 +14,7 @@ youTubeAspectRatio: 16/10
 publishingDate: 2024-07-22
 ---
 
-I developed Lolita specifically to improve my immersive design, AI and narrative skills. The concepting phase was a collaborative effort with artistically inclined former classmates. We gathered reference art and wrote down both the story of the character and the ideal gameplay. To challenge ourselves with a unique design, we envisioned our target audience to be a more artsy group of people, more interested in the story and the artstyle than the fun in itself. Although the focus of the game is elsewhere, this definitely would not make up an excuse for poor gameplay.
+I developed Lolita specifically to improve my immersive design, AI and narrative skills. The concepting phase was a collaborative effort with former classmates that are artistically inclined. We gathered reference art and wrote down both the story of the character and the ideal gameplay. To challenge ourselves with a unique design, we envisioned our target audience to be a more artsy group of people, interested in the story and the artstyle more than the fun in itself. Although the focus of the game is elsewhere, this definitely would not make up an excuse for poor game design.
 
 ## The game
 
