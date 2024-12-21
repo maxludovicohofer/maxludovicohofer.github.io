@@ -1,9 +1,10 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import { remarkMinutesRead } from "./remark-minutes-read.mts";
+import { rehypeLink } from "./rehype-link.mts";
 import { remarkCreated } from "./remark-created.mts";
 import remarkMath from "remark-math";
-import rehypeKatex from "rehype-katex";
+import rehypeKatex, { type Options as KatexOptions } from "rehype-katex";
 
 import tailwind from "@astrojs/tailwind";
 
@@ -16,6 +17,12 @@ export default defineConfig({
   site: "https://maxludovicohofer.github.io",
   markdown: {
     remarkPlugins: [remarkMinutesRead, remarkCreated, remarkMath],
-    rehypePlugins: [[rehypeKatex, { macros: { "\\ ": "\\allowbreak\\," } }]],
+    rehypePlugins: [
+      [
+        rehypeKatex,
+        { macros: { "\\ ": "\\allowbreak\\, " } } satisfies KatexOptions,
+      ],
+      rehypeLink,
+    ],
   },
 });

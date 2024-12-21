@@ -18,6 +18,10 @@ I developed Lolita specifically to improve my immersive design, AI and narrative
 
 ## The game
 
+Lolita is a game inspired by the [book of the same name](https://wikipedia.org/wiki/Lolita). In the game, a little girl living in a village near a forest gets unjustly shamed by her patriarchal community, and runs away into the woods. As she wonders among the never ending trees, she will be protected by a mysterious presence, that grants her the power to turn into various animals that she befriends. Initially, the game encourages the player not to kill anyone, and instead avoid combat altogether. This premise will eventually turn out to be false, and the player will always have a choice to avenge themselves with violence.
+
+## Game design
+
 The challenge of the gameplay was to design skills that could be used for both stealth and action, and communicate a feeling of fear and inferiority in stealth situations, while expressing power in action. I figured having skills as potentially involuntary actions could create tension for the player, where every step must be calculated precisely in order to avoid triggering skills. The game also starts out by encouraging stealth gameplay, in order to express a feeling of restraint, in accordance with the story of a young innocent girl that gradually becomes a powerful evil being. As the game progresses, new skills are acquired and the gameplay naturally evolves into action, as being caught is not as punishing.
 
 In this case, all documents were made to sell the script and game idea to possible colleagues and stakeholders. Therefore, the GDD is more focused on getting the concept and feeling of the ideal player across. It has some degree of technicality, but specifics are rather viewed through the prototype, than through the document. Thought boards have been set up to develop a unique art style and connect the whole vision together.
