@@ -1,7 +1,7 @@
 ---
 import Projects from "@components/Projects.astro";
 import Page from "@layouts/Page.astro";
-import Post from "@layouts/Post.astro";
+import Post, { getPostId } from "@layouts/Post.astro";
 import { getCollection, getEntries } from "astro:content";
 import PostFooter from "@components/PostFooter.astro";
 import dayjs from "dayjs";
@@ -16,7 +16,7 @@ export const getStaticPaths = async () =>
       ({ data: { draft } }) => import.meta.env.DEV || !draft
     )
   ).map((entry) => ({
-    params: { id: entry.id },
+    params: { id: getPostId(entry) },
     props: { entry },
   }));
 

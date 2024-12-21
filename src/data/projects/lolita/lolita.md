@@ -16,9 +16,11 @@ publishingDate: 2024-07-22
 
 I developed Lolita specifically to improve my immersive design, AI and narrative skills. The concepting phase was a collaborative effort with former classmates that are artistically inclined. We gathered reference art and wrote down both the story of the character and the ideal gameplay. To challenge ourselves with a unique design, we envisioned our target audience to be a more artsy group of people, interested in the story and the artstyle more than the fun in itself. Although the focus of the game is elsewhere, this definitely would not make up an excuse for poor game design.
 
-## The game
+![Reference art for the game](./lolita-game.webp)
 
-Lolita is a game inspired by the [book of the same name](https://wikipedia.org/wiki/Lolita). In the game, a little girl living in a village near a forest gets unjustly shamed by her patriarchal community, and runs away into the woods. As she wonders among the never ending trees, she will be protected by a mysterious presence, that grants her the power to turn into various animals that she befriends. Initially, the game encourages the player not to kill anyone, and instead avoid combat altogether. This premise will eventually turn out to be false, and the player will always have a choice to avenge themselves with violence.
+## Game
+
+Lolita is inspired by the [book of the same name](https://wikipedia.org/wiki/Lolita). In the game, a little girl living in a village near a forest gets unjustly shamed by her patriarchal community, and runs away into the woods. As she wonders among the never ending trees, she will be protected by a mysterious presence, that grants her the power to turn into various animals that she befriends. Initially, the game encourages the player not to kill anyone, and instead avoid combat altogether. This premise will eventually turn out to be false, and the player will always have a choice to avenge themselves with violence.
 
 ## Game design
 

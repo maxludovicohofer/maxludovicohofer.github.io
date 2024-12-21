@@ -30,7 +30,7 @@ export const linkProperties = ({
     rel: navigate ? undefined : "noopener noreferrer",
   } satisfies HTMLAttributes<"a">);
 
-export const rehypeLink: RehypePlugins[number] = () => {
+export const rehypeElements: RehypePlugins[number] = () => {
   return (tree) => {
     visit(tree, "element", (element: Element) => {
       if (

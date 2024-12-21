@@ -1,9 +1,16 @@
 ---
-import { linkProperties, type LinkProps } from "rehype-link.mts";
+import { linkProperties, type LinkProps } from "rehype-elements.mts";
 
 interface Props extends LinkProps {}
+
+const { className, ...props } = Astro.props;
 ---
 
-<a {...linkProperties(Astro.props)}>
+<a
+  {...linkProperties({
+    className: `${className} hover:text-base 2xl:hover:text-2xl active:text-xs 2xl:active:text-lg`,
+    ...props,
+  })}
+>
   <slot />
 </a>

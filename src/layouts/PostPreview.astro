@@ -9,6 +9,7 @@ import {
   getPublishingDate,
   getPostCover,
   type PostCollection,
+  getPostId,
 } from "./Post.astro";
 import type { ComponentProps } from "astro/types";
 import Video from "./Video.astro";
@@ -62,7 +63,7 @@ const minutesToRead =
 const readMoreLink =
   noReadMore || (realMinutesToRead && realMinutesToRead < 0)
     ? undefined
-    : (readMore ?? (entry && `/${entry.collection}/${entry.id}`));
+    : (readMore ?? (entry && `/${entry.collection}/${getPostId(entry)}`));
 
 const cover = getPostCover(entry);
 const description = getDescription(entry);

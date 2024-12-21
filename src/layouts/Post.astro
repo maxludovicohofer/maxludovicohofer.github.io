@@ -35,6 +35,8 @@ export type PostCollection = Extract<CollectionKey, "projects" | "thoughts">;
 
 const { Content, remarkPluginFrontmatter } = entry ? await render(entry) : {};
 
+export const getPostId = (post: typeof entry) => post?.id.split("/").at(-1);
+
 export const getPublishingDate = (
   post: typeof entry,
   frontmatter: typeof remarkPluginFrontmatter
@@ -62,10 +64,10 @@ export const getPostCover = (post: typeof entry) => {
       aspect: post.data.youTubeAspectRatio ?? "16/9",
     } satisfies ComponentProps<typeof Video>["youTubeInfo"];
 
-  const imageFolder = `/data/${post.collection}/`;
-  const extensions = ["png", "jpg", "jpeg", "gif"];
+  const imageFolder = `/src/data/${post.collection}/`;
+  const extensions = ["png", "jpg", "jpeg", "gif", "webp"];
   const images = import.meta.glob<{ default: ImageMetadata }>(
-    "/data/**/*.{png,jpg,jpeg,gif}"
+    "/src/data/**/*.{png,jpg,jpeg,gif,webp}"
   );
   const imagePath = `${imageFolder}${post.id}`;
   const image =
