@@ -20,12 +20,10 @@ const {
   class={`${className} ${
     noStyle
       ? ""
-      : "underline hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 hover:scale-125 active:scale-90 duration-150 hover:text-base 2xl:hover:text-2xl active:text-xs 2xl:active:text-lg"
+      : "text-current font-normal underline hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150"
   }`}
   href={href}
   data-astro-prefetch={prefetch}
   target={navigate ? "_self" : "_blank"}
-  rel={navigate ? undefined : "noopener noreferrer"}
+  rel={navigate ? undefined : "noopener noreferrer"}><slot /></a
 >
-  <slot />
-</a>

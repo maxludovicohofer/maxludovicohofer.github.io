@@ -178,9 +178,9 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
         </Text>
       )
     }
-    <Text title className="text-3xl 2xl:text-5xl">
-      {entry?.data.title ?? <slot name="title" />}
-    </Text>
+    <Text title className="text-3xl 2xl:text-5xl"
+      >{entry?.data.title ?? <slot name="title" />}</Text
+    >
     {category && <Text subtitle>{category}</Text>}
     <Text
       className={`${Content ? "is-entry" : ""} ${publishingDate ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl`}

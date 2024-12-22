@@ -13,9 +13,8 @@ const { className = "" } = Astro.props;
   noRounding
   fullHeight
   className={`can-fullscreen ${className} flex items-center justify-center overflow-hidden !bg-transparent`}
+  ><slot /></Button
 >
-  <slot />
-</Button>
 <script>
   import { activateModal, removeFromClass, getCssValue } from "src/utils";
 

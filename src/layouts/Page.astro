@@ -28,9 +28,8 @@ const completeTitle = `Max Hofer \\ ${title}`;
 
     <ClientRouter />
   </head>
-  <body class="bg-zinc-200 dark:bg-zinc-950">
-    <slot />
-    {
+  <body class="bg-zinc-200 dark:bg-zinc-950"
+    ><slot />{
       Astro.url.pathname !== "/" && (
         <BackButton href={backHref} prefetch="load" />
       )
