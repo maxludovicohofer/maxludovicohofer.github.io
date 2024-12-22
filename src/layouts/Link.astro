@@ -1,16 +1,31 @@
 ---
-import { linkProperties, type LinkProps } from "rehype-elements.mts";
+interface Props {
+  href?: string | undefined;
+  className?: string | undefined;
+  navigate?: boolean | undefined;
+  noStyle?: boolean;
+  prefetch?: "viewport" | "load" | "hover";
+}
 
-interface Props extends LinkProps {}
-
-const { className, ...props } = Astro.props;
+const {
+  className = "",
+  href,
+  navigate,
+  noStyle,
+  prefetch = "viewport",
+} = Astro.props;
 ---
 
 <a
-  {...linkProperties({
-    className: `${className} hover:text-base 2xl:hover:text-2xl active:text-xs 2xl:active:text-lg`,
-    ...props,
-  })}
+  class={`${className} ${
+    noStyle
+      ? ""
+      : "underline hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 hover:scale-125 active:scale-90 duration-150 hover:text-base 2xl:hover:text-2xl active:text-xs 2xl:active:text-lg"
+  }`}
+  href={href}
+  data-astro-prefetch={prefetch}
+  target={navigate ? "_self" : "_blank"}
+  rel={navigate ? undefined : "noopener noreferrer"}
 >
   <slot />
 </a>

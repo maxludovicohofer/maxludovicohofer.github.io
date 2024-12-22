@@ -1,7 +1,7 @@
 ---
 import ContentList from "@components/ContentList.astro";
-import Post from "@layouts/Post.astro";
-import { title } from "@pages/thoughts/index.astro";
+import Post from "@layouts/Post/Post.astro";
+import { title } from "@pages/projects/index.astro";
 import type { ComponentProps } from "astro/types";
 
 interface Props {
@@ -17,10 +17,10 @@ const { exclude, isNotFullpage } = Astro.props;
     >{isNotFullpage ? `Other ${title.toLowerCase()}` : title}</Fragment
   >
   <ContentList
-    collection="thoughts"
+    collection="projects"
     short
     disableHighlight
-    className="md:grid-cols-1 xl:grid-cols-2"
+    className="md:grid-cols-1 xl:grid-cols-2 -mx-6 md:mx-0 px-6 md:px-0"
     exclude={exclude}
     numberOfItemsToLoadEager={isNotFullpage ? undefined : 2}
   />

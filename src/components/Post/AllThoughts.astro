@@ -1,7 +1,7 @@
 ---
 import ContentList from "@components/ContentList.astro";
-import PostPreview from "@layouts/PostPreview.astro";
-import { title } from "@pages/projects/index.astro";
+import PostPreview from "@layouts/Post/PostPreview.astro";
+import { title } from "@pages/thoughts/index.astro";
 import type { ComponentProps } from "astro/types";
 
 interface Props {
@@ -9,22 +9,20 @@ interface Props {
 }
 
 const { importance } = Astro.props;
-
-// TODO PHASE 2 ADD FILTER FOR PROJECT TYPE TO THE RIGHT OF TITLE
 ---
 
 <PostPreview
   container
   className="mx-4 md:mx-0"
-  readMore="projects"
-  readMoreText="See all projects"
+  readMore="thoughts"
+  readMoreText="See all thoughts"
   readMoreClassName="hidden md:inline"
   importance={importance}
 >
   <Fragment slot="title">{title}</Fragment>
   <ContentList
-    collection="projects"
+    collection="thoughts"
     short
-    className="md:grid-cols-2 2xl:grid-cols-1 -mx-4 md:mx-0 px-4 md:px-0"
+    className="md:grid-cols-2 lg:grid-cols-1 -mx-4 md:mx-0 px-4 md:px-0"
   />
 </PostPreview>

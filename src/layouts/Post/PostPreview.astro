@@ -1,7 +1,7 @@
 ---
 import Text from "@layouts/Text.astro";
 import { render, type CollectionEntry } from "astro:content";
-import Button from "./Button.astro";
+import Button from "@layouts/Button.astro";
 import { Image } from "astro:assets";
 import {
   getCategory,
@@ -12,8 +12,9 @@ import {
   getPostId,
 } from "./Post.astro";
 import type { ComponentProps } from "astro/types";
-import Video from "./Video.astro";
-import { isVideoCover } from "@components/Cover.astro";
+import Video from "@layouts/Video.astro";
+import { isVideoCover } from "@components/Post/Cover.astro";
+import PostContent from "./PostContent.astro";
 
 interface Props {
   entry?: CollectionEntry<PostCollection> | undefined;
@@ -125,7 +126,7 @@ const backgroundClass = "object-cover pointer-events-none";
         descriptionAsBody && description ? (
           description
         ) : Content ? (
-          <Content />
+          <PostContent Content={Content} />
         ) : (
           <slot />
         )

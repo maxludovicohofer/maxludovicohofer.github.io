@@ -1,7 +1,10 @@
 ---
 import Card from "@layouts/Card.astro";
-import { getPublishingDate, type PostCollection } from "@layouts/Post.astro";
-import PostPreview from "@layouts/PostPreview.astro";
+import {
+  getPublishingDate,
+  type PostCollection,
+} from "@layouts/Post/Post.astro";
+import PostPreview from "@layouts/Post/PostPreview.astro";
 import { render, getCollection, type CollectionEntry } from "astro:content";
 
 interface Props {

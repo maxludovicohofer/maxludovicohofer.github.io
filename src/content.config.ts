@@ -12,7 +12,7 @@ const post = z.object({
 
 // Define your collection(s)
 const projects = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: "src/data/projects" }),
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "src/data/projects" }),
   schema: post.extend({
     description: z.string().max(120),
     category: z.enum(["Game", "Prototype", "Tool"]),
@@ -26,7 +26,7 @@ const projects = defineCollection({
 });
 
 const thoughts = defineCollection({
-  loader: glob({ pattern: "**/[^_]*.md", base: "src/data/thoughts" }),
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "src/data/thoughts" }),
   schema: post,
 });
 

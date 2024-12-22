@@ -5,13 +5,14 @@ import { render } from "astro:content";
 import type { ImageMetadata } from "astro";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
-import Card from "./Card.astro";
+import Card from "@layouts/Card.astro";
 import type { ComponentProps } from "astro/types";
-import Cover from "@components/Cover.astro";
-import Link from "./Link.astro";
-import Button from "./Button.astro";
-import type Video from "./Video.astro";
+import Cover from "@components/Post/Cover.astro";
+import Link from "@layouts/Link.astro";
+import Button from "@layouts/Button.astro";
+import type Video from "@layouts/Video.astro";
 import { toTitleCase } from "src/utils";
+import PostContent from "./PostContent.astro";
 
 interface Props {
   entry?: CollectionEntry<PostCollection>;
@@ -55,6 +56,8 @@ const publishingDate = getPublishingDate(
   remarkPluginFrontmatter
 )?.format("D MMMM YYYY");
 
+export const imageExtensions = ["png", "jpg", "jpeg", "gif", "webp"] as const;
+
 export const getPostCover = (post: typeof entry) => {
   if (!post) return;
 
@@ -65,20 +68,19 @@ export const getPostCover = (post: typeof entry) => {
     } satisfies ComponentProps<typeof Video>["youTubeInfo"];
 
   const imageFolder = `/src/data/${post.collection}/`;
-  const extensions = ["png", "jpg", "jpeg", "gif", "webp"];
   const images = import.meta.glob<{ default: ImageMetadata }>(
     "/src/data/**/*.{png,jpg,jpeg,gif,webp}"
   );
   const imagePath = `${imageFolder}${post.id}`;
   const image =
     images[
-      `${imagePath}.${extensions.find((extension) => images[`${imagePath}.${extension}`])}`
+      `${imagePath}.${imageExtensions.find((extension) => images[`${imagePath}.${extension}`])}`
     ];
 
   if (post.collection === "projects" && !post.data.draft && !image) {
     // Projects require image
     throw new Error(
-      `An image for "${imagePath}" does not exist in pattern: "${imageFolder}*.{${extensions.join(",")}}". Import an image, or preferably a video.`
+      `An image for "${imagePath}" does not exist in pattern: "${imageFolder}*.{${imageExtensions.join(",")}}". Import an image, or preferably a video.`
     );
   }
 
@@ -183,7 +185,7 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
     <Text
       className={`${Content ? "is-entry" : ""} ${publishingDate ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl`}
       markdown={!!Content}
-      tag={tag}>{Content ? <Content /> : <slot />}</Text
+      tag={tag}>{Content ? <PostContent Content={Content} /> : <slot />}</Text
     >
     {
       downloadsPresent && (

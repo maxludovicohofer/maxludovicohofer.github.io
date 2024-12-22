@@ -1,0 +1,13 @@
+---
+import PostImage from "@components/Post/PostImage.astro";
+import Link from "@layouts/Link.astro";
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+
+interface Props {
+  Content: AstroComponentFactory;
+}
+
+const { Content } = Astro.props;
+---
+
+<Content components={{ a: Link, img: PostImage }} />
