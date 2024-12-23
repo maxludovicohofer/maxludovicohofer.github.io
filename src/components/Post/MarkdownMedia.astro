@@ -1,0 +1,10 @@
+---
+import PostMedia from "./PostMedia.astro";
+import type { ComponentProps } from "astro/types";
+
+interface Props extends ComponentProps<typeof PostMedia> {}
+
+const { className = "", ...props } = Astro.props;
+---
+
+<PostMedia className={`${className} h-[40vh] mt-12 -mb-4`} {...props} />

@@ -35,6 +35,22 @@ export const deactivateModal = () => {
   backdrop.classList.remove("!opacity-100");
 };
 
+export const getPagePosition = (element?: HTMLElement) => {
+  let visitingElement = element;
+
+  let left = 0;
+  let top = 0;
+
+  while (visitingElement) {
+    left += (visitingElement.offsetLeft - visitingElement.scrollLeft + visitingElement.clientLeft);
+    top += (visitingElement.offsetTop - visitingElement.scrollTop + visitingElement.clientTop);
+
+    visitingElement = visitingElement.offsetParent as typeof visitingElement;
+  }
+
+  return { left, top };
+}
+
 //? Text
 export const toTitleCase = (word: string) =>
   word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();

@@ -1,0 +1,22 @@
+---
+import type { getPostCover, PostCollection } from "@layouts/Post/Post.astro";
+import type { CollectionEntry } from "astro:content";
+import PostMedia from "@components/Post/PostMedia.astro";
+import type { ComponentProps } from "astro/types";
+
+interface Props extends Omit<ComponentProps<typeof PostMedia>, "src" | "alt"> {
+  cover: NonNullable<ReturnType<typeof getPostCover>>;
+  entry: CollectionEntry<PostCollection> | undefined;
+}
+
+const { cover, entry, ...props } = Astro.props;
+---
+
+<PostMedia
+  src={cover}
+  alt={entry?.collection === "projects"
+    ? entry.data.description
+    : `Graphic explanation of "${entry!.data.title}"`}
+  loading="eager"
+  {...props}
+/>

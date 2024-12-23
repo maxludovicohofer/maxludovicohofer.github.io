@@ -1,5 +1,5 @@
 ---
-import PostImage from "@components/Post/PostImage.astro";
+import MarkdownMedia from "@components/Post/MarkdownMedia.astro";
 import Link from "@layouts/Link.astro";
 import type { AstroComponentFactory } from "astro/runtime/server/index.js";
 
@@ -10,4 +10,4 @@ interface Props {
 const { Content } = Astro.props;
 ---
 
-<Content components={{ a: Link, img: PostImage }} />
+<Content components={{ a: Link, img: MarkdownMedia }} />

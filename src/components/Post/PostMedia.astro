@@ -1,0 +1,19 @@
+---
+import Fullscreenable from "@layouts/Fullscreenable.astro";
+import Dissolving from "@layouts/Dissolving.astro";
+import type { ComponentProps } from "astro/types";
+import Media from "@layouts/Media.astro";
+
+interface Props extends ComponentProps<typeof Media> {
+  positionClassName?: string;
+  className?: string;
+}
+
+const { className = "", positionClassName = "", ...props } = Astro.props;
+---
+
+<Dissolving className={positionClassName}>
+  <Fullscreenable className={`${className} rounded-3xl`}>
+    <Media {...props} />
+  </Fullscreenable>
+</Dissolving>

@@ -2,7 +2,6 @@
 import Text from "@layouts/Text.astro";
 import { render, type CollectionEntry } from "astro:content";
 import Button from "@layouts/Button.astro";
-import { Image } from "astro:assets";
 import {
   getCategory,
   getDescription,
@@ -12,9 +11,8 @@ import {
   getPostId,
 } from "./Post.astro";
 import type { ComponentProps } from "astro/types";
-import Video from "@layouts/Video.astro";
-import { isVideoCover } from "@components/Post/Cover.astro";
 import PostContent from "./PostContent.astro";
+import Media from "@layouts/Media.astro";
 
 interface Props {
   entry?: CollectionEntry<PostCollection> | undefined;
@@ -74,8 +72,6 @@ const publishingDate =
   getPublishingDate(entry, remarkPluginFrontmatter)?.format("D MMMM YYYY");
 
 const subtitle = [category, publishingDate].filter((part) => !!part);
-
-const backgroundClass = "object-cover pointer-events-none";
 ---
 
 <div class={`${className} flex flex-col h-full justify-between`}>
@@ -146,15 +142,10 @@ const backgroundClass = "object-cover pointer-events-none";
     <div
       class={`absolute inset-0 pointer-events-none opacity-0 intersect:opacity-15 intersect-half duration-700 ${container ? "group-hover/container-card:opacity-15" : "group-hover/card:opacity-15"}`}
     >
-      {isVideoCover(cover) ? (
-        <Video className={backgroundClass} youTubeInfo={cover} />
-      ) : (
-        <Image
-          src={cover()}
-          class={`${backgroundClass} size-full`}
-          alt={description ?? `Graphic explanation of "${entry!.data.title}"`}
-        />
-      )}
+      <Media
+        src={cover}
+        alt={description ?? `Graphic explanation of "${entry!.data.title}"`}
+      />
     </div>
   )
 }
