@@ -144,12 +144,9 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
 
 {
   cover && (
-    <CoverMedia
-      cover={cover}
-      entry={entry}
-      className="h-[55vh] -mt-[39vh]"
-      positionClassName="lg:hidden fixed left-0 right-0 mx-auto"
-    />
+    <div class="lg:hidden fixed left-0 right-0 mx-auto">
+      <CoverMedia cover={cover} entry={entry} className="h-[55vh] -mt-[39vh]" />
+    </div>
   )
 }
 <Card
@@ -161,12 +158,9 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
   >
     {
       cover && (
-        <CoverMedia
-          cover={cover}
-          entry={entry}
-          className="h-[40vh] mb-6"
-          positionClassName="hidden lg:block"
-        />
+        <div class="hidden lg:inline">
+          <CoverMedia cover={cover} entry={entry} className="h-[40vh] mb-6" />
+        </div>
       )
     }
     {

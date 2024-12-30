@@ -42,14 +42,20 @@ export const getPagePosition = (element?: HTMLElement) => {
   let top = 0;
 
   while (visitingElement) {
-    left += (visitingElement.offsetLeft - visitingElement.scrollLeft + visitingElement.clientLeft);
-    top += (visitingElement.offsetTop - visitingElement.scrollTop + visitingElement.clientTop);
+    left +=
+      visitingElement.offsetLeft -
+      visitingElement.scrollLeft +
+      visitingElement.clientLeft;
+    top +=
+      visitingElement.offsetTop -
+      visitingElement.scrollTop +
+      visitingElement.clientTop;
 
     visitingElement = visitingElement.offsetParent as typeof visitingElement;
   }
 
-  return { left, top };
-}
+  return { left: Math.max(left, 0), top: Math.max(top, 0) };
+};
 
 //? Text
 export const toTitleCase = (word: string) =>

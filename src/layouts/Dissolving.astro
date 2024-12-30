@@ -6,7 +6,9 @@ interface Props {
 const { className = "" } = Astro.props;
 ---
 
-<div class={`${className} dissolving`}><slot /></div>
+<div class={`${className} dissolving`}>
+  <slot />
+</div>
 <script>
   import { getPagePosition } from "src/utils";
 
@@ -18,6 +20,7 @@ const { className = "" } = Astro.props;
         container.offsetHeight,
       1
     );
+
     container.style.opacity = `${1 - scrollPercent}`;
 
     const parallaxSpeed = 6;
