@@ -10,7 +10,7 @@ import type { ComponentProps } from "astro/types";
 import CoverMedia from "@components/Post/CoverMedia.astro";
 import Link from "@layouts/Link.astro";
 import Button from "@layouts/Button.astro";
-import type NewVideo from "@layouts/NewVideo.astro";
+import type Video from "@layouts/Video.astro";
 import { toTitleCase } from "src/utils";
 import PostContent from "./PostContent.astro";
 
@@ -65,7 +65,7 @@ export const getPostCover = (post: typeof entry) => {
     return {
       id: post.data.youTubeID,
       aspect: post.data.youTubeAspectRatio ?? "16/9",
-    } satisfies ComponentProps<typeof NewVideo>["youTubeInfo"];
+    } satisfies ComponentProps<typeof Video>["youTubeInfo"];
 
   const imageFolder = `/src/data/${post.collection}/`;
   const images = import.meta.glob<{ default: ImageMetadata }>(

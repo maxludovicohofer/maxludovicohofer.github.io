@@ -11,14 +11,13 @@ interface Props {
   trackTime?: boolean;
 }
 
-// TODO PHASE 2 USE A LIGHTWEIGHT NPM PACKAGE TO EMBED IFRAME
-
 const {
-  youTubeInfo = { id: "", aspect: "16/9" } satisfies ComponentProps<
-    typeof Video
-  >["youTubeInfo"],
+  youTubeInfo: { id, aspect } = {
+    id: "",
+    aspect: "16/9",
+  } satisfies ComponentProps<typeof Video>["youTubeInfo"],
   color = "white",
-  autoplay,
+  autoplay = true,
   mute = true,
   loop = true,
   className = "",
@@ -26,192 +25,161 @@ const {
 } = Astro.props;
 
 const noControls = className.includes("pointer-events-none");
-const aspect =
-  youTubeInfo.aspect === "16/10" ? "aspect-[16/10]" : "aspect-video";
+const aspectClass = aspect === "16/10" ? "aspect-[16/10]" : "aspect-video";
 
 const boolToInt = (value?: boolean) => (value ? 1 : 0);
+
+import "node_modules/lite-youtube-embed/src/lite-yt-embed.css";
 ---
 
 <div
-  class={`size-full overflow-hidden flex items-center justify-center ${aspect}`}
+  class={`size-full overflow-hidden flex items-center justify-center ${aspectClass}`}
 >
   <div class="size-full">
-    <div
-      id={`yt-player/${youTubeInfo.id}`}
-      class={`yt-player/color/${color}/autoplay/${boolToInt(autoplay)}/mute/${boolToInt(mute)}/loop/${boolToInt(loop)}/controls/${boolToInt(!noControls)}/disablekb/${boolToInt(noControls)} size-full ${className} ${aspect} ${trackTime ? "current-time-0" : ""}`}
+    <lite-youtube
+      js-api
+      videoid={id}
+      params={`playlist=${id}&color=${color}&autoplay=${boolToInt(autoplay)}&mute=${boolToInt(mute)}&loop=${boolToInt(loop)}&controls=${boolToInt(!noControls)}&disablekb=${boolToInt(noControls)}`}
+      class={`${className} size-full max-w-none ${aspectClass} ${trackTime ? "current-time-0" : ""}`}
     >
-    </div>
+      <!-- <a
+        href={`https://youtube.com/watch?v=${id}`}
+        class="lyt-playbtn"
+        title="Play Video"
+      >
+        <span class="lyt-visually-hidden">Play Video</span>
+      </a> -->
+    </lite-youtube>
   </div>
-</div>
-<script>
-  import { getTailwindValue } from "src/utils";
+  <script src="node_modules/lite-youtube-embed/src/lite-yt-embed.js"></script>
+  <script>
+    import type { LiteYTEmbed } from "lite-youtube-embed";
+    import { getTailwindValue, switchClasses } from "src/utils";
 
-  const getVideoId = (iFrameId: string) => iFrameId.split("/").at(1)!;
+    const getVideos = () => document.querySelectorAll("lite-youtube");
 
-  let iFrameToPlayer: Record<string, YT.Player> = {};
+    let currentTimeInterval: NodeJS.Timeout | undefined;
+    const currentTimeRegex = /current-time-\d+/;
 
-  let currentTimeInterval: NodeJS.Timeout | undefined;
-  const currentTimeRegex = /current-time-\d+/;
+    const setCurrentTime = (element: Element, seconds: number) =>
+      (element.className = element.className.replace(
+        currentTimeRegex,
+        `current-time-${seconds.toFixed()}`
+      ));
 
-  const setCurrentTime = (element: Element, seconds: number) =>
-    (element.className = element.className.replace(
-      currentTimeRegex,
-      `current-time-${seconds.toFixed()}`
-    ));
+    const setCurrentTimes = async () => {
+      const videos = getVideos();
 
-  const setCurrentTimes = () => {
-    if (!Object.keys(iFrameToPlayer).length) {
-      clearInterval(currentTimeInterval);
-      currentTimeInterval = undefined;
-      return;
-    }
+      if (!videos.length) {
+        clearInterval(currentTimeInterval);
+        currentTimeInterval = undefined;
+        return;
+      }
 
-    for (const player of Object.values(iFrameToPlayer))
-      setCurrentTime(player.getIframe(), player.getCurrentTime());
-  };
+      for (const lyt of videos) {
+        setCurrentTime(lyt, (await lyt.getYTPlayer()).getCurrentTime());
+      }
+    };
 
-  const loadVideos = () => {
-    //? Init divs for iframe and resize dynamically
-    const containerObserver = new ResizeObserver((entries) =>
-      entries.forEach(({ target }) => {
-        const containerAspectRatio = target.clientWidth / target.clientHeight;
-        const videoAspectEnum = getTailwindValue(target, "aspect");
-        const videoAspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
-        const containerIsWider = containerAspectRatio > videoAspectRatio;
+    const isActivated = (lyt: Element) =>
+      lyt.classList.contains("lyt-activated");
 
-        const resizingDiv = target.firstElementChild! as HTMLDivElement;
+    document.addEventListener("astro:page-load", () => {
+      // Auto resize for object-cover videos
+      const containerObserver = new ResizeObserver((entries) =>
+        entries.forEach(({ target }) => {
+          const containerAspectRatio = target.clientWidth / target.clientHeight;
+          const videoAspectEnum = getTailwindValue(target, "aspect");
+          const videoAspectRatio =
+            videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
+          const containerIsWider = containerAspectRatio > videoAspectRatio;
+          const resizingDiv = target.firstElementChild! as HTMLDivElement;
 
-        const resizeWidth = ["h-auto"];
-        const resizeHeight = ["w-auto"];
-        resizingDiv.classList.remove(...resizeWidth, ...resizeHeight);
-        resizingDiv.classList.add(
-          ...(containerIsWider ? resizeWidth : resizeHeight)
-        );
+          // Resize width if container is wider, else height
+          switchClasses(resizingDiv, containerIsWider, ["h-auto"], ["w-auto"]);
+          // Expand width if container is wider, else height
+          switchClasses(
+            resizingDiv.firstElementChild!,
+            containerIsWider,
+            ["h-[300dvw]", "w-full"],
+            ["h-full", "w-[300dvh]"]
+          );
+        })
+      );
 
-        const iFrame = resizingDiv.firstElementChild! as HTMLIFrameElement;
+      // Handle lite youtube embeds
+      const lytObserver = new IntersectionObserver((entries) => {
+        entries.forEach(async ({ target, isIntersecting }) => {
+          const lyt = target as LiteYTEmbed;
 
-        const expandWidth = ["h-[300dvw]", "w-full"];
-        const expandHeight = ["h-full", "w-[300dvh]"];
-        iFrame.classList.remove(...expandWidth, ...expandHeight);
-        iFrame.classList.add(
-          ...(containerIsWider ? expandWidth : expandHeight)
-        );
-      })
-    );
+          // Play or pause player
+          if (isIntersecting) {
+            // Should initialize
+            if (!isActivated(lyt)) {
+              const videoId = lyt.getAttribute("videoid")!;
 
-    document
-      .querySelectorAll<HTMLDivElement>("div[class^=yt-player]")
-      .forEach((div, key) => {
-        // Assign unique IDs
-        div.id = `${div.id}/${key}`;
+              // Set start time
+              const start = Number(
+                sessionStorage.getItem(`video/${videoId}`) ?? 0
+              );
+              setCurrentTime(lyt, start);
 
-        // Remove black bands
-        if (!div.classList.contains("object-cover")) return;
-        containerObserver.observe(div.parentElement!.parentElement!);
+              lyt.setAttribute(
+                "params",
+                `${lyt.getAttribute("params")}&start=${start}`
+              );
+
+              // Init time tracker
+              if (lyt.className.match(currentTimeRegex)) {
+                currentTimeInterval ??= setInterval(setCurrentTimes, 1000);
+              }
+            }
+
+            (await lyt.getYTPlayer()).playVideo();
+          } else {
+            if (!isActivated(lyt)) return;
+
+            (await lyt.getYTPlayer()).pauseVideo();
+          }
+        });
       });
 
-    // Handle players
-    const playerObserver = new IntersectionObserver((entries) =>
-      entries.forEach((entry) => {
-        const iFrameId = entry.target.id;
-        const player = iFrameToPlayer[iFrameId];
-
-        if (!player) {
-          if (!entry.isIntersecting) return;
-
-          // Lazily initialize player
-          playerObserver.unobserve(entry.target);
-
-          const videoId = getVideoId(iFrameId);
-          const [color, autoplay, mute, loop, controls, disablekb] =
-            entry.target.classList[0]!.split("/")
-              .slice(1)
-              .filter((_, index) => index % 2 === 1);
-
-          const start = Number(sessionStorage.getItem(`video/${videoId}`) ?? 0);
-          setCurrentTime(entry.target, start);
-
-          new YT.Player(iFrameId, {
-            videoId,
-            host: "https://www.youtube-nocookie.com",
-            width: 0,
-            height: 0,
-            playerVars: {
-              playlist: videoId,
-              color: color as YT.ProgressBarColor,
-              autoplay: Number(autoplay),
-              mute: Number(mute),
-              loop: Number(loop),
-              controls: Number(controls),
-              disablekb: Number(disablekb),
-              start,
-            },
-            events: {
-              onReady: ({ target }) => {
-                iFrameToPlayer[iFrameId] = target;
-                const iFrame = target.getIframe();
-                playerObserver.observe(iFrame);
-
-                if (!iFrame.className.match(currentTimeRegex)) return;
-
-                currentTimeInterval ??= setInterval(setCurrentTimes, 1000);
-              },
-            },
-          });
-        } else {
-          // Play or pause player
-          if (entry.isIntersecting) player.playVideo();
-          else player.pauseVideo();
+      getVideos().forEach((lyt) => {
+        if (lyt.classList.contains("object-cover")) {
+          // Remove black bands
+          containerObserver.observe(lyt.parentElement!.parentElement!);
         }
-      })
-    );
 
-    document
-      .querySelectorAll("div[class^=yt-player]")
-      .forEach((div) => playerObserver.observe(div));
-  };
+        lytObserver.observe(lyt);
+      });
+    });
 
-  addEventListener("youTubeAPIReady", () => loadVideos());
-  document.addEventListener("astro:page-load", () => {
-    if (!sessionStorage.getItem("youTubeAPIReady")) return;
-
-    loadVideos();
-  });
-
-  //? Save times to restore start times
-  const savePlayerTimes = () => {
-    const videoData = Object.groupBy(
-      Object.entries(iFrameToPlayer),
-      ([iFrameId]) => getVideoId(iFrameId)
-    );
-
-    // Save longest time watched
-    for (const videoId in videoData) {
-      const players = videoData[videoId]!;
-
-      players.sort(
-        ([, playerA], [, playerB]) =>
-          playerB.getCurrentTime() - playerA.getCurrentTime()
+    //? Save times to restore start times
+    const savePlayerTimes = async () => {
+      const videoData = Object.groupBy(
+        getVideos(),
+        (video) => video.getAttribute("videoid")!
       );
 
-      sessionStorage.setItem(
-        `video/${videoId}`,
-        players[0]![1].getCurrentTime().toFixed()
-      );
-    }
-  };
+      // Save longest time watched for each video ID
+      for (const videoId in videoData) {
+        const players = await Promise.all(
+          videoData[videoId]!.map((lyt) => lyt.getYTPlayer())
+        );
 
-  document.addEventListener("astro:before-swap", () => {
-    savePlayerTimes();
-    // Cleanup before page change
-    iFrameToPlayer = {};
-  });
-  addEventListener("beforeunload", savePlayerTimes);
-</script>
-<script is:inline>
-  function onYouTubeIframeAPIReady() {
-    sessionStorage.setItem("youTubeAPIReady", true);
-    dispatchEvent(new Event("youTubeAPIReady"));
-  }
-</script>
-<script src="https://www.youtube.com/iframe_api" defer is:inline></script>
+        players.sort(
+          (playerA, playerB) =>
+            playerB.getCurrentTime() - playerA.getCurrentTime()
+        );
+
+        sessionStorage.setItem(
+          `video/${videoId}`,
+          players[0]!.getCurrentTime().toFixed()
+        );
+      }
+    };
+
+    document.addEventListener("astro:before-swap", savePlayerTimes);
+    addEventListener("beforeunload", savePlayerTimes);
+  </script>
+</div>
