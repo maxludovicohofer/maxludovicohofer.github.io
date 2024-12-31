@@ -30,12 +30,11 @@ const noControls = className.includes("pointer-events-none");
 const aspectClass = aspect === "16/10" ? "aspect-[16/10]" : "aspect-video";
 
 const boolToInt = (value?: boolean) => (value ? 1 : 0);
+
+import "node_modules/lite-youtube-embed/src/lite-yt-embed.css";
 ---
 
-<link
-  rel="stylesheet"
-  href="node_modules/lite-youtube-embed/src/lite-yt-embed.css"
-/><div
+<div
   class={`size-full overflow-hidden flex items-center justify-center ${aspectClass}`}
 >
   <div class="size-full">
