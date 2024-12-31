@@ -24,6 +24,8 @@ const {
   trackTime,
 } = Astro.props;
 
+// TODO FIX WEIRD SCROLLING ISSUES ON MOBILE
+
 const noControls = className.includes("pointer-events-none");
 const aspectClass = aspect === "16/10" ? "aspect-[16/10]" : "aspect-video";
 
@@ -40,16 +42,8 @@ import "node_modules/lite-youtube-embed/src/lite-yt-embed.css";
       js-api
       videoid={id}
       params={`playlist=${id}&color=${color}&autoplay=${boolToInt(autoplay)}&mute=${boolToInt(mute)}&loop=${boolToInt(loop)}&controls=${boolToInt(!noControls)}&disablekb=${boolToInt(noControls)}`}
-      class={`${className} size-full max-w-none ${aspectClass} ${trackTime ? "current-time-0" : ""}`}
-    >
-      <!-- <a
-        href={`https://youtube.com/watch?v=${id}`}
-        class="lyt-playbtn"
-        title="Play Video"
-      >
-        <span class="lyt-visually-hidden">Play Video</span>
-      </a> -->
-    </lite-youtube>
+      class={`${className} size-full ${aspectClass} ${trackTime ? "current-time-0" : ""} max-w-none`}
+    ></lite-youtube>
   </div>
   <script src="node_modules/lite-youtube-embed/src/lite-yt-embed.js"></script>
   <script>
@@ -152,6 +146,9 @@ import "node_modules/lite-youtube-embed/src/lite-yt-embed.css";
 
         lytObserver.observe(lyt);
       });
+
+      // TODO RESTART VIDEOS ON FOCUS REGAINED IF OBJECT COVER
+      // onfocus = () => lytObserver;
     });
 
     //? Save times to restore start times
