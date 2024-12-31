@@ -57,11 +57,8 @@ export const getPagePosition = (element?: HTMLElement) => {
   return { left: Math.max(left, 0), top: Math.max(top, 0) };
 };
 
-//? Text
-export const toTitleCase = (word: string) =>
-  word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-
-export const removeFromClass = (className: string, remove: string[]) =>
+//? Tailwind
+export const removeFromClasses = (className: string, remove: string[]) =>
   className.replace(
     new RegExp(
       `(^|\\s)(\\S*[:-])*(${remove.map((part) => `${part}-`).join("|")})\\S*`,
@@ -70,12 +67,26 @@ export const removeFromClass = (className: string, remove: string[]) =>
     ""
   );
 
-export const getCssValue = (element: Element, key: string) =>
+export const getTailwindValue = (element: Element, key: string) =>
   Array.from(element.classList)
     .find((part) => part.startsWith(key))
     ?.split("-")
     .at(-1)!
     .replace(/[[\]']+/g, "");
 
-export const hasProperty = (property: string, className: string) =>
+export const hasClass = (property: string, className: string) =>
   className.split(" ").includes(property);
+
+export const switchClasses = (
+  element: Element,
+  condition: boolean,
+  trueClasses: string[],
+  falseClasses: string[]
+) => {
+  element.classList.remove(...trueClasses, ...falseClasses);
+  element.classList.add(...(condition ? trueClasses : falseClasses));
+};
+
+//? Text
+export const toTitleCase = (word: string) =>
+  word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();

@@ -45,19 +45,19 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
       params={`playlist=${id}&color=${color}&autoplay=${boolToInt(autoplay)}&mute=${boolToInt(mute)}&loop=${boolToInt(loop)}&controls=${boolToInt(!noControls)}&disablekb=${boolToInt(noControls)}`}
       class={`${className} size-full max-w-none ${aspectClass} ${trackTime ? "current-time-0" : ""}`}
     >
-      <a
+      <!-- <a
         href={`https://youtube.com/watch?v=${id}`}
         class="lyt-playbtn"
         title="Play Video"
       >
         <span class="lyt-visually-hidden">Play Video</span>
-      </a>
+      </a> -->
     </lite-youtube>
   </div>
   <script src="node_modules/lite-youtube-embed/src/lite-yt-embed.js"></script>
   <script>
     import type { LiteYTEmbed } from "lite-youtube-embed";
-    // import { getCssValue } from "src/utils";
+    import { getTailwindValue, switchClasses } from "src/utils";
 
     const getVideos = () => document.querySelectorAll("lite-youtube");
 
@@ -88,45 +88,27 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
       lyt.classList.contains("lyt-activated");
 
     document.addEventListener("astro:page-load", () => {
-      //? Init divs for iframe and resize dynamically
-      // const containerObserver = new ResizeObserver((entries) =>
-      //   entries.forEach(({ target }) => {
-      //     const containerAspectRatio = target.clientWidth / target.clientHeight;
-      //     const videoAspectEnum = getCssValue(target, "aspect");
-      //     const videoAspectRatio =
-      //       videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
-      //     const containerIsWider = containerAspectRatio > videoAspectRatio;
+      // Auto resize for object-cover videos
+      const containerObserver = new ResizeObserver((entries) =>
+        entries.forEach(({ target }) => {
+          const containerAspectRatio = target.clientWidth / target.clientHeight;
+          const videoAspectEnum = getTailwindValue(target, "aspect");
+          const videoAspectRatio =
+            videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
+          const containerIsWider = containerAspectRatio > videoAspectRatio;
+          const resizingDiv = target.firstElementChild! as HTMLDivElement;
 
-      //     const resizingDiv = target.firstElementChild! as HTMLDivElement;
-
-      //     const resizeWidth = ["h-auto"];
-      //     const resizeHeight = ["w-auto"];
-      //     resizingDiv.classList.remove(...resizeWidth, ...resizeHeight);
-      //     resizingDiv.classList.add(
-      //       ...(containerIsWider ? resizeWidth : resizeHeight)
-      //     );
-
-      //     const iFrame = resizingDiv.firstElementChild! as HTMLIFrameElement;
-
-      //     const expandWidth = ["h-[300dvw]", "w-full"];
-      //     const expandHeight = ["h-full", "w-[300dvh]"];
-      //     iFrame.classList.remove(...expandWidth, ...expandHeight);
-      //     iFrame.classList.add(
-      //       ...(containerIsWider ? expandWidth : expandHeight)
-      //     );
-      //   })
-      // );
-
-      // document
-      //   .querySelectorAll<HTMLDivElement>("div[class^=yt-player]")
-      //   .forEach((div, key) => {
-      //     // Assign unique IDs
-      //     div.id = `${div.id}/${key}`;
-
-      //     // Remove black bands
-      //     if (!div.classList.contains("object-cover")) return;
-      //     containerObserver.observe(div.parentElement!.parentElement!);
-      //   });
+          // Resize width if container is wider, else height
+          switchClasses(resizingDiv, containerIsWider, ["h-auto"], ["w-auto"]);
+          // Expand width if container is wider, else height
+          switchClasses(
+            resizingDiv.firstElementChild!,
+            containerIsWider,
+            ["h-[300dvw]", "w-full"],
+            ["h-full", "w-[300dvh]"]
+          );
+        })
+      );
 
       // Handle lite youtube embeds
       const lytObserver = new IntersectionObserver((entries) => {
@@ -165,7 +147,14 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
         });
       });
 
-      getVideos().forEach((lyt) => lytObserver.observe(lyt));
+      getVideos().forEach((lyt) => {
+        if (lyt.classList.contains("object-cover")) {
+          // Remove black bands
+          containerObserver.observe(lyt.parentElement!.parentElement!);
+        }
+
+        lytObserver.observe(lyt);
+      });
     });
 
     //? Save times to restore start times
