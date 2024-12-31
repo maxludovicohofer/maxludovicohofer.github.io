@@ -90,7 +90,7 @@ let highlightSet = false;
 </ol>
 <script>
   import type { CollectionKey } from "astro:content";
-  import { hasProperty, removeFromClass } from "src/utils";
+  import { hasClass, removeFromClasses } from "src/utils";
 
   const carouselEvents: {
     [K in keyof HTMLElementEventMap]?: (
@@ -160,9 +160,9 @@ let highlightSet = false;
           for (const item of list.children) {
             if (item.classList[0]?.split("/").at(-1) !== readSlug) continue;
 
-            if (hasProperty("row-start-1", item.className)) {
+            if (hasClass("row-start-1", item.className)) {
               // Remove highlight classes
-              item.className = removeFromClass(item.className, [
+              item.className = removeFromClasses(item.className, [
                 "row-start",
                 "col-span",
                 "md:h",
@@ -173,7 +173,7 @@ let highlightSet = false;
               )!;
 
               // Add normal text
-              highlightTitle.className = removeFromClass(
+              highlightTitle.className = removeFromClasses(
                 highlightTitle.className,
                 ["text"]
               );

@@ -44,7 +44,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
   </div>
 </div>
 <script>
-  import { getCssValue } from "src/utils";
+  import { getTailwindValue } from "src/utils";
 
   const getVideoId = (iFrameId: string) => iFrameId.split("/").at(1)!;
 
@@ -75,7 +75,7 @@ const boolToInt = (value?: boolean) => (value ? 1 : 0);
     const containerObserver = new ResizeObserver((entries) =>
       entries.forEach(({ target }) => {
         const containerAspectRatio = target.clientWidth / target.clientHeight;
-        const videoAspectEnum = getCssValue(target, "aspect");
+        const videoAspectEnum = getTailwindValue(target, "aspect");
         const videoAspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
         const containerIsWider = containerAspectRatio > videoAspectRatio;
 

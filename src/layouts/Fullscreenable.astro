@@ -16,7 +16,11 @@ const { className = "" } = Astro.props;
   ><slot /></Button
 >
 <script>
-  import { activateModal, removeFromClass, getCssValue } from "src/utils";
+  import {
+    activateModal,
+    removeFromClasses,
+    getTailwindValue,
+  } from "src/utils";
 
   function setFullscreenMedia(this: HTMLButtonElement) {
     const modal = document.querySelector<HTMLDivElement>("div.modal")!;
@@ -29,7 +33,7 @@ const { className = "" } = Astro.props;
 
     if (!fullscreenMedia) return;
 
-    fullscreenMedia.className = removeFromClass(fullscreenMedia.className, [
+    fullscreenMedia.className = removeFromClasses(fullscreenMedia.className, [
       "size",
       "w",
       "h",
@@ -38,7 +42,7 @@ const { className = "" } = Astro.props;
     ]);
 
     if (fullscreenMedia.tagName === "IFRAME") {
-      const videoAspectEnum = getCssValue(fullscreenMedia, "aspect");
+      const videoAspectEnum = getTailwindValue(fullscreenMedia, "aspect");
       const aspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
 
       const observer = new ResizeObserver((entries) =>
@@ -60,7 +64,7 @@ const { className = "" } = Astro.props;
         document.querySelector<HTMLDivElement>("div.modal-slot")!
       );
 
-      const startTime = getCssValue(fullscreenMedia, "current-time");
+      const startTime = getTailwindValue(fullscreenMedia, "current-time");
 
       if (startTime) {
         fullscreenMedia.src = fullscreenMedia.src.replace(
