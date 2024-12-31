@@ -4,8 +4,8 @@ import Bento from "@layouts/Bento.astro";
 import Profile from "@components/Profile.astro";
 import AllProjects from "@components/Post/AllProjects.astro";
 import AllThoughts from "@components/Post/AllThoughts.astro";
-import Video from "@layouts/Video.astro";
 import TechPreview from "@components/TechPreview.astro";
+import NewVideo from "@layouts/NewVideo.astro";
 
 // TODO PHASE 2 I18N ENG/JAP. ADD LANG SELECTION ON TOP OF PAGE (TWO UNDERLINED LINKS WITH LANG ICONS).
 ---
@@ -16,7 +16,7 @@ import TechPreview from "@components/TechPreview.astro";
 >
   <Bento>
     <Profile slot="1-small" importance="low" />
-    <Video
+    <NewVideo
       slot="2-medium"
       youTubeInfo={{ id: "m0KhK_J0LiQ", aspect: "16/10" }}
     />
