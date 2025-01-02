@@ -1,3 +1,6 @@
+import type Video from "@layouts/Video.astro";
+import type { ComponentProps } from "astro/types";
+
 //? HTML
 export const activateModal = (content: HTMLElement) => {
   const modalSlot = document.querySelector<HTMLDivElement>("div.modal-slot")!;
@@ -86,6 +89,10 @@ export const switchClasses = (
   element.classList.remove(...trueClasses, ...falseClasses);
   element.classList.add(...(condition ? trueClasses : falseClasses));
 };
+
+export const getAspectClass = (aspect: string) => aspect === "16/10" ? "aspect-[16/10]" : "aspect-video";
+
+export const getAspectRatio = (aspect: string) => aspect.split("/").map(Number).reduce((a, b) => a / b);
 
 //? Text
 export const toTitleCase = (word: string) =>

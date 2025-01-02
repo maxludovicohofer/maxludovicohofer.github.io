@@ -19,26 +19,31 @@ const { className = "" } = Astro.props;
   import type { LiteYTEmbed } from "lite-youtube-embed";
   import {
     activateModal,
+    getAspectClass,
+    getAspectRatio,
     removeFromClasses,
-    getTailwindValue,
     switchClasses,
   } from "src/utils";
 
-  function setFullscreenMedia(this: HTMLButtonElement) {
+  async function setFullscreenMedia(this: HTMLButtonElement) {
     const modal = document.querySelector<HTMLDivElement>("div.modal")!;
 
     if (modal.childElementCount) return;
 
-    const fullscreenMedia = this.querySelector(
+    const originalMedia = this.querySelector(
       "img, video, iframe, lite-youtube"
-    )?.cloneNode(true) as
+    ) as
       | HTMLImageElement
       | HTMLVideoElement
       | HTMLIFrameElement
       | LiteYTEmbed
       | undefined;
 
-    if (!fullscreenMedia) return;
+    if (!originalMedia) return;
+
+    const fullscreenMedia = originalMedia.cloneNode(
+      true
+    ) as typeof originalMedia;
 
     fullscreenMedia.className = removeFromClasses(fullscreenMedia.className, [
       "size",
@@ -48,21 +53,25 @@ const { className = "" } = Astro.props;
       "object",
     ]);
 
-    if (
-      fullscreenMedia.tagName === "IFRAME" ||
-      fullscreenMedia.tagName === "LITE-YOUTUBE"
-    ) {
-      const videoAspectEnum = getTailwindValue(fullscreenMedia, "aspect");
-      const aspectRatio = videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
+    fullscreenMedia.style.maxWidth = "inherit";
+    fullscreenMedia.style.maxHeight = "inherit";
+
+    const isLYT = fullscreenMedia.tagName === "LITE-YOUTUBE";
+
+    if (isLYT || fullscreenMedia.tagName === "IFRAME") {
+      const aspect = fullscreenMedia.dataset.aspectRatio!;
+      fullscreenMedia.classList.add(getAspectClass(aspect));
+
+      const ratio = getAspectRatio(aspect);
 
       // Adapt to modal slot
       const observer = new ResizeObserver((entries) =>
         entries.forEach(({ target }) =>
           switchClasses(
             fullscreenMedia,
-            target.clientWidth / target.clientHeight > aspectRatio,
-            ["h-[90dvh]", "lg:h-[80dvh]"],
-            ["w-[90dvw]", "lg:w-[80dvw]"]
+            target.clientWidth / target.clientHeight > ratio,
+            ["h-screen"],
+            ["w-screen"]
           )
         )
       );
@@ -71,12 +80,11 @@ const { className = "" } = Astro.props;
         document.querySelector<HTMLDivElement>("div.modal-slot")!
       );
 
-      const iframe =
-        fullscreenMedia.tagName === "LITE-YOUTUBE"
-          ? fullscreenMedia.querySelector("iframe")!
-          : (fullscreenMedia as HTMLIFrameElement);
+      const iframe = isLYT
+        ? fullscreenMedia.querySelector("iframe")!
+        : (fullscreenMedia as HTMLIFrameElement);
 
-      const startTime = getTailwindValue(fullscreenMedia, "current-time");
+      const startTime = fullscreenMedia.dataset.currentTime;
 
       if (startTime) {
         iframe.src = iframe.src.replace(/start=\d+/, `start=${startTime}`);
@@ -86,8 +94,13 @@ const { className = "" } = Astro.props;
         .replace("controls=0", "controls=1")
         .replace("disablekb=1", "disablekb=0")
         .replace("autoplay=0", "autoplay=1");
+
+      if (isLYT) {
+        // Restart stopped videos
+        (await (originalMedia as LiteYTEmbed).getYTPlayer())?.playVideo();
+      }
     } else {
-      fullscreenMedia.classList.add("size-full");
+      fullscreenMedia.classList.add("size-auto");
     }
 
     activateModal(fullscreenMedia);

@@ -1,6 +1,6 @@
 declare module "lite-youtube-embed" {
   declare class LiteYTEmbed extends HTMLElement {
-    async getYTPlayer(): Promise<YT.Player>;
+    async getYTPlayer(): Promise<YT.Player | undefined>;
   }
 
   declare global {

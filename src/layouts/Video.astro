@@ -1,5 +1,6 @@
 ---
 import type { ComponentProps } from "astro/types";
+import { getAspectClass } from "src/utils";
 
 interface Props {
   youTubeInfo?: { id: string; aspect: "16/9" | "16/10" };
@@ -24,10 +25,7 @@ const {
   trackTime,
 } = Astro.props;
 
-// TODO FIX WEIRD SCROLLING ISSUES ON MOBILE
-
 const noControls = className.includes("pointer-events-none");
-const aspectClass = aspect === "16/10" ? "aspect-[16/10]" : "aspect-video";
 
 const boolToInt = (value?: boolean) => (value ? 1 : 0);
 
@@ -35,31 +33,34 @@ import "node_modules/lite-youtube-embed/src/lite-yt-embed.css";
 ---
 
 <div
-  class={`size-full overflow-hidden flex items-center justify-center ${aspectClass}`}
+  class={`size-full overflow-hidden flex items-center justify-center ${getAspectClass(aspect)}`}
 >
   <div class="size-full">
     <lite-youtube
       js-api
       videoid={id}
       params={`playlist=${id}&color=${color}&autoplay=${boolToInt(autoplay)}&mute=${boolToInt(mute)}&loop=${boolToInt(loop)}&controls=${boolToInt(!noControls)}&disablekb=${boolToInt(noControls)}`}
-      class={`${className} size-full ${aspectClass} ${trackTime ? "current-time-0" : ""} max-w-none`}
-    ></lite-youtube>
+      class={`${className} size-full`}
+      data-aspect-ratio={aspect}
+      {...trackTime ? { "data-current-time": 0 } : {}}></lite-youtube>
+    <style>
+      /* Fix default styles */
+      lite-youtube {
+        max-width: none;
+      }
+    </style>
   </div>
   <script src="node_modules/lite-youtube-embed/src/lite-yt-embed.js"></script>
   <script>
     import type { LiteYTEmbed } from "lite-youtube-embed";
-    import { getTailwindValue, switchClasses } from "src/utils";
+    import { getAspectRatio, switchClasses } from "src/utils";
 
     const getVideos = () => document.querySelectorAll("lite-youtube");
 
     let currentTimeInterval: NodeJS.Timeout | undefined;
-    const currentTimeRegex = /current-time-\d+/;
 
-    const setCurrentTime = (element: Element, seconds: number) =>
-      (element.className = element.className.replace(
-        currentTimeRegex,
-        `current-time-${seconds.toFixed()}`
-      ));
+    const setCurrentTime = (element: HTMLElement, seconds: number) =>
+      (element.dataset.currentTime = seconds.toFixed());
 
     const setCurrentTimes = async () => {
       const videos = getVideos();
@@ -71,7 +72,9 @@ import "node_modules/lite-youtube-embed/src/lite-yt-embed.css";
       }
 
       for (const lyt of videos) {
-        setCurrentTime(lyt, (await lyt.getYTPlayer()).getCurrentTime());
+        const player = await lyt.getYTPlayer();
+        if (!player) continue;
+        setCurrentTime(lyt, player.getCurrentTime());
       }
     };
 
@@ -82,18 +85,19 @@ import "node_modules/lite-youtube-embed/src/lite-yt-embed.css";
       // Auto resize for object-cover videos
       const containerObserver = new ResizeObserver((entries) =>
         entries.forEach(({ target }) => {
-          const containerAspectRatio = target.clientWidth / target.clientHeight;
-          const videoAspectEnum = getTailwindValue(target, "aspect");
-          const videoAspectRatio =
-            videoAspectEnum === "16/10" ? 16 / 10 : 16 / 9;
-          const containerIsWider = containerAspectRatio > videoAspectRatio;
-          const resizingDiv = target.firstElementChild! as HTMLDivElement;
+          if (!target.checkVisibility()) return;
 
+          const resizingDiv = target.firstElementChild! as HTMLDivElement;
+          const lyt = resizingDiv.firstElementChild! as LiteYTEmbed;
+
+          const containerIsWider =
+            target.clientWidth / target.clientHeight >
+            getAspectRatio(lyt.dataset.aspectRatio!);
           // Resize width if container is wider, else height
           switchClasses(resizingDiv, containerIsWider, ["h-auto"], ["w-auto"]);
           // Expand width if container is wider, else height
           switchClasses(
-            resizingDiv.firstElementChild!,
+            lyt,
             containerIsWider,
             ["h-[300dvw]", "w-full"],
             ["h-full", "w-[300dvh]"]
@@ -124,16 +128,20 @@ import "node_modules/lite-youtube-embed/src/lite-yt-embed.css";
               );
 
               // Init time tracker
-              if (lyt.className.match(currentTimeRegex)) {
+              if (lyt.dataset.currentTime) {
                 currentTimeInterval ??= setInterval(setCurrentTimes, 1000);
               }
             }
 
-            (await lyt.getYTPlayer()).playVideo();
+            const player = await lyt.getYTPlayer();
+            if (!player) return;
+            player.playVideo();
           } else {
             if (!isActivated(lyt)) return;
 
-            (await lyt.getYTPlayer()).pauseVideo();
+            const player = await lyt.getYTPlayer();
+            if (!player) return;
+            player.pauseVideo();
           }
         });
       });
@@ -146,9 +154,6 @@ import "node_modules/lite-youtube-embed/src/lite-yt-embed.css";
 
         lytObserver.observe(lyt);
       });
-
-      // TODO RESTART VIDEOS ON FOCUS REGAINED IF OBJECT COVER
-      // onfocus = () => lytObserver;
     });
 
     //? Save times to restore start times
@@ -166,7 +171,7 @@ import "node_modules/lite-youtube-embed/src/lite-yt-embed.css";
 
         players.sort(
           (playerA, playerB) =>
-            playerB.getCurrentTime() - playerA.getCurrentTime()
+            (playerB?.getCurrentTime() ?? 0) - (playerA?.getCurrentTime() ?? 0)
         );
 
         sessionStorage.setItem(
