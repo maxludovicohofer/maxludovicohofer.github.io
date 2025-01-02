@@ -135,13 +135,20 @@ let highlightSet = false;
       entries.forEach(({ target }) => {
         const list = target as HTMLElement;
 
+        const actionToExecute =
+          list.scrollWidth > list.offsetWidth
+            ? "addEventListener"
+            : "removeEventListener";
+
         for (const event in carouselEvents) {
-          list[
-            list.scrollWidth > list.offsetWidth
-              ? "addEventListener"
-              : "removeEventListener"
-          ](event, carouselEvents[event as keyof typeof carouselEvents] as any);
+          list[actionToExecute](
+            event,
+            carouselEvents[event as keyof typeof carouselEvents] as any
+          );
         }
+
+        if (actionToExecute === "removeEventListener")
+          list.style.cursor = "unset";
       })
     );
 
