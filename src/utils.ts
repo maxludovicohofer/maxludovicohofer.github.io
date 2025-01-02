@@ -1,6 +1,3 @@
-import type Video from "@layouts/Video.astro";
-import type { ComponentProps } from "astro/types";
-
 //? HTML
 export const activateModal = (content: HTMLElement) => {
   const modalSlot = document.querySelector<HTMLDivElement>("div.modal-slot")!;
