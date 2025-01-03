@@ -34,7 +34,7 @@ const mediaClass = "size-full object-cover pointer-events-none";
 
 {
   isVideo(src) ? (
-    <Video youTubeInfo={src} className={mediaClass} trackTime />
+    <Video youTubeInfo={src} className={mediaClass} />
   ) : (
     <Image
       src={isMarkdownImage(src) ? src : src()}

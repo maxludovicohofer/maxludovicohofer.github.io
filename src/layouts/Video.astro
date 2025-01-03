@@ -9,7 +9,6 @@ interface Props {
   mute?: boolean;
   loop?: boolean;
   className?: string;
-  trackTime?: boolean;
 }
 
 const {
@@ -22,7 +21,6 @@ const {
   mute = true,
   loop = true,
   className = "",
-  trackTime,
 } = Astro.props;
 
 const noControls = className.includes("pointer-events-none");
@@ -41,8 +39,7 @@ import "node_modules/lite-youtube-embed/src/lite-yt-embed.css";
       videoid={id}
       params={`playlist=${id}&color=${color}&autoplay=${boolToInt(autoplay)}&mute=${boolToInt(mute)}&loop=${boolToInt(loop)}&controls=${boolToInt(!noControls)}&disablekb=${boolToInt(noControls)}`}
       class={`${className} size-full`}
-      data-aspect-ratio={aspect}
-      {...trackTime ? { "data-current-time": 0 } : {}}></lite-youtube>
+      data-aspect-ratio={aspect}></lite-youtube>
     <style>
       /* Fix default styles */
       lite-youtube {
@@ -57,29 +54,7 @@ import "node_modules/lite-youtube-embed/src/lite-yt-embed.css";
 
     const getVideos = () => document.querySelectorAll("lite-youtube");
 
-    let currentTimeInterval: NodeJS.Timeout | undefined;
-
-    const setCurrentTime = (element: HTMLElement, seconds: number) =>
-      (element.dataset.currentTime = seconds.toFixed());
-
-    const setCurrentTimes = async () => {
-      const videos = getVideos();
-
-      if (!videos.length) {
-        clearInterval(currentTimeInterval);
-        currentTimeInterval = undefined;
-        return;
-      }
-
-      for (const lyt of videos) {
-        const player = await lyt.getYTPlayer();
-        if (!player) continue;
-        setCurrentTime(lyt, player.getCurrentTime());
-      }
-    };
-
-    const isActivated = (lyt: Element) =>
-      lyt.classList.contains("lyt-activated");
+    const players: Map<LiteYTEmbed, YT.Player> = new Map();
 
     document.addEventListener("astro:page-load", () => {
       // Auto resize for object-cover videos
@@ -106,58 +81,46 @@ import "node_modules/lite-youtube-embed/src/lite-yt-embed.css";
       );
 
       // Handle lite youtube embeds
-      const lytObserver = new IntersectionObserver((entries) => {
+      const lytObserver = new IntersectionObserver((entries) =>
         entries.forEach(async ({ target, isIntersecting }) => {
           const lyt = target as LiteYTEmbed;
+          let player = players.get(lyt);
 
           // Play or pause player
           if (isIntersecting) {
-            // Should initialize
-            if (!isActivated(lyt)) {
-              const videoId = lyt.getAttribute("videoid")!;
+            // Initialize video
+            if (!player) {
+              //? Get YT player activates the player for some reason
+              const ytPlayer = await lyt.getYTPlayer();
+              if (!ytPlayer) return;
+              players.set(lyt, ytPlayer);
+              player = ytPlayer;
 
-              // Set start time
-              const start = Number(
-                sessionStorage.getItem(`video/${videoId}`) ?? 0
-              );
-              setCurrentTime(lyt, start);
-
-              lyt.setAttribute(
-                "params",
-                `${lyt.getAttribute("params")}&start=${start}`
-              );
-
-              // Init time tracker
-              if (lyt.dataset.currentTime) {
-                currentTimeInterval ??= setInterval(setCurrentTimes, 1000);
+              if (lyt.classList.contains("object-cover")) {
+                // Remove black bands
+                containerObserver.observe(lyt.parentElement!.parentElement!);
               }
             }
-
-            const player = await lyt.getYTPlayer();
-            if (!player) return;
             player.playVideo();
           } else {
-            if (!isActivated(lyt)) return;
-
-            const player = await lyt.getYTPlayer();
-            if (!player) return;
-            player.pauseVideo();
+            player?.pauseVideo();
           }
-        });
-      });
+        })
+      );
 
       getVideos().forEach((lyt) => {
-        if (lyt.classList.contains("object-cover")) {
-          // Remove black bands
-          containerObserver.observe(lyt.parentElement!.parentElement!);
-        }
+        // Set start time
+        lyt.setAttribute(
+          "params",
+          `${lyt.getAttribute("params")}&start=${Number(sessionStorage.getItem(`video/${lyt.getAttribute("videoid")!}`) ?? 0)}`
+        );
 
         lytObserver.observe(lyt);
       });
     });
 
     //? Save times to restore start times
-    const savePlayerTimes = async () => {
+    const savePlayerTimes = () => {
       const videoData = Object.groupBy(
         getVideos(),
         (video) => video.getAttribute("videoid")!
@@ -165,20 +128,21 @@ import "node_modules/lite-youtube-embed/src/lite-yt-embed.css";
 
       // Save longest time watched for each video ID
       for (const videoId in videoData) {
-        const players = await Promise.all(
-          videoData[videoId]!.map((lyt) => lyt.getYTPlayer())
-        );
+        const sortedPlayers = videoData[videoId]!.map((lyt) =>
+          players.get(lyt)?.getCurrentTime()
+        ).filter((time) => time !== undefined);
 
-        players.sort(
-          (playerA, playerB) =>
-            (playerB?.getCurrentTime() ?? 0) - (playerA?.getCurrentTime() ?? 0)
-        );
+        if (!sortedPlayers.length) continue;
+
+        sortedPlayers.sort();
 
         sessionStorage.setItem(
           `video/${videoId}`,
-          players[0]!.getCurrentTime().toFixed()
+          sortedPlayers.at(-1)!.toFixed()
         );
       }
+
+      players.clear();
     };
 
     document.addEventListener("astro:before-swap", savePlayerTimes);

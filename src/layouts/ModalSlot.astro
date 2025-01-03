@@ -20,19 +20,30 @@ import BackButton from "@components/BackButton.astro";
   <BackButton buttonName="modal-back" className="opacity-0" />
 </div>
 <script>
+  import type { LiteYTEmbed } from "lite-youtube-embed";
   import { deactivateModal } from "src/utils";
+
+  const closeModal = async () => {
+    deactivateModal();
+
+    // Restart paused video
+    const originalMedia = document.querySelector<LiteYTEmbed>(
+      "lite-youtube[data-modal-original]"
+    )!;
+    originalMedia.removeAttribute("data-modal-original");
+    const originalPlayer = (await originalMedia.getYTPlayer())!;
+    originalPlayer.playVideo();
+  };
 
   document.addEventListener("astro:page-load", () =>
     document
       .querySelectorAll<HTMLElement>(".modal-back")
-      .forEach((element) => element.addEventListener("click", deactivateModal))
+      .forEach((element) => element.addEventListener("click", closeModal))
   );
 
   document.addEventListener("astro:before-swap", () =>
     document
       .querySelectorAll<HTMLElement>(".modal-back")
-      .forEach((element) =>
-        element.removeEventListener("click", deactivateModal)
-      )
+      .forEach((element) => element.removeEventListener("click", closeModal))
   );
 </script>

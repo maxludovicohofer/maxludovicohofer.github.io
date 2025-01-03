@@ -1,3 +1,5 @@
+import type { LiteYTEmbed } from "lite-youtube-embed";
+
 //? HTML
 export const activateModal = (content: HTMLElement) => {
   const modalSlot = document.querySelector<HTMLDivElement>("div.modal-slot")!;
@@ -87,10 +89,21 @@ export const switchClasses = (
   element.classList.add(...(condition ? trueClasses : falseClasses));
 };
 
-export const getAspectClass = (aspect: string) => aspect === "16/10" ? "aspect-[16/10]" : "aspect-video";
+export const getAspectClass = (aspect: string) =>
+  aspect === "16/10" ? "aspect-[16/10]" : "aspect-video";
 
-export const getAspectRatio = (aspect: string) => aspect.split("/").map(Number).reduce((a, b) => a / b);
+export const getAspectRatio = (aspect: string) =>
+  aspect
+    .split("/")
+    .map(Number)
+    .reduce((a, b) => a / b);
 
 //? Text
 export const toTitleCase = (word: string) =>
   word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+
+//? Integrations
+
+export function isLiteYouTube(element: Element): element is LiteYTEmbed {
+  return element.tagName === "LITE-YOUTUBE";
+}
