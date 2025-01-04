@@ -21,12 +21,15 @@ const { className = "" } = Astro.props;
       1
     );
 
-    container.style.opacity = `${1 - scrollPercent}`;
-
     const parallaxSpeed = 6;
+    const perfectDissolveSpeed = 0.22;
+    const dissolveSpeed = perfectDissolveSpeed + 0.03;
+
+    container.style.opacity = `${1 - scrollPercent * dissolveSpeed * parallaxSpeed}`;
+
     container.style.setProperty(
       "--tw-translate-y",
-      `-${parallaxSpeed * scrollPercent}rem`
+      `-${scrollPercent * parallaxSpeed}rem`
     );
     container.style.transform = `translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))`;
   };
