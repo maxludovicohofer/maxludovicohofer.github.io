@@ -29,7 +29,10 @@ import BackButton from "@components/BackButton.astro";
     // Restart paused video
     const originalMedia = document.querySelector<LiteYTEmbed>(
       "lite-youtube[data-modal-original]"
-    )!;
+    );
+
+    if (!originalMedia) return;
+
     originalMedia.removeAttribute("data-modal-original");
     const originalPlayer = (await originalMedia.getYTPlayer())!;
     originalPlayer.playVideo();
