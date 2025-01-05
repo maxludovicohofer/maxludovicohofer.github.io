@@ -6,7 +6,7 @@ import type { ComponentProps } from "astro/types";
 
 interface Props extends Omit<ComponentProps<typeof PostMedia>, "src" | "alt"> {
   cover: NonNullable<ReturnType<typeof getPostCover>>;
-  entry: CollectionEntry<PostCollection> | undefined;
+  entry: CollectionEntry<PostCollection>;
 }
 
 const { cover, entry, ...props } = Astro.props;
@@ -14,9 +14,10 @@ const { cover, entry, ...props } = Astro.props;
 
 <PostMedia
   src={cover}
-  alt={entry?.collection === "projects"
+  alt={entry.collection === "projects"
     ? entry.data.description
-    : `Graphic explanation of "${entry!.data.title}"`}
+    : `Graphic explanation of "${entry.data.title}"`}
   loading="eager"
+  data-umami-event={`${entry.data.title} cover`}
   {...props}
 />

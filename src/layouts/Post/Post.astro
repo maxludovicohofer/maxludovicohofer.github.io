@@ -11,7 +11,7 @@ import CoverMedia from "@components/Post/CoverMedia.astro";
 import Link from "@layouts/Link.astro";
 import Button from "@layouts/Button.astro";
 import type Video from "@layouts/Video.astro";
-import { toTitleCase } from "src/utils";
+import { getLinkName } from "src/utils";
 import PostContent from "./PostContent.astro";
 
 interface Props extends HTMLAttributes<"div"> {
@@ -140,12 +140,14 @@ const downloadLinks = getDownloadLinks(entry);
 const downloadsPresent = downloadLinks && downloadLinks.length !== 0;
 
 const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
+
+const action = category === "Tool" ? "Download" : "Play";
 ---
 
 {
   cover && (
     <div class="lg:hidden fixed left-0 right-0 mx-auto">
-      <CoverMedia cover={cover} entry={entry} class="h-[55vh] -mt-[39vh]" />
+      <CoverMedia cover={cover} entry={entry!} class="h-[55vh] -mt-[39vh]" />
     </div>
   )
 }
@@ -160,7 +162,7 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
     {
       cover && (
         <div class="hidden lg:inline">
-          <CoverMedia cover={cover} entry={entry} class="h-[40vh] mb-6" />
+          <CoverMedia cover={cover} entry={entry!} class="h-[40vh] mb-6" />
         </div>
       )
     }
@@ -187,20 +189,31 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
     {
       downloadsPresent && (
         <div class="flex flex-col items-center mt-8 mb-7">
-          <Button href={downloadLinks[0]} linkClass={buttonWidthClass}>
-            {category === "Tool" ? "Download" : "Play"}
+          <Button
+            href={downloadLinks[0]}
+            linkClass={buttonWidthClass}
+            data-umami-event={`${action} on ${getLinkName(downloadLinks[0]!)}`}
+          >
+            {action}
           </Button>
           {downloadLinks.length > 1 && (
             <Text subtitle class={`-mb-4 w-full ${buttonWidthClass}`}>
               Or
-              {downloadLinks.slice(1).map((link, index, { length }) => (
-                <>
-                  <Link href={link}>
-                    {toTitleCase(new URL(link).host.split(".").at(-2)!)}
-                  </Link>
-                  {index !== length - 1 ? ", " : ""}
-                </>
-              ))}
+              {downloadLinks.slice(1).map((link, index, { length }) => {
+                const linkName = getLinkName(link);
+
+                return (
+                  <>
+                    <Link
+                      href={link}
+                      data-umami-event={`${action} on ${linkName}`}
+                    >
+                      {linkName}
+                    </Link>
+                    {index !== length - 1 ? ", " : ""}
+                  </>
+                );
+              })}
             </Text>
           )}
         </div>

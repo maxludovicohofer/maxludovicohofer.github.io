@@ -102,6 +102,9 @@ export const getAspectRatio = (aspect: string) =>
 export const toTitleCase = (word: string) =>
   word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
 
+export const getLinkName = (link: string) =>
+  toTitleCase(new URL(link).host.split(".").at(-2)!);
+
 //? Integrations
 
 export function isLiteYouTube(element: Element): element is LiteYTEmbed {

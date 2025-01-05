@@ -6,11 +6,18 @@ import Media from "@layouts/Media.astro";
 
 interface Props extends ComponentProps<typeof Media> {}
 
-const { class: className = "", ...props } = Astro.props;
+const {
+  class: className = "",
+  "data-umami-event": umamiEvent,
+  ...props
+} = Astro.props;
 ---
 
 <Dissolving>
-  <Fullscreenable class={`${className} rounded-3xl`}>
+  <Fullscreenable
+    class={`${className} rounded-3xl`}
+    data-umami-event={umamiEvent ?? props.alt}
+  >
     <Media {...props} />
   </Fullscreenable>
 </Dissolving>

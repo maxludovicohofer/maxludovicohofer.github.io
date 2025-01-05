@@ -8,12 +8,15 @@ import PostPreview from "@layouts/Post/PostPreview.astro";
 import type { ComponentProps } from "astro/types";
 import Fullscreenable from "@layouts/Fullscreenable.astro";
 import { Image } from "astro:assets";
+import { getLinkName } from "src/utils";
 
 interface Props {
   importance?: ComponentProps<typeof PostPreview>["importance"];
 }
 
 const { importance } = Astro.props;
+
+const linkedIn = "https://linkedin.com/in/maxludovicohofer";
 ---
 
 <PostPreview importance={importance}>
@@ -33,9 +36,10 @@ const { importance } = Astro.props;
       <Text title>Max Ludovico Hofer</Text>
       <div class="flex gap-2 -ml-0.5 2xl:-ml-1">
         <Link
-          href="https://linkedin.com/in/maxludovicohofer"
+          href={linkedIn}
           class="!size-6 2xl:!size-12 drop-shadow-md hover:drop-shadow-lg active:drop-shadow"
-          data-umami-event="LinkedIn"><Fragment set:html={LinkedIn} /></Link
+          data-umami-event={getLinkName(linkedIn)}
+          ><Fragment set:html={LinkedIn} /></Link
         >
       </div>
     </div>
