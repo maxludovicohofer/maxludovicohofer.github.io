@@ -145,6 +145,7 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
       <Media
         src={cover}
         alt={description ?? `Graphic explanation of "${entry!.data.title}"`}
+        smoothLoading
       />
     </div>
   )

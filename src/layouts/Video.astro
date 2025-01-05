@@ -8,6 +8,7 @@ interface Props extends HTMLAttributes<"iframe"> {
   autoplay?: boolean;
   mute?: boolean;
   loop?: boolean;
+  smoothLoading?: boolean;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   mute = true,
   loop = true,
   class: className = "",
+  smoothLoading,
   ...props
 } = Astro.props;
 
@@ -38,7 +40,7 @@ import "node_modules/lite-youtube-embed/src/lite-yt-embed.css";
       js-api
       videoid={id}
       params={`playlist=${id}&color=${color}&autoplay=${boolToInt(autoplay)}&mute=${boolToInt(mute)}&loop=${boolToInt(loop)}&controls=${boolToInt(!noControls)}&disablekb=${boolToInt(noControls)}`}
-      class={`${className} size-full`}
+      class={`${className} size-full ${smoothLoading ? "opacity-0 duration-700" : ""}`}
       data-aspect-ratio={aspect}
       {...props}></lite-youtube>
     <style>
@@ -91,7 +93,12 @@ import "node_modules/lite-youtube-embed/src/lite-yt-embed.css";
           if (isIntersecting) {
             // Initialize video
             if (!player) {
-              //? Get YT player activates the player for some reason
+              // Smooth loading
+              if (target.classList.contains("opacity-0")) {
+                setTimeout(() => target.classList.add("opacity-100"), 1000);
+              }
+
+              //? Get YT player activates the player for some reason, it's a really bad repo
               const ytPlayer = await lyt.getYTPlayer();
               if (!ytPlayer) return;
               players.set(lyt, ytPlayer);
