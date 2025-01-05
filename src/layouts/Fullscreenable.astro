@@ -1,21 +1,20 @@
 ---
+import type { ComponentProps } from "astro/types";
 import Button from "./Button.astro";
 
-interface Props {
-  className?: string;
-}
+interface Props extends ComponentProps<typeof Button> {}
 
 // TODO PHASE 2 Add 3D perspective that follows mouse, or gyroscope on mobile
 
-const { className = "" } = Astro.props;
+const { class: className = "", ...buttonProps } = Astro.props;
 ---
 
 <Button
   noFocus
   noRounding
   fullHeight
-  className={`can-fullscreen ${className} flex items-center justify-center overflow-hidden !bg-transparent`}
-  ><slot /></Button
+  class={`can-fullscreen ${className} flex items-center justify-center overflow-hidden !bg-transparent`}
+  {...buttonProps}><slot /></Button
 >
 <script>
   import type { LiteYTEmbed } from "lite-youtube-embed";

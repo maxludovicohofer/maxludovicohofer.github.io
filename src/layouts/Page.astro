@@ -27,6 +27,14 @@ const completeTitle = `Max Hofer \\ ${title}`;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <ClientRouter />
+
+    <!-- Umami analytics -->
+    <script
+      is:inline
+      defer
+      type="text/partytown"
+      src="https://cloud.umami.is/script.js"
+      data-website-id="4cbde35d-908e-44ec-b45c-9face0570614"></script>
   </head>
   <body class="bg-zinc-200 dark:bg-zinc-950"
     ><slot />{
@@ -61,9 +69,10 @@ const completeTitle = `Max Hofer \\ ${title}`;
       });
     </script>
     <script
-      src="https://unpkg.com/tailwindcss-intersect@2.x.x/dist/observer.min.js"
-      defer
       is:inline
+      defer
+      type="text/partytown"
+      src="https://unpkg.com/tailwindcss-intersect@2.x.x/dist/observer.min.js"
       data-astro-rerun></script>
   </body>
 </html>

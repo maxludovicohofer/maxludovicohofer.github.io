@@ -6,7 +6,7 @@ import type { ImageMetadata } from "astro";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import Card from "@layouts/Card.astro";
-import type { ComponentProps } from "astro/types";
+import type { ComponentProps, HTMLAttributes } from "astro/types";
 import CoverMedia from "@components/Post/CoverMedia.astro";
 import Link from "@layouts/Link.astro";
 import Button from "@layouts/Button.astro";
@@ -14,13 +14,12 @@ import type Video from "@layouts/Video.astro";
 import { toTitleCase } from "src/utils";
 import PostContent from "./PostContent.astro";
 
-interface Props {
+interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollection>;
   tag?: ComponentProps<typeof Text>["tag"];
   fullWidth?: boolean | undefined;
   container?: boolean;
   followedByOther?: boolean;
-  className?: string;
 }
 
 const {
@@ -29,7 +28,8 @@ const {
   fullWidth,
   container,
   followedByOther,
-  className = "",
+  class: className = "",
+  ...props
 } = Astro.props;
 
 export type PostCollection = Extract<CollectionKey, "projects" | "thoughts">;
@@ -145,21 +145,22 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
 {
   cover && (
     <div class="lg:hidden fixed left-0 right-0 mx-auto">
-      <CoverMedia cover={cover} entry={entry} className="h-[55vh] -mt-[39vh]" />
+      <CoverMedia cover={cover} entry={entry} class="h-[55vh] -mt-[39vh]" />
     </div>
   )
 }
 <Card
   container={container}
-  className={`!bg-opacity-0 !p-6 !pt-7 md:!pt-12 !shadow-none ${cover ? "rounded-b-none lg:rounded-none mt-[26vh] lg:mt-0" : "rounded-none"} ${followedByOther ? (cover ? "mb-[calc(26vh-12rem)]" : "mb-0") : "mb-4"} lg:mb-0 ${container ? "" : "bg-gradient-to-b from-zinc-100 dark:from-zinc-900 to-zinc-200 dark:to-zinc-950"} flex flex-col items-center`}
+  class={`!bg-opacity-0 !p-6 !pt-7 md:!pt-12 !shadow-none ${cover ? "rounded-b-none lg:rounded-none mt-[26vh] lg:mt-0" : "rounded-none"} ${followedByOther ? (cover ? "mb-[calc(26vh-12rem)]" : "mb-0") : "mb-4"} lg:mb-0 ${container ? "" : "bg-gradient-to-b from-zinc-100 dark:from-zinc-900 to-zinc-200 dark:to-zinc-950"} flex flex-col items-center`}
 >
   <div
     class={`${className} w-full mb-16 lg:mb-6 ${fullWidth ? "lg:px-20" : "max-w-[40rem] 2xl:max-w-[70rem]"}`}
+    {...props}
   >
     {
       cover && (
         <div class="hidden lg:inline">
-          <CoverMedia cover={cover} entry={entry} className="h-[40vh] mb-6" />
+          <CoverMedia cover={cover} entry={entry} class="h-[40vh] mb-6" />
         </div>
       )
     }
@@ -174,23 +175,23 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
         </Text>
       )
     }
-    <Text title className="text-3xl 2xl:text-5xl"
+    <Text title class="text-3xl 2xl:text-5xl"
       >{entry?.data.title ?? <slot name="title" />}</Text
     >
     {category && <Text subtitle>{category}</Text>}
     <Text
-      className={`${Content ? "is-entry" : ""} ${publishingDate ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl`}
+      class={`${Content ? "is-entry" : ""} ${publishingDate ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl`}
       markdown={!!Content}
       tag={tag}>{Content ? <PostContent Content={Content} /> : <slot />}</Text
     >
     {
       downloadsPresent && (
         <div class="flex flex-col items-center mt-8 mb-7">
-          <Button href={downloadLinks[0]} linkClassName={buttonWidthClass}>
+          <Button href={downloadLinks[0]} linkClass={buttonWidthClass}>
             {category === "Tool" ? "Download" : "Play"}
           </Button>
           {downloadLinks.length > 1 && (
-            <Text subtitle className={`-mb-4 w-full ${buttonWidthClass}`}>
+            <Text subtitle class={`-mb-4 w-full ${buttonWidthClass}`}>
               Or
               {downloadLinks.slice(1).map((link, index, { length }) => (
                 <>
@@ -207,14 +208,14 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
     }
     {
       Astro.slots.has("footer") && (
-        <Text subtitle className="mt-2 mb-1.5 xl:-mb-1" tag="div">
+        <Text subtitle class="mt-2 mb-1.5 xl:-mb-1" tag="div">
           <slot name="footer" />
         </Text>
       )
     }
     {
       publishingDate && (
-        <Text subtitle className="mt-0.5 xl:mt-3">
+        <Text subtitle class="mt-0.5 xl:mt-3">
           {publishingDate}
         </Text>
       )

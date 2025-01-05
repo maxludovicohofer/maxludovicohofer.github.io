@@ -8,11 +8,11 @@ interface Props extends ComponentProps<typeof Button> {
 
 //? Always add href to allow prefetch
 
-const { className = "", buttonName, href, ...buttonProps } = Astro.props;
+const { class: className = "", buttonName, href, ...buttonProps } = Astro.props;
 ---
 
 <Button
-  className={`${buttonName ?? (href ? "back-link" : "back-button")} ${className} !text-3xl fixed left-6 lg:left-9 top-[calc(100dvh-5rem)] lg:top-12 max-w-14 lg:max-w-10 min-h-14 lg:min-h-fit lg:max-h-10 hover:scale-110 active:scale-75`}
+  class={`${buttonName ?? (href ? "back-link" : "back-button")} ${className} !text-3xl fixed left-6 lg:left-9 top-[calc(100dvh-5rem)] lg:top-12 max-w-14 lg:max-w-10 min-h-14 lg:min-h-fit lg:max-h-10 hover:scale-110 active:scale-75`}
   rounded
   navigate
   href={href}

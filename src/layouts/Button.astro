@@ -4,16 +4,16 @@ import Link from "./Link.astro";
 import LinkButton from "./LinkButton.astro";
 
 interface Props
-  extends ComponentProps<typeof Link>,
-    ComponentProps<typeof LinkButton> {
-  linkClassName?: string;
+  extends ComponentProps<typeof LinkButton>,
+    Omit<ComponentProps<typeof Link>, keyof ComponentProps<typeof LinkButton>> {
+  linkClass?: string;
 }
 
 const {
   href,
   navigate,
-  className,
-  linkClassName = "",
+  class: className,
+  linkClass = "",
   ...buttonProps
 } = Astro.props;
 ---
@@ -24,15 +24,15 @@ const {
       href={href}
       navigate={navigate}
       noStyle
-      className={`${linkClassName} w-full`}
+      class={`${linkClass} w-full`}
       {...buttonProps}
     >
-      <LinkButton className={className} {...buttonProps}>
+      <LinkButton class={className} {...buttonProps}>
         <slot />
       </LinkButton>
     </Link>
   ) : (
-    <LinkButton className={className} {...buttonProps}>
+    <LinkButton class={className} {...buttonProps}>
       <slot />
     </LinkButton>
   )

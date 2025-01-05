@@ -1,14 +1,12 @@
 ---
-interface Props {
-  className?: string;
-}
+import type { HTMLAttributes } from "astro/types";
 
-const { className = "" } = Astro.props;
+interface Props extends HTMLAttributes<"div"> {}
+
+const { class: className = "", ...props } = Astro.props;
 ---
 
-<div class={`${className} dissolving`}>
-  <slot />
-</div>
+<div class={`${className} dissolving`} {...props}><slot /></div>
 <script>
   import { getPagePosition } from "src/utils";
 

@@ -5,12 +5,12 @@ import {
   type PostCollection,
 } from "@layouts/Post/Post.astro";
 import PostPreview from "@layouts/Post/PostPreview.astro";
+import type { HTMLAttributes } from "astro/types";
 import { render, getCollection, type CollectionEntry } from "astro:content";
 
-interface Props {
+interface Props extends HTMLAttributes<"ol"> {
   collection: PostCollection;
   short?: boolean;
-  className?: string;
   exclude?: string[] | undefined;
   disableHighlight?: true;
   append?: CollectionEntry<PostCollection>[];
@@ -20,11 +20,12 @@ interface Props {
 const {
   collection,
   short,
-  className = "",
+  class: className = "",
   exclude = [],
   append = [],
   disableHighlight,
   numberOfItemsToLoadEager = 0,
+  ...props
 } = Astro.props;
 
 export const getSortedEntries = async <C extends PostCollection>(
@@ -64,6 +65,7 @@ let highlightSet = false;
 
 <ol
   class={`content-list/${collection} content-list-size/${numberOfItemsToLoadEager} ${className} grid grid-flow-col md:grid-flow-row gap-4 overflow-x-scroll scrollbar-hide snap-mandatory pb-4 md:pb-0`}
+  {...props}
 >
   {
     sortedEntries.map((entry) => {
@@ -75,7 +77,7 @@ let highlightSet = false;
       return (
         <Card
           tag="li"
-          className={`content-slug/${entry.id} snap-center w-[80dvw] md:w-auto h-[17rem] ${isHighlight ? `row-start-1 col-span-full md:h-[23.6rem]` : ""}`}
+          class={`content-slug/${entry.id} snap-center w-[80dvw] md:w-auto h-[17rem] ${isHighlight ? `row-start-1 col-span-full md:h-[23.6rem]` : ""}`}
         >
           <PostPreview
             importance={isHighlight ? "container-highlight" : "container-item"}

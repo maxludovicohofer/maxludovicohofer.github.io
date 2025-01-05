@@ -1,17 +1,17 @@
 ---
 import Text from "@layouts/Text.astro";
+import type { HTMLAttributes } from "astro/types";
 import { getCollection } from "astro:content";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { toTitleCase } from "src/utils";
 
-interface Props {
-  className?: string;
+interface Props extends HTMLAttributes<"ol"> {
   compact?: boolean;
 }
 
-const { className = "", compact } = Astro.props;
+const { class: className = "", compact, ...props } = Astro.props;
 
 const tech = await getCollection("tech");
 
@@ -23,7 +23,7 @@ dayjs.extend(duration);
 dayjs.extend(relativeTime);
 ---
 
-<ol class={`grid ${className}`}>
+<ol class={`grid ${className}`} {...props}>
   {
     tech.map(({ data: { id, experience, group, functionalities } }) => {
       const isGroup = group && !compact;
@@ -49,13 +49,13 @@ dayjs.extend(relativeTime);
         <li
           class={`${rowSpan < 2 ? "row-span-1" : rowSpan < 3 ? "row-span-2" : rowSpan < 4 ? "row-span-3" : rowSpan < 5 ? "row-span-4" : "row-span-5"}`}
         >
-          <Text title={!compact} className="inline">
+          <Text title={!compact} class="inline">
             {title}
           </Text>
           {!compact && (
             <>
               {experience && !isGroup && (
-                <Text subtitle className="inline">
+                <Text subtitle class="inline">
                   {toTitleCase(dayjs.duration(experience).humanize())} of
                   experience
                 </Text>
@@ -64,9 +64,9 @@ dayjs.extend(relativeTime);
                 <ol class="ml-8">
                   {content.map((item) => (
                     <li>
-                      <Text className="inline">{item.id}</Text>
+                      <Text class="inline">{item.id}</Text>
                       {item.data && (
-                        <Text subtitle className="inline">
+                        <Text subtitle class="inline">
                           {toTitleCase(
                             dayjs.duration(item.data.experience).humanize()
                           )}{" "}

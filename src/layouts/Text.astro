@@ -1,13 +1,21 @@
 ---
-interface Props {
-  className?: string;
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div" | "b" | "u"> {
   title?: boolean;
   subtitle?: boolean;
   markdown?: boolean;
   tag?: "div" | "b" | "u" | undefined;
 }
 
-const { className = "", title, subtitle, markdown, tag } = Astro.props;
+const {
+  class: className = "",
+  title,
+  subtitle,
+  markdown,
+  tag,
+  ...props
+} = Astro.props;
 
 const Element = tag ?? (markdown ? "div" : "p");
 
@@ -16,5 +24,5 @@ if (markdown) import("katex/dist/katex.min.css");
 
 <Element
   class={`${className} ${title ? "text-balance text-zinc-950 dark:text-zinc-100 font-semibold" : subtitle ? "text-sm 2xl:text-xl text-zinc-400 leading-6" : "text-zinc-500 dark:text-zinc-300"} ${markdown ? "prose dark:prose-invert max-w-full prose-h1:font-semibold prose-h2:text-2xl prose-h2:xl:text-4xl prose-h2:font-semibold prose-h3:text-xl prose-h3:xl:text-3xl prose-h3:font-semibold prose-li:list-[kannada]" : ""}`}
-  ><slot /></Element
+  {...props}><slot /></Element
 >

@@ -11,13 +11,19 @@ interface MarkdownImage {
   format: (typeof imageExtensions)[number];
 }
 
-interface Props {
+interface Props extends Omit<ComponentProps<typeof Video>, "src"> {
   src: NonNullable<ReturnType<typeof getPostCover>> | MarkdownImage;
   alt: string;
   loading?: ImgAttributes["loading"];
 }
 
-const { src, alt, loading = "lazy" } = Astro.props;
+const {
+  src,
+  alt,
+  class: className = "",
+  loading = "lazy",
+  ...props
+} = Astro.props;
 
 export function isVideo(
   video: typeof src
@@ -29,18 +35,19 @@ function isMarkdownImage(image: typeof src): image is MarkdownImage {
   return !!(image as MarkdownImage).src;
 }
 
-const mediaClass = "size-full object-cover pointer-events-none";
+const mediaClass = `${className} size-full object-cover pointer-events-none`;
 ---
 
 {
   isVideo(src) ? (
-    <Video youTubeInfo={src} className={mediaClass} />
+    <Video youTubeInfo={src} class={mediaClass} {...props} />
   ) : (
     <Image
       src={isMarkdownImage(src) ? src : src()}
       alt={alt}
       class={mediaClass}
       loading={loading}
+      {...(props as any)}
     />
   )
 }

@@ -1,14 +1,13 @@
 ---
-import type { ComponentProps } from "astro/types";
+import type { ComponentProps, HTMLAttributes } from "astro/types";
 import { getAspectClass } from "src/utils";
 
-interface Props {
+interface Props extends HTMLAttributes<"iframe"> {
   youTubeInfo?: { id: string; aspect: "16/9" | "16/10" };
   color?: YT.ProgressBarColor;
   autoplay?: boolean;
   mute?: boolean;
   loop?: boolean;
-  className?: string;
 }
 
 const {
@@ -20,10 +19,11 @@ const {
   autoplay = true,
   mute = true,
   loop = true,
-  className = "",
+  class: className = "",
+  ...props
 } = Astro.props;
 
-const noControls = className.includes("pointer-events-none");
+const noControls = className?.includes("pointer-events-none");
 
 const boolToInt = (value?: boolean) => (value ? 1 : 0);
 
@@ -39,7 +39,8 @@ import "node_modules/lite-youtube-embed/src/lite-yt-embed.css";
       videoid={id}
       params={`playlist=${id}&color=${color}&autoplay=${boolToInt(autoplay)}&mute=${boolToInt(mute)}&loop=${boolToInt(loop)}&controls=${boolToInt(!noControls)}&disablekb=${boolToInt(noControls)}`}
       class={`${className} size-full`}
-      data-aspect-ratio={aspect}></lite-youtube>
+      data-aspect-ratio={aspect}
+      {...props}></lite-youtube>
     <style>
       /* Fix default styles */
       lite-youtube {
