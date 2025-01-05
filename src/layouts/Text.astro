@@ -1,7 +1,7 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 
-interface Props extends HTMLAttributes<"div" | "b" | "u"> {
+interface Props extends Omit<HTMLAttributes<"div" | "b" | "u">, "title"> {
   title?: boolean;
   subtitle?: boolean;
   markdown?: boolean;
