@@ -15,7 +15,7 @@ const { cover, entry, ...props } = Astro.props;
 <PostMedia
   src={cover}
   alt={entry.collection === "projects"
-    ? entry.data.description
+    ? `${entry.data.title} gameplay`
     : `Graphic explanation of "${entry.data.title}"`}
   loading="eager"
   data-umami-event={`${entry.data.title} cover`}

@@ -3,6 +3,7 @@ import Fullscreenable from "@layouts/Fullscreenable.astro";
 import Dissolving from "@layouts/Dissolving.astro";
 import type { ComponentProps } from "astro/types";
 import Media from "@layouts/Media.astro";
+import Text from "@layouts/Text.astro";
 
 interface Props extends ComponentProps<typeof Media> {}
 
@@ -13,11 +14,10 @@ const {
 } = Astro.props;
 ---
 
-<Dissolving>
-  <Fullscreenable
+<Dissolving
+  ><Fullscreenable
     class={`${className} rounded-3xl`}
     data-umami-event={umamiEvent ?? props.alt}
-  >
-    <Media {...props} />
-  </Fullscreenable>
-</Dissolving>
+    ><Media {...props} /></Fullscreenable
+  ><Text subtitle>{props.alt}</Text></Dissolving
+>
