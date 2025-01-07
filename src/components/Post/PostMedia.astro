@@ -10,14 +10,24 @@ interface Props extends ComponentProps<typeof Media> {}
 const {
   class: className = "",
   "data-umami-event": umamiEvent,
+  alt,
   ...props
 } = Astro.props;
+
+const [visibleAlt, hiddenAlt] = alt.split("HIDDEN ");
+const displayedAlt = (visibleAlt || hiddenAlt!).trim();
 ---
 
 <Dissolving
   ><Fullscreenable
     class={`${className} rounded-3xl`}
-    data-umami-event={umamiEvent ?? props.alt}
-    ><Media {...props} /></Fullscreenable
-  ><Text subtitle class="-mb-4">{props.alt}</Text></Dissolving
+    data-umami-event={umamiEvent ?? displayedAlt}
+    ><Media alt={displayedAlt} {...props} /></Fullscreenable
+  >{
+    visibleAlt && (
+      <Text subtitle class="-mb-4">
+        {displayedAlt}
+      </Text>
+    )
+  }</Dissolving
 >
