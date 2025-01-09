@@ -83,7 +83,9 @@ let highlightSet = false;
             importance={isHighlight ? "container-highlight" : "container-item"}
             entry={entry}
             minutesAlreadySpentReading={short && !isHighlight ? 0 : undefined}
-            descriptionAsBody={short}
+            {...(entry.collection === "projects"
+              ? { startHeading: "Design", short: true }
+              : {})}
           />
         </Card>
       );

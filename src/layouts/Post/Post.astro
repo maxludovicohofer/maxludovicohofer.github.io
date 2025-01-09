@@ -89,18 +89,6 @@ export const getPostCover = (post: typeof entry) => {
 
 const cover = getPostCover(entry);
 
-export const getDescription = <C extends CollectionKey>(
-  entry?: CollectionEntry<C>
-) => {
-  function isDescriptiveEntry<C extends CollectionKey>(
-    entry?: CollectionEntry<C>
-  ): entry is CollectionEntry<C> & { data: { description: string } } {
-    return !!(entry && Object.hasOwn(entry.data, "description"));
-  }
-
-  return isDescriptiveEntry(entry) ? entry.data.description : undefined;
-};
-
 export const getCategory = <C extends CollectionKey>(
   entry?: CollectionEntry<C>
 ) => {

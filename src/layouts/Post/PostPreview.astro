@@ -4,7 +4,6 @@ import { render, type CollectionEntry } from "astro:content";
 import Button from "@layouts/Button.astro";
 import {
   getCategory,
-  getDescription,
   getPublishingDate,
   getPostCover,
   type PostCollection,
@@ -13,10 +12,13 @@ import {
 import type { ComponentProps, HTMLAttributes } from "astro/types";
 import PostContent from "./PostContent.astro";
 import Media from "@layouts/Media.astro";
+import { getCoverAlt } from "@components/Post/CoverMedia.astro";
+import { toCapitalized } from "src/utils";
 
 interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollection> | undefined;
-  descriptionAsBody?: boolean | undefined;
+  startHeading?: string | undefined;
+  short?: boolean | undefined;
   readMore?: string;
   readMoreText?: string;
   readMoreClass?: string;
@@ -36,21 +38,50 @@ interface Props extends HTMLAttributes<"div"> {
 
 const {
   class: className = "",
+  container,
   importance = "medium",
   entry,
-  descriptionAsBody,
+  startHeading,
+  short,
   readMore,
   readMoreText,
   noReadMore,
   readMoreClass = "",
   tag,
   hideDate,
-  container,
   minutesAlreadySpentReading = 0.5, // Time assumed to be already spent reading before clicking read more
   ...props
 } = Astro.props;
 
+let overrideContent: string | undefined;
+
+const cleanMarkdown = (markdown: string) =>
+  markdown.replace(/{\/\*.*\*\/}/g, "").trim();
+
+if (entry?.body) {
+  if (startHeading) {
+    overrideContent = entry.body.split(
+      new RegExp(`# ${startHeading}[\n\r\s]+`)
+    )[1];
+  }
+
+  overrideContent = overrideContent && cleanMarkdown(overrideContent);
+
+  if (short) {
+    overrideContent = `${(overrideContent ?? cleanMarkdown(entry.body)).split(/\.[\n\r\s]+/)[0]!}.`;
+
+    //! Try to shorten sentence, could lead to errors
+    //! Also, uses lookbehind, which could be unsupported
+    overrideContent = toCapitalized(
+      overrideContent.split(/(?<!,.*)( is a | is | was a | was )/)[2] ??
+        overrideContent
+    );
+  }
+}
+
 const { Content, remarkPluginFrontmatter } = entry ? await render(entry) : {};
+
+const renderedContent = overrideContent ?? Content;
 
 const realMinutesToRead =
   remarkPluginFrontmatter &&
@@ -65,7 +96,6 @@ const readMoreLink =
     : (readMore ?? (entry && `/${entry.collection}/${getPostId(entry)}`));
 
 const cover = getPostCover(entry);
-const description = getDescription(entry);
 const category = getCategory(entry);
 const publishingDate =
   !hideDate &&
@@ -115,16 +145,14 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
       )
     }
     <Text
-      class={`${publishingDate ? "mt-4" : Content || Astro.slots.has("title") ? "mt-6" : ""} text-xl 2xl:text-3xl ${container ? "max-h-[32rem]" : readMoreLink ? "h-64" : ""}`}
-      markdown={!!Content}
+      class={`${publishingDate ? "mt-4" : renderedContent || Astro.slots.has("title") ? "mt-6" : ""} text-xl 2xl:text-3xl ${container ? "max-h-[32rem]" : readMoreLink ? "h-64" : ""}`}
+      markdown={typeof renderedContent === "function"}
       tag={tag ?? (container ? "div" : undefined)}
       >{
-        descriptionAsBody && description ? (
-          description
-        ) : Content ? (
-          <PostContent Content={Content} />
+        typeof renderedContent === "function" ? (
+          <PostContent Content={renderedContent} />
         ) : (
-          <slot />
+          (renderedContent ?? <slot />)
         )
       }</Text
     >
@@ -142,11 +170,7 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
     <div
       class={`absolute inset-0 pointer-events-none opacity-0 intersect:opacity-15 intersect-half duration-700 ${container ? "group-hover/container-card:opacity-15" : "group-hover/card:opacity-15"}`}
     >
-      <Media
-        src={cover}
-        alt={description ?? `Graphic explanation of "${entry!.data.title}"`}
-        smoothLoading
-      />
+      <Media src={cover} alt={getCoverAlt(entry!)} smoothLoading />
     </div>
   )
 }
