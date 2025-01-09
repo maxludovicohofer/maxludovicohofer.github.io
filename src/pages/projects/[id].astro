@@ -1,7 +1,7 @@
 ---
 import Projects from "@components/Post/Projects.astro";
 import Page from "@layouts/Page.astro";
-import Post, { getPostId } from "@layouts/Post/Post.astro";
+import Post, { getDescription, getPostId } from "@layouts/Post/Post.astro";
 import { getCollection, getEntries } from "astro:content";
 import PostFooter from "@components/Post/PostFooter.astro";
 import dayjs from "dayjs";
@@ -21,8 +21,7 @@ export const getStaticPaths = async () =>
   }));
 
 const { entry } = Astro.props;
-const { title, description, roles, tech, awards, team, developmentTime } =
-  entry.data;
+const { title, roles, tech, awards, team, developmentTime } = entry.data;
 
 const techData = await getEntries(tech);
 
@@ -33,7 +32,7 @@ const developmentDuration = dayjs.duration(developmentTime).humanize();
 // TODO PHASE 2 USE HREF ON PAGE BACK, BUT GET HREF DINAMICALLY
 ---
 
-<Page title={title} description={description}>
+<Page title={title} description={getDescription(entry, 2) ?? title}>
   <Post entry={entry} followedByOther>
     <Fragment slot="footer">
       <PostFooter

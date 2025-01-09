@@ -98,6 +98,11 @@ export const getAspectRatio = (aspect: string) =>
     .map(Number)
     .reduce((a, b) => a / b);
 
+//? Markdown
+
+export const cleanMarkdown = (markdown: string) =>
+  markdown.replace(/{\/\*.*\*\/}/g, "").trim();
+
 //? Text
 export const toTitleCase = (word: string) =>
   word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();

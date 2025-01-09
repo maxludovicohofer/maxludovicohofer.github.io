@@ -8,12 +8,12 @@ import {
   getPostCover,
   type PostCollection,
   getPostId,
+  getDescription,
 } from "./Post.astro";
 import type { ComponentProps, HTMLAttributes } from "astro/types";
 import PostContent from "./PostContent.astro";
 import Media from "@layouts/Media.astro";
 import { getCoverAlt } from "@components/Post/CoverMedia.astro";
-import { toCapitalized } from "src/utils";
 
 interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollection> | undefined;
@@ -53,35 +53,10 @@ const {
   ...props
 } = Astro.props;
 
-let overrideContent: string | undefined;
-
-const cleanMarkdown = (markdown: string) =>
-  markdown.replace(/{\/\*.*\*\/}/g, "").trim();
-
-if (entry?.body) {
-  if (startHeading) {
-    overrideContent = entry.body.split(
-      new RegExp(`# ${startHeading}[\n\r\s]+`)
-    )[1];
-  }
-
-  overrideContent = overrideContent && cleanMarkdown(overrideContent);
-
-  if (short) {
-    overrideContent = `${(overrideContent ?? cleanMarkdown(entry.body)).split(/\.[\n\r\s]+/)[0]!}.`;
-
-    //! Try to shorten sentence, could lead to errors
-    //! Also, uses lookbehind, which could be unsupported
-    overrideContent = toCapitalized(
-      overrideContent.split(/(?<!,.*)( is a | is | was a | was )/)[2] ??
-        overrideContent
-    );
-  }
-}
-
 const { Content, remarkPluginFrontmatter } = entry ? await render(entry) : {};
 
-const renderedContent = overrideContent ?? Content;
+const renderedContent =
+  getDescription(entry, short ? 1 : undefined, true, startHeading) ?? Content;
 
 const realMinutesToRead =
   remarkPluginFrontmatter &&

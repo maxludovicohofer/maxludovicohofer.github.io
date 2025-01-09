@@ -11,7 +11,7 @@ import CoverMedia from "@components/Post/CoverMedia.astro";
 import Link from "@layouts/Link.astro";
 import Button from "@layouts/Button.astro";
 import type Video from "@layouts/Video.astro";
-import { getLinkName } from "src/utils";
+import { getLinkName, toCapitalized, cleanMarkdown } from "src/utils";
 import PostContent from "./PostContent.astro";
 
 interface Props extends HTMLAttributes<"div"> {
@@ -88,6 +88,43 @@ export const getPostCover = (post: typeof entry) => {
 };
 
 const cover = getPostCover(entry);
+
+export const getDescription = <C extends CollectionKey>(
+  entry?: CollectionEntry<C>,
+  sentences?: number,
+  shortenStart?: boolean,
+  startHeading?: string
+) => {
+  let description: string | undefined;
+
+  if (!entry?.body) return;
+
+  if (startHeading) {
+    description = entry.body.split(new RegExp(`# ${startHeading}[\n\r\s]+`))[1];
+  }
+
+  description = description && cleanMarkdown(description);
+
+  if (sentences) {
+    const splitSentences = (description ?? cleanMarkdown(entry.body)).split(
+      /\.[\n\r\s]+/
+    );
+
+    description = `${splitSentences.slice(0, sentences).join(". ")}.`;
+  }
+
+  if (shortenStart) {
+    //! Try to shorten sentence, could lead to errors
+    //! Also, uses lookbehind, which could be unsupported
+    const shortenedStart = (description ?? cleanMarkdown(entry.body)).split(
+      /(?<!,.*)( is a | is | was a | was )/
+    )[2];
+
+    if (shortenedStart) description = toCapitalized(shortenedStart);
+  }
+
+  return description;
+};
 
 export const getCategory = <C extends CollectionKey>(
   entry?: CollectionEntry<C>
