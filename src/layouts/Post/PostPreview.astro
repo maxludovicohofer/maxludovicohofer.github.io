@@ -56,7 +56,7 @@ const {
 const { Content, remarkPluginFrontmatter } = entry ? await render(entry) : {};
 
 const renderedContent =
-  getDescription(entry, short ? 1 : undefined, true, startHeading) ?? Content;
+  getDescription(entry, short ? 1 : undefined, short, startHeading) ?? Content;
 
 const realMinutesToRead =
   remarkPluginFrontmatter &&
