@@ -55,7 +55,7 @@ export const rotate3D = async (
 
       if (response === "granted") {
         // Front-to-back angle at which the device is normally held
-        const normalDeviceYAngle = 30;
+        const normalDeviceYAngle = 60;
         return {
           deviceorientation: ({ gamma, beta }) => {
             const sideToSide = gamma ?? 0;
@@ -68,8 +68,8 @@ export const rotate3D = async (
               );
             } else {
               setRotation(
-                clamp(-frontToBack / maxAngle),
-                clamp((sideToSide - normalDeviceYAngle) / maxAngle)
+                clamp(frontToBack / maxAngle),
+                clamp(-(sideToSide - normalDeviceYAngle) / maxAngle)
               );
             }
           },
