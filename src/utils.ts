@@ -33,8 +33,7 @@ export const rotate3D = async (
     const workingGyroscope = new Promise<boolean>((resolve) =>
       window.addEventListener(
         "deviceorientation",
-        ({ alpha, beta, gamma }) =>
-          resolve(alpha !== null || beta !== null || gamma !== null),
+        ({ gamma, beta }) => resolve(gamma !== null || beta !== null),
         {
           once: true,
         }
@@ -58,12 +57,8 @@ export const rotate3D = async (
 
       if (response === "granted") {
         return {
-          deviceorientation: ({ gamma, beta }) => {
-            setRotation(
-              gamma ? gamma / 90 : undefined,
-              beta ? beta / 180 : undefined
-            );
-          },
+          deviceorientation: ({ gamma, beta }) =>
+            setRotation((gamma ?? 0) / 90, (beta ?? 0) / 180),
         };
       }
     }
