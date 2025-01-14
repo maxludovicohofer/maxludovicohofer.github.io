@@ -54,11 +54,19 @@ export const rotate3D = async (
         : "granted";
 
       if (response === "granted") {
+        // Front-to-back angle at which the device is normally held
+        const normalDeviceYAngle = 30;
         return {
           deviceorientation: ({ gamma, beta }) =>
             setRotation(
-              Math.min(Math.max((gamma ?? 0) / maxAngle, -1), 1),
-              Math.min(Math.max(-((beta ?? 0) - 45) / maxAngle, -1), 1)
+              Math.min(Math.max((gamma ?? 0) / normalDeviceYAngle, -1), 1),
+              Math.min(
+                Math.max(
+                  -((beta ?? 0) - normalDeviceYAngle) / normalDeviceYAngle,
+                  -1
+                ),
+                1
+              )
             ),
         };
       }
