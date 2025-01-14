@@ -17,11 +17,9 @@ export const rotate3D = async (
 }> => {
   const maxAngle = 15;
 
-  const setRotation = (xPercent?: number, yPercent?: number) => {
-    if (xPercent !== undefined)
-      element.style.setProperty("--rotateX", `${xPercent * maxAngle}deg`);
-    if (yPercent !== undefined)
-      element.style.setProperty("--rotateY", `${yPercent * maxAngle}deg`);
+  const setRotation = (xPercent: number, yPercent: number) => {
+    element.style.setProperty("--rotateX", `${xPercent * maxAngle}deg`);
+    element.style.setProperty("--rotateY", `${yPercent * maxAngle}deg`);
   };
 
   // Check for gyroscope
@@ -135,6 +133,9 @@ export const deactivateModal = () => {
     } else {
       document.removeEventListener("mousemove", modalMoveFunction.mousemove!);
     }
+
+    modal.style.setProperty("--rotateX", "0deg");
+    modal.style.setProperty("--rotateY", "0deg");
   }
 };
 
