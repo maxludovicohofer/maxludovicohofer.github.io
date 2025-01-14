@@ -16,8 +16,8 @@ export function getCoverAlt({
   data: { title },
 }: CollectionEntry<PostCollection>) {
   return collection === "projects"
-    ? `${title} gameplay`
-    : `Graphic explanation of "${title}"`;
+    ? `${title} gameplay.`
+    : `Graphic explanation of "${title}".`;
 }
 ---
 

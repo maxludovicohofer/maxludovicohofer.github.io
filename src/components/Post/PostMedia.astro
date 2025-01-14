@@ -4,6 +4,7 @@ import Dissolving from "@layouts/Dissolving.astro";
 import type { ComponentProps } from "astro/types";
 import Media from "@layouts/Media.astro";
 import Text from "@layouts/Text.astro";
+import Link from "@layouts/Link.astro";
 
 interface Props extends ComponentProps<typeof Media> {}
 
@@ -14,19 +15,70 @@ const {
   ...props
 } = Astro.props;
 
-const [visibleAlt, hiddenAlt] = alt.split("HIDDEN ");
-const displayedAlt = (visibleAlt || hiddenAlt!).trim();
+// Check if hidden text
+const [descriptiveAlt, hiddenAlt] = alt.split("HIDDEN ");
+// This alt is present even if there is no description, useful for event name and screen reader alt
+const realAlt = (hiddenAlt || descriptiveAlt!).trim();
+
+// Check for links in alt
+const textAlt = [realAlt];
+const links: ComponentProps<typeof Link>[] = [];
+
+const altLinks = textAlt
+  .at(-1)!
+  .match(
+    /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+  );
+
+const linkTextBeforeRegex = /\[.*\($/;
+const linkTextAfterRegex = /^\)]/;
+
+altLinks?.forEach((altLink) => {
+  links.push({ href: altLink });
+
+  // Check for link text
+  const [altBeforeLink, altAfterLink] = textAlt.at(-1)!.split(altLink);
+  if (!altAfterLink || !altAfterLink.match(linkTextAfterRegex)) return;
+
+  const linkTextPosition = altBeforeLink!.search(linkTextBeforeRegex);
+  if (linkTextPosition === -1) return;
+
+  const linkText = altBeforeLink!.slice(linkTextPosition).slice(1, -1);
+
+  links.push({ ...links.pop(), slot: linkText });
+
+  textAlt.pop();
+  textAlt.push(
+    altBeforeLink!.replace(linkTextBeforeRegex, ""),
+    altAfterLink!.replace(linkTextAfterRegex, "")
+  );
+});
+
+const stringAlt = textAlt.reduce(
+  (joined, toJoin, index) =>
+    `${joined}${index !== 0 ? links[index - 1]!.slot : ""}${toJoin}`,
+  ""
+);
 ---
 
 <Dissolving
   ><Fullscreenable
     class={`${className} rounded-3xl`}
-    data-umami-event={umamiEvent ?? displayedAlt}
-    ><Media alt={displayedAlt} {...props} /></Fullscreenable
+    data-umami-event={umamiEvent ?? stringAlt}
+    ><Media alt={stringAlt} {...props} /></Fullscreenable
   >{
-    visibleAlt && (
+    descriptiveAlt && (
       <Text subtitle class="-mb-4">
-        {displayedAlt}
+        {textAlt.map((text, index) => (
+          <>
+            {index !== 0 && (
+              <Link {...links[index - 1]}>{links[index - 1]!.slot}</Link>
+            )}
+            <Text tag="span" subtitle>
+              {text}
+            </Text>
+          </>
+        ))}
       </Text>
     )
   }</Dissolving
