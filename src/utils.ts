@@ -57,17 +57,22 @@ export const rotate3D = async (
         // Front-to-back angle at which the device is normally held
         const normalDeviceYAngle = 30;
         return {
-          deviceorientation: ({ gamma, beta }) =>
-            setRotation(
-              Math.min(Math.max((gamma ?? 0) / normalDeviceYAngle, -1), 1),
-              Math.min(
-                Math.max(
-                  -((beta ?? 0) - normalDeviceYAngle) / normalDeviceYAngle,
-                  -1
-                ),
-                1
-              )
-            ),
+          deviceorientation: ({ gamma, beta }) => {
+            const sideToSide = gamma ?? 0;
+            const frontToBack = beta ?? 0;
+
+            if (screen.orientation.type.startsWith("portrait")) {
+              setRotation(
+                clamp(sideToSide / maxAngle),
+                clamp(-(frontToBack - normalDeviceYAngle) / maxAngle)
+              );
+            } else {
+              setRotation(
+                clamp(-frontToBack / maxAngle),
+                clamp((sideToSide - normalDeviceYAngle) / maxAngle)
+              );
+            }
+          },
         };
       }
     }
@@ -225,6 +230,11 @@ export const toCapitalized = (word: string) =>
 
 export const getLinkName = (link: string) =>
   toTitleCase(new URL(link).host.split(".").at(-2)!);
+
+//? Math
+
+export const clamp = (value: number, min: number = -1, max: number = 1) =>
+  Math.min(Math.max(value, min), max);
 
 //? Integrations
 
