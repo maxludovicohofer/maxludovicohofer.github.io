@@ -4,8 +4,6 @@ import Button from "./Button.astro";
 
 interface Props extends ComponentProps<typeof Button> {}
 
-// TODO PHASE 2 Add 3D perspective that follows mouse, or gyroscope on mobile
-
 const { class: className = "", ...buttonProps } = Astro.props;
 ---
 
@@ -52,6 +50,8 @@ const { class: className = "", ...buttonProps } = Astro.props;
     ]);
     fullscreenMedia.style.maxWidth = "inherit";
     fullscreenMedia.style.maxHeight = "inherit";
+
+    let noAnimation = false;
 
     if (isLiteYouTube(fullscreenMedia)) {
       const aspect = fullscreenMedia.dataset.aspectRatio!;
@@ -105,11 +105,13 @@ const { class: className = "", ...buttonProps } = Astro.props;
       // Pause original video to save resources
       originalMedia.setAttribute("data-modal-original", "true");
       originalPlayer.pauseVideo();
+
+      noAnimation = true;
     } else {
       fullscreenMedia.classList.add("size-auto");
     }
 
-    activateModal(fullscreenMedia);
+    activateModal(fullscreenMedia, noAnimation);
   }
 
   document.addEventListener("astro:page-load", () =>

@@ -1,7 +1,33 @@
 import type { LiteYTEmbed } from "lite-youtube-embed";
 
 //? HTML
-export const activateModal = (content: HTMLElement) => {
+export const rotate3D = (element: HTMLElement) => {
+  const maxAngle = 15;
+
+  const setRotation = (xPercent?: number, yPercent?: number) => {
+    if (xPercent !== undefined)
+      element.style.setProperty("--rotateX", `${xPercent * maxAngle}deg`);
+    if (yPercent !== undefined)
+      element.style.setProperty("--rotateY", `${yPercent * maxAngle}deg`);
+  };
+
+  return DeviceOrientationEvent
+    ? ({ clientX, clientY }: MouseEvent) =>
+        setRotation(
+          clientX / (innerWidth / 2) - 1,
+          -(clientY / (innerHeight / 2) - 1)
+        )
+    : ({ beta, gamma }: DeviceOrientationEvent) => {
+        setRotation(
+          gamma ? gamma / 90 : undefined,
+          beta ? beta / 180 : undefined
+        );
+      };
+};
+
+let modalMoveFunction: ReturnType<typeof rotate3D>;
+
+export const activateModal = (content: HTMLElement, noAnimation?: boolean) => {
   const modalSlot = document.querySelector<HTMLDivElement>("div.modal-slot")!;
   modalSlot.classList.add("!pointer-events-auto");
 
@@ -13,6 +39,20 @@ export const activateModal = (content: HTMLElement) => {
   backButton.classList.add("!opacity-100");
 
   const modal = modalSlot.querySelector<HTMLDivElement>("div.modal")!;
+  if (!noAnimation) {
+    modalMoveFunction = rotate3D(modal);
+    if (DeviceOrientationEvent) {
+      document.addEventListener(
+        "mousemove",
+        modalMoveFunction as (e: MouseEvent) => void
+      );
+    } else {
+      addEventListener(
+        "deviceorientation",
+        modalMoveFunction as (e: DeviceOrientationEvent) => void
+      );
+    }
+  }
   modal.append(content);
 
   content.className = content.className.replace(
@@ -32,6 +72,19 @@ export const deactivateModal = () => {
 
   const modal = modalSlot.querySelector<HTMLDivElement>("div.modal")!;
   modal.replaceChildren();
+  if (modalMoveFunction) {
+    if (DeviceOrientationEvent) {
+      document.removeEventListener(
+        "mousemove",
+        modalMoveFunction as (e: MouseEvent) => void
+      );
+    } else {
+      removeEventListener(
+        "deviceorientation",
+        modalMoveFunction as (e: DeviceOrientationEvent) => void
+      );
+    }
+  }
 
   const backdrop = modalSlot.querySelector<HTMLDivElement>("div.modal-back")!;
   backdrop.classList.remove("!opacity-100");

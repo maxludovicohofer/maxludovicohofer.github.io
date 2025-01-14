@@ -16,6 +16,13 @@ import BackButton from "@components/BackButton.astro";
       class="modal max-h-[90dvh] lg:max-h-[80dvh] max-w-[90dvw] lg:max-w-[80dvw] rounded-3xl overflow-hidden flex flex-col items-center justify-center"
     >
     </div>
+    <style>
+      .modal {
+        /* Used for 3D perspective */
+        transform: perspective(5000px) rotateY(var(--rotateX))
+          rotateX(var(--rotateY));
+      }
+    </style>
   </div>
   <BackButton buttonName="modal-back" class="opacity-0" />
 </div>
