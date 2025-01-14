@@ -69,16 +69,18 @@ const stringAlt = textAlt.reduce(
   >{
     descriptiveAlt && (
       <Text subtitle class="-mb-4">
-        {textAlt.map((text, index) => (
-          <>
-            {index !== 0 && (
-              <Link {...links[index - 1]}>{links[index - 1]!.slot}</Link>
-            )}
-            <Text tag="span" subtitle>
-              {text}
-            </Text>
-          </>
-        ))}
+        {textAlt.length === 1
+          ? textAlt[0]
+          : textAlt.map((text, index) => (
+              <>
+                {index !== 0 && (
+                  <Link {...links[index - 1]}>{links[index - 1]!.slot}</Link>
+                )}
+                <Text tag="span" subtitle>
+                  {text}
+                </Text>
+              </>
+            ))}
       </Text>
     )
   }</Dissolving
