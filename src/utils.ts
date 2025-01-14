@@ -17,7 +17,20 @@ export const rotate3D = async (
 }> => {
   const maxAngle = 15;
 
+  const firstRotationDuration = "duration-75";
+  element.classList.add(firstRotationDuration);
+  let firstRotationTimeout: NodeJS.Timeout;
   const setRotation = (xPercent: number, yPercent: number) => {
+    if (
+      !firstRotationTimeout &&
+      element.classList.contains(firstRotationDuration)
+    ) {
+      firstRotationTimeout = setTimeout(
+        () => element.classList.remove(firstRotationDuration),
+        Number(getTailwindClassValue(firstRotationDuration)) + 200
+      );
+    }
+
     element.style.setProperty("--rotateX", `${xPercent * maxAngle}deg`);
     element.style.setProperty("--rotateY", `${yPercent * maxAngle}deg`);
   };
@@ -185,10 +198,17 @@ export const removeFromClasses = (className: string, remove: string[]) =>
     ""
   );
 
-export const getTailwindValue = (element: Element, key: string) =>
-  Array.from(element.classList)
-    .find((part) => part.startsWith(key))
-    ?.split("-")
+export const getTailwindValue = (element: Element, key: string) => {
+  const tailwindClass = Array.from(element.classList).find((part) =>
+    part.startsWith(key)
+  );
+
+  return tailwindClass && getTailwindClassValue(tailwindClass);
+};
+
+export const getTailwindClassValue = (tailwindClass: string) =>
+  tailwindClass
+    .split("-")
     .at(-1)!
     .replace(/[[\]']+/g, "");
 
