@@ -69,7 +69,7 @@ export const rotate3D = async (
             } else {
               setRotation(
                 clamp(frontToBack / maxAngle),
-                clamp(-(sideToSide - normalDeviceYAngle) / maxAngle)
+                clamp(-(sideToSide + normalDeviceYAngle) / maxAngle)
               );
             }
           },
