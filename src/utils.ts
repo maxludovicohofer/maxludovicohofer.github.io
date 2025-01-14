@@ -15,7 +15,7 @@ export const rotate3D = async (
       : never
   ) => void;
 }> => {
-  const maxAngle = 15;
+  const maxAngle = 45;
 
   const firstRotationDuration = "duration-75";
   element.classList.add(firstRotationDuration);
@@ -74,6 +74,8 @@ export const rotate3D = async (
             const sideToSide = gamma ?? 0;
             const frontToBack = beta ?? 0;
             const isPortrait = screen.orientation.type.startsWith("portrait");
+
+            // TODO PHASE 2 FIX GIMBAL LOCK IN GYROSCOPE
 
             setRotation(
               clamp((isPortrait ? sideToSide : frontToBack) / maxAngle),
