@@ -64,12 +64,12 @@ export const rotate3D = async (
             if (screen.orientation.type.startsWith("portrait")) {
               setRotation(
                 clamp(sideToSide / maxAngle),
-                clamp(-(frontToBack - normalDeviceYAngle) / maxAngle)
+                -clamp((frontToBack - normalDeviceYAngle) / maxAngle)
               );
             } else {
               setRotation(
                 clamp(frontToBack / maxAngle),
-                clamp(-(sideToSide + normalDeviceYAngle) / maxAngle)
+                clamp((sideToSide + normalDeviceYAngle) / maxAngle)
               );
             }
           },
