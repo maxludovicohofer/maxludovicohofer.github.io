@@ -1,7 +1,20 @@
 import type { LiteYTEmbed } from "lite-youtube-embed";
 
 //? HTML
-export const rotate3D = (element: HTMLElement) => {
+export const rotate3D = async (
+  element: HTMLElement
+): Promise<{
+  [K in Extract<
+    keyof (WindowEventMap & DocumentEventMap),
+    "deviceorientation" | "mousemove"
+  >]?: (
+    e: K extends keyof WindowEventMap
+      ? WindowEventMap[K]
+      : K extends keyof DocumentEventMap
+      ? DocumentEventMap[K]
+      : never
+  ) => void;
+}> => {
   const maxAngle = 15;
 
   const setRotation = (xPercent?: number, yPercent?: number) => {
@@ -11,23 +24,66 @@ export const rotate3D = (element: HTMLElement) => {
       element.style.setProperty("--rotateY", `${yPercent * maxAngle}deg`);
   };
 
-  return DeviceOrientationEvent
-    ? ({ clientX, clientY }: MouseEvent) =>
-        setRotation(
-          clientX / (innerWidth / 2) - 1,
-          -(clientY / (innerHeight / 2) - 1)
-        )
-    : ({ beta, gamma }: DeviceOrientationEvent) => {
-        setRotation(
-          gamma ? gamma / 90 : undefined,
-          beta ? beta / 180 : undefined
-        );
-      };
+  // Check for gyroscope
+  const gyroscope = DeviceOrientationEvent as unknown as
+    | DeviceOrientationEvent
+    | undefined;
+
+  if (gyroscope) {
+    const workingGyroscope = new Promise<boolean>((resolve) =>
+      window.addEventListener(
+        "deviceorientation",
+        ({ alpha, beta, gamma }) =>
+          resolve(alpha !== null || beta !== null || gamma !== null),
+        {
+          once: true,
+        }
+      )
+    );
+
+    if (await workingGyroscope) {
+      interface SafariDeviceOrientationEvent extends DeviceOrientationEvent {
+        requestPermission: () => Promise<"granted" | "denied">;
+      }
+
+      function isSafariGyroscope(
+        device: DeviceOrientationEvent | SafariDeviceOrientationEvent
+      ): device is SafariDeviceOrientationEvent {
+        return !!(device as SafariDeviceOrientationEvent).requestPermission;
+      }
+
+      const response = isSafariGyroscope(gyroscope)
+        ? await gyroscope.requestPermission()
+        : "granted";
+
+      if (response === "granted") {
+        return {
+          deviceorientation: ({ gamma, beta }) => {
+            setRotation(
+              gamma ? gamma / 90 : undefined,
+              beta ? beta / 180 : undefined
+            );
+          },
+        };
+      }
+    }
+  }
+
+  return {
+    mousemove: ({ clientX, clientY }) =>
+      setRotation(
+        clientX / (innerWidth / 2) - 1,
+        -(clientY / (innerHeight / 2) - 1)
+      ),
+  };
 };
 
-let modalMoveFunction: ReturnType<typeof rotate3D>;
+let modalMoveFunction: Awaited<ReturnType<typeof rotate3D>>;
 
-export const activateModal = (content: HTMLElement, noAnimation?: boolean) => {
+export const activateModal = async (
+  content: HTMLElement,
+  noAnimation?: boolean
+) => {
   const modalSlot = document.querySelector<HTMLDivElement>("div.modal-slot")!;
   modalSlot.classList.add("!pointer-events-auto");
 
@@ -39,20 +95,6 @@ export const activateModal = (content: HTMLElement, noAnimation?: boolean) => {
   backButton.classList.add("!opacity-100");
 
   const modal = modalSlot.querySelector<HTMLDivElement>("div.modal")!;
-  if (!noAnimation) {
-    modalMoveFunction = rotate3D(modal);
-    if (DeviceOrientationEvent) {
-      document.addEventListener(
-        "mousemove",
-        modalMoveFunction as (e: MouseEvent) => void
-      );
-    } else {
-      addEventListener(
-        "deviceorientation",
-        modalMoveFunction as (e: DeviceOrientationEvent) => void
-      );
-    }
-  }
   modal.append(content);
 
   content.className = content.className.replace(
@@ -60,6 +102,19 @@ export const activateModal = (content: HTMLElement, noAnimation?: boolean) => {
     ""
   );
   content.classList.add("pointer-events-auto");
+
+  if (!noAnimation) {
+    modalMoveFunction = await rotate3D(modal);
+
+    if (modalMoveFunction.deviceorientation) {
+      addEventListener(
+        "deviceorientation",
+        modalMoveFunction.deviceorientation
+      );
+    } else {
+      document.addEventListener("mousemove", modalMoveFunction.mousemove!);
+    }
+  }
 };
 
 export const deactivateModal = () => {
@@ -72,22 +127,20 @@ export const deactivateModal = () => {
 
   const modal = modalSlot.querySelector<HTMLDivElement>("div.modal")!;
   modal.replaceChildren();
-  if (modalMoveFunction) {
-    if (DeviceOrientationEvent) {
-      document.removeEventListener(
-        "mousemove",
-        modalMoveFunction as (e: MouseEvent) => void
-      );
-    } else {
-      removeEventListener(
-        "deviceorientation",
-        modalMoveFunction as (e: DeviceOrientationEvent) => void
-      );
-    }
-  }
 
   const backdrop = modalSlot.querySelector<HTMLDivElement>("div.modal-back")!;
   backdrop.classList.remove("!opacity-100");
+
+  if (modalMoveFunction) {
+    if (modalMoveFunction.deviceorientation) {
+      removeEventListener(
+        "deviceorientation",
+        modalMoveFunction.deviceorientation
+      );
+    } else {
+      document.removeEventListener("mousemove", modalMoveFunction.mousemove!);
+    }
+  }
 };
 
 export const getPagePosition = (element?: HTMLElement) => {
