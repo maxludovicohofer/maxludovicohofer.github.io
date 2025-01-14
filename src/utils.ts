@@ -55,10 +55,10 @@ export const rotate3D = async (
 
       if (response === "granted") {
         return {
-          deviceorientation: ({ beta, gamma }) =>
+          deviceorientation: ({ beta, alpha }) =>
             setRotation(
-              Math.min(Math.max(-(beta ?? 0) / maxAngle, -1), 1),
-              Math.min(Math.max((gamma ?? 0) / maxAngle, -1), 1)
+              Math.min(Math.max((beta ?? 0) / maxAngle, -1), 1),
+              Math.min(Math.max((alpha ?? 0) / maxAngle, -1), 1)
             ),
         };
       }
