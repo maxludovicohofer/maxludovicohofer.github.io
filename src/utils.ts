@@ -69,7 +69,7 @@ export const rotate3D = async (
       if (response === "granted") {
         // Front-to-back angle at which the device is normally held
         const line = document.querySelector("span.line")!.firstElementChild!;
-        const normalDeviceYAngle = 60;
+        // const normalDeviceYAngle = 60;
         const radians = Math.PI / 180;
         return {
           deviceorientation: ({ alpha, beta, gamma }) => {
