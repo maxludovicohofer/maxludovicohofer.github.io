@@ -82,7 +82,8 @@ export const rotate3D = async (
               frontToBack * radians,
               -sideToSide * radians,
               "ZXY"
-            ).sub(Quaternion.fromEuler(0, normalDeviceYAngle * radians, 0));
+            );
+            // .sub(Quaternion.fromEuler(0, normalDeviceYAngle * radians, 0));
 
             const [, sideRotation, frontRotation] = rotation.toEuler();
 
