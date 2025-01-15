@@ -36,7 +36,6 @@ export default defineConfig({
         authToken: loadEnv(process.env.NODE_ENV!, process.cwd(), "")
           .SENTRY_AUTH_TOKEN!,
       },
-      release: `${process.env.npm_package_name}@${process.env.npm_package_version}`,
     }),
   ],
   site: "https://maxludovicohofer.github.io",

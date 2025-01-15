@@ -1,5 +1,6 @@
 ---
 import BackButton from "@components/BackButton.astro";
+import { Debug } from "astro:components";
 
 // TODO PHASE 2 USE DIALOG INSTEAD OF DIV
 ---
@@ -16,6 +17,7 @@ import BackButton from "@components/BackButton.astro";
       class="modal max-h-[90dvh] lg:max-h-[80dvh] max-w-[90dvw] lg:max-w-[80dvw] rounded-3xl overflow-hidden flex flex-col items-center justify-center"
     >
     </div>
+    <Debug />
     <style>
       .modal {
         /* Used for 3D perspective */
