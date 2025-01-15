@@ -83,7 +83,6 @@ export const rotate3D = async (
               -sideToSide * radians,
               "ZXY"
             );
-            // .mul(Quaternion.fromEuler(deviceRotation * radians, 0, 0));
 
             const [, sideRotation, frontRotation] = rotation.toEuler();
 
@@ -92,8 +91,8 @@ export const rotate3D = async (
             ).toFixed(0)}`;
 
             setRotation(
-              clamp(sideRotation / maxAngle),
-              clamp((frontRotation + normalDeviceYAngle) / maxAngle)
+              clamp(sideRotation / radians / maxAngle),
+              clamp((frontRotation / radians + normalDeviceYAngle) / maxAngle)
             );
           },
         };
