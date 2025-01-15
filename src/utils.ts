@@ -77,7 +77,7 @@ export const rotate3D = async (
             const frontToBack = beta ?? 0;
 
             const rotation = Quaternion.fromEulerLogical(
-              -screen.orientation.angle * radians,
+              screen.orientation.angle * radians,
               sideToSide * radians,
               frontToBack * radians,
               "ZXY"
@@ -88,7 +88,7 @@ export const rotate3D = async (
 
             line.innerHTML = `sideRot: ${(sideRotation / radians).toFixed(0)}, frontRot: ${(
               frontRotation / radians
-            ).toFixed(0)}, screen: ${screen.orientation.angle.toFixed(0)}`;
+            ).toFixed(0)}`;
 
             setRotation(
               clamp(sideRotation / radians / maxAngle),
