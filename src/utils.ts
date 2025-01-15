@@ -69,7 +69,7 @@ export const rotate3D = async (
       if (response === "granted") {
         // Front-to-back angle at which the device is normally held
         const line = document.querySelector("span.line")!.firstElementChild!;
-        // const normalDeviceYAngle = 60;
+        // const normalDeviceYAngle = 50;
         const radians = Math.PI / 180;
         return {
           deviceorientation: ({ alpha, beta, gamma }) => {
@@ -77,11 +77,10 @@ export const rotate3D = async (
             const frontToBack = beta ?? 0;
             const deviceRotation = alpha ?? 0;
 
-            const rotation = Quaternion.fromEulerLogical(
+            const rotation = Quaternion.fromEuler(
               deviceRotation * radians,
               frontToBack * radians,
-              -sideToSide * radians,
-              "ZXY"
+              -sideToSide * radians
             );
             // .sub(Quaternion.fromEuler(0, normalDeviceYAngle * radians, 0));
 
