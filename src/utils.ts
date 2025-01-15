@@ -84,9 +84,9 @@ export const rotate3D = async (
               "ZXY"
             );
 
-            const [, frontRotation, sideRotation] = rotation.toEuler();
+            const [zRot, frontRotation, sideRotation] = rotation.toEuler();
 
-            line.innerHTML = `xRot: ${(sideRotation / radians).toFixed(0)}, yRot: ${(
+            line.innerHTML = `deviceRot: ${(zRot / radians).toFixed(0)}, xRot: ${(sideRotation / radians).toFixed(0)}, yRot: ${(
               frontRotation / radians
             ).toFixed(0)}`;
 
