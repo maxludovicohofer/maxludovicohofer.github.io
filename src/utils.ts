@@ -267,7 +267,7 @@ export const getLinkName = (link: string) => {
       .split("/")
       .at(-1)!
       .replace("-", " ")
-      .replace(/\.[^/.]+$/, "");
+      .split(".")[0]!;
   }
 
   return toSentenceCase(linkName);
