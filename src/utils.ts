@@ -89,7 +89,7 @@ export const rotate3D = async (
 
             line.innerHTML = `absSideRot: ${sideToSide.toFixed(0)}, absFrontRot: ${frontToBack.toFixed(
               0
-            )}, absDeviceRot: ${deviceRotation.toFixed(0)}`;
+            )}, absDeviceRot: ${deviceRotation.toFixed(0)}, screen: ${screen.orientation.angle.toFixed(0)}`;
 
             setRotation(
               clamp(sideRotation / radians / maxAngle),
