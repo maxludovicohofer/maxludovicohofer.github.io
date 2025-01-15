@@ -79,8 +79,8 @@ export const rotate3D = async (
 
             const rotation = Quaternion.fromEulerLogical(
               deviceRotation * radians,
-              -frontToBack * radians,
-              sideToSide * radians,
+              frontToBack * radians,
+              -sideToSide * radians,
               "ZXY"
             ).add(Quaternion.fromEuler(0, normalDeviceYAngle, 0));
 
