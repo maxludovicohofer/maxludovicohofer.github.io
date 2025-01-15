@@ -79,16 +79,16 @@ export const rotate3D = async (
 
             const rotation = Quaternion.fromEulerLogical(
               deviceRotation * radians,
-              frontToBack * radians,
-              -sideToSide * radians,
+              -frontToBack * radians,
+              sideToSide * radians,
               "ZXY"
-            ).sub(Quaternion.fromEuler(0, normalDeviceYAngle, 0));
+            ).add(Quaternion.fromEuler(0, normalDeviceYAngle, 0));
 
             const [, sideRotation, frontRotation] = rotation.toEuler();
 
             line.innerHTML = `sideRot: ${(sideRotation / radians).toFixed(0)}, frontRot: ${(
               frontRotation / radians
-            ).toFixed(0)}`;
+            ).toFixed(0)}, deviceRot: ${deviceRotation.toFixed(0)}`;
 
             setRotation(
               clamp(sideRotation / radians / maxAngle),
