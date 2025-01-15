@@ -67,33 +67,26 @@ export const rotate3D = async (
         : "granted";
 
       if (response === "granted") {
-        const line = document.querySelector("span.line")!.firstElementChild!;
-        // Front-to-back angle at which the device is normally held
-        const normalDeviceYAngle = 50;
-        const radians = Math.PI / 180;
+        // Angle at which the device is normally held
+        const normalDeviceRotation = Quaternion.fromAxisAngle(
+          [0, -1, 0],
+          toRadians(50)
+        );
+
         return {
           deviceorientation: ({ gamma, beta }) => {
             const [, sideRotation, frontRotation] = Quaternion.fromEulerLogical(
-              screen.orientation.angle * radians,
-              (gamma ?? 0) * radians,
-              (beta ?? 0) * radians,
+              toRadians(screen.orientation.angle),
+              toRadians(gamma ?? 0),
+              toRadians(beta ?? 0),
               "ZXY"
             )
-              .mul(
-                Quaternion.fromAxisAngle(
-                  [0, -1, 0],
-                  normalDeviceYAngle * radians
-                )
-              )
+              .mul(normalDeviceRotation)
               .toEuler();
 
-            line.innerHTML = `sideRot: ${(sideRotation / radians).toFixed(0)}, frontRot: ${(
-              frontRotation / radians
-            ).toFixed(0)}`;
-
             setRotation(
-              clamp(sideRotation / radians / maxAngle),
-              clamp(frontRotation / radians / 90)
+              clamp(toDegrees(sideRotation) / maxAngle),
+              clamp(toDegrees(frontRotation) / maxAngle)
             );
           },
         };
@@ -271,6 +264,10 @@ export const getLinkName = (link: string) =>
 
 export const clamp = (value: number, min: number = -1, max: number = 1) =>
   Math.min(Math.max(value, min), max);
+
+const radianUnit = Math.PI / 180;
+export const toRadians = (degrees: number) => degrees * radianUnit;
+export const toDegrees = (radians: number) => radians / radianUnit;
 
 //? Integrations
 
