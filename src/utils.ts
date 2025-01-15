@@ -33,7 +33,7 @@ export const rotate3D = async (
     }
 
     element.style.setProperty("--rotateX", `${xPercent * maxAngle}deg`);
-    element.style.setProperty("--rotateY", `${yPercent * maxAngle}deg`);
+    element.style.setProperty("--rotateY", `${-yPercent * maxAngle}deg`);
   };
 
   if (typeof DeviceOrientationEvent === "function") {
@@ -73,19 +73,19 @@ export const rotate3D = async (
         const radians = Math.PI / 180;
         return {
           deviceorientation: ({ gamma, beta }) => {
-            const sideToSide = gamma ?? 0;
-            const frontToBack = beta ?? 0;
-
-            const rotation = Quaternion.fromEulerLogical(
+            const [, sideRotation, frontRotation] = Quaternion.fromEulerLogical(
               screen.orientation.angle * radians,
-              sideToSide * radians,
-              frontToBack * radians,
+              (gamma ?? 0) * radians,
+              (beta ?? 0) * radians,
               "ZXY"
-            ).mul(
-              Quaternion.fromAxisAngle([0, -1, 0], normalDeviceYAngle * radians)
-            );
-
-            const [, sideRotation, frontRotation] = rotation.toEuler();
+            )
+              .mul(
+                Quaternion.fromAxisAngle(
+                  [0, -1, 0],
+                  normalDeviceYAngle * radians
+                )
+              )
+              .toEuler();
 
             line.innerHTML = `sideRot: ${(sideRotation / radians).toFixed(0)}, frontRot: ${(
               frontRotation / radians
@@ -105,7 +105,7 @@ export const rotate3D = async (
     mousemove: ({ clientX, clientY }) =>
       setRotation(
         clientX / (innerWidth / 2) - 1,
-        -(clientY / (innerHeight / 2) - 1)
+        clientY / (innerHeight / 2) - 1
       ),
   };
 };
