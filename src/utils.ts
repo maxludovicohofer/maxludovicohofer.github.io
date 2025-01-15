@@ -35,12 +35,8 @@ export const rotate3D = async (
     element.style.setProperty("--rotateY", `${yPercent * maxAngle}deg`);
   };
 
-  // Check for gyroscope
-  const gyroscope = DeviceOrientationEvent as unknown as
-    | DeviceOrientationEvent
-    | undefined;
-
-  if (gyroscope) {
+  if (typeof DeviceOrientationEvent === "function") {
+    // Check for gyroscope
     const workingGyroscope = new Promise<boolean>((resolve) =>
       window.addEventListener(
         "deviceorientation",
@@ -62,6 +58,9 @@ export const rotate3D = async (
         return !!(device as SafariDeviceOrientationEvent).requestPermission;
       }
 
+      const gyroscope =
+        DeviceOrientationEvent as unknown as DeviceOrientationEvent;
+
       const response = isSafariGyroscope(gyroscope)
         ? await gyroscope.requestPermission()
         : "granted";
@@ -69,7 +68,6 @@ export const rotate3D = async (
       if (response === "granted") {
         // Front-to-back angle at which the device is normally held
         const line = document.querySelector("span.line")!.firstElementChild!;
-        console.log(line);
         const normalDeviceYAngle = 60;
         return {
           deviceorientation: ({ gamma, beta }) => {
@@ -77,9 +75,9 @@ export const rotate3D = async (
             const frontToBack = beta ?? 0;
             const isPortrait = screen.orientation.type.startsWith("portrait");
 
-            line.innerHTML = `xRot: ${isPortrait ? sideToSide : frontToBack}, yRot: ${
+            line.innerHTML = `xRot: ${(isPortrait ? sideToSide : frontToBack).toFixed(0)}, yRot: ${(
               (isPortrait ? -frontToBack : sideToSide) + normalDeviceYAngle
-            }`;
+            ).toFixed(0)}`;
 
             setRotation(
               clamp((isPortrait ? sideToSide : frontToBack) / maxAngle),
