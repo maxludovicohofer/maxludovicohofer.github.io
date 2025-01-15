@@ -67,8 +67,8 @@ export const rotate3D = async (
         : "granted";
 
       if (response === "granted") {
-        // Front-to-back angle at which the device is normally held
         const line = document.querySelector("span.line")!.firstElementChild!;
+        // Front-to-back angle at which the device is normally held
         // const normalDeviceYAngle = 50;
         const radians = Math.PI / 180;
         return {
@@ -86,9 +86,9 @@ export const rotate3D = async (
 
             const [, sideRotation, frontRotation] = rotation.toEuler();
 
-            line.innerHTML = `sideRot: ${sideRotation.toFixed(0)}, frontRot: ${frontRotation.toFixed(
-              0
-            )}, screen: ${screen.orientation.angle.toFixed(0)}`;
+            line.innerHTML = `sideRot: ${(sideRotation / radians).toFixed(0)}, frontRot: ${(
+              frontRotation / radians
+            ).toFixed(0)}, screen: ${screen.orientation.angle.toFixed(0)}`;
 
             setRotation(
               clamp(sideRotation / radians / maxAngle),
