@@ -227,31 +227,18 @@ const action = category === "Tool" ? "Download" : "Play";
     {
       downloadsPresent && (
         <div class="flex flex-col items-center mt-8 mb-7">
-          <Button
-            href={downloadLinks[0]}
-            linkClass={buttonWidthClass}
-            data-umami-event={`${action} on ${getLinkName(downloadLinks[0]!)}`}
-          >
+          <Button href={downloadLinks[0]} linkClass={buttonWidthClass}>
             {action}
           </Button>
           {downloadLinks.length > 1 && (
             <Text subtitle class={`-mb-4 w-full ${buttonWidthClass}`}>
               Or
-              {downloadLinks.slice(1).map((link, index, { length }) => {
-                const linkName = getLinkName(link);
-
-                return (
-                  <>
-                    <Link
-                      href={link}
-                      data-umami-event={`${action} on ${linkName}`}
-                    >
-                      {linkName}
-                    </Link>
-                    {index !== length - 1 ? ", " : ""}
-                  </>
-                );
-              })}
+              {downloadLinks.slice(1).map((link, index, { length }) => (
+                <>
+                  <Link href={link}>{getLinkName(link)}</Link>
+                  {index !== length - 1 ? ", " : ""}
+                </>
+              ))}
             </Text>
           )}
         </div>

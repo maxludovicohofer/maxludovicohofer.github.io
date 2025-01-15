@@ -1,6 +1,6 @@
 ---
 import type { ComponentProps } from "astro/types";
-import Link from "./Link.astro";
+import Link, { getUmamiLinkEvent } from "./Link.astro";
 import LinkButton from "./LinkButton.astro";
 
 interface Props
@@ -16,6 +16,8 @@ const {
   linkClass = "",
   ...buttonProps
 } = Astro.props;
+
+const umamiEvent = await getUmamiLinkEvent(Astro, href);
 ---
 
 {
@@ -25,9 +27,10 @@ const {
       navigate={navigate}
       noStyle
       class={`${linkClass} w-full`}
+      noEvent
       {...buttonProps}
     >
-      <LinkButton class={className} {...buttonProps}>
+      <LinkButton class={className} {...umamiEvent} {...buttonProps}>
         <slot />
       </LinkButton>
     </Link>

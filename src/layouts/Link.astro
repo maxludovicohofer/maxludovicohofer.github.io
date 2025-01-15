@@ -1,10 +1,13 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import type { AstroGlobal } from "astro";
+import type { ComponentProps, HTMLAttributes } from "astro/types";
+import { getLinkName } from "src/utils";
 
 interface Props extends HTMLAttributes<"a"> {
   navigate?: boolean | undefined;
   noStyle?: boolean;
   prefetch?: "viewport" | "load" | "hover";
+  noEvent?: boolean;
 }
 
 const {
@@ -13,8 +16,41 @@ const {
   navigate,
   noStyle,
   prefetch = "viewport",
+  noEvent,
+  "data-umami-event": umamiEvent,
   ...props
 } = Astro.props;
+
+export const formatUmamiEvent = (astro: AstroGlobal, eventName: string) =>
+  `${eventName} (${getLinkName(astro.url.pathname) || "Homepage"})`;
+
+export const getUmamiLinkEvent = async (
+  astro: AstroGlobal,
+  href?: ComponentProps<typeof Link>["href"]
+) => {
+  const getAnchorName = async () => {
+    const anchor = await astro.slots.render("default");
+    return anchor.search(/^<[\S\s]+>$/) !== -1
+      ? getLinkName(href?.toString() ?? "")
+      : anchor;
+  };
+
+  return {
+    "data-umami-event":
+      astro.props["data-umami-event"] ?? (await getAnchorName()),
+    ...(href ? { "data-umami-event-url": href } : {}),
+  };
+};
+
+const umamiEventInfo: Partial<Awaited<ReturnType<typeof getUmamiLinkEvent>>> =
+  noEvent ? {} : await getUmamiLinkEvent(Astro, href);
+
+if (umamiEventInfo["data-umami-event"]) {
+  umamiEventInfo["data-umami-event"] = formatUmamiEvent(
+    Astro,
+    umamiEventInfo["data-umami-event"]
+  );
+}
 ---
 
 <a
@@ -27,5 +63,6 @@ const {
   data-astro-prefetch={prefetch}
   target={navigate ? "_self" : "_blank"}
   rel={navigate ? undefined : "noopener noreferrer"}
+  {...umamiEventInfo}
   {...props}><slot /></a
 >

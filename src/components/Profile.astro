@@ -15,16 +15,14 @@ interface Props {
 }
 
 const { importance } = Astro.props;
-
-const linkedIn = "https://linkedin.com/in/maxludovicohofer";
 ---
 
 <PostPreview importance={importance}>
   <div slot="header" class="flex items-center gap-x-4 mb-6">
     <Fullscreenable
       class="!size-14 2xl:!size-20 !rounded-full hover:scale-125"
-      data-umami-event="Profile picture"
       noAnimation
+      data-umami-event={getLinkName(ProfilePicture.src)}
     >
       <Image
         src={ProfilePicture}
@@ -37,19 +35,15 @@ const linkedIn = "https://linkedin.com/in/maxludovicohofer";
       <Text title>Max Ludovico Hofer</Text>
       <div class="flex items-center gap-0.5 -ml-0.5 2xl:-ml-1">
         <Link
-          href={linkedIn}
+          href="https://linkedin.com/in/maxludovicohofer"
           class="!size-6 2xl:!size-8 drop-shadow-md hover:drop-shadow-lg active:drop-shadow"
-          data-umami-event={getLinkName(linkedIn)}
           ><Fragment set:html={LinkedIn} /></Link
         >
       </div>
     </div>
   </div>
   I'm a game designer with a passion for mechanics, combat, AI, and systems.
-  <Button
-    slot="footer"
-    class="mt-2"
-    href="/public-resume.pdf"
-    data-umami-event="Resume">View my resume</Button
+  <Button slot="footer" class="mt-2" href="/public-resume.pdf"
+    >View my resume</Button
   >
 </PostPreview>

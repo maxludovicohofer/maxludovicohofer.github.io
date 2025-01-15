@@ -3,6 +3,7 @@ import type { ComponentProps } from "astro/types";
 import Button from "./Button.astro";
 
 interface Props extends ComponentProps<typeof Button> {
+  "data-umami-event": string;
   noAnimation?: boolean;
 }
 

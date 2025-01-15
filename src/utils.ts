@@ -254,14 +254,24 @@ export const toTitleCase = (text: string) =>
 export const capitalize = (text: string) =>
   text.charAt(0).toUpperCase() + text.slice(1);
 
-export const getLinkName = (link: string) =>
-  toSentenceCase(
-    link.startsWith("http")
-      ? new URL(link).host.split(".").at(-2)!
-      : link.startsWith("mailto:")
-      ? link.slice(7)
-      : link
-  );
+export const getLinkName = (link: string) => {
+  let linkName = "";
+
+  if (link.startsWith("http")) {
+    linkName = new URL(link).host.split(".").at(-2)!;
+  } else if (link.startsWith("mailto:")) {
+    linkName = link.slice(7);
+  } else {
+    linkName = link
+      .replace(/^\/+\/+$/g, "")
+      .split("/")
+      .at(-1)!
+      .replace("-", " ")
+      .replace(/\.[^/.]+$/, "");
+  }
+
+  return toSentenceCase(linkName);
+};
 
 //? Math
 
