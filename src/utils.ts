@@ -249,7 +249,13 @@ export const toCapitalized = (word: string) =>
   word.charAt(0).toUpperCase() + word.slice(1);
 
 export const getLinkName = (link: string) =>
-  toTitleCase(new URL(link).host.split(".").at(-2)!);
+  toTitleCase(
+    link.startsWith("http")
+      ? new URL(link).host.split(".").at(-2)!
+      : link.startsWith("mailto:")
+      ? link.slice(7)
+      : link
+  );
 
 //? Math
 
