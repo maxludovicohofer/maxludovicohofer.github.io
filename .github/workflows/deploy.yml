@@ -24,6 +24,15 @@ jobs:
           # These two lines fix the output of the git log command
           fetch-depth: 0
           fetch-tags: true
+      - name: Create Sentry release
+        uses: getsentry/action-release@v1
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+          # SENTRY_URL: https://sentry.io/
+        with:
+          environment: production
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         # with:

@@ -11,11 +11,11 @@ export const rotate3D = async (
     e: K extends keyof WindowEventMap
       ? WindowEventMap[K]
       : K extends keyof DocumentEventMap
-      ? DocumentEventMap[K]
-      : never
+        ? DocumentEventMap[K]
+        : never
   ) => void;
 }> => {
-  const maxAngle = 45;
+  const maxAngle = 40;
 
   const firstRotationDuration = "duration-75";
   element.classList.add(firstRotationDuration);
@@ -253,8 +253,8 @@ export const getLinkName = (link: string) =>
     link.startsWith("http")
       ? new URL(link).host.split(".").at(-2)!
       : link.startsWith("mailto:")
-      ? link.slice(7)
-      : link
+        ? link.slice(7)
+        : link
   );
 
 //? Math

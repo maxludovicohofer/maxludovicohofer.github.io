@@ -8,7 +8,8 @@
       "@components/*": ["src/components/*"],
       "@pages/*": ["src/pages/*"],
       "@layouts/*": ["src/layouts/*"],
-      "@images/*": ["src/images/*"]
+      "@images/*": ["src/images/*"],
+      "@integrations/*": ["src/integrations/*"]
     },
     "typeRoots": ["node_modules/@types"],
     "types": ["youtube"]
