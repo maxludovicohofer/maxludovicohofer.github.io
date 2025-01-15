@@ -86,9 +86,9 @@ export const rotate3D = async (
 
             const [, frontRotation, sideRotation] = rotation.toEuler();
 
-            line.innerHTML = `xRot: ${sideRotation.toFixed(0)}, yRot: ${frontRotation.toFixed(
-              0
-            )}`;
+            line.innerHTML = `xRot: ${(sideRotation / radians).toFixed(0)}, yRot: ${(
+              frontRotation / radians
+            ).toFixed(0)}`;
 
             setRotation(
               clamp(sideRotation / maxAngle),
