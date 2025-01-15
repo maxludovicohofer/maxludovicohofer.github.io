@@ -93,7 +93,7 @@ export const rotate3D = async (
 
             setRotation(
               clamp(sideRotation / radians / maxAngle),
-              clamp(frontRotation / radians / maxAngle)
+              clamp(frontRotation / radians / 90)
             );
           },
         };
