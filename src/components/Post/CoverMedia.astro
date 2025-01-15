@@ -1,5 +1,9 @@
 ---
-import type { getPostCover, PostCollection } from "@layouts/Post/Post.astro";
+import {
+  getTitle,
+  type getPostCover,
+  type PostCollection,
+} from "@layouts/Post/Post.astro";
 import type { CollectionEntry } from "astro:content";
 import PostMedia from "@components/Post/PostMedia.astro";
 import type { ComponentProps } from "astro/types";
@@ -11,11 +15,10 @@ interface Props extends Omit<ComponentProps<typeof PostMedia>, "src" | "alt"> {
 
 const { cover, entry, ...props } = Astro.props;
 
-export function getCoverAlt({
-  collection,
-  data: { title },
-}: CollectionEntry<PostCollection>) {
-  return collection === "projects"
+export function getCoverAlt(post: CollectionEntry<PostCollection>) {
+  const title = getTitle(post)!;
+
+  return post.collection === "projects"
     ? `${title} gameplay.`
     : `Graphic explanation of "${title}".`;
 }

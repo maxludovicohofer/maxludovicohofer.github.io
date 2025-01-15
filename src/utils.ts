@@ -12,8 +12,8 @@ export const rotate3D = async (
     e: K extends keyof WindowEventMap
       ? WindowEventMap[K]
       : K extends keyof DocumentEventMap
-        ? DocumentEventMap[K]
-        : never
+      ? DocumentEventMap[K]
+      : never
   ) => void;
 }> => {
   const maxAngle = 40;
@@ -245,19 +245,22 @@ export const cleanMarkdown = (markdown: string) =>
   markdown.replace(/{\/\*.*\*\/}/g, "").trim();
 
 //? Text
-export const toTitleCase = (word: string) =>
-  word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+export const toSentenceCase = (text: string) =>
+  text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
 
-export const toCapitalized = (word: string) =>
-  word.charAt(0).toUpperCase() + word.slice(1);
+export const toTitleCase = (text: string) =>
+  text.split(" ").map(capitalize).join(" ");
+
+export const capitalize = (text: string) =>
+  text.charAt(0).toUpperCase() + text.slice(1);
 
 export const getLinkName = (link: string) =>
-  toTitleCase(
+  toSentenceCase(
     link.startsWith("http")
       ? new URL(link).host.split(".").at(-2)!
       : link.startsWith("mailto:")
-        ? link.slice(7)
-        : link
+      ? link.slice(7)
+      : link
   );
 
 //? Math

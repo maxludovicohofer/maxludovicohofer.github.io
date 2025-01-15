@@ -1,7 +1,11 @@
 ---
 import Thoughts from "@components/Post/Thoughts.astro";
 import Page from "@layouts/Page.astro";
-import Post, { getPostId } from "@layouts/Post/Post.astro";
+import Post, {
+  getDescription,
+  getPostId,
+  getTitle,
+} from "@layouts/Post/Post.astro";
 import { getCollection } from "astro:content";
 
 // Generate a new path for every collection entry
@@ -17,11 +21,11 @@ export const getStaticPaths = async () =>
   }));
 
 const { entry } = Astro.props;
+
+const title = getTitle(entry)!;
 ---
 
-<Page
-  title={entry.data.title}
-  description={`${entry.body!.split(/[.?!](?=\s+)/, 1)[0]!.trimStart()}.`}
+<Page title={title} description={getDescription(entry, 2) ?? title}
   ><Post entry={entry} followedByOther /><div class="-mt-24 lg:-mt-20">
     <Thoughts isNotFullpage exclude={[entry.id]} />
   </div></Page

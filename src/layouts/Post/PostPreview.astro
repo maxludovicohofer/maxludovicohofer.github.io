@@ -9,6 +9,7 @@ import {
   type PostCollection,
   getPostId,
   getDescription,
+  getTitle,
 } from "./Post.astro";
 import type { ComponentProps, HTMLAttributes } from "astro/types";
 import PostContent from "./PostContent.astro";
@@ -55,6 +56,8 @@ const {
 
 const { Content, remarkPluginFrontmatter } = entry ? await render(entry) : {};
 
+const title = getTitle(entry);
+
 const renderedContent =
   getDescription(entry, short ? 1 : undefined, short, startHeading) ?? Content;
 
@@ -93,7 +96,7 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
       )
     }
     {
-      (entry?.data.title || Astro.slots.has("title")) && (
+      (title || Astro.slots.has("title")) && (
         <Text
           title
           class={`preview-title ${
@@ -108,7 +111,7 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
                     : "text-3xl lg:text-5xl 2xl:text-8xl"
           } ${container ? "lg:ml-4 mt-1 lg:mt-0" : ""}`}
         >
-          {entry?.data.title ?? <slot name="title" />}
+          {title ?? <slot name="title" />}
         </Text>
       )
     }

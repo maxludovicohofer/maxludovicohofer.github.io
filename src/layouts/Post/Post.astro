@@ -11,7 +11,7 @@ import CoverMedia from "@components/Post/CoverMedia.astro";
 import Link from "@layouts/Link.astro";
 import Button from "@layouts/Button.astro";
 import type Video from "@layouts/Video.astro";
-import { getLinkName, toCapitalized, cleanMarkdown } from "src/utils";
+import { getLinkName, capitalize, cleanMarkdown, toTitleCase } from "src/utils";
 import PostContent from "./PostContent.astro";
 
 interface Props extends HTMLAttributes<"div"> {
@@ -38,6 +38,17 @@ const { Content, remarkPluginFrontmatter } = entry ? await render(entry) : {};
 
 export const getPostId = (post: typeof entry) => post?.id.split("/").at(-1);
 
+export const getTitle = (post: typeof entry) => {
+  if (!post) return;
+
+  if (post.data.title) return post.data.title;
+
+  const rawTitle = getPostId(post)!.split("-").join(" ");
+  return post.collection === "projects"
+    ? toTitleCase(rawTitle)
+    : capitalize(rawTitle);
+};
+
 export const getPublishingDate = (
   post: typeof entry,
   frontmatter: typeof remarkPluginFrontmatter
@@ -55,6 +66,8 @@ const publishingDate = getPublishingDate(
   entry,
   remarkPluginFrontmatter
 )?.format("D MMMM YYYY");
+
+const title = getTitle(entry);
 
 export const imageExtensions = ["png", "jpg", "jpeg", "gif", "webp"] as const;
 
@@ -115,12 +128,12 @@ export const getDescription = <C extends CollectionKey>(
 
   if (shortenStart) {
     //! Try to shorten sentence, could lead to errors
-    //! Also, uses lookbehind, which could be unsupported
+    //! Also, uses lookbehind, which could not be supported
     const shortenedStart = (description ?? cleanMarkdown(entry.body)).split(
-      /(?<!,.*)( is a | is | was a | was )/
+      /(?<!,.*)( is an | is a | is | was an | was a | was )/
     )[2];
 
-    if (shortenedStart) description = toCapitalized(shortenedStart);
+    if (shortenedStart) description = capitalize(shortenedStart);
   }
 
   return description;
@@ -203,7 +216,7 @@ const action = category === "Tool" ? "Download" : "Play";
       )
     }
     <Text title class="text-3xl 2xl:text-5xl"
-      >{entry?.data.title ?? <slot name="title" />}</Text
+      >{title ?? <slot name="title" />}</Text
     >
     {category && <Text subtitle>{category}</Text>}
     <Text
