@@ -1,4 +1,5 @@
 import type { LiteYTEmbed } from "lite-youtube-embed";
+import Quaternion from "quaternion";
 
 //? HTML
 export const rotate3D = async (
@@ -69,23 +70,29 @@ export const rotate3D = async (
         // Front-to-back angle at which the device is normally held
         const line = document.querySelector("span.line")!.firstElementChild!;
         const normalDeviceYAngle = 60;
+        const radians = Math.PI / 180;
         return {
-          deviceorientation: ({ gamma, beta }) => {
+          deviceorientation: ({ alpha, beta, gamma }) => {
             const sideToSide = gamma ?? 0;
             const frontToBack = beta ?? 0;
-            const isPortrait = screen.orientation.type.startsWith("portrait");
+            const deviceRotation = alpha ?? 0;
 
-            line.innerHTML = `xRot: ${(isPortrait ? sideToSide : frontToBack).toFixed(0)}, yRot: ${(
-              (isPortrait ? -frontToBack : sideToSide) + normalDeviceYAngle
-            ).toFixed(0)}`;
+            const rotation = Quaternion.fromEulerLogical(
+              deviceRotation * radians,
+              frontToBack * radians,
+              -sideToSide * radians,
+              "ZXY"
+            );
+
+            const [, frontRotation, sideRotation] = rotation.toEuler();
+
+            line.innerHTML = `xRot: ${sideRotation.toFixed(0)}, yRot: ${frontRotation.toFixed(
+              0
+            )}`;
 
             setRotation(
-              clamp((isPortrait ? sideToSide : frontToBack) / maxAngle),
-              clamp(
-                ((isPortrait ? -frontToBack : sideToSide) +
-                  normalDeviceYAngle) /
-                  maxAngle
-              )
+              clamp(sideRotation / maxAngle),
+              clamp((frontRotation + normalDeviceYAngle) / maxAngle)
             );
           },
         };
