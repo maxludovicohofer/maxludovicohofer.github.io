@@ -142,8 +142,7 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
       </Text>
     )
   }
-</div>
-{
+</div>{
   cover && (
     <div
       class={`absolute inset-0 pointer-events-none opacity-0 intersect:opacity-15 intersect-half duration-700 ${container ? "group-hover/container-card:opacity-15" : "group-hover/card:opacity-15"}`}
@@ -151,8 +150,7 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
       <Media src={cover} alt={getCoverAlt(entry!)} smoothLoading />
     </div>
   )
-}
-{
+}{
   readMoreLink && (
     <Button
       cardButton

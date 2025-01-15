@@ -24,16 +24,30 @@ const {
 export const formatUmamiEvent = (astro: AstroGlobal, eventName: string) =>
   `${eventName} (${getLinkName(astro.url.pathname) || "Homepage"})`;
 
+export interface UmamiLinkEvent {
+  "data-umami-event"?: string;
+  "data-umami-event-url"?: ComponentProps<typeof Link>["href"];
+}
+
 export const getUmamiLinkEvent = async (
   astro: AstroGlobal,
   href?: ComponentProps<typeof Link>["href"]
-) => {
+): Promise<UmamiLinkEvent> => {
   const getAnchorName = async () => {
     const anchor = await astro.slots.render("default");
-    return anchor.search(/^<[\S\s]+>$/) !== -1
+    return anchor.trim().search(/^<[\S\s]+>$/) !== -1
       ? getLinkName(href?.toString() ?? "")
       : anchor;
   };
+
+  if (
+    href &&
+    !href.toString().startsWith("http") &&
+    !href.toString().includes(".")
+  ) {
+    // Local link, already tracked by Umami
+    return {};
+  }
 
   return {
     "data-umami-event":
@@ -42,8 +56,7 @@ export const getUmamiLinkEvent = async (
   };
 };
 
-const umamiEventInfo: Partial<Awaited<ReturnType<typeof getUmamiLinkEvent>>> =
-  noEvent ? {} : await getUmamiLinkEvent(Astro, href);
+const umamiEventInfo = noEvent ? {} : await getUmamiLinkEvent(Astro, href);
 
 if (umamiEventInfo["data-umami-event"]) {
   umamiEventInfo["data-umami-event"] = formatUmamiEvent(
