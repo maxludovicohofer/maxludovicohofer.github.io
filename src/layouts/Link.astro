@@ -1,7 +1,7 @@
 ---
 import type { AstroGlobal } from "astro";
 import type { ComponentProps, HTMLAttributes } from "astro/types";
-import { getLinkName } from "src/utils";
+import { getLinkName, getMaximumWordsInLimit } from "src/utils";
 
 interface Props extends HTMLAttributes<"a"> {
   navigate?: boolean | undefined;
@@ -21,8 +21,20 @@ const {
   ...props
 } = Astro.props;
 
-export const formatUmamiEvent = (astro: AstroGlobal, eventName: string) =>
-  `${eventName} (${getLinkName(astro.url.pathname) || "Homepage"})`;
+export const formatUmamiEvent = (astro: AstroGlobal, eventName: string) => {
+  // Max characters - formatting characters
+  const usableCharacters = 50 - 3;
+
+  const pageName = getMaximumWordsInLimit(
+    getLinkName(astro.url.pathname) || "Homepage",
+    usableCharacters * 0.2
+  );
+
+  return `${getMaximumWordsInLimit(
+    eventName,
+    usableCharacters - pageName.length
+  )} (${pageName})`;
+};
 
 export interface UmamiLinkEvent {
   "data-umami-event"?: string;

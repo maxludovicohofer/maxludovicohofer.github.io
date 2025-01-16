@@ -273,6 +273,30 @@ export const getLinkName = (link: string) => {
   return toSentenceCase(linkName);
 };
 
+export const getMaximumWordsInLimit = (text: string, limit: number) => {
+  let shortened = text;
+
+  if (shortened.length < limit) return shortened;
+
+  // Shorten page name
+  const words = shortened.split(" ");
+  shortened = words[0]!;
+
+  // Is one word, must slice
+  if (shortened.length > limit) return shortened.slice(0, limit);
+
+  // Multiple words, select the most that can fit
+  let index = 1;
+  while (true) {
+    const joinedWords = `${shortened} ${words[index]}`;
+    if (joinedWords.length < limit) shortened = joinedWords;
+    else break;
+    index++;
+  }
+
+  return shortened;
+};
+
 //? Math
 
 export const clamp = (value: number, min: number = -1, max: number = 1) =>
