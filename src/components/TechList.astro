@@ -23,7 +23,7 @@ dayjs.extend(duration);
 dayjs.extend(relativeTime);
 ---
 
-<ol class={`grid ${className}`} {...props}>
+<ol class={`${className} grid`} {...props}>
   {
     tech.map(({ data: { id, experience, group, functionalities } }) => {
       const isGroup = group && !compact;

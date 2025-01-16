@@ -7,31 +7,39 @@ export const makeHighlight = (discrete?: boolean) => {
     highlightClass: `col-span-full ${discrete ? "" : "md:h-[23.6rem]"}`,
     importance: (discrete
       ? "container-item"
-      : "container-highlight") as Parameters<typeof getTitleClasses>[0],
+      : "container-highlight") as Parameters<typeof getTextClass>[0],
   };
 };
 
-export const getTitleClasses = (
-  importance?:
+export const getTextClass = (
+  importance:
     | "low"
     | "medium"
     | "high"
+    | "post-title"
     | "container-item"
     | "container-highlight"
-    | undefined
+    | "button"
+    | "button-cta"
 ) => {
   switch (importance) {
     case "container-item":
-      return "text-2xl 2xl:text-3xl";
+      return "text-3xl 2xl:text-4xl";
     case "container-highlight":
-      return "text-2xl md:text-4xl 2xl:text-6xl";
+      return "text-3xl md:text-4xl 2xl:text-5xl";
+    case "post-title":
+      return "text-3xl 2xl:text-4xl";
+    case "button":
+      return "text-base 2xl:text-3xl";
+    case "button-cta":
+      return "text-xl 2xl:text-3xl";
     case "low":
-      return "text-3xl lg:text-2xl 2xl:text-3xl";
+      return "text-2xl 2xl:text-3xl";
     case "medium":
-      return "text-3xl 2xl:text-5xl";
+      return "text-2xl lg:text-3xl 2xl:text-4xl";
+    case "high":
+      return "text-3xl lg:text-5xl 2xl:text-8xl";
   }
-
-  return "text-3xl lg:text-5xl 2xl:text-8xl";
 };
 
 //? HTML

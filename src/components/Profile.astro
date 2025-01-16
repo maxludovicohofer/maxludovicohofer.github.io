@@ -20,7 +20,7 @@ const { importance } = Astro.props;
 <PostPreview importance={importance}>
   <div slot="header" class="flex items-center gap-x-4 mb-6">
     <Fullscreenable
-      class="!size-14 2xl:!size-20 !rounded-full hover:scale-125"
+      class="!max-w-14 2xl:!max-w-20 !rounded-full hover:scale-125"
       noAnimation
       data-umami-event={getLinkName(ProfilePicture.src)}
     >
@@ -43,7 +43,10 @@ const { importance } = Astro.props;
     </div>
   </div>
   I'm a game designer with a passion for mechanics, combat, AI, and systems.
-  <Button slot="footer" class="mt-2" href="/public-resume.pdf"
-    >View my resume</Button
+  <Button
+    slot="footer"
+    importance="button-cta"
+    class="mt-2"
+    href="/public-resume.pdf">View my resume</Button
   >
 </PostPreview>

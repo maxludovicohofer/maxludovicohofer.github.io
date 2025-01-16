@@ -16,7 +16,7 @@ import {
   capitalize,
   cleanMarkdown,
   toTitleCase,
-  getTitleClasses,
+  getTextClass,
 } from "src/utils";
 import PostContent from "./PostContent.astro";
 
@@ -25,6 +25,7 @@ interface Props extends HTMLAttributes<"div"> {
   tag?: ComponentProps<typeof Text>["tag"];
   fullWidth?: boolean | undefined;
   container?: boolean;
+  importance?: Parameters<typeof getTextClass>[0] | undefined;
   followedByOther?: boolean;
 }
 
@@ -33,6 +34,7 @@ const {
   tag,
   fullWidth,
   container,
+  importance,
   followedByOther,
   class: className = "",
   ...props
@@ -221,7 +223,9 @@ const action = category === "Tool" ? "Download" : "Play";
         </Text>
       )
     }
-    <Text title class={getTitleClasses("medium")}
+    <Text
+      title
+      class={getTextClass(importance ?? (container ? "low" : "post-title"))}
       >{title ?? <slot name="title" />}</Text
     >
     {category && <Text subtitle>{category}</Text>}
@@ -233,7 +237,11 @@ const action = category === "Tool" ? "Download" : "Play";
     {
       downloadsPresent && (
         <div class="flex flex-col items-center mt-8 mb-7">
-          <Button href={downloadLinks[0]} linkClass={buttonWidthClass}>
+          <Button
+            href={downloadLinks[0]}
+            importance="button-cta"
+            linkClass={buttonWidthClass}
+          >
             {action}
           </Button>
           {downloadLinks.length > 1 && (

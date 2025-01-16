@@ -117,7 +117,7 @@ const sortedEntries: CollectionEntry<PostCollection>[] = await getSortedEntries(
 </ol>
 <script>
   import type { CollectionKey } from "astro:content";
-  import { getTitleClasses, makeHighlight, removeFromClasses } from "src/utils";
+  import { getTextClass, makeHighlight, removeFromClasses } from "src/utils";
 
   const carouselEvents: {
     [K in keyof HTMLElementEventMap]?: (
@@ -181,7 +181,7 @@ const sortedEntries: CollectionEntry<PostCollection>[] = await getSortedEntries(
 
     const replaceTitleClass = (
       container: Element,
-      importance: Parameters<typeof getTitleClasses>[0]
+      importance: Parameters<typeof getTextClass>[0]
     ) => {
       const containerTitle =
         container.querySelector<HTMLParagraphElement>("p.preview-title")!;
@@ -190,7 +190,7 @@ const sortedEntries: CollectionEntry<PostCollection>[] = await getSortedEntries(
       containerTitle.className = removeFromClasses(containerTitle.className, [
         "text",
       ]);
-      containerTitle.className = `${containerTitle.className} text-balance text-zinc-950 dark:text-zinc-100 ${getTitleClasses(importance)}`;
+      containerTitle.className = `${containerTitle.className} text-balance text-zinc-950 dark:text-zinc-100 ${getTextClass(importance)}`;
     };
 
     document
