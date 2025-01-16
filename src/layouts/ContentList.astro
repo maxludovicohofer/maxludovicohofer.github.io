@@ -8,7 +8,7 @@ import {
 import PostPreview from "@layouts/Post/PostPreview.astro";
 import type { HTMLAttributes } from "astro/types";
 import { render, getCollection, type CollectionEntry } from "astro:content";
-import { makeHighlight, partition } from "src/utils";
+import { groupBy, makeHighlight, partition } from "src/utils";
 
 interface Props extends HTMLAttributes<"ol"> {
   collection: PostCollection;
@@ -42,7 +42,7 @@ export const getSortedEntries = async <C extends PostCollection>(
 
   const isProjects = entryCollection === "projects";
 
-  const groupedEntries = Object.groupBy(
+  const groupedEntries = groupBy(
     await Promise.all(
       entries.map(async (entry) => ({
         ...entry,
