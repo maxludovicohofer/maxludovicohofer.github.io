@@ -266,7 +266,7 @@ export const getLinkName = (link: string) => {
       .replace(/(^\/+)|(\/+$)/g, "")
       .split("/")
       .at(-1)!
-      .replace("-", " ")
+      .replaceAll("-", " ")
       .split(".")[0]!;
   }
 
