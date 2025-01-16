@@ -1,6 +1,39 @@
 import type { LiteYTEmbed } from "lite-youtube-embed";
 import Quaternion from "quaternion";
 
+//? Tailwind
+export const makeHighlight = (discrete?: boolean) => {
+  return {
+    highlightClass: `col-span-full ${discrete ? "" : "md:h-[23.6rem]"}`,
+    importance: (discrete
+      ? "container-item"
+      : "container-highlight") as Parameters<typeof getTitleClasses>[0],
+  };
+};
+
+export const getTitleClasses = (
+  importance?:
+    | "low"
+    | "medium"
+    | "high"
+    | "container-item"
+    | "container-highlight"
+    | undefined
+) => {
+  switch (importance) {
+    case "container-item":
+      return "text-2xl 2xl:text-3xl";
+    case "container-highlight":
+      return "text-2xl md:text-4xl 2xl:text-6xl";
+    case "low":
+      return "text-3xl lg:text-2xl 2xl:text-3xl";
+    case "medium":
+      return "text-3xl 2xl:text-5xl";
+  }
+
+  return "text-3xl lg:text-5xl 2xl:text-8xl";
+};
+
 //? HTML
 export const rotate3D = async (
   element: HTMLElement
@@ -304,7 +337,22 @@ export const clamp = (value: number, min: number = -1, max: number = 1) =>
 
 const radianUnit = Math.PI / 180;
 export const toRadians = (degrees: number) => degrees * radianUnit;
+
 export const toDegrees = (radians: number) => radians / radianUnit;
+
+//? Arrays
+
+export const partition = <T>(
+  array: Array<T>,
+  filter: (element: T) => any
+): [filtered: typeof array, filteredOut: typeof array] => {
+  const filtered: typeof array = [];
+  const filteredOut: typeof array = [];
+
+  array.forEach((e) => (filter(e) ? filtered : filteredOut).push(e));
+
+  return [filtered, filteredOut];
+};
 
 //? Integrations
 

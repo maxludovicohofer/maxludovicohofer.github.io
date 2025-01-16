@@ -11,7 +11,13 @@ import CoverMedia from "@components/Post/CoverMedia.astro";
 import Link from "@layouts/Link.astro";
 import Button from "@layouts/Button.astro";
 import type Video from "@layouts/Video.astro";
-import { getLinkName, capitalize, cleanMarkdown, toTitleCase } from "src/utils";
+import {
+  getLinkName,
+  capitalize,
+  cleanMarkdown,
+  toTitleCase,
+  getTitleClasses,
+} from "src/utils";
 import PostContent from "./PostContent.astro";
 
 interface Props extends HTMLAttributes<"div"> {
@@ -215,7 +221,7 @@ const action = category === "Tool" ? "Download" : "Play";
         </Text>
       )
     }
-    <Text title class="text-3xl 2xl:text-5xl"
+    <Text title class={getTitleClasses("medium")}
       >{title ?? <slot name="title" />}</Text
     >
     {category && <Text subtitle>{category}</Text>}

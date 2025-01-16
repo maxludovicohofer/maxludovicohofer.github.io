@@ -1,18 +1,19 @@
 ---
 import Card from "@layouts/Card.astro";
 import {
+  getPostId,
   getPublishingDate,
   type PostCollection,
 } from "@layouts/Post/Post.astro";
 import PostPreview from "@layouts/Post/PostPreview.astro";
 import type { HTMLAttributes } from "astro/types";
 import { render, getCollection, type CollectionEntry } from "astro:content";
+import { makeHighlight, partition } from "src/utils";
 
 interface Props extends HTMLAttributes<"ol"> {
   collection: PostCollection;
   exclude?: string[] | undefined;
-  disableHighlight?: true;
-  append?: CollectionEntry<PostCollection>[];
+  discreteHighlight?: true;
   numberOfItemsToLoadEager?: number | undefined;
 }
 
@@ -20,8 +21,7 @@ const {
   collection,
   class: className = "",
   exclude = [],
-  append = [],
-  disableHighlight,
+  discreteHighlight,
   numberOfItemsToLoadEager = 0,
   ...props
 } = Astro.props;
@@ -30,14 +30,19 @@ export const getSortedEntries = async <C extends PostCollection>(
   entryCollection: C,
   excluded: string[] = []
 ) => {
-  const entries = await getCollection(
-    entryCollection,
-    ({ data: { draft }, id }) =>
-      (import.meta.env.DEV || !draft) && excluded.every((entry) => id !== entry)
+  const [highlights, entries] = partition(
+    await getCollection(
+      entryCollection,
+      ({ data: { draft }, id }) =>
+        (import.meta.env.DEV || !draft) &&
+        excluded.every((entry) => id !== entry)
+    )!,
+    ({ data: { highlight } }) => highlight
   );
 
-  // Sort by latest first
-  return (
+  const isProjects = entryCollection === "projects";
+
+  const groupedEntries = Object.groupBy(
     await Promise.all(
       entries.map(async (entry) => ({
         ...entry,
@@ -46,39 +51,60 @@ export const getSortedEntries = async <C extends PostCollection>(
           (await render(entry)).remarkPluginFrontmatter
         )!,
       }))
+    ),
+    // Group by category priority
+    (entry) => {
+      if (isProjects) {
+        switch ((entry as CollectionEntry<"projects">).data.category) {
+          case "Game":
+            return "1";
+        }
+      }
+
+      return "0";
+    }
+  );
+
+  // Sort individual categories by latest first
+  Object.values(groupedEntries).forEach((entries) =>
+    entries.sort((a, b) =>
+      b.publishingDate.isAfter(a.publishingDate) ? 1 : -1
     )
-  ).toSorted((a, b) => (b.publishingDate.isAfter(a.publishingDate) ? 1 : -1));
+  );
+
+  // Apply priorities
+  return [...highlights, ...Object.values(groupedEntries).reverse().flat()];
 };
 
 const sortedEntries: CollectionEntry<PostCollection>[] = await getSortedEntries(
   collection,
   exclude
 );
-
-// Add additional at the end
-sortedEntries.push(...append);
-
-let highlightSet = false;
 ---
 
 <ol
-  class={`content-list/${collection} content-list-size/${numberOfItemsToLoadEager} ${className} grid grid-flow-col md:grid-flow-row gap-4 overflow-x-scroll scrollbar-hide snap-mandatory pb-4 md:pb-0`}
+  class={`${className} content-list grid grid-flow-col md:grid-flow-row gap-4 overflow-x-scroll scrollbar-hide snap-mandatory pb-4 md:pb-0`}
+  data-collection={collection}
+  data-eager-items={numberOfItemsToLoadEager}
+  {...discreteHighlight ? { "data-discrete": "" } : {}}
   {...props}
 >
   {
-    sortedEntries.map((entry) => {
-      const isHighlight =
-        !disableHighlight && !highlightSet && entry.data.highlight;
+    sortedEntries.map((entry, index) => {
+      const isHighlight = !index || entry.data.highlight;
 
-      if (isHighlight) highlightSet = true;
+      const { highlightClass, importance } = isHighlight
+        ? makeHighlight(discreteHighlight)
+        : {};
 
       return (
         <Card
           tag="li"
-          class={`content-slug/${entry.id} snap-center w-[80dvw] md:w-auto h-[17rem] ${isHighlight ? `row-start-1 col-span-full md:h-[23.6rem]` : ""}`}
+          class={`snap-center w-[80dvw] md:w-auto h-[17rem] ${highlightClass ?? ""}`}
+          data-slug={getPostId(entry)}
         >
           <PostPreview
-            importance={isHighlight ? "container-highlight" : "container-item"}
+            importance={importance ?? "container-item"}
             entry={entry}
             {...(entry.collection === "projects"
               ? { startHeading: "Design", short: true }
@@ -91,7 +117,7 @@ let highlightSet = false;
 </ol>
 <script>
   import type { CollectionKey } from "astro:content";
-  import { hasClass, removeFromClasses } from "src/utils";
+  import { getTitleClasses, makeHighlight, removeFromClasses } from "src/utils";
 
   const carouselEvents: {
     [K in keyof HTMLElementEventMap]?: (
@@ -153,45 +179,47 @@ let highlightSet = false;
       })
     );
 
+    const replaceTitleClass = (
+      container: Element,
+      importance: Parameters<typeof getTitleClasses>[0]
+    ) => {
+      const containerTitle =
+        container.querySelector<HTMLParagraphElement>("p.preview-title")!;
+
+      // Replace text classes
+      containerTitle.className = removeFromClasses(containerTitle.className, [
+        "text",
+      ]);
+      containerTitle.className = `${containerTitle.className} text-balance text-zinc-950 dark:text-zinc-100 ${getTitleClasses(importance)}`;
+    };
+
     document
-      .querySelectorAll<HTMLOListElement>("ol[class^=content-list]")
+      .querySelectorAll<HTMLOListElement>("ol.content-list")
       .forEach((list) => {
+        // Add snap after in order to avoid autofocus on highlights
+        list.classList.add("snap-x");
+
         observer.observe(list);
 
         // Order entries
         const readEntrySlugs =
-          readEntries[list.classList[0]?.split("/").at(-1) as CollectionKey];
+          readEntries[list.dataset.collection as CollectionKey];
 
         if (!readEntrySlugs) return;
 
         readEntrySlugs.forEach((readSlug) => {
           for (const item of list.children) {
-            if (item.classList[0]?.split("/").at(-1) !== readSlug) continue;
+            if ((item as HTMLElement).dataset.slug !== readSlug) continue;
 
-            if (hasClass("row-start-1", item.className)) {
+            // Process highlight
+            if (item.classList.contains("col-span-full")) {
               // Remove highlight classes
               item.className = removeFromClasses(item.className, [
-                "row-start",
                 "col-span",
                 "md:h",
               ]);
 
-              const highlightTitle = item.querySelector<HTMLElement>(
-                "[class^=preview-title]"
-              )!;
-
-              // Add normal text
-              highlightTitle.className = removeFromClasses(
-                highlightTitle.className,
-                ["text"]
-              );
-              highlightTitle.classList.add(
-                "text-2xl",
-                "2xl:text-3xl",
-                "text-balance",
-                "text-zinc-950",
-                "dark:text-zinc-100"
-              );
+              replaceTitleClass(item, "container-item");
             }
 
             // Move to end
@@ -200,23 +228,32 @@ let highlightSet = false;
           }
         });
 
-        // Add snap
-        list.classList.add("snap-x");
+        // Force first element to be highlight
+        const firstElement = list.children[0];
+        if (firstElement && !firstElement.classList.contains("col-span-full")) {
+          const { highlightClass, importance } = makeHighlight(
+            list.dataset.discrete !== undefined
+          );
 
-        const itemsToLoadEager = Number(list.classList[1]?.split("/").at(-1));
+          firstElement.className = `${firstElement.className} ${highlightClass}`;
+
+          replaceTitleClass(firstElement, importance);
+        }
+
+        const itemsToLoadEager = Number(list.dataset.eagerItems);
 
         if (!itemsToLoadEager) return;
 
-        const images = list.querySelectorAll<
+        const media = list.querySelectorAll<
           HTMLImageElement | HTMLIFrameElement
         >("img, iframe");
 
         for (
           let index = 0;
-          index < Math.min(images.length, itemsToLoadEager);
+          index < Math.min(media.length, itemsToLoadEager);
           index++
         ) {
-          images[index]!.loading = "eager";
+          media[index]!.loading = "eager";
         }
       });
   });
