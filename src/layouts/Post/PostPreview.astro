@@ -15,6 +15,9 @@ import type { ComponentProps, HTMLAttributes } from "astro/types";
 import PostContent from "./PostContent.astro";
 import Media from "@layouts/Media.astro";
 import { getCoverAlt } from "@components/Post/CoverMedia.astro";
+import getReadingTime from "reading-time";
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
 
 interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollection> | undefined;
@@ -24,7 +27,6 @@ interface Props extends HTMLAttributes<"div"> {
   readMoreText?: string;
   readMoreClass?: string;
   noReadMore?: boolean;
-  minutesAlreadySpentReading?: number | undefined;
   importance?:
     | "low"
     | "medium"
@@ -50,7 +52,6 @@ const {
   readMoreClass = "",
   tag,
   hideDate,
-  minutesAlreadySpentReading = 0.5, // Time assumed to be already spent reading before clicking read more
   ...props
 } = Astro.props;
 
@@ -61,15 +62,25 @@ const title = getTitle(entry);
 const renderedContent =
   getDescription(entry, short ? 1 : undefined, short, startHeading) ?? Content;
 
-const realMinutesToRead =
-  remarkPluginFrontmatter &&
-  remarkPluginFrontmatter.minutesRead - minutesAlreadySpentReading;
+const isMarkdown = !!remarkPluginFrontmatter;
 
-const minutesToRead =
-  realMinutesToRead !== undefined && Math.max(Math.round(realMinutesToRead), 1);
+const minutesToRead = isMarkdown
+  ? remarkPluginFrontmatter.minutesRead -
+    Math.min(
+      typeof renderedContent === "string"
+        ? // Description time
+          getReadingTime(renderedContent).minutes
+        : // Post time
+          remarkPluginFrontmatter.minutesRead,
+      // Maximum time assumed to be already spent reading before clicking read more
+      0.2
+    )
+  : undefined;
+
+dayjs.extend(duration);
 
 const readMoreLink =
-  noReadMore || (realMinutesToRead && realMinutesToRead < 0)
+  noReadMore || (isMarkdown && minutesToRead! < 0)
     ? undefined
     : (readMore ?? (entry && `/${entry.collection}/${getPostId(entry)}`));
 
@@ -162,7 +173,9 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
         class={`size-full flex flex-col justify-end pb-5 ${container ? "group-hover/container-card:animate-pulse" : "group-hover/card:animate-pulse"} intersect:animate-pulse lg:intersect:animate-none intersect-full`}
       >
         {readMoreText ??
-          (minutesToRead ? `Read in ${minutesToRead} min` : "Read more")}
+          (isMarkdown
+            ? `Read in ${dayjs.duration({ minutes: Math.max(Math.round(minutesToRead!), 1) }).format("m")} min`
+            : "Read more")}
         <br />▼
       </div>
     </Button>

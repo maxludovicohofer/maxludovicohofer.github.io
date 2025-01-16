@@ -5,7 +5,7 @@ import { getCollection } from "astro:content";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { toSentenceCase } from "src/utils";
+import { capitalize } from "src/utils";
 
 interface Props extends HTMLAttributes<"ol"> {
   compact?: boolean;
@@ -56,7 +56,7 @@ dayjs.extend(relativeTime);
             <>
               {experience && !isGroup && (
                 <Text subtitle class="inline">
-                  {toSentenceCase(dayjs.duration(experience).humanize())} of
+                  {capitalize(dayjs.duration(experience).humanize())} of
                   experience
                 </Text>
               )}
@@ -67,7 +67,7 @@ dayjs.extend(relativeTime);
                       <Text class="inline">{item.id}</Text>
                       {item.data && (
                         <Text subtitle class="inline">
-                          {toSentenceCase(
+                          {capitalize(
                             dayjs.duration(item.data.experience).humanize()
                           )}{" "}
                           of experience
