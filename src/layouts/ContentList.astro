@@ -83,7 +83,7 @@ const sortedEntries: CollectionEntry<PostCollection>[] = await getSortedEntries(
 ---
 
 <ol
-  class={`${className} content-list grid grid-flow-col md:grid-flow-row gap-4 overflow-x-scroll scrollbar-hide snap-mandatory pb-4 md:pb-0`}
+  class={`${className} content-list grid grid-flow-col md:grid-flow-row gap-4 overflow-x-scroll scrollbar-hide snap-mandatory pb-4 -mb-2`}
   data-collection={collection}
   data-eager-items={numberOfItemsToLoadEager}
   {...discreteHighlight ? { "data-discrete": "" } : {}}
