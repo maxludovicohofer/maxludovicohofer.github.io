@@ -161,7 +161,7 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
       >
         {readMoreText ??
           (isMarkdown
-            ? `Read in ${dayjs.duration({ minutes: Math.max(Math.round(minutesToRead!), 1) }).format("m")} min`
+            ? `Read in ${dayjs.duration({ minutes: Math.ceil(minutesToRead!) }).format("m")} min`
             : "Read more")}
         <br />▼
       </div>
