@@ -4,7 +4,6 @@ import Link from "@layouts/Link.astro";
 import Text from "@layouts/Text.astro";
 import Button from "@layouts/Button.astro";
 import LinkedIn from "@images/logos/linkedin.svg?raw";
-import Arrow from "@images/arrows/curly-dotted-arrow.svg?raw";
 import PostPreview from "@layouts/Post/PostPreview.astro";
 import type { ComponentProps } from "astro/types";
 import Fullscreenable from "@layouts/Fullscreenable.astro";
@@ -42,11 +41,7 @@ const { importance } = Astro.props;
       </div>
     </div>
   </div>I'm a game designer with a passion for mechanics, combat, AI, and
-  systems.<div
-    class="hidden lg:flex 2xl:hidden flex-col items-center size-full -mb-4"
-  >
-    <Text class="size-[75%] xl:size-[82%]"><Fragment set:html={Arrow} /></Text>
-  </div><Button slot="footer" class="mt-2" href="/public-resume.pdf"
+  systems.<Button slot="footer" class="mt-2" href="/public-resume.pdf"
     >View my resume</Button
   ></PostPreview
 >
