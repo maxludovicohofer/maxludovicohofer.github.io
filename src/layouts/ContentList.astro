@@ -81,7 +81,7 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
 ---
 
 <ol
-  class={`${className} content-list grid grid-flow-col sm:grid-flow-row gap-4 overflow-x-scroll scrollbar-hide snap-mandatory pb-4 -mb-2`}
+  class={`${className} content-list grid grid-flow-col lg:grid-flow-row gap-4 overflow-x-scroll scrollbar-hide snap-mandatory pb-4 -mb-2`}
   data-collection={collection}
   data-eager-items={numberOfItemsToLoadEager}
   {...discreteHighlight ? { "data-discrete": "" } : {}}
@@ -98,7 +98,7 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
       return (
         <Card
           tag="li"
-          class={`snap-center w-[80dvw] sm:w-auto h-[17rem] ${highlightClass ?? ""}`}
+          class={`snap-center w-[80dvw] lg:w-full aspect-[16/10] max-h-[17rem] ${highlightClass ?? ""}`}
           data-slug={getPostId(entry)}
         >
           <PostPreview
@@ -123,14 +123,14 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
       e: HTMLElementEventMap[K]
     ) => any;
   } = {
-    mouseenter: function () {
+    pointerenter: function () {
       this.style.cursor = "grab";
     },
-    mousedown: function (e) {
+    pointerdown: function (e) {
       // Prevent selection of text
       e.preventDefault();
     },
-    mousemove: function (e) {
+    pointermove: function (e) {
       // Move only if mouse clicked and not right click
       if (!e.buttons || e.buttons === 2) return;
 
@@ -145,7 +145,7 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
 
       this.style.cursor = "grabbing";
     },
-    mouseup: function () {
+    pointerup: function () {
       this.style.cursor = "grab";
     },
   };

@@ -4,7 +4,9 @@ import Quaternion from "quaternion";
 //? Tailwind
 export const makeHighlight = (discrete?: boolean) => {
   return {
-    highlightClass: `col-span-full ${discrete ? "" : "lg:h-[22.6rem]"}`,
+    highlightClass: `col-span-full ${
+      discrete ? "" : "lg:h-[22.6rem] lg:max-h-none"
+    }`,
     importance: (discrete
       ? "container-item"
       : "container-highlight") as Parameters<typeof getTextClass>[0],
@@ -26,7 +28,7 @@ export const getTextClass = (
     case "container-item":
       return "text-3xl 2xl:text-4xl";
     case "container-highlight":
-      return "text-3xl sm:text-4xl 2xl:text-5xl";
+      return "text-3xl lg:text-4xl 2xl:text-5xl";
     case "post-title":
       return "text-3xl 2xl:text-4xl";
     case "button":
@@ -48,7 +50,7 @@ export const rotate3D = async (
 ): Promise<{
   [K in Extract<
     keyof (WindowEventMap & DocumentEventMap),
-    "deviceorientation" | "mousemove"
+    "deviceorientation" | "pointermove"
   >]?: (
     e: K extends keyof WindowEventMap
       ? WindowEventMap[K]
@@ -136,11 +138,8 @@ export const rotate3D = async (
   }
 
   return {
-    mousemove: ({ clientX, clientY }) =>
-      setRotation(
-        clientX / (innerWidth / 2) - 1,
-        clientY / (innerHeight / 2) - 1
-      ),
+    pointermove: ({ x, y }) =>
+      setRotation(x / (innerWidth / 2) - 1, y / (innerHeight / 2) - 1),
   };
 };
 
@@ -177,8 +176,10 @@ export const activateModal = async (
         "deviceorientation",
         modalMoveFunction.deviceorientation
       );
-    } else {
-      document.addEventListener("mousemove", modalMoveFunction.mousemove!);
+    }
+
+    if (modalMoveFunction.pointermove) {
+      document.addEventListener("pointermove", modalMoveFunction.pointermove);
     }
   }
 };
@@ -203,8 +204,13 @@ export const deactivateModal = () => {
         "deviceorientation",
         modalMoveFunction.deviceorientation
       );
-    } else {
-      document.removeEventListener("mousemove", modalMoveFunction.mousemove!);
+    }
+
+    if (modalMoveFunction.pointermove) {
+      document.removeEventListener(
+        "pointermove",
+        modalMoveFunction.pointermove
+      );
     }
 
     modal.style.setProperty("--rotateX", "0deg");

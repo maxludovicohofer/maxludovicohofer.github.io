@@ -23,7 +23,7 @@ const { collection, exclude, isNotFullpage } = Astro.props;
   ><ContentList
     collection={collection}
     discreteHighlight={isNotFullpage}
-    class={`${isNotFullpage ? "2xl:grid-cols-2" : "lg:grid-cols-2"} -mx-6 sm:mx-0 px-6 sm:px-0`}
+    class={`${isNotFullpage ? "2xl:grid-cols-2" : "lg:grid-cols-2"} -mx-6 lg:mx-0 px-6 lg:px-0`}
     exclude={exclude}
     numberOfItemsToLoadEager={isNotFullpage ? undefined : 2}
   /></Post
