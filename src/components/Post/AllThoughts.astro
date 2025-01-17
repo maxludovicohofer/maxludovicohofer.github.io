@@ -1,27 +1,13 @@
 ---
-import ContentList from "@layouts/ContentList.astro";
-import PostPreview from "@layouts/Post/PostPreview.astro";
-import { title } from "@pages/thoughts/index.astro";
+import PostCollectionPreview from "@layouts/Post/PostCollectionPreview.astro";
 import type { ComponentProps } from "astro/types";
 
-interface Props {
-  importance?: ComponentProps<typeof PostPreview>["importance"];
-}
-
-const { importance } = Astro.props;
+interface Props
+  extends Omit<ComponentProps<typeof PostCollectionPreview>, "collection"> {}
 ---
 
-<PostPreview
-  container
-  class="mx-4 md:mx-0"
-  readMore="thoughts"
-  readMoreText="See all thoughts"
-  readMoreClass="hidden md:inline"
-  importance={importance}
->
-  <Fragment slot="title">{title}</Fragment>
-  <ContentList
-    collection="thoughts"
-    class="md:grid-cols-2 lg:grid-cols-1 -mx-4 md:mx-0 px-4 md:px-0"
-  />
-</PostPreview>
+<PostCollectionPreview
+  collection="thoughts"
+  contentClass="lg:grid-cols-1"
+  {...Astro.props}
+/>

@@ -107,7 +107,7 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
           title
           class={`preview-title ${getTextClass(
             importance ?? "medium"
-          )} ${container ? "lg:ml-4 mt-1 lg:mt-0" : ""}`}
+          )} ${container ? "lg:ml-4" : ""}`}
         >
           {title ?? <slot name="title" />}
         </Text>

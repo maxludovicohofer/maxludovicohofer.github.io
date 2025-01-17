@@ -1,12 +1,12 @@
 ---
 import Thoughts from "@components/Post/Thoughts.astro";
 import Page from "@layouts/Page.astro";
-
-export const title = "Thoughts";
+import type { CollectionKey } from "astro:content";
+import { capitalize } from "src/utils";
 ---
 
 <Page
-  title={title}
+  title={capitalize("thoughts" satisfies CollectionKey)}
   description="All my blog posts and thoughts about videogames, the industry and work."
   backHref="/"
 >

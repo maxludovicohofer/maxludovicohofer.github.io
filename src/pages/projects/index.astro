@@ -1,12 +1,12 @@
 ---
 import Projects from "@components/Post/Projects.astro";
 import Page from "@layouts/Page.astro";
-
-export const title = "Projects";
+import type { CollectionKey } from "astro:content";
+import { capitalize } from "src/utils";
 ---
 
 <Page
-  title={title}
+  title={capitalize("projects" satisfies CollectionKey)}
   description="All my games, prototypes and secondary projects."
   backHref="/"
 >

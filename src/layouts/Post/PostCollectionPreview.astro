@@ -1,0 +1,29 @@
+---
+import ContentList from "@layouts/ContentList.astro";
+import PostPreview from "@layouts/Post/PostPreview.astro";
+import type { ComponentProps } from "astro/types";
+import type { PostCollection } from "./Post.astro";
+import { capitalize } from "src/utils";
+
+interface Props extends ComponentProps<typeof PostPreview> {
+  collection: PostCollection;
+  contentClass?: string;
+}
+
+const { collection, contentClass, ...props } = Astro.props;
+---
+
+<PostPreview
+  container
+  class="mx-4 md:mx-0"
+  readMore={collection}
+  readMoreText={`See all ${collection}`}
+  readMoreClass="hidden md:inline"
+  {...props}
+>
+  <Fragment slot="title">{capitalize(collection)}</Fragment>
+  <ContentList
+    collection={collection}
+    class={`${contentClass} md:grid-cols-2 -mx-4 md:mx-0 px-4 md:px-0`}
+  />
+</PostPreview>

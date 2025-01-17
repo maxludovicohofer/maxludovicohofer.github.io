@@ -260,14 +260,14 @@ const action = category === "Tool" ? "Download" : "Play";
     }
     {
       Astro.slots.has("footer") && (
-        <Text subtitle class="mt-2 mb-1.5 xl:-mb-1" tag="div">
+        <Text subtitle class="mt-2 mb-1.5 2xl:-mb-1" tag="div">
           <slot name="footer" />
         </Text>
       )
     }
     {
       publishingDate && (
-        <Text subtitle class="mt-0.5 xl:mt-3">
+        <Text subtitle class="mt-0.5 2xl:mt-3">
           {publishingDate}
         </Text>
       )
