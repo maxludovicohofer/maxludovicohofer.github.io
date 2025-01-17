@@ -2,6 +2,7 @@
 import { ClientRouter } from "astro:transitions";
 import BackButton from "@components/BackButton.astro";
 import ModalSlot from "./ModalSlot.astro";
+import { capitalize } from "src/utils";
 
 interface Props {
   title: string;
@@ -11,7 +12,7 @@ interface Props {
 
 const { title, description, backHref } = Astro.props;
 
-const completeTitle = `Max Hofer \\ ${title}`;
+const completeTitle = `Max Hofer \\ ${capitalize(title)}`;
 ---
 
 <!doctype html>
@@ -22,7 +23,7 @@ const completeTitle = `Max Hofer \\ ${title}`;
 
     <title>{completeTitle}</title>
     <meta name="title" content={completeTitle} />
-    <meta name="description" content={description} />
+    <meta name="description" content={capitalize(description)} />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 

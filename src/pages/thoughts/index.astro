@@ -1,14 +1,13 @@
 ---
-import Thoughts from "@components/Post/Thoughts.astro";
 import Page from "@layouts/Page.astro";
-import type { CollectionKey } from "astro:content";
-import { capitalize } from "src/utils";
+import type { PostCollectionKey } from "@layouts/Post/Post.astro";
+import PostList from "@layouts/Post/PostList.astro";
 ---
 
 <Page
-  title={capitalize("thoughts" satisfies CollectionKey)}
+  title={"thoughts" satisfies PostCollectionKey}
   description="All my blog posts and thoughts about videogames, the industry and work."
   backHref="/"
 >
-  <Thoughts />
+  <PostList collection="thoughts" />
 </Page>

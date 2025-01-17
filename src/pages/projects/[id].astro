@@ -1,5 +1,4 @@
 ---
-import Projects from "@components/Post/Projects.astro";
 import Page from "@layouts/Page.astro";
 import Post, {
   getDescription,
@@ -11,6 +10,7 @@ import PostFooter from "@components/Post/PostFooter.astro";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
+import PostList from "@layouts/Post/PostList.astro";
 
 // Generate a new path for every collection entry
 export const getStaticPaths = async () =>
@@ -70,6 +70,6 @@ const title = getTitle(entry)!;
     </Fragment>
   </Post>
   <div class="-mt-24 lg:-mt-20">
-    <Projects isNotFullpage exclude={[entry.id]} />
+    <PostList collection="projects" isNotFullpage exclude={[entry.id]} />
   </div>
 </Page>

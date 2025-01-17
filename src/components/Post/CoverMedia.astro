@@ -2,7 +2,7 @@
 import {
   getTitle,
   type getPostCover,
-  type PostCollection,
+  type PostCollectionKey,
 } from "@layouts/Post/Post.astro";
 import type { CollectionEntry } from "astro:content";
 import PostMedia from "@components/Post/PostMedia.astro";
@@ -10,12 +10,12 @@ import type { ComponentProps } from "astro/types";
 
 interface Props extends Omit<ComponentProps<typeof PostMedia>, "src" | "alt"> {
   cover: NonNullable<ReturnType<typeof getPostCover>>;
-  entry: CollectionEntry<PostCollection>;
+  entry: CollectionEntry<PostCollectionKey>;
 }
 
 const { cover, entry, ...props } = Astro.props;
 
-export function getCoverAlt(post: CollectionEntry<PostCollection>) {
+export function getCoverAlt(post: CollectionEntry<PostCollectionKey>) {
   const title = getTitle(post)!;
 
   return post.collection === "projects"

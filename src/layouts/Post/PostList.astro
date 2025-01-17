@@ -1,11 +1,11 @@
 ---
 import ContentList from "@layouts/ContentList.astro";
-import Post, { type PostCollection } from "@layouts/Post/Post.astro";
+import Post, { type PostCollectionKey } from "@layouts/Post/Post.astro";
 import type { ComponentProps } from "astro/types";
 import { capitalize } from "src/utils";
 
 interface Props {
-  collection: PostCollection;
+  collection: PostCollectionKey;
   exclude?: ComponentProps<typeof ContentList>["exclude"];
   isNotFullpage?: boolean;
 }

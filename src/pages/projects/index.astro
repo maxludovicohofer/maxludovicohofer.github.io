@@ -1,14 +1,13 @@
 ---
-import Projects from "@components/Post/Projects.astro";
 import Page from "@layouts/Page.astro";
-import type { CollectionKey } from "astro:content";
-import { capitalize } from "src/utils";
+import type { PostCollectionKey } from "@layouts/Post/Post.astro";
+import PostList from "@layouts/Post/PostList.astro";
 ---
 
 <Page
-  title={capitalize("projects" satisfies CollectionKey)}
+  title={"projects" satisfies PostCollectionKey}
   description="All my games, prototypes and secondary projects."
   backHref="/"
 >
-  <Projects />
+  <PostList collection="projects" />
 </Page>

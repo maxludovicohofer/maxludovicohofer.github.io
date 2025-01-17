@@ -3,7 +3,7 @@ import Card from "@layouts/Card.astro";
 import {
   getPostId,
   getPublishingDate,
-  type PostCollection,
+  type PostCollectionKey,
 } from "@layouts/Post/Post.astro";
 import PostPreview from "@layouts/Post/PostPreview.astro";
 import type { HTMLAttributes } from "astro/types";
@@ -11,7 +11,7 @@ import { render, getCollection, type CollectionEntry } from "astro:content";
 import { groupBy, makeHighlight, partition } from "src/utils";
 
 interface Props extends HTMLAttributes<"ol"> {
-  collection: PostCollection;
+  collection: PostCollectionKey;
   exclude?: string[] | undefined;
   discreteHighlight?: true;
   numberOfItemsToLoadEager?: number | undefined;
@@ -26,7 +26,7 @@ const {
   ...props
 } = Astro.props;
 
-export const getSortedEntries = async <C extends PostCollection>(
+export const getSortedEntries = async <C extends PostCollectionKey>(
   entryCollection: C,
   excluded: string[] = []
 ) => {
@@ -76,10 +76,8 @@ export const getSortedEntries = async <C extends PostCollection>(
   return [...highlights, ...Object.values(groupedEntries).reverse().flat()];
 };
 
-const sortedEntries: CollectionEntry<PostCollection>[] = await getSortedEntries(
-  collection,
-  exclude
-);
+const sortedEntries: CollectionEntry<PostCollectionKey>[] =
+  await getSortedEntries(collection, exclude);
 ---
 
 <ol

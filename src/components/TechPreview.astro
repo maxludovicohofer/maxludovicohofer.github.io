@@ -1,17 +1,16 @@
 ---
 import PostPreview from "@layouts/Post/PostPreview.astro";
 import type { ComponentProps } from "astro/types";
-import { title } from "@pages/tech.astro";
 import TechList from "@components/TechList.astro";
+import type { CollectionKey } from "astro:content";
+import { capitalize } from "src/utils";
 
-interface Props {
-  importance?: ComponentProps<typeof PostPreview>["importance"];
-}
+interface Props extends ComponentProps<typeof PostPreview> {}
 
-const { importance } = Astro.props;
+const title: CollectionKey = "tech";
 ---
 
-<PostPreview importance={importance} readMore="tech" tag="div">
-  <Fragment slot="title">{title}</Fragment>
+<PostPreview readMore={title} tag="div" {...Astro.props}>
+  <Fragment slot="title">{capitalize(title)}</Fragment>
   <TechList compact class="grid-cols-2 gap-1" />
 </PostPreview>

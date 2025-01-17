@@ -2,16 +2,15 @@
 import Page from "@layouts/Page.astro";
 import Bento from "@layouts/Bento.astro";
 import Profile from "@components/Profile.astro";
-import AllProjects from "@components/Post/AllProjects.astro";
-import AllThoughts from "@components/Post/AllThoughts.astro";
 import TechPreview from "@components/TechPreview.astro";
 import Video from "@layouts/Video.astro";
+import PostListPreview from "@layouts/Post/PostListPreview.astro";
 
 // TODO PHASE 2 I18N ENG/JAP. ADD LANG SELECTION ON TOP OF PAGE (TWO UNDERLINED LINKS WITH LANG ICONS).
 ---
 
 <Page
-  title="Game Designer"
+  title="game designer"
   description="Max Hofer's game design portfolio and blog."
 >
   <Bento>
@@ -20,8 +19,16 @@ import Video from "@layouts/Video.astro";
       slot="2-medium"
       youTubeInfo={{ id: "m0KhK_J0LiQ", aspect: "16/10" }}
     />
-    <AllProjects slot="3-large" />
+    <PostListPreview
+      slot="3-large"
+      collection="projects"
+      contentClass="2xl:grid-cols-1"
+    />
     <TechPreview slot="4-small" importance="low" />
-    <AllThoughts slot="5-medium" />
+    <PostListPreview
+      slot="5-medium"
+      collection="thoughts"
+      contentClass="lg:grid-cols-1"
+    />
   </Bento>
 </Page>

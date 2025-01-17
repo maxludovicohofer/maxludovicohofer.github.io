@@ -1,11 +1,11 @@
 ---
-import Thoughts from "@components/Post/Thoughts.astro";
 import Page from "@layouts/Page.astro";
 import Post, {
   getDescription,
   getPostId,
   getTitle,
 } from "@layouts/Post/Post.astro";
+import PostList from "@layouts/Post/PostList.astro";
 import { getCollection } from "astro:content";
 
 // Generate a new path for every collection entry
@@ -23,10 +23,12 @@ export const getStaticPaths = async () =>
 const { entry } = Astro.props;
 
 const title = getTitle(entry)!;
+
+// TODO JOIN THOUGHTS ID AND PROJECTS ID IN SINGLE COMPONENT
 ---
 
 <Page title={title} description={getDescription(entry, 2) ?? title}
   ><Post entry={entry} followedByOther /><div class="-mt-24 lg:-mt-20">
-    <Thoughts isNotFullpage exclude={[entry.id]} />
+    <PostList collection="thoughts" isNotFullpage exclude={[entry.id]} />
   </div></Page
 >

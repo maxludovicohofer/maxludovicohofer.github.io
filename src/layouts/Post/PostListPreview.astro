@@ -2,11 +2,11 @@
 import ContentList from "@layouts/ContentList.astro";
 import PostPreview from "@layouts/Post/PostPreview.astro";
 import type { ComponentProps } from "astro/types";
-import type { PostCollection } from "./Post.astro";
+import type { PostCollectionKey } from "./Post.astro";
 import { capitalize } from "src/utils";
 
 interface Props extends ComponentProps<typeof PostPreview> {
-  collection: PostCollection;
+  collection: PostCollectionKey;
   contentClass?: string;
 }
 

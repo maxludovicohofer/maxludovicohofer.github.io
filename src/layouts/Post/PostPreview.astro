@@ -6,7 +6,7 @@ import {
   getCategory,
   getPublishingDate,
   getPostCover,
-  type PostCollection,
+  type PostCollectionKey,
   getPostId,
   getDescription,
   getTitle,
@@ -21,7 +21,7 @@ import duration from "dayjs/plugin/duration";
 import { getTextClass } from "src/utils";
 
 interface Props extends HTMLAttributes<"div"> {
-  entry?: CollectionEntry<PostCollection> | undefined;
+  entry?: CollectionEntry<PostCollectionKey> | undefined;
   startHeading?: string | undefined;
   short?: boolean | undefined;
   readMore?: string;

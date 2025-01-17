@@ -2,13 +2,15 @@
 import Page from "@layouts/Page.astro";
 import TechList from "@components/TechList.astro";
 import Post from "@layouts/Post/Post.astro";
+import type { CollectionKey } from "astro:content";
+import { capitalize } from "src/utils";
 
-export const title = "Tech";
+const title: CollectionKey = "tech";
 ---
 
 <Page title={title} description="Max Hofer's tech stack." backHref="/"
   ><Post tag="div" fullWidth class="max-w-[170rem]"
-    ><Fragment slot="title">{title}</Fragment>
+    ><Fragment slot="title">{capitalize(title)}</Fragment>
     <TechList
       class="md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 lg:min-h-[calc(100vh-12rem)]"
     /></Post
