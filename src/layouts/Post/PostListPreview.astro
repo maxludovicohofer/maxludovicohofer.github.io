@@ -15,15 +15,13 @@ const { collection, contentClass, ...props } = Astro.props;
 
 <PostPreview
   container
-  class="mx-4 md:mx-0"
+  class="mx-4 sm:mx-0"
   readMore={collection}
   readMoreText={`See all ${collection}`}
-  readMoreClass="hidden md:inline"
+  readMoreClass="hidden sm:inline"
   {...props}
->
-  <Fragment slot="title">{capitalize(collection)}</Fragment>
-  <ContentList
+  ><Fragment slot="title">{capitalize(collection)}</Fragment><ContentList
     collection={collection}
-    class={`${contentClass} md:grid-cols-2 -mx-4 md:mx-0 px-4 md:px-0`}
-  />
-</PostPreview>
+    class={`${contentClass} sm:grid-cols-2 -mx-4 sm:mx-0 px-4 sm:px-0`}
+  /></PostPreview
+>

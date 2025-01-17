@@ -4,7 +4,7 @@ import Quaternion from "quaternion";
 //? Tailwind
 export const makeHighlight = (discrete?: boolean) => {
   return {
-    highlightClass: `col-span-full ${discrete ? "" : "md:h-[23.6rem]"}`,
+    highlightClass: `col-span-full ${discrete ? "" : "lg:h-[22.6rem]"}`,
     importance: (discrete
       ? "container-item"
       : "container-highlight") as Parameters<typeof getTextClass>[0],
@@ -26,7 +26,7 @@ export const getTextClass = (
     case "container-item":
       return "text-3xl 2xl:text-4xl";
     case "container-highlight":
-      return "text-3xl md:text-4xl 2xl:text-5xl";
+      return "text-3xl sm:text-4xl 2xl:text-5xl";
     case "post-title":
       return "text-3xl 2xl:text-4xl";
     case "button":

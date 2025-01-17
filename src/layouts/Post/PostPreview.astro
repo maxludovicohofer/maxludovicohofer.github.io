@@ -121,7 +121,7 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
       )
     }
     <Text
-      class={`${publishingDate ? "mt-4" : renderedContent || Astro.slots.has("title") ? "mt-6" : ""} text-xl 2xl:text-3xl ${container ? "max-h-[32rem]" : readMoreLink ? "h-64" : ""}`}
+      class={`${subtitle.length !== 0 || renderedContent || Astro.slots.has("title") ? (container ? "mt-6" : "mt-4") : ""} text-xl 2xl:text-3xl ${container ? "max-h-[32rem]" : readMoreLink ? "h-64" : ""}`}
       markdown={typeof renderedContent === "function"}
       tag={tag ?? (container ? "div" : undefined)}
       >{
