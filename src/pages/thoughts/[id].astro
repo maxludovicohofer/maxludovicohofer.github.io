@@ -1,34 +1,7 @@
 ---
-import Page from "@layouts/Page.astro";
-import Post, {
-  getDescription,
-  getPostId,
-  getTitle,
-} from "@layouts/Post/Post.astro";
-import PostList from "@layouts/Post/PostList.astro";
-import { getCollection } from "astro:content";
+import PostPage, { makePostPaths } from "@layouts/Post/PostPage.astro";
 
-// Generate a new path for every collection entry
-export const getStaticPaths = async () =>
-  (
-    await getCollection(
-      "thoughts",
-      ({ data: { draft } }) => import.meta.env.DEV || !draft
-    )
-  ).map((entry) => ({
-    params: { id: getPostId(entry) },
-    props: { entry },
-  }));
-
-const { entry } = Astro.props;
-
-const title = getTitle(entry)!;
-
-// TODO JOIN THOUGHTS ID AND PROJECTS ID IN SINGLE COMPONENT
+export const getStaticPaths = makePostPaths("thoughts");
 ---
 
-<Page title={title} description={getDescription(entry, 2) ?? title}
-  ><Post entry={entry} followedByOther /><div class="-mt-24 lg:-mt-20">
-    <PostList collection="thoughts" isNotFullpage exclude={[entry.id]} />
-  </div></Page
->
+<PostPage {...Astro.props} />

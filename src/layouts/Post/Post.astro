@@ -24,18 +24,18 @@ interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollectionKey>;
   tag?: ComponentProps<typeof Text>["tag"];
   fullWidth?: boolean | undefined;
+  noPadding?: boolean | undefined;
   container?: boolean;
   importance?: Parameters<typeof getTextClass>[0] | undefined;
-  followedByOther?: boolean;
 }
 
 const {
   entry,
   tag,
   fullWidth,
+  noPadding,
   container,
   importance,
-  followedByOther,
   class: className = "",
   ...props
 } = Astro.props;
@@ -185,6 +185,13 @@ export const getDownloadLinks = <C extends CollectionKey>(
 const downloadLinks = getDownloadLinks(entry);
 const downloadsPresent = downloadLinks && downloadLinks.length !== 0;
 
+const widthClass = `w-full ${
+  noPadding
+    ? ""
+    : `pb-24 lg:pb-10 px-6 ${
+        fullWidth ? "lg:px-24" : "max-w-[40rem] 2xl:max-w-[70rem]"
+      }`
+} `;
 const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
 
 const action = category === "Tool" ? "Download" : "Play";
@@ -199,76 +206,90 @@ const action = category === "Tool" ? "Download" : "Play";
 }
 <Card
   container={container}
-  class={`!bg-opacity-0 !p-6 !pt-7 md:!pt-12 !shadow-none ${cover ? "rounded-b-none lg:rounded-none mt-[26vh] lg:mt-0" : "rounded-none"} ${followedByOther ? (cover ? "mb-[calc(26vh-12rem)]" : "mb-0") : "mb-4"} lg:mb-0 ${container ? "" : "bg-gradient-to-b from-zinc-100 dark:from-zinc-900 to-zinc-200 dark:to-zinc-950"} flex flex-col items-center`}
+  class={`!p-0 !shadow-none !bg-opacity-0 ${cover ? "rounded-b-none lg:rounded-none mt-[26vh] lg:mt-0" : "rounded-none"}`}
 >
-  <div
-    class={`${className} w-full mb-16 lg:mb-6 ${fullWidth ? "lg:px-20" : "max-w-[40rem] 2xl:max-w-[70rem]"}`}
-    {...props}
-  >
-    {
-      cover && (
-        <div class="hidden lg:inline">
-          <CoverMedia cover={cover} entry={entry!} class="h-[40vh] mb-6" />
-        </div>
-      )
-    }
-    {
-      (Astro.slots.has("header") || entry?.data.draft) && (
-        <Text subtitle tag="div">
-          {entry?.data.draft ? (
-            "Draft (not visible in production)"
-          ) : (
-            <slot name="header" />
-          )}
-        </Text>
-      )
-    }
-    <Text
-      title
-      class={getTextClass(importance ?? (container ? "low" : "post-title"))}
-      >{title ?? <slot name="title" />}</Text
+  <div class="flex flex-col items-center">
+    <div
+      class={`flex flex-col items-center w-full ${container ? "" : "bg-gradient-to-b from-zinc-100 dark:from-zinc-900 to-zinc-200 dark:to-zinc-950"} `}
     >
-    {category && <Text subtitle>{category}</Text>}
-    <Text
-      class={`${Content ? "is-entry" : ""} ${publishingDate ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl`}
-      markdown={!!Content}
-      tag={tag}>{Content ? <PostContent Content={Content} /> : <slot />}</Text
-    >
-    {
-      downloadsPresent && (
-        <div class="flex flex-col items-center mt-8 mb-7">
-          <Button
-            href={downloadLinks[0]}
-            importance="button-cta"
-            linkClass={buttonWidthClass}
-          >
-            {action}
-          </Button>
-          {downloadLinks.length > 1 && (
-            <Text subtitle class={`-mb-4 w-full ${buttonWidthClass}`}>
-              Or
-              {downloadLinks.slice(1).map((link, index, { length }) => (
-                <>
-                  <Link href={link}>{getLinkName(link)}</Link>
-                  {index !== length - 1 ? ", " : ""}
-                </>
-              ))}
+      <div
+        class={`${className} ${widthClass} ${noPadding ? "" : "pt-7 md:pt-12"} ${Astro.slots.has("after") ? "!pb-0" : ""}`}
+        {...props}
+      >
+        {
+          cover && (
+            <div class="hidden lg:inline">
+              <CoverMedia cover={cover} entry={entry!} class="h-[40vh] mb-6" />
+            </div>
+          )
+        }
+        {
+          (Astro.slots.has("header") || entry?.data.draft) && (
+            <Text subtitle tag="div">
+              {entry?.data.draft ? (
+                "Draft (not visible in production)"
+              ) : (
+                <slot name="header" />
+              )}
             </Text>
-          )}
-        </div>
-      )
-    }
+          )
+        }
+        <Text
+          title
+          class={getTextClass(importance ?? (container ? "low" : "post-title"))}
+          >{title ?? <slot name="title" />}</Text
+        >
+        {category && <Text subtitle>{category}</Text>}
+        <Text
+          class={`${Content ? "is-entry" : ""} ${publishingDate ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl`}
+          markdown={!!Content}
+          tag={tag}
+          >{Content ? <PostContent Content={Content} /> : <slot />}</Text
+        >
+        {
+          downloadsPresent && (
+            <div class="flex flex-col items-center mt-8 mb-7">
+              <Button
+                href={downloadLinks[0]}
+                importance="button-cta"
+                linkClass={buttonWidthClass}
+              >
+                {action}
+              </Button>
+              {downloadLinks.length > 1 && (
+                <Text subtitle class={`-mb-4 w-full ${buttonWidthClass}`}>
+                  Or
+                  {downloadLinks.slice(1).map((link, index, { length }) => (
+                    <>
+                      <Link href={link}>{getLinkName(link)}</Link>
+                      {index !== length - 1 ? ", " : ""}
+                    </>
+                  ))}
+                </Text>
+              )}
+            </div>
+          )
+        }
+        {
+          Astro.slots.has("footer") && (
+            <Text subtitle class="mt-2 mb-1.5 2xl:-mb-1" tag="div">
+              <slot name="footer" />
+            </Text>
+          )
+        }
+        {
+          publishingDate && (
+            <Text subtitle class="mt-0.5 2xl:mt-3">
+              {publishingDate}
+            </Text>
+          )
+        }
+      </div>
+    </div>
     {
-      Astro.slots.has("footer") && (
-        <Text subtitle class="mt-2 mb-1.5 2xl:-mb-1" tag="div">
-          <slot name="footer" />
-        </Text>
-      )
-    }
-    {
-      publishingDate && (
-        <Text subtitle class="mt-0.5 2xl:mt-3">
-          {publishingDate}
+      Astro.slots.has("after") && (
+        <Text subtitle tag="div" class={widthClass}>
+          <slot name="after" />
         </Text>
       )
     }

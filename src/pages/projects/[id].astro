@@ -1,31 +1,14 @@
 ---
-import Page from "@layouts/Page.astro";
-import Post, {
-  getDescription,
-  getPostId,
-  getTitle,
-} from "@layouts/Post/Post.astro";
-import { getCollection, getEntries } from "astro:content";
-import PostFooter from "@components/Post/PostFooter.astro";
+import { getEntries } from "astro:content";
+import PostFooter from "@layouts/Post/PostFooter.astro";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
-import PostList from "@layouts/Post/PostList.astro";
+import PostPage, { makePostPaths } from "@layouts/Post/PostPage.astro";
 
-// Generate a new path for every collection entry
-export const getStaticPaths = async () =>
-  (
-    await getCollection(
-      "projects",
-      ({ data: { draft } }) => import.meta.env.DEV || !draft
-    )
-  ).map((entry) => ({
-    params: { id: getPostId(entry) },
-    props: { entry },
-  }));
+export const getStaticPaths = makePostPaths("projects");
 
-const { entry } = Astro.props;
-const { roles, tech, awards, team, developmentTime } = entry.data;
+const { roles, tech, awards, team, developmentTime } = Astro.props.entry.data;
 
 const techData = await getEntries(tech);
 
@@ -33,43 +16,32 @@ dayjs.extend(duration);
 dayjs.extend(relativeTime);
 const developmentDuration = dayjs.duration(developmentTime).humanize();
 
-const title = getTitle(entry)!;
-
 // TODO PHASE 2 USE HREF ON PAGE BACK, BUT GET HREF DINAMICALLY
 ---
 
-<Page title={title} description={getDescription(entry, 2) ?? title}>
-  <Post entry={entry} followedByOther>
-    <Fragment slot="footer">
-      <PostFooter
-        value={!team || team === 1
-          ? `Solo developed in ${developmentDuration}`
-          : `Made in ${developmentDuration} by an average team of ${team}`}
-        >Development</PostFooter
-      >
-      {
-        roles && roles.length !== 0 && (
-          <>
-            <br />
-            <PostFooter value={roles}>Roles</PostFooter>
-          </>
-        )
-      }
-      <br />
-      <PostFooter value={techData.map(({ data: { id } }) => id)}
-        >Tech</PostFooter
-      >
-      {
-        awards && awards.length !== 0 && (
-          <>
-            <br />
-            <PostFooter value={awards}>Awards</PostFooter>
-          </>
-        )
-      }
-    </Fragment>
-  </Post>
-  <div class="-mt-24 lg:-mt-20">
-    <PostList collection="projects" isNotFullpage exclude={[entry.id]} />
-  </div>
-</Page>
+<PostPage {...Astro.props}
+  ><Fragment slot="footer"
+    ><PostFooter
+      value={!team || team === 1
+        ? `Solo developed in ${developmentDuration}`
+        : `Made in ${developmentDuration} by an average team of ${team}`}
+      >Development</PostFooter
+    >{
+      roles && roles.length !== 0 && (
+        <>
+          <br />
+          <PostFooter value={roles}>Roles</PostFooter>
+        </>
+      )
+    }<br /><PostFooter value={techData.map(({ data: { id } }) => id)}
+      >Tech</PostFooter
+    >{
+      awards && awards.length !== 0 && (
+        <>
+          <br />
+          <PostFooter value={awards}>Awards</PostFooter>
+        </>
+      )
+    }</Fragment
+  ></PostPage
+>
