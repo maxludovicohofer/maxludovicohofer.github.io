@@ -117,20 +117,21 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
   import type { CollectionKey } from "astro:content";
   import { getTextClass, makeHighlight, removeFromClasses } from "src/utils";
 
+  // TODO PHASE 2 USE POINTER EVENTS, AND MAKE THEM WORK ON IOS SAFARI
   const carouselEvents: {
     [K in keyof HTMLElementEventMap]?: (
       this: HTMLElement,
       e: HTMLElementEventMap[K]
     ) => any;
   } = {
-    pointerenter: function () {
+    mouseenter: function () {
       this.style.cursor = "grab";
     },
-    pointerdown: function (e) {
+    mousedown: function (e) {
       // Prevent selection of text
       e.preventDefault();
     },
-    pointermove: function (e) {
+    mousemove: function (e) {
       // Move only if mouse clicked and not right click
       if (!e.buttons || e.buttons === 2) return;
 
@@ -145,7 +146,7 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
 
       this.style.cursor = "grabbing";
     },
-    pointerup: function () {
+    mouseup: function () {
       this.style.cursor = "grab";
     },
   };
