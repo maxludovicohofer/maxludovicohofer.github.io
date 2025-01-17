@@ -8,8 +8,8 @@ export const makeHighlight = (discrete?: boolean) => {
       discrete ? "" : "lg:h-[22.6rem] lg:max-h-none"
     }`,
     importance: (discrete
-      ? "container-item"
-      : "container-highlight") as Parameters<typeof getTextClass>[0],
+      ? "content-list-item"
+      : "content-list-highlight") as Parameters<typeof getTextClass>[0],
   };
 };
 
@@ -19,15 +19,15 @@ export const getTextClass = (
     | "medium"
     | "high"
     | "post-title"
-    | "container-item"
-    | "container-highlight"
+    | "content-list-item"
+    | "content-list-highlight"
     | "button"
     | "button-cta"
 ) => {
   switch (importance) {
-    case "container-item":
+    case "content-list-item":
       return "text-3xl 2xl:text-4xl";
-    case "container-highlight":
+    case "content-list-highlight":
       return "text-3xl lg:text-4xl 2xl:text-5xl";
     case "post-title":
       return "text-3xl 2xl:text-4xl";
