@@ -7,8 +7,9 @@ interface Props extends ComponentProps<typeof Button> {
 }
 
 //? Always add href to allow prefetch
-
 const { class: className = "", buttonName, href, ...buttonProps } = Astro.props;
+
+// TODO PHASE 2 ADD A HOME BUTTON WHEN BACK BUTTON DOESN'T RETURN TO HOME
 ---
 
 <Button
