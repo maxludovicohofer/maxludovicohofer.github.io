@@ -6,12 +6,15 @@ import Media from "@layouts/Media.astro";
 import Text from "@layouts/Text.astro";
 import Link from "@layouts/Link.astro";
 
-interface Props extends ComponentProps<typeof Media> {}
+interface Props extends ComponentProps<typeof Media> {
+  noMargin?: boolean;
+}
 
 const {
   class: className = "",
   "data-umami-event": umamiEvent,
   alt,
+  noMargin,
   ...props
 } = Astro.props;
 
@@ -61,9 +64,9 @@ const stringAlt = textAlt.reduce(
 );
 ---
 
-<Dissolving
+<Dissolving class={noMargin ? "" : "mt-12 mb-11"}
   ><Fullscreenable
-    class={`${className} rounded-3xl`}
+    class={`${className} rounded-3xl ${descriptiveAlt ? "-mb-2" : ""}`}
     data-umami-event={umamiEvent ?? stringAlt}
     ><Media alt={stringAlt} {...props} /></Fullscreenable
   >{

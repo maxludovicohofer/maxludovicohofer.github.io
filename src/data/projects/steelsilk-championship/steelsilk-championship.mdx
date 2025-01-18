@@ -4,17 +4,10 @@ developmentTime: P1M3W
 team: 26
 roles:
 - Game director
-- Agile team lead
-- Balance lead
-- Performance optimization lead
-- QA lead
+- Tech team lead
 - Sound lead
 - Camera lead
 - UI/UX lead
-- Technical art lead
-- Technical animation lead
-- Programmer
-- IT
 tech:
 - Unreal Engine
 - Maya
@@ -29,7 +22,7 @@ youTubeAspectRatio: 16/9
 publishingDate: 2024-04-01
 ---
 
-{/* Description of the game, as short as possible */}
+{/* Description of the game, as short as possible. Max 1 section */}
 
 In the year 2980, a much anticipated robotics competition takes place: a team of miniature remote-control arachnoids fend off the creepy crawlies of three different biomes. Before each round, enemies receive a random bonus, and each spider has to choose a bonus for itself. To win, the team must counter enemies, make good use of each character's unique strengths, and form a solid strategy.
 
@@ -37,16 +30,19 @@ In the year 2980, a much anticipated robotics competition takes place: a team of
 
 ## Design
 
-{/* Genre, target and goal of the design */}
+{/* Genre, target and goal of the design. Split in max 2 sections if too long, divided by a media */}
 
-Steelsilk Championship is a couch co-op rougelite hero shoot 'em up, where victory is achieved by resisting three arenas. The game was outlined by my game development school, then passed onto my classmates and me to develop further. We imagined a target audience interested in small catchy games, where people could team up with their friends or achieve a quick solo flow state. Our goal was to create a genre game that favored positive interactions among players, theorycrafting and replayability. At the same time, we sacrificed design focus and faster development times in favor of deepening our skillsets of choice.
+Steelsilk Championship is a couch co-op rougelite hero shoot 'em up, where victory is achieved by resisting three arenas. The game was outlined by my game development school, then passed onto my classmates and me to develop further. We imagined a target audience interested in small catchy games, where people could team up with their friends or achieve a quick solo flow state.
 
-{/* First point: character, second point: world, third point: development solutions. Split if too long, in max 4 points */}
+![Steelsilk's main menu.](./steelsilk-championship-ui.png)
 
-* The game was originally thought out for 4 players, but we scaled the number of heroes down to 2, while allowing a flexible 1 to 4 players. I designed the two heroes to have opposite playstyles that relied on each other to truly shine. For example, one spider specializes in areas of effect, but only the other spider is fast enough to herd enemies. To win at Steelsilk, character interplay was designed to be a necessity.
-* I wrote the GDD we used during development based on communication with the creators of the base concept, while greatly expanding its specificity, features and philosophy. This helped tremendously in contrast with the original concept document, because artists and developers were now aligned both technically and in terms of emotional design goals. Given the project's unpaid and commissioned context, I tried to focus more on the team's morale and involvement more than the project's completion per se. I held daily reviews, where we colored sentences in the GDD based on their state of completion. In this situation, I found it to be a more effective alternative to the standard Kanban board. Seeing the document become greener and greener gave the team a big morale boost and reminded them to check out the document, giving them a bigger sense of involvement in the game's overall progress and vision.
-* Since the tech team was composed solely of people with no prior work experience, I mentored each member to achieve an acceptable quality standard. This was only possible by setting strict guidelines at the beginning, and only allowing more flexibility as the team gained a deeper understanding of the concepts. Since micromanagement usually affects morale negatively, I kept code reviews on a weekly basis.
-* Since the art team experienced a long delay at the beginning of the project, I set up IT infrastructure to parallelize our work and theirs. Also, this required setting up a well-defined tech art pipeline to export assets and textures consistently and efficiently (for example, a specific kind of texture packing).
-* I set up QA to have three different stages: play tested by tech team, play tested by art team, finally play tested by externals. This detected a fair number of bugs and usability defects, while keeping any inactive art team members busy.
-* Since there were a lot of ideas for cards, I set up a data-driven system so that even artists could define cards to be added, based on the spiders' attributes.
-* To motivate the art team and always keep them updated, we held weekly reviews and retrospectives, in true scrum spirit. Sometimes, if big changes were made during the week, I arranged exceptional meetings with the art team and displayed the new features. On the other hand, I brought ideas and visions from the art team to the tech team, to assert their feasibility and foster enthusiasm and productive communication.
+Our goal was to create a genre game that favored positive interactions among players, theorycrafting and replayability. At the same time, we sacrificed design focus and faster development times in favor of deepening our skillsets of choice.
+
+
+
+{/* First point: character, second point: world, third point: development challenges. Split in max 4 points if too long */}
+
+* The game was originally thought out for 4 players, but we scaled the number of heroes down to 2, while allowing 1 to 4 players. I designed the two heroes to have opposite playstyles that relied on each other to truly shine. For example, one spider specializes in areas of effect, but only the other spider is fast enough to herd enemies. To win at Steelsilk, character interplay was designed to be a necessity.
+* Spawned enemies change based on the biome, and have different movesets that must be countered by the most effective character. Each level is progressively harder than the previous, and enemy spawn rates increase as the stage timer reaches zero and players take refuge in an underground elevator.
+* In the elevator, enemies receive a random bonus, and players must choose a bonus among three, before the next stage begins. Bonuses have a rarity system, with the rarest bonuses completely changing a hero's playstyle. After three stages, players can check on their performance with a leaderboard system, and can decide to restart and beat their score.
+* Given the lack of details of the concept document, one of the project's biggest challenges was team alignment with the GDD, which I wrote during production. It came to me that we could use the GDD to also track work, by coloring text that was WIP or completed. This greatly increased morale, development quality and speed, since the team became more aware of the big picture.

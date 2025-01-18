@@ -11,7 +11,7 @@ const isEager = alt.includes("EAGER ");
 
 <PostMedia
   alt={isEager ? alt.replace("EAGER ", "") : alt}
-  class={`${className} h-[40vh] mt-12 -mb-2`}
+  class={`${className} h-[40vh]`}
   loading={isEager ? "eager" : undefined}
   {...props}
 />
