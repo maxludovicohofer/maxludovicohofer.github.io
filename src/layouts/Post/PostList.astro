@@ -7,24 +7,24 @@ import { capitalize } from "src/utils";
 interface Props {
   collection: PostCollectionKey;
   exclude?: ComponentProps<typeof ContentList>["exclude"];
-  isNotFullpage?: boolean;
+  partOfPost?: boolean;
 }
 
-const { collection, exclude, isNotFullpage } = Astro.props;
+const { collection, exclude, partOfPost } = Astro.props;
 ---
 
 <Post
   container
-  fullWidth={!isNotFullpage}
-  inline={isNotFullpage}
-  class={isNotFullpage ? "mt-3" : ""}
+  fullWidth={!partOfPost}
+  inline={partOfPost}
+  class={partOfPost ? "mt-3" : ""}
   ><Fragment slot="title"
-    >{isNotFullpage ? `Other ${collection}` : capitalize(collection)}</Fragment
+    >{partOfPost ? `Other ${collection}` : capitalize(collection)}</Fragment
   ><ContentList
     collection={collection}
-    discreteHighlight={isNotFullpage}
-    class={`${isNotFullpage ? "2xl:grid-cols-2" : "lg:grid-cols-2"} -mx-[calc(max(100dvw-40rem,0rem)+3rem)] lg:mx-0 px-[calc(max(100dvw-40rem,0rem)+3rem)] lg:px-0`}
+    discreteHighlight={partOfPost}
+    class={`${partOfPost ? "2xl:grid-cols-2" : "lg:grid-cols-2"} -mx-[calc(max(100dvw-40rem,0rem)+3rem)] lg:mx-0 px-[calc(max(100dvw-40rem,0rem)+3rem)] lg:px-0`}
     exclude={exclude}
-    numberOfItemsToLoadEager={isNotFullpage ? undefined : 2}
+    numberOfItemsToLoadEager={partOfPost ? undefined : 2}
   /></Post
 >
