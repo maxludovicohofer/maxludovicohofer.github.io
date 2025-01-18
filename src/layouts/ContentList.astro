@@ -209,7 +209,9 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
         const { highlightClass, importance } = makeHighlight(
           list.dataset.discrete !== undefined
         );
-        const highlightClasses = highlightClass.split(" ");
+        const highlightClasses = highlightClass
+          .split(" ")
+          .filter((className) => !!className);
 
         readEntrySlugs.forEach((readSlug) => {
           for (const item of list.children) {
