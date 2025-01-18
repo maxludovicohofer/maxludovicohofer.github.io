@@ -16,14 +16,14 @@ const { collection, exclude, isNotFullpage } = Astro.props;
 <Post
   container
   fullWidth={!isNotFullpage}
-  noPadding={isNotFullpage}
-  class={isNotFullpage ? "mt-3 px-6" : ""}
+  inline={isNotFullpage}
+  class={isNotFullpage ? "mt-3" : ""}
   ><Fragment slot="title"
     >{isNotFullpage ? `Other ${collection}` : capitalize(collection)}</Fragment
   ><ContentList
     collection={collection}
     discreteHighlight={isNotFullpage}
-    class={`${isNotFullpage ? "2xl:grid-cols-2" : "lg:grid-cols-2"} -mx-6 lg:mx-0 px-6 lg:px-0`}
+    class={`${isNotFullpage ? "2xl:grid-cols-2" : "lg:grid-cols-2"} -mx-[calc(max(100dvw-40rem,0rem)+3rem)] lg:mx-0 px-[calc(max(100dvw-40rem,0rem)+3rem)] lg:px-0`}
     exclude={exclude}
     numberOfItemsToLoadEager={isNotFullpage ? undefined : 2}
   /></Post

@@ -34,13 +34,13 @@ const title = getTitle(entry)!;
 ---
 
 <Page title={title} description={getDescription(entry, 2) ?? title}
-  ><Post {...Astro.props}
-    ><slot name="footer" slot="footer" /><div slot="after" class="-mx-6">
-      <PostList
-        collection={entry.collection}
-        isNotFullpage
-        exclude={[entry.id]}
-      />
-    </div></Post
+  ><Post fullWidthAfter {...Astro.props}
+    ><slot name="footer" slot="footer" />
+    <PostList
+      slot="after"
+      collection={entry.collection}
+      isNotFullpage
+      exclude={[entry.id]}
+    /></Post
   ></Page
 >

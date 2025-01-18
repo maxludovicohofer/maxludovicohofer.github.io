@@ -24,7 +24,8 @@ interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollectionKey>;
   tag?: ComponentProps<typeof Text>["tag"];
   fullWidth?: boolean | undefined;
-  noPadding?: boolean | undefined;
+  fullWidthAfter?: boolean | undefined;
+  inline?: boolean | undefined;
   container?: boolean;
   importance?: Parameters<typeof getTextClass>[0] | undefined;
 }
@@ -33,7 +34,8 @@ const {
   entry,
   tag,
   fullWidth,
-  noPadding,
+  fullWidthAfter,
+  inline,
   container,
   importance,
   class: className = "",
@@ -185,13 +187,9 @@ export const getDownloadLinks = <C extends CollectionKey>(
 const downloadLinks = getDownloadLinks(entry);
 const downloadsPresent = downloadLinks && downloadLinks.length !== 0;
 
-const widthClass = `w-full ${
-  noPadding
-    ? ""
-    : `pb-24 lg:pb-10 px-6 ${
-        fullWidth ? "lg:px-24" : "max-w-[40rem] 2xl:max-w-[70rem]"
-      }`
-} `;
+const fullWidthClass = `w-full ${inline ? "" : "pb-24 lg:pb-10"}`;
+
+const widthClass = `${fullWidthClass} px-6 ${fullWidth ? "lg:px-24" : "max-w-[40rem] 2xl:max-w-[70rem]"}`;
 const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
 
 const action = category === "Tool" ? "Download" : "Play";
@@ -210,10 +208,10 @@ const action = category === "Tool" ? "Download" : "Play";
 >
   <div class="flex flex-col items-center">
     <div
-      class={`flex flex-col items-center w-full ${container ? "" : "bg-gradient-to-b from-zinc-100 dark:from-zinc-900 to-zinc-200 dark:to-zinc-950"} `}
+      class={`flex flex-col items-center w-full ${container ? "bg-zinc-200 dark:bg-zinc-950" : "bg-gradient-to-b from-zinc-100 dark:from-zinc-900 to-zinc-200 dark:to-zinc-950"} `}
     >
       <div
-        class={`${className} ${widthClass} ${noPadding ? "" : "pt-7 lg:pt-12"} ${Astro.slots.has("after") ? "!pb-0" : ""}`}
+        class={`${className} ${widthClass} ${inline ? "" : "pt-7 lg:pt-12"} ${Astro.slots.has("after") ? "!pb-0" : ""}`}
         {...props}
       >
         {
@@ -288,7 +286,11 @@ const action = category === "Tool" ? "Download" : "Play";
     </div>
     {
       Astro.slots.has("after") && (
-        <Text subtitle tag="div" class={widthClass}>
+        <Text
+          subtitle
+          tag="div"
+          class={fullWidthAfter ? fullWidthClass : widthClass}
+        >
           <slot name="after" />
         </Text>
       )
