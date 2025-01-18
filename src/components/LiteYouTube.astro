@@ -1,0 +1,41 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"iframe"> {
+  id?: string;
+  color?: YT.ProgressBarColor;
+  autoplay?: boolean;
+  mute?: boolean;
+  loop?: boolean;
+}
+
+const {
+  id,
+  color = "white",
+  autoplay = true,
+  mute = true,
+  loop = true,
+  ...props
+} = Astro.props;
+
+const noControls = Astro.props.class?.includes("pointer-events-none");
+
+const boolToInt = (value?: boolean) => (value ? 1 : 0);
+
+import "node_modules/lite-youtube-embed/src/lite-yt-embed.css";
+---
+
+<lite-youtube
+  js-api
+  videoid={id}
+  params={`playlist=${id}&color=${color}&autoplay=${boolToInt(autoplay)}&mute=${boolToInt(mute)}&loop=${boolToInt(loop)}&controls=${boolToInt(!noControls)}&disablekb=${boolToInt(noControls)}`}
+  {...props}></lite-youtube>
+<style>
+  /* Fix default styles */
+  lite-youtube {
+    max-width: none;
+  }
+</style>
+<script>
+  import "node_modules/lite-youtube-embed/src/lite-yt-embed.js";
+</script>

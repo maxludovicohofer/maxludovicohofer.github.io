@@ -1,13 +1,10 @@
 ---
-import type { ComponentProps, HTMLAttributes } from "astro/types";
+import LiteYouTube from "@components/LiteYouTube.astro";
+import type { ComponentProps } from "astro/types";
 import { getAspectClass } from "src/utils";
 
-interface Props extends HTMLAttributes<"iframe"> {
+interface Props extends ComponentProps<typeof LiteYouTube> {
   youTubeInfo?: { id: string; aspect: "16/9" | "16/10" };
-  color?: YT.ProgressBarColor;
-  autoplay?: boolean;
-  mute?: boolean;
-  loop?: boolean;
   smoothLoading?: boolean;
 }
 
@@ -15,145 +12,127 @@ const {
   youTubeInfo: { id, aspect } = {
     id: "",
     aspect: "16/9",
-  } satisfies ComponentProps<typeof Video>["youTubeInfo"],
-  color = "white",
-  autoplay = true,
-  mute = true,
-  loop = true,
+  } satisfies Props["youTubeInfo"],
   class: className = "",
   smoothLoading,
   ...props
 } = Astro.props;
-
-const noControls = className?.includes("pointer-events-none");
-
-const boolToInt = (value?: boolean) => (value ? 1 : 0);
-
-import "node_modules/lite-youtube-embed/src/lite-yt-embed.css";
 ---
 
 <div
   class={`size-full overflow-hidden flex items-center justify-center ${getAspectClass(aspect)}`}
 >
   <div class="size-full">
-    <lite-youtube
-      js-api
-      videoid={id}
-      params={`playlist=${id}&color=${color}&autoplay=${boolToInt(autoplay)}&mute=${boolToInt(mute)}&loop=${boolToInt(loop)}&controls=${boolToInt(!noControls)}&disablekb=${boolToInt(noControls)}`}
+    <LiteYouTube
+      id={id}
       class={`${className} size-full ${smoothLoading ? "opacity-0 duration-700" : ""}`}
       data-aspect-ratio={aspect}
-      {...props}></lite-youtube>
-    <style>
-      /* Fix default styles */
-      lite-youtube {
-        max-width: none;
-      }
-    </style>
+      {...props}
+    />
   </div>
-  <script src="node_modules/lite-youtube-embed/src/lite-yt-embed.js"></script>
-  <script>
-    import type { LiteYTEmbed } from "lite-youtube-embed";
-    import { getAspectRatio, switchClasses } from "src/utils";
-
-    const getVideos = () => document.querySelectorAll("lite-youtube");
-
-    const players: Map<LiteYTEmbed, YT.Player> = new Map();
-
-    document.addEventListener("astro:page-load", () => {
-      // Auto resize for object-cover videos
-      const containerObserver = new ResizeObserver((entries) =>
-        entries.forEach(({ target }) => {
-          if (!target.checkVisibility()) return;
-
-          const resizingDiv = target.firstElementChild! as HTMLDivElement;
-          const lyt = resizingDiv.firstElementChild! as LiteYTEmbed;
-
-          const containerIsWider =
-            target.clientWidth / target.clientHeight >
-            getAspectRatio(lyt.dataset.aspectRatio!);
-          // Resize width if container is wider, else height
-          switchClasses(resizingDiv, containerIsWider, ["h-auto"], ["w-auto"]);
-          // Expand width if container is wider, else height
-          switchClasses(
-            lyt,
-            containerIsWider,
-            ["h-[300dvw]", "w-full"],
-            ["h-full", "w-[300dvh]"]
-          );
-        })
-      );
-
-      // Handle lite youtube embeds
-      const lytObserver = new IntersectionObserver((entries) =>
-        entries.forEach(async ({ target, isIntersecting }) => {
-          const lyt = target as LiteYTEmbed;
-          let player = players.get(lyt);
-
-          // Play or pause player
-          if (isIntersecting) {
-            // Initialize video
-            if (!player) {
-              // Smooth loading
-              if (target.classList.contains("opacity-0")) {
-                setTimeout(() => target.classList.add("opacity-100"), 2000);
-              }
-
-              //? Get YT player activates the player for some reason, it's a really bad repo
-              const ytPlayer = await lyt.getYTPlayer();
-              if (!ytPlayer) return;
-              players.set(lyt, ytPlayer);
-              player = ytPlayer;
-
-              if (lyt.classList.contains("object-cover")) {
-                // Remove black bands
-                containerObserver.observe(lyt.parentElement!.parentElement!);
-              }
-            }
-            player.playVideo();
-          } else {
-            player?.pauseVideo();
-          }
-        })
-      );
-
-      getVideos().forEach((lyt) => {
-        // Set start time
-        lyt.setAttribute(
-          "params",
-          `${lyt.getAttribute("params")}&start=${Number(sessionStorage.getItem(`video/${lyt.getAttribute("videoid")!}`) ?? 0)}`
-        );
-
-        lytObserver.observe(lyt);
-      });
-    });
-
-    //? Save times to restore start times
-    const savePlayerTimes = () => {
-      const videoData = Object.groupBy(
-        getVideos(),
-        (video) => video.getAttribute("videoid")!
-      );
-
-      // Save longest time watched for each video ID
-      for (const videoId in videoData) {
-        const sortedPlayers = videoData[videoId]!.map((lyt) =>
-          players.get(lyt)?.getCurrentTime()
-        ).filter((time) => time !== undefined);
-
-        if (!sortedPlayers.length) continue;
-
-        sortedPlayers.sort();
-
-        sessionStorage.setItem(
-          `video/${videoId}`,
-          sortedPlayers.at(-1)!.toFixed()
-        );
-      }
-
-      players.clear();
-    };
-
-    document.addEventListener("astro:before-swap", savePlayerTimes);
-    addEventListener("beforeunload", savePlayerTimes);
-  </script>
 </div>
+<script>
+  import type { LiteYTEmbed } from "lite-youtube-embed";
+  import { getAspectRatio, switchClasses } from "src/utils";
+
+  const getVideos = () => document.querySelectorAll("lite-youtube");
+
+  const players: Map<LiteYTEmbed, YT.Player> = new Map();
+
+  document.addEventListener("astro:page-load", () => {
+    // Auto resize for object-cover videos
+    const containerObserver = new ResizeObserver((entries) =>
+      entries.forEach(({ target }) => {
+        if (!target.checkVisibility()) return;
+
+        const resizingDiv = target.firstElementChild! as HTMLDivElement;
+        const lyt = resizingDiv.firstElementChild! as LiteYTEmbed;
+
+        const containerIsWider =
+          target.clientWidth / target.clientHeight >
+          getAspectRatio(lyt.dataset.aspectRatio!);
+        // Resize width if container is wider, else height
+        switchClasses(resizingDiv, containerIsWider, ["h-auto"], ["w-auto"]);
+        // Expand width if container is wider, else height
+        switchClasses(
+          lyt,
+          containerIsWider,
+          ["h-[300dvw]", "w-full"],
+          ["h-full", "w-[300dvh]"]
+        );
+      })
+    );
+
+    // Handle lite youtube embeds
+    const lytObserver = new IntersectionObserver((entries) =>
+      entries.forEach(async ({ target, isIntersecting }) => {
+        const lyt = target as LiteYTEmbed;
+        let player = players.get(lyt);
+
+        // Play or pause player
+        if (isIntersecting) {
+          // Initialize video
+          if (!player) {
+            // Smooth loading
+            if (target.classList.contains("opacity-0")) {
+              setTimeout(() => target.classList.add("opacity-100"), 2000);
+            }
+
+            //? Get YT player activates the player for some reason, it's a really bad repo
+            const ytPlayer = await lyt.getYTPlayer();
+            if (!ytPlayer) return;
+            players.set(lyt, ytPlayer);
+            player = ytPlayer;
+
+            if (lyt.classList.contains("object-cover")) {
+              // Remove black bands
+              containerObserver.observe(lyt.parentElement!.parentElement!);
+            }
+          }
+          player.playVideo();
+        } else {
+          player?.pauseVideo();
+        }
+      })
+    );
+
+    getVideos().forEach((lyt) => {
+      // Set start time
+      lyt.setAttribute(
+        "params",
+        `${lyt.getAttribute("params")}&start=${Number(sessionStorage.getItem(`video/${lyt.getAttribute("videoid")!}`) ?? 0)}`
+      );
+
+      lytObserver.observe(lyt);
+    });
+  });
+
+  //? Save times to restore start times
+  const savePlayerTimes = () => {
+    const videoData = Object.groupBy(
+      getVideos(),
+      (video) => video.getAttribute("videoid")!
+    );
+
+    // Save longest time watched for each video ID
+    for (const videoId in videoData) {
+      const sortedPlayers = videoData[videoId]!.map((lyt) =>
+        players.get(lyt)?.getCurrentTime()
+      ).filter((time) => time !== undefined);
+
+      if (!sortedPlayers.length) continue;
+
+      sortedPlayers.sort();
+
+      sessionStorage.setItem(
+        `video/${videoId}`,
+        sortedPlayers.at(-1)!.toFixed()
+      );
+    }
+
+    players.clear();
+  };
+
+  document.addEventListener("astro:before-swap", savePlayerTimes);
+  addEventListener("beforeunload", savePlayerTimes);
+</script>
