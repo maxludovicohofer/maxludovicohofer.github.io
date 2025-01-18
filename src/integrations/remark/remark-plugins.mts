@@ -13,7 +13,7 @@ export const remarkCreated: RemarkPlugin = () => (_, file) => {
 
 export const remarkMinutesRead: RemarkPlugin = () => (tree, file) => {
   file.data.astro!.frontmatter!.minutesRead = getReadingTime(
-    toString(tree, { includeImageAlt: false })
+    toString(tree)
   ).minutes;
 };
 
