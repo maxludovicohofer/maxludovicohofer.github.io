@@ -206,18 +206,18 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
 
         if (!readEntrySlugs) return;
 
+        const { highlightClass, importance } = makeHighlight(
+          list.dataset.discrete !== undefined
+        );
+        const highlightClasses = highlightClass.split(" ");
+
         readEntrySlugs.forEach((readSlug) => {
           for (const item of list.children) {
             if ((item as HTMLElement).dataset.slug !== readSlug) continue;
 
             // Process highlight
-            if (item.classList.contains("col-span-full")) {
-              // Remove highlight classes
-              item.className = removeFromClasses(item.className, [
-                "col-span",
-                "lg:h",
-              ]);
-
+            if (item.className.includes(highlightClass)) {
+              item.classList.remove(...highlightClasses);
               replaceTitleClass(item, "content-list-item");
             }
 
@@ -230,12 +230,7 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
         // Force first element to be highlight
         const firstElement = list.children[0];
         if (firstElement && !firstElement.classList.contains("col-span-full")) {
-          const { highlightClass, importance } = makeHighlight(
-            list.dataset.discrete !== undefined
-          );
-
-          firstElement.className = `${firstElement.className} ${highlightClass}`;
-
+          firstElement.classList.add(...highlightClasses);
           replaceTitleClass(firstElement, importance);
         }
 
