@@ -187,8 +187,9 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
       container: Element,
       importance: Parameters<typeof getTextClass>[0]
     ) => {
-      const containerTitle =
-        container.querySelector<HTMLParagraphElement>("p.preview-title")!;
+      const containerTitle = container.querySelector<HTMLParagraphElement>(
+        "p.post-preview-title"
+      )!;
 
       // Replace text classes
       containerTitle.className = removeFromClasses(containerTitle.className, [

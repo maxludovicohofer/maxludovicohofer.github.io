@@ -30,7 +30,6 @@
     "typescript": "^5.6.3"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.15",
-    "tailwindcss-intersect": "^2.0.1"
+    "@tailwindcss/typography": "^0.5.15"
   }
 }
