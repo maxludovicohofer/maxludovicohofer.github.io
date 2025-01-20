@@ -88,83 +88,85 @@ const publishingDate =
 const subtitle = [category, publishingDate].filter((part) => !!part);
 ---
 
-<div class={`${className} flex flex-col h-full justify-between`} {...props}>
-  <div>
-    {
-      (Astro.slots.has("header") || entry?.data.draft) && (
-        <Text subtitle tag="div">
-          {entry?.data.draft ? (
-            "Draft (not visible in production)"
-          ) : (
-            <slot name="header" />
-          )}
-        </Text>
-      )
-    }
-    {
-      (title || Astro.slots.has("title")) && (
-        <Text
-          title
-          class={`preview-title ${getTextClass(
-            importance ?? "medium"
-          )} ${container ? "lg:ml-4" : ""}`}
-        >
-          {title ?? <slot name="title" />}
-        </Text>
-      )
-    }
-    {
-      subtitle.length !== 0 && (
-        <Text subtitle class="xl:mt-3">
-          {subtitle.join(" \\ ")}
-        </Text>
-      )
-    }
-    <Text
-      class={`${subtitle.length !== 0 || renderedContent || Astro.slots.has("title") ? (container ? "mt-6" : "mt-4") : ""} text-xl 2xl:text-3xl ${container ? "max-h-[32rem]" : readMoreLink ? "h-64" : ""}`}
-      markdown={typeof renderedContent === "function"}
-      tag={tag ?? (container ? "div" : undefined)}
-      >{
-        typeof renderedContent === "function" ? (
-          <PostContent Content={renderedContent} />
-        ) : (
-          (renderedContent ?? <slot />)
+<div class={className}>
+  <div class="flex flex-col h-full justify-between" {...props}>
+    <div>
+      {
+        (Astro.slots.has("header") || entry?.data.draft) && (
+          <Text subtitle tag="div">
+            {entry?.data.draft ? (
+              "Draft (not visible in production)"
+            ) : (
+              <slot name="header" />
+            )}
+          </Text>
         )
-      }</Text
-    >
-  </div>
-  {
-    Astro.slots.has("footer") && (
-      <Text subtitle class="mt-6" tag="div">
-        <slot name="footer" />
-      </Text>
+      }
+      {
+        (title || Astro.slots.has("title")) && (
+          <Text
+            title
+            class={`preview-title ${getTextClass(
+              importance ?? "medium"
+            )} ${container ? "lg:ml-4" : ""}`}
+          >
+            {title ?? <slot name="title" />}
+          </Text>
+        )
+      }
+      {
+        subtitle.length !== 0 && (
+          <Text subtitle class="xl:mt-3">
+            {subtitle.join(" \\ ")}
+          </Text>
+        )
+      }
+      <Text
+        class={`${subtitle.length !== 0 || renderedContent || Astro.slots.has("title") ? (container ? "mt-6" : "mt-4") : ""} text-xl 2xl:text-3xl ${container ? "max-h-[32rem]" : readMoreLink ? "h-64" : ""}`}
+        markdown={typeof renderedContent === "function"}
+        tag={tag ?? (container ? "div" : undefined)}
+        >{
+          typeof renderedContent === "function" ? (
+            <PostContent Content={renderedContent} />
+          ) : (
+            (renderedContent ?? <slot />)
+          )
+        }</Text
+      >
+    </div>
+    {
+      Astro.slots.has("footer") && (
+        <Text subtitle class="mt-6" tag="div">
+          <slot name="footer" />
+        </Text>
+      )
+    }
+  </div>{
+    cover && (
+      <div
+        class={`absolute inset-0 pointer-events-none opacity-0 intersect:opacity-15 intersect-half duration-700 ${container ? "group-hover/container-card:opacity-15" : "group-hover/card:opacity-15"}`}
+      >
+        <Media src={cover} alt={getCoverAlt(entry!)} smoothLoading />
+      </div>
+    )
+  }{
+    readMoreLink && (
+      <Button
+        cardButton
+        class={`${readMoreClass} absolute bottom-0 left-0 h-24 2xl:h-32`}
+        href={readMoreLink}
+        navigate
+      >
+        <div
+          class={`size-full flex flex-col justify-end pb-5 2xl:pb-6 ${container ? "group-hover/container-card:animate-pulse" : "group-hover/card:animate-pulse"} intersect:animate-pulse lg:intersect:animate-none intersect-full`}
+        >
+          {readMoreText ??
+            (isMarkdown
+              ? `Read in ${dayjs.duration({ minutes: Math.ceil(minutesToRead!) }).format("m")} min`
+              : "Read more")}
+          <br />▼
+        </div>
+      </Button>
     )
   }
-</div>{
-  cover && (
-    <div
-      class={`absolute inset-0 pointer-events-none opacity-0 intersect:opacity-15 intersect-half duration-700 ${container ? "group-hover/container-card:opacity-15" : "group-hover/card:opacity-15"}`}
-    >
-      <Media src={cover} alt={getCoverAlt(entry!)} smoothLoading />
-    </div>
-  )
-}{
-  readMoreLink && (
-    <Button
-      cardButton
-      class={`${readMoreClass} absolute bottom-0 left-0 h-24 2xl:h-32`}
-      href={readMoreLink}
-      navigate
-    >
-      <div
-        class={`size-full flex flex-col justify-end pb-5 2xl:pb-6 ${container ? "group-hover/container-card:animate-pulse" : "group-hover/card:animate-pulse"} intersect:animate-pulse lg:intersect:animate-none intersect-full`}
-      >
-        {readMoreText ??
-          (isMarkdown
-            ? `Read in ${dayjs.duration({ minutes: Math.ceil(minutesToRead!) }).format("m")} min`
-            : "Read more")}
-        <br />▼
-      </div>
-    </Button>
-  )
-}
+</div>

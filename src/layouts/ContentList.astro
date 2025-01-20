@@ -98,10 +98,11 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
       return (
         <Card
           tag="li"
-          class={`snap-center w-[80dvw] lg:w-full aspect-[16/10] min-h-[min(17rem,80dvh)] max-h-[min(18rem,80dvh)] ${highlightClass ?? ""}`}
+          class={`content-list-card snap-center w-[80dvw] lg:w-full aspect-[16/10] min-h-[min(17rem,80dvh)] max-h-[min(18rem,80dvh)] animate-pulse ${highlightClass ?? ""}`}
           data-slug={getPostId(entry)}
         >
           <PostPreview
+            class="content-list-item invisible"
             importance={importance ?? "content-list-item"}
             entry={entry}
             {...(entry.collection === "projects"
@@ -242,19 +243,26 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
 
         const itemsToLoadEager = Number(list.dataset.eagerItems);
 
-        if (!itemsToLoadEager) return;
+        if (itemsToLoadEager) {
+          const media = list.querySelectorAll<
+            HTMLImageElement | HTMLIFrameElement
+          >("img, iframe");
 
-        const media = list.querySelectorAll<
-          HTMLImageElement | HTMLIFrameElement
-        >("img, iframe");
-
-        for (
-          let index = 0;
-          index < Math.min(media.length, itemsToLoadEager);
-          index++
-        ) {
-          media[index]!.loading = "eager";
+          for (
+            let index = 0;
+            index < Math.min(media.length, itemsToLoadEager);
+            index++
+          ) {
+            media[index]!.loading = "eager";
+          }
         }
+
+        list.querySelectorAll(".content-list-card").forEach((card) => {
+          card.classList.remove("animate-pulse");
+          card
+            .querySelector(".content-list-item")
+            ?.classList.remove("invisible");
+        });
       });
   });
 </script>
