@@ -1,5 +1,4 @@
 ---
-draft: true
 category: Prototype
 developmentTime: P2W
 tech:
@@ -25,7 +24,6 @@ This prototype is an online deathmatch third-person shooter, based on bullets th
 
 {/* First point: character, second point: world, third point: development challenges. Split in max 4 points if too long */}
 
-* The concept is to make an e-sports grade third person shooter, with fast paced 4-player free-for-all matches that take place on planets. When bullets hit the ground, they create structures that the player can then walk on, by switching his gravity. Before the game, players can select 3 skills. During the game, every 2 minutes one skill will be randomly selected and applied to the player.
-* Given the depth of the mechanics, I still created a full-fledged GDD for myself. Also, I made some gameplay flow and game theory graphs, to avoid stalemates and exploits. Since I'm also committed to the artistic side, I made some concept art to gain a better understanding of the visual identity and elements I want the game to have.
-* Since Unreal Engine does not support switching gravity, I had to create some custom code to allow for smooth gravity transitions. This code eventually evolved in a deeper mechanic that works by selecting the surface you want to stand on, and the game figuring out the trajectory and necessary gravity to achieve the desired outcome position.
-* I used this game as an opportunity to refactor my codebase into auto-consistent drag and drop components, to drastically improve development speed on future prototypes and games.
+* Before each game, players choose a bullet type and special skill type, while jumping always gravitates the character towards their predicted destination. Bullets spawn plants on impact that the player can use for defense or terrain. An enemy is defeated if hit 3 times, and players possess auto-reloading magazines. At the same time, special skills are tactical tools that keep the game dynamic, for example a teleport.
+* The 4v4 free-for-all matches take place on arid asteroids. During the game, bullets will change the landscape considerably, transforming a mostly flat surface into an intricate vertical jungle, increasing the skill required to win. I also experimented with diegetic UI, that can have visibility problems solved by a separate render pass.
+* Since Unreal Engine and its marketplace packages did not support gravity switching, I had to code dynamic gravity from the ground up. This eventually evolved into inferring the player's desired destination based on their inputs, and dynamically adjusting the trajectory and gravity to execute a smooth and intuitive jump. Also, I organized my codebase and assets into reusable drag and drop components that 10x my prototyping speed to this day.
