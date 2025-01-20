@@ -8,7 +8,7 @@ import {
 import PostPreview from "@layouts/Post/PostPreview.astro";
 import type { HTMLAttributes } from "astro/types";
 import { render, getCollection, type CollectionEntry } from "astro:content";
-import { groupBy, makeHighlight, partition } from "src/utils";
+import { groupBy, makeHighlight, partition } from "@integrations/utils";
 
 interface Props extends HTMLAttributes<"ol"> {
   collection: PostCollectionKey;
@@ -115,7 +115,11 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
 </ol>
 <script>
   import type { CollectionKey } from "astro:content";
-  import { getTextClass, makeHighlight, removeFromClasses } from "src/utils";
+  import {
+    getTextClass,
+    makeHighlight,
+    removeFromClasses,
+  } from "@integrations/utils";
 
   // TODO PHASE 2 USE POINTER EVENTS, AND MAKE THEM WORK ON IOS SAFARI
   const carouselEvents: {

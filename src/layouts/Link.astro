@@ -1,7 +1,7 @@
 ---
 import type { AstroGlobal } from "astro";
 import type { HTMLAttributes } from "astro/types";
-import { getLinkName, getMaximumWordsInLimit } from "src/utils";
+import { getLinkName, getMaximumWordsInLimit } from "@integrations/utils";
 
 interface Props extends HTMLAttributes<"a"> {
   navigate?: boolean | undefined;

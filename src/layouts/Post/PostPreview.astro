@@ -18,7 +18,7 @@ import { getCoverAlt } from "@components/Post/CoverMedia.astro";
 import getReadingTime from "reading-time";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
-import { getTextClass } from "src/utils";
+import { getTextClass } from "@integrations/utils";
 
 interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollectionKey> | undefined;

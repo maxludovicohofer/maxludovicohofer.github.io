@@ -8,7 +8,7 @@ import PostPreview from "@layouts/Post/PostPreview.astro";
 import type { ComponentProps } from "astro/types";
 import Fullscreenable from "@layouts/Fullscreenable.astro";
 import { Image } from "astro:assets";
-import { getLinkName } from "src/utils";
+import { getLinkName } from "@integrations/utils";
 
 interface Props {
   importance?: ComponentProps<typeof PostPreview>["importance"];

@@ -27,7 +27,7 @@ const { class: className = "", noAnimation, ...buttonProps } = Astro.props;
     isLiteYouTube,
     removeFromClasses,
     switchClasses,
-  } from "src/utils";
+  } from "@integrations/utils";
 
   async function setFullscreenMedia(this: HTMLButtonElement) {
     const modal = document.querySelector<HTMLDivElement>("div.modal")!;

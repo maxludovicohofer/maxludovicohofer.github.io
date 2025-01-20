@@ -2,7 +2,7 @@
 import { ClientRouter } from "astro:transitions";
 import BackButton from "@components/BackButton.astro";
 import ModalSlot from "./ModalSlot.astro";
-import { capitalize } from "src/utils";
+import { capitalize } from "@integrations/utils";
 
 interface Props {
   title: string;
@@ -69,11 +69,14 @@ const completeTitle = `Max Hofer \\ ${capitalize(title)}`;
         scrollTo({ ...JSON.parse(state), behavior: "instant" });
       });
     </script>
-    <script
-      is:inline
-      defer
-      type="text/partytown"
-      src="https://unpkg.com/tailwindcss-intersect@2.x.x/dist/observer.min.js"
-      data-astro-rerun></script>
+
+    <!-- External scripts -->
+
+    <script>
+      import "node_modules/lite-youtube-embed/src/lite-yt-embed.js";
+    </script>
+    <script>
+      import "node_modules/tailwindcss-intersect/dist/observer.min.js";
+    </script>
   </body>
 </html>
