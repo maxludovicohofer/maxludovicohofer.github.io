@@ -38,6 +38,7 @@ const title = getTitle(entry)!;
     ><slot name="footer" slot="footer" />
     <PostList
       slot="after"
+      class="scroll-reset"
       collection={entry.collection}
       partOfPost
       exclude={[entry.id]}

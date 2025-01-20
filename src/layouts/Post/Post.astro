@@ -149,6 +149,29 @@ export const getDescription = <C extends CollectionKey>(
   return description;
 };
 
+export function isDownloadableEntry<C extends CollectionKey>(
+  entry?: CollectionEntry<C>
+): entry is CollectionEntry<C> & { data: { downloadLinks: string[] } } {
+  return !!(entry && Object.hasOwn(entry.data, "downloadLinks"));
+}
+
+export const getDownloadLinks = <C extends CollectionKey>(
+  entry?: CollectionEntry<C>
+) => {
+  return isDownloadableEntry(entry)
+    ? (entry.data
+        .downloadLinks as CollectionEntry<"projects">["data"]["downloadLinks"])
+    : undefined;
+};
+
+const downloadLinks = getDownloadLinks(entry);
+
+export function areDownloadsPresent(
+  links: ReturnType<typeof getDownloadLinks>
+): links is NonNullable<typeof links> {
+  return !!links && links.length !== 0;
+}
+
 export const getCategory = <C extends CollectionKey>(
   entry?: CollectionEntry<C>
 ) => {
@@ -158,34 +181,15 @@ export const getCategory = <C extends CollectionKey>(
     return !!(entry && Object.hasOwn(entry.data, "category"));
   }
 
-  const categoryEnum = isCategoryEntry(entry)
-    ? (entry.data.category as CollectionEntry<"projects">["data"]["category"])
+  return isCategoryEntry(entry)
+    ? isDownloadableEntry(entry) &&
+      areDownloadsPresent(entry.data.downloadLinks)
+      ? `Published ${entry.data.category.toLowerCase()}`
+      : entry.data.category
     : undefined;
-
-  return categoryEnum === "Game" ? "Published game" : categoryEnum;
 };
 
 const category = getCategory(entry);
-
-export const getDownloadLinks = <C extends CollectionKey>(
-  entry?: CollectionEntry<C>
-) => {
-  function isDownloadableEntry<C extends CollectionKey>(
-    entry?: CollectionEntry<C>
-  ): entry is CollectionEntry<C> & { data: { downloadLinks: string[] } } {
-    return !!(entry && Object.hasOwn(entry.data, "downloadLinks"));
-  }
-
-  const downloadLinks = isDownloadableEntry(entry)
-    ? (entry.data
-        .downloadLinks as CollectionEntry<"projects">["data"]["downloadLinks"])
-    : undefined;
-
-  return downloadLinks;
-};
-
-const downloadLinks = getDownloadLinks(entry);
-const downloadsPresent = downloadLinks && downloadLinks.length !== 0;
 
 const fullWidthClass = `w-full ${inline ? "" : "pb-24 lg:pb-10"}`;
 
@@ -245,7 +249,7 @@ const action = category === "Tool" ? "Download" : "Play";
           >{Content ? <PostContent Content={Content} /> : <slot />}</Text
         >
         {
-          downloadsPresent && (
+          areDownloadsPresent(downloadLinks) && (
             <div class="flex flex-col items-center mt-8 mb-7">
               <Button
                 href={downloadLinks[0]}

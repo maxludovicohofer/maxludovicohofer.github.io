@@ -45,6 +45,8 @@ const completeTitle = `Max Hofer \\ ${capitalize(title)}`;
     }
     <ModalSlot />
     <script>
+      import { getPagePosition } from "@integrations/utils";
+
       // This code fixes Astro scroll restoration
       document.addEventListener("astro:before-swap", () => {
         const { scrollX, scrollY } = history.state as {
@@ -66,7 +68,19 @@ const completeTitle = `Max Hofer \\ ${capitalize(title)}`;
 
         if (!state) return;
 
-        scrollTo({ ...JSON.parse(state), behavior: "instant" });
+        const scroll: Required<ScrollToOptions> = JSON.parse(state);
+
+        //? A scroll reset elements resets scroll if scroll has reached it (is visible)
+        const scrollReset =
+          document.querySelector<HTMLElement>(".scroll-reset");
+
+        scrollTo({
+          ...(scrollReset &&
+          scroll.top > getPagePosition(scrollReset).top - window.innerHeight
+            ? { top: 0, left: 0 }
+            : scroll),
+          behavior: "instant",
+        });
       });
     </script>
 

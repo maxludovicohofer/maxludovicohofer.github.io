@@ -4,20 +4,27 @@ import Post, { type PostCollectionKey } from "@layouts/Post/Post.astro";
 import type { ComponentProps } from "astro/types";
 import { capitalize } from "@integrations/utils";
 
-interface Props {
+interface Props extends ComponentProps<typeof Post> {
   collection: PostCollectionKey;
   exclude?: ComponentProps<typeof ContentList>["exclude"];
   partOfPost?: boolean;
 }
 
-const { collection, exclude, partOfPost } = Astro.props;
+const {
+  collection,
+  exclude,
+  partOfPost,
+  class: className = "",
+  ...props
+} = Astro.props;
 ---
 
 <Post
   container
   fullWidth={!partOfPost}
   inline={partOfPost}
-  class={partOfPost ? "mt-3" : ""}
+  class={`${className} ${partOfPost ? "mt-3" : ""}`}
+  {...props}
   ><Fragment slot="title"
     >{partOfPost ? `Other ${collection}` : capitalize(collection)}</Fragment
   ><ContentList

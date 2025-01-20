@@ -47,11 +47,11 @@ const { class: className = "", buttonName, href, ...buttonProps } = Astro.props;
     history.back();
   };
 
-  document.addEventListener("astro:page-load", () =>
+  document.addEventListener("astro:page-load", () => {
     document
       .querySelectorAll<HTMLButtonElement>("button.back-button")
-      .forEach((button) => button.addEventListener("click", back))
-  );
+      .forEach((button) => button.addEventListener("click", back));
+  });
 
   document.addEventListener("astro:before-preparation", () =>
     document
