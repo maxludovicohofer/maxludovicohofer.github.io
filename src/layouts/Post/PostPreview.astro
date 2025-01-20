@@ -174,26 +174,33 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
   import { switchClasses } from "@integrations/utils";
 
   document.addEventListener("astro:page-load", () => {
-    const observer = new IntersectionObserver(
+    const coverObserver = new IntersectionObserver(
       (entries) =>
-        entries.forEach(({ intersectionRatio, target }) => {
-          const isCover = target.classList.contains("post-preview-cover");
-          const intersectionThreshold = isCover ? 0.5 : 1;
-
-          switchClasses(
-            target,
-            intersectionRatio < intersectionThreshold,
-            [],
-            isCover ? ["opacity-15"] : ["animate-pulse", "lg:animate-none"]
-          );
-        }),
+        entries.forEach(({ isIntersecting, target }) =>
+          switchClasses(target, isIntersecting, ["opacity-15"], [])
+        ),
       { threshold: 0.5 }
     );
 
     document
-      .querySelectorAll(
-        "div.post-preview-cover,div.post-preview-read-more-text"
-      )
-      .forEach((element) => observer.observe(element));
+      .querySelectorAll("div.post-preview-cover")
+      .forEach((element) => coverObserver.observe(element));
+
+    const readMoreObserver = new IntersectionObserver(
+      (entries) =>
+        entries.forEach(({ isIntersecting, target }) =>
+          switchClasses(
+            target,
+            isIntersecting,
+            ["animate-pulse", "lg:animate-none"],
+            []
+          )
+        ),
+      { threshold: 1 }
+    );
+
+    document
+      .querySelectorAll("div.post-preview-read-more-text")
+      .forEach((element) => readMoreObserver.observe(element));
   });
 </script>
