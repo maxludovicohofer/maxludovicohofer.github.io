@@ -88,8 +88,8 @@ const publishingDate =
 const subtitle = [category, publishingDate].filter((part) => !!part);
 ---
 
-<div class={className}>
-  <div class="flex flex-col h-full justify-between" {...props}>
+<div class=`${className} size-full`>
+  <div class="flex flex-col size-full justify-between" {...props}>
     <div>
       {
         (Astro.slots.has("header") || entry?.data.draft) && (

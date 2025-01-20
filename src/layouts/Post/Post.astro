@@ -4,6 +4,7 @@ import type { CollectionKey, CollectionEntry } from "astro:content";
 import { render } from "astro:content";
 import type { ImageMetadata } from "astro";
 import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
 import utc from "dayjs/plugin/utc";
 import Card from "@layouts/Card.astro";
 import type { ComponentProps, HTMLAttributes } from "astro/types";
@@ -112,7 +113,7 @@ export const getPostCover = (post: typeof entry) => {
 
 const cover = getPostCover(entry);
 
-export const getDescription = <C extends CollectionKey>(
+export const getDescription = <C extends PostCollectionKey>(
   entry?: CollectionEntry<C>,
   sentences?: number,
   shortenStart?: boolean,
@@ -149,44 +150,65 @@ export const getDescription = <C extends CollectionKey>(
   return description;
 };
 
-export function isDownloadableEntry<C extends CollectionKey>(
-  entry?: CollectionEntry<C>
-): entry is CollectionEntry<C> & { data: { downloadLinks: string[] } } {
-  return !!(entry && Object.hasOwn(entry.data, "downloadLinks"));
-}
-
-export const getDownloadLinks = <C extends CollectionKey>(
+export const getDownloadLinks = <C extends PostCollectionKey>(
   entry?: CollectionEntry<C>
 ) => {
-  return isDownloadableEntry(entry)
-    ? (entry.data
-        .downloadLinks as CollectionEntry<"projects">["data"]["downloadLinks"])
-    : undefined;
+  function isDownloadableEntry<C extends PostCollectionKey>(
+    entry?: CollectionEntry<C>
+  ): entry is CollectionEntry<C> & { data: { downloadLinks: string[] } } {
+    return !!(entry && Object.hasOwn(entry.data, "downloadLinks"));
+  }
+
+  if (!isDownloadableEntry(entry) || !entry.data.downloadLinks.length) return;
+
+  return entry.data.downloadLinks;
 };
 
 const downloadLinks = getDownloadLinks(entry);
 
-export function areDownloadsPresent(
-  links: ReturnType<typeof getDownloadLinks>
-): links is NonNullable<typeof links> {
-  return !!links && links.length !== 0;
-}
-
-export const getCategory = <C extends CollectionKey>(
+export const getDevelopmentTime = <C extends PostCollectionKey>(
   entry?: CollectionEntry<C>
 ) => {
-  function isCategoryEntry<C extends CollectionKey>(
+  function isDevelopmentTimeEntry<C extends PostCollectionKey>(
     entry?: CollectionEntry<C>
-  ): entry is CollectionEntry<C> & { data: { category: string } } {
+  ): entry is CollectionEntry<C> & { data: { developmentTime: string } } {
+    return !!(entry && Object.hasOwn(entry.data, "developmentTime"));
+  }
+
+  if (!isDevelopmentTimeEntry(entry)) return;
+
+  dayjs.extend(duration);
+
+  return dayjs.duration(entry.data.developmentTime);
+};
+
+export const getCategory = <C extends PostCollectionKey>(
+  entry?: CollectionEntry<C>
+) => {
+  function isCategoryEntry<C extends PostCollectionKey>(
+    entry?: CollectionEntry<C>
+  ): entry is CollectionEntry<C> & {
+    data: { category: CollectionEntry<"projects">["data"]["category"] };
+  } {
     return !!(entry && Object.hasOwn(entry.data, "category"));
   }
 
-  return isCategoryEntry(entry)
-    ? isDownloadableEntry(entry) &&
-      areDownloadsPresent(entry.data.downloadLinks)
-      ? `Published ${entry.data.category.toLowerCase()}`
-      : entry.data.category
-    : undefined;
+  let category = isCategoryEntry(entry) ? entry.data.category : undefined;
+
+  if (!category) {
+    const developmentTime = getDevelopmentTime(entry);
+
+    if (!developmentTime) return;
+
+    //? Games are assumed to be at least 1 month of development
+    category = (
+      developmentTime.months() ? "Game" : "Prototype"
+    ) satisfies CollectionEntry<"projects">["data"]["category"];
+  }
+
+  return getDownloadLinks(entry)
+    ? `Published ${category.toLowerCase()}`
+    : category;
 };
 
 const category = getCategory(entry);
@@ -249,7 +271,7 @@ const action = category === "Tool" ? "Download" : "Play";
           >{Content ? <PostContent Content={Content} /> : <slot />}</Text
         >
         {
-          areDownloadsPresent(downloadLinks) && (
+          downloadLinks && (
             <div class="flex flex-col items-center mt-8 mb-7">
               <Button
                 href={downloadLinks[0]}

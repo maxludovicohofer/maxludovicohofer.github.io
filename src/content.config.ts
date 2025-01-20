@@ -14,7 +14,7 @@ const post = z.object({
 const projects = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "src/data/projects" }),
   schema: post.extend({
-    category: z.enum(["Game", "Prototype", "Tool"]),
+    category: z.enum(["Game", "Prototype", "Tool"]).optional(),
     developmentTime: z.string().duration(),
     team: z.number().int().positive().optional(),
     roles: z.array(z.string()).optional(),

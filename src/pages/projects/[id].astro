@@ -2,19 +2,18 @@
 import { getEntries } from "astro:content";
 import PostFooter from "@layouts/Post/PostFooter.astro";
 import dayjs from "dayjs";
-import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PostPage, { makePostPaths } from "@layouts/Post/PostPage.astro";
+import { getDevelopmentTime } from "@layouts/Post/Post.astro";
 
 export const getStaticPaths = makePostPaths("projects");
 
-const { roles, tech, awards, team, developmentTime } = Astro.props.entry.data;
+const { roles, tech, awards, team } = Astro.props.entry.data;
 
 const techData = await getEntries(tech);
 
-dayjs.extend(duration);
 dayjs.extend(relativeTime);
-const developmentDuration = dayjs.duration(developmentTime).humanize();
+const developmentDuration = getDevelopmentTime(Astro.props.entry)!.humanize();
 
 // TODO PHASE 2 USE HREF ON PAGE BACK, BUT GET HREF DINAMICALLY
 ---
