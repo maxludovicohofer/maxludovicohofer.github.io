@@ -236,8 +236,10 @@ const action = category === "Tool" ? "Download" : "Play";
   )
 }
 <Card
-  container={container}
-  class={`!p-0 !shadow-none !bg-opacity-0 ${cover ? "rounded-b-none lg:rounded-none mt-[26vh] lg:mt-0" : "rounded-none"}`}
+  container
+  class={cover
+    ? "rounded-3xl rounded-b-none lg:rounded-none mt-[26vh] lg:mt-0"
+    : "rounded-none"}
 >
   <div class="flex flex-col items-center">
     <div
