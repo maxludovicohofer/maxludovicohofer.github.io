@@ -1,6 +1,7 @@
 ---
 import Card from "@layouts/Card.astro";
 import {
+  getCategory,
   getPostId,
   getPublishingDate,
   type PostCollectionKey,
@@ -55,7 +56,7 @@ export const getSortedEntries = async <C extends PostCollectionKey>(
     // Group by category priority
     (entry) => {
       if (isProjects) {
-        switch ((entry as CollectionEntry<"projects">).data.category) {
+        switch (getCategory(entry, true)) {
           case "Game":
             return "1";
         }
@@ -210,51 +211,54 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
         const readEntrySlugs =
           readEntries[list.dataset.collection as CollectionKey];
 
-        if (!readEntrySlugs) return;
+        if (readEntrySlugs) {
+          const { highlightClass, importance } = makeHighlight(
+            list.dataset.discrete !== undefined
+          );
+          const highlightClasses = highlightClass
+            .split(" ")
+            .filter((className) => !!className);
 
-        const { highlightClass, importance } = makeHighlight(
-          list.dataset.discrete !== undefined
-        );
-        const highlightClasses = highlightClass
-          .split(" ")
-          .filter((className) => !!className);
+          readEntrySlugs.forEach((readSlug) => {
+            for (const item of list.children) {
+              if ((item as HTMLElement).dataset.slug !== readSlug) continue;
 
-        readEntrySlugs.forEach((readSlug) => {
-          for (const item of list.children) {
-            if ((item as HTMLElement).dataset.slug !== readSlug) continue;
+              // Process highlight
+              if (item.className.includes(highlightClass)) {
+                item.classList.remove(...highlightClasses);
+                replaceTitleClass(item, "content-list-item");
+              }
 
-            // Process highlight
-            if (item.className.includes(highlightClass)) {
-              item.classList.remove(...highlightClasses);
-              replaceTitleClass(item, "content-list-item");
+              // Move to end
+              list.append(item);
+              return;
             }
+          });
 
-            // Move to end
-            list.append(item);
-            return;
-          }
-        });
-
-        // Force first element to be highlight
-        const firstElement = list.children[0];
-        if (firstElement && !firstElement.classList.contains("col-span-full")) {
-          firstElement.classList.add(...highlightClasses);
-          replaceTitleClass(firstElement, importance);
-        }
-
-        const itemsToLoadEager = Number(list.dataset.eagerItems);
-
-        if (itemsToLoadEager) {
-          const media = list.querySelectorAll<
-            HTMLImageElement | HTMLIFrameElement
-          >("img, iframe");
-
-          for (
-            let index = 0;
-            index < Math.min(media.length, itemsToLoadEager);
-            index++
+          // Force first element to be highlight
+          const firstElement = list.children[0];
+          if (
+            firstElement &&
+            !firstElement.classList.contains("col-span-full")
           ) {
-            media[index]!.loading = "eager";
+            firstElement.classList.add(...highlightClasses);
+            replaceTitleClass(firstElement, importance);
+          }
+
+          const itemsToLoadEager = Number(list.dataset.eagerItems);
+
+          if (itemsToLoadEager) {
+            const media = list.querySelectorAll<
+              HTMLImageElement | HTMLIFrameElement
+            >("img, iframe");
+
+            for (
+              let index = 0;
+              index < Math.min(media.length, itemsToLoadEager);
+              index++
+            ) {
+              media[index]!.loading = "eager";
+            }
           }
         }
 

@@ -153,7 +153,8 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
     readMoreLink && (
       <Button
         cardButton
-        class={`${readMoreClass} absolute bottom-0 left-0 h-24 2xl:h-32`}
+        linkClass={`${readMoreClass} absolute bottom-0 left-0`}
+        class="h-24 2xl:h-32"
         href={readMoreLink}
         navigate
       >

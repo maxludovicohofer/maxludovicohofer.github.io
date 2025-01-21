@@ -182,13 +182,18 @@ export const getDevelopmentTime = <C extends PostCollectionKey>(
   return dayjs.duration(entry.data.developmentTime);
 };
 
-export const getCategory = <C extends PostCollectionKey>(
-  entry?: CollectionEntry<C>
-) => {
+type Category = NonNullable<CollectionEntry<"projects">["data"]["category"]>;
+
+export function getCategory<C extends PostCollectionKey, F extends boolean>(
+  entry?: CollectionEntry<C>,
+  noFormat?: F
+):
+  | (F extends true ? Category : `Published ${Lowercase<Category>}` | Category)
+  | undefined {
   function isCategoryEntry<C extends PostCollectionKey>(
     entry?: CollectionEntry<C>
   ): entry is CollectionEntry<C> & {
-    data: { category: CollectionEntry<"projects">["data"]["category"] };
+    data: { category: Category };
   } {
     return !!(entry && Object.hasOwn(entry.data, "category"));
   }
@@ -203,13 +208,15 @@ export const getCategory = <C extends PostCollectionKey>(
     //? Games are assumed to be at least 1 month of development
     category = (
       developmentTime.months() ? "Game" : "Prototype"
-    ) satisfies CollectionEntry<"projects">["data"]["category"];
+    ) satisfies Category;
   }
 
-  return getDownloadLinks(entry)
-    ? `Published ${category.toLowerCase()}`
-    : category;
-};
+  return (
+    !noFormat && getDownloadLinks(entry)
+      ? `Published ${category.toLowerCase()}`
+      : category
+  ) as any;
+}
 
 const category = getCategory(entry);
 
