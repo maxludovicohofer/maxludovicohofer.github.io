@@ -88,7 +88,7 @@ const publishingDate =
 const subtitle = [category, publishingDate].filter((part) => !!part);
 ---
 
-<div class=`${className} h-full` {...props}>
+<div class=`${className} post-preview h-full` {...props}>
   <div class="flex flex-col size-full justify-between">
     <div>
       {
@@ -183,25 +183,34 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
       { threshold: 0.5 }
     );
 
-    document
-      .querySelectorAll("div.post-preview-cover")
-      .forEach((element) => coverObserver.observe(element));
+    const postPreviewToReadMore = new Map<Element, Element>();
 
     const readMoreObserver = new IntersectionObserver(
       (entries) =>
         entries.forEach(({ isIntersecting, target }) =>
           switchClasses(
-            target,
+            postPreviewToReadMore.get(target)!,
             isIntersecting,
-            ["animate-pulse", "lg:animate-none", "scale-125", "lg:scale-100"],
+            ["animate-pulse", "lg:animate-none", "scale-110", "lg:scale-100"],
             []
           )
         ),
       { threshold: 1 }
     );
 
-    document
-      .querySelectorAll("div.post-preview-read-more-text")
-      .forEach((element) => readMoreObserver.observe(element));
+    document.querySelectorAll("div.post-preview").forEach((element) => {
+      const cover = element.querySelector("div.post-preview-cover");
+
+      if (cover) coverObserver.observe(cover);
+
+      const readMoreText = element.querySelector(
+        "div.post-preview-read-more-text"
+      );
+
+      if (readMoreText) {
+        postPreviewToReadMore.set(element, readMoreText);
+        readMoreObserver.observe(element);
+      }
+    });
   });
 </script>
