@@ -21,20 +21,18 @@ publishingDate: 2023-12-27
 
 {/* Description of the game, as short as possible. Max 1 section */}
 
-{/* TODO */}
+Duchessa is an easily scared humanoid cat, and when she hears a loud noise, her instincts tell her to run away as fast as she can. Her eyes, one yellow and one blue, allow her access to another dimension: the cat realm. Using this power, she needs to avoid pitfalls and find a safe place in time.
 
-Inspired by Titanfall's infamous time travel mechanic, we came up with a puzzle sidescroller, where the player can change the character's “eyesight” to switch from normal world to a fantasy cat world. In each world, some level elements will be hidden, while others will be active, allowing for a smooth and fast puzzle gameplay.
-
-![EAGER Blue and green blocks are part of different worlds.](./duchessas-world-game.png)
+![EAGER Blue and green blocks are part of different realms.](./duchessas-world-game.png)
 
 ## Design
 
 {/* Genre, target and goal of the design. Split in max 2 sections if too long, divided by a media */}
 
-Mobile sidescroller, where the platforming is achieved by swapping between the "cat world" and the "human world". This prototype was commissioned by a company, requesting a mobile platformer-like game, featuring an odd-eyed cat character. Also, particular emphasis was placed on the technical aspects of the game and making the character's unique features shine.
+Duchessa's World is a mobile sidescroller, where levels require switching between two realms. It's a simple rhythm game aimed at children and adults alike, with a small and addictive game loop. The prototype was commissioned by a company which requested the target platform, genre, and protagonist, with particular emphasis on procedural content. Our goal was to design a casual game that was at the same time approachable and deep.
 
 {/* First point: character, second point: world, third point: development challenges. Split in max 4 points if too long */}
 
-* Levels are composed dynamically based on an estimated skill level, increasing or decreasing the difficulties of the puzzles. Also, for the prototype we kept graphic fidelity to a minimum to maximize compatibility with older devices.
-* Since the game's levels had to be procedurally generated, I came up with a dynamic difficulty algorithm that created a skill profile for the user. Given a constraint of 30 seconds to complete a level, this algorithm sequentially placed puzzle patterns based on their declared difficulty and the skill profile of the player.
-* Given the simple design and limited time, instead of a GDD I drew all level elements and their expected behavior on a blackboard for the team to see. This merged the brainstorming and design phases, helping with time.
+* The player can traverse platforms by moving, jumping, and switching realms. Timing, momentum, and knowledge of block patterns are key to completing a level without the timer running out. Duchessa has three lives, that get reset after each completed stage.
+* The game is organized in 30-seconds levels with dynamic difficulty, assembled at runtime from different block patterns. Each block pattern has an associated skill level that gets compared to the player's skill, evaluated based on their proficiency at the game. Block patterns are composed of blocks of different colors and movement-altering platforms, like an uplifting tornado.
+* Given the limited time and simple design, I replaced the GDD with drawing platform behaviors on a blackboard for the team to see, combining brainstorming and design. Also, we kept graphic fidelity to a minimum to maximize device compatibility.
