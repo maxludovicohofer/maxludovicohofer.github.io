@@ -153,13 +153,13 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
     readMoreLink && (
       <Button
         cardButton
-        linkClass={`${readMoreClass} absolute bottom-0 left-0`}
+        linkClass={`${readMoreClass} group/read-more absolute bottom-0 left-0`}
         class="h-24 2xl:h-32"
         href={readMoreLink}
         navigate
       >
         <div
-          class={`post-preview-read-more-text size-full flex flex-col justify-end pb-5 2xl:pb-6 ${container ? "group-hover/container-card:animate-pulse" : "group-hover/card:animate-pulse"}`}
+          class={`post-preview-read-more-text size-full flex flex-col justify-end pb-5 2xl:pb-6 group-active/read-more:scale-90 duration-150 ${container ? "group-hover/container-card:animate-pulse group-hover/read-more:scale-125" : "group-hover/card:animate-pulse group-hover/card:scale-125"}`}
         >
           {readMoreText ??
             (isMarkdown
@@ -193,7 +193,7 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
           switchClasses(
             target,
             isIntersecting,
-            ["animate-pulse", "lg:animate-none"],
+            ["animate-pulse", "lg:animate-none", "scale-125", "lg:scale-100"],
             []
           )
         ),
