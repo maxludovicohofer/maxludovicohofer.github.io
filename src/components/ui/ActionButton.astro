@@ -1,0 +1,47 @@
+---
+import type { ComponentProps } from "astro/types";
+import CardButton from "./CardButton.astro";
+import SolidButton from "./SolidButton.astro";
+import { formatUmamiEvent } from "./Link.astro";
+import { getTextClass } from "@integrations/utils";
+
+interface Props
+  extends ComponentProps<typeof CardButton>,
+    ComponentProps<typeof SolidButton> {
+  cardButton?: boolean;
+  inline?: boolean;
+  importance?: Parameters<typeof getTextClass>[0] | undefined;
+}
+
+const {
+  cardButton,
+  class: className = "",
+  inline,
+  importance,
+  "data-umami-event": umamiEvent,
+  ...props
+} = Astro.props;
+
+const buttonProps:
+  | ComponentProps<typeof CardButton>
+  | ComponentProps<typeof SolidButton> = {
+  type: "button",
+  class: `${className} font-semibold duration-150 hover:shadow-lg active:shadow ${inline ? "" : "w-full"} ${getTextClass(importance ?? "button")}`,
+  ...(umamiEvent
+    ? { "data-umami-event": formatUmamiEvent(Astro, umamiEvent) }
+    : {}),
+  ...props,
+};
+---
+
+{
+  cardButton ? (
+    <CardButton {...buttonProps}>
+      <slot />
+    </CardButton>
+  ) : (
+    <SolidButton {...buttonProps}>
+      <slot />
+    </SolidButton>
+  )
+}

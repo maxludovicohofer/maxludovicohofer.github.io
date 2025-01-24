@@ -1,11 +1,14 @@
 ---
 import type { ComponentProps } from "astro/types";
 import Link, { getUmamiLinkEvent } from "./Link.astro";
-import LinkButton from "./LinkButton.astro";
+import ActionButton from "./ActionButton.astro";
 
 interface Props
-  extends ComponentProps<typeof LinkButton>,
-    Omit<ComponentProps<typeof Link>, keyof ComponentProps<typeof LinkButton>> {
+  extends ComponentProps<typeof ActionButton>,
+    Omit<
+      ComponentProps<typeof Link>,
+      keyof ComponentProps<typeof ActionButton>
+    > {
   linkClass?: string;
 }
 
@@ -30,13 +33,13 @@ const umamiEvent = await getUmamiLinkEvent(Astro, href);
       noEvent
       {...buttonProps}
     >
-      <LinkButton class={className} {...umamiEvent} {...buttonProps}>
+      <ActionButton class={className} {...umamiEvent} {...buttonProps}>
         <slot />
-      </LinkButton>
+      </ActionButton>
     </Link>
   ) : (
-    <LinkButton class={className} {...buttonProps}>
+    <ActionButton class={className} {...buttonProps}>
       <slot />
-    </LinkButton>
+    </ActionButton>
   )
 }

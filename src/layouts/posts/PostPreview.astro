@@ -153,20 +153,23 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
     readMoreLink && (
       <Button
         cardButton
-        linkClass={`${readMoreClass} group/read-more absolute bottom-0 left-0`}
-        class="h-24 2xl:h-32"
+        linkClass={`${readMoreClass} absolute bottom-0 left-0`}
         href={readMoreLink}
         navigate
       >
-        <div
-          class={`post-preview-read-more-text size-full flex flex-col justify-end pb-5 2xl:pb-6 group-hover/read-more:scale-110 group-active/read-more:scale-90 group-hover/read-more:animate-none duration-150 ${container ? "group-hover/container-card:animate-pulse" : "group-hover/card:animate-pulse"}`}
+        <span
+          class={`post-preview-read-more ${
+            container
+              ? "group-hover/container-card:animate-pulse"
+              : "group-hover/card:animate-pulse"
+          }`}
         >
           {readMoreText ??
             (isMarkdown
               ? `Read in ${dayjs.duration({ minutes: Math.ceil(minutesToRead!) }).format("m")} min`
               : "Read more")}
           <br />▼
-        </div>
+        </span>
       </Button>
     )
   }
@@ -185,10 +188,10 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
 
     const postPreviewToReadMore = new Map<Element, Element>();
 
+    // TODO PHASE 2 maybe looking for some seconds could also scale text on mobile
     const readMoreObserver = new IntersectionObserver(
       (entries) =>
         entries.forEach(({ isIntersecting, target }) =>
-          // TODO PHASE 2 maybe looking for some seconds could also scale text on mobile
           switchClasses(
             postPreviewToReadMore.get(target)!,
             isIntersecting,
@@ -204,9 +207,7 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
 
       if (cover) coverObserver.observe(cover);
 
-      const readMoreText = element.querySelector(
-        "div.post-preview-read-more-text"
-      );
+      const readMoreText = element.querySelector("span.post-preview-read-more");
 
       if (readMoreText) {
         postPreviewToReadMore.set(element, readMoreText);
