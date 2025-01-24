@@ -1,5 +1,5 @@
 ---
-import Text from "@layouts/Text.astro";
+import Text from "@ui/Text.astro";
 import type { CollectionKey, CollectionEntry } from "astro:content";
 import { render } from "astro:content";
 import type { ImageMetadata } from "astro";
@@ -8,10 +8,10 @@ import duration from "dayjs/plugin/duration";
 import utc from "dayjs/plugin/utc";
 import Card from "@layouts/Card.astro";
 import type { ComponentProps, HTMLAttributes } from "astro/types";
-import CoverMedia from "@components/Post/CoverMedia.astro";
-import Link from "@layouts/Link.astro";
-import Button from "@layouts/Button.astro";
-import type Video from "@layouts/Video.astro";
+import CoverMedia from "@post/CoverMedia.astro";
+import Link from "@ui/Link.astro";
+import Button from "@ui/Button.astro";
+import type Video from "@ui/Video.astro";
 import {
   getLinkName,
   capitalize,

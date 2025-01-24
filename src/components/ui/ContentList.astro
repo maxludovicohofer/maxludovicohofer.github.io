@@ -5,8 +5,8 @@ import {
   getPostId,
   getPublishingDate,
   type PostCollectionKey,
-} from "@layouts/Post/Post.astro";
-import PostPreview from "@layouts/Post/PostPreview.astro";
+} from "@post/Post.astro";
+import PostPreview from "@post/PostPreview.astro";
 import type { HTMLAttributes } from "astro/types";
 import { render, getCollection, type CollectionEntry } from "astro:content";
 import { groupBy, makeHighlight, partition } from "@integrations/utils";

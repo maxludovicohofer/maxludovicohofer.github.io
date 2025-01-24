@@ -1,7 +1,7 @@
 ---
-import Text from "@layouts/Text.astro";
+import Text from "@ui/Text.astro";
 import { render, type CollectionEntry } from "astro:content";
-import Button from "@layouts/Button.astro";
+import Button from "@ui/Button.astro";
 import {
   getCategory,
   getPublishingDate,
@@ -13,8 +13,8 @@ import {
 } from "./Post.astro";
 import type { ComponentProps, HTMLAttributes } from "astro/types";
 import PostContent from "./PostContent.astro";
-import Media from "@layouts/Media.astro";
-import { getCoverAlt } from "@components/Post/CoverMedia.astro";
+import Media from "@ui/Media.astro";
+import { getCoverAlt } from "@post/CoverMedia.astro";
 import getReadingTime from "reading-time";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
