@@ -21,7 +21,7 @@ publishingDate: 2023-10-06
 
 {/* Description of the game, as short as possible. Max 1 section */}
 
-The concept was to be an ambulance driver whose goal is to pick up patients and deliver them to the hospital. Unfortunately, the ambulance would be so difficult to drive that in the process you would necessarily hit some people on the road to reach the goal in time. As a bonus, the jump mechanic could be exploited to make the vehicle fly.
+The task is easy: take patients to the hospital before their situation becomes critical. Simple enough, if it weren't for your particularly broken vehicle. Try (not) to hit pedestrians while you master the most accurate ambulance simulator ever created.
 
 {/* TODO ![EAGER Ambulance.](./ambulance-game.png) */}
 
@@ -29,8 +29,10 @@ The concept was to be an ambulance driver whose goal is to pick up patients and 
 
 {/* Genre, target and goal of the design. Split in max 2 sections if too long, divided by a media */}
 
-This prototype is a driving game where an out of control ambulance saves lives while inadvertently running over pedestrians. This game was made for a school game jam, with a theme of “unfortunately, you're the bad guy”. We figured a silly game would make up for the lack of polish and go well with our target audience.
+This prototype is a silly driving game where an out of control ambulance saves lives while inadvertently running over pedestrians. It's made for fans of ridiculous games, where wack physics allow for funny slapstick gameplay. Ambulance was made for a game jam with the theme "unfortunately, you're the bad guy". We wanted to create a simple experience with potential for hilarious moments.
 
 {/* First point: character, second point: world, third point: development challenges. Split in max 4 points if too long */}
 
-* To give the game some repeatable content, I created a procedural map generation algorithm, organizing the map into tiles. Also, the target and delivery point were spawned randomly on the map.
+* The ambulance has unstable handling and collisions, feeling intuitive but physically exaggerated. Also, we left in hidden exploitable bugs, like flying, for comedic purposes.
+* The map, pedestrians, and patient positions are procedurally generated, enabling some replayability value.
+* The biggest challenge of this prototype was giving the player just the right amount of control over the vehicle. I underestimated the effort required by these delicate controls and had to discard many planned features to focus on the core gameplay.
