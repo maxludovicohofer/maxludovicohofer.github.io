@@ -180,20 +180,20 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
       { threshold: 0.5 }
     );
 
-    const postPreviewToReadMore = new Map<Element, Element>();
+    const containerToReadMore = new Map<Element, Element>();
 
     // TODO PHASE 2 maybe looking for some seconds could also scale text on mobile
     const readMoreObserver = new IntersectionObserver(
       (entries) =>
         entries.forEach(({ isIntersecting, target }) =>
           switchClasses(
-            postPreviewToReadMore.get(target)!,
+            containerToReadMore.get(target)!,
             isIntersecting,
             ["animate-pulse", "lg:animate-none"],
             []
           )
         ),
-      { threshold: 1 }
+      { threshold: 0.9 }
     );
 
     document.querySelectorAll("div.post-preview").forEach((element) => {
@@ -206,8 +206,14 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
       )?.firstElementChild;
 
       if (readMoreText) {
-        postPreviewToReadMore.set(element, readMoreText);
-        readMoreObserver.observe(element);
+        const container = element.parentElement?.classList.contains(
+          "content-list-card"
+        )
+          ? element.parentElement
+          : element;
+
+        containerToReadMore.set(container, readMoreText);
+        readMoreObserver.observe(container);
       }
     });
   });
