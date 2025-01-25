@@ -111,10 +111,10 @@ const { class: className = "", noAnimation, ...buttonProps } = Astro.props;
 
       noAnimation = true;
     } else {
+      const format = new URL(fullscreenMedia.src).searchParams.get("f");
+
       fullscreenMedia.classList.add(
-        fullscreenMedia.classList.contains("object-cover")
-          ? "size-auto"
-          : "size-screen"
+        format === "svg" ? "size-screen" : "size-auto"
       );
     }
 
