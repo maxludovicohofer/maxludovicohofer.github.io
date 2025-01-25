@@ -1,5 +1,4 @@
 ---
-draft: true
 category: Tool
 developmentTime: P2W
 tech:
@@ -51,11 +50,12 @@ public class AI
 }
 ```
 
-Beliefs can also process signals from sensors or existing beliefs, for example to extract data.
+Beliefs can also interpret signals from sensors or existing beliefs. Signals contain data circulating in the brain.
 
 ```csharp
 public class AI
 {
+    // Senses a transform, extracts a vector
     public Belief<Transform, Vector3> PlayerPosition { get; } =
         new(signal => signal.sensed.position);
 
@@ -66,14 +66,14 @@ public class AI
 }
 ```
 
-But most importantly, a brain has needs that it wants to fulfill. Note that needs are still beliefs.
+But most importantly, a brain has needs that it wants to fulfill. Need beliefs are special beliefs that estimate the urgency of a need from 0 to 1, given the current signal. Also, the `Need` static class contains helper functions for frequent estimates.
 
 ```csharp
 public AI(Character body)
 {
     // The AI needs to kiss the player
-    // More and more as the player gets near
     var kissPlayer = brain.Need(
+        // More and more as the player gets near
         new(
             signal =>
                 Need.Near(
@@ -87,15 +87,59 @@ public AI(Character body)
 }
 ```
 
-{/* TODO EXPLAIN WHAT MOTIVES ARE AND HOW NEEDS ARE EVALUATED */}
+The motive of a need can be survival, love, or achievement, in order of importance following Maslow's pyramid. It acts as a weight, used to compare needs. Finally, these needs are used to evaluate output beliefs, read by the body to execute actions.
 
-{/* TODO THEN ADD OUTPUT BELIEFS */}
+```csharp
+public class AI
+{
+    public Belief<Vector3> TargetPosition { get; }
+
+    public AI(Character body)
+    {
+        // If needs to kiss, target is player
+        // Else stand still
+        TargetPosition = new(
+            signal =>
+                signal.Get(kissPlayer) >
+                    Need.ABSENT
+                    ? signal.Get(PlayerPosition)
+                    : signal.Get(Position)
+        );
+    }
+}
+```
 
 ### Body
 
-{/* TODO EXPLAIN BODY AND BODY ACTION */}
+Beliefs that always represent reality can be moved to the body.
+
+```csharp
+public class Character : MonoBehaviour
+{
+    // Moved position to body
+    public Belief<Vector3> Position { get; } = new();
+
+    AI brain;
+
+    // Add brain reference
+    void Awake() => brain = new AI(this);
+}
+```
+
+At last, a body acts upon the output beliefs of the brain.
+
+```csharp
+void FixedUpdate()
+{
+    var targetDirection = (brain.TargetPosition.Value - Position.Value).normalized;
+
+    // Move toward target
+    controller.Move(movementSpeed * targetDirection);
+}
+```
 
 {/* First point: ux, second point: code, third point: development challenges. Split in max 4 points if too long */}
 
-* The system comes with a simple and fully documented API, and an in-game debugger, limiting its usage to Unity programmers. A simple code demonstration of basic functionality is also provided. The debugger displays a text overlay with the quasi-realtime beliefs of every brain, and brain IDs on top of their bodies.
-*
+* The system comes with a simple and fully documented API and in-game debugger, limiting its usage to Unity programmers. The debugger displays a text overlay with the quasi-realtime beliefs of every brain, and brain IDs on top of their bodies. A simple code demonstration of basic functionality is also provided.
+* The codebase is compact, amounting to a total of around 1500 lines including documentation. The API was designed for a smooth developer experience and ease of editing.
+* The biggest development challenge was C#'s type system, forcing me to introduce some slow reflection. To save on performance, I plan to migrate this system to a C++ library in the near future.
