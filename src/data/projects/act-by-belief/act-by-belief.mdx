@@ -74,13 +74,7 @@ public AI(Character body)
     // The AI needs to kiss the player
     var kissPlayer = brain.Need(
         // More and more as the player gets near
-        new(
-            signal =>
-                Need.Near(
-                    signal.Get(Position),
-                    signal.Get(PlayerPosition)
-                )
-        ),
+        new(signal => Need.Near(signal.Get(Position), signal.Get(PlayerPosition))),
         // The AI needs to kiss out of love
         Motive.Love
     );
