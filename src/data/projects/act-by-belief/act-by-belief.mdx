@@ -23,84 +23,54 @@ Act by belief is an extension of decision trees designed for natural behavior. I
 
 ### Brain
 
-The brain is the belief processor, and holder of the agent's personality.
+The brain is the belief processor and the agent's personality.
 
 ```csharp
-public class AI
-{
-    public AI(Character body)
-    {
-        var brain = new Brain(body);
-    }
-}
+var brain = new Brain(body);
 ```
 
 A brain can believe in signals captured by its sensors, or have beliefs of its own.
 
 ```csharp
-public class AI
-{
-    public Belief<Vector3> Position { get; } = new();
+Belief<Vector3> Position = new();
 
-    void FixedUpdate()
-    {
-        // Update belief
-        Position.Sense(transform.position);
-    }
-}
+// Update belief
+Position.Sense(transform.position);
 ```
 
 Beliefs can also interpret signals from sensors or existing beliefs. Signals contain data circulating in the brain and assure only beliefs that need to be updated are processed.
 
 ```csharp
-public class AI
-{
-    // Senses a transform, extracts a vector
-    public Belief<Transform, Vector3> PlayerPosition { get; } =
-        new(signal => signal.sensed.position);
+// Senses a transform, holds a vector
+Belief<Transform, Vector3> PlayerPosition = new(signal => signal.sensed.position);
 
-    void FixedUpdate()
-    {
-        PlayerPosition.Sense(player.transform);
-    }
-}
+PlayerPosition.Sense(player.transform);
 ```
 
 But most importantly, a brain has needs that it wants to fulfill. Need beliefs are special beliefs that estimate the urgency of a need from 0 to 1, given the current signal. Also, the `Need` static class contains helper functions for frequent estimates.
 
 ```csharp
-public AI(Character body)
-{
-    // The AI needs to kiss the player
-    var kissPlayer = brain.Need(
-        // More and more as the player gets near
-        new(signal => Need.Near(signal.Get(Position), signal.Get(PlayerPosition))),
-        // The AI needs to kiss out of love
-        Motive.Love
-    );
-}
+// The AI needs to kiss the player more and more as the player gets near
+var kissPlayer = brain.Need(
+    new(signal => Need.Near(signal.Get(Position), signal.Get(PlayerPosition))),
+    // Needs to kiss out of love
+    Motive.Love
+);
 ```
 
 The motive of a need can be survival, love, or achievement, in order of importance following Maslow's pyramid. It acts as a weight, used to compare needs. Finally, these needs are used to evaluate output beliefs, read by the body to execute actions.
 
 ```csharp
-public class AI
-{
-    public Belief<Vector3> TargetPosition { get; }
+Belief<Vector3> TargetPosition;
 
-    public AI(Character body)
-    {
-        // If needs to kiss, target is player
-        // Else stand still
-        TargetPosition = new(
-            signal =>
-                signal.Get(kissPlayer) >
-                    Need.ABSENT
-                    ? signal.Get(PlayerPosition)
-                    : signal.Get(Position)
-        );
-    }
-}
+// If needs to kiss, target is player
+// Else stand still
+TargetPosition = new(
+    signal =>
+        signal.Get(kissPlayer) > Need.ABSENT
+            ? signal.Get(PlayerPosition)
+            : signal.Get(Position)
+);
 ```
 
 ### Body
@@ -108,28 +78,23 @@ public class AI
 Beliefs that always represent reality can be moved to the body.
 
 ```csharp
-public class Character : MonoBehaviour
-{
-    // Moved position to body
-    public Belief<Vector3> Position { get; } = new();
+// Can be moved from brain to body
+Belief<Vector3> Position = new();
 
-    AI brain;
-
-    // Add brain reference
-    void Awake() => brain = new AI(this);
-}
+// Add brain reference
+var brain = new AI(this);
 ```
 
 At last, a body acts upon the output beliefs of the brain.
 
 ```csharp
-void FixedUpdate()
-{
-    var targetDirection = (brain.TargetPosition.Value - Position.Value).normalized;
+var targetPath = brain.TargetPosition.Value - Position.Value;
 
-    // Move toward target
-    controller.Move(movementSpeed * targetDirection);
-}
+// Kiss if in range, else move toward target
+if(targetPath.magnitude < 1)
+    Kiss();
+else
+    controller.Move(movementSpeed * targetPath.normalized);
 ```
 
 {/* First point: ux, second point: code, third point: development challenges. Split in max 4 points if too long */}
