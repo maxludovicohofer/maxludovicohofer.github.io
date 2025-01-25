@@ -153,23 +153,17 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
     readMoreLink && (
       <Button
         cardButton
+        container={container}
+        class="post-preview-read-more"
         linkClass={`${readMoreClass} absolute bottom-0 left-0`}
         href={readMoreLink}
         navigate
       >
-        <span
-          class={`post-preview-read-more group-hover/card-button:animate-none ${
-            container
-              ? "group-hover/container-card:animate-pulse"
-              : "group-hover/card:animate-pulse"
-          }`}
-        >
-          {readMoreText ??
-            (isMarkdown
-              ? `Read in ${dayjs.duration({ minutes: Math.ceil(minutesToRead!) }).format("m")} min`
-              : "Read more")}
-          <br />▼
-        </span>
+        {readMoreText ??
+          (isMarkdown
+            ? `Read in ${dayjs.duration({ minutes: Math.ceil(minutesToRead!) }).format("m")} min`
+            : "Read more")}
+        <br />▼
       </Button>
     )
   }
@@ -207,7 +201,9 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
 
       if (cover) coverObserver.observe(cover);
 
-      const readMoreText = element.querySelector("span.post-preview-read-more");
+      const readMoreText = element.querySelector(
+        "button.post-preview-read-more"
+      )?.firstElementChild;
 
       if (readMoreText) {
         postPreviewToReadMore.set(element, readMoreText);
