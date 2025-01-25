@@ -22,6 +22,8 @@ const { class: className = "", buttonName, href, ...buttonProps } = Astro.props;
   <p class="mt-[-0.2rem] ml-[-0.1rem] lg:ml-[-0.2rem]">◂</p>
 </Button>
 <script>
+  import { saveScrollPosition } from "@integrations/utils";
+
   // Executed once to set back fallback
   const startLocation = location.pathname;
   const startState = history.state;
@@ -30,19 +32,7 @@ const { class: className = "", buttonName, href, ...buttonProps } = Astro.props;
   history.pushState(startState, "", startLocation);
 
   const back = () => {
-    // This code fixes Astro scroll restoration
-    const { scrollX, scrollY } = history.state as {
-      scrollX: number;
-      scrollY: number;
-    };
-
-    sessionStorage.setItem(
-      location.pathname,
-      JSON.stringify({
-        left: scrollX,
-        top: scrollY,
-      } satisfies ScrollToOptions)
-    );
+    saveScrollPosition();
 
     history.back();
   };

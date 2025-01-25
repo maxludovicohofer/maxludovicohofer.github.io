@@ -1,6 +1,25 @@
 import type { LiteYTEmbed } from "lite-youtube-embed";
 import Quaternion from "quaternion";
 
+//? Astro
+export const saveScrollPosition = () => {
+  const state: {
+    index: number;
+    scrollX: number;
+    scrollY: number;
+  } | null = history.state;
+
+  if (!state) return;
+
+  sessionStorage.setItem(
+    location.pathname,
+    JSON.stringify({
+      left: state.scrollX,
+      top: state.scrollY,
+    } satisfies ScrollToOptions)
+  );
+};
+
 //? Tailwind
 export const makeHighlight = (discrete?: boolean) => {
   return {
