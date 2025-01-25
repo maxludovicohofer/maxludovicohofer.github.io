@@ -1,6 +1,6 @@
 ---
 import Card from "@layouts/Card.astro";
-import { listContainerClass } from "./post/PostListPreview.astro";
+import { listPreviewContainerClass } from "./post/PostListPreview.astro";
 ---
 
 <div
@@ -12,14 +12,14 @@ import { listContainerClass } from "./post/PostListPreview.astro";
   >
   <Card
     container
-    class={`lg:row-span-3 lg:col-span-2 2xl:row-start-1 2xl:col-start-4 2xl:col-span-1 ${listContainerClass}`}
+    class={`lg:row-span-3 lg:col-span-2 2xl:row-start-1 2xl:col-start-4 2xl:col-span-1 ${listPreviewContainerClass}`}
     ><slot name="3-large" /></Card
   >
   <Card
     class="lg:row-start-2 lg:col-start-3 2xl:row-start-3 2xl:col-start-2 2xl:col-span-2"
     ><slot name="4-small" /></Card
   >
-  <Card container class={`lg:row-span-2 ${listContainerClass}`}
+  <Card container class={`lg:row-span-2 ${listPreviewContainerClass}`}
     ><slot name="5-medium" /></Card
   >
 </div>
