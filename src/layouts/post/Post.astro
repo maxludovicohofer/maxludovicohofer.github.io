@@ -18,6 +18,7 @@ import {
   cleanMarkdown,
   toTitleCase,
   getTextClass,
+  imageExtensions,
 } from "@integrations/utils";
 import PostContent from "./PostContent.astro";
 
@@ -80,8 +81,6 @@ const publishingDate = getPublishingDate(
 
 const title = getTitle(entry);
 
-export const imageExtensions = ["png", "jpg", "jpeg", "gif", "webp"] as const;
-
 export const getPostCover = (post: typeof entry) => {
   if (!post) return;
 
@@ -93,7 +92,7 @@ export const getPostCover = (post: typeof entry) => {
 
   const imageFolder = `/src/data/${post.collection}/`;
   const images = import.meta.glob<{ default: ImageMetadata }>(
-    "/src/data/**/*.{png,jpg,jpeg,gif,webp}"
+    "/src/data/**/*.{png,jpg,jpeg,gif,webp,svg}"
   );
   const imagePath = `${imageFolder}${post.id}`;
   const image =

@@ -111,7 +111,11 @@ const { class: className = "", noAnimation, ...buttonProps } = Astro.props;
 
       noAnimation = true;
     } else {
-      fullscreenMedia.classList.add("size-auto");
+      fullscreenMedia.classList.add(
+        fullscreenMedia.classList.contains("object-cover")
+          ? "size-auto"
+          : "size-screen"
+      );
     }
 
     activateModal(

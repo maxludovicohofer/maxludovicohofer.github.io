@@ -1,8 +1,9 @@
 ---
-import type { getPostCover, imageExtensions } from "@post/Post.astro";
+import type { getPostCover } from "@post/Post.astro";
 import { Image, type ImgAttributes } from "astro:assets";
 import type { ComponentProps } from "astro/types";
 import Video from "./Video.astro";
+import type { imageExtensions } from "@integrations/utils";
 
 interface MarkdownImage {
   src: string;
@@ -35,7 +36,9 @@ function isMarkdownImage(image: typeof src): image is MarkdownImage {
   return !!(image as MarkdownImage).src;
 }
 
-const mediaClass = `${className} size-full object-cover pointer-events-none`;
+const asMarkdownImage = isMarkdownImage(src) ? src : undefined;
+
+const mediaClass = `${className} size-full ${asMarkdownImage?.format === "svg" ? "bg-zinc-300" : "object-cover"} pointer-events-none`;
 ---
 
 {

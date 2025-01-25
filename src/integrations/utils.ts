@@ -20,6 +20,15 @@ export const saveScrollPosition = () => {
   );
 };
 
+export const imageExtensions = [
+  "png",
+  "jpg",
+  "jpeg",
+  "gif",
+  "webp",
+  "svg",
+] as const;
+
 //? Tailwind
 export const makeHighlight = (discrete?: boolean) => {
   return {
