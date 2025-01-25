@@ -20,6 +20,7 @@ import {
   getTextClass,
 } from "@integrations/utils";
 import PostContent from "./PostContent.astro";
+import { listContainerClass } from "./PostListPreview.astro";
 
 interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollectionKey>;
@@ -236,10 +237,12 @@ const action = category === "Published tool" ? "Download" : "Play";
   )
 }
 <Card
-  container
+  unstyled
   class={cover
-    ? "rounded-3xl rounded-b-none lg:rounded-none mt-[26vh] lg:mt-0"
-    : "rounded-none"}
+    ? "rounded-t-3xl lg:rounded-none mt-[26vh] lg:mt-0"
+    : container
+      ? `${listContainerClass} lg:!rounded-none lg:!shadow-none`
+      : ""}
 >
   <div class="flex flex-col items-center">
     <div
@@ -287,7 +290,7 @@ const action = category === "Published tool" ? "Download" : "Play";
                 importance="button-cta"
                 linkClass={buttonWidthClass}
               >
-                {action}
+                <div class="group-hover:animate-pulse">{action}</div>
               </Button>
               {downloadLinks.length > 1 && (
                 <Text subtitle class={`-mb-4 w-full ${buttonWidthClass}`}>

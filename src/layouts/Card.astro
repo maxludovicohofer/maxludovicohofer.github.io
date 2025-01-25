@@ -2,16 +2,23 @@
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"div" | "li"> {
+  unstyled?: boolean | undefined;
   container?: boolean | undefined;
   tag?: "li";
 }
 
-const { container, class: className = "", tag, ...props } = Astro.props;
+const {
+  unstyled,
+  container,
+  class: className = "",
+  tag,
+  ...props
+} = Astro.props;
 
 const Element = tag ?? "div";
 ---
 
 <Element
-  class={`${className} ${container ? "group/container-card rounded-b-3xl" : "group/card rounded-3xl shadow-md bg-zinc-100 dark:bg-zinc-900 p-7 2xl:p-12"} overflow-hidden relative`}
+  class={`${className} relative overflow-hidden ${unstyled ? "" : `${container ? "group/container-card shadow-[0_6px_4px_-4px_rgb(0_0_0/0.1)] rounded-b-3xl" : "group/card rounded-3xl shadow-md bg-zinc-100 dark:bg-zinc-900 p-7 2xl:p-12"}`}`}
   {...props}><slot /></Element
 >

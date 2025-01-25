@@ -11,6 +11,9 @@ interface Props extends ComponentProps<typeof PostPreview> {
 }
 
 const { collection, contentClass, ...props } = Astro.props;
+
+export const listContainerClass =
+  "-mx-4 lg:mx-0 !shadow-none lg:!shadow-[0_6px_4px_-4px_rgb(0_0_0/0.1)] !rounded-none lg:!rounded-b-3xl";
 ---
 
 <PostPreview
