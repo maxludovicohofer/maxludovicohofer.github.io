@@ -13,7 +13,7 @@ interface MarkdownImage {
 }
 
 interface Props extends Omit<ComponentProps<typeof Video>, "src"> {
-  src: NonNullable<ReturnType<typeof getPostCover>> | MarkdownImage;
+  src: NonNullable<ReturnType<typeof getPostCover>> | MarkdownImage | string;
   alt: string;
   loading?: ImgAttributes["loading"];
 }
@@ -26,10 +26,19 @@ const {
   ...props
 } = Astro.props;
 
+export function isEmbed(video: typeof src): video is string {
+  return (
+    typeof video === "string" && new URL(video).hostname.endsWith("youtube.com")
+  );
+}
+
 export function isVideo(
   video: typeof src
 ): video is NonNullable<ComponentProps<typeof Video>["youTubeInfo"]> {
-  return !!(video as ComponentProps<typeof Video>["youTubeInfo"])?.id;
+  return (
+    !!(video as ComponentProps<typeof Video>["youTubeInfo"])?.id ||
+    isEmbed(video)
+  );
 }
 
 function isMarkdownImage(image: typeof src): image is MarkdownImage {
@@ -43,10 +52,18 @@ const mediaClass = `${className} size-full ${asMarkdownImage?.format === "svg" ?
 
 {
   isVideo(src) ? (
-    <Video youTubeInfo={src} class={mediaClass} {...props} />
+    <Video
+      youTubeInfo={
+        isEmbed(src)
+          ? { id: new URL(src).searchParams.get("v")!, aspect: "16/9" }
+          : src
+      }
+      class={mediaClass}
+      {...props}
+    />
   ) : (
     <Image
-      src={isMarkdownImage(src) ? src : src()}
+      src={isMarkdownImage(src) ? src : typeof src === "string" ? src : src()}
       alt={alt}
       class={mediaClass}
       loading={loading}
