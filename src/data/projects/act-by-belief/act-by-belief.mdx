@@ -11,7 +11,7 @@ publishingDate: 2024-02-05
 
 {/* Reason to exist, as short as possible. Max 1 section */}
 
-Current game AI is often a checklist that settles on specific behavior. While maybe easy to debug, it does not follow a fluid thought process, easily resulting in robotic behavior. Reusing these imperative decision trees can be daunting, as they couple AI with gameplay. With this system, I aim to address these issues through a [Maslow hierarchy](https://en.wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs)-inspired declarative infrastructure that is performant, easy to use and debug.
+Current game AI is often a checklist that settles on specific behavior. While maybe easy to debug, this does not follow a fluid thought process, easily resulting in robotic behavior. Reusing these imperative decision trees can be daunting, as they couple AI with gameplay. With Act By Belief, I aim to address these issues through a [Maslow hierarchy](https://en.wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs)-inspired declarative method that is performant, easy to use and debug.
 
 ![EAGER Maslow's hierarchy of needs, simplified.](./act-by-belief-maslow.svg)
 
@@ -19,17 +19,17 @@ Current game AI is often a checklist that settles on specific behavior. While ma
 
 {/* Description, target and explanation of the design. Split in max 2 sections if too long, divided by a media */}
 
-Act by belief is an extension of decision trees designed for natural behavior. It is especially useful for complex organic agents that follow reactive thought processes. For robotic or immutable behavior, traditional methods would be preferable. In this system, an agent is split into brain and body.
+Act By Belief is a decision tree-based workflow for natural thought. It's useful for agents that require a personality and follow reactive thought processes. For robotic or immutable behavior, traditional methods would be preferable. In this system, agents are split into brain and body.
 
 ### Brain
 
-The brain is the belief processor and the agent's personality.
+The brain is the belief and personality processor.
 
 ```csharp
-var brain = new Brain(body);
+Brain brain = new(body);
 ```
 
-A brain can believe in signals captured by its sensors, or have beliefs of its own.
+A brain has input beliefs that sense data.
 
 ```csharp
 Belief<Vector3> Position = new();
@@ -38,7 +38,7 @@ Belief<Vector3> Position = new();
 Position.Sense(transform.position);
 ```
 
-Beliefs can also interpret signals from sensors or existing beliefs. Signals contain data circulating in the brain and assure only beliefs that need to be updated are processed.
+Beliefs can also interpret signals from sensors or existing beliefs. Signals contain the data of the brain and a dependency graph, assuring only beliefs that need to be updated are.
 
 ```csharp
 // Senses a transform, holds a vector
@@ -47,7 +47,7 @@ Belief<Transform, Vector3> PlayerPosition = new(signal => signal.sensed.position
 PlayerPosition.Sense(player.transform);
 ```
 
-But most importantly, a brain has needs that it wants to fulfill. Need beliefs are special beliefs that estimate the urgency of a need from 0 to 1, given the current signal. Also, the `Need` static class contains helper functions for frequent estimates.
+But most importantly, a brain has needs that it wants to fulfill. Need beliefs are special beliefs that estimate the urgency of a need from 0 to 1, given the current signal. Also, the `Need` static class contains estimate functions.
 
 ```csharp
 // The AI needs to kiss the player more and more as the player gets near
@@ -58,14 +58,12 @@ var kissPlayer = brain.Need(
 );
 ```
 
-The motive of a need can be survival, love, or achievement, in order of importance following Maslow's pyramid. It acts as a weight, used to compare needs. Finally, these needs are used to evaluate output beliefs, read by the body to execute actions.
+The motive of a need can be survival, love, or achievement, in order of importance following Maslow's pyramid. It's used as a weight to compare needs. Finally, needs are used in output beliefs, read by the body to execute actions.
 
 ```csharp
-Belief<Vector3> TargetPosition;
-
 // If needs to kiss, target is player
 // Else stand still
-TargetPosition = new(
+Belief<Vector3> TargetPosition = new(
     signal =>
         signal.Get(kissPlayer) > Need.ABSENT
             ? signal.Get(PlayerPosition)
@@ -82,7 +80,7 @@ Beliefs that always represent reality can be moved to the body.
 Belief<Vector3> Position = new();
 
 // Add brain reference
-var brain = new AI(this);
+AI brain = new(this);
 ```
 
 At last, a body acts upon the output beliefs of the brain.
@@ -99,6 +97,6 @@ else
 
 {/* First point: ux, second point: code, third point: development challenges. Split in max 4 points if too long */}
 
-* The system comes with a simple and fully documented API and in-game debugger, limiting its usage to Unity programmers. The debugger displays a text overlay with the quasi-realtime beliefs of every brain, and brain IDs on top of their bodies. A simple code demonstration of basic functionality is also provided.
-* The codebase is compact, amounting to a total of around 1500 lines including documentation. The API was designed for a smooth developer experience and ease of editing.
+* The system comes with a fully documented API and in-game debugger targeted at Unity programmers. The debugger displays a text overlay with the quasi-realtime beliefs of every brain, and brain IDs on top of their bodies. A simple code demonstration of basic functionality is also provided.
+* The codebase amounts to around 1500 lines including documentation. The API was designed for a smooth developer experience and ease of extension. Also, the Act By Belief workflow can be achieved in existing decision tree systems without relying on this API.
 * The biggest development challenge was C#'s type system, forcing me to introduce some slow reflection. To save on performance, I plan to migrate this system to a C++ library in the near future.
