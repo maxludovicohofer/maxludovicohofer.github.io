@@ -1,34 +1,34 @@
 - id: Unreal Engine
   experience: P5Y
   functionalities:
-  - Landscape \ foliage
-  - Modeling
-  - Visual scripting \ editor extensions
-  - Online \ local multiplayer scripting
-  - C++ scripting \ engine extensions
-  - Materials \ shaders \ textures
-  - Niagara
-  - Retargeting
-  - UI
+  - Online and local multiplayer
+  - Visual scripting and editor extensions
+  - Coding and engine extensions
   - AI
-  - Profiling
-  - Source control
+  - UI
+  - Animation blueprints, state machines, and montages
+  - Control rig
+  - Cinematics and sequencer
+  - MetaSound and audio
   - Level editor
-  - Lighting
-  - UV editor \ mesh editor
-  - Runtime virtual textures
+  - Modeling
+  - Materials, shaders, and textures
+  - Niagara
+  - Landscape and foliage
+  - Retargeting
+  - Profiling
   - Nanite
-  - Procedural animation \ Control rig
-  - Animation blueprints \ state machines \ montages
-  - MetaSound \ audio
-  - Cinematics \ sequencer
+  - Source control
+  - Lighting
+  - UV and mesh editors
+  - Runtime virtual textures
 - id: Unity
   experience: P1Y
   functionalities:
-  - Scripting
   - Visual scripting
+  - Coding
+  - Level editor
   - 2D sprite painting
-  - Custom decision tree AI system
 - id: C++
   experience: P5Y
   group: Programming
@@ -65,19 +65,19 @@
 - id: Houdini
   experience: P6M
   functionalities:
-  - Complex simulations
-  - Offline rendering
+  - Simulations
   - Offline lighting
+  - Offline rendering
 - id: Maya
   experience: P1Y
   functionalities:
   - Modeling
+  - Animation
   - UV
   - Retopology
-  - Hard surface rigging
-  - Animation
-  - Blend shapes
+  - Rigging
   - Grooming with cards
+  - Blend shapes
 - id: ZBrush
   experience: P1Y
   functionalities:
@@ -92,12 +92,12 @@
   experience: P6M
   functionalities:
   - Exporting maps
-  - Smart materials for painter
+  - Smart materials
 - id: Substance painter
   experience: P6M
   functionalities:
   - Texturing
-  - Baking maps
+  - Baking
 - id: Photoshop
   experience: P3Y
   functionalities:
@@ -108,6 +108,7 @@
   experience: P3Y
   functionalities:
   - Creating UI elements
+  - Creating icons
 - id: Krita
   experience: P6M
   functionalities:
@@ -117,14 +118,17 @@
   functionalities:
   - Compositing
   - Video effects
+  - 2D animation
+  - Scripting
 - id: Premiere
   experience: P3Y
   functionalities:
-  - Video editing
+  - Montage
+  - Video and audio editing
 - id: FontLab
   experience: P1Y
   functionalities:
-  - Creating custom fonts
+  - Creating fonts
 - id: Gaea
   experience: P6M
   functionalities:
@@ -132,11 +136,12 @@
 - id: TouchDesigner
   experience: P2Y
   functionalities:
-  - Real time VFX synced to sound
+  - Sound-reacting visuals
+  - Scripting
 - id: FL Studio
   experience: P15Y
   functionalities:
-  - Music production
   - Sound design
+  - Music production
+  - Mixing and mastering
   - Recording
-  - Mixing & mastering
