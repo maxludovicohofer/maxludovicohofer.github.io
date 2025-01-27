@@ -175,7 +175,7 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
     const coverObserver = new IntersectionObserver(
       (entries) =>
         entries.forEach(({ isIntersecting, target }) =>
-          switchClasses(target, isIntersecting, ["opacity-15"], [])
+          switchClasses(target, isIntersecting, ["opacity-15"], ["opacity-0"])
         ),
       { threshold: 0.5 }
     );
