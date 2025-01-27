@@ -127,7 +127,7 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
         tag={tag ?? (container ? "div" : undefined)}
         >{
           typeof renderedContent === "function" ? (
-            <PostContent Content={renderedContent} />
+            <PostContent preview Content={renderedContent} />
           ) : (
             (renderedContent ?? <slot />)
           )
