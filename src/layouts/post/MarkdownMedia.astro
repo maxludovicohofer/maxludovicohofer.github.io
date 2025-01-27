@@ -6,12 +6,43 @@ interface Props extends ComponentProps<typeof PostMedia> {}
 
 const { class: className = "", alt, ...props } = Astro.props;
 
-const isEager = alt.includes("EAGER ");
+const getAttribute = (
+  altText: string,
+  attribute: string,
+  isBoolean?: boolean
+) => {
+  const attributeRegex = new RegExp(
+    `(^|\\s)${attribute.toUpperCase()}${isBoolean ? "(?=($|\\s))" : "\\s\\S+"}`
+  );
+  const valueIndex = altText.search(attributeRegex);
+
+  return {
+    value:
+      valueIndex !== -1
+        ? isBoolean
+          ? "true"
+          : altText.slice(valueIndex).trimStart().split(" ")[1]
+        : undefined,
+    cleanedAlt: altText.replace(attributeRegex, "").trimStart(),
+  };
+};
+
+const { value: eager, cleanedAlt: altWithoutEager } = getAttribute(
+  alt,
+  "EAGER",
+  true
+);
+
+const { value: aspect, cleanedAlt: altWithoutAspect } = getAttribute(
+  altWithoutEager,
+  "ASPECT"
+);
 ---
 
 <PostMedia
-  alt={isEager ? alt.replace("EAGER ", "") : alt}
+  alt={altWithoutAspect}
   class={`${className} h-[40vh]`}
-  loading={isEager ? "eager" : undefined}
+  loading={eager ? "eager" : undefined}
+  aspect={aspect as ComponentProps<typeof PostMedia>["aspect"]}
   {...props}
 />

@@ -84,11 +84,14 @@ const title = getTitle(entry);
 export const getPostCover = (post: typeof entry) => {
   if (!post) return;
 
-  if (post.data.youTubeID)
+  if (post.data.youTubeID) {
     return {
       id: post.data.youTubeID,
-      aspect: post.data.youTubeAspectRatio ?? "16/9",
-    } satisfies ComponentProps<typeof Video>["youTubeInfo"];
+      aspect: post.data.youTubeAspectRatio,
+    } satisfies ComponentProps<typeof Video>["youTubeInfo"] as ComponentProps<
+      typeof Video
+    >["youTubeInfo"];
+  }
 
   const imageFolder = `/src/data/${post.collection}/`;
   const images = import.meta.glob<{ default: ImageMetadata }>(

@@ -4,29 +4,28 @@ import type { ComponentProps } from "astro/types";
 import { getAspectClass } from "@integrations/utils";
 
 interface Props extends ComponentProps<typeof LiteYouTube> {
-  youTubeInfo?: { id: string; aspect: "16/9" | "16/10" };
+  youTubeInfo: { id: string; aspect?: "16/9" | "16/10" | undefined };
   smoothLoading?: boolean;
 }
 
 const {
-  youTubeInfo: { id, aspect } = {
-    id: "",
-    aspect: "16/9",
-  } satisfies Props["youTubeInfo"],
+  youTubeInfo: { id, aspect },
   class: className = "",
   smoothLoading,
   ...props
 } = Astro.props;
+
+const aspectRatio = aspect ?? "16/9";
 ---
 
 <div
-  class={`size-full overflow-hidden flex items-center justify-center ${getAspectClass(aspect)}`}
+  class={`size-full overflow-hidden flex items-center justify-center ${getAspectClass(aspectRatio)}`}
 >
   <div class="size-full">
     <LiteYouTube
       id={id}
       class={`${className} size-full ${smoothLoading ? "opacity-0 duration-700" : ""}`}
-      data-aspect-ratio={aspect}
+      data-aspect-ratio={aspectRatio}
       {...props}
     />
   </div>
