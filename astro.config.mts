@@ -17,6 +17,7 @@ import sentry from "@sentry/astro";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://maxludovicohofer.github.io",
   env: {
     schema: {
       SENTRY_AUTH_TOKEN: envField.string({
@@ -33,12 +34,11 @@ export default defineConfig({
       dsn: "https://5cccb7f2878ca1b593bab70b7d791312@o4508257933787136.ingest.de.sentry.io/4508257936736336",
       sourceMapsUploadOptions: {
         project: "portfolio",
-        authToken: loadEnv(process.env.NODE_ENV!, process.cwd(), "")
+        authToken: loadEnv(import.meta.env.MODE, process.cwd(), "")
           .SENTRY_AUTH_TOKEN!,
       },
     }),
   ],
-  site: "https://maxludovicohofer.github.io",
   markdown: {
     remarkPlugins: [remarkMinutesRead, remarkCreated, remarkMath],
     rehypePlugins: [
