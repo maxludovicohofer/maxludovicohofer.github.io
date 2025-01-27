@@ -18,6 +18,7 @@ interface Props
   alt: string;
   aspect?: ComponentProps<typeof Video>["youTubeInfo"]["aspect"];
   loading?: ImgAttributes["loading"];
+  smoothLoading?: boolean;
 }
 
 const {
@@ -26,6 +27,7 @@ const {
   aspect,
   class: className = "",
   loading = "lazy",
+  smoothLoading,
   ...props
 } = Astro.props;
 
@@ -50,7 +52,7 @@ function isMarkdownImage(image: typeof src): image is MarkdownImage {
 
 const asMarkdownImage = isMarkdownImage(src) ? src : undefined;
 
-const mediaClass = `${className} size-full ${asMarkdownImage?.format === "svg" ? "bg-zinc-300" : "object-cover"} pointer-events-none`;
+const mediaClass = `${className} size-full ${asMarkdownImage?.format === "svg" ? "bg-zinc-300" : "object-cover"} pointer-events-none ${smoothLoading && loading === "lazy" ? "opacity-0 duration-700" : ""}`;
 ---
 
 {
@@ -72,3 +74,20 @@ const mediaClass = `${className} size-full ${asMarkdownImage?.format === "svg" ?
     />
   )
 }
+<script>
+  const showMedia = (media: Element) => media.classList.remove("opacity-0");
+
+  document.addEventListener("astro:page-load", () => {
+    // Handle images
+    document.querySelectorAll("img").forEach((image) => {
+      if (!image.classList.contains("opacity-0")) return;
+
+      if (image.complete) {
+        showMedia(image);
+        return;
+      }
+
+      image.addEventListener("load", () => showMedia(image), { once: true });
+    });
+  });
+</script>

@@ -5,13 +5,11 @@ import { getAspectClass } from "@integrations/utils";
 
 interface Props extends ComponentProps<typeof LiteYouTube> {
   youTubeInfo: { id: string; aspect?: "16/9" | "16/10" | undefined };
-  smoothLoading?: boolean;
 }
 
 const {
   youTubeInfo: { id, aspect },
   class: className = "",
-  smoothLoading,
   ...props
 } = Astro.props;
 
@@ -24,7 +22,7 @@ const aspectRatio = aspect ?? "16/9";
   <div class="size-full">
     <LiteYouTube
       id={id}
-      class={`${className} size-full ${smoothLoading ? "opacity-0 duration-700" : ""}`}
+      class={`${className} size-full`}
       data-aspect-ratio={aspectRatio}
       {...props}
     />
@@ -62,7 +60,7 @@ const aspectRatio = aspect ?? "16/9";
       })
     );
 
-    // Handle lite youtube embeds
+    // Handle smooth loading and play/pause
     const lytObserver = new IntersectionObserver((entries) =>
       entries.forEach(async ({ target, isIntersecting }) => {
         const lyt = target as LiteYTEmbed;
@@ -72,9 +70,32 @@ const aspectRatio = aspect ?? "16/9";
         if (isIntersecting) {
           // Initialize video
           if (!player) {
-            // Smooth loading
-            if (target.classList.contains("opacity-0")) {
-              setTimeout(() => target.classList.add("opacity-100"), 2000);
+            const smoothLoading = target.classList.contains("opacity-0");
+
+            let loadingTimeout: NodeJS.Timeout;
+
+            const showPlayer: YT.PlayerEventHandler<YT.OnStateChangeEvent> = ({
+              data,
+              target: player,
+            }) => {
+              if (data !== YT.PlayerState.PLAYING) return;
+
+              setTimeout(() => target.classList.remove("opacity-0"), 800);
+
+              (player as typeof player | undefined)?.removeEventListener(
+                "onStateChange",
+                showPlayer
+              );
+
+              clearTimeout(loadingTimeout);
+            };
+
+            if (smoothLoading) {
+              loadingTimeout = setTimeout(
+                () => showPlayer({ data: YT.PlayerState.PLAYING } as any),
+                // Maximum time to wait for player to show
+                4000
+              );
             }
 
             //? Get YT player activates the player for some reason, it's a really bad repo
@@ -82,6 +103,10 @@ const aspectRatio = aspect ?? "16/9";
             if (!ytPlayer) return;
             players.set(lyt, ytPlayer);
             player = ytPlayer;
+
+            if (smoothLoading) {
+              player.addEventListener("onStateChange", showPlayer);
+            }
 
             if (lyt.classList.contains("object-cover")) {
               // Remove black bands
