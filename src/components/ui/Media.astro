@@ -77,7 +77,7 @@ const mediaClass = `${className} size-full ${asMarkdownImage?.format === "svg" ?
 <script>
   const showMedia = (media: Element) => media.classList.remove("opacity-0");
 
-  //! Not working in iOS safari, animation flickers
+  // TODO PHASE 2 Not working in iOS safari, animation flickers. Fix
   document.addEventListener("astro:page-load", () => {
     // Handle images
     document.querySelectorAll("img").forEach((image) => {
