@@ -9,4 +9,4 @@ const { value } = Astro.props;
 ---
 
 <Text tag="b" class="font-normal"><slot /></Text>
-{Array.isArray(value) ? value.join(", ") : value}
+{Array.isArray(value) ? value.join(", ") : value}.
