@@ -1,3 +1,5 @@
+import type { AstroGlobal } from "astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import type { LiteYTEmbed } from "lite-youtube-embed";
 import Quaternion from "quaternion";
 
@@ -28,6 +30,14 @@ export const imageExtensions = [
   "webp",
   "svg",
 ] as const;
+
+export const localizeHref = (astro: AstroGlobal, link?: string) => {
+  const locale = astro.currentLocale ?? astro.preferredLocale;
+
+  return locale
+    ? getRelativeLocaleUrl(locale, link).replace(/\/$/, "")
+    : `/${link}`;
+};
 
 //? Tailwind
 export const makeHighlight = (discrete?: boolean) => {
@@ -329,10 +339,12 @@ export const toTitleCase = (text: string) =>
 export const capitalize = (text: string) =>
   text.charAt(0).toUpperCase() + text.slice(1);
 
+export const isRemoteLink = (link: string) => link.startsWith("http");
+
 export const getLinkName = (link: string) => {
   let linkName = "";
 
-  if (link.startsWith("http")) {
+  if (isRemoteLink(link)) {
     linkName = new URL(link).host.split(".").at(-2)!;
   } else if (link.startsWith("mailto:")) {
     linkName = link.slice(7);
