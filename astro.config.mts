@@ -13,6 +13,7 @@ import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
 
 import sentry from "@sentry/astro";
+import pdf from "astro-pdf";
 //! Removed spotlight because of slow performance/memory leak
 
 // https://astro.build/config
@@ -36,6 +37,15 @@ export default defineConfig({
         project: "portfolio",
         authToken: loadEnv(import.meta.env.MODE, process.cwd(), "")
           .SENTRY_AUTH_TOKEN!,
+      },
+    }),
+    pdf({
+      pages: (pathname) => {
+        if (!pathname.startsWith("/printable/")) return;
+
+        return {
+          path: pathname + ".pdf",
+        };
       },
     }),
   ],
