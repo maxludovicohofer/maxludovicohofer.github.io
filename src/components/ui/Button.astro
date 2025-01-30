@@ -12,13 +12,7 @@ interface Props
   linkClass?: string;
 }
 
-const {
-  href,
-  navigate,
-  class: className,
-  linkClass = "",
-  ...buttonProps
-} = Astro.props;
+const { href, class: className, linkClass = "", ...buttonProps } = Astro.props;
 
 const umamiEvent = await getUmamiLinkEvent(Astro, href);
 ---
@@ -27,7 +21,6 @@ const umamiEvent = await getUmamiLinkEvent(Astro, href);
   href ? (
     <Link
       href={href}
-      navigate={navigate}
       noStyle
       class={`${linkClass} w-full`}
       noEvent

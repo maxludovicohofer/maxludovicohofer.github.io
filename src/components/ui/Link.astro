@@ -1,22 +1,27 @@
 ---
 import type { AstroGlobal } from "astro";
 import type { HTMLAttributes } from "astro/types";
-import { getLinkName, getMaximumWordsInLimit } from "@integrations/utils";
+import {
+  getLinkName,
+  getMaximumWordsInLimit,
+  isRemoteLink,
+  localizeHref,
+} from "@integrations/utils";
 
 interface Props extends HTMLAttributes<"a"> {
-  navigate?: boolean | undefined;
   noStyle?: boolean;
   prefetch?: "viewport" | "load" | "hover";
   noEvent?: boolean;
+  noLocalization?: boolean;
 }
 
 const {
   class: className = "",
   href,
-  navigate,
   noStyle,
   prefetch = "viewport",
   noEvent,
+  noLocalization,
   "data-umami-event": umamiEvent,
   ...props
 } = Astro.props;
@@ -76,6 +81,8 @@ if (umamiEventInfo["data-umami-event"]) {
     umamiEventInfo["data-umami-event"]
   );
 }
+
+const isRemote = href ? isRemoteLink(href.toString()) : false;
 ---
 
 <a
@@ -84,10 +91,12 @@ if (umamiEventInfo["data-umami-event"]) {
       ? ""
       : "text-current font-normal underline hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150"
   }`}
-  href={href}
+  href={noLocalization || isRemote || !href
+    ? href
+    : localizeHref(Astro, href.toString())}
   data-astro-prefetch={prefetch}
-  target={navigate ? "_self" : "_blank"}
-  rel={navigate ? undefined : "noopener noreferrer"}
+  target={isRemote ? "_blank" : "_self"}
+  rel={isRemote ? "noopener noreferrer" : undefined}
   {...umamiEventInfo}
   {...props}><slot /></a
 >
