@@ -7,6 +7,7 @@ import {
   remarkMinutesRead,
 } from "./src/integrations/remark/remark-plugins.mts";
 import rehypeKatex, { type Options as KatexOptions } from "rehype-katex";
+import { execSync } from "child_process";
 
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
@@ -15,9 +16,13 @@ import partytown from "@astrojs/partytown";
 import sentry from "@sentry/astro";
 //! Removed spotlight because of slow performance/memory leak
 
+const currentBranch = execSync("git branch --show-current").toString();
+
 // https://astro.build/config
 export default defineConfig({
-  site: "https://maxludovicohofer.github.io",
+  site: `https://${
+    currentBranch !== "main" ? `${currentBranch.replaceAll(/\/\./g, "")}.` : ""
+  }maxludovicohofer.github.io`,
   env: {
     schema: {
       SENTRY_AUTH_TOKEN: envField.string({
