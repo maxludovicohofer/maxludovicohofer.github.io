@@ -33,6 +33,8 @@ jobs:
           # SENTRY_URL: https://sentry.io/
         with:
           environment: production
+      - name: Fix astro-pdf error with Ubuntu
+        run: echo 'export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox' > ~/.bashrc
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         # with:
