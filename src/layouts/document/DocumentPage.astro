@@ -1,0 +1,33 @@
+---
+import Page from "@layouts/Page.astro";
+import type { ComponentProps } from "astro/types";
+import { getCollection } from "astro:content";
+import Document, {
+  getDescription,
+  getDocumentId,
+  type DocumentCollectionKey,
+} from "./Document.astro";
+
+interface Props extends Omit<ComponentProps<typeof Document>, "entry"> {
+  entry: NonNullable<ComponentProps<typeof Document>["entry"]>;
+}
+
+// Generate a new path for every collection entry
+export const makeDocumentPaths =
+  <C extends DocumentCollectionKey>(collection: C) =>
+  async () =>
+    (
+      await getCollection(
+        collection,
+        ({ data: { draft } }) => import.meta.env.DEV || !draft
+      )
+    ).map((entry) => ({
+      params: { id: getDocumentId(entry) },
+      props: { entry },
+    }));
+
+const { entry } = Astro.props;
+---
+
+<Page description={getDescription(entry, 2)}><Document {...Astro.props} /></Page
+>

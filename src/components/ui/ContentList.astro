@@ -2,14 +2,15 @@
 import Card from "@layouts/Card.astro";
 import {
   getCategory,
-  getPostId,
   getPublishingDate,
   type PostCollectionKey,
 } from "@post/Post.astro";
 import PostPreview from "@post/PostPreview.astro";
 import type { HTMLAttributes } from "astro/types";
 import { render, getCollection, type CollectionEntry } from "astro:content";
-import { groupBy, makeHighlight, partition } from "@integrations/utils";
+import { getDocumentId } from "@layouts/document/Document.astro";
+import { groupBy, partition } from "@integrations/array";
+import { makeHighlight } from "@integrations/tailwind";
 
 interface Props extends HTMLAttributes<"ol"> {
   collection: PostCollectionKey;
@@ -100,7 +101,7 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
         <Card
           tag="li"
           class={`content-list-card snap-center w-[80dvw] lg:w-full aspect-[16/10] min-h-[min(17rem,80dvh)] max-h-[min(18rem,80dvh)] animate-pulse ${highlightClass ?? ""}`}
-          data-slug={getPostId(entry)}
+          data-slug={getDocumentId(entry)}
         >
           <PostPreview
             class="content-list-item invisible"
@@ -116,12 +117,12 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
   }
 </ol>
 <script>
-  import type { CollectionKey } from "astro:content";
   import {
     getTextClass,
     makeHighlight,
     removeFromClasses,
-  } from "@integrations/utils";
+  } from "@integrations/tailwind";
+  import type { CollectionKey } from "astro:content";
 
   // TODO PHASE 2 USE POINTER EVENTS, AND MAKE THEM WORK ON IOS SAFARI
   const carouselEvents: {

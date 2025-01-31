@@ -1,12 +1,12 @@
 ---
-import type { AstroGlobal } from "astro";
-import type { HTMLAttributes } from "astro/types";
 import {
   getLinkName,
   getMaximumWordsInLimit,
   isRemoteLink,
-  localizeHref,
-} from "@integrations/utils";
+} from "@integrations/text";
+import { localizeHref } from "@integrations/astro";
+import type { AstroGlobal } from "astro";
+import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"a"> {
   noStyle?: boolean;
@@ -52,7 +52,7 @@ export const getUmamiLinkEvent = async (
 ): Promise<UmamiLinkEvent> => {
   const getAnchorName = async () => {
     const anchor = await astro.slots.render("default");
-    return anchor.trim().search(/^<[\S\s]+>$/) !== -1
+    return anchor?.trim().search(/^<[\S\s]+>$/) !== -1
       ? getLinkName(href?.toString() ?? "")
       : anchor;
   };
@@ -91,9 +91,9 @@ const isRemote = href ? isRemoteLink(href.toString()) : false;
       ? ""
       : "text-current font-normal underline hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150"
   }`}
-  href={noLocalization || isRemote || !href
+  href={noLocalization || isRemote || href === undefined
     ? href
-    : localizeHref(Astro, href.toString())}
+    : localizeHref(Astro, href?.toString())}
   data-astro-prefetch={prefetch}
   target={isRemote ? "_blank" : "_self"}
   rel={isRemote ? "noopener noreferrer" : undefined}

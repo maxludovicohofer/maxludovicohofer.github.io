@@ -1,39 +1,18 @@
 ---
+import { getDescription } from "@layouts/document/Document.astro";
 import Page from "@layouts/Page.astro";
-import Post, {
-  getDescription,
-  getPostId,
-  getTitle,
-  type PostCollectionKey,
-} from "@post/Post.astro";
+import Post, { getTitle } from "@post/Post.astro";
 import PostList from "@post/PostList.astro";
 import type { ComponentProps } from "astro/types";
-import { getCollection } from "astro:content";
 
 interface Props extends Omit<ComponentProps<typeof Post>, "entry"> {
   entry: NonNullable<ComponentProps<typeof Post>["entry"]>;
 }
 
-// Generate a new path for every collection entry
-export const makePostPaths =
-  <C extends PostCollectionKey>(collection: C) =>
-  async () =>
-    (
-      await getCollection(
-        collection,
-        ({ data: { draft } }) => import.meta.env.DEV || !draft
-      )
-    ).map((entry) => ({
-      params: { id: getPostId(entry) },
-      props: { entry },
-    }));
-
 const { entry } = Astro.props;
-
-const title = getTitle(entry)!;
 ---
 
-<Page title={title} description={getDescription(entry, 2) ?? title}
+<Page title={getTitle(entry)} description={getDescription(entry, 2)}
   ><Post fullWidthAfter {...Astro.props}
     ><slot name="footer" slot="footer" />
     <PostList

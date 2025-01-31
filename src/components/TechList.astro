@@ -1,11 +1,11 @@
 ---
+import { capitalize } from "@integrations/text";
 import Text from "@ui/Text.astro";
 import type { HTMLAttributes } from "astro/types";
 import { getCollection } from "astro:content";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { capitalize } from "@integrations/utils";
 
 interface Props extends HTMLAttributes<"ol"> {
   compact?: boolean;

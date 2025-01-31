@@ -27,8 +27,8 @@ import BackButton from "@ui/BackButton.astro";
   <BackButton buttonName="modal-back" class="opacity-0" />
 </div>
 <script>
+  import { deactivateModal } from "@integrations/html";
   import type { LiteYTEmbed } from "lite-youtube-embed";
-  import { deactivateModal } from "@integrations/utils";
 
   const closeModal = async () => {
     deactivateModal();

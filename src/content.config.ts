@@ -1,10 +1,13 @@
 import { defineCollection, reference, z } from "astro:content";
 import { file, glob } from "astro/loaders";
 
-const post = z.object({
+const document = z.object({
   draft: z.boolean().optional(),
-  highlight: z.boolean().optional(),
+});
+
+const post = document.extend({
   title: z.string().optional(),
+  highlight: z.boolean().optional(),
   publishingDate: z.date().max(new Date()).optional(),
   youTubeID: z.string().optional(),
   youTubeAspectRatio: z.enum(["16/9", "16/10"]).optional(),
@@ -39,10 +42,15 @@ const tech = defineCollection({
   }),
 });
 
+const docs = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "src/data/docs" }),
+  schema: document,
+});
+
 // Export a single `collections` object to register your collection(s)
-//    This key should match your collection directory name in "src/content"
 export const collections = {
   projects,
   thoughts,
   tech,
+  docs,
 };

@@ -5,7 +5,7 @@ import remarkMath from "remark-math";
 import {
   remarkCreated,
   remarkMinutesRead,
-} from "./src/integrations/remark/remark-plugins.mts";
+} from "./src/integrations/remark.mts";
 import rehypeKatex, { type Options as KatexOptions } from "rehype-katex";
 
 import tailwind from "@astrojs/tailwind";
@@ -13,8 +13,24 @@ import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
 
 import sentry from "@sentry/astro";
-import pdf from "astro-pdf";
+import pdf, { type PagesFunction } from "astro-pdf";
 //! Removed spotlight because of slow performance/memory leak
+
+export const getPrintOptions: PagesFunction = (pathname) => {
+  const cleanPathname = pathname.replace(/\/$/, "");
+
+  if (cleanPathname.endsWith("/pdf")) {
+    return {
+      path: `${cleanPathname.slice(0, cleanPathname.lastIndexOf("/"))}.pdf`,
+    };
+  } else if (cleanPathname.startsWith("/docs/")) {
+    return {
+      path: `${cleanPathname.slice(cleanPathname.indexOf("/", 1))}.pdf`,
+    };
+  } else {
+    return;
+  }
+};
 
 // https://astro.build/config
 export default defineConfig({
@@ -40,13 +56,7 @@ export default defineConfig({
       },
     }),
     pdf({
-      pages: (pathname) => {
-        if (!pathname.startsWith("/printable/")) return;
-
-        return {
-          path: pathname + ".pdf",
-        };
-      },
+      pages: getPrintOptions,
     }),
   ],
   markdown: {

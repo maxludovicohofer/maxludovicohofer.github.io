@@ -1,5 +1,5 @@
 ---
-import PostMedia from "./PostMedia.astro";
+import PostMedia from "@post/PostMedia.astro";
 import type { ComponentProps } from "astro/types";
 
 interface Props extends ComponentProps<typeof PostMedia> {}
@@ -41,7 +41,7 @@ const { value: aspect, cleanedAlt: altWithoutAspect } = getAttribute(
 
 <PostMedia
   alt={altWithoutAspect}
-  class={`${className} h-[40vh]`}
+  class={`${className} ${aspect ? "!w-auto h-48" : "h-[40vh]"}`}
   loading={eager ? "eager" : undefined}
   aspect={aspect as ComponentProps<typeof PostMedia>["aspect"]}
   {...props}
