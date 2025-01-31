@@ -21,7 +21,7 @@ const { class: className = "", buttonName, href, ...buttonProps } = Astro.props;
   <p class="mt-[-0.2rem] ml-[-0.1rem] lg:ml-[-0.2rem]">◂</p>
 </Button>
 <script>
-  import { saveScrollPosition } from "@integrations/utils";
+  import { saveScrollPosition } from "@integrations/astro";
 
   // Executed once to set back fallback
   const startLocation = location.pathname;
@@ -36,11 +36,11 @@ const { class: className = "", buttonName, href, ...buttonProps } = Astro.props;
     history.back();
   };
 
-  document.addEventListener("astro:page-load", () => {
+  document.addEventListener("astro:page-load", () =>
     document
       .querySelectorAll<HTMLButtonElement>("button.back-button")
-      .forEach((button) => button.addEventListener("click", back));
-  });
+      .forEach((button) => button.addEventListener("click", back))
+  );
 
   document.addEventListener("astro:before-preparation", () =>
     document

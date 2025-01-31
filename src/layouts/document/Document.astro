@@ -1,0 +1,80 @@
+---
+import type { CollectionKey, CollectionEntry } from "astro:content";
+import { cleanMarkdown } from "@integrations/markdown";
+import { capitalize } from "@integrations/text";
+import type { PostCollectionKey } from "@post/Post.astro";
+import type { ComponentProps } from "astro/types";
+import Card from "@layouts/Card.astro";
+import DocumentText from "./DocumentText.astro";
+import PrintableMedia from "./PrintableMedia.astro";
+
+interface Props extends ComponentProps<typeof DocumentText> {
+  inline?: boolean;
+}
+
+const { inline, ...props } = Astro.props;
+
+// prettier-ignore
+export type DocumentCollectionKey = Extract<CollectionKey, "docs" | PostCollectionKey>;
+
+export const getDocumentId = (
+  document: CollectionEntry<DocumentCollectionKey>
+) => document?.id.split("/").at(-1);
+
+export const getDescription = <C extends CollectionKey>(
+  entry?: CollectionEntry<C>,
+  sentences?: number,
+  shortenStart?: boolean,
+  startHeading?: string
+) => {
+  let description: string | undefined;
+
+  if (!entry?.body) return;
+
+  if (startHeading || entry.body.trimStart().startsWith("#")) {
+    description = entry.body.split(
+      startHeading ? new RegExp(`# ${startHeading}\\s+`) : /#.*/
+    )[1];
+  }
+
+  description = description && cleanMarkdown(description);
+
+  if (sentences) {
+    const splitSentences = (description ?? cleanMarkdown(entry.body)).split(
+      /\.\s+/
+    );
+
+    description = `${splitSentences.slice(0, sentences).join(". ")}.`;
+  }
+
+  if (shortenStart) {
+    //! Try to shorten sentence, could lead to errors
+    //! Also, uses lookbehind, which could not be supported
+    const shortenedStart = (description ?? cleanMarkdown(entry.body)).split(
+      /(?<!,.*)( is an | is a | is | was an | was a | was )/
+    )[2];
+
+    if (shortenedStart) description = capitalize(shortenedStart);
+  }
+
+  return description;
+};
+---
+
+{
+  inline ? (
+    <DocumentText {...props}>
+      <slot />
+    </DocumentText>
+  ) : (
+    <Card class="min-h-dvh rounded-none shadow-none">
+      <DocumentText
+        class="prose-li:list-disc"
+        contentProps={{ components: { img: PrintableMedia } }}
+        {...props}
+      >
+        <slot />
+      </DocumentText>
+    </Card>
+  )
+}

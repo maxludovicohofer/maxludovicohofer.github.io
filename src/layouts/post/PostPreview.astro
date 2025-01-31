@@ -7,18 +7,20 @@ import {
   getPublishingDate,
   getPostCover,
   type PostCollectionKey,
-  getPostId,
-  getDescription,
   getTitle,
 } from "./Post.astro";
 import type { ComponentProps, HTMLAttributes } from "astro/types";
-import PostContent from "./PostContent.astro";
+import DocumentContent from "@document/DocumentContent.astro";
 import Media from "@ui/Media.astro";
 import { getCoverAlt } from "@post/CoverMedia.astro";
 import getReadingTime from "reading-time";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
-import { getTextClass } from "@integrations/utils";
+import { getTextClass } from "@integrations/tailwind";
+import {
+  getDescription,
+  getDocumentId,
+} from "@layouts/document/Document.astro";
 
 interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollectionKey> | undefined;
@@ -77,7 +79,7 @@ dayjs.extend(duration);
 const readMoreLink =
   noReadMore || (isMarkdown && minutesToRead! < 0)
     ? undefined
-    : (readMore ?? (entry && `/${entry.collection}/${getPostId(entry)}`));
+    : (readMore ?? (entry && `/${entry.collection}/${getDocumentId(entry)}`));
 
 const cover = getPostCover(entry);
 const category = getCategory(entry);
@@ -127,7 +129,7 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
         tag={tag ?? (container ? "div" : undefined)}
         >{
           typeof renderedContent === "function" ? (
-            <PostContent preview Content={renderedContent} />
+            <DocumentContent preview Content={renderedContent} />
           ) : (
             (renderedContent ?? <slot />)
           )
@@ -168,7 +170,7 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
   }
 </div>
 <script>
-  import { switchClasses } from "@integrations/utils";
+  import { switchClasses } from "@integrations/tailwind";
 
   document.addEventListener("astro:page-load", () => {
     const coverObserver = new IntersectionObserver(

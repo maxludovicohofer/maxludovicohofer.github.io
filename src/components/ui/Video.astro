@@ -1,10 +1,10 @@
 ---
 import LiteYouTube from "./LiteYouTube.astro";
 import type { ComponentProps } from "astro/types";
-import { getAspectClass } from "@integrations/utils";
+import { getAspectClass } from "@integrations/tailwind";
 
 interface Props extends ComponentProps<typeof LiteYouTube> {
-  youTubeInfo: { id: string; aspect?: "16/9" | "16/10" | undefined };
+  youTubeInfo: { id: string; aspect?: "16/9" | "16/10" | "1/1" | undefined };
 }
 
 const {
@@ -29,8 +29,8 @@ const aspectRatio = aspect ?? "16/9";
   </div>
 </div>
 <script>
+  import { getAspectRatio, switchClasses } from "@integrations/tailwind";
   import type { LiteYTEmbed } from "lite-youtube-embed";
-  import { getAspectRatio, switchClasses } from "@integrations/utils";
 
   const getVideos = () => document.querySelectorAll("lite-youtube");
 

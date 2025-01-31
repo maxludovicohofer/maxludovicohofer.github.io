@@ -18,7 +18,7 @@ const umamiEvent = await getUmamiLinkEvent(Astro, href);
 ---
 
 {
-  href ? (
+  href !== undefined ? (
     <Link
       href={href}
       noStyle
