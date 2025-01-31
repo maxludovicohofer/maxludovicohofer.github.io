@@ -33,10 +33,13 @@ jobs:
           # SENTRY_URL: https://sentry.io/
         with:
           environment: production
-      - name: Fix astro-pdf error with Ubuntu
-        run: echo 'export CHROME_DEVEL_SANDBOX=/opt/google/chrome/chrome-sandbox' > ~/.bashrc
+      - name: Disable AppArmor
+        # Fixes astro-pdf error with Ubuntu, see https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md
+        run: echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
       - name: Install, build, and upload your site
         uses: withastro/action@v3
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
         # with:
         # path: . # The root location of your Astro project inside the repository. (optional)
         # node-version: 20 # The specific version of Node that should be used to build your site. Defaults to 20. (optional)
