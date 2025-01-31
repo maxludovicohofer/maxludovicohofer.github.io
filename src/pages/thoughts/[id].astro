@@ -1,7 +1,8 @@
 ---
-import PostPage, { makePostPaths } from "@post/PostPage.astro";
+import PostPage from "@post/PostPage.astro";
+import { makeDocumentPaths } from "@document/DocumentPage.astro";
 
-export const getStaticPaths = makePostPaths("thoughts");
+export const getStaticPaths = makeDocumentPaths("thoughts");
 ---
 
 <PostPage {...Astro.props} />

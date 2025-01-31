@@ -8,7 +8,7 @@ const { class: className = "", ...props } = Astro.props;
 
 <div class={`${className} dissolving`} {...props}><slot /></div>
 <script>
-  import { getPagePosition } from "@integrations/utils";
+  import { getPagePosition } from "@integrations/html";
 
   const updateContainer = (container: HTMLElement) => {
     if (!container.checkVisibility()) return;

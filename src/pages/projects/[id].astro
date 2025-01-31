@@ -3,10 +3,11 @@ import { getEntries } from "astro:content";
 import PostFooter from "@post/PostFooter.astro";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import PostPage, { makePostPaths } from "@post/PostPage.astro";
+import PostPage from "@post/PostPage.astro";
+import { makeDocumentPaths } from "@document/DocumentPage.astro";
 import { getDevelopmentTime } from "@post/Post.astro";
 
-export const getStaticPaths = makePostPaths("projects");
+export const getStaticPaths = makeDocumentPaths("projects");
 
 const { roles, tech, awards, team } = Astro.props.entry.data;
 

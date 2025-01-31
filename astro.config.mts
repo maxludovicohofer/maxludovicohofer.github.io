@@ -1,11 +1,10 @@
-// @ts-check
 import { defineConfig, envField } from "astro/config";
 import { loadEnv } from "vite";
 import remarkMath from "remark-math";
 import {
   remarkCreated,
   remarkMinutesRead,
-} from "./src/integrations/remark/remark-plugins.mts";
+} from "./src/integrations/remark.mts";
 import rehypeKatex, { type Options as KatexOptions } from "rehype-katex";
 
 import tailwind from "@astrojs/tailwind";
@@ -13,6 +12,8 @@ import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
 
 import sentry from "@sentry/astro";
+import pdf from "astro-pdf";
+import { getPrintOptions } from "./src/integrations/pdf.mts";
 //! Removed spotlight because of slow performance/memory leak
 
 // https://astro.build/config
@@ -37,6 +38,9 @@ export default defineConfig({
         authToken: loadEnv(import.meta.env.MODE, process.cwd(), "")
           .SENTRY_AUTH_TOKEN!,
       },
+    }),
+    pdf({
+      pages: getPrintOptions,
     }),
   ],
   markdown: {

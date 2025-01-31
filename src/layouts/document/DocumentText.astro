@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { render } from "astro:content";
+import DocumentContent from "./DocumentContent.astro";
+import Text from "@components/ui/Text.astro";
+import type { ComponentProps } from "astro/types";
+import type { DocumentCollectionKey } from "./Document.astro";
+
+interface Props extends ComponentProps<typeof Text> {
+  entry?: CollectionEntry<DocumentCollectionKey> | undefined;
+  contentProps?: Omit<ComponentProps<typeof DocumentContent>, "Content">;
+}
+
+const { entry, contentProps, ...props } = Astro.props;
+
+const { Content } = entry ? await render(entry) : {};
+---
+
+<Text markdown={!!Content} {...props}
+  >{
+    Content ? <DocumentContent Content={Content} {...contentProps} /> : <slot />
+  }</Text
+>

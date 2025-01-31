@@ -3,7 +3,8 @@ import type { getPostCover } from "@post/Post.astro";
 import { Image, type ImgAttributes } from "astro:assets";
 import type { ComponentProps } from "astro/types";
 import Video from "./Video.astro";
-import type { imageExtensions } from "@integrations/utils";
+import type { imageExtensions } from "@integrations/astro";
+import { getAspectClass } from "@integrations/tailwind";
 
 interface MarkdownImage {
   src: string;
@@ -68,7 +69,7 @@ const mediaClass = `${className} size-full ${asMarkdownImage?.format === "svg" ?
     <Image
       src={isMarkdownImage(src) ? src : typeof src === "string" ? src : src()}
       alt={alt}
-      class={mediaClass}
+      class={`${mediaClass} ${aspect ? getAspectClass(aspect) : ""}`}
       loading={loading}
       {...(props as any)}
     />

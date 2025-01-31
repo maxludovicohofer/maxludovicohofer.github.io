@@ -12,19 +12,15 @@ import CoverMedia from "@post/CoverMedia.astro";
 import Link from "@ui/Link.astro";
 import Button from "@ui/Button.astro";
 import type Video from "@ui/Video.astro";
-import {
-  getLinkName,
-  capitalize,
-  cleanMarkdown,
-  toTitleCase,
-  getTextClass,
-  imageExtensions,
-} from "@integrations/utils";
-import PostContent from "./PostContent.astro";
+import Document from "@document/Document.astro";
+import { getDocumentId } from "@document/Document.astro";
+import { getTextClass } from "@integrations/tailwind";
+import { capitalize, getLinkName, toTitleCase } from "@integrations/text";
+import { imageExtensions } from "@integrations/astro";
 
 interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollectionKey>;
-  tag?: ComponentProps<typeof Text>["tag"];
+  tag?: ComponentProps<typeof Document>["tag"];
   fullWidth?: boolean | undefined;
   fullWidthAfter?: boolean | undefined;
   inline?: boolean | undefined;
@@ -44,18 +40,17 @@ const {
   ...props
 } = Astro.props;
 
+// prettier-ignore
 export type PostCollectionKey = Extract<CollectionKey, "projects" | "thoughts">;
 
 const { Content, remarkPluginFrontmatter } = entry ? await render(entry) : {};
-
-export const getPostId = (post: typeof entry) => post?.id.split("/").at(-1);
 
 export const getTitle = (post: typeof entry) => {
   if (!post) return;
 
   if (post.data.title) return post.data.title;
 
-  const rawTitle = getPostId(post)!.split("-").join(" ");
+  const rawTitle = getDocumentId(post)!.split("-").join(" ");
   return post.collection === "projects"
     ? toTitleCase(rawTitle)
     : capitalize(rawTitle);
@@ -114,43 +109,6 @@ export const getPostCover = (post: typeof entry) => {
 };
 
 const cover = getPostCover(entry);
-
-export const getDescription = <C extends PostCollectionKey>(
-  entry?: CollectionEntry<C>,
-  sentences?: number,
-  shortenStart?: boolean,
-  startHeading?: string
-) => {
-  let description: string | undefined;
-
-  if (!entry?.body) return;
-
-  if (startHeading) {
-    description = entry.body.split(new RegExp(`# ${startHeading}[\n\r\s]+`))[1];
-  }
-
-  description = description && cleanMarkdown(description);
-
-  if (sentences) {
-    const splitSentences = (description ?? cleanMarkdown(entry.body)).split(
-      /\.[\n\r\s]+/
-    );
-
-    description = `${splitSentences.slice(0, sentences).join(". ")}.`;
-  }
-
-  if (shortenStart) {
-    //! Try to shorten sentence, could lead to errors
-    //! Also, uses lookbehind, which could not be supported
-    const shortenedStart = (description ?? cleanMarkdown(entry.body)).split(
-      /(?<!,.*)( is an | is a | is | was an | was a | was )/
-    )[2];
-
-    if (shortenedStart) description = capitalize(shortenedStart);
-  }
-
-  return description;
-};
 
 export const getDownloadLinks = <C extends PostCollectionKey>(
   entry?: CollectionEntry<C>
@@ -273,11 +231,12 @@ const action = category === "Published tool" ? "Try" : "Play";
           >{title ?? <slot name="title" />}</Text
         >
         {category && <Text subtitle>{category}</Text>}
-        <Text
-          class={`${Content ? "is-entry" : ""} ${publishingDate ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl`}
-          markdown={!!Content}
+        <Document
+          inline
+          entry={entry}
           tag={tag}
-          >{Content ? <PostContent Content={Content} /> : <slot />}</Text
+          class={`${Content ? "is-entry" : ""} ${publishingDate ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl`}
+          ><slot /></Document
         >
         {
           downloadLinks && (

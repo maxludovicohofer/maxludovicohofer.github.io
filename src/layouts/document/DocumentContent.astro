@@ -1,0 +1,23 @@
+---
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+import DocumentMedia from "@document/DocumentMedia.astro";
+import DocumentHidden from "@document/DocumentHidden.astro";
+import Link from "@ui/Link.astro";
+import type { HTMLTag } from "astro/types";
+
+interface Props {
+  Content: AstroComponentFactory;
+  preview?: boolean;
+  components?: Partial<Record<HTMLTag, (args: any) => any>>;
+}
+
+const { Content, preview, components } = Astro.props;
+---
+
+<Content
+  components={{
+    a: Link,
+    img: preview ? DocumentHidden : DocumentMedia,
+    ...components,
+  }}
+/>

@@ -1,0 +1,7 @@
+---
+import DocumentPage, { makeDocumentPaths } from "@document/DocumentPage.astro";
+
+export const getStaticPaths = makeDocumentPaths("docs");
+---
+
+<DocumentPage {...Astro.props} />
