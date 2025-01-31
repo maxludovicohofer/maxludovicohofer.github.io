@@ -9,13 +9,19 @@ export const capitalize = (text: string) =>
 
 export const isRemoteLink = (link: string) => link.startsWith("http");
 
+export const isMailLink = (link: string) => link.startsWith("mailto:");
+
+export const isTelLink = (link: string) => link.startsWith("tel:");
+
 export const getLinkName = (link: string) => {
   let linkName = "";
 
   if (isRemoteLink(link)) {
     linkName = new URL(link).host.split(".").at(-2)!;
-  } else if (link.startsWith("mailto:")) {
+  } else if (isMailLink(link)) {
     linkName = link.slice(7);
+  } else if (isTelLink(link)) {
+    linkName = link.slice(4);
   } else {
     linkName = link
       .replace(/(^\/+)|(\/+$)/g, "")

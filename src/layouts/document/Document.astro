@@ -67,7 +67,7 @@ export const getDescription = <C extends CollectionKey>(
     </DocumentText>
   ) : (
     <Card class="min-h-dvh rounded-none">
-      <DocumentText {...props}>
+      <DocumentText class="prose-li:list-disc" {...props}>
         <slot />
       </DocumentText>
     </Card>

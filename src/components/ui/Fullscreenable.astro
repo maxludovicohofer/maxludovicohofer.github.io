@@ -57,7 +57,9 @@ const { class: className = "", noAnimation, ...buttonProps } = Astro.props;
     let noAnimation = false;
 
     if (isLiteYouTube(fullscreenMedia)) {
-      const aspect = fullscreenMedia.dataset.aspectRatio!;
+      const aspect = fullscreenMedia.dataset.aspectRatio! as Parameters<
+        typeof getAspectClass
+      >[0];
       fullscreenMedia.classList.add(getAspectClass(aspect));
       const aspectRatio = getAspectRatio(aspect);
 

@@ -2,7 +2,9 @@
 import {
   getLinkName,
   getMaximumWordsInLimit,
+  isMailLink,
   isRemoteLink,
+  isTelLink,
 } from "@integrations/text";
 import { localizeHref } from "@integrations/astro";
 import type { AstroGlobal } from "astro";
@@ -82,7 +84,11 @@ if (umamiEventInfo["data-umami-event"]) {
   );
 }
 
-const isRemote = href ? isRemoteLink(href.toString()) : false;
+const hrefString = href?.toString();
+
+const isExternal =
+  hrefString &&
+  (isRemoteLink(hrefString) || isMailLink(hrefString) || isTelLink(hrefString));
 ---
 
 <a
@@ -91,12 +97,12 @@ const isRemote = href ? isRemoteLink(href.toString()) : false;
       ? ""
       : "text-current font-normal underline hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150"
   }`}
-  href={noLocalization || isRemote || href === undefined
+  href={noLocalization || isExternal || href === undefined
     ? href
     : localizeHref(Astro, href?.toString())}
   data-astro-prefetch={prefetch}
-  target={isRemote ? "_blank" : "_self"}
-  rel={isRemote ? "noopener noreferrer" : undefined}
+  target={isExternal ? "_blank" : "_self"}
+  rel={isExternal ? "noopener noreferrer" : undefined}
   {...umamiEventInfo}
   {...props}><slot /></a
 >
