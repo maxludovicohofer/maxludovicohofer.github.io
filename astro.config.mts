@@ -12,24 +12,9 @@ import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
 
 import sentry from "@sentry/astro";
-import pdf, { type PagesFunction } from "astro-pdf";
+import pdf from "astro-pdf";
+import { getPrintOptions } from "./src/integrations/pdf.mts";
 //! Removed spotlight because of slow performance/memory leak
-
-export const getPrintOptions: PagesFunction = (pathname) => {
-  const cleanPathname = pathname.replace(/\/$/, "");
-
-  if (cleanPathname.endsWith("/pdf")) {
-    return {
-      path: `${cleanPathname.slice(0, cleanPathname.lastIndexOf("/"))}.pdf`,
-    };
-  } else if (cleanPathname.startsWith("/docs/")) {
-    return {
-      path: `${cleanPathname.slice(cleanPathname.indexOf("/", 1))}.pdf`,
-    };
-  } else {
-    return;
-  }
-};
 
 // https://astro.build/config
 export default defineConfig({

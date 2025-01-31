@@ -8,13 +8,16 @@ import type { DocumentCollectionKey } from "./Document.astro";
 
 interface Props extends ComponentProps<typeof Text> {
   entry?: CollectionEntry<DocumentCollectionKey> | undefined;
+  contentProps?: Omit<ComponentProps<typeof DocumentContent>, "Content">;
 }
 
-const { entry, ...props } = Astro.props;
+const { entry, contentProps, ...props } = Astro.props;
 
 const { Content } = entry ? await render(entry) : {};
 ---
 
 <Text markdown={!!Content} {...props}
-  >{Content ? <DocumentContent Content={Content} /> : <slot />}</Text
+  >{
+    Content ? <DocumentContent Content={Content} {...contentProps} /> : <slot />
+  }</Text
 >

@@ -6,6 +6,7 @@ import type { PostCollectionKey } from "@post/Post.astro";
 import type { ComponentProps } from "astro/types";
 import Card from "@layouts/Card.astro";
 import DocumentText from "./DocumentText.astro";
+import PrintableMedia from "./PrintableMedia.astro";
 
 interface Props extends ComponentProps<typeof DocumentText> {
   inline?: boolean;
@@ -66,8 +67,12 @@ export const getDescription = <C extends CollectionKey>(
       <slot />
     </DocumentText>
   ) : (
-    <Card class="min-h-dvh rounded-none">
-      <DocumentText class="prose-li:list-disc" {...props}>
+    <Card class="min-h-dvh rounded-none shadow-none">
+      <DocumentText
+        class="prose-li:list-disc"
+        contentProps={{ components: { img: PrintableMedia } }}
+        {...props}
+      >
         <slot />
       </DocumentText>
     </Card>
