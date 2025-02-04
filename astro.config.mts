@@ -41,6 +41,17 @@ export default defineConfig({
     }),
     pdf({
       pages: getPrintOptions,
+      baseOptions: {
+        pdf: {
+          waitForFonts: true,
+          margin: {
+            top: "0.9in",
+            bottom: "0.9in",
+            left: "1in",
+            right: "1in",
+          },
+        },
+      },
     }),
   ],
   markdown: {
