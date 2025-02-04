@@ -41,9 +41,6 @@ export default defineConfig({
     }),
     pdf({
       pages: getPrintOptions,
-      launch: {
-        headless: false,
-      },
       baseOptions: {
         pdf: {
           format: "A4",

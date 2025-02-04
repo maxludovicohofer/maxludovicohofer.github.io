@@ -33,6 +33,8 @@ jobs:
           # SENTRY_URL: https://sentry.io/
         with:
           environment: production
+      - name: Check Astro PDF dependencies
+        run: ldd chrome | grep not
       - name: Disable AppArmor
         # Fixes astro-pdf error with Ubuntu, see https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md
         run: echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
