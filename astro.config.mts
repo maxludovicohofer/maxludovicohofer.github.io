@@ -41,6 +41,9 @@ export default defineConfig({
     }),
     pdf({
       pages: getPrintOptions,
+      launch: {
+        args: ["--no-sandbox", "--disable-web-security"],
+      },
       baseOptions: {
         pdf: {
           format: "A4",
