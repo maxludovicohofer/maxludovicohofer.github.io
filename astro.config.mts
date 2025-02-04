@@ -41,9 +41,6 @@ export default defineConfig({
     }),
     pdf({
       pages: getPrintOptions,
-      launch: {
-        args: ["--font-render-hinting=medium"],
-      },
       baseOptions: {
         pdf: {
           format: "A4",
