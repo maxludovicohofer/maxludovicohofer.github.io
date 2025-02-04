@@ -42,7 +42,7 @@ export default defineConfig({
     pdf({
       pages: getPrintOptions,
       launch: {
-        headless: true,
+        headless: false,
       },
       baseOptions: {
         pdf: {
