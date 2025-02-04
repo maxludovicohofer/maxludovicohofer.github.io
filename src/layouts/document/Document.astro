@@ -31,8 +31,10 @@ export const getDescription = <C extends CollectionKey>(
 
   if (!entry?.body) return;
 
-  if (startHeading || entry.body.trimStart().startsWith("#")) {
-    description = entry.body.split(
+  const cleanBody = entry.body.trimStart();
+
+  if (startHeading || cleanBody.startsWith("#") || cleanBody.startsWith("![")) {
+    description = cleanBody.split(
       startHeading ? new RegExp(`# ${startHeading}\\s+`) : /#.*/
     )[1];
   }
@@ -40,7 +42,7 @@ export const getDescription = <C extends CollectionKey>(
   description = description && cleanMarkdown(description);
 
   if (sentences) {
-    const splitSentences = (description ?? cleanMarkdown(entry.body)).split(
+    const splitSentences = (description ?? cleanMarkdown(cleanBody)).split(
       /\.\s+/
     );
 
@@ -50,7 +52,7 @@ export const getDescription = <C extends CollectionKey>(
   if (shortenStart) {
     //! Try to shorten sentence, could lead to errors
     //! Also, uses lookbehind, which could not be supported
-    const shortenedStart = (description ?? cleanMarkdown(entry.body)).split(
+    const shortenedStart = (description ?? cleanMarkdown(cleanBody)).split(
       /(?<!,.*)( is an | is a | is | was an | was a | was )/
     )[2];
 
@@ -69,7 +71,7 @@ export const getDescription = <C extends CollectionKey>(
   ) : (
     <Card class="min-h-dvh rounded-none shadow-none">
       <DocumentText
-        class="prose-li:list-disc prose-h1:font-normal"
+        class="prose-li:list-disc"
         contentProps={{ components: { img: PrintableMedia } }}
         {...props}
       >
