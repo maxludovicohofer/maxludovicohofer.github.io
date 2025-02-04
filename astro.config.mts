@@ -50,7 +50,6 @@ export default defineConfig({
             left: 70,
             right: 70,
           },
-          waitForFonts: true,
         },
       },
     }),
