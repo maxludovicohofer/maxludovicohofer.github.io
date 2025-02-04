@@ -41,14 +41,17 @@ export default defineConfig({
     }),
     pdf({
       pages: getPrintOptions,
+      launch: {
+        args: ["--font-render-hinting=none"],
+      },
       baseOptions: {
         pdf: {
-          waitForFonts: true,
+          format: "A4",
           margin: {
-            top: "0.9in",
-            bottom: "0.9in",
-            left: "1in",
-            right: "1in",
+            top: 70,
+            bottom: 70,
+            left: 70,
+            right: 70,
           },
         },
       },
