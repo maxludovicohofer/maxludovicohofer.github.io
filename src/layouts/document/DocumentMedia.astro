@@ -39,13 +39,13 @@ const { value: aspect, cleanedAlt: altWithoutAspect } = getAttribute(
 );
 
 const { value: smallTopMargin, cleanedAlt: altWithoutSmallTopMargin } =
-  getAttribute(altWithoutAspect, "MT-SMALL", true);
+  getAttribute(altWithoutAspect, "TOP", true);
 ---
 
 <PostMedia
   alt={altWithoutSmallTopMargin}
   class={`${className} h-[40vh] ${aspect ? "!w-auto" : ""}`}
-  marginClass={smallTopMargin ? "mt-6 2xl:mt-0" : ""}
+  marginClass={smallTopMargin ? "mt-0 mb-6" : ""}
   loading={eager ? "eager" : undefined}
   aspect={aspect as ComponentProps<typeof PostMedia>["aspect"]}
   {...props}
