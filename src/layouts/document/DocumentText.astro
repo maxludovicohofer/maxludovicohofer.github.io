@@ -1,23 +1,24 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import { render } from "astro:content";
-import DocumentContent from "./DocumentContent.astro";
-import Text from "@components/ui/Text.astro";
 import type { ComponentProps } from "astro/types";
-import type { DocumentCollectionKey } from "./Document.astro";
+import PrintableMedia from "./PrintableMedia.astro";
+import PostText from "@layouts/post/PostText.astro";
 
-interface Props extends ComponentProps<typeof Text> {
-  entry?: CollectionEntry<DocumentCollectionKey> | undefined;
-  contentProps?: Omit<ComponentProps<typeof DocumentContent>, "Content">;
-}
-
-const { entry, contentProps, ...props } = Astro.props;
-
-const { Content } = entry ? await render(entry) : {};
+interface Props extends ComponentProps<typeof PostText> {}
 ---
 
-<Text markdown={!!Content} {...props}
-  >{
-    Content ? <DocumentContent Content={Content} {...contentProps} /> : <slot />
-  }</Text
+<PostText
+  class="font-['Segoe_UI'] prose-li:list-disc"
+  contentProps={{ components: { img: PrintableMedia } }}
+  {...Astro.props}
 >
+  <slot />
+</PostText>
+<style>
+  @font-face {
+    font-family: "Segoe UI";
+    src:
+      local("Segoe UI"),
+      url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff2)
+        format("woff2");
+  }
+</style>

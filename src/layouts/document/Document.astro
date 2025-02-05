@@ -6,9 +6,11 @@ import type { PostCollectionKey } from "@post/Post.astro";
 import type { ComponentProps } from "astro/types";
 import Card from "@layouts/Card.astro";
 import DocumentText from "./DocumentText.astro";
-import PrintableMedia from "./PrintableMedia.astro";
+import PostText from "@post/PostText.astro";
 
-interface Props extends ComponentProps<typeof DocumentText> {
+interface Props
+  extends ComponentProps<typeof DocumentText>,
+    ComponentProps<typeof PostText> {
   inline?: boolean;
 }
 
@@ -31,8 +33,10 @@ export const getDescription = <C extends CollectionKey>(
 
   if (!entry?.body) return;
 
-  if (startHeading || entry.body.trimStart().startsWith("#")) {
-    description = entry.body.split(
+  const cleanBody = entry.body.trimStart();
+
+  if (startHeading || cleanBody.startsWith("#") || cleanBody.startsWith("![")) {
+    description = cleanBody.split(
       startHeading ? new RegExp(`# ${startHeading}\\s+`) : /#.*/
     )[1];
   }
@@ -40,7 +44,7 @@ export const getDescription = <C extends CollectionKey>(
   description = description && cleanMarkdown(description);
 
   if (sentences) {
-    const splitSentences = (description ?? cleanMarkdown(entry.body)).split(
+    const splitSentences = (description ?? cleanMarkdown(cleanBody)).split(
       /\.\s+/
     );
 
@@ -50,7 +54,7 @@ export const getDescription = <C extends CollectionKey>(
   if (shortenStart) {
     //! Try to shorten sentence, could lead to errors
     //! Also, uses lookbehind, which could not be supported
-    const shortenedStart = (description ?? cleanMarkdown(entry.body)).split(
+    const shortenedStart = (description ?? cleanMarkdown(cleanBody)).split(
       /(?<!,.*)( is an | is a | is | was an | was a | was )/
     )[2];
 
@@ -63,16 +67,12 @@ export const getDescription = <C extends CollectionKey>(
 
 {
   inline ? (
-    <DocumentText {...props}>
+    <PostText {...props}>
       <slot />
-    </DocumentText>
+    </PostText>
   ) : (
     <Card class="min-h-dvh rounded-none shadow-none">
-      <DocumentText
-        class="prose-li:list-disc"
-        contentProps={{ components: { img: PrintableMedia } }}
-        {...props}
-      >
+      <DocumentText {...props}>
         <slot />
       </DocumentText>
     </Card>

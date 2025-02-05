@@ -41,6 +41,17 @@ export default defineConfig({
     }),
     pdf({
       pages: getPrintOptions,
+      baseOptions: {
+        pdf: {
+          format: "A4",
+          margin: {
+            top: 70,
+            bottom: 70,
+            left: 70,
+            right: 70,
+          },
+        },
+      },
     }),
   ],
   markdown: {
