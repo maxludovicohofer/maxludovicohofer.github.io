@@ -45,7 +45,7 @@ const { value: smallTopMargin, cleanedAlt: altWithoutSmallTopMargin } =
 <PostMedia
   alt={altWithoutSmallTopMargin}
   class={`${className} h-[40vh] ${aspect ? "!w-auto" : ""}`}
-  marginClass={smallTopMargin ? "mt-0 mb-6" : ""}
+  marginClass={smallTopMargin ? "!mt-0 !mb-6" : ""}
   loading={eager ? "eager" : undefined}
   aspect={aspect as ComponentProps<typeof PostMedia>["aspect"]}
   {...props}
