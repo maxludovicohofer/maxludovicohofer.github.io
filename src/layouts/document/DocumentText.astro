@@ -7,7 +7,7 @@ interface Props extends ComponentProps<typeof PostText> {}
 ---
 
 <PostText
-  class="font-['Segoe_UI'] prose-li:list-disc"
+  class="prose-li:list-disc font-['Segoe_UI']"
   contentProps={{ components: { img: PrintableMedia } }}
   {...Astro.props}
 >
@@ -16,9 +16,7 @@ interface Props extends ComponentProps<typeof PostText> {}
 <style>
   @font-face {
     font-family: "Segoe UI";
-    src:
-      local("Segoe UI"),
-      url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff2)
-        format("woff2");
+    src: url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff2)
+      format("woff2");
   }
 </style>
