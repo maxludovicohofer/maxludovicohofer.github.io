@@ -38,14 +38,17 @@ const { value: aspect, cleanedAlt: altWithoutAspect } = getAttribute(
   "ASPECT"
 );
 
-const { value: smallTopMargin, cleanedAlt: altWithoutSmallTopMargin } =
-  getAttribute(altWithoutAspect, "TOP", true);
+const { value: top, cleanedAlt: altWithoutTop } = getAttribute(
+  altWithoutAspect,
+  "TOP",
+  true
+);
 ---
 
 <PostMedia
-  alt={altWithoutSmallTopMargin}
+  alt={altWithoutTop}
   class={`${className} h-[40vh] ${aspect ? "!w-auto" : ""}`}
-  marginClass={smallTopMargin ? "!mt-0 !mb-6" : ""}
+  marginClass={top ? "!mt-0 !mb-6" : ""}
   loading={eager ? "eager" : undefined}
   aspect={aspect as ComponentProps<typeof PostMedia>["aspect"]}
   {...props}
