@@ -49,7 +49,11 @@ dayjs.extend(relativeTime);
         <li
           class={`${rowSpan < 2 ? "row-span-1" : rowSpan < 3 ? "row-span-2" : rowSpan < 4 ? "row-span-3" : rowSpan < 5 ? "row-span-4" : "row-span-5"}`}
         >
-          <Text title={!compact} class="inline">
+          <Text
+            title={!compact}
+            tag={compact ? undefined : "h2"}
+            class="inline"
+          >
             {title}
           </Text>
           {!compact && (

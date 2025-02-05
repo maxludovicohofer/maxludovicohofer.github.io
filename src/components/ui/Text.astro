@@ -1,11 +1,13 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 
-interface Props extends Omit<HTMLAttributes<"div" | "b" | "u">, "title"> {
+type TextTag = "div" | "b" | "u" | "span" | "h1" | "h2";
+
+interface Props extends Omit<HTMLAttributes<TextTag>, "title"> {
   title?: boolean;
   subtitle?: boolean;
   markdown?: boolean;
-  tag?: "div" | "b" | "u" | "span" | "h1" | undefined;
+  tag?: TextTag | undefined;
 }
 
 const {
