@@ -227,6 +227,7 @@ const action = category === "Published tool" ? "Try" : "Play";
         }
         <Text
           title
+          tag="h1"
           class={getTextClass(importance ?? (container ? "low" : "post-title"))}
           >{title ?? <slot name="title" />}</Text
         >
