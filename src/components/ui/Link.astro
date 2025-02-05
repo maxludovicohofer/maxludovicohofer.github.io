@@ -5,7 +5,6 @@ import {
   isMailLink,
   isRemoteLink,
   isTelLink,
-  isFileLink,
 } from "@integrations/text";
 import { localizeHref } from "@integrations/astro";
 import type { AstroGlobal } from "astro";
@@ -101,11 +100,9 @@ const isExternal =
   href={noLocalization || isExternal || href === undefined
     ? href
     : localizeHref(Astro, href?.toString())}
+  data-astro-prefetch={prefetch}
   target={isExternal ? "_blank" : "_self"}
   rel={isExternal ? "noopener noreferrer" : undefined}
-  data-astro-prefetch={!hrefString || isExternal || isFileLink(hrefString)
-    ? undefined
-    : prefetch}
   {...umamiEventInfo}
   {...props}><slot /></a
 >

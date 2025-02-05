@@ -6,10 +6,12 @@ import {
   remarkMinutesRead,
 } from "./src/integrations/remark.mts";
 import rehypeKatex, { type Options as KatexOptions } from "rehype-katex";
+
+import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
+
 import sentry from "@sentry/astro";
-import tailwindcss from "@tailwindcss/vite";
 import pdf from "astro-pdf";
 import { getPrintOptions } from "./src/integrations/pdf.mts";
 //! Removed spotlight because of slow performance/memory leak
@@ -17,7 +19,6 @@ import { getPrintOptions } from "./src/integrations/pdf.mts";
 // https://astro.build/config
 export default defineConfig({
   site: "https://maxludovicohofer.github.io",
-
   env: {
     schema: {
       SENTRY_AUTH_TOKEN: envField.string({
@@ -26,8 +27,8 @@ export default defineConfig({
       }),
     },
   },
-
   integrations: [
+    tailwind(),
     mdx(),
     partytown({ config: { forward: ["umami.track"] } }),
     sentry({
@@ -53,7 +54,6 @@ export default defineConfig({
       },
     }),
   ],
-
   markdown: {
     remarkPlugins: [remarkMinutesRead, remarkCreated, remarkMath],
     rehypePlugins: [
@@ -63,13 +63,8 @@ export default defineConfig({
       ],
     ],
   },
-
   i18n: {
     locales: ["en", "ja"],
     defaultLocale: "en",
-  },
-
-  vite: {
-    plugins: [tailwindcss()],
   },
 });

@@ -13,11 +13,6 @@ export const isMailLink = (link: string) => link.startsWith("mailto:");
 
 export const isTelLink = (link: string) => link.startsWith("tel:");
 
-export const isFileLink = (link: string) =>
-  isRemoteLink(link)
-    ? new URL(link).pathname.includes(".")
-    : link.includes(".");
-
 export const getLinkName = (link: string) => {
   let linkName = "";
 

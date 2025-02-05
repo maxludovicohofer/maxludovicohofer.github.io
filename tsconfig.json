@@ -12,8 +12,7 @@
       "@post/*": ["src/layouts/post/*"],
       "@document/*": ["src/layouts/document/*"],
       "@images/*": ["src/images/*"],
-      "@integrations/*": ["src/integrations/*"],
-      "@styles/*": ["src/styles/*"]
+      "@integrations/*": ["src/integrations/*"]
     },
     "typeRoots": ["node_modules/@types"],
     "types": ["youtube"]
