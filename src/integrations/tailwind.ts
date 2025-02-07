@@ -37,7 +37,7 @@ export const getTextClass = (
   format?: "heading" | "detail" | "base"
 ) => {
   const headings = [
-    "",
+    "text-zinc-950 dark:text-zinc-100 print:text-cyan-700",
     "prose-headings:text-zinc-950 prose-headings:dark:text-zinc-100 prose-headings:print:text-cyan-700",
   ] as const;
 
@@ -46,6 +46,8 @@ export const getTextClass = (
     detail: "text-zinc-400 leading-6",
     base: "text-zinc-500 dark:text-zinc-300",
   };
+
+  const realHeadingFormat = "font-semibold print:font-normal text-balance";
 
   const elements: Record<
     Exclude<typeof size, "markdown">,
@@ -61,29 +63,27 @@ export const getTextClass = (
     u: {},
     em: {},
     h1: {
-      classes:
-        "text-2xl lg:text-3xl 2xl:text-4xl font-semibold print:font-normal text-balance",
+      classes: `text-2xl lg:text-3xl 2xl:text-4xl ${realHeadingFormat}`,
       prose:
         "prose-h1:text-3xl prose-h1:2xl:text-4xl prose-h1:-mb-2 prose-h1:font-semibold prose-h1:print:font-normal prose-h1:text-balance",
     },
     h2: {
-      classes:
-        "text-2xl 2xl:text-3xl font-semibold print:font-normal text-balance",
+      classes: `text-2xl 2xl:text-3xl ${realHeadingFormat}`,
       prose:
         "prose-h2:text-2xl prose-h2:2xl:text-3xl prose-h2:mt-10 prose-h2:mb-2 prose-h2:font-semibold prose-h2:print:font-normal prose-h2:text-balance",
     },
     h3: {
-      classes: "font-semibold print:font-normal text-balance",
+      classes: realHeadingFormat,
       prose:
         "prose-h3:text-xl prose-h3:2xl:text-2xl prose-h3:mt-0 prose-h3:mb-2 prose-h3:font-semibold prose-h3:print:font-normal prose-h3:text-balance",
     },
     h4: { classes: "italic font-normal", prose: "prose-h4:font-normal" },
     "content-list-item": {
-      classes: "text-3xl 2xl:text-4xl",
+      classes: `text-3xl 2xl:text-4xl ${realHeadingFormat}`,
       format: "heading",
     },
     "content-list-highlight": {
-      classes: "text-3xl lg:text-4xl 2xl:text-5xl",
+      classes: `text-3xl lg:text-4xl 2xl:text-5xl ${realHeadingFormat}`,
       format: "heading",
     },
     small: {
