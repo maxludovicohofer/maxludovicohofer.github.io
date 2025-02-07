@@ -14,7 +14,6 @@ import Button from "@ui/Button.astro";
 import type Video from "@ui/Video.astro";
 import Document from "@document/Document.astro";
 import { getDocumentId } from "@document/Document.astro";
-import { getTextClass } from "@integrations/tailwind";
 import { capitalize, getLinkName, toTitleCase } from "@integrations/text";
 import { VALID_INPUT_FORMATS } from "node_modules/astro/dist/assets/consts";
 
@@ -25,7 +24,6 @@ interface Props extends HTMLAttributes<"div"> {
   fullWidthAfter?: boolean | undefined;
   inline?: boolean | undefined;
   container?: boolean;
-  importance?: Parameters<typeof getTextClass>[0] | undefined;
 }
 
 const {
@@ -35,7 +33,6 @@ const {
   fullWidthAfter,
   inline,
   container,
-  importance,
   class: className = "",
   ...props
 } = Astro.props;
@@ -225,10 +222,7 @@ const action = category === "Published tool" ? "Try" : "Play";
             </Text>
           )
         }
-        <Text
-          title
-          tag="h1"
-          class={getTextClass(importance ?? (container ? "low" : "post-title"))}
+        <Text tag={container ? "h2" : "h1"}
           >{title ?? <slot name="title" />}</Text
         >
         {category && <Text subtitle>{category}</Text>}
@@ -265,7 +259,7 @@ const action = category === "Published tool" ? "Try" : "Play";
         }
         {
           Astro.slots.has("footer") && (
-            <Text subtitle class="mt-2 mb-1.5 2xl:-mb-1" tag="div">
+            <Text subtitle tag="div" class="mt-2 mb-1.5 2xl:-mb-1">
               <slot name="footer" />
             </Text>
           )

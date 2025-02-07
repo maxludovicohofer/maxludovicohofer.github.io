@@ -107,5 +107,14 @@ const isExternal =
     ? undefined
     : prefetch}
   {...umamiEventInfo}
-  {...props}><slot /></a
+  {...props}
+  >{
+    Astro.slots.has("default") ? (
+      <slot />
+    ) : hrefString ? (
+      getLinkName(hrefString, true).toLowerCase()
+    ) : (
+      "Link"
+    )
+  }</a
 >

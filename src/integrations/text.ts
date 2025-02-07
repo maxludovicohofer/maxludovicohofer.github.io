@@ -18,11 +18,11 @@ export const isFileLink = (link: string) =>
     ? new URL(link).pathname.includes(".")
     : link.includes(".");
 
-export const getLinkName = (link: string) => {
+export const getLinkName = (link: string, extended?: boolean) => {
   let linkName = "";
 
   if (isRemoteLink(link)) {
-    linkName = new URL(link).host.split(".").at(-2)!;
+    linkName = extended ? link : new URL(link).host.split(".").at(-2)!;
   } else if (isMailLink(link)) {
     linkName = link.slice(7);
   } else if (isTelLink(link)) {

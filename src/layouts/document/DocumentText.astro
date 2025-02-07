@@ -1,6 +1,6 @@
 ---
 import type { ComponentProps } from "astro/types";
-import PrintableMedia from "./PrintableMedia.astro";
+import DocumentMedia from "@document/DocumentMedia.astro";
 import PostText from "@layouts/post/PostText.astro";
 
 interface Props extends ComponentProps<typeof PostText> {}
@@ -8,7 +8,7 @@ interface Props extends ComponentProps<typeof PostText> {}
 
 <PostText
   class="font-['Segoe_UI'] prose-li:list-disc"
-  contentProps={{ components: { img: PrintableMedia } }}
+  contentProps={{ components: { img: DocumentMedia } }}
   {...Astro.props}
 >
   <slot />

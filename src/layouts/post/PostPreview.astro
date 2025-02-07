@@ -16,7 +16,6 @@ import { getCoverAlt } from "@post/CoverMedia.astro";
 import getReadingTime from "reading-time";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
-import { getTextClass } from "@integrations/tailwind";
 import {
   getDescription,
   getDocumentId,
@@ -30,7 +29,7 @@ interface Props extends HTMLAttributes<"div"> {
   readMoreText?: string;
   readMoreClass?: string;
   noReadMore?: boolean;
-  importance?: Parameters<typeof getTextClass>[0] | undefined;
+  titleProps?: ComponentProps<typeof Text>;
   tag?: ComponentProps<typeof Text>["tag"];
   hideDate?: boolean;
   container?: boolean;
@@ -39,7 +38,7 @@ interface Props extends HTMLAttributes<"div"> {
 const {
   class: className = "",
   container,
-  importance,
+  titleProps,
   entry,
   startHeading,
   short,
@@ -107,10 +106,9 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
       {
         (title || Astro.slots.has("title")) && (
           <Text
-            title
-            class={`post-preview-title ${getTextClass(
-              importance ?? "medium"
-            )} ${container ? "lg:ml-4" : ""}`}
+            tag="h1"
+            class={`post-preview-title ${container ? "lg:ml-4" : ""}`}
+            {...titleProps}
           >
             {title ?? <slot name="title" />}
           </Text>
@@ -124,7 +122,7 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
         )
       }
       <Text
-        class={`${subtitle.length !== 0 || renderedContent || Astro.slots.has("title") ? (container ? "mt-6" : "mt-4") : ""} text-xl 2xl:text-3xl ${container ? "max-h-[32rem]" : readMoreLink ? "h-64" : ""}`}
+        class={`${subtitle.length !== 0 || renderedContent || Astro.slots.has("title") ? (container ? "mt-6" : "mt-4") : ""} ${container ? "max-h-[32rem]" : readMoreLink ? "h-64" : ""}`}
         markdown={typeof renderedContent === "function"}
         tag={tag ?? (container ? "div" : undefined)}
         >{

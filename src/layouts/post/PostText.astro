@@ -16,7 +16,7 @@ const { entry, contentProps, ...props } = Astro.props;
 const { Content } = entry ? await render(entry) : {};
 ---
 
-<Text markdown={!!Content} {...props}
+<Text tag="div" markdown={!!Content} {...props}
   >{
     Content ? <DocumentContent Content={Content} {...contentProps} /> : <slot />
   }</Text
