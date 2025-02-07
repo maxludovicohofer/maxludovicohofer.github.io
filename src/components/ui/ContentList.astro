@@ -105,7 +105,7 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
         >
           <PostPreview
             class="content-list-item invisible"
-            titleProps={{ importance: importance ?? "content-list-item" }}
+            titleProps={{ importance: importance }}
             entry={entry}
             {...(entry.collection === "projects"
               ? { startHeading: "Design", short: true }
@@ -225,7 +225,7 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
               // Process highlight
               if (item.className.includes(highlightClass)) {
                 item.classList.remove(...highlightClasses);
-                replaceTitleClass(item, "content-list-item");
+                replaceTitleClass(item, "h1");
               }
 
               // Move to end

@@ -108,6 +108,7 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
           <Text
             tag="h1"
             class={`post-preview-title ${container ? "lg:ml-4" : ""}`}
+            importance={container ? "container" : undefined}
             {...titleProps}
           >
             {title ?? <slot name="title" />}

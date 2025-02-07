@@ -6,9 +6,7 @@ export const makeHighlight = (discrete?: boolean) => {
     highlightClass: `col-span-full ${
       discrete ? "" : "lg:h-[22.6rem] lg:max-h-none"
     }`,
-    importance: (discrete
-      ? "content-list-item"
-      : "content-list-highlight") as TextImportance,
+    importance: (discrete ? "h1" : "content-list-highlight") as TextImportance,
   };
 };
 
@@ -25,9 +23,9 @@ export type TextTag =
   | "h4";
 
 export type TextImportance =
-  | "small"
-  | "content-list-item"
   | "content-list-highlight"
+  | "small"
+  | "container"
   | "button"
   | "button-cta"
   | "markdown";
@@ -63,7 +61,7 @@ export const getTextClass = (
     u: {},
     em: {},
     h1: {
-      classes: `text-2xl lg:text-3xl 2xl:text-4xl ${realHeadingFormat}`,
+      classes: `text-3xl 2xl:text-4xl ${realHeadingFormat}`,
       prose:
         "prose-h1:text-3xl prose-h1:2xl:text-4xl prose-h1:-mb-2 prose-h1:font-semibold prose-h1:print:font-normal prose-h1:text-balance",
     },
@@ -78,8 +76,8 @@ export const getTextClass = (
         "prose-h3:text-xl prose-h3:2xl:text-2xl prose-h3:mt-0 prose-h3:mb-2 prose-h3:font-semibold prose-h3:print:font-normal prose-h3:text-balance",
     },
     h4: { classes: "italic font-normal", prose: "prose-h4:font-normal" },
-    "content-list-item": {
-      classes: `text-3xl 2xl:text-4xl ${realHeadingFormat}`,
+    container: {
+      classes: `text-2xl lg:text-3xl 2xl:text-4xl ${realHeadingFormat}`,
       format: "heading",
     },
     "content-list-highlight": {
