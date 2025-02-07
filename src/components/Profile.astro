@@ -10,14 +10,10 @@ import Fullscreenable from "@ui/Fullscreenable.astro";
 import { Image } from "astro:assets";
 import { getLinkName } from "@integrations/text";
 
-interface Props {
-  importance?: ComponentProps<typeof PostPreview>["importance"];
-}
-
-const { importance } = Astro.props;
+interface Props extends ComponentProps<typeof PostPreview> {}
 ---
 
-<PostPreview importance={importance}
+<PostPreview {...Astro.props}
   ><div slot="header" class="flex items-center gap-x-4 mb-6">
     <Fullscreenable
       class="!max-w-14 2xl:!max-w-20 !rounded-full hover:scale-125"
