@@ -19,15 +19,6 @@ export const saveScrollPosition = () => {
   );
 };
 
-export const imageExtensions = [
-  "png",
-  "jpg",
-  "jpeg",
-  "gif",
-  "webp",
-  "svg",
-] as const;
-
 export const localizeHref = (astro: AstroGlobal, link?: string) => {
   const locale = astro.currentLocale ?? astro.preferredLocale;
 

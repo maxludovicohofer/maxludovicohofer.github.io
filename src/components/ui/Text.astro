@@ -1,7 +1,7 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 
-type TextTag = "div" | "b" | "u" | "span" | "h1" | "h2";
+type TextTag = "div" | "b" | "u" | "span" | "h1" | "h2" | "h3" | "h4";
 
 interface Props extends Omit<HTMLAttributes<TextTag>, "title"> {
   title?: boolean;

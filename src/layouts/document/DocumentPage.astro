@@ -8,9 +8,7 @@ import Document, {
   type DocumentCollectionKey,
 } from "./Document.astro";
 
-interface Props extends Omit<ComponentProps<typeof Document>, "entry"> {
-  entry: NonNullable<ComponentProps<typeof Document>["entry"]>;
-}
+interface Props extends ComponentProps<typeof Document> {}
 
 // Generate a new path for every collection entry
 export const makeDocumentPaths =
@@ -29,5 +27,6 @@ export const makeDocumentPaths =
 const { entry } = Astro.props;
 ---
 
-<Page description={getDescription(entry, 2)}><Document {...Astro.props} /></Page
+<Page description={getDescription(entry, 2)}
+  ><Document {...Astro.props}><slot /></Document></Page
 >

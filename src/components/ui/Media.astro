@@ -3,19 +3,11 @@ import type { getPostCover } from "@post/Post.astro";
 import { Image, type ImgAttributes } from "astro:assets";
 import type { ComponentProps } from "astro/types";
 import Video from "./Video.astro";
-import type { imageExtensions } from "@integrations/astro";
 import { getAspectClass } from "@integrations/tailwind";
-
-interface MarkdownImage {
-  src: string;
-  width: number;
-  height: number;
-  format: (typeof imageExtensions)[number];
-}
 
 interface Props
   extends Omit<ComponentProps<typeof Video>, "src" | "youTubeInfo"> {
-  src: NonNullable<ReturnType<typeof getPostCover>> | MarkdownImage | string;
+  src: NonNullable<ReturnType<typeof getPostCover>> | ImageMetadata | string;
   alt: string;
   aspect?: ComponentProps<typeof Video>["youTubeInfo"]["aspect"];
   loading?: ImgAttributes["loading"];
@@ -47,8 +39,8 @@ export function isVideo(
   );
 }
 
-function isMarkdownImage(image: typeof src): image is MarkdownImage {
-  return !!(image as MarkdownImage).src;
+function isMarkdownImage(image: typeof src): image is ImageMetadata {
+  return !!(image as ImageMetadata).src;
 }
 
 const asMarkdownImage = isMarkdownImage(src) ? src : undefined;

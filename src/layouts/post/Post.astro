@@ -16,7 +16,7 @@ import Document from "@document/Document.astro";
 import { getDocumentId } from "@document/Document.astro";
 import { getTextClass } from "@integrations/tailwind";
 import { capitalize, getLinkName, toTitleCase } from "@integrations/text";
-import { imageExtensions } from "@integrations/astro";
+import { VALID_INPUT_FORMATS } from "node_modules/astro/dist/assets/consts";
 
 interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollectionKey>;
@@ -95,13 +95,13 @@ export const getPostCover = (post: typeof entry) => {
   const imagePath = `${imageFolder}${post.id}`;
   const image =
     images[
-      `${imagePath}.${imageExtensions.find((extension) => images[`${imagePath}.${extension}`])}`
+      `${imagePath}.${VALID_INPUT_FORMATS.find((extension) => images[`${imagePath}.${extension}`])}`
     ];
 
   if (post.collection === "projects" && !post.data.draft && !image) {
     // Projects require image
     throw new Error(
-      `An image for "${imagePath}" does not exist in pattern: "${imageFolder}*.{${imageExtensions.join(",")}}". Import an image, or preferably a video.`
+      `An image for "${imagePath}" does not exist in pattern: "${imageFolder}*.{${VALID_INPUT_FORMATS.join(",")}}". Import an image, or preferably a video.`
     );
   }
 
