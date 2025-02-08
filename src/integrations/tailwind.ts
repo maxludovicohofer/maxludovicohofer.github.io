@@ -33,10 +33,15 @@ export type TextSize =
   | "button"
   | "markdown";
 
-export const getTextClass = (
-  size: TextTag | TextSize,
-  format?: "heading" | "subheading" | "detail" | "base" | "none"
-) => {
+export type TextFormat =
+  | "heading"
+  | "subheading"
+  | "detail"
+  | "base"
+  | "branded"
+  | "none";
+
+export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
   const headingsBase = [
     "text-zinc-950 dark:text-zinc-100 print:text-cyan-700",
     "prose-headings:text-zinc-950 prose-headings:dark:text-zinc-100 prose-headings:print:text-cyan-700",
@@ -47,6 +52,8 @@ export const getTextClass = (
     subheading: `${headingsBase[0]} font-normal italic`,
     detail: "text-zinc-400 leading-6",
     base: "text-zinc-500 dark:text-zinc-300",
+    branded:
+      "text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-400 dark:shadow-yellow-200",
     none: "",
   };
 

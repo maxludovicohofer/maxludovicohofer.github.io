@@ -27,11 +27,11 @@ export default defineConfig({
       }),
       PHONE_NUMBER: envField.string({
         context: "server",
-        access: "secret",
+        access: "public",
       }),
       ADDRESS: envField.string({
         context: "server",
-        access: "secret",
+        access: "public",
       }),
     },
   },

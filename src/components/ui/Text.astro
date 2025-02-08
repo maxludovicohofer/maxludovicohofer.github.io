@@ -3,6 +3,7 @@ import {
   getTextClass,
   type TextTag,
   type TextSize,
+  type TextFormat,
 } from "@integrations/tailwind";
 import type { HTMLAttributes } from "astro/types";
 
@@ -12,6 +13,7 @@ interface Props extends Omit<HTMLAttributes<TextTag>, "title"> {
   markdown?: boolean;
   tag?: TextTag | undefined;
   importance?: TextSize | undefined;
+  format?: TextFormat | undefined;
 }
 
 const {
@@ -21,6 +23,7 @@ const {
   markdown,
   tag,
   importance,
+  format,
   ...props
 } = Astro.props;
 
@@ -30,6 +33,6 @@ if (markdown) import("katex/dist/katex.min.css");
 ---
 
 <Element
-  class={`${className} ${getTextClass(markdown ? "markdown" : (importance ?? (subtitle ? "small" : Element)), title ? "heading" : subtitle ? "detail" : undefined)}`}
+  class={`${className} ${getTextClass(markdown ? "markdown" : (importance ?? (subtitle ? "small" : Element)), format ?? (title ? "heading" : subtitle ? "detail" : undefined))}`}
   {...props}><slot /></Element
 >

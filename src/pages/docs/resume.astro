@@ -14,13 +14,18 @@ import { ADDRESS, PHONE_NUMBER } from "astro:env/server";
   />
   <Text tag="h1">Max Ludovico Hofer</Text>
   <Text
-    >👜 Portfolio: <Link href="https://maxludovicohofer.github.io" />
-    <br />📬 <Link href="mailto:hofermaxludovico@gmail.com" />
+    ><Text tag="span" format="branded">👜</Text> Portfolio:
+    <Link href="https://maxludovicohofer.github.io" />
+    <br /><Text tag="span" format="branded">📬</Text>
+    <Link href="mailto:hofermaxludovico@gmail.com" />
     {
       PHONE_NUMBER && (
         <>
           <br />
-          📞 <Link href={`tel:${PHONE_NUMBER}`} />
+          <Text tag="span" format="branded">
+            📞
+          </Text>
+          <Link href={`tel:${PHONE_NUMBER}`} />
         </>
       )
     }
@@ -28,10 +33,10 @@ import { ADDRESS, PHONE_NUMBER } from "astro:env/server";
       ADDRESS && (
         <>
           <br />
-          🌍{" "}
-          <Link href={`https://maps.google.com/?q=${ADDRESS}`}>
-            {ADDRESS}
-          </Link>{" "}
+          <Text tag="span" format="branded">
+            📍
+          </Text>
+          <Link href={`https://maps.google.com/?q=${ADDRESS}`}>{ADDRESS}</Link>{" "}
           (open to relocate)
         </>
       )
