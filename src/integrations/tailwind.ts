@@ -35,7 +35,7 @@ export type TextSize =
 
 export const getTextClass = (
   size: TextTag | TextSize,
-  format?: "heading" | "subheading" | "detail" | "base"
+  format?: "heading" | "subheading" | "detail" | "base" | "none"
 ) => {
   const headingsBase = [
     "text-zinc-950 dark:text-zinc-100 print:text-cyan-700",
@@ -47,6 +47,7 @@ export const getTextClass = (
     subheading: `${headingsBase[0]} font-normal italic`,
     detail: "text-zinc-400 leading-6",
     base: "text-zinc-500 dark:text-zinc-300",
+    none: "",
   };
 
   const blockClasses = "text-xl 2xl:text-3xl";
@@ -98,6 +99,7 @@ export const getTextClass = (
     },
     button: {
       classes: "text-base 2xl:text-3xl",
+      format: "none",
     },
   };
 
