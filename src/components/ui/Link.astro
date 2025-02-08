@@ -6,6 +6,7 @@ import {
   isRemoteLink,
   isTelLink,
   isFileLink,
+  isGeoLink,
 } from "@integrations/text";
 import { localizeHref } from "@integrations/astro";
 import type { AstroGlobal } from "astro";
@@ -89,7 +90,10 @@ const hrefString = href?.toString();
 
 const isExternal =
   hrefString &&
-  (isRemoteLink(hrefString) || isMailLink(hrefString) || isTelLink(hrefString));
+  (isRemoteLink(hrefString) ||
+    isMailLink(hrefString) ||
+    isTelLink(hrefString) ||
+    isGeoLink(hrefString));
 ---
 
 <a
@@ -108,13 +112,7 @@ const isExternal =
     : prefetch}
   {...umamiEventInfo}
   {...props}
-  >{
-    Astro.slots.has("default") ? (
-      <slot />
-    ) : hrefString ? (
-      getLinkName(hrefString, true).toLowerCase()
-    ) : (
-      "Link"
-    )
-  }</a
+  ><slot
+    >{hrefString ? getLinkName(hrefString, true).toLowerCase() : "Link"}</slot
+  ></a
 >

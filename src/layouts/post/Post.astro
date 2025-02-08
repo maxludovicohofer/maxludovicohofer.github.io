@@ -223,7 +223,7 @@ const action = category === "Published tool" ? "Try" : "Play";
           )
         }
         <Text tag={container ? "h2" : "h1"}
-          >{title ?? <slot name="title" />}</Text
+          ><slot name="title">{title}</slot></Text
         >
         {category && <Text subtitle>{category}</Text>}
         <Document

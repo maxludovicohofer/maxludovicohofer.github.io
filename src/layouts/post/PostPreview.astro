@@ -111,7 +111,7 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
             importance={container ? "container" : undefined}
             {...titleProps}
           >
-            {title ?? <slot name="title" />}
+            <slot name="title">{title}</slot>
           </Text>
         )
       }
@@ -126,13 +126,15 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
         class={`${subtitle.length !== 0 || renderedContent || Astro.slots.has("title") ? (container ? "mt-6" : "mt-4") : ""} ${container ? "max-h-[32rem]" : readMoreLink ? "h-64" : ""}`}
         markdown={typeof renderedContent === "function"}
         tag={tag ?? (container ? "div" : undefined)}
-        >{
-          typeof renderedContent === "function" ? (
-            <DocumentContent preview Content={renderedContent} />
-          ) : (
-            (renderedContent ?? <slot />)
-          )
-        }</Text
+        ><slot
+          >{
+            typeof renderedContent === "function" ? (
+              <DocumentContent preview Content={renderedContent} />
+            ) : (
+              renderedContent
+            )
+          }</slot
+        ></Text
       >
     </div>
     {

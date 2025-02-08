@@ -1,9 +1,10 @@
 ---
 import Text from "@components/ui/Text.astro";
-import Photo from "@docs/public-resume/public-resume-photo.jpg";
+import Photo from "@images/profile-picture-straight.jpg";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
 import Link from "@components/ui/Link.astro";
 import DocumentMedia from "@layouts/document/DocumentMedia.astro";
+import { ADDRESS, PHONE_NUMBER } from "astro:env/server";
 ---
 
 <DocumentPage>
@@ -11,10 +12,30 @@ import DocumentMedia from "@layouts/document/DocumentMedia.astro";
     src={Photo}
     alt="HIDDEN Portrait of Max Ludovico Hofer ASPECT 1/1 TOP"
   />
-  <Text title>Max Ludovico Hofer</Text>
+  <Text tag="h1">Max Ludovico Hofer</Text>
   <Text
-    >👜 Portfolio: <Link href="https://maxludovicohofer.github.io" /><br />
-    📬 <Link href="mailto:hofermaxludovico@gmail.com" /></Text
+    >👜 Portfolio: <Link href="https://maxludovicohofer.github.io" />
+    <br />📬 <Link href="mailto:hofermaxludovico@gmail.com" />
+    {
+      PHONE_NUMBER && (
+        <>
+          <br />
+          📞 <Link href={`tel:${PHONE_NUMBER}`} />
+        </>
+      )
+    }
+    {
+      ADDRESS && (
+        <>
+          <br />
+          🌍{" "}
+          <Link href={`https://maps.google.com/?q=${ADDRESS}`}>
+            {ADDRESS}
+          </Link>{" "}
+          (open to relocate)
+        </>
+      )
+    }</Text
   >
   <Text tag="h2">Summary</Text>
   <Text
