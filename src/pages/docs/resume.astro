@@ -4,7 +4,7 @@ import Photo from "@images/profile-picture-straight.jpg";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
 import Link from "@components/ui/Link.astro";
 import DocumentMedia from "@layouts/document/DocumentMedia.astro";
-import * as env from "astro:env/server";
+import { ADDRESS, PHONE_NUMBER } from "astro:env/server";
 ---
 
 <DocumentPage>
@@ -19,26 +19,24 @@ import * as env from "astro:env/server";
     <br /><Text tag="span" format="branded">📬</Text>
     <Link href="mailto:hofermaxludovico@gmail.com" />
     {
-      env.PHONE_NUMBER && (
+      PHONE_NUMBER && (
         <>
           <br />
           <Text tag="span" format="branded">
             📞
           </Text>
-          <Link href={`tel:${env.PHONE_NUMBER}`} />
+          <Link href={`tel:${PHONE_NUMBER}`} />
         </>
       )
     }
     {
-      env.ADDRESS && (
+      ADDRESS && (
         <>
           <br />
           <Text tag="span" format="branded">
             📍
           </Text>
-          <Link href={`https://maps.google.com/?q=${env.ADDRESS}`}>
-            {env.ADDRESS}
-          </Link>{" "}
+          <Link href={`https://maps.google.com/?q=${ADDRESS}`}>{ADDRESS}</Link>{" "}
           (open to relocate)
         </>
       )
