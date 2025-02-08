@@ -25,14 +25,18 @@ export default defineConfig({
         context: "server",
         access: "secret",
       }),
-      PHONE_NUMBER: envField.string({
-        context: "server",
-        access: "public",
-      }),
-      ADDRESS: envField.string({
-        context: "server",
-        access: "public",
-      }),
+      ...(import.meta.env.DEV
+        ? {
+            PHONE_NUMBER: envField.string({
+              context: "server",
+              access: "secret",
+            }),
+            ADDRESS: envField.string({
+              context: "server",
+              access: "secret",
+            }),
+          }
+        : {}),
     },
   },
   integrations: [
