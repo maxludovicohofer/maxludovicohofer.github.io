@@ -105,7 +105,12 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
         >
           <PostPreview
             class="content-list-item invisible"
-            titleProps={{ importance: importance }}
+            titleProps={{
+              importance:
+                importance === "content-list-highlight"
+                  ? importance
+                  : undefined,
+            }}
             entry={entry}
             {...(entry.collection === "projects"
               ? { startHeading: "Design", short: true }
@@ -120,7 +125,7 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
   import {
     getTextClass,
     makeHighlight,
-    removeFromClasses,
+    switchClasses,
   } from "@integrations/tailwind";
   import type { CollectionKey } from "astro:content";
 
@@ -187,15 +192,17 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
 
     const replaceTitleClass = (
       container: Element,
-      importance: Parameters<typeof getTextClass>[0]
+      importance: ReturnType<typeof makeHighlight>["importance"]
     ) => {
       const containerTitle = container.querySelector(".post-preview-title")!;
 
       // Replace text classes
-      containerTitle.className = removeFromClasses(containerTitle.className, [
-        "text",
-      ]);
-      containerTitle.className = `${containerTitle.className} text-balance text-zinc-950 dark:text-zinc-100 ${getTextClass(importance)}`;
+      switchClasses(
+        containerTitle,
+        importance === "content-list-highlight",
+        getTextClass("content-list-highlight").split(" "),
+        getTextClass("h1").split(" ")
+      );
     };
 
     document

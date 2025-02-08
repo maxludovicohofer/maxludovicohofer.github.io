@@ -230,7 +230,7 @@ const action = category === "Published tool" ? "Try" : "Play";
           inline
           entry={entry}
           tag={tag}
-          class={`${Content ? "is-entry" : ""} ${publishingDate ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl`}
+          class={`${Content ? "is-entry" : ""} ${publishingDate ? "mt-4" : "mt-6"}`}
           ><slot /></Document
         >
         {
@@ -238,7 +238,7 @@ const action = category === "Published tool" ? "Try" : "Play";
             <div class="flex flex-col items-center mt-8 mb-7">
               <Button
                 href={downloadLinks[0]}
-                importance="button-cta"
+                importance="p"
                 linkClass={buttonWidthClass}
               >
                 <div class="group-hover:animate-pulse">{action}</div>

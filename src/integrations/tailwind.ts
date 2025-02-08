@@ -6,7 +6,11 @@ export const makeHighlight = (discrete?: boolean) => {
     highlightClass: `col-span-full ${
       discrete ? "" : "lg:h-[22.6rem] lg:max-h-none"
     }`,
-    importance: (discrete ? "h1" : "content-list-highlight") as TextImportance,
+    importance: (discrete
+      ? ("h1" as const)
+      : ("content-list-highlight" as const)) satisfies Parameters<
+      typeof getTextClass
+    >[0],
   };
 };
 
@@ -22,66 +26,71 @@ export type TextTag =
   | "h3"
   | "h4";
 
-export type TextImportance =
+export type TextSize =
   | "content-list-highlight"
   | "small"
   | "container"
   | "button"
-  | "button-cta"
   | "markdown";
 
 export const getTextClass = (
-  size: TextTag | TextImportance,
-  format?: "heading" | "detail" | "base"
+  size: TextTag | TextSize,
+  format?: "heading" | "subheading" | "detail" | "base"
 ) => {
-  const headings = [
+  const headingsBase = [
     "text-zinc-950 dark:text-zinc-100 print:text-cyan-700",
     "prose-headings:text-zinc-950 prose-headings:dark:text-zinc-100 prose-headings:print:text-cyan-700",
   ] as const;
 
   const formats: Record<NonNullable<typeof format>, string> = {
-    heading: headings[0],
+    heading: `${headingsBase[0]} font-semibold print:font-normal text-balance`,
+    subheading: `${headingsBase[0]} font-normal italic`,
     detail: "text-zinc-400 leading-6",
     base: "text-zinc-500 dark:text-zinc-300",
   };
 
-  const realHeadingFormat = "font-semibold print:font-normal text-balance";
+  const blockClasses = "text-xl 2xl:text-3xl";
 
   const elements: Record<
-    Exclude<typeof size, "markdown">,
+    typeof size,
     { classes?: string; prose?: string; format?: keyof typeof formats }
   > = {
     p: {
-      classes: "text-xl 2xl:text-3xl",
+      classes: blockClasses,
       prose: "prose-p:text-xl prose-p:2xl:text-3xl empty:prose-p:hidden",
     },
-    div: {},
+    div: { classes: blockClasses },
+    markdown: {
+      prose: blockClasses,
+    },
     span: {},
     b: { classes: "font-normal" },
     u: {},
     em: {},
     h1: {
-      classes: `text-3xl 2xl:text-4xl ${realHeadingFormat}`,
+      classes: "text-3xl 2xl:text-4xl",
       prose:
         "prose-h1:text-3xl prose-h1:2xl:text-4xl prose-h1:-mb-2 prose-h1:font-semibold prose-h1:print:font-normal prose-h1:text-balance",
     },
     h2: {
-      classes: `text-2xl 2xl:text-3xl ${realHeadingFormat}`,
+      classes: "text-2xl 2xl:text-3xl",
       prose:
         "prose-h2:text-2xl prose-h2:2xl:text-3xl prose-h2:mt-10 prose-h2:mb-2 prose-h2:font-semibold prose-h2:print:font-normal prose-h2:text-balance",
     },
     h3: {
-      classes: realHeadingFormat,
       prose:
         "prose-h3:text-xl prose-h3:2xl:text-2xl prose-h3:mt-0 prose-h3:mb-2 prose-h3:font-semibold prose-h3:print:font-normal prose-h3:text-balance",
     },
-    h4: { classes: "italic font-normal", prose: "prose-h4:font-normal" },
+    h4: {
+      prose: "prose-h4:italic prose-h4:font-normal",
+      format: "subheading",
+    },
     container: {
-      classes: `text-2xl lg:text-3xl 2xl:text-4xl ${realHeadingFormat}`,
+      classes: "text-2xl lg:text-3xl 2xl:text-4xl",
       format: "heading",
     },
     "content-list-highlight": {
-      classes: `text-3xl lg:text-4xl 2xl:text-5xl ${realHeadingFormat}`,
+      classes: "text-3xl lg:text-4xl 2xl:text-5xl",
       format: "heading",
     },
     small: {
@@ -90,29 +99,26 @@ export const getTextClass = (
     button: {
       classes: "text-base 2xl:text-3xl",
     },
-    "button-cta": {
-      classes: "text-xl 2xl:text-3xl",
-    },
   };
 
   if (size === "markdown") {
-    return `max-w-full prose dark:prose-invert ${headings[1]} ${Object.values(
-      elements
-    )
+    return `max-w-full prose dark:prose-invert ${
+      headingsBase[1]
+    } ${Object.values(elements)
       .map(({ prose }) => prose)
-      .join(
-        " "
-      )} prose-li:list-[kannada] prose-li:marker:text-zinc-400 dark:prose-li:marker:text-zinc-500 prose-pre:rounded-3xl prose-pre:whitespace-pre-wrap prose-pre:text-xs prose-pre:sm:text-base prose-pre:2xl:text-2xl`;
+      .filter((text) => !!text)
+      .join(" ")} ${
+      formats.base
+    } prose-li:list-[kannada] prose-li:marker:text-zinc-400 dark:prose-li:marker:text-zinc-500 prose-pre:rounded-3xl prose-pre:whitespace-pre-wrap prose-pre:text-xs prose-pre:sm:text-base prose-pre:2xl:text-2xl`;
   }
 
-  return [
-    elements[size].classes,
+  return `${elements[size].classes ?? ""} ${
     formats[
       format ??
         elements[size].format ??
         (size.startsWith("h") ? "heading" : "base")
-    ],
-  ].join(" ");
+    ]
+  }`;
 };
 
 export const removeFromClasses = (className: string, remove: string[]) =>

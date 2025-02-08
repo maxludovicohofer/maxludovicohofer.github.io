@@ -2,7 +2,7 @@
 import {
   getTextClass,
   type TextTag,
-  type TextImportance,
+  type TextSize,
 } from "@integrations/tailwind";
 import type { HTMLAttributes } from "astro/types";
 
@@ -11,7 +11,7 @@ interface Props extends Omit<HTMLAttributes<TextTag>, "title"> {
   subtitle?: boolean;
   markdown?: boolean;
   tag?: TextTag | undefined;
-  importance?: TextImportance | undefined;
+  importance?: TextSize | undefined;
 }
 
 const {
