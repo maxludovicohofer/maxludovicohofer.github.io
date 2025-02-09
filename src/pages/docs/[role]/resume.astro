@@ -1,7 +1,7 @@
 ---
-import { getPath } from "@integrations/text";
-import Homepage from "@pages/index.astro";
+import DefaultResume from "@pages/docs/resume.astro";
 import { getCollection } from "astro:content";
+import { getPath } from "@integrations/text";
 
 export const getStaticPaths = async () =>
   (await getCollection("roles")).slice(1).map((entry) => ({
@@ -10,4 +10,4 @@ export const getStaticPaths = async () =>
   }));
 ---
 
-<Homepage />
+<DefaultResume />
