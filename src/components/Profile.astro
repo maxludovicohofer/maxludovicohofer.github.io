@@ -14,7 +14,9 @@ import { getCollection } from "astro:content";
 interface Props extends ComponentProps<typeof PostPreview> {}
 
 const roles = await getCollection("roles");
-const role = getHumanPath(Astro.url.pathname);
+const requiredRole = getHumanPath(Astro.url.pathname);
+const role =
+  (requiredRole && roles.find(({ id }) => id === requiredRole)) || roles[0]!;
 ---
 
 <PostPreview {...Astro.props}
@@ -40,12 +42,10 @@ const role = getHumanPath(Astro.url.pathname);
         >
       </div>
     </div>
-  </div>I'm a {
-    (role && roles.find(({ id }) => id === role)?.id) || roles[0]!.id
-  } specialized in mechanics, combat, AI, and systems.<Button
+  </div>I'm a {role.id} specialized in mechanics, combat, AI, and systems.<Button
     slot="footer"
     class="mt-2"
-    href="docs/resume.pdf"
+    href={`docs${role === roles[0] ? "" : `/${role.id}`}/resume.pdf`}
     noLocalization
     ><div class="group-hover:animate-pulse">View my resume</div></Button
   >
