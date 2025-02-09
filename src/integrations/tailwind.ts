@@ -57,7 +57,7 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
     none: "",
   };
 
-  const blockClasses = "text-lg lg:text-xl 2xl:text-3xl print:text-base";
+  const blockClasses = "text-xl 2xl:text-3xl print:text-base";
 
   const elements: Record<
     typeof size,
@@ -65,7 +65,7 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
   > = {
     p: {
       classes: blockClasses,
-      prose: "prose-p:text-lg prose-p:lg:text-xl prose-p:2xl:text-3xl prose-p:print:text-base empty:prose-p:hidden",
+      prose: "prose-p:text-xl prose-p:2xl:text-3xl prose-p:print:text-base empty:prose-p:hidden",
     },
     div: { classes: blockClasses },
     markdown: {
