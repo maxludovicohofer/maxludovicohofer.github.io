@@ -5,7 +5,7 @@ export const getPrintOptions: PagesFunction = (pathname) => {
 
   if (cleanPathname.startsWith("/docs/")) {
     return {
-      path: `${cleanPathname.slice(cleanPathname.indexOf("/", 1))}.pdf`,
+      path: `${cleanPathname}.pdf`,
     };
   } else if (cleanPathname.endsWith("/pdf")) {
     return {
