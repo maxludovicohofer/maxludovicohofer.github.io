@@ -11,12 +11,14 @@ import { render, getCollection, type CollectionEntry } from "astro:content";
 import { getDocumentId } from "@layouts/document/Document.astro";
 import { groupBy, partition } from "@integrations/array";
 import { makeHighlight } from "@integrations/tailwind";
+import { getHumanPath } from "@integrations/text";
 
 interface Props extends HTMLAttributes<"ol"> {
   collection: PostCollectionKey;
   exclude?: string[] | undefined;
   discreteHighlight?: boolean | undefined;
   numberOfItemsToLoadEager?: number | undefined;
+  priority?: (entry: CollectionEntry<PostCollectionKey>) => number;
 }
 
 const {
@@ -25,10 +27,11 @@ const {
   exclude = [],
   discreteHighlight,
   numberOfItemsToLoadEager = 0,
+  priority,
   ...props
 } = Astro.props;
 
-export const getSortedEntries = async <C extends PostCollectionKey>(
+const getSortedEntries = async <C extends PostCollectionKey>(
   entryCollection: C,
   excluded: string[] = []
 ) => {
@@ -44,22 +47,30 @@ export const getSortedEntries = async <C extends PostCollectionKey>(
 
   const isProjects = entryCollection === "projects";
 
+  const isProgrammer = getHumanPath(Astro.url.pathname).endsWith("programmer");
+
+  const datedEntries = await Promise.all(
+    entries.map(async (entry) => ({
+      ...entry,
+      publishingDate: getPublishingDate(
+        entry,
+        (await render(entry)).remarkPluginFrontmatter
+      )!,
+    }))
+  );
+
   const groupedEntries = groupBy(
-    await Promise.all(
-      entries.map(async (entry) => ({
-        ...entry,
-        publishingDate: getPublishingDate(
-          entry,
-          (await render(entry)).remarkPluginFrontmatter
-        )!,
-      }))
-    ),
+    datedEntries,
     // Group by category priority
     (entry) => {
       if (isProjects) {
         switch (getCategory(entry, true)) {
           case "Game":
             return "1";
+
+          case "Tool":
+            if (isProgrammer) return "2";
+            break;
         }
       }
 

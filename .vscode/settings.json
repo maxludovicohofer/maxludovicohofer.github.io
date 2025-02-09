@@ -1,4 +1,5 @@
 {
   "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": false,
-  "cSpell.words": ["Diegetic", "Umami"]
+  "cSpell.words": ["Diegetic", "Umami"],
+  "yaml.schemaStore.enable": false
 }

@@ -14,7 +14,12 @@ import Button from "@ui/Button.astro";
 import type Video from "@ui/Video.astro";
 import Document from "@document/Document.astro";
 import { getDocumentId } from "@document/Document.astro";
-import { capitalize, getLinkName, toTitleCase } from "@integrations/text";
+import {
+  capitalize,
+  getHumanPath,
+  getLinkName,
+  toTitleCase,
+} from "@integrations/text";
 import { VALID_INPUT_FORMATS } from "node_modules/astro/dist/assets/consts";
 
 interface Props extends HTMLAttributes<"div"> {
@@ -47,7 +52,7 @@ export const getTitle = (post: typeof entry) => {
 
   if (post.data.title) return post.data.title;
 
-  const rawTitle = getDocumentId(post)!.split("-").join(" ");
+  const rawTitle = getHumanPath(getDocumentId(post)!);
   return post.collection === "projects"
     ? toTitleCase(rawTitle)
     : capitalize(rawTitle);

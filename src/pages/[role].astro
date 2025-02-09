@@ -1,0 +1,12 @@
+---
+import Homepage from "@pages/index.astro";
+import { getCollection } from "astro:content";
+
+export const getStaticPaths = async () =>
+  (await getCollection("roles")).slice(1).map((entry) => ({
+    params: { role: entry.id.replaceAll(" ", "-") },
+    props: { entry },
+  }));
+---
+
+<Homepage />

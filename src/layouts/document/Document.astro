@@ -1,7 +1,7 @@
 ---
 import type { CollectionKey, CollectionEntry } from "astro:content";
 import { cleanMarkdown } from "@integrations/markdown";
-import { capitalize } from "@integrations/text";
+import { capitalize, getShortPath } from "@integrations/text";
 import type { PostCollectionKey } from "@post/Post.astro";
 import type { ComponentProps } from "astro/types";
 import Card from "@layouts/Card.astro";
@@ -21,7 +21,7 @@ export type DocumentCollectionKey = Extract<CollectionKey, "docs" | PostCollecti
 
 export const getDocumentId = (
   document: CollectionEntry<DocumentCollectionKey>
-) => document?.id.split("/").at(-1);
+) => document?.id && getShortPath(document.id);
 
 export const getDescription = <C extends CollectionKey>(
   entry?: CollectionEntry<C>,

@@ -7,14 +7,13 @@
     "paths": {
       "@components/*": ["src/components/*"],
       "@ui/*": ["src/components/ui/*"],
-      "@pages/*": ["src/pages/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@post/*": ["src/layouts/post/*"],
-      "@document/*": ["src/layouts/document/*"],
-      "@images/*": ["src/images/*"],
       "@integrations/*": ["src/integrations/*"],
-      "@data/*": ["src/data/*"],
-      "@docs/*": ["src/data/docs/*"]
+      "@images/*": ["src/images/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@document/*": ["src/layouts/document/*"],
+      "@post/*": ["src/layouts/post/*"],
+      "@pages/*": ["src/pages/*"],
+      "@docs/*": ["src/pages/docs/*"],
     },
     "typeRoots": ["node_modules/@types"],
     "types": ["youtube"]

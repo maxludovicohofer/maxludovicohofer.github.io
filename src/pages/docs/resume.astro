@@ -5,6 +5,12 @@ import DocumentPage from "@layouts/document/DocumentPage.astro";
 import Link from "@components/ui/Link.astro";
 import DocumentMedia from "@layouts/document/DocumentMedia.astro";
 import { ADDRESS, PHONE_NUMBER } from "astro:env/server";
+import { getDirectoryPath, toSentenceCase, getPath } from "@integrations/text";
+import { getCollection } from "astro:content";
+
+const roles = await getCollection("roles");
+const requiredRole = getDirectoryPath(Astro.url.pathname)!;
+const role = roles.find(({ id }) => id === requiredRole) ?? roles[0]!;
 ---
 
 <DocumentPage>
@@ -15,7 +21,9 @@ import { ADDRESS, PHONE_NUMBER } from "astro:env/server";
   <Text tag="h1">Max Ludovico Hofer</Text>
   <Text
     ><Text tag="span" format="branded">👜</Text> Portfolio:
-    <Link href="https://maxludovicohofer.github.io" />
+    <Link
+      href={`https://maxludovicohofer.github.io${role === roles[0] ? "" : `/${getPath(role.id)}`}`}
+    />
     <br /><Text tag="span" format="branded">📬</Text>
     <Link href="mailto:hofermaxludovico@gmail.com" />
     {
@@ -44,7 +52,7 @@ import { ADDRESS, PHONE_NUMBER } from "astro:env/server";
   >
   <Text tag="h2">Summary</Text>
   <Text
-    >Technical game designer experienced in leadership and software, specialized
+    >{toSentenceCase(role.id)} experienced in leadership and software, specialized
     in mechanics, combat, AI, and systems.</Text
   >
   <Text tag="h2">Experience</Text>

@@ -48,12 +48,7 @@ export const getLinkName = (link: string, pretty?: boolean) => {
   } else if (isGeoLink(link)) {
     linkName = link.slice(4);
   } else {
-    linkName = link
-      .replace(/(^\/+)|(\/+$)/g, "")
-      .split("/")
-      .at(-1)!
-      .replaceAll("-", " ")
-      .split(".")[0]!;
+    linkName = getHumanPath(link);
   }
 
   return toSentenceCase(linkName);
@@ -82,3 +77,17 @@ export const getMaximumWordsInLimit = (text: string, limit: number) => {
 
   return shortened;
 };
+
+export const standardizePath = (pathname: string) =>
+  pathname.replace(/(^\/+)|(\/+$)/g, "");
+
+export const getShortPath = (pathname: string) =>
+  standardizePath(pathname).split("/").at(-1);
+
+export const getDirectoryPath = (pathname: string) =>
+  standardizePath(pathname).split("/").at(-2);
+
+export const getHumanPath = (pathname: string) =>
+  getShortPath(pathname)!.replaceAll("-", " ").split(".")[0]!;
+
+export const getPath = (humanName: string) => humanName.replaceAll(" ", "-");
