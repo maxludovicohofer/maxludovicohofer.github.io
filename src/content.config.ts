@@ -51,6 +51,7 @@ const roles = defineCollection({
   loader: file("src/data/roles.yaml"),
   schema: z.object({
     id: z.string(),
+    homepageTitle: z.string().optional(),
   }),
 });
 

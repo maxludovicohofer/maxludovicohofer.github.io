@@ -78,7 +78,7 @@ dayjs.extend(duration);
 const readMoreLink =
   noReadMore || (isMarkdown && minutesToRead! < 0)
     ? undefined
-    : (readMore ?? (entry && `/${entry.collection}/${getDocumentId(entry)}`));
+    : (readMore ?? (entry && `${entry.collection}/${getDocumentId(entry)}`));
 
 const cover = getPostCover(entry);
 const category = getCategory(entry);

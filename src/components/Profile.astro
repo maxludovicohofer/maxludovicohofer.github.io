@@ -8,15 +8,12 @@ import PostPreview from "@post/PostPreview.astro";
 import type { ComponentProps } from "astro/types";
 import Fullscreenable from "@ui/Fullscreenable.astro";
 import { Image } from "astro:assets";
-import { getLinkName, getHumanPath } from "@integrations/text";
-import { getCollection } from "astro:content";
+import { getLinkName } from "@integrations/text";
+import { getRole } from "@integrations/astro-server";
 
 interface Props extends ComponentProps<typeof PostPreview> {}
 
-const roles = await getCollection("roles");
-const requiredRole = getHumanPath(Astro.url.pathname);
-const role =
-  (requiredRole && roles.find(({ id }) => id === requiredRole)) || roles[0]!;
+const { role } = await getRole(Astro);
 ---
 
 <PostPreview {...Astro.props}
@@ -45,8 +42,7 @@ const role =
   </div>I'm a {role.id} specialized in mechanics, combat, AI, and systems.<Button
     slot="footer"
     class="mt-2"
-    href={`docs${role === roles[0] ? "" : `/${role.id}`}/resume.pdf`}
-    noLocalization
+    href="docs/resume.pdf"
     ><div class="group-hover:animate-pulse">View my resume</div></Button
   >
 </PostPreview>

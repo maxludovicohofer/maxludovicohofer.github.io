@@ -48,7 +48,7 @@ export const getLinkName = (link: string, pretty?: boolean) => {
   } else if (isGeoLink(link)) {
     linkName = link.slice(4);
   } else {
-    linkName = getHumanPath(link);
+    linkName = getHumanPathSection(link);
   }
 
   return toSentenceCase(linkName);
@@ -81,13 +81,23 @@ export const getMaximumWordsInLimit = (text: string, limit: number) => {
 export const standardizePath = (pathname: string) =>
   pathname.replace(/(^\/+)|(\/+$)/g, "");
 
-export const getShortPath = (pathname: string) =>
-  standardizePath(pathname).split("/").at(-1);
+export const getPathSection = (pathname: string, position: number = -1) =>
+  getPathSections(pathname).at(position);
 
-export const getDirectoryPath = (pathname: string) =>
-  standardizePath(pathname).split("/").at(-2);
+export const getPathSections = (
+  pathname: string,
+  ...params: Parameters<string[]["slice"]>
+) =>
+  standardizePath(pathname)
+    .split("/")
+    .slice(...params);
 
-export const getHumanPath = (pathname: string) =>
-  getShortPath(pathname)!.replaceAll("-", " ").split(".")[0]!;
+export const getHumanPathSection = (
+  ...params: Parameters<typeof getPathSection>
+) =>
+  getPathSection(...params)!
+    .replaceAll("-", " ")
+    .split(".")[0]!;
 
-export const getPath = (humanName: string) => humanName.replaceAll(" ", "-");
+export const makePath = (humanName: string) =>
+  humanName.toLowerCase().replaceAll(" ", "-");

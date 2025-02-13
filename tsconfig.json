@@ -12,8 +12,8 @@
       "@layouts/*": ["src/layouts/*"],
       "@document/*": ["src/layouts/document/*"],
       "@post/*": ["src/layouts/post/*"],
-      "@pages/*": ["src/pages/*"],
-      "@docs/*": ["src/pages/docs/*"],
+      "@pages/*": ["src/pages/[...path]/*"],
+      "@docs/*": ["src/pages/docs/*"]
     },
     "typeRoots": ["node_modules/@types"],
     "types": ["youtube"]

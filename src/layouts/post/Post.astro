@@ -16,7 +16,7 @@ import Document from "@document/Document.astro";
 import { getDocumentId } from "@document/Document.astro";
 import {
   capitalize,
-  getHumanPath,
+  getHumanPathSection,
   getLinkName,
   toTitleCase,
 } from "@integrations/text";
@@ -52,7 +52,7 @@ export const getTitle = (post: typeof entry) => {
 
   if (post.data.title) return post.data.title;
 
-  const rawTitle = getHumanPath(getDocumentId(post)!);
+  const rawTitle = getHumanPathSection(getDocumentId(post)!);
   return post.collection === "projects"
     ? toTitleCase(rawTitle)
     : capitalize(rawTitle);

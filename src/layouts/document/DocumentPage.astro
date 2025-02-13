@@ -7,22 +7,40 @@ import Document, {
   getDocumentId,
   type DocumentCollectionKey,
 } from "./Document.astro";
+import type { GetStaticPathsResult } from "astro";
+import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 
 interface Props extends ComponentProps<typeof Document> {}
+
+// prettier-ignore
+export const mergePaths = <B extends GetStaticPathsResult,P extends GetStaticPathsResult>(
+  basePaths: B,
+  paths: P
+) => {
+  return basePaths.flatMap((base) =>
+    paths.map((path) => ({
+      params: { ...(base.params as B[number]["params"]), ...(path.params as P[number]["params"]) },
+      props: { ...(base.props as P[number]["props"]), ...(path.props as P[number]["props"]) },
+    }))
+  );
+};
 
 // Generate a new path for every collection entry
 export const makeDocumentPaths =
   <C extends DocumentCollectionKey>(collection: C) =>
   async () =>
-    (
-      await getCollection(
-        collection,
-        ({ data: { draft } }) => import.meta.env.DEV || !draft
-      )
-    ).map((entry) => ({
-      params: { id: getDocumentId(entry) },
-      props: { entry },
-    }));
+    mergePaths(
+      await getBasePaths(),
+      (
+        await getCollection(
+          collection,
+          ({ data: { draft } }) => import.meta.env.DEV || !draft
+        )
+      ).map((entry) => ({
+        params: { id: getDocumentId(entry) },
+        props: { entry },
+      }))
+    );
 
 const { entry } = Astro.props;
 ---

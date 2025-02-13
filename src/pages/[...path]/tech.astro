@@ -2,15 +2,15 @@
 import Page from "@layouts/Page.astro";
 import TechList from "@components/TechList.astro";
 import Post from "@post/Post.astro";
-import type { CollectionKey } from "astro:content";
 import { capitalize } from "@integrations/text";
+import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 
-const title: CollectionKey = "tech";
+export const getStaticPaths = getBasePaths;
 ---
 
 <Page description="Max Hofer's tech stack."
   ><Post tag="div" fullWidth class="max-w-[170rem]"
-    ><Fragment slot="title">{capitalize(title)}</Fragment>
+    ><Fragment slot="title">{capitalize("tech")}</Fragment>
     <TechList
       class="sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 lg:min-h-[calc(100vh-12rem)]"
     /></Post

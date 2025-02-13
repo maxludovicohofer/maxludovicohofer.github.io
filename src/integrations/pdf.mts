@@ -1,12 +1,17 @@
 import type { PagesFunction } from "astro-pdf";
-import { standardizePath } from "./text";
+import { getPathSections } from "./text";
 
 export const getPrintOptions: PagesFunction = (pathname) => {
-  const cleanPathname = standardizePath(pathname);
+  const sections = getPathSections(pathname);
 
-  if (cleanPathname.startsWith("docs/") || cleanPathname.endsWith("/pdf")) {
+  if (sections.at(-2) === "docs") {
+    sections.reverse();
     return {
-      path: `${cleanPathname}.pdf`,
+      path: `${[...sections.slice(1), sections[0]].join("/")}.pdf`,
+    };
+  } else if (sections.at(-1) === "pdf") {
+    return {
+      path: `${sections.join("/")}.pdf`,
     };
   } else return;
 };

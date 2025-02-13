@@ -11,7 +11,7 @@ import { render, getCollection, type CollectionEntry } from "astro:content";
 import { getDocumentId } from "@layouts/document/Document.astro";
 import { groupBy, partition } from "@integrations/array";
 import { makeHighlight } from "@integrations/tailwind";
-import { getHumanPath } from "@integrations/text";
+import { getHumanPathSection } from "@integrations/text";
 
 interface Props extends HTMLAttributes<"ol"> {
   collection: PostCollectionKey;
@@ -46,8 +46,9 @@ const getSortedEntries = async <C extends PostCollectionKey>(
   );
 
   const isProjects = entryCollection === "projects";
-
-  const isProgrammer = getHumanPath(Astro.url.pathname).endsWith("programmer");
+  const isProgrammer = getHumanPathSection(Astro.url.pathname).includes(
+    "programmer"
+  );
 
   const datedEntries = await Promise.all(
     entries.map(async (entry) => ({

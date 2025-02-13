@@ -14,6 +14,7 @@ import partytown from "@astrojs/partytown";
 import sentry from "@sentry/astro";
 import pdf from "astro-pdf";
 import { getPrintOptions } from "./src/integrations/pdf.mts";
+import { locales } from "./src/integrations/astro-config.mts";
 //! Removed spotlight because of slow performance/memory leak
 
 // https://astro.build/config
@@ -74,7 +75,7 @@ export default defineConfig({
     ],
   },
   i18n: {
-    locales: ["en", "ja"],
-    defaultLocale: "en",
+    locales,
+    defaultLocale: locales[0],
   },
 });

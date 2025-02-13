@@ -2,8 +2,9 @@
 import { ClientRouter } from "astro:transitions";
 import BackButton from "@ui/BackButton.astro";
 import ModalSlot from "./ModalSlot.astro";
-import { capitalize, getHumanPath } from "@integrations/text";
+import { capitalize, getHumanPathSection } from "@integrations/text";
 import { getPrintOptions } from "@integrations/pdf.mts";
+import { getRole } from "@integrations/astro-server";
 
 interface Props {
   title?: string | undefined;
@@ -14,8 +15,13 @@ interface Props {
 
 const { title, description, backHref, homepage } = Astro.props;
 
+const { role } = await getRole(Astro);
+
 const formattedTitle =
-  (title ?? getHumanPath(Astro.url.pathname)) || "game design";
+  title ??
+  (homepage
+    ? (role.data.homepageTitle ?? role.id)
+    : getHumanPathSection(Astro.url.pathname));
 
 const completeTitle = `Max Hofer \\ ${capitalize(formattedTitle)}`;
 ---
