@@ -8,7 +8,7 @@ import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 export const getStaticPaths = getBasePaths;
 ---
 
-<Page description="Max Hofer's tech stack."
+<Page description="Max Hofer's tech stack." backHref=""
   ><Post tag="div" fullWidth class="max-w-[170rem]"
     ><Fragment slot="title">{capitalize("tech")}</Fragment>
     <TechList
