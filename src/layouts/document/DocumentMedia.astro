@@ -1,52 +1,17 @@
 ---
-import PostMedia from "@post/PostMedia.astro";
 import type { ComponentProps } from "astro/types";
+import MarkdownMedia from "@document/MarkdownMedia.astro";
 
-interface Props extends ComponentProps<typeof PostMedia> {}
+interface Props extends ComponentProps<typeof MarkdownMedia> {
+  resolution?: number;
+}
 
-const { class: className = "", alt, ...props } = Astro.props;
-
-const getAttribute = (
-  altText: string,
-  attribute: string,
-  isBoolean?: boolean
-) => {
-  const attributeRegex = new RegExp(
-    `(^|\\s)${attribute.toUpperCase()}${isBoolean ? "(?=($|\\s))" : "\\s\\S+"}`
-  );
-  const valueIndex = altText.search(attributeRegex);
-
-  return {
-    value:
-      valueIndex !== -1
-        ? isBoolean
-          ? "true"
-          : altText.slice(valueIndex).trimStart().split(" ")[1]
-        : undefined,
-    cleanedAlt: altText.replace(attributeRegex, "").trimStart(),
-  };
-};
-
-const { value: eager, cleanedAlt: altWithoutEager } = getAttribute(
-  alt,
-  "EAGER",
-  true
-);
-
-const { value: aspect, cleanedAlt: altWithoutAspect } = getAttribute(
-  altWithoutEager,
-  "ASPECT"
-);
-
-const { value: smallTopMargin, cleanedAlt: altWithoutSmallTopMargin } =
-  getAttribute(altWithoutAspect, "MT-SMALL", true);
+const { resolution = 7, ...props } = Astro.props;
 ---
 
-<PostMedia
-  alt={altWithoutSmallTopMargin}
-  class={`${className} ${aspect ? "!w-auto h-36" : "h-[40vh]"}`}
-  marginClass={smallTopMargin ? "mt-6 2xl:mt-0" : ""}
-  loading={eager ? "eager" : undefined}
-  aspect={aspect as ComponentProps<typeof PostMedia>["aspect"]}
+<MarkdownMedia
+  class="shadow-none !h-32"
+  width={resolution * 32}
+  loading="eager"
   {...props}
 />

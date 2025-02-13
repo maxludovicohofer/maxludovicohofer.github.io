@@ -2,20 +2,26 @@
 import { ClientRouter } from "astro:transitions";
 import BackButton from "@ui/BackButton.astro";
 import ModalSlot from "./ModalSlot.astro";
-import { capitalize } from "@integrations/text";
+import { capitalize, getHumanPathSection } from "@integrations/text";
 import { getPrintOptions } from "@integrations/pdf.mts";
+import { getRole } from "@integrations/astro-server";
 
 interface Props {
   title?: string | undefined;
   description?: string | undefined;
   backHref?: string;
+  homepage?: boolean;
 }
 
-const { title, description, backHref } = Astro.props;
+const { title, description, backHref, homepage } = Astro.props;
+
+const { role } = await getRole(Astro);
 
 const formattedTitle =
   title ??
-  Astro.url.pathname.replace(/\/$/, "").split("/").at(-1)!.replace("-", " ");
+  (homepage
+    ? (role.data.homepageTitle ?? role.id)
+    : getHumanPathSection(Astro.url.pathname));
 
 const completeTitle = `Max Hofer \\ ${capitalize(formattedTitle)}`;
 ---
@@ -47,7 +53,7 @@ const completeTitle = `Max Hofer \\ ${capitalize(formattedTitle)}`;
   </head>
   <body class="bg-zinc-200 dark:bg-zinc-950"
     ><slot />{
-      Astro.url.pathname !== "/" && !getPrintOptions(Astro.url.pathname) && (
+      !homepage && !getPrintOptions(Astro.url.pathname) && (
         <BackButton href={backHref} prefetch="load" />
       )
     }

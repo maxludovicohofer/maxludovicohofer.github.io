@@ -9,15 +9,21 @@ import type { ComponentProps } from "astro/types";
 import Fullscreenable from "@ui/Fullscreenable.astro";
 import { Image } from "astro:assets";
 import { getLinkName } from "@integrations/text";
+import { addBaseToLink, getRole } from "@integrations/astro-server";
+import { getPrintPath } from "@integrations/pdf.mjs";
+import { getSpecializationSentence } from "@integrations/docs";
 
-interface Props {
-  importance?: ComponentProps<typeof PostPreview>["importance"];
-}
+interface Props extends ComponentProps<typeof PostPreview> {}
 
-const { importance } = Astro.props;
+const { role } = await getRole(Astro);
+
+const resumePageLink = await addBaseToLink(Astro, "docs/resume");
+const resumeLink = getPrintPath(resumePageLink);
+
+const specializationSentence = await getSpecializationSentence(Astro);
 ---
 
-<PostPreview importance={importance}
+<PostPreview {...Astro.props}
   ><div slot="header" class="flex items-center gap-x-4 mb-6">
     <Fullscreenable
       class="!max-w-14 2xl:!max-w-20 !rounded-full hover:scale-125"
@@ -30,7 +36,7 @@ const { importance } = Astro.props;
         loading="eager"
       /></Fullscreenable
     ><div>
-      <Text title>Max Ludovico Hofer</Text><div
+      <Text tag="h3">Max Ludovico Hofer</Text><div
         class="flex items-center gap-0.5 -ml-0.5 2xl:-ml-1"
       >
         <Link
@@ -40,12 +46,11 @@ const { importance } = Astro.props;
         >
       </div>
     </div>
-  </div>I'm a technical game designer specialized in mechanics, combat, AI, and
-  systems.<Button
+  </div>I'm {role.data.withArticle}{" "}
+  {specializationSentence}.<Button
     slot="footer"
     class="mt-2"
-    href="public-resume.pdf"
-    noLocalization
-    ><div class="group-hover:animate-pulse">View my resume</div></Button
+    href={import.meta.env.DEV ? resumePageLink : resumeLink}
+    noBase><div class="group-hover:animate-pulse">View my resume</div></Button
   >
 </PostPreview>

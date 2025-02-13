@@ -13,8 +13,8 @@ export const rotate3D = async (
     e: K extends keyof WindowEventMap
       ? WindowEventMap[K]
       : K extends keyof DocumentEventMap
-        ? DocumentEventMap[K]
-        : never
+      ? DocumentEventMap[K]
+      : never
   ) => void;
 }> => {
   const maxAngle = 40;

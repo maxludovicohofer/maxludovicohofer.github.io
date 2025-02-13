@@ -1,0 +1,173 @@
+---
+import Text from "@components/ui/Text.astro";
+import Photo from "@images/profile-picture-straight.jpg";
+import DocumentPage from "@layouts/document/DocumentPage.astro";
+import Link from "@components/ui/Link.astro";
+import DocumentMedia from "@layouts/document/DocumentMedia.astro";
+import { ADDRESS, PHONE_NUMBER } from "astro:env/server";
+import { capitalize } from "@integrations/text";
+import { getStaticPaths as getBasePaths } from "@pages/index.astro";
+import { addBaseToLink, getRole } from "@integrations/astro-server";
+import { getSpecializationSentence } from "@integrations/docs";
+
+export const getStaticPaths = getBasePaths;
+
+const { role } = await getRole(Astro);
+
+const portfolioVersion = await addBaseToLink(Astro);
+const portfolioLink = `${import.meta.env.SITE}${portfolioVersion === "/" ? "" : portfolioVersion}`;
+
+const specializationSentence = await getSpecializationSentence(Astro);
+---
+
+<DocumentPage>
+  <DocumentMedia
+    src={Photo}
+    alt="HIDDEN Portrait of Max Ludovico Hofer ASPECT 1/1 TOP"
+  />
+  <Text tag="h1">Max Ludovico Hofer</Text>
+  <Text
+    ><Text tag="span" format="branded">👜</Text> Portfolio:
+    <Link href={portfolioLink} />
+    <br /><Text tag="span" format="branded">📬</Text>
+    <Link href="mailto:hofermaxludovico@gmail.com" />
+    {
+      PHONE_NUMBER && (
+        <>
+          <br />
+          <Text tag="span" format="branded">
+            📞
+          </Text>
+          <Link href={`tel:${PHONE_NUMBER}`} />
+        </>
+      )
+    }
+    {
+      ADDRESS && (
+        <>
+          <br />
+          <Text tag="span" format="branded">
+            📍
+          </Text>
+          <Link href={`https://maps.google.com/?q=${ADDRESS}`}>{ADDRESS}</Link>{" "}
+          (open to relocate)
+        </>
+      )
+    }</Text
+  >
+  <Text tag="h2">Summary</Text>
+  <Text
+    >{capitalize(role.id)} experienced in leadership and software, {
+      specializationSentence
+    }.</Text
+  >
+  <Text tag="h2">Experience</Text>
+  <Text tag="h3">Game director for school projects</Text>
+  <Text tag="h4">BigRock Institute of Magic Technologies - 09/23 - 03/24</Text>
+  <ul>
+    <li>
+      Directed a published game, completed in 3 months by an average team of 18.
+      The game won People's Choice at "The Rookies Awards".
+    </li>
+    <li>
+      Designed and lead development of multiple prototypes for clients or game
+      jams, completed by teams of 5.
+    </li>
+  </ul>
+  <Text tag="h3">Project manager</Text>
+  <Text tag="h4">INattivo Soc. Cons. a.r.l. - 05/21 - 03/22</Text>
+  <ul>
+    <li>
+      Envisioned and lead development of innovative B2C and B2B solutions in the
+      credit brokerage sector.
+    </li>
+    <li>Worked as a DevOps full stack programmer.</li>
+  </ul>
+  <Text tag="h3">Technical lead</Text>
+  <Text tag="h4">Zulu Medical - 11/19 - 04/21</Text>
+  <ul>
+    <li>Managed R&D innovation in the telemedicine sector.</li>
+    <li>Worked as a scrum master, and desktop and full stack programmer.</li>
+  </ul>
+  <Text tag="h2">Education</Text>
+  <Text tag="h3">Technical art for videogames</Text>
+  <Text tag="h4">BigRock Institute of Magic Technologies - 09/23 - 03/24</Text>
+  <ul>
+    <li>
+      Studied the game development pipeline, using the latest industry
+      standards.
+    </li>
+    <li>Specialized in design and technical aspects.</li>
+  </ul>
+  <Text tag="h3">Software engineering (Not graduated)</Text>
+  <Text tag="h4">University of Padua - 2016 - 2019</Text>
+  <ul>
+    <li>
+      Learned physics, math for games, electronics, and advanced computer
+      science.
+    </li>
+  </ul>
+  <Text tag="h3">Computer science</Text>
+  <Text tag="h4">High school - 2011 - 2016</Text>
+  <ul>
+    <li>
+      Studied programming for videogames, desktop, web, data analysis, and
+      electronics, in most major languages, from assembly to python.
+    </li>
+    <li>
+      Won school programming competition and top 25% placement at national team
+      programming competition.
+    </li>
+  </ul>
+  <Text tag="h2">Skills</Text>
+  <ul>
+    <li>
+      My work spans the fields of game design, level design, narrative design,
+      and UI/UX design.
+    </li>
+    <li>
+      I have extensive experience in agile project management and leadership.
+      Also, I worked closely with business development.
+    </li>
+    <li>
+      I have experience in Unreal (5 years), Unity (1 year), popular programming
+      languages (blueprints (3 years), C++ (5 years), C# (5 years), HLSL (1
+      year), python (3 years), assembly (1 year), full stack web (5 years),
+      mobile (2 years), Java (2 years), SQL (5 years)), ECS (5 years), shading
+      and graphics programming, AI, databases, cloud and web programming, server
+      management, and CPU and GPU architectures.
+    </li>
+    <li>
+      I have experience in most software quality standards, such as TDD/BDD, XP,
+      DevOps, CI/CD and pair programming.
+    </li>
+    <li>I made games for desktop, mobile, and online and local multiplayer.</li>
+    <li>
+      I have experience in Houdini (6 months), Maya (1 year), ZBrush (1 year),
+      Marvelous designer (6 months), Substance designer (6 months), Substance
+      painter (6 months), Photoshop/Illustrator/Krita (3 years), After
+      Effects/Premiere (3 years).
+    </li>
+    <li>
+      I am fluent in English, Italian and German. I'm at Japanese limited
+      professional (N3) level. I also understand French and Spanish at a B1
+      level, while speaking them at an A2 level.
+    </li>
+  </ul>
+  <Text tag="h3">Extra</Text>
+  <ul>
+    <li>
+      I have a learning method which allows me to quickly become proficient in
+      new skills. This allows me to keep up to date with the latest technology
+      and research.
+    </li>
+    <li>
+      I am passionate about cinema and arts, often drawing inspiration from them
+      for my designs.
+    </li>
+    <li>
+      I compose techno music and worked professionally as mixing and mastering
+      engineer. I also have experience in TouchDesigner (2 years).
+    </li>
+  </ul>
+</DocumentPage>

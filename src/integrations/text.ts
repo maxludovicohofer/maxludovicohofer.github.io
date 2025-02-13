@@ -13,27 +13,42 @@ export const isMailLink = (link: string) => link.startsWith("mailto:");
 
 export const isTelLink = (link: string) => link.startsWith("tel:");
 
+export const isGeoLink = (link: string) => link.startsWith("geo:");
+
 export const isFileLink = (link: string) =>
   isRemoteLink(link)
     ? new URL(link).pathname.includes(".")
     : link.includes(".");
 
-export const getLinkName = (link: string) => {
+export const getLinkName = (link: string, pretty?: boolean) => {
   let linkName = "";
 
   if (isRemoteLink(link)) {
-    linkName = new URL(link).host.split(".").at(-2)!;
+    const url = new URL(link);
+
+    if (!pretty) {
+      linkName = url.host.split(".").at(-2)!;
+    } else {
+      linkName =
+        url.hostname === "maps.google.com" ? url.searchParams.get("q")! : link;
+    }
   } else if (isMailLink(link)) {
     linkName = link.slice(7);
   } else if (isTelLink(link)) {
     linkName = link.slice(4);
+
+    if (pretty) {
+      const sections = linkName.match(/.{1,3}/g)!;
+      if (sections.at(-1)!.length < 3) {
+        sections[sections.length - 2] = `${sections.at(-2)}${sections.pop()}`;
+      }
+
+      linkName = sections.join(" ");
+    }
+  } else if (isGeoLink(link)) {
+    linkName = link.slice(4);
   } else {
-    linkName = link
-      .replace(/(^\/+)|(\/+$)/g, "")
-      .split("/")
-      .at(-1)!
-      .replaceAll("-", " ")
-      .split(".")[0]!;
+    linkName = getHumanPathSection(link);
   }
 
   return toSentenceCase(linkName);
@@ -61,4 +76,40 @@ export const getMaximumWordsInLimit = (text: string, limit: number) => {
   }
 
   return shortened;
+};
+
+export const standardizePath = (pathname: string) =>
+  pathname.replace(/(^\/+)|(\/+$)/g, "");
+
+export const getPathSection = (pathname: string, position: number = -1) =>
+  getPathSections(pathname).at(position);
+
+export const getPathSections = (
+  pathname: string,
+  ...params: Parameters<string[]["slice"]>
+) =>
+  standardizePath(pathname)
+    .split("/")
+    .slice(...params);
+
+export const getHumanPathSection = (
+  ...params: Parameters<typeof getPathSection>
+) =>
+  getPathSection(...params)!
+    .replaceAll("-", " ")
+    .split(".")[0]!;
+
+export const makePath = (humanName: string) =>
+  humanName.toLowerCase().replaceAll(" ", "-");
+
+export const toTextList = (text: string[]) => {
+  const length = text.length;
+
+  if (length > 1) {
+    return `${text.slice(0, -1).join(", ")}${
+      length === 2 ? "" : ","
+    } and ${text.at(-1)}`;
+  }
+
+  return text[0] ?? "";
 };

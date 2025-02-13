@@ -1,11 +1,11 @@
 import { defineCollection, reference, z } from "astro:content";
 import { file, glob } from "astro/loaders";
 
-const document = z.object({
+const documents = z.object({
   draft: z.boolean().optional(),
 });
 
-const post = document.extend({
+const posts = documents.extend({
   title: z.string().optional(),
   highlight: z.boolean().optional(),
   publishingDate: z.date().max(new Date()).optional(),
@@ -16,7 +16,7 @@ const post = document.extend({
 // Define your collection(s)
 const projects = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "src/data/projects" }),
-  schema: post.extend({
+  schema: posts.extend({
     category: z.enum(["Game", "Prototype", "Tool"]).optional(),
     developmentTime: z.string().duration(),
     team: z.number().int().positive().optional(),
@@ -29,7 +29,7 @@ const projects = defineCollection({
 
 const thoughts = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "src/data/thoughts" }),
-  schema: post,
+  schema: posts,
 });
 
 const tech = defineCollection({
@@ -44,7 +44,15 @@ const tech = defineCollection({
 
 const docs = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "src/data/docs" }),
-  schema: document,
+  schema: documents,
+});
+
+const roles = defineCollection({
+  loader: file("src/data/roles.yaml"),
+  schema: z.object({
+    id: z.string(),
+    homepageTitle: z.string().optional(),
+  }),
 });
 
 // Export a single `collections` object to register your collection(s)
@@ -53,4 +61,5 @@ export const collections = {
   thoughts,
   tech,
   docs,
+  roles,
 };

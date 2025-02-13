@@ -73,7 +73,7 @@ const stringAlt = textAlt.reduce(
     ><Media alt={stringAlt} {...props} /></Fullscreenable
   >{
     descriptiveAlt && (
-      <Text subtitle class="-mb-4">
+      <Text subtitle class="not-prose mt-4 -mb-4">
         {textAlt.length === 1
           ? textAlt[0]
           : textAlt.map((text, index) => (
@@ -81,7 +81,7 @@ const stringAlt = textAlt.reduce(
                 {index !== 0 && (
                   <Link {...links[index - 1]}>{links[index - 1]!.slot}</Link>
                 )}
-                <Text tag="span" subtitle>
+                <Text subtitle tag="span">
                   {text}
                 </Text>
               </>

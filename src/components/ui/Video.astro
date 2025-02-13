@@ -40,8 +40,6 @@ const aspectRatio = aspect ?? "16/9";
     // Auto resize for object-cover videos
     const containerObserver = new ResizeObserver((entries) =>
       entries.forEach(({ target }) => {
-        if (!target.checkVisibility()) return;
-
         const resizingDiv = target.firstElementChild! as HTMLDivElement;
         const lyt = resizingDiv.firstElementChild! as LiteYTEmbed;
 

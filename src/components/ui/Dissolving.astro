@@ -11,8 +11,6 @@ const { class: className = "", ...props } = Astro.props;
   import { getPagePosition } from "@integrations/html";
 
   const updateContainer = (container: HTMLElement) => {
-    if (!container.checkVisibility()) return;
-
     const scrollPercent = Math.min(
       Math.max(scrollY - getPagePosition(container).top, 0) /
         container.offsetHeight,

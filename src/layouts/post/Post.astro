@@ -14,9 +14,13 @@ import Button from "@ui/Button.astro";
 import type Video from "@ui/Video.astro";
 import Document from "@document/Document.astro";
 import { getDocumentId } from "@document/Document.astro";
-import { getTextClass } from "@integrations/tailwind";
-import { capitalize, getLinkName, toTitleCase } from "@integrations/text";
-import { imageExtensions } from "@integrations/astro";
+import {
+  capitalize,
+  getHumanPathSection,
+  getLinkName,
+  toTitleCase,
+} from "@integrations/text";
+import { VALID_INPUT_FORMATS } from "node_modules/astro/dist/assets/consts";
 
 interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollectionKey>;
@@ -25,7 +29,6 @@ interface Props extends HTMLAttributes<"div"> {
   fullWidthAfter?: boolean | undefined;
   inline?: boolean | undefined;
   container?: boolean;
-  importance?: Parameters<typeof getTextClass>[0] | undefined;
 }
 
 const {
@@ -35,7 +38,6 @@ const {
   fullWidthAfter,
   inline,
   container,
-  importance,
   class: className = "",
   ...props
 } = Astro.props;
@@ -50,7 +52,7 @@ export const getTitle = (post: typeof entry) => {
 
   if (post.data.title) return post.data.title;
 
-  const rawTitle = getDocumentId(post)!.split("-").join(" ");
+  const rawTitle = getHumanPathSection(getDocumentId(post)!);
   return post.collection === "projects"
     ? toTitleCase(rawTitle)
     : capitalize(rawTitle);
@@ -95,13 +97,13 @@ export const getPostCover = (post: typeof entry) => {
   const imagePath = `${imageFolder}${post.id}`;
   const image =
     images[
-      `${imagePath}.${imageExtensions.find((extension) => images[`${imagePath}.${extension}`])}`
+      `${imagePath}.${VALID_INPUT_FORMATS.find((extension) => images[`${imagePath}.${extension}`])}`
     ];
 
   if (post.collection === "projects" && !post.data.draft && !image) {
     // Projects require image
     throw new Error(
-      `An image for "${imagePath}" does not exist in pattern: "${imageFolder}*.{${imageExtensions.join(",")}}". Import an image, or preferably a video.`
+      `An image for "${imagePath}" does not exist in pattern: "${imageFolder}*.{${VALID_INPUT_FORMATS.join(",")}}". Import an image, or preferably a video.`
     );
   }
 
@@ -225,17 +227,15 @@ const action = category === "Published tool" ? "Try" : "Play";
             </Text>
           )
         }
-        <Text
-          title
-          class={getTextClass(importance ?? (container ? "low" : "post-title"))}
-          >{title ?? <slot name="title" />}</Text
+        <Text tag={container ? "h2" : "h1"}
+          ><slot name="title">{title}</slot></Text
         >
         {category && <Text subtitle>{category}</Text>}
         <Document
           inline
           entry={entry}
           tag={tag}
-          class={`${Content ? "is-entry" : ""} ${publishingDate ? "mt-4" : "mt-6"} text-xl 2xl:text-3xl`}
+          class={`${Content ? "is-entry" : ""} ${publishingDate ? "mt-4" : "mt-6"}`}
           ><slot /></Document
         >
         {
@@ -243,7 +243,7 @@ const action = category === "Published tool" ? "Try" : "Play";
             <div class="flex flex-col items-center mt-8 mb-7">
               <Button
                 href={downloadLinks[0]}
-                importance="button-cta"
+                importance="p"
                 linkClass={buttonWidthClass}
               >
                 <div class="group-hover:animate-pulse">{action}</div>
@@ -264,7 +264,7 @@ const action = category === "Published tool" ? "Try" : "Play";
         }
         {
           Astro.slots.has("footer") && (
-            <Text subtitle class="mt-2 mb-1.5 2xl:-mb-1" tag="div">
+            <Text subtitle tag="div" class="mt-2 mb-1.5 2xl:-mb-1">
               <slot name="footer" />
             </Text>
           )

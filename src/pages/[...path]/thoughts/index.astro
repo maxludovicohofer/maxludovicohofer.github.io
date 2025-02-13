@@ -1,6 +1,9 @@
 ---
 import Page from "@layouts/Page.astro";
 import PostList from "@post/PostList.astro";
+import { getStaticPaths as getBasePaths } from "@pages/index.astro";
+
+export const getStaticPaths = getBasePaths;
 ---
 
 <Page

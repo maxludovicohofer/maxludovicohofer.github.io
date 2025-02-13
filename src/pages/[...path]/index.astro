@@ -5,16 +5,32 @@ import Profile from "@components/Profile.astro";
 import TechPreview from "@components/TechPreview.astro";
 import Video from "@ui/Video.astro";
 import PostListPreview from "@post/PostListPreview.astro";
+import { getCollection } from "astro:content";
+import { makePath } from "@integrations/text";
+import { locales } from "@integrations/astro-config.mts";
 
-// TODO PHASE 2 AUTOMATE RESUME PDF CREATION WITH ASTRO-PDF (ALSO CREATES WORK HISTORY FOR JAPAN)
+export const getStaticPaths = async () =>
+  (
+    await Promise.all(
+      [undefined, ...locales.slice(1)].map(async (locale) =>
+        [undefined, ...(await getCollection("roles")).slice(1)].map((role) => ({
+          params: {
+            path:
+              [locale, role && makePath(role.id)]
+                .filter((param) => !!param)
+                .join("/") || undefined,
+          },
+          props: {},
+        }))
+      )
+    )
+  ).flat();
+
 // TODO PHASE 2 ADD LANG SELECTION ON TOP OF PAGE (TWO UNDERLINED LINKS WITH LANG ICONS). ADD i18n TO CONTENT AND DAYJS.
 // TODO PHASE 2 UPDATE TAILWIND (ISSUES WITH OPACITY AND OBJECT COVER)
 ---
 
-<Page
-  title="game design"
-  description="Max Hofer's game design portfolio and blog."
->
+<Page description="Max Hofer's portfolio and blog." homepage>
   <Bento>
     <Profile slot="1-small" />
     <Video
@@ -26,7 +42,7 @@ import PostListPreview from "@post/PostListPreview.astro";
       collection="projects"
       contentClass="lg:grid-cols-2 2xl:grid-cols-1"
     />
-    <TechPreview slot="4-small" importance="low" />
+    <TechPreview slot="4-small" titleProps={{ tag: "h2" }} />
     <PostListPreview
       slot="5-medium"
       collection="thoughts"

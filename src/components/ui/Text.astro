@@ -1,11 +1,19 @@
 ---
+import {
+  getTextClass,
+  type TextTag,
+  type TextSize,
+  type TextFormat,
+} from "@integrations/tailwind";
 import type { HTMLAttributes } from "astro/types";
 
-interface Props extends Omit<HTMLAttributes<"div" | "b" | "u">, "title"> {
+interface Props extends Omit<HTMLAttributes<TextTag>, "title"> {
   title?: boolean;
   subtitle?: boolean;
   markdown?: boolean;
-  tag?: "div" | "b" | "u" | "span" | undefined;
+  tag?: TextTag | undefined;
+  importance?: TextSize | undefined;
+  format?: TextFormat | undefined;
 }
 
 const {
@@ -14,15 +22,17 @@ const {
   subtitle,
   markdown,
   tag,
+  importance,
+  format,
   ...props
 } = Astro.props;
 
-const Element = tag ?? (markdown ? "div" : "p");
+const Element = tag ?? (markdown ? "div" : title ? "h1" : "p");
 
 if (markdown) import("katex/dist/katex.min.css");
 ---
 
 <Element
-  class={`${className} ${title ? "text-balance text-zinc-950 dark:text-zinc-100 font-semibold" : subtitle ? "text-sm 2xl:text-xl text-zinc-400 leading-6" : "text-zinc-500 dark:text-zinc-300"} ${markdown ? "max-w-full prose dark:prose-invert empty:prose-p:hidden prose-h1:font-semibold prose-h2:text-2xl prose-h2:2xl:text-3xl prose-h2:font-semibold prose-h3:text-xl prose-h3:2xl:text-3xl prose-h3:font-semibold prose-li:list-[kannada] prose-li:marker:text-zinc-400 dark:prose-li:marker:text-zinc-500 prose-pre:rounded-3xl prose-pre:whitespace-pre-wrap prose-pre:text-xs prose-pre:sm:text-base prose-pre:2xl:text-2xl" : ""}`}
+  class={`${className} ${getTextClass(markdown ? "markdown" : (importance ?? (subtitle ? "small" : Element)), format ?? (title ? "heading" : subtitle ? "detail" : undefined))}`}
   {...props}><slot /></Element
 >

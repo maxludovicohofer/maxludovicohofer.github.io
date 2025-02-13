@@ -8,5 +8,5 @@ interface Props {
 const { value } = Astro.props;
 ---
 
-<Text tag="b" class="font-normal"><slot /></Text>
+<Text tag="b"><slot /></Text>
 {Array.isArray(value) ? value.join(", ") : value}.

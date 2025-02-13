@@ -11,12 +11,14 @@ import { render, getCollection, type CollectionEntry } from "astro:content";
 import { getDocumentId } from "@layouts/document/Document.astro";
 import { groupBy, partition } from "@integrations/array";
 import { makeHighlight } from "@integrations/tailwind";
+import { getRole } from "@integrations/astro-server";
 
 interface Props extends HTMLAttributes<"ol"> {
   collection: PostCollectionKey;
   exclude?: string[] | undefined;
   discreteHighlight?: boolean | undefined;
   numberOfItemsToLoadEager?: number | undefined;
+  priority?: (entry: CollectionEntry<PostCollectionKey>) => number;
 }
 
 const {
@@ -25,10 +27,11 @@ const {
   exclude = [],
   discreteHighlight,
   numberOfItemsToLoadEager = 0,
+  priority,
   ...props
 } = Astro.props;
 
-export const getSortedEntries = async <C extends PostCollectionKey>(
+const getSortedEntries = async <C extends PostCollectionKey>(
   entryCollection: C,
   excluded: string[] = []
 ) => {
@@ -44,22 +47,32 @@ export const getSortedEntries = async <C extends PostCollectionKey>(
 
   const isProjects = entryCollection === "projects";
 
+  const { role } = await getRole(Astro);
+  // TODO POSTS SHOULD HAVE TAGS AND MATCH TAGS WITH ROLES
+  const isProgrammer = role.id.toLowerCase().includes("programmer");
+
+  const datedEntries = await Promise.all(
+    entries.map(async (entry) => ({
+      ...entry,
+      publishingDate: getPublishingDate(
+        entry,
+        (await render(entry)).remarkPluginFrontmatter
+      )!,
+    }))
+  );
+
   const groupedEntries = groupBy(
-    await Promise.all(
-      entries.map(async (entry) => ({
-        ...entry,
-        publishingDate: getPublishingDate(
-          entry,
-          (await render(entry)).remarkPluginFrontmatter
-        )!,
-      }))
-    ),
+    datedEntries,
     // Group by category priority
     (entry) => {
       if (isProjects) {
         switch (getCategory(entry, true)) {
           case "Game":
             return "1";
+
+          case "Tool":
+            if (isProgrammer) return "2";
+            break;
         }
       }
 
@@ -105,7 +118,12 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
         >
           <PostPreview
             class="content-list-item invisible"
-            importance={importance ?? "content-list-item"}
+            titleProps={{
+              importance:
+                importance === "content-list-highlight"
+                  ? importance
+                  : undefined,
+            }}
             entry={entry}
             {...(entry.collection === "projects"
               ? { startHeading: "Design", short: true }
@@ -120,7 +138,7 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
   import {
     getTextClass,
     makeHighlight,
-    removeFromClasses,
+    switchClasses,
   } from "@integrations/tailwind";
   import type { CollectionKey } from "astro:content";
 
@@ -187,17 +205,17 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
 
     const replaceTitleClass = (
       container: Element,
-      importance: Parameters<typeof getTextClass>[0]
+      importance: ReturnType<typeof makeHighlight>["importance"]
     ) => {
-      const containerTitle = container.querySelector<HTMLParagraphElement>(
-        "p.post-preview-title"
-      )!;
+      const containerTitle = container.querySelector(".post-preview-title")!;
 
       // Replace text classes
-      containerTitle.className = removeFromClasses(containerTitle.className, [
-        "text",
-      ]);
-      containerTitle.className = `${containerTitle.className} text-balance text-zinc-950 dark:text-zinc-100 ${getTextClass(importance)}`;
+      switchClasses(
+        containerTitle,
+        importance === "content-list-highlight",
+        getTextClass("content-list-highlight").split(" "),
+        getTextClass("h1").split(" ")
+      );
     };
 
     document
@@ -227,7 +245,7 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
               // Process highlight
               if (item.className.includes(highlightClass)) {
                 item.classList.remove(...highlightClasses);
-                replaceTitleClass(item, "content-list-item");
+                replaceTitleClass(item, "h1");
               }
 
               // Move to end
