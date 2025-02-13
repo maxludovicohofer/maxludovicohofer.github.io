@@ -11,7 +11,7 @@ import { render, getCollection, type CollectionEntry } from "astro:content";
 import { getDocumentId } from "@layouts/document/Document.astro";
 import { groupBy, partition } from "@integrations/array";
 import { makeHighlight } from "@integrations/tailwind";
-import { getHumanPathSection } from "@integrations/text";
+import { getRole } from "@integrations/astro-server";
 
 interface Props extends HTMLAttributes<"ol"> {
   collection: PostCollectionKey;
@@ -46,9 +46,10 @@ const getSortedEntries = async <C extends PostCollectionKey>(
   );
 
   const isProjects = entryCollection === "projects";
-  const isProgrammer = getHumanPathSection(Astro.url.pathname).includes(
-    "programmer"
-  );
+
+  const { role } = await getRole(Astro);
+  // TODO POSTS SHOULD HAVE TAGS AND MATCH TAGS WITH ROLES
+  const isProgrammer = role.id.toLowerCase().includes("programmer");
 
   const datedEntries = await Promise.all(
     entries.map(async (entry) => ({

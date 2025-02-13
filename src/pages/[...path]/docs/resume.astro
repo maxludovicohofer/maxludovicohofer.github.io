@@ -7,15 +7,17 @@ import DocumentMedia from "@layouts/document/DocumentMedia.astro";
 import { ADDRESS, PHONE_NUMBER } from "astro:env/server";
 import { capitalize } from "@integrations/text";
 import { getStaticPaths as getBasePaths } from "@pages/index.astro";
-import type { AstroGlobal } from "astro";
 import { addBaseToLink, getRole } from "@integrations/astro-server";
+import { getSpecializationSentence } from "@integrations/docs";
 
 export const getStaticPaths = getBasePaths;
 
-const { role } = await getRole(Astro as unknown as AstroGlobal);
+const { role } = await getRole(Astro);
 
 const portfolioVersion = await addBaseToLink(Astro);
 const portfolioLink = `${import.meta.env.SITE}${portfolioVersion === "/" ? "" : portfolioVersion}`;
+
+const specializationSentence = await getSpecializationSentence(Astro);
 ---
 
 <DocumentPage>
@@ -55,8 +57,9 @@ const portfolioLink = `${import.meta.env.SITE}${portfolioVersion === "/" ? "" : 
   >
   <Text tag="h2">Summary</Text>
   <Text
-    >{capitalize(role.id)} experienced in leadership and software, specialized in
-    mechanics, combat, AI, and systems.</Text
+    >{capitalize(role.id)} experienced in leadership and software, {
+      specializationSentence
+    }.</Text
   >
   <Text tag="h2">Experience</Text>
   <Text tag="h3">Game director for school projects</Text>

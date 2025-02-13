@@ -2,6 +2,7 @@ import type { AstroGlobal } from "astro";
 import { getCollection } from "astro:content";
 import { getPathSections, makePath, standardizePath } from "./text";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import addArticle from "indefinite";
 
 export const getRole = async (astro: AstroGlobal) => {
   const roles = await getCollection("roles");
@@ -21,7 +22,10 @@ export const getRole = async (astro: AstroGlobal) => {
     }
   }
 
-  return { role, isDefault: role === roles[0] };
+  return {
+    role: { ...role, data: { ...role.data, withArticle: addArticle(role.id) } },
+    isDefault: role === roles[0],
+  };
 };
 
 export const addBaseToLink = async (astro: AstroGlobal, link: string = "") => {

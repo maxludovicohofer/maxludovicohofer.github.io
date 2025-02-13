@@ -101,3 +101,15 @@ export const getHumanPathSection = (
 
 export const makePath = (humanName: string) =>
   humanName.toLowerCase().replaceAll(" ", "-");
+
+export const toTextList = (text: string[]) => {
+  const length = text.length;
+
+  if (length > 1) {
+    return `${text.slice(0, -1).join(", ")}${
+      length === 2 ? "" : ","
+    } and ${text.at(-1)}`;
+  }
+
+  return text[0] ?? "";
+};

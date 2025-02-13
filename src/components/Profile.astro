@@ -11,12 +11,16 @@ import { Image } from "astro:assets";
 import { getLinkName } from "@integrations/text";
 import { addBaseToLink, getRole } from "@integrations/astro-server";
 import { getPrintPath } from "@integrations/pdf.mjs";
+import { getSpecializationSentence } from "@integrations/docs";
 
 interface Props extends ComponentProps<typeof PostPreview> {}
 
 const { role } = await getRole(Astro);
 
-const resumeHref = getPrintPath(await addBaseToLink(Astro, "docs/resume"));
+const resumePageLink = await addBaseToLink(Astro, "docs/resume");
+const resumeLink = getPrintPath(resumePageLink);
+
+const specializationSentence = await getSpecializationSentence(Astro);
 ---
 
 <PostPreview {...Astro.props}
@@ -42,10 +46,11 @@ const resumeHref = getPrintPath(await addBaseToLink(Astro, "docs/resume"));
         >
       </div>
     </div>
-  </div>I'm a {role.id} specialized in mechanics, combat, AI, and systems.<Button
+  </div>I'm {role.data.withArticle}{" "}
+  {specializationSentence}.<Button
     slot="footer"
     class="mt-2"
-    href={resumeHref}
+    href={import.meta.env.DEV ? resumePageLink : resumeLink}
     noBase><div class="group-hover:animate-pulse">View my resume</div></Button
   >
 </PostPreview>
