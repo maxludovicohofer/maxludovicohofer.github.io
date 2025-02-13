@@ -1,6 +1,6 @@
 import type { AstroGlobal } from "astro";
 import { getCollection } from "astro:content";
-import { getPathSections, makePath } from "./text";
+import { getPathSections, makePath, standardizePath } from "./text";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
 export const getRole = async (astro: AstroGlobal) => {
@@ -31,7 +31,9 @@ export const addBaseToHref = async (astro: AstroGlobal, link?: string) => {
 
   const locale = astro.currentLocale ?? astro.preferredLocale;
 
-  return locale
-    ? getRelativeLocaleUrl(locale, linkWithRole)
-    : `/${linkWithRole}`;
+  return `/${
+    locale
+      ? standardizePath(getRelativeLocaleUrl(locale, linkWithRole))
+      : linkWithRole
+  }`;
 };
