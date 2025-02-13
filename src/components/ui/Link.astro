@@ -8,7 +8,7 @@ import {
   isFileLink,
   isGeoLink,
 } from "@integrations/text";
-import { addBaseToHref } from "@integrations/astro-server";
+import { addBaseToLink } from "@integrations/astro-server";
 import type { AstroGlobal } from "astro";
 import type { HTMLAttributes } from "astro/types";
 
@@ -16,6 +16,7 @@ interface Props extends HTMLAttributes<"a"> {
   noStyle?: boolean;
   prefetch?: "viewport" | "load" | "hover";
   noEvent?: boolean;
+  noBase?: boolean;
 }
 
 const {
@@ -24,6 +25,7 @@ const {
   noStyle,
   prefetch = "viewport",
   noEvent,
+  noBase,
   "data-umami-event": umamiEvent,
   ...props
 } = Astro.props;
@@ -100,9 +102,9 @@ const isExternal =
       ? ""
       : "not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150"
   }`}
-  href={isExternal || href === undefined
+  href={noBase || isExternal || href === undefined
     ? href
-    : await addBaseToHref(Astro, href?.toString())}
+    : await addBaseToLink(Astro, href?.toString())}
   target={isExternal ? "_blank" : "_self"}
   rel={isExternal ? "noopener noreferrer" : undefined}
   data-astro-prefetch={!hrefString || isExternal || isFileLink(hrefString)

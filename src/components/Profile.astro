@@ -9,11 +9,14 @@ import type { ComponentProps } from "astro/types";
 import Fullscreenable from "@ui/Fullscreenable.astro";
 import { Image } from "astro:assets";
 import { getLinkName } from "@integrations/text";
-import { getRole } from "@integrations/astro-server";
+import { addBaseToLink, getRole } from "@integrations/astro-server";
+import { getPrintPath } from "@integrations/pdf.mjs";
 
 interface Props extends ComponentProps<typeof PostPreview> {}
 
 const { role } = await getRole(Astro);
+
+const resumeHref = getPrintPath(await addBaseToLink(Astro, "docs/resume"));
 ---
 
 <PostPreview {...Astro.props}
@@ -42,7 +45,7 @@ const { role } = await getRole(Astro);
   </div>I'm a {role.id} specialized in mechanics, combat, AI, and systems.<Button
     slot="footer"
     class="mt-2"
-    href="docs/resume.pdf"
-    ><div class="group-hover:animate-pulse">View my resume</div></Button
+    href={resumeHref}
+    noBase><div class="group-hover:animate-pulse">View my resume</div></Button
   >
 </PostPreview>

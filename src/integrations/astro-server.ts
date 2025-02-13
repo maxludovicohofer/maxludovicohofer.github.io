@@ -24,7 +24,7 @@ export const getRole = async (astro: AstroGlobal) => {
   return { role, isDefault: role === roles[0] };
 };
 
-export const addBaseToHref = async (astro: AstroGlobal, link?: string) => {
+export const addBaseToLink = async (astro: AstroGlobal, link?: string) => {
   const { role, isDefault } = await getRole(astro);
 
   const linkWithRole = isDefault ? link : `${makePath(role.id)}/${link}`;
