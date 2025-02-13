@@ -5,14 +5,17 @@ import DocumentPage from "@layouts/document/DocumentPage.astro";
 import Link from "@components/ui/Link.astro";
 import DocumentMedia from "@layouts/document/DocumentMedia.astro";
 import { ADDRESS, PHONE_NUMBER } from "astro:env/server";
-import { makePath, capitalize } from "@integrations/text";
+import { capitalize } from "@integrations/text";
 import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 import type { AstroGlobal } from "astro";
-import { getRole } from "@integrations/astro-server";
+import { addBaseToLink, getRole } from "@integrations/astro-server";
 
 export const getStaticPaths = getBasePaths;
 
-const { role, isDefault } = await getRole(Astro as unknown as AstroGlobal);
+const { role } = await getRole(Astro as unknown as AstroGlobal);
+
+const portfolioVersion = await addBaseToLink(Astro);
+const portfolioLink = `${import.meta.env.SITE}${portfolioVersion === "/" ? "" : portfolioVersion}`;
 ---
 
 <DocumentPage>
@@ -23,9 +26,7 @@ const { role, isDefault } = await getRole(Astro as unknown as AstroGlobal);
   <Text tag="h1">Max Ludovico Hofer</Text>
   <Text
     ><Text tag="span" format="branded">👜</Text> Portfolio:
-    <Link
-      href={`https://maxludovicohofer.github.io${isDefault ? "" : `/${makePath(role.id)}`}`}
-    />
+    <Link href={portfolioLink} />
     <br /><Text tag="span" format="branded">📬</Text>
     <Link href="mailto:hofermaxludovico@gmail.com" />
     {
