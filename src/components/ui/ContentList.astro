@@ -1,17 +1,12 @@
 ---
 import Card from "@layouts/Card.astro";
-import {
-  getCategory,
-  getPublishingDate,
-  type PostCollectionKey,
-} from "@post/Post.astro";
+import type { PostCollectionKey } from "@post/Post.astro";
 import PostPreview from "@post/PostPreview.astro";
 import type { HTMLAttributes } from "astro/types";
-import { render, getCollection, type CollectionEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import { getDocumentId } from "@layouts/document/Document.astro";
-import { groupBy, partition } from "@integrations/array";
 import { makeHighlight } from "@integrations/tailwind";
-import { getRole } from "@integrations/astro-server";
+import { getSortedPosts } from "@integrations/astro-server";
 
 interface Props extends HTMLAttributes<"ol"> {
   collection: PostCollectionKey;
@@ -31,68 +26,8 @@ const {
   ...props
 } = Astro.props;
 
-const getSortedEntries = async <C extends PostCollectionKey>(
-  entryCollection: C,
-  excluded: string[] = []
-) => {
-  const [highlights, entries] = partition(
-    await getCollection(
-      entryCollection,
-      ({ data: { draft }, id }) =>
-        (import.meta.env.DEV || !draft) &&
-        excluded.every((entry) => id !== entry)
-    )!,
-    ({ data: { highlight } }) => highlight
-  );
-
-  const isProjects = entryCollection === "projects";
-
-  const { role } = await getRole(Astro);
-  // TODO POSTS SHOULD HAVE TAGS AND MATCH TAGS WITH ROLES
-  const isProgrammer = role.id.toLowerCase().includes("programmer");
-
-  const datedEntries = await Promise.all(
-    entries.map(async (entry) => ({
-      ...entry,
-      publishingDate: getPublishingDate(
-        entry,
-        (await render(entry)).remarkPluginFrontmatter
-      )!,
-    }))
-  );
-
-  const groupedEntries = groupBy(
-    datedEntries,
-    // Group by category priority
-    (entry) => {
-      if (isProjects) {
-        switch (getCategory(entry, true)) {
-          case "Game":
-            return "1";
-
-          case "Tool":
-            if (isProgrammer) return "2";
-            break;
-        }
-      }
-
-      return "0";
-    }
-  );
-
-  // Sort individual categories by latest first
-  Object.values(groupedEntries).forEach((entries) =>
-    entries.sort((a, b) =>
-      b.publishingDate.isAfter(a.publishingDate) ? 1 : -1
-    )
-  );
-
-  // Apply priorities
-  return [...highlights, ...Object.values(groupedEntries).reverse().flat()];
-};
-
 const sortedEntries: CollectionEntry<PostCollectionKey>[] =
-  await getSortedEntries(collection, exclude);
+  await getSortedPosts(Astro, collection, exclude);
 ---
 
 <ol
@@ -104,9 +39,8 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
 >
   {
     sortedEntries.map((entry, index) => {
-      const isHighlight = !index || entry.data.highlight;
-
-      const { highlightClass, importance } = isHighlight
+      // First is highlight
+      const { highlightClass, importance } = !index
         ? makeHighlight(discreteHighlight)
         : {};
 

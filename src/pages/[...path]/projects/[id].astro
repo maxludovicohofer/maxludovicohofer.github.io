@@ -1,5 +1,4 @@
 ---
-import { getEntries } from "astro:content";
 import PostFooter from "@post/PostFooter.astro";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -11,7 +10,7 @@ export const getStaticPaths = makeDocumentPaths("projects");
 
 const { roles, tech, awards, team } = Astro.props.entry.data;
 
-const techData = await getEntries(tech);
+const soloDeveloped = !team || team === 1;
 
 dayjs.extend(relativeTime);
 const developmentDuration = getDevelopmentTime(Astro.props.entry)!.humanize();
@@ -22,20 +21,18 @@ const developmentDuration = getDevelopmentTime(Astro.props.entry)!.humanize();
 <PostPage {...Astro.props}
   ><Fragment slot="footer"
     ><PostFooter
-      value={!team || team === 1
+      value={soloDeveloped
         ? `Solo developed in ${developmentDuration}`
         : `Made in ${developmentDuration} by an average team of ${team}`}
       >Development</PostFooter
     >{
-      roles && roles.length !== 0 && (
+      roles && roles.length !== 0 && !soloDeveloped && (
         <>
           <br />
-          <PostFooter value={roles}>Roles</PostFooter>
+          <PostFooter value={roles.map(({ id }) => id)}>Roles</PostFooter>
         </>
       )
-    }<br /><PostFooter value={techData.map(({ data: { id } }) => id)}
-      >Tech</PostFooter
-    >{
+    }<br /><PostFooter value={tech.map(({ id }) => id)}>Tech</PostFooter>{
       awards && awards.length !== 0 && (
         <>
           <br />
