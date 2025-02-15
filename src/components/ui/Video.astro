@@ -2,9 +2,13 @@
 import LiteYouTube from "./LiteYouTube.astro";
 import type { ComponentProps } from "astro/types";
 import { getAspectClass } from "@integrations/tailwind";
+import type { CollectionEntry } from "astro:content";
 
 interface Props extends ComponentProps<typeof LiteYouTube> {
-  youTubeInfo: { id: string; aspect?: "16/9" | "16/10" | "1/1" | undefined };
+  youTubeInfo: {
+    id: string;
+    aspect?: CollectionEntry<"projects">["data"]["youTubeAspectRatio"];
+  };
 }
 
 const {

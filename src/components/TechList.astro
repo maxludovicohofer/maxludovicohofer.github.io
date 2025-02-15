@@ -1,4 +1,5 @@
 ---
+import { matchRoles } from "@integrations/astro-server";
 import { capitalize } from "@integrations/text";
 import Text from "@ui/Text.astro";
 import type { HTMLAttributes } from "astro/types";
@@ -13,7 +14,12 @@ interface Props extends HTMLAttributes<"ol"> {
 
 const { class: className = "", compact, ...props } = Astro.props;
 
-const tech = await getCollection("tech");
+const tech = Object.entries(
+  await matchRoles(Astro, await getCollection("tech"))
+)
+  .filter(([roleMatch]) => !!Number(roleMatch))
+  .reverse()
+  .flatMap(([_, tech]) => tech!);
 
 const renderedGroups: string[] = [];
 

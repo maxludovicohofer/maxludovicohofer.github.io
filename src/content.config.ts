@@ -13,7 +13,7 @@ const roles = defineCollection({
 });
 
 const roleContent = z.object({
-  roles: z.array(reference("roles")).optional(),
+  roles: z.array(reference("roles")),
 });
 
 const tech = defineCollection({
@@ -41,7 +41,7 @@ const posts = documents
     title: z.string().optional(),
     publishingDate: z.date().max(new Date()).optional(),
     youTubeID: z.string().optional(),
-    youTubeAspectRatio: z.enum(["16/9", "16/10"]).optional(),
+    youTubeAspectRatio: z.enum(["16/9", "16/10", "1/1"]).optional(),
   })
   .merge(roleContent);
 

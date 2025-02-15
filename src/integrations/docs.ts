@@ -10,7 +10,7 @@ export const getSpecializationSentence = async (astro: AstroGlobal) => {
   return `specialized in ${toTextList(
     specializations.filter(
       (specialization) =>
-        !role.id.toLowerCase().includes(specialization.toLowerCase())
+        role.id.search(new RegExp(`\\b${specialization}\\b`)) === -1
     )
   )}`;
 };

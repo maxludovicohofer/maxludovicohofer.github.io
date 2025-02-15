@@ -22,6 +22,10 @@
   - Lighting
   - UV and mesh editors
   - Runtime virtual textures
+  roles:
+  - Game designer
+  - Programmer
+  - Technical artist
 - id: Unity
   experience: P1Y
   functionalities:
@@ -29,45 +33,76 @@
   - Coding
   - Level editor
   - 2D sprites
+  roles:
+  - Game designer
+  - Programmer
+  - Technical artist
 - id: C++
   experience: P5Y
   group: Programming
+  roles:
+  - Game designer
+  - Programmer
 - id: C#
   experience: P5Y
   group: Programming
+  roles:
+  - Game designer
+  - Programmer
 - id: Blueprints
   experience: P3Y
   group: Programming
+  roles:
+  - Game designer
 - id: HLSL
   experience: P1Y
   group: Programming
+  roles:
+  - Programmer
+  - Technical artist
 - id: Python
   experience: P3Y
   group: Programming
+  roles:
+  - Programmer
 - id: X86 assembly
   experience: P1Y
   group: Programming
+  roles:
+  - Programmer
 - id: Full stack web development
   experience: P5Y
   group: Programming
+  roles:
+  - Programmer
 - id: Mobile development
   experience: P2Y
   group: Programming
+  roles:
+  - Programmer
 - id: Java
   experience: P2Y
   group: Programming
+  roles:
+  - Programmer
 - id: SQL
   experience: P5Y
   group: Programming
+  roles:
+  - Programmer
 - id: Amazon Web Services
   experience: P5Y
   group: Programming
+  roles:
+  - Programmer
 - id: Houdini
   experience: P6M
   functionalities:
   - Simulations
   - Offline lighting
   - Offline rendering
+  roles:
+  - Technical artist
 - id: Maya
   experience: P1Y
   functionalities:
@@ -78,41 +113,64 @@
   - Rigging
   - Grooming with cards
   - Blend shapes
+  roles:
+  - Game designer
+  - 3D artist
+  - Technical artist
 - id: ZBrush
   experience: P1Y
   functionalities:
   - Sculpting
   - Exporting maps
+  roles:
+  - 3D artist
 - id: Marvelous designer
   experience: P6M
   functionalities:
   - Character clothing
   - Cloth simulation
+  roles:
+  - 3D artist
 - id: Substance designer
   experience: P6M
   functionalities:
   - Exporting maps
   - Smart materials
+  roles:
+  - 3D artist
+  - Technical artist
 - id: Substance painter
   experience: P6M
   functionalities:
   - Texturing
   - Baking
+  roles:
+  - 3D artist
 - id: Photoshop
   experience: P3Y
   functionalities:
   - Creating alphas
   - Modifying textures
   - Editing pictures
+  roles:
+  - Game designer
+  - 3D artist
+  - Technical artist
 - id: Illustrator
   experience: P3Y
   functionalities:
   - Creating UI elements
   - Creating icons
+  roles:
+  - Game designer
+  - 3D artist
+  - Technical artist
 - id: Krita
   experience: P6M
   functionalities:
   - Concept drawings
+  roles:
+  - 3D artist
 - id: After effects
   experience: P3Y
   functionalities:
@@ -120,24 +178,35 @@
   - Video effects
   - 2D animation
   - Scripting
+  roles:
+  - 3D artist
 - id: Premiere
   experience: P3Y
   functionalities:
   - Montage
   - Video and audio editing
+  roles:
+  - 3D artist
 - id: FontLab
   experience: P1Y
   functionalities:
   - Creating fonts
+  roles:
+  - 3D artist
 - id: Gaea
   experience: P6M
   functionalities:
   - Landscape generation
+  roles:
+  - 3D artist
+  - Technical artist
 - id: TouchDesigner
   experience: P2Y
   functionalities:
   - Sound-reacting visuals
   - Scripting
+  roles:
+  - Sound designer
 - id: FL Studio
   experience: P15Y
   functionalities:
@@ -145,3 +214,6 @@
   - Music production
   - Mixing and mastering
   - Recording
+  roles:
+  - Music director
+  - Sound designer

@@ -13,10 +13,11 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import addArticle from "indefinite";
 import {
   getCategory,
+  getGroup,
   getPublishingDate,
   type PostCollectionKey,
 } from "@layouts/post/Post.astro";
-import { groupBy } from "./array";
+import { getCombinations, groupBy, swap } from "./array";
 
 export const getRole = async (astro: AstroGlobal) => {
   const roles = await getCollection("roles");
@@ -77,42 +78,67 @@ export const getEntriesSafe = async <
   return unsafeEntries;
 };
 
+type RolesCollectionKey = Extract<CollectionKey, PostCollectionKey | "tech">;
+
 export const matchRoles = async <
   E extends Flatten<DataEntryMap[C]>,
-  C extends CollectionKey
+  C extends RolesCollectionKey
 >(
   astro: AstroGlobal,
   entries: E[]
 ) => {
-  // TODO
-  // ADD CATEGORY TO ROLES IF PROJECTS
-  // CASE INSENSITIVE MATCH:
-  // SCORE FROM FACTORIAL(NUMWORDS)-0: INCLUDES ALL WORDS (Character AI programmer), INCLUDES N - 1 WORDS PRIORITIZING RIGHT(Character AI or AI programmer), ..., INCLUDES 1 WORD PRIORITIZING SECOND LAST FROM RIGHT (AI designer includes AI), NO MATCH (Level designer)
-  // GROUP BY HIGHEST MATCH VALUE
-  // SORT GROUPS BY CREATED DATE
+  const words = (await getRole(astro)).role.id.split(" ");
+  const wordsNum = words.length;
 
-  const isProjects = entries[0]?.collection === "projects";
-  const { role } = await getRole(astro);
-  const isProgrammer = role.id.toLowerCase().includes("programmer");
-
-  return groupBy(
-    entries,
-    // Group by category priority
-    (entry) => {
-      if (isProjects) {
-        switch (getCategory(entry as Parameters<typeof getCategory>[0], true)) {
-          case "Game":
-            return "1";
-
-          case "Tool":
-            if (isProgrammer) return "2";
-            break;
-        }
-      }
-
-      return "0";
-    }
+  const matchers = getCombinations(words).flatMap(
+    (combination) => new RegExp(`\\b${combination.join(" ")}\\b`, "i")
   );
+  const matchersNum = matchers.length;
+
+  if (wordsNum > 1) {
+    //? If has specialization, prioritize specialization over profession (ex: game designer, game over designer)
+    const firstWordIndex = matchersNum - wordsNum;
+    swap(matchers, firstWordIndex, firstWordIndex + 1);
+  }
+
+  const match = (searchIn: string | string[]) =>
+    matchers.findIndex(
+      Array.isArray(searchIn)
+        ? (matcher) =>
+            searchIn.some((searchItem) => searchItem.search(matcher) !== -1)
+        : (matcher) => searchIn.search(matcher) !== -1
+    );
+
+  // Group by match score
+  return groupBy(entries, (entry) => {
+    // Default value, meaning undefined match.
+    // Differs from no match, which is 0
+    let matchScore = 1;
+
+    const category = getCategory(entry);
+    if (category) {
+      const categoryScore = match(category);
+      if (categoryScore !== -1) {
+        matchScore += categoryScore + Math.round(0.2 * matchersNum);
+      }
+    }
+
+    const group = getGroup(entry);
+    if (group) {
+      const groupScore = match(group);
+      if (groupScore !== -1) {
+        matchScore += groupScore + Math.round(0.2 * matchersNum);
+      }
+    }
+
+    const roles = entry.data.roles.map(({ id }) => id);
+    if (roles) {
+      const rolesScore = match(roles);
+      matchScore += rolesScore !== -1 ? matchersNum - rolesScore : rolesScore;
+    }
+
+    return `${matchScore}`;
+  });
 };
 
 export const getSortedPosts = async <C extends PostCollectionKey>(
@@ -144,7 +170,7 @@ export const getSortedPosts = async <C extends PostCollectionKey>(
   return (
     Object.values(groupedEntries)
       .map((entries) =>
-        entries.toSorted((a, b) =>
+        entries!.toSorted((a, b) =>
           b.publishingDate.isAfter(a.publishingDate) ? 1 : -1
         )
       )

@@ -26,7 +26,7 @@ const developmentDuration = getDevelopmentTime(Astro.props.entry)!.humanize();
         : `Made in ${developmentDuration} by an average team of ${team}`}
       >Development</PostFooter
     >{
-      roles && roles.length !== 0 && !soloDeveloped && (
+      !soloDeveloped && (
         <>
           <br />
           <PostFooter value={roles.map(({ id }) => id)}>Roles</PostFooter>

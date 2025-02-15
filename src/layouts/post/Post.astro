@@ -112,10 +112,10 @@ export const getPostCover = (post: typeof entry) => {
 
 const cover = getPostCover(entry);
 
-export const getDownloadLinks = <C extends PostCollectionKey>(
+export const getDownloadLinks = <C extends CollectionKey>(
   entry?: CollectionEntry<C>
 ) => {
-  function isDownloadableEntry<C extends PostCollectionKey>(
+  function isDownloadableEntry<C extends CollectionKey>(
     entry?: CollectionEntry<C>
   ): entry is CollectionEntry<C> & { data: { downloadLinks: string[] } } {
     return !!(entry && Object.hasOwn(entry.data, "downloadLinks"));
@@ -128,10 +128,10 @@ export const getDownloadLinks = <C extends PostCollectionKey>(
 
 const downloadLinks = getDownloadLinks(entry);
 
-export const getDevelopmentTime = <C extends PostCollectionKey>(
+export const getDevelopmentTime = <C extends CollectionKey>(
   entry?: CollectionEntry<C>
 ) => {
-  function isDevelopmentTimeEntry<C extends PostCollectionKey>(
+  function isDevelopmentTimeEntry<C extends CollectionKey>(
     entry?: CollectionEntry<C>
   ): entry is CollectionEntry<C> & { data: { developmentTime: string } } {
     return !!(entry && Object.hasOwn(entry.data, "developmentTime"));
@@ -146,13 +146,13 @@ export const getDevelopmentTime = <C extends PostCollectionKey>(
 
 type Category = NonNullable<CollectionEntry<"projects">["data"]["category"]>;
 
-export function getCategory<C extends PostCollectionKey, F extends boolean>(
+export function getCategory<C extends CollectionKey, F extends boolean>(
   entry?: CollectionEntry<C>,
   noFormat?: F
 ):
   | (F extends true ? Category : `Published ${Lowercase<Category>}` | Category)
   | undefined {
-  function isCategoryEntry<C extends PostCollectionKey>(
+  function isCategoryEntry<C extends CollectionKey>(
     entry?: CollectionEntry<C>
   ): entry is CollectionEntry<C> & {
     data: { category: Category };
@@ -178,6 +178,18 @@ export function getCategory<C extends PostCollectionKey, F extends boolean>(
       ? `Published ${category.toLowerCase()}`
       : category
   ) as any;
+}
+
+export function getGroup<C extends CollectionKey>(entry?: CollectionEntry<C>) {
+  function isGroupEntry<C extends CollectionKey>(
+    entry?: CollectionEntry<C>
+  ): entry is CollectionEntry<C> & {
+    data: { group: string };
+  } {
+    return !!(entry && Object.hasOwn(entry.data, "group"));
+  }
+
+  return isGroupEntry(entry) ? entry.data.group : undefined;
 }
 
 const category = getCategory(entry);
