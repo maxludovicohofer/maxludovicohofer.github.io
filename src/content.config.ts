@@ -10,7 +10,8 @@ const roles = defineCollection({
   schema: fileSchema.extend({
     matches: z.array(reference("roles")).optional(),
     notMatches: z.array(reference("roles")).optional(),
-    homepageTitle: z.string().optional(),
+    workFields: z.string().array().optional(),
+    specializations: z.string().array().optional(),
   }),
 });
 

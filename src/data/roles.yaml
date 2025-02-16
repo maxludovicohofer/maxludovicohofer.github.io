@@ -4,8 +4,18 @@
     - game director
   notMatches:
     - sound designer
-  homepageTitle: Game design
+  workFields:
+    - game design
+    - level design
+    - physics systems
+  specializations:
+    - mechanics
+    - combat
+    - AI
+    - systems
 - id: AI programmer
   matches:
     - AI tool programmer
-- id: technical artist
+  workFields:
+    - AI programming
+    - decision trees

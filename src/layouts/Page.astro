@@ -20,7 +20,7 @@ const { role } = await getRole(Astro);
 const formattedTitle =
   title ??
   (homepage
-    ? (role.data.homepageTitle ?? role.id)
+    ? (role.data.workFields?.[0] ?? role.id)
     : getHumanPathSection(Astro.url.pathname));
 
 const completeTitle = `Max Hofer \\ ${capitalize(formattedTitle)}`;
