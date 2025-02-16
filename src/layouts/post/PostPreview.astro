@@ -123,7 +123,7 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
         )
       }
       <Text
-        class={`${subtitle.length !== 0 || renderedContent || Astro.slots.has("title") ? (container ? "mt-6" : "mt-4") : ""} ${container ? "max-h-[32rem]" : readMoreLink ? "h-64" : ""}`}
+        class={`${subtitle.length !== 0 || renderedContent || Astro.slots.has("title") ? (container ? "mt-6" : "mt-4") : ""} ${container ? "max-h-[32rem]" : readMoreLink ? "max-h-64" : ""}`}
         markdown={typeof renderedContent === "function"}
         tag={tag ?? (container ? "div" : undefined)}
         ><slot

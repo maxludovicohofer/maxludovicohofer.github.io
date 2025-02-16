@@ -17,7 +17,14 @@ import {
   getPublishingDate,
   type PostCollectionKey,
 } from "@layouts/post/Post.astro";
-import { getCombinations, groupBy, swap } from "./array";
+import {
+  getCombinations,
+  groupBy,
+  indexOfMax,
+  renameObjectKeys,
+  swap,
+} from "./array";
+import { remap } from "./math";
 
 export const getRole = async (astro: AstroGlobal) => {
   const roles = await getCollection("roles");
@@ -87,58 +94,77 @@ export const matchRoles = async <
   astro: AstroGlobal,
   entries: E[]
 ) => {
-  const words = (await getRole(astro)).role.id.split(" ");
-  const wordsNum = words.length;
+  const role = (await getRole(astro)).role;
+  const matchedRoles = [role, ...(role.data.matches ?? [])].map(({ id }) => {
+    const words = id.split(" ");
+    const wordsNum = words.length;
 
-  const matchers = getCombinations(words).flatMap(
-    (combination) => new RegExp(`\\b${combination.join(" ")}\\b`, "i")
-  );
-  const matchersNum = matchers.length;
+    const matchers = getCombinations(words).flatMap((combination) => ({
+      matcher: new RegExp(`\\b${combination.join(" ")}\\b`, "i"),
+      //? More specific match (more words) is better
+      weight: Math.sqrt(combination.length),
+    }));
 
-  if (wordsNum > 1) {
-    //? If has specialization, prioritize specialization over profession (ex: game designer, game over designer)
-    const firstWordIndex = matchersNum - wordsNum;
-    swap(matchers, firstWordIndex, firstWordIndex + 1);
-  }
-
-  const match = (searchIn: string | string[]) =>
-    matchers.findIndex(
-      Array.isArray(searchIn)
-        ? (matcher) =>
-            searchIn.some((searchItem) => searchItem.search(matcher) !== -1)
-        : (matcher) => searchIn.search(matcher) !== -1
-    );
-
-  // Group by match score
-  return groupBy(entries, (entry) => {
-    // Default value, meaning undefined match.
-    // Differs from no match, which is 0
-    let matchScore = 1;
-
-    const category = getCategory(entry);
-    if (category) {
-      const categoryScore = match(category);
-      if (categoryScore !== -1) {
-        matchScore += categoryScore + Math.round(0.2 * matchersNum);
-      }
+    if (wordsNum > 1) {
+      //? If has specialization, prioritize specialization over profession (ex: game designer, game over designer)
+      const firstWordIndex = matchers.length - wordsNum;
+      swap(matchers, firstWordIndex, firstWordIndex + 1);
     }
 
-    const group = getGroup(entry);
-    if (group) {
-      const groupScore = match(group);
-      if (groupScore !== -1) {
-        matchScore += groupScore + Math.round(0.2 * matchersNum);
-      }
+    return matchers;
+  });
+
+  const match = (test: string | string[]) => {
+    const findBestMatch: Parameters<
+      (typeof matchedRoles)[number]["findIndex"]
+    >[0] = Array.isArray(test)
+      ? ({ matcher }) =>
+          test.some((testItem) => testItem.search(matcher) !== -1)
+      : ({ matcher }) => test.search(matcher) !== -1;
+
+    // Match each role, then take best match
+    const scores = matchedRoles.map((matchers) => {
+      const bestMatchIndex = matchers.findIndex(findBestMatch);
+
+      return bestMatchIndex === -1
+        ? 0
+        : matchers[bestMatchIndex]!.weight *
+            (1 - bestMatchIndex / matchers.length);
+    });
+    const bestScoreIndex = indexOfMax(scores)!;
+
+    return Math.ceil(scores[bestScoreIndex]!);
+  };
+
+  // Group by match score
+  const scoredEntities = groupBy(entries, (entry) => {
+    let matchScore = 0;
+
+    const topic = getCategory(entry) ?? getGroup(entry);
+    if (topic) {
+      const score = match(topic);
+      matchScore += score;
     }
 
     const roles = entry.data.roles.map(({ id }) => id);
     if (roles) {
-      const rolesScore = match(roles);
-      matchScore += rolesScore !== -1 ? matchersNum - rolesScore : rolesScore;
+      const score = match(roles);
+      matchScore += score;
+    } else {
+      // If roles are undefined, distinguish from no match
+      matchScore += 1;
     }
 
-    return `${matchScore}`;
+    return matchScore;
   });
+
+  // Standardize keys from 0-10
+  const maxScore = Number(Object.keys(scoredEntities).at(-1));
+  renameObjectKeys(scoredEntities, (oldKey) =>
+    Math.round(remap(Number(oldKey), maxScore, 10))
+  );
+
+  return scoredEntities;
 };
 
 export const getSortedPosts = async <C extends PostCollectionKey>(

@@ -1,4 +1,8 @@
 # Format id as written in middle of a sentence
 - id: technical game designer
+  matches:
+    - game director
   homepageTitle: Game design
 - id: AI programmer
+  matches:
+    - AI tool programmer

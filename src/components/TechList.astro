@@ -2,6 +2,7 @@
 import { matchRoles } from "@integrations/astro-server";
 import { capitalize } from "@integrations/text";
 import Text from "@ui/Text.astro";
+import type { AstroGlobal } from "astro";
 import type { HTMLAttributes } from "astro/types";
 import { getCollection } from "astro:content";
 import dayjs from "dayjs";
@@ -14,12 +15,16 @@ interface Props extends HTMLAttributes<"ol"> {
 
 const { class: className = "", compact, ...props } = Astro.props;
 
-const tech = Object.entries(
-  await matchRoles(Astro, await getCollection("tech"))
-)
-  .filter(([roleMatch]) => !!Number(roleMatch))
-  .reverse()
-  .flatMap(([_, tech]) => tech!);
+export const getTech = async (astro: AstroGlobal) => {
+  // Number from 0-10 that filters out weak matches
+  const roleFilterThreshold = 4;
+  return Object.entries(await matchRoles(astro, await getCollection("tech")))
+    .filter(([roleMatch]) => Number(roleMatch) > roleFilterThreshold)
+    .reverse()
+    .flatMap(([_, tech]) => tech!);
+};
+
+const tech = await getTech(Astro);
 
 const renderedGroups: string[] = [];
 

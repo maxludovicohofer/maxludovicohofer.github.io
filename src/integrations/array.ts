@@ -10,7 +10,7 @@ export const partition = <T>(
   return [filtered, filteredOut];
 };
 
-export const groupBy = <T, K extends string>(
+export const groupBy = <T, K extends number | string>(
   array: T[],
   predicate: (item: T) => K
 ) =>
@@ -41,3 +41,31 @@ export const getCombinations = <T>(array: T[]) => {
 
 export const swap = <T>(array: T[], indexA: number, indexB: number) =>
   ([array[indexA], array[indexB]] = [array[indexB]!, array[indexA]!]);
+
+export const indexOfMax = <T>(array: T[]) => {
+  const length = array.length;
+
+  if (!length) return;
+
+  let maxIndex = 0;
+
+  for (let index = 1; index < length; index++)
+    if (array[index]! > array[maxIndex]!) maxIndex = index;
+
+  return maxIndex;
+};
+
+export const renameObjectKeys = <O extends Record<string | number, any>>(
+  obj: O,
+  predicate: (oldKey: string) => keyof typeof obj
+) => {
+  for (const oldKey in obj) {
+    const newKey = predicate(oldKey);
+
+    if (newKey == oldKey) continue;
+
+    delete Object.assign(obj, {
+      [newKey]: obj[oldKey],
+    })[oldKey];
+  }
+};
