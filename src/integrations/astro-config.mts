@@ -4,3 +4,4 @@ type Mutable<T> = {
 
 const definedLocales = ["en", "ja"] as const;
 export const locales = definedLocales as Mutable<typeof definedLocales>;
+export const defaultLocale = locales[0];

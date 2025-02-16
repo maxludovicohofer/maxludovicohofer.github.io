@@ -1,0 +1,11 @@
+---
+import { i18n } from "@integrations/i18n";
+
+const t = i18n(Astro);
+
+const slot = Astro.slots.has("default")
+  ? await t(await Astro.slots.render("default"))
+  : "";
+---
+
+<Fragment set:html={slot} />

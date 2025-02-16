@@ -5,6 +5,7 @@ import ModalSlot from "./ModalSlot.astro";
 import { capitalize, getHumanPathSection } from "@integrations/text";
 import { getPrintOptions } from "@integrations/pdf.mts";
 import { getRole } from "@integrations/astro-server";
+import { i18n } from "@integrations/i18n";
 
 interface Props {
   title?: string | undefined;
@@ -15,6 +16,8 @@ interface Props {
 
 const { title, description, backHref, homepage } = Astro.props;
 
+const t = i18n(Astro);
+
 const { role } = await getRole(Astro);
 
 const formattedTitle =
@@ -23,11 +26,11 @@ const formattedTitle =
     ? (role.data.workFields?.[0] ?? role.id)
     : getHumanPathSection(Astro.url.pathname));
 
-const completeTitle = `Max Hofer \\ ${capitalize(formattedTitle)}`;
+const completeTitle = await t(`Max Hofer \\ ${capitalize(formattedTitle)}`);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={Astro.currentLocale}>
   <head>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
@@ -38,6 +41,7 @@ const completeTitle = `Max Hofer \\ ${capitalize(formattedTitle)}`;
       name="description"
       content={description ? capitalize(description) : `${title}.`}
     />
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 

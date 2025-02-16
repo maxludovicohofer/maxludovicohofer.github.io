@@ -55,7 +55,7 @@ export const addBaseToLink = async (astro: AstroGlobal, link: string = "") => {
 
   const linkWithRole = isDefault ? link : `${makePath(role.id)}/${link}`;
 
-  const locale = astro.currentLocale ?? astro.preferredLocale;
+  const locale = astro.currentLocale;
 
   return `/${
     locale
@@ -66,7 +66,7 @@ export const addBaseToLink = async (astro: AstroGlobal, link: string = "") => {
 
 export const getEntriesSafe = async <
   C extends CollectionKey,
-  E extends keyof DataEntryMap[C] = string
+  E extends keyof DataEntryMap[C] = string,
 >(
   entries: ReferenceDataEntry<C, E>[]
 ) => {
@@ -88,7 +88,7 @@ export const getEntriesSafe = async <
 export const matchRoles = async <
   E extends {
     data: Partial<Pick<Flatten<DataEntryMap["projects"]>["data"], "roles">>;
-  }
+  },
 >(
   astro: AstroGlobal,
   entries: E[]
@@ -210,9 +210,7 @@ export const getSortedPosts = async <C extends PostCollectionKey>(
       ...entry,
       publishingDate: getPublishingDate(
         entry,
-        (
-          await render(entry)
-        ).remarkPluginFrontmatter
+        (await render(entry)).remarkPluginFrontmatter
       )!,
     }))
   );

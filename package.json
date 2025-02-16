@@ -18,6 +18,7 @@
     "astro": "^5.2.1",
     "astro-pdf": "^1.7.2",
     "dayjs": "^1.11.13",
+    "deepl-node": "^1.16.0",
     "indefinite": "^2.5.1",
     "lite-youtube-embed": "^0.3.3",
     "mdast-util-to-string": "^4.0.0",
