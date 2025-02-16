@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PostPage from "@post/PostPage.astro";
 import { makeDocumentPaths } from "@document/DocumentPage.astro";
-import { getDevelopmentTime } from "@post/Post.astro";
+import { getDevelopmentTime } from "@integrations/content";
 
 export const getStaticPaths = makeDocumentPaths("projects");
 

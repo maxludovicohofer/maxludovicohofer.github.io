@@ -16,12 +16,47 @@ interface Props extends HTMLAttributes<"ol"> {
 const { class: className = "", compact, ...props } = Astro.props;
 
 export const getTech = async (astro: AstroGlobal) => {
-  // Number from 0-10 that filters out weak matches
-  const roleFilterThreshold = 4;
-  return Object.entries(await matchRoles(astro, await getCollection("tech")))
-    .filter(([roleMatch]) => Number(roleMatch) > roleFilterThreshold)
-    .reverse()
-    .flatMap(([_, tech]) => tech!);
+  const applyMatch = <T,>(matchResult: Partial<Record<any, T[]>>) => {
+    // Number from 0-10 that filters out weak matches
+    const threshold = 4;
+    return Object.entries(matchResult)
+      .filter(([matchScore]) => Number(matchScore) > threshold)
+      .reverse()
+      .flatMap(([_, value]) => value!);
+  };
+
+  return await Promise.all(
+    applyMatch(await matchRoles(astro, await getCollection("tech"))).map(
+      async (tech) => {
+        const roleFunctionalities = tech.data.functionalities?.filter(
+          (functionality) => typeof functionality !== "string"
+        );
+
+        if (roleFunctionalities?.length) {
+          const matchedFunctionalities = applyMatch(
+            await matchRoles(
+              astro,
+              roleFunctionalities.map((functionality) => ({
+                data: functionality,
+              }))
+            )
+          ).map(({ data }) => data);
+
+          // Filter and map functionalities
+          tech.data.functionalities = tech.data.functionalities!.flatMap(
+            (functionality) =>
+              typeof functionality === "string"
+                ? [functionality]
+                : matchedFunctionalities.includes(functionality)
+                  ? [functionality.id]
+                  : []
+          );
+        }
+
+        return tech;
+      }
+    )
+  );
 };
 
 const tech = await getTech(Astro);

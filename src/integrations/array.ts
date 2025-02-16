@@ -58,14 +58,15 @@ export const indexOfMax = <T>(array: T[]) => {
 export const renameObjectKeys = <O extends Record<string | number, any>>(
   obj: O,
   predicate: (oldKey: string) => keyof typeof obj
-) => {
-  for (const oldKey in obj) {
-    const newKey = predicate(oldKey);
+) =>
+  Object.keys(obj)
+    .reverse()
+    .forEach((oldKey) => {
+      const newKey = predicate(oldKey);
 
-    if (newKey == oldKey) continue;
+      if (newKey == oldKey) return;
 
-    delete Object.assign(obj, {
-      [newKey]: obj[oldKey],
-    })[oldKey];
-  }
-};
+      delete Object.assign(obj, {
+        [newKey]: obj[oldKey],
+      })[oldKey];
+    });

@@ -9,6 +9,7 @@ const roles = defineCollection({
   loader: file("src/data/roles.yaml"),
   schema: fileSchema.extend({
     matches: z.array(reference("roles")).optional(),
+    notMatches: z.array(reference("roles")).optional(),
     homepageTitle: z.string().optional(),
   }),
 });
@@ -23,7 +24,9 @@ const tech = defineCollection({
     .extend({
       experience: z.string().duration(),
       group: z.string().optional(),
-      functionalities: z.string().array().optional(),
+      functionalities: z
+        .array(z.string().or(fileSchema.merge(roleContent)))
+        .optional(),
     })
     .merge(roleContent),
 });

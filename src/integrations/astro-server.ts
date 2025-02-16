@@ -16,7 +16,7 @@ import {
   getGroup,
   getPublishingDate,
   type PostCollectionKey,
-} from "@layouts/post/Post.astro";
+} from "@integrations/content";
 import {
   getCombinations,
   groupBy,
@@ -85,22 +85,24 @@ export const getEntriesSafe = async <
   return unsafeEntries;
 };
 
-type RolesCollectionKey = Extract<CollectionKey, PostCollectionKey | "tech">;
-
 export const matchRoles = async <
-  E extends Flatten<DataEntryMap[C]>,
-  C extends RolesCollectionKey
+  E extends {
+    data: Partial<Pick<Flatten<DataEntryMap["projects"]>["data"], "roles">>;
+  }
 >(
   astro: AstroGlobal,
   entries: E[]
 ) => {
   const role = (await getRole(astro)).role;
+
+  const makeMatcher = (text: string) => new RegExp(`\\b${text}\\b`, "i");
+
   const matchedRoles = [role, ...(role.data.matches ?? [])].map(({ id }) => {
     const words = id.split(" ");
     const wordsNum = words.length;
 
     const matchers = getCombinations(words).flatMap((combination) => ({
-      matcher: new RegExp(`\\b${combination.join(" ")}\\b`, "i"),
+      matcher: makeMatcher(combination.join(" ")),
       //? More specific match (more words) is better
       weight: Math.sqrt(combination.length),
     }));
@@ -114,13 +116,36 @@ export const matchRoles = async <
     return matchers;
   });
 
+  const notMatchers = role.data.notMatches?.map(({ id }) => makeMatcher(id));
+
   const match = (test: string | string[]) => {
+    let testValue = test;
+
+    const testMatch = (singleTest: string, matcher: RegExp) =>
+      singleTest.search(matcher) !== -1;
+
+    if (notMatchers) {
+      const isNotMatching = (singleTest: string) =>
+        notMatchers.some((notMatcher) => testMatch(singleTest, notMatcher));
+
+      if (Array.isArray(testValue)) {
+        // Exclude values that cannot match
+        testValue = testValue.filter(
+          (singleTest) => !isNotMatching(singleTest)
+        );
+      } else if (isNotMatching(testValue)) {
+        // Cannot match
+        return 0;
+      }
+    }
+
+    // TODO PHASE 2 TRY FUZZY MATCHING IF NO EXACT MATCH, BUT ONLY IF SIMILAR (FOR EXAMPLE MATCH "PROGRAMMER" AND "PROGRAMMING")
     const findBestMatch: Parameters<
       (typeof matchedRoles)[number]["findIndex"]
-    >[0] = Array.isArray(test)
+    >[0] = Array.isArray(testValue)
       ? ({ matcher }) =>
-          test.some((testItem) => testItem.search(matcher) !== -1)
-      : ({ matcher }) => test.search(matcher) !== -1;
+          testValue.some((singleTest) => testMatch(singleTest, matcher))
+      : ({ matcher }) => testMatch(testValue, matcher);
 
     // Match each role, then take best match
     const scores = matchedRoles.map((matchers) => {
@@ -146,7 +171,7 @@ export const matchRoles = async <
       matchScore += score;
     }
 
-    const roles = entry.data.roles.map(({ id }) => id);
+    const roles = entry.data.roles?.map(({ id }) => id);
     if (roles) {
       const score = match(roles);
       matchScore += score;
@@ -160,9 +185,11 @@ export const matchRoles = async <
 
   // Standardize keys from 0-10
   const maxScore = Number(Object.keys(scoredEntities).at(-1));
-  renameObjectKeys(scoredEntities, (oldKey) =>
-    Math.round(remap(Number(oldKey), maxScore, 10))
-  );
+  if (maxScore) {
+    renameObjectKeys(scoredEntities, (oldKey) =>
+      Math.round(remap(Number(oldKey), maxScore, 10))
+    );
+  }
 
   return scoredEntities;
 };

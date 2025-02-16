@@ -2,7 +2,10 @@
 - id: technical game designer
   matches:
     - game director
+  notMatches:
+    - sound designer
   homepageTitle: Game design
 - id: AI programmer
   matches:
     - AI tool programmer
+- id: technical artist
