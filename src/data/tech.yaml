@@ -141,6 +141,26 @@
   group: Programming
   roles:
   - Programmer
+- id: Test driven development
+  experience: P3Y
+  group: Programming
+  roles:
+  - Programmer
+- id: Continuous Integration \ Continuous Deployment
+  experience: P3Y
+  group: Programming
+  roles:
+  - Programmer
+- id: Extreme programming
+  experience: P3Y
+  group: Programming
+  roles:
+  - Programmer
+- id: DevOps
+  experience: P3Y
+  group: Programming
+  roles:
+  - Programmer
 - id: Houdini
   experience: P6M
   functionalities:

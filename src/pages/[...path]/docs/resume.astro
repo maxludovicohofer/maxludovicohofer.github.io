@@ -9,6 +9,10 @@ import { capitalize } from "@integrations/text";
 import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 import { addBaseToLink, getRole } from "@integrations/astro-server";
 import { getSpecializationSentence } from "@integrations/docs";
+import { getTech } from "@components/TechList.astro";
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 export const getStaticPaths = getBasePaths;
 
@@ -18,6 +22,11 @@ const portfolioVersion = await addBaseToLink(Astro);
 const portfolioLink = `${import.meta.env.SITE}${portfolioVersion === "/" ? "" : portfolioVersion}`;
 
 const specializationSentence = await getSpecializationSentence(Astro);
+
+const tech = await getTech(Astro);
+
+dayjs.extend(duration);
+dayjs.extend(relativeTime);
 ---
 
 <DocumentPage>
@@ -120,54 +129,33 @@ const specializationSentence = await getSpecializationSentence(Astro);
     </li>
   </ul>
   <Text tag="h2">Skills</Text>
+  <ul class="grid grid-cols-2">
+    {
+      tech.map(({ data: { id, experience } }) => (
+        <li>
+          {id} ({dayjs.duration(experience).humanize()})
+        </li>
+      ))
+    }
+  </ul>
   <ul>
     <li>
-      My work spans the fields of game design, level design, narrative design,
-      and UI/UX design.
+      I made games for desktop, mobile, and online and local multiplayer. My
+      work spans the fields of game design, level design, narrative design, and
+      UI/UX design.
     </li>
     <li>
-      I have extensive experience in agile project management and leadership.
-      Also, I worked closely with business development.
-    </li>
-    <li>
-      I have experience in Unreal (5 years), Unity (1 year), popular programming
-      languages (blueprints (3 years), C++ (5 years), C# (5 years), HLSL (1
-      year), python (3 years), assembly (1 year), full stack web (5 years),
-      mobile (2 years), Java (2 years), SQL (5 years)), ECS (5 years), shading
-      and graphics programming, AI, databases, cloud and web programming, server
-      management, and CPU and GPU architectures.
-    </li>
-    <li>
-      I have experience in most software quality standards, such as TDD/BDD, XP,
-      DevOps, CI/CD and pair programming.
-    </li>
-    <li>I made games for desktop, mobile, and online and local multiplayer.</li>
-    <li>
-      I have experience in Houdini (6 months), Maya (1 year), ZBrush (1 year),
-      Marvelous designer (6 months), Substance designer (6 months), Substance
-      painter (6 months), Photoshop/Illustrator/Krita (3 years), After
-      Effects/Premiere (3 years).
-    </li>
-    <li>
-      I am fluent in English, Italian and German. I'm at Japanese limited
-      professional (N3) level. I also understand French and Spanish at a B1
-      level, while speaking them at an A2 level.
+      I am fluent in English, German, and Italian. I'm at Japanese limited
+      professional (N3) level. I also understand French and Spanish at a basic
+      level.
     </li>
   </ul>
   <Text tag="h3">Extra</Text>
   <ul>
+    <li>I keep up to date with the latest technology and research.</li>
+    <li>I am very passionate about cinema and arts, especially cyberpunk.</li>
     <li>
-      I have a learning method which allows me to quickly become proficient in
-      new skills. This allows me to keep up to date with the latest technology
-      and research.
-    </li>
-    <li>
-      I am passionate about cinema and arts, often drawing inspiration from them
-      for my designs.
-    </li>
-    <li>
-      I compose techno music and worked professionally as mixing and mastering
-      engineer. I also have experience in TouchDesigner (2 years).
+      I create electronic music and worked as mixing and mastering engineer.
     </li>
   </ul>
 </DocumentPage>
