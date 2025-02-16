@@ -1,26 +1,22 @@
 ---
 import Text from "@ui/Text.astro";
-import type { CollectionKey, CollectionEntry } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import { render } from "astro:content";
-import type { ImageMetadata } from "astro";
-import dayjs from "dayjs";
-import duration from "dayjs/plugin/duration";
-import utc from "dayjs/plugin/utc";
 import Card from "@layouts/Card.astro";
 import type { ComponentProps, HTMLAttributes } from "astro/types";
 import CoverMedia from "@post/CoverMedia.astro";
 import Link from "@ui/Link.astro";
 import Button from "@ui/Button.astro";
-import type Video from "@ui/Video.astro";
 import Document from "@document/Document.astro";
-import { getDocumentId } from "@document/Document.astro";
+import { getLinkName } from "@integrations/text";
 import {
-  capitalize,
-  getHumanPathSection,
-  getLinkName,
-  toTitleCase,
-} from "@integrations/text";
-import { VALID_INPUT_FORMATS } from "node_modules/astro/dist/assets/consts";
+  getTitle,
+  getPublishingDate,
+  getPostCover,
+  getCategory,
+  getDownloadLinks,
+  type PostCollectionKey,
+} from "@integrations/content";
 
 interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollectionKey>;
@@ -42,152 +38,22 @@ const {
   ...props
 } = Astro.props;
 
-// prettier-ignore
-export type PostCollectionKey = Extract<CollectionKey, "projects" | "thoughts">;
-
 const { Content, remarkPluginFrontmatter } = entry ? await render(entry) : {};
 
-export const getTitle = (post: typeof entry) => {
-  if (!post) return;
-
-  if (post.data.title) return post.data.title;
-
-  const rawTitle = getHumanPathSection(getDocumentId(post)!);
-  return post.collection === "projects"
-    ? toTitleCase(rawTitle)
-    : capitalize(rawTitle);
-};
-
-export const getPublishingDate = (
-  post: typeof entry,
-  frontmatter: typeof remarkPluginFrontmatter
-) => {
-  if (post?.data.publishingDate) return dayjs(post.data.publishingDate);
-
-  if (!frontmatter) return;
-
-  dayjs.extend(utc);
-
-  return dayjs.utc(frontmatter.created || undefined);
-};
-
+const title = getTitle(entry);
 const publishingDate = getPublishingDate(
   entry,
   remarkPluginFrontmatter
 )?.format("D MMMM YYYY");
-
-const title = getTitle(entry);
-
-export const getPostCover = (post: typeof entry) => {
-  if (!post) return;
-
-  if (post.data.youTubeID) {
-    return {
-      id: post.data.youTubeID,
-      aspect: post.data.youTubeAspectRatio,
-    } satisfies ComponentProps<typeof Video>["youTubeInfo"] as ComponentProps<
-      typeof Video
-    >["youTubeInfo"];
-  }
-
-  const imageFolder = `/src/data/${post.collection}/`;
-  const images = import.meta.glob<{ default: ImageMetadata }>(
-    "/src/data/**/*.{png,jpg,jpeg,gif,webp,svg}"
-  );
-  const imagePath = `${imageFolder}${post.id}`;
-  const image =
-    images[
-      `${imagePath}.${VALID_INPUT_FORMATS.find((extension) => images[`${imagePath}.${extension}`])}`
-    ];
-
-  if (post.collection === "projects" && !post.data.draft && !image) {
-    // Projects require image
-    throw new Error(
-      `An image for "${imagePath}" does not exist in pattern: "${imageFolder}*.{${VALID_INPUT_FORMATS.join(",")}}". Import an image, or preferably a video.`
-    );
-  }
-
-  return image;
-};
-
 const cover = getPostCover(entry);
-
-export const getDownloadLinks = <C extends PostCollectionKey>(
-  entry?: CollectionEntry<C>
-) => {
-  function isDownloadableEntry<C extends PostCollectionKey>(
-    entry?: CollectionEntry<C>
-  ): entry is CollectionEntry<C> & { data: { downloadLinks: string[] } } {
-    return !!(entry && Object.hasOwn(entry.data, "downloadLinks"));
-  }
-
-  if (!isDownloadableEntry(entry) || !entry.data.downloadLinks.length) return;
-
-  return entry.data.downloadLinks;
-};
-
 const downloadLinks = getDownloadLinks(entry);
-
-export const getDevelopmentTime = <C extends PostCollectionKey>(
-  entry?: CollectionEntry<C>
-) => {
-  function isDevelopmentTimeEntry<C extends PostCollectionKey>(
-    entry?: CollectionEntry<C>
-  ): entry is CollectionEntry<C> & { data: { developmentTime: string } } {
-    return !!(entry && Object.hasOwn(entry.data, "developmentTime"));
-  }
-
-  if (!isDevelopmentTimeEntry(entry)) return;
-
-  dayjs.extend(duration);
-
-  return dayjs.duration(entry.data.developmentTime);
-};
-
-type Category = NonNullable<CollectionEntry<"projects">["data"]["category"]>;
-
-export function getCategory<C extends PostCollectionKey, F extends boolean>(
-  entry?: CollectionEntry<C>,
-  noFormat?: F
-):
-  | (F extends true ? Category : `Published ${Lowercase<Category>}` | Category)
-  | undefined {
-  function isCategoryEntry<C extends PostCollectionKey>(
-    entry?: CollectionEntry<C>
-  ): entry is CollectionEntry<C> & {
-    data: { category: Category };
-  } {
-    return !!(entry && Object.hasOwn(entry.data, "category"));
-  }
-
-  let category = isCategoryEntry(entry) ? entry.data.category : undefined;
-
-  if (!category) {
-    const developmentTime = getDevelopmentTime(entry);
-
-    if (!developmentTime) return;
-
-    //? Games are assumed to be at least 1 month of development
-    category = (
-      developmentTime.months() ? "Game" : "Prototype"
-    ) satisfies Category;
-  }
-
-  return (
-    !noFormat && getDownloadLinks(entry)
-      ? `Published ${category.toLowerCase()}`
-      : category
-  ) as any;
-}
-
 const category = getCategory(entry);
+const action = category === "Published tool" ? "Try" : "Play";
 
 const fullWidthClass = `w-full ${inline ? "" : "pb-24 lg:pb-10"}`;
 
 const widthClass = `${fullWidthClass} px-6 ${fullWidth ? "lg:px-24" : "max-w-[40rem] 2xl:max-w-[70rem]"}`;
 const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
-
-const action = category === "Published tool" ? "Try" : "Play";
 ---
 
 {

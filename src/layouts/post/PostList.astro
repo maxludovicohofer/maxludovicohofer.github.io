@@ -1,8 +1,9 @@
 ---
 import ContentList from "@ui/ContentList.astro";
-import Post, { type PostCollectionKey } from "@post/Post.astro";
+import Post from "@post/Post.astro";
 import type { ComponentProps } from "astro/types";
 import { capitalize } from "@integrations/text";
+import type { PostCollectionKey } from "@integrations/content";
 
 interface Props extends ComponentProps<typeof Post> {
   collection: PostCollectionKey;

@@ -18,7 +18,7 @@ interface Props extends ComponentProps<typeof PostPreview> {}
 const { role } = await getRole(Astro);
 
 const resumePageLink = await addBaseToLink(Astro, "docs/resume");
-const resumeLink = getPrintPath(resumePageLink);
+const resumeLink = `/${getPrintPath(resumePageLink)}`;
 
 const specializationSentence = await getSpecializationSentence(Astro);
 ---

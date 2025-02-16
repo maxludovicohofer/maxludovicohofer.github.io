@@ -1,0 +1,11 @@
+{
+  "$ref": "#/definitions/roles",
+  "definitions": {
+    "roles": {
+        "type": "array",
+        "items": {
+            "$ref": "../../.astro/collections/roles.schema.json"
+        }
+    }
+  }
+}

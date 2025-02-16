@@ -1,118 +1,253 @@
 - id: Unreal Engine
   experience: P5Y
   functionalities:
-  - Online and local multiplayer
-  - Visual scripting and editor extensions
+  - id: Online and local multiplayer
+    roles:
+      - Game designer
+      - Programmer
+  - Visual scripting
   - Coding and engine extensions
   - AI
   - UI
-  - Animation blueprints, state machines, and montages
+  - id: Animation blueprints, state machines, and montages
+    roles:
+      - Game designer
   - Control rig
-  - Cinematics and sequencer
-  - MetaSound and audio
-  - Level editor
-  - Modeling
-  - Materials, shaders, and textures
-  - Niagara
-  - Landscape and foliage
-  - Retargeting
-  - Profiling
-  - Nanite
-  - Source control
-  - Lighting
-  - UV and mesh editors
-  - Runtime virtual textures
+  - id: Cinematics and sequencer
+    roles:
+      - Game designer
+  - id: MetaSound and audio
+    roles:
+      - Game designer
+      - Sound designer
+  - id: Level editor
+    roles:
+      - Game designer
+  - id: Editor extensions
+    roles:
+      - Programmer
+  - id: Modeling
+    roles:
+      - Game designer
+      - 3D artist
+  - id: Shaders
+    roles:
+      - Programmer
+      - 3D artist
+  - id: Materials and textures
+    roles:
+      - 3D artist
+  - id: Niagara
+    roles:
+      - Programmer
+      - Shader artist
+  - id: Landscape and foliage
+    roles:
+      - 3D artist
+  - id: Retargeting
+    roles:
+      - Technical animator
+  - id: Profiling
+    roles:
+      - Programmer
+  - id: Nanite
+    roles:
+      - 3D artist
+      - Technical artist
+  - id: Lighting
+    roles:
+      - Technical artist
+  - id: UV and mesh editors
+    roles:
+      - 3D artist
+      - Technical artist
+  - id: Runtime virtual textures
+    roles:
+      - Technical artist
+  roles:
+  - Game designer
+  - Programmer
+  - Technical artist
 - id: Unity
   experience: P1Y
   functionalities:
   - Visual scripting
   - Coding
-  - Level editor
-  - 2D sprites
+  - id: Level editor
+    roles:
+      - Game designer
+  - id: 2D sprites
+    roles:
+      - 3D artist
+  roles:
+  - Game designer
+  - Programmer
+  - Technical artist
 - id: C++
   experience: P5Y
   group: Programming
+  roles:
+  - Game designer
+  - Programmer
 - id: C#
   experience: P5Y
   group: Programming
+  roles:
+  - Game designer
+  - Programmer
 - id: Blueprints
   experience: P3Y
   group: Programming
+  roles:
+  - Game designer
 - id: HLSL
   experience: P1Y
   group: Programming
+  roles:
+  - Programmer
+  - Technical artist
 - id: Python
   experience: P3Y
   group: Programming
+  roles:
+  - Programmer
 - id: X86 assembly
   experience: P1Y
   group: Programming
+  roles:
+  - Programmer
 - id: Full stack web development
   experience: P5Y
   group: Programming
+  roles:
+  - Programmer
 - id: Mobile development
   experience: P2Y
   group: Programming
+  roles:
+  - Programmer
 - id: Java
   experience: P2Y
   group: Programming
+  roles:
+  - Programmer
 - id: SQL
   experience: P5Y
   group: Programming
+  roles:
+  - Programmer
 - id: Amazon Web Services
   experience: P5Y
   group: Programming
+  roles:
+  - Programmer
+- id: Test driven development
+  experience: P3Y
+  group: Programming
+  roles:
+  - Programmer
+- id: Continuous Integration \ Continuous Deployment
+  experience: P3Y
+  group: Programming
+  roles:
+  - Programmer
+- id: Extreme programming
+  experience: P3Y
+  group: Programming
+  roles:
+  - Programmer
+- id: DevOps
+  experience: P3Y
+  group: Programming
+  roles:
+  - Programmer
 - id: Houdini
   experience: P6M
   functionalities:
   - Simulations
   - Offline lighting
   - Offline rendering
+  roles:
+  - 3D artist
+  - Technical artist
 - id: Maya
   experience: P1Y
   functionalities:
   - Modeling
   - Animation
-  - UV
-  - Retopology
+  - id: UV
+    roles:
+      - 3D artist
+  - id: Retopology
+    roles:
+      - 3D artist
   - Rigging
-  - Grooming with cards
-  - Blend shapes
+  - id: Grooming with cards
+    roles:
+      - 3D artist
+  - id: Blend shapes
+    roles:
+      - 3D artist
+  roles:
+  - Game designer
+  - 3D artist
+  - Technical artist
 - id: ZBrush
   experience: P1Y
   functionalities:
   - Sculpting
   - Exporting maps
+  roles:
+  - 3D artist
 - id: Marvelous designer
   experience: P6M
   functionalities:
   - Character clothing
   - Cloth simulation
+  roles:
+  - 3D artist
 - id: Substance designer
   experience: P6M
   functionalities:
   - Exporting maps
   - Smart materials
+  roles:
+  - 3D artist
+  - Technical artist
 - id: Substance painter
   experience: P6M
   functionalities:
   - Texturing
   - Baking
+  roles:
+  - 3D artist
 - id: Photoshop
   experience: P3Y
   functionalities:
   - Creating alphas
   - Modifying textures
-  - Editing pictures
+  - id: Editing pictures
+    roles:
+      - 3D artist
+  roles:
+  - Game designer
+  - 3D artist
+  - Technical artist
 - id: Illustrator
   experience: P3Y
   functionalities:
   - Creating UI elements
   - Creating icons
+  roles:
+  - Game designer
+  - 3D artist
+  - Technical artist
 - id: Krita
   experience: P6M
   functionalities:
   - Concept drawings
+  roles:
+  - 3D artist
 - id: After effects
   experience: P3Y
   functionalities:
@@ -120,28 +255,50 @@
   - Video effects
   - 2D animation
   - Scripting
+  roles:
+  - 3D artist
 - id: Premiere
   experience: P3Y
   functionalities:
   - Montage
   - Video and audio editing
+  roles:
+  - 3D artist
 - id: FontLab
   experience: P1Y
   functionalities:
   - Creating fonts
+  roles:
+  - 3D artist
 - id: Gaea
   experience: P6M
   functionalities:
   - Landscape generation
+  roles:
+  - Game designer
+  - 3D artist
+  - Technical artist
 - id: TouchDesigner
   experience: P2Y
   functionalities:
   - Sound-reacting visuals
   - Scripting
+  roles:
+  - Sound designer
 - id: FL Studio
   experience: P15Y
   functionalities:
   - Sound design
-  - Music production
-  - Mixing and mastering
-  - Recording
+  - id: Music production
+    roles:
+      - Music
+  - id: Mixing and mastering
+    roles:
+      - Sound
+  - id: Recording
+    roles:
+      - Sound
+  roles:
+  - Game designer
+  - Music
+  - Sound

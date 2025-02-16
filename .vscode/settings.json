@@ -1,5 +1,8 @@
 {
   "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": false,
   "cSpell.words": ["Diegetic", "Umami"],
-  "yaml.schemaStore.enable": false
+  "yaml.schemas": {
+    "src/data/tech.schema.json": "src/data/tech.yaml",
+    "src/data/roles.schema.json": "src/data/roles.yaml"
+  }
 }
