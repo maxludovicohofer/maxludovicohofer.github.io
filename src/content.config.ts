@@ -8,6 +8,7 @@ const fileSchema = z.object({
 const roles = defineCollection({
   loader: file("src/data/roles.yaml"),
   schema: fileSchema.extend({
+    matches: z.array(reference("roles")).optional(),
     homepageTitle: z.string().optional(),
   }),
 });
