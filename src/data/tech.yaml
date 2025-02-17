@@ -95,6 +95,11 @@
   roles:
   - Game designer
   - Programmer
+- id: ECS
+  experience: P3Y
+  group: Programming
+  roles:
+  - Programmer
 - id: Blueprints
   experience: P3Y
   group: Programming
@@ -111,23 +116,18 @@
   group: Programming
   roles:
   - Programmer
-- id: X86 assembly
-  experience: P1Y
-  group: Programming
-  roles:
-  - Programmer
-- id: Full stack web development
-  experience: P5Y
-  group: Programming
-  roles:
-  - Programmer
-- id: Mobile development
-  experience: P2Y
-  group: Programming
-  roles:
-  - Programmer
 - id: Java
   experience: P2Y
+  group: Programming
+  roles:
+  - Programmer
+- id: Agile
+  experience: P3Y
+  group: Programming
+  roles:
+  - Programmer
+- id: TDD
+  experience: P3Y
   group: Programming
   roles:
   - Programmer
@@ -136,28 +136,23 @@
   group: Programming
   roles:
   - Programmer
-- id: Amazon Web Services
+- id: AWS
   experience: P5Y
   group: Programming
   roles:
   - Programmer
-- id: Test driven development
+- id: CI \ CD
   experience: P3Y
   group: Programming
   roles:
   - Programmer
-- id: Continuous Integration \ Continuous Deployment
-  experience: P3Y
+- id: Mobile
+  experience: P2Y
   group: Programming
   roles:
   - Programmer
-- id: Extreme programming
-  experience: P3Y
-  group: Programming
-  roles:
-  - Programmer
-- id: DevOps
-  experience: P3Y
+- id: Full stack
+  experience: P5Y
   group: Programming
   roles:
   - Programmer

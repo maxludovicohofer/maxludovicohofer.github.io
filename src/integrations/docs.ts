@@ -26,5 +26,7 @@ export const getWorkFieldsSentence = async (astro: AstroGlobal) => {
   const workFields =
     role.data.workFields ?? (await getCollection("roles"))[0]?.data.workFields;
 
-  return workFields ? toTextList(workFields) : "";
+  if (!workFields) return "";
+
+  return `I am especially involved in ${toTextList(workFields)}.`;
 };

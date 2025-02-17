@@ -31,7 +31,7 @@ const {
   ...props
 } = Astro.props;
 
-const t = await i18n(Astro);
+const t = i18n(Astro);
 
 export const formatUmamiEvent = (astro: AstroGlobal, eventName: string) => {
   // Max characters - formatting characters

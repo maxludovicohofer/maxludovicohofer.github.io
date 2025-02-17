@@ -20,6 +20,7 @@ export type TextTag =
   | "b"
   | "u"
   | "ul"
+  | "li"
   | "em"
   | "span"
   | "h1"
@@ -66,7 +67,8 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
   > = {
     p: {
       classes: blockClasses,
-      prose: "prose-p:text-xl prose-p:2xl:text-3xl prose-p:print:text-base empty:prose-p:hidden",
+      prose:
+        "prose-p:text-xl prose-p:2xl:text-3xl prose-p:print:text-base empty:prose-p:hidden",
     },
     div: { classes: blockClasses },
     markdown: {
@@ -76,6 +78,11 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
     b: { classes: "font-normal" },
     u: {},
     ul: {},
+    li: {
+      classes: "list-[kannada] marker:text-zinc-400 dark:marker:text-zinc-500",
+      prose:
+        "prose-li:list-[kannada] prose-li:marker:text-zinc-400 dark:prose-li:marker:text-zinc-500",
+    },
     em: {},
     h1: {
       classes: "text-3xl 2xl:text-4xl",
@@ -92,7 +99,8 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
         "prose-h3:text-xl prose-h3:2xl:text-2xl prose-h3:mt-0 prose-h3:mb-2 prose-h3:font-semibold prose-h3:print:font-normal prose-h3:text-balance",
     },
     h4: {
-      prose: "prose-h4:italic prose-h4:font-normal",
+      classes: "-mt-2",
+      prose: "prose-h4:-mt-2 prose-h4:italic prose-h4:font-normal",
       format: "subheading",
     },
     container: {
@@ -120,7 +128,7 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
       .filter((text) => !!text)
       .join(" ")} ${
       formats.base
-    } prose-li:list-[kannada] prose-li:marker:text-zinc-400 dark:prose-li:marker:text-zinc-500 prose-pre:rounded-3xl prose-pre:whitespace-pre-wrap prose-pre:text-xs prose-pre:sm:text-base prose-pre:2xl:text-2xl`;
+    } prose-pre:rounded-3xl prose-pre:whitespace-pre-wrap prose-pre:text-xs prose-pre:sm:text-base prose-pre:2xl:text-2xl`;
   }
 
   return `${elements[size].classes ?? ""} ${

@@ -7,16 +7,13 @@ import LinkedIn from "@images/logos/linkedin.svg?raw";
 import PostPreview from "@post/PostPreview.astro";
 import type { ComponentProps } from "astro/types";
 import Fullscreenable from "@ui/Fullscreenable.astro";
-import { Image } from "astro:assets";
 import { getLinkName } from "@integrations/text";
 import { addBaseToLink, getRole } from "@integrations/astro-server";
 import { getPrintPath } from "@integrations/pdf.mjs";
 import { getSpecializationSentence } from "@integrations/docs";
-import { i18n } from "@integrations/i18n";
+import Media from "./ui/Media.astro";
 
 interface Props extends ComponentProps<typeof PostPreview> {}
-
-const t = i18n(Astro);
 
 const { role } = await getRole(Astro);
 
@@ -24,8 +21,6 @@ const resumePageLink = await addBaseToLink(Astro, "docs/resume");
 const resumeLink = `/${getPrintPath(resumePageLink)}`;
 
 const specializationSentence = await getSpecializationSentence(Astro);
-
-const profilePictureAlt = await t("Close up of Max Ludovico Hofer");
 ---
 
 <PostPreview {...Astro.props}
@@ -34,10 +29,10 @@ const profilePictureAlt = await t("Close up of Max Ludovico Hofer");
       class="!max-w-14 2xl:!max-w-20 !rounded-full hover:scale-125"
       noAnimation
       data-umami-event={getLinkName(ProfilePicture.src)}
-      ><Image
+      ><Media
         src={ProfilePicture}
         class="rounded-full"
-        alt={profilePictureAlt}
+        alt="Close up of Max Ludovico Hofer"
         loading="eager"
       /></Fullscreenable
     ><div>

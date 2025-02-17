@@ -6,7 +6,6 @@ import {
   type TextFormat,
 } from "@integrations/tailwind";
 import type { HTMLAttributes } from "astro/types";
-import Translate from "./Translate.astro";
 
 interface Props extends Omit<HTMLAttributes<TextTag>, "title"> {
   title?: boolean;
@@ -35,5 +34,5 @@ if (markdown) import("katex/dist/katex.min.css");
 
 <Element
   class={`${className} ${getTextClass(markdown ? "markdown" : (importance ?? (subtitle ? "small" : Element)), format ?? (title ? "heading" : subtitle ? "detail" : undefined))}`}
-  {...props}><Translate><slot /></Translate></Element
+  {...props}><slot /></Element
 >
