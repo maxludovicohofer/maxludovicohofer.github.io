@@ -19,6 +19,7 @@ export type TextTag =
   | "div"
   | "b"
   | "u"
+  | "ul"
   | "em"
   | "span"
   | "h1"
@@ -74,6 +75,7 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
     span: {},
     b: { classes: "font-normal" },
     u: {},
+    ul: {},
     em: {},
     h1: {
       classes: "text-3xl 2xl:text-4xl",

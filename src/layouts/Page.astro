@@ -39,7 +39,7 @@ const completeTitle = await t(`Max Hofer \\ ${capitalize(formattedTitle)}`);
     <meta name="title" content={completeTitle} />
     <meta
       name="description"
-      content={description ? capitalize(description) : `${title}.`}
+      content={await t(description ? capitalize(description) : `${title}.`)}
     />
 
     <meta charset="UTF-8" />

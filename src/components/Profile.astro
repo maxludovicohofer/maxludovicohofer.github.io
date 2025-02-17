@@ -12,8 +12,11 @@ import { getLinkName } from "@integrations/text";
 import { addBaseToLink, getRole } from "@integrations/astro-server";
 import { getPrintPath } from "@integrations/pdf.mjs";
 import { getSpecializationSentence } from "@integrations/docs";
+import { i18n } from "@integrations/i18n";
 
 interface Props extends ComponentProps<typeof PostPreview> {}
+
+const t = i18n(Astro);
 
 const { role } = await getRole(Astro);
 
@@ -21,6 +24,8 @@ const resumePageLink = await addBaseToLink(Astro, "docs/resume");
 const resumeLink = `/${getPrintPath(resumePageLink)}`;
 
 const specializationSentence = await getSpecializationSentence(Astro);
+
+const profilePictureAlt = await t("Close up of Max Ludovico Hofer");
 ---
 
 <PostPreview {...Astro.props}
@@ -32,7 +37,7 @@ const specializationSentence = await getSpecializationSentence(Astro);
       ><Image
         src={ProfilePicture}
         class="rounded-full"
-        alt="Close up of Max Ludovico Hofer"
+        alt={profilePictureAlt}
         loading="eager"
       /></Fullscreenable
     ><div>

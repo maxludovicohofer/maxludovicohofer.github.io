@@ -11,6 +11,7 @@ import {
 import { addBaseToLink } from "@integrations/astro-server";
 import type { AstroGlobal } from "astro";
 import type { HTMLAttributes } from "astro/types";
+import { i18n } from "@integrations/i18n";
 
 interface Props extends HTMLAttributes<"a"> {
   noStyle?: boolean;
@@ -29,6 +30,8 @@ const {
   "data-umami-event": umamiEvent,
   ...props
 } = Astro.props;
+
+const t = await i18n(Astro);
 
 export const formatUmamiEvent = (astro: AstroGlobal, eventName: string) => {
   // Max characters - formatting characters
@@ -113,6 +116,8 @@ const isExternal =
   {...umamiEventInfo}
   {...props}
   ><slot
-    >{hrefString ? getLinkName(hrefString, true).toLowerCase() : "Link"}</slot
+    >{
+      hrefString ? getLinkName(hrefString, true).toLowerCase() : await t("Link")
+    }</slot
   ></a
 >
