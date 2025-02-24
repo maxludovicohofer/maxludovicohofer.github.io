@@ -68,6 +68,13 @@ const thoughts = defineCollection({
   schema: posts,
 });
 
+export const translationsPath = "src/data/translations";
+
+const translations = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.json", base: translationsPath }),
+  schema: z.record(z.string()),
+});
+
 // Export a single `collections` object to register your collection(s)
 export const collections = {
   roles,
@@ -75,4 +82,5 @@ export const collections = {
   docs,
   projects,
   thoughts,
+  translations,
 };

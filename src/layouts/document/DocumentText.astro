@@ -7,7 +7,7 @@ interface Props extends ComponentProps<typeof PostText> {}
 ---
 
 <PostText
-  class="font-['Segoe_UI'] prose-li:list-disc"
+  class="font-['Segoe_UI','Noto_Sans_Japanese'] prose-li:list-disc"
   contentProps={{ components: { img: DocumentMedia } }}
   {...Astro.props}
 >
@@ -19,6 +19,13 @@ interface Props extends ComponentProps<typeof PostText> {}
     src:
       local("Segoe UI"),
       url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff2)
+        format("woff2");
+  }
+  @font-face {
+    font-family: "Noto Sans Japanese";
+    src:
+      local("Noto Sans Japanese"),
+      url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Thin.woff2)
         format("woff2");
   }
 </style>

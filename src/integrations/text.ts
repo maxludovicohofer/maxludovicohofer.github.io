@@ -113,3 +113,27 @@ export const toTextList = (text: string[]) => {
 
   return text[0] ?? "";
 };
+
+export const findCharacterDifferences = (str1: string, str2: string) => {
+  const differences: {
+    index: number;
+    a: string;
+    aCode: number;
+    b: string;
+    bCode: number;
+  }[] = [];
+
+  Array.from({ length: Math.max(str1.length, str2.length) }).forEach((_, i) => {
+    if (str1[i] !== str2[i]) {
+      differences.push({
+        index: i,
+        a: str1[i]!,
+        aCode: str1.charCodeAt(i),
+        b: str2[i]!,
+        bCode: str2.charCodeAt(i),
+      });
+    }
+  });
+
+  return differences;
+};
