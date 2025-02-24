@@ -4,7 +4,6 @@ import { getEntry } from "astro:content";
 import { DEEPL_API_KEY } from "astro:env/server";
 import * as deepl from "deepl-node";
 import { translationsPath } from "src/content.config";
-import { findCharacterDifferences } from "@integrations/text";
 
 const translator = new deepl.Translator(DEEPL_API_KEY);
 
