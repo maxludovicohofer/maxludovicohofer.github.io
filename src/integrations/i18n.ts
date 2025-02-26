@@ -42,6 +42,7 @@ export const i18n = (astro: AstroGlobal, globalOptions?: I18nOptions) => {
 
 let translationCount = 0;
 
+// The buffer where text to translate is stored
 let translateBuffer: {
   text: string;
   toLocale: PossibleTranslations;
