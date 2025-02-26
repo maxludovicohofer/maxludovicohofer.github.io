@@ -25,6 +25,7 @@ const {
   fullWidth={!partOfPost}
   inline={partOfPost}
   class={`${className} ${partOfPost ? "mt-3" : ""}`}
+  contentProps={{ tag: "div" }}
   {...props}
   ><Fragment slot="title"
     >{partOfPost ? `Other ${collection}` : capitalize(collection)}</Fragment

@@ -10,4 +10,6 @@ const { value } = Astro.props;
 ---
 
 <Text tag="b"><slot /></Text>
-{capitalize(Array.isArray(value) ? value.join(", ") : value)}.
+<Text subtitle tag="span"
+  >{capitalize(Array.isArray(value) ? value.join(", ") : value)}.</Text
+>

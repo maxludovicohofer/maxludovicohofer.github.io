@@ -6,7 +6,6 @@ import { capitalize, getHumanPathSection } from "@integrations/text";
 import { getPrintOptions } from "@integrations/pdf.mts";
 import { getRole } from "@integrations/astro-server";
 import { i18n } from "@integrations/i18n";
-import Translate from "@components/ui/Translate.astro";
 
 interface Props {
   title?: string | undefined;
@@ -57,7 +56,7 @@ const completeTitle = await t(`Max Hofer \\ ${capitalize(formattedTitle)}`);
       data-website-id="4cbde35d-908e-44ec-b45c-9face0570614"></script>
   </head>
   <body class="bg-zinc-200 dark:bg-zinc-950"
-    ><Translate><slot /></Translate>{
+    ><slot />{
       !homepage && !getPrintOptions(Astro.url.pathname) && (
         <BackButton href={backHref} prefetch="load" />
       )

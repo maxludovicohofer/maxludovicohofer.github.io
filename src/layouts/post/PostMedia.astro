@@ -73,7 +73,7 @@ const stringAlt = textAlt.reduce(
     ><Media alt={stringAlt} {...props} /></Fullscreenable
   >{
     descriptiveAlt && (
-      <Text subtitle class="not-prose mt-4 -mb-4">
+      <Text subtitle class="not-prose mt-4 -mb-4" noTranslation>
         {textAlt.length === 1
           ? textAlt[0]
           : textAlt.map((text, index) => (

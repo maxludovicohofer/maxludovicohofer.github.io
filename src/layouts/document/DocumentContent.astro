@@ -4,6 +4,8 @@ import MarkdownMedia from "@document/MarkdownMedia.astro";
 import DocumentHidden from "@document/DocumentHidden.astro";
 import Link from "@ui/Link.astro";
 import type { HTMLTag } from "astro/types";
+import Text from "@components/ui/Text.astro";
+import List from "@components/ui/List.astro";
 
 interface Props {
   Content: AstroComponentFactory;
@@ -18,6 +20,8 @@ const { Content, preview, components } = Astro.props;
   components={{
     a: Link,
     img: preview ? DocumentHidden : MarkdownMedia,
+    p: Text,
+    ul: List,
     ...components,
   }}
 />

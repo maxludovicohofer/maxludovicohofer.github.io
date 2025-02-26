@@ -25,6 +25,8 @@ interface Props extends HTMLAttributes<"div"> {
   fullWidthAfter?: boolean | undefined;
   inline?: boolean | undefined;
   container?: boolean;
+  contentProps?: ComponentProps<typeof Text>;
+  afterProps?: ComponentProps<typeof Text>;
 }
 
 const {
@@ -35,6 +37,8 @@ const {
   inline,
   container,
   class: className = "",
+  contentProps,
+  afterProps,
   ...props
 } = Astro.props;
 
@@ -102,7 +106,7 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
           entry={entry}
           tag={tag}
           class={`${Content ? "is-entry" : ""} ${publishingDate ? "mt-4" : "mt-6"}`}
-          ><slot /></Document
+          {...contentProps}><slot /></Document
         >
         {
           downloadLinks && (
@@ -150,6 +154,7 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
           subtitle
           tag="div"
           class={fullWidthAfter ? fullWidthClass : widthClass}
+          {...afterProps}
         >
           <slot name="after" />
         </Text>

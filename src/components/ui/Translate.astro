@@ -1,10 +1,12 @@
 ---
-import { i18n } from "@integrations/i18n";
+import { i18n, type I18nOptions } from "@integrations/i18n";
+
+interface Props extends I18nOptions {}
 
 const t = i18n(Astro);
 
 const slot = Astro.slots.has("default")
-  ? await t(await Astro.slots.render("default"))
+  ? await t(await Astro.slots.render("default"), Astro.props)
   : "";
 ---
 

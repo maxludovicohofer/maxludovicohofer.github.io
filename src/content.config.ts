@@ -72,7 +72,12 @@ export const translationsPath = "src/data/translations";
 
 const translations = defineCollection({
   loader: glob({ pattern: "**/[^_]*.json", base: translationsPath }),
-  schema: z.record(z.string()),
+  schema: z.record(
+    z.object({
+      translation: z.string(),
+      api: z.enum(["deepl"]).optional(),
+    })
+  ),
 });
 
 // Export a single `collections` object to register your collection(s)
