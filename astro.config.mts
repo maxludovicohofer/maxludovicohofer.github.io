@@ -29,6 +29,7 @@ export default defineConfig({
       DEEPL_API_KEY: envField.string({
         context: "server",
         access: "secret",
+        optional: true,
       }),
       PHONE_NUMBER: envField.string({
         context: "server",

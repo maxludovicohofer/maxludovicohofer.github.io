@@ -7,7 +7,9 @@ import { translationsPath } from "src/content.config";
 import { diff, highlightCharacter } from "./text";
 import { groupBy, indexOfMin } from "./array";
 
-const deeplTrans = new deepl.Translator(DEEPL_API_KEY);
+const deeplTrans = DEEPL_API_KEY
+  ? new deepl.Translator(DEEPL_API_KEY)
+  : undefined;
 
 type PossibleTranslations = Exclude<
   (typeof locales)[number],
@@ -94,6 +96,8 @@ const translate = async (translateOptions?: TranslateOptions) => {
     console.warn("i18n: translation limit reached");
     process.exit(1);
   }
+
+  if (!deeplTrans) throw new Error("Deepl API key not found");
 
   // Order translate buffer
   const translateGroups = Object.fromEntries(
