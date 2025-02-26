@@ -87,12 +87,14 @@ const translate = async (translateOptions?: TranslateOptions) => {
       ([locale, translateInfo]) => [
         locale as PossibleTranslations,
         new Map(
-          Map.groupBy(translateInfo, ({ options }) => options ?? {})
-            .entries()
-            .map(([options, translateInfo]) => [
-              options,
-              [...new Set(translateInfo.map(({ text }) => text))],
-            ])
+          Object.entries(
+            groupBy(translateInfo, ({ options }) =>
+              options ? JSON.stringify(options) : ""
+            )
+          ).map(([, translateInfo]) => [
+            translateInfo![0]!.options,
+            [...new Set(translateInfo!.map(({ text }) => text))],
+          ])
         ),
       ]
     )
