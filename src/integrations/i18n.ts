@@ -60,17 +60,28 @@ const queueTranslation = async (
 
   let translations = (await getEntry("translations", toLocale))?.data;
 
-  // Cache hit
-  if (translations?.[text]) return translations[text].translation;
+  const standardizedText = text.replaceAll("\r\n", "\n");
+
+  // Check if in astro collection
+  if (translations?.[standardizedText]) {
+    return translations[standardizedText].translation;
+  } else {
+    // Check if in file but not in astro collection
+    const cachedTranslation = (await getTranslationsCache(toLocale))?.[
+      standardizedText
+    ]?.translation;
+
+    if (cachedTranslation) return cachedTranslation;
+  }
 
   // Translation only works consistently in production env, because astro adds html attributes in dev
-  if (import.meta.env.DEV && !options?.force) return `${text} (t)`;
+  if (import.meta.env.DEV && !options?.force) return `${standardizedText} (t)`;
 
   // Cache miss
-  debugCacheMiss(text, Object.keys(translations!));
+  debugCacheMiss(standardizedText, Object.keys(translations!));
 
-  translateBuffer.push({ text, toLocale, options });
-  return (await translate(options))[toLocale]![text]!.translation;
+  translateBuffer.push({ text: standardizedText, toLocale, options });
+  return (await translate(options))[toLocale]![standardizedText]!.translation;
 };
 
 const translate = async (translateOptions?: TranslateOptions) => {
@@ -135,30 +146,40 @@ const translate = async (translateOptions?: TranslateOptions) => {
         console.info(`i18n: translated ${text.length} texts`);
     }
 
-    const { readFileSync, writeFileSync } = await import("node:fs");
-
-    const filePath = `${translationsPath}/${toLocale}.json`;
-
-    let file = "";
-    try {
-      file = readFileSync(filePath, "utf-8");
-    } catch {
-      // File non existing, will be created
-    }
-
     localeTranslations = {
-      ...((file && JSON.parse(file)) as typeof localeTranslations),
+      ...(await getTranslationsCache(toLocale)),
       ...localeTranslations,
     };
 
+    const { writeFileSync } = await import("node:fs");
+
     // Add to cache
-    writeFileSync(filePath, JSON.stringify(localeTranslations, null, 2));
+    writeFileSync(
+      `${translationsPath}/${toLocale}.json`,
+      JSON.stringify(localeTranslations, null, 2)
+    );
 
     translateBuffer = [];
     cachedTranslations[toLocale] = localeTranslations;
   }
 
   return cachedTranslations;
+};
+
+const getTranslationsCache = async (locale: PossibleTranslations) => {
+  const { readFileSync } = await import("node:fs");
+
+  const filePath = `${translationsPath}/${locale}.json`;
+
+  let file = "";
+
+  try {
+    file = readFileSync(filePath, "utf-8");
+  } catch {
+    return undefined;
+  }
+
+  return JSON.parse(file) as CollectionEntry<"translations">["data"];
 };
 
 const debugCacheMiss = (text: string, cacheKeys: string[]) => {

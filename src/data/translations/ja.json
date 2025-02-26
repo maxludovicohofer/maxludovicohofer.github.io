@@ -487,10 +487,6 @@
     "translation": "マックス・ホーファー",
     "api": "deepl"
   },
-  "The best videogames can be approached in two ways: as *activities* and as *entertainment*. ![[Breath of the Wild(https://wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild)] is a masterclass in balancing both approaches.](https://youtube.com/watch?v=Q9sAzTOjl6s)\r\n\r\nAs activities, games impart a rhythm to a player's thought process and physical actions.": {
-    "translation": "最高のビデオゲームは2つの方法でアプローチできる：*アクティビティ*として、そして*エンターテインメント*として。ブレス・オブ・ザ・ワイルド(https://wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild)』は、この2つのアプローチをバランスよく両立させた傑作だ。](https://youtube.com/watch?v=Q9sAzTOjl6s) アクティビティとして、ゲームはプレイヤーの思考プロセスや身体動作にリズムを与える。",
-    "api": "deepl"
-  },
   "Graphic explanation of \"Flow vs immersion\".": {
     "translation": "フロー対イマージョン」をグラフィックで説明。",
     "api": "deepl"
@@ -1161,6 +1157,10 @@
   },
   "View my resume": {
     "translation": "履歴書を見る",
+    "api": "deepl"
+  },
+  "The best videogames can be approached in two ways: as *activities* and as *entertainment*. ![[Breath of the Wild(https://wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild)] is a masterclass in balancing both approaches.](https://youtube.com/watch?v=Q9sAzTOjl6s)\n\nAs activities, games impart a rhythm to a player's thought process and physical actions.": {
+    "translation": "最高のビデオゲームは2つの方法でアプローチできる：*アクティビティ*として、そして*エンターテインメント*として。ブレス・オブ・ザ・ワイルド(https://wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild)』は、この2つのアプローチをバランスよく両立させた傑作だ。](https://youtube.com/watch?v=Q9sAzTOjl6s) アクティビティとして、ゲームはプレイヤーの思考プロセスや身体動作にリズムを与える。",
     "api": "deepl"
   }
 }
