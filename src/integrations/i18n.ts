@@ -55,14 +55,15 @@ const queueTranslation = async (
   // Custom translation
   if (options?.[toLocale]) return options[toLocale];
 
-  if (!text) return text;
+  // Do not translate empty or divs
+  if (!text || text.trimStart().startsWith("<div")) return text;
 
   let translations = (await getEntry("translations", toLocale))?.data;
 
   // Cache hit
   if (translations?.[text]) return translations[text].translation;
 
-  // Translation cache only works consistently in production env, because astro adds html attributes in dev
+  // Translation only works consistently in production env, because astro adds html attributes in dev
   if (import.meta.env.DEV && !options?.force) return `${text} (t)`;
 
   // Cache miss

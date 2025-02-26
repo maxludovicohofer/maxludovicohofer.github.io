@@ -17,6 +17,7 @@ import {
   getDownloadLinks,
   type PostCollectionKey,
 } from "@integrations/content";
+import { i18n } from "@integrations/i18n";
 
 interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollectionKey>;
@@ -52,7 +53,8 @@ const publishingDate = getPublishingDate(
 const cover = getPostCover(entry);
 const downloadLinks = getDownloadLinks(entry);
 const category = getCategory(entry);
-const action = category === "Published tool" ? "Try" : "Play";
+const t = i18n(Astro);
+const action = await t(category === "Published tool" ? "Try" : "Play");
 
 const fullWidthClass = `w-full ${inline ? "" : "pb-24 lg:pb-10"}`;
 

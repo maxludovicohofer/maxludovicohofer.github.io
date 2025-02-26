@@ -141,7 +141,7 @@ export const diff = (str1: string, str2: string) => {
 export const highlightCharacter = (
   text: string,
   index: number,
-  charactersAfter: number = 100
+  charactersAfter: number = 200
 ) =>
   `${text.slice(0, index)}❌${text[index] ?? ""}❌${text.slice(
     index + 1,

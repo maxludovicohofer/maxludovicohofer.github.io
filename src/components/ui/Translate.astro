@@ -1,13 +1,18 @@
 ---
 import { i18n, type I18nOptions } from "@integrations/i18n";
 
-interface Props extends I18nOptions {}
+interface Props extends I18nOptions {
+  disable?: boolean;
+}
+
+const { disable, ...props } = Astro.props;
 
 const t = i18n(Astro);
 
-const slot = Astro.slots.has("default")
-  ? await t(await Astro.slots.render("default"), Astro.props)
-  : "";
+const slot =
+  Astro.slots.has("default") && !disable
+    ? await t(await Astro.slots.render("default"), props)
+    : "";
 ---
 
-<Fragment set:html={slot} />
+{disable ? <slot /> : <Fragment set:html={slot} />}
