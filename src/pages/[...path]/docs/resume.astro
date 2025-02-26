@@ -16,6 +16,7 @@ import { getTech } from "@components/TechList.astro";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { i18n } from "@integrations/i18n";
 
 export const getStaticPaths = getBasePaths;
 
@@ -34,6 +35,9 @@ const tech = await getTech(Astro);
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
+
+const t = i18n(Astro);
+const address = ADDRESS ? await t(ADDRESS, { noCache: true }) : undefined;
 ---
 
 <DocumentPage>
@@ -47,35 +51,35 @@ dayjs.extend(relativeTime);
       specializationSentence
     }.</Text
   >
-  <Text
+  <Text tag="span"
     ><Text tag="span" format="branded">👜</Text> Portfolio 🡢
     <Link href={portfolioLink} />
     <br /><Text tag="span" format="branded">📬</Text>
-    <Link href="mailto:hofermaxludovico@gmail.com" />
-    {
-      PHONE_NUMBER && (
-        <>
-          <br />
-          <Text tag="span" format="branded">
-            📞
-          </Text>
-          <Link href={`tel:${PHONE_NUMBER}`} />
-        </>
-      )
-    }
-    {
-      ADDRESS && (
-        <>
-          <br />
-          <Text tag="span" format="branded">
-            📍
-          </Text>
-          <Link href={`https://maps.google.com/?q=${ADDRESS}`}>{ADDRESS}</Link>{" "}
-          (open to relocate)
-        </>
-      )
-    }</Text
+    <Link href="mailto:hofermaxludovico@gmail.com" /></Text
   >
+  {
+    PHONE_NUMBER && (
+      <>
+        <br />
+        <Text tag="span" format="branded">
+          📞
+        </Text>
+        <Link href={`tel:${PHONE_NUMBER}`} />
+      </>
+    )
+  }
+  {
+    ADDRESS && (
+      <>
+        <br />
+        <Text tag="span" format="branded">
+          📍
+        </Text>
+        <Link href={`https://maps.google.com/?q=${ADDRESS}`}>{address}</Link>{" "}
+        <Text tag="span">(open to relocate)</Text>
+      </>
+    )
+  }
   <Text tag="h2">Experience</Text>
   <Text tag="h3">Game director for school projects</Text>
   <Text tag="h4" subtitle

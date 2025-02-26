@@ -18,6 +18,7 @@ export type TranslateOptions = {
   force?: boolean;
   debug?: boolean;
   allowedTranslations?: number;
+  noCache?: boolean;
 };
 
 export type I18nOptions = deepl.TranslatorOptions &
@@ -156,7 +157,19 @@ const translate = async (translateOptions?: TranslateOptions) => {
     // Add to cache
     writeFileSync(
       `${translationsPath}/${toLocale}.json`,
-      JSON.stringify(localeTranslations, null, 2)
+      JSON.stringify(
+        Object.fromEntries(
+          Object.entries(localeTranslations).filter(
+            ([text]) =>
+              // Remove texts that are not to be cached
+              !translateGroups[locale]!.entries().some(
+                ([options, texts]) => options?.noCache && texts.includes(text)
+              )
+          )
+        ),
+        null,
+        2
+      )
     );
 
     translateBuffer = [];
