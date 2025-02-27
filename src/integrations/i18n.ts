@@ -4,7 +4,7 @@ import { getEntry, type CollectionEntry } from "astro:content";
 import { DEEPL_API_KEY } from "astro:env/server";
 import * as deepl from "deepl-node";
 import { translationsPath } from "src/content.config";
-import { diff, highlightCharacter } from "./text";
+import { diff, fixNewLines, highlightCharacter } from "./text";
 import { groupBy, indexOfMin } from "./array";
 
 const deeplTrans = DEEPL_API_KEY
@@ -64,7 +64,7 @@ const queueTranslation = async (
 
   const entryTranslations = (await getEntry("translations", toLocale))?.data;
 
-  const cleanText = text.replaceAll("\r\n", "\n");
+  const cleanText = fixNewLines(text);
 
   // Check if in astro entry
   if (entryTranslations?.[cleanText]) {

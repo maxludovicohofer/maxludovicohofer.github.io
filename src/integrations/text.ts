@@ -147,3 +147,5 @@ export const highlightCharacter = (
     index + 1,
     charactersAfter ? index + charactersAfter : undefined
   )}`;
+
+export const fixNewLines = (text: string) => text.replaceAll("\r\n", "\n");
