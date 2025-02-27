@@ -62,30 +62,30 @@ const queueTranslation = async (
   // Do not translate empty or divs
   if (!text || text.trimStart().startsWith("<div")) return text;
 
-  let translations = (await getEntry("translations", toLocale))?.data;
+  const entryTranslations = (await getEntry("translations", toLocale))?.data;
 
-  const standardizedText = text.replaceAll("\r\n", "\n");
+  const cleanText = text.replaceAll("\r\n", "\n");
 
-  // Check if in astro collection
-  if (translations?.[standardizedText]) {
-    return translations[standardizedText].translation;
+  // Check if in astro entry
+  if (entryTranslations?.[cleanText]) {
+    return entryTranslations[cleanText].translation;
   } else {
-    // Check if in file but not in astro collection
-    const cachedTranslation = (await getTranslationsCache(toLocale))?.[
-      standardizedText
-    ]?.translation;
+    // Check if in file but not in astro entry
+    //? This can happen if translated in current session
+    const fileTranslation = (await getTranslationsFile(toLocale))?.[cleanText]
+      ?.translation;
 
-    if (cachedTranslation) return cachedTranslation;
+    if (fileTranslation) return fileTranslation;
   }
 
   // Translation only works consistently in production env, because astro adds html attributes in dev
-  if (import.meta.env.DEV && !options?.force) return `${standardizedText} (t)`;
+  if (import.meta.env.DEV && !options?.force) return `${cleanText} (t)`;
 
   // Cache miss
-  debugCacheMiss(standardizedText, Object.keys(translations!));
+  debugCacheMiss(cleanText, Object.keys(entryTranslations!));
 
-  translateBuffer.push({ text: standardizedText, toLocale, options });
-  return (await translate(options))[toLocale]![standardizedText]!.translation;
+  translateBuffer.push({ text: cleanText, toLocale, options });
+  return (await translate(options))[toLocale]![cleanText]!.translation;
 };
 
 const translate = async (translateOptions?: TranslateOptions) => {
@@ -100,7 +100,7 @@ const translate = async (translateOptions?: TranslateOptions) => {
   if (!deeplTrans) throw new Error("Deepl API key not found");
 
   // Order translate buffer
-  const translateGroups = Object.fromEntries(
+  const translateInfoGroups = Object.fromEntries(
     Object.entries(groupBy(translateBuffer, ({ toLocale }) => toLocale)).map(
       ([locale, translateInfo]) => [
         locale as PossibleTranslations,
@@ -118,26 +118,28 @@ const translate = async (translateOptions?: TranslateOptions) => {
     )
   );
 
-  const cachedTranslations: Partial<
+  const translations: Partial<
     Record<PossibleTranslations, CollectionEntry<"translations">["data"]>
   > = {};
 
-  for (const locale in translateGroups) {
+  for (const locale in translateInfoGroups) {
     const toLocale = locale as PossibleTranslations;
 
     let localeTranslations: CollectionEntry<"translations">["data"] = {};
 
-    for (const [options, text] of translateGroups[locale]!) {
+    const uncachedTexts: string[] = [];
+
+    for (const [options, texts] of translateInfoGroups[locale]!) {
       localeTranslations = {
         ...localeTranslations,
         ...Object.fromEntries(
           (
-            await deeplTrans.translateText(text, defaultLocale, toLocale, {
+            await deeplTrans.translateText(texts, defaultLocale, toLocale, {
               tagHandling: "html",
               ...options,
             })
           ).map(({ text: translation }, index) => [
-            text[index]!,
+            texts[index]!,
             { translation, api: "deepl" },
           ]) satisfies [
             string,
@@ -147,31 +149,29 @@ const translate = async (translateOptions?: TranslateOptions) => {
       };
 
       // Translated
-      translationCount += text.length;
-      if (translateOptions?.debug)
-        console.info(`i18n: translated ${text.length} texts`);
+      translationCount += texts.length;
+      if (translateOptions?.debug) {
+        console.info(`i18n: translated ${texts.length} texts`);
+      }
+
+      if (options?.noCache) uncachedTexts.push(...texts);
     }
 
     localeTranslations = {
-      ...(await getTranslationsCache(toLocale)),
+      ...(await getTranslationsFile(toLocale)),
       ...localeTranslations,
     };
 
     const { writeFileSync } = await import("node:fs");
 
-    // Add to cache
+    // Add to cache/file
     writeFileSync(
       `${translationsPath}/${toLocale}.json`,
       JSON.stringify(
         Object.fromEntries(
           Object.entries(localeTranslations).filter(
-            ([text]) =>
-              // Remove texts that are not to be cached
-              !translateGroups[locale]!.keys().some(
-                (options) =>
-                  options?.noCache &&
-                  translateGroups[locale]!.get(options)!.includes(text)
-              )
+            // Remove texts that are not to be cached
+            ([text]) => !uncachedTexts.includes(text)
           )
         ),
         null,
@@ -180,13 +180,13 @@ const translate = async (translateOptions?: TranslateOptions) => {
     );
 
     translateBuffer = [];
-    cachedTranslations[toLocale] = localeTranslations;
+    translations[toLocale] = localeTranslations;
   }
 
-  return cachedTranslations;
+  return translations;
 };
 
-const getTranslationsCache = async (locale: PossibleTranslations) => {
+const getTranslationsFile = async (locale: PossibleTranslations) => {
   const { readFileSync } = await import("node:fs");
 
   const filePath = `${translationsPath}/${locale}.json`;
@@ -205,7 +205,7 @@ const getTranslationsCache = async (locale: PossibleTranslations) => {
 const debugCacheMiss = (text: string, cacheKeys: string[]) => {
   const diffs = cacheKeys.map((key) => diff(key, text));
 
-  // Most similar key is the one with the least differences
+  // Closest key is the one with the least differences
   const closestKeyIndex = indexOfMin(diffs.map(({ length }) => length))!;
   const { index: firstDifferenceIndex } = diffs[closestKeyIndex]![0]!;
 
