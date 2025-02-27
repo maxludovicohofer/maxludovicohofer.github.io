@@ -167,8 +167,10 @@ const translate = async (translateOptions?: TranslateOptions) => {
           Object.entries(localeTranslations).filter(
             ([text]) =>
               // Remove texts that are not to be cached
-              !translateGroups[locale]!.entries().some(
-                ([options, texts]) => options?.noCache && texts.includes(text)
+              !translateGroups[locale]!.keys().some(
+                (options) =>
+                  options?.noCache &&
+                  translateGroups[locale]!.get(options)!.includes(text)
               )
           )
         ),
