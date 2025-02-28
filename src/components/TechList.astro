@@ -1,5 +1,6 @@
 ---
 import { matchRoles } from "@integrations/astro-server";
+import { i18n, setLocale } from "@integrations/i18n";
 import { capitalize } from "@integrations/text";
 import Text from "@ui/Text.astro";
 import type { AstroGlobal } from "astro";
@@ -65,13 +66,19 @@ const renderedGroups: string[] = [];
 
 // TODO PHASE 2 REFERENCE PROJECTS WHERE THE TECH IS USED. MOST LIKELY SHOW THEM ON HOVER/INTERSECT (MOBILE). COULD BE INDIVIDUAL PROJECTS OR JUST (USED IN 3 GAMES, 2 PROTOTYPES ...)
 
+await setLocale(Astro);
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
+
+const t = i18n(Astro);
+
+const getExperience = async (experience: string) =>
+  `${capitalize(dayjs.duration(experience).humanize())} ${await t("of experience")}`;
 ---
 
 <ol class={`${className} grid`} {...props}>
   {
-    tech.map(({ data: { id, experience, group, functionalities } }) => {
+    tech.map(async ({ data: { id, experience, group, functionalities } }) => {
       const isGroup = group && !compact;
 
       if (isGroup) {
@@ -91,6 +98,9 @@ dayjs.extend(relativeTime);
       const rowSpan = (compact ? 1 : content.length) / 8;
       const title = isGroup ? group : id;
 
+      const experienceSentence =
+        experience && !isGroup && (await getExperience(experience));
+
       return (
         <li
           class={`${rowSpan < 2 ? "row-span-1" : rowSpan < 3 ? "row-span-2" : rowSpan < 4 ? "row-span-3" : rowSpan < 5 ? "row-span-4" : "row-span-5"}`}
@@ -100,27 +110,32 @@ dayjs.extend(relativeTime);
           </Text>
           {!compact && (
             <>
-              {experience && !isGroup && (
-                <Text subtitle tag="span">
-                  {capitalize(dayjs.duration(experience).humanize())} of
-                  experience
+              {experienceSentence && (
+                <Text subtitle tag="span" translateProps={{ disable: true }}>
+                  {experienceSentence}
                 </Text>
               )}
               {content.length !== 0 && (
                 <ol class="ml-8">
-                  {content.map((item) => (
-                    <li>
-                      <Text tag="span">{item.id}</Text>
-                      {item.data && (
-                        <Text subtitle tag="span">
-                          {capitalize(
-                            dayjs.duration(item.data.experience).humanize()
-                          )}{" "}
-                          of experience
-                        </Text>
-                      )}
-                    </li>
-                  ))}
+                  {content.map(async (item) => {
+                    const experienceSentence =
+                      item.data && (await getExperience(item.data.experience));
+
+                    return (
+                      <li>
+                        <Text tag="span">{item.id}</Text>
+                        {experienceSentence && (
+                          <Text
+                            subtitle
+                            tag="span"
+                            translateProps={{ disable: true }}
+                          >
+                            {experienceSentence}
+                          </Text>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ol>
               )}
             </>

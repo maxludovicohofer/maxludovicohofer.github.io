@@ -16,7 +16,7 @@ import { getTech } from "@components/TechList.astro";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { i18n } from "@integrations/i18n";
+import { i18n, setLocale } from "@integrations/i18n";
 
 export const getStaticPaths = getBasePaths;
 
@@ -33,6 +33,7 @@ const tech = await getTech(Astro);
 
 // TODO MAKE COLLECTION FOR EXPERIENCE AND EDUCATION, THAT CAN CHANGE INFO BASED ON ROLE (FOR EXAMPLE, PROGRAMMER SHOULD SPECIFY THAT I WAS A PROGRAMMER, NOT A GAME DESIGNER)
 
+await setLocale(Astro);
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
 
@@ -143,13 +144,13 @@ const address = ADDRESS ? await t(ADDRESS, { noCache: true }) : undefined;
     </li>
   </Text>
   <Text tag="h2">Skills</Text>
-  <Text tag="ul" class="grid grid-cols-3">
+  <Text tag="ul" class="grid grid-cols-3" translateProps={{ disable: true }}>
     {
-      tech.map(({ data: { id, experience } }) => (
-        <li class="pr-7 my-0.5">
-          {id}, {dayjs.duration(experience).humanize()}
-        </li>
-      ))
+      tech.map(async ({ data: { id, experience } }) => {
+        const techItem = `${await t(id)}${await t(",")} ${dayjs.duration(experience).humanize()}`;
+
+        return <li class="pr-7 my-0.5">{techItem}</li>;
+      })
     }
   </Text>
   <Text tag="ul" class="-mt-3">

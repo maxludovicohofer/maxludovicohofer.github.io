@@ -6,6 +6,8 @@ import * as deepl from "deepl-node";
 import { translationsPath } from "src/content.config";
 import { diff, fixNewLines, getPathSection, highlightCharacter } from "./text";
 import { groupBy, indexOfMin } from "./array";
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
 
 const deeplTrans = DEEPL_API_KEY
   ? new deepl.Translator(DEEPL_API_KEY)
@@ -245,4 +247,19 @@ export const getLocaleFromPath = (path: string) => {
   if (locales.includes(possibleLocale)) return possibleLocale;
 
   return undefined;
+};
+
+export const setLocale = async (astro: AstroGlobal) => {
+  dayjs.extend(localizedFormat);
+
+  const translateLocale = (astro.currentLocale ??
+    defaultLocale) as (typeof locales)[number];
+
+  switch (translateLocale) {
+    case "ja":
+      await import("dayjs/locale/ja");
+      break;
+  }
+
+  dayjs.locale(translateLocale);
 };

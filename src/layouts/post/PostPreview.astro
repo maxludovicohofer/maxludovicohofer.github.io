@@ -18,6 +18,7 @@ import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import { getDescription, getEntryId } from "@layouts/document/Document.astro";
 import { isLocalizedEntry } from "@integrations/astro-server";
+import { i18n, setLocale } from "@integrations/i18n";
 
 interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollectionKey> | undefined;
@@ -73,6 +74,7 @@ const minutesToRead = isMarkdown
     )
   : undefined;
 
+await setLocale(Astro);
 dayjs.extend(duration);
 
 const readMoreLink =
@@ -82,13 +84,15 @@ const readMoreLink =
 
 const cover = getCover(entry);
 const category = getCategory(entry);
+
 const publishingDate =
-  !hideDate &&
-  getPublishingDate(entry, remarkPluginFrontmatter)?.format("D MMMM YYYY");
+  !hideDate && getPublishingDate(entry, remarkPluginFrontmatter)?.format("LL");
 
-const subtitle = [category, publishingDate].filter((part) => !!part);
+const t = i18n(Astro);
 
-// TODO ALSO DO NOT TRANSLATE TITLE SUBTITLE AND OTHER STUFF
+const subtitle = [category && (await t(category)), publishingDate].filter(
+  (part) => !!part
+);
 
 const noTranslation = isLocalizedEntry(entry);
 ---
@@ -124,7 +128,7 @@ const noTranslation = isLocalizedEntry(entry);
       }
       {
         subtitle.length !== 0 && (
-          <Text subtitle class="xl:mt-3">
+          <Text subtitle class="xl:mt-3" translateProps={{ disable: true }}>
             {subtitle.join(" \\ ")}
           </Text>
         )
@@ -180,7 +184,7 @@ const noTranslation = isLocalizedEntry(entry);
       >
         {readMoreText ??
           (isMarkdown
-            ? `Read in ${dayjs.duration({ minutes: Math.ceil(minutesToRead!) }).format("m")} min`
+            ? `Read in ${dayjs.duration({ minutes: Math.ceil(minutesToRead!) }).get("minutes")} min`
             : "Read more")}
         <br />▼
       </Button>

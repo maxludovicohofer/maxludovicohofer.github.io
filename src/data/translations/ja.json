@@ -1086,5 +1086,61 @@
   "Steelsilk's main menu.": {
     "translation": "Steelsilkのメインメニュー。",
     "api": "deepl"
+  },
+  "<li class=\"pr-7 my-0.5\"> Unreal Engine, 5年 </li><li class=\"pr-7 my-0.5\"> Unity, 1年 </li><li class=\"pr-7 my-0.5\"> C++, 5年 </li><li class=\"pr-7 my-0.5\"> C#, 5年 </li><li class=\"pr-7 my-0.5\"> Blueprints, 3年 </li><li class=\"pr-7 my-0.5\"> Maya, 1年 </li><li class=\"pr-7 my-0.5\"> Photoshop, 3年 </li><li class=\"pr-7 my-0.5\"> Illustrator, 3年 </li><li class=\"pr-7 my-0.5\"> Gaea, 6ヶ月 </li><li class=\"pr-7 my-0.5\"> FL Studio, 15年 </li><li class=\"pr-7 my-0.5\"> HLSL, 1年 </li><li class=\"pr-7 my-0.5\"> Houdini, 6ヶ月 </li><li class=\"pr-7 my-0.5\"> Substance designer, 6ヶ月 </li>": {
+    "translation": "<li class=\"pr-7 my-0.5\">アンリアル・エンジン、5年 </li><li class=\"pr-7 my-0.5\">ユニティ、1年 </li><li class=\"pr-7 my-0.5\">C++、5年 </li><li class=\"pr-7 my-0.5\">C#、5年 </li><li class=\"pr-7 my-0.5\">ブループリント、3年 </li><li class=\"pr-7 my-0.5\">Maya, 1年 </li><li class=\"pr-7 my-0.5\">フォトショップ, 3年 </li><li class=\"pr-7 my-0.5\">イラストレーター, 3年 </li><li class=\"pr-7 my-0.5\">ガイア, 6ヶ月 </li><li class=\"pr-7 my-0.5\">FL Studio, 15年 </li><li class=\"pr-7 my-0.5\">HLSL, 1年 </li><li class=\"pr-7 my-0.5\">Houdini, 6ヶ月 </li><li class=\"pr-7 my-0.5\">サブスタンス・デザイナー, 6ヶ月 </li>",
+    "api": "deepl"
+  },
+  "<li class=\"pr-7 my-0.5\"> Unreal Engine, 5年 </li><li class=\"pr-7 my-0.5\"> Unity, 1年 </li><li class=\"pr-7 my-0.5\"> C++, 5年 </li><li class=\"pr-7 my-0.5\"> C#, 5年 </li><li class=\"pr-7 my-0.5\"> ECS, 3年 </li><li class=\"pr-7 my-0.5\"> HLSL, 1年 </li><li class=\"pr-7 my-0.5\"> Python, 3年 </li><li class=\"pr-7 my-0.5\"> Java, 2年 </li><li class=\"pr-7 my-0.5\"> Agile, 3年 </li><li class=\"pr-7 my-0.5\"> TDD, 3年 </li><li class=\"pr-7 my-0.5\"> SQL, 5年 </li><li class=\"pr-7 my-0.5\"> AWS, 5年 </li><li class=\"pr-7 my-0.5\"> CI \\ CD, 3年 </li><li class=\"pr-7 my-0.5\"> Mobile, 2年 </li><li class=\"pr-7 my-0.5\"> Full stack, 5年 </li>": {
+    "translation": "<li class=\"pr-7 my-0.5\">アンリアル・エンジン、5年 </li><li class=\"pr-7 my-0.5\">ユニティ、1年 </li><li class=\"pr-7 my-0.5\">C++、5年 </li><li class=\"pr-7 my-0.5\">C#、5年 </li><li class=\"pr-7 my-0.5\">ECS、3年 </li><li class=\"pr-7 my-0.5\">HLSL、1年 </li><li class=\"pr-7 my-0.5\">Python, 3年 </li><li class=\"pr-7 my-0.5\">Java, 2年 </li><li class=\"pr-7 my-0.5\">アジャイル, 3年 </li><li class=\"pr-7 my-0.5\">TDD, 3年 </li><li class=\"pr-7 my-0.5\">SQL, 5年 </li><li class=\"pr-7 my-0.5\">AWS, 5年 </li><li class=\"pr-7 my-0.5\">CI </li><li class=\"pr-7 my-0.5\">モバイル, 2年 </li><li class=\"pr-7 my-0.5\">フルスタック, 5年 </li>",
+    "api": "deepl"
+  },
+  ",": {
+    "translation": ",",
+    "api": "deepl"
+  },
+  "Resume": {
+    "translation": "履歴書",
+    "api": "deepl"
+  },
+  "Max Hofer": {
+    "translation": "マックス・ホーファー",
+    "api": "deepl"
+  },
+  "Solo developed in 14日.": {
+    "translation": "ソロは14日に開発された。",
+    "api": "deepl"
+  },
+  "Made in 3日 by an average team of 5.": {
+    "translation": "平均的な5人のチームによって3日で作られる。",
+    "api": "deepl"
+  },
+  "Made in 5日 by an average team of 5.": {
+    "translation": "平均的な5人のチームによって5日で作られる。",
+    "api": "deepl"
+  },
+  "Duchessa's World": {
+    "translation": "ドゥシェサの世界",
+    "api": "deepl"
+  },
+  "Made in 7日 by an average team of 2.": {
+    "translation": "平均2人のチームによって7日間で作られる。",
+    "api": "deepl"
+  },
+  "Made in 2ヶ月 by an average team of 26.": {
+    "translation": "平均26人のチームによって2ヶ月で作られた。",
+    "api": "deepl"
+  },
+  "of experience": {
+    "translation": "経験",
+    "api": "deepl"
+  },
+  "Game design": {
+    "translation": "ゲームデザイン",
+    "api": "deepl"
+  },
+  "AI programming": {
+    "translation": "AIプログラミング",
+    "api": "deepl"
   }
 }

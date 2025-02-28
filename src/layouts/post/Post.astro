@@ -48,7 +48,7 @@ const title = getTitle(entry);
 const publishingDate = getPublishingDate(
   entry,
   remarkPluginFrontmatter
-)?.format("D MMMM YYYY");
+)?.format("LL");
 const cover = getCover(entry);
 const downloadLinks = getDownloadLinks(entry);
 const category = getCategory(entry);
@@ -151,7 +151,11 @@ const noTranslation = isLocalizedEntry(entry);
         }
         {
           publishingDate && (
-            <Text subtitle class="mt-0.5 2xl:mt-3">
+            <Text
+              subtitle
+              class="mt-0.5 2xl:mt-3"
+              translateProps={{ disable: true }}
+            >
               {publishingDate}
             </Text>
           )

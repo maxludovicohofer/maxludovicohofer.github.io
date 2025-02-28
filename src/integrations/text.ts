@@ -1,11 +1,11 @@
 export const toSentenceCase = (text: string) =>
-  text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+  text.charAt(0).toLocaleUpperCase() + text.slice(1).toLocaleLowerCase();
 
 export const toTitleCase = (text: string) =>
   text.split(" ").map(capitalize).join(" ");
 
 export const capitalize = (text: string) =>
-  text.charAt(0).toUpperCase() + text.slice(1);
+  text.charAt(0).toLocaleUpperCase() + text.slice(1);
 
 export const isRemoteLink = (link: string) => link.startsWith("http");
 
@@ -100,7 +100,7 @@ export const getHumanPathSection = (
     .split(".")[0]!;
 
 export const makePath = (humanName: string) =>
-  humanName.toLowerCase().replaceAll(" ", "-");
+  humanName.toLocaleLowerCase().replaceAll(" ", "-");
 
 export const toTextList = (text: string[]) => {
   const length = text.length;

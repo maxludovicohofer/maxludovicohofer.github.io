@@ -117,7 +117,9 @@ const isExternal =
   {...props}
   ><slot
     >{
-      hrefString ? getLinkName(hrefString, true).toLowerCase() : await t("Link")
+      hrefString
+        ? getLinkName(hrefString, true).toLocaleLowerCase()
+        : await t("Link")
     }</slot
   ></a
 >

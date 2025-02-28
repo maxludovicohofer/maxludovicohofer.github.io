@@ -28,9 +28,7 @@ const formattedTitle = capitalize(
       : getHumanPathSection(Astro.url.pathname))
 );
 
-const prefixedTitle = `Max Hofer \\ ${formattedTitle}`;
-
-const completeTitle = noTranslation ? prefixedTitle : await t(prefixedTitle);
+const completeTitle = `${await t("Max Hofer")} \\ ${noTranslation ? formattedTitle : await t(formattedTitle)}`;
 
 const formattedDescription = description
   ? capitalize(description)

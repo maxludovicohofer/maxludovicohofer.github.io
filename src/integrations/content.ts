@@ -132,7 +132,7 @@ export function getCategory<F extends boolean>(
 
   return (
     !noFormat && getDownloadLinks(entry)
-      ? `Published ${category.toLowerCase()}`
+      ? `Published ${category.toLocaleLowerCase()}`
       : category
   ) as any;
 }
