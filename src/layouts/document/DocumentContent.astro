@@ -11,17 +11,17 @@ interface Props {
   Content: AstroComponentFactory;
   preview?: boolean;
   components?: Partial<Record<HTMLTag, (args: any) => any>>;
+  noTranslation?: boolean;
 }
 
-const { Content, preview, components } = Astro.props;
+const { Content, preview, components, noTranslation } = Astro.props;
 ---
 
 <Content
   components={{
     a: Link,
     img: preview ? DocumentHidden : MarkdownMedia,
-    p: Text,
-    ul: List,
+    ...(noTranslation ? {} : { p: Text, ul: List }),
     ...components,
   }}
 />

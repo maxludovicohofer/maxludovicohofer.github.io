@@ -12,21 +12,33 @@ interface Props {
   description?: string | undefined;
   backHref?: string;
   homepage?: boolean;
+  noTranslation?: boolean;
 }
 
-const { title, description, backHref, homepage } = Astro.props;
+const { title, description, backHref, homepage, noTranslation } = Astro.props;
 
 const t = i18n(Astro);
 
 const { role } = await getRole(Astro);
 
-const formattedTitle =
+const formattedTitle = capitalize(
   title ??
-  (homepage
-    ? (role.data.workFields?.[0] ?? role.id)
-    : getHumanPathSection(Astro.url.pathname));
+    (homepage
+      ? (role.data.workFields?.[0] ?? role.id)
+      : getHumanPathSection(Astro.url.pathname))
+);
 
-const completeTitle = await t(`Max Hofer \\ ${capitalize(formattedTitle)}`);
+const prefixedTitle = `Max Hofer \\ ${formattedTitle}`;
+
+const completeTitle = noTranslation ? prefixedTitle : await t(prefixedTitle);
+
+const formattedDescription = description
+  ? capitalize(description)
+  : `${formattedTitle}.`;
+
+const completeDescription = noTranslation
+  ? formattedDescription
+  : await t(formattedDescription);
 ---
 
 <!doctype html>
@@ -37,12 +49,7 @@ const completeTitle = await t(`Max Hofer \\ ${capitalize(formattedTitle)}`);
 
     <title>{completeTitle}</title>
     <meta name="title" content={completeTitle} />
-    <meta
-      name="description"
-      content={description
-        ? await t(capitalize(description))
-        : `${completeTitle}.`}
-    />
+    <meta name="description" content={completeDescription} />
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

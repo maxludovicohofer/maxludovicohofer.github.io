@@ -1,18 +1,18 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import type { ComponentProps, HTMLAttributes } from "astro/types";
 import Translate from "./Translate.astro";
 
 interface Props extends HTMLAttributes<"button"> {
   container?: boolean | undefined;
   noRounding?: boolean;
-  noTranslation?: boolean;
+  translateProps?: ComponentProps<typeof Translate>;
 }
 
 const {
   class: className = "",
   container,
   noRounding,
-  noTranslation,
+  translateProps,
   ...props
 } = Astro.props;
 ---
@@ -25,14 +25,6 @@ const {
       container ? "" : "group-hover/card:animate-pulse"
     }`}
   >
-    {
-      noTranslation ? (
-        <slot />
-      ) : (
-        <Translate>
-          <slot />
-        </Translate>
-      )
-    }
+    <Translate {...translateProps}><slot /></Translate>
   </div>
 </button>

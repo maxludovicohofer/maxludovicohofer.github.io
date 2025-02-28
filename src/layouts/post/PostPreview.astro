@@ -5,7 +5,7 @@ import Button from "@ui/Button.astro";
 import {
   getCategory,
   getPublishingDate,
-  getPostCover,
+  getCover,
   type PostCollectionKey,
   getTitle,
 } from "@integrations/content";
@@ -16,10 +16,8 @@ import { getCoverAlt } from "@post/CoverMedia.astro";
 import getReadingTime from "reading-time";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
-import {
-  getDescription,
-  getDocumentId,
-} from "@layouts/document/Document.astro";
+import { getDescription, getEntryId } from "@layouts/document/Document.astro";
+import { isLocalizedEntry } from "@integrations/astro-server";
 
 interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollectionKey> | undefined;
@@ -30,9 +28,9 @@ interface Props extends HTMLAttributes<"div"> {
   readMoreClass?: string;
   noReadMore?: boolean;
   titleProps?: ComponentProps<typeof Text>;
-  tag?: ComponentProps<typeof Text>["tag"];
   hideDate?: boolean;
   container?: boolean;
+  contentProps?: ComponentProps<typeof Text>;
 }
 
 const {
@@ -46,8 +44,8 @@ const {
   readMoreText,
   noReadMore,
   readMoreClass = "",
-  tag,
   hideDate,
+  contentProps,
   ...props
 } = Astro.props;
 
@@ -58,16 +56,18 @@ const title = getTitle(entry);
 const renderedContent =
   getDescription(entry, short ? 1 : undefined, short, startHeading) ?? Content;
 
+const isMarkdownContent = typeof renderedContent === "function";
+
 const isMarkdown = !!remarkPluginFrontmatter;
 
 const minutesToRead = isMarkdown
   ? remarkPluginFrontmatter.minutesRead -
     Math.min(
-      typeof renderedContent === "string"
-        ? // Description time
-          getReadingTime(renderedContent).minutes
-        : // Post time
-          remarkPluginFrontmatter.minutesRead,
+      isMarkdownContent
+        ? // Post time
+          remarkPluginFrontmatter.minutesRead
+        : // Description time
+          getReadingTime(renderedContent ?? "").minutes,
       // Maximum time assumed to be already spent reading before clicking read more
       0.2
     )
@@ -78,15 +78,19 @@ dayjs.extend(duration);
 const readMoreLink =
   noReadMore || (isMarkdown && minutesToRead! < 0)
     ? undefined
-    : (readMore ?? (entry && `${entry.collection}/${getDocumentId(entry)}`));
+    : (readMore ?? (entry && `${entry.collection}/${getEntryId(entry)}`));
 
-const cover = getPostCover(entry);
+const cover = getCover(entry);
 const category = getCategory(entry);
 const publishingDate =
   !hideDate &&
   getPublishingDate(entry, remarkPluginFrontmatter)?.format("D MMMM YYYY");
 
 const subtitle = [category, publishingDate].filter((part) => !!part);
+
+// TODO ALSO DO NOT TRANSLATE TITLE SUBTITLE AND OTHER STUFF
+
+const noTranslation = isLocalizedEntry(entry);
 ---
 
 <div class=`${className} post-preview h-full` {...props}>
@@ -109,6 +113,9 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
             tag="h1"
             class={`post-preview-title ${container ? "lg:ml-4" : ""}`}
             importance={container ? "container" : undefined}
+            {...((noTranslation && !container
+              ? { translateProps: { disable: noTranslation } }
+              : {}) satisfies Partial<ComponentProps<typeof Text>>)}
             {...titleProps}
           >
             <slot name="title">{title}</slot>
@@ -124,12 +131,22 @@ const subtitle = [category, publishingDate].filter((part) => !!part);
       }
       <Text
         class={`${subtitle.length !== 0 || renderedContent || Astro.slots.has("title") ? (container ? "mt-6" : "mt-4") : ""} ${container ? "max-h-[32rem]" : readMoreLink ? "max-h-64" : ""}`}
-        markdown={typeof renderedContent === "function"}
-        tag={tag ?? (container ? "div" : undefined)}
+        markdown={isMarkdownContent}
+        tag={isMarkdownContent || container ? "div" : undefined}
+        {...(noTranslation
+          ? { translateProps: { disable: noTranslation } }
+          : {}) satisfies Partial<ComponentProps<typeof Text>>}
+        {...contentProps}
         ><slot
           >{
-            typeof renderedContent === "function" ? (
-              <DocumentContent preview Content={renderedContent} />
+            isMarkdownContent ? (
+              <DocumentContent
+                preview
+                Content={renderedContent}
+                {...((noTranslation ? { noTranslation } : {}) satisfies Partial<
+                  ComponentProps<typeof DocumentContent>
+                >)}
+              />
             ) : (
               renderedContent
             )

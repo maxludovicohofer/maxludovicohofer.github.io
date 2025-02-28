@@ -5,9 +5,8 @@ import {
   type TextSize,
   type TextFormat,
 } from "@integrations/tailwind";
-import type { HTMLAttributes } from "astro/types";
+import type { ComponentProps, HTMLAttributes } from "astro/types";
 import Translate from "./Translate.astro";
-import { type I18nOptions } from "@integrations/i18n";
 
 interface Props extends Omit<HTMLAttributes<TextTag>, "title"> {
   title?: boolean;
@@ -16,8 +15,7 @@ interface Props extends Omit<HTMLAttributes<TextTag>, "title"> {
   tag?: TextTag | undefined;
   importance?: TextSize | undefined;
   format?: TextFormat | undefined;
-  noTranslation?: boolean;
-  i18nOptions?: I18nOptions;
+  translateProps?: ComponentProps<typeof Translate>;
 }
 
 const {
@@ -28,28 +26,19 @@ const {
   tag,
   importance,
   format,
-  noTranslation,
-  i18nOptions,
+  translateProps,
   ...props
 } = Astro.props;
 
 const Element = tag ?? (markdown ? "div" : title ? "h1" : "p");
 
 if (markdown) import("katex/dist/katex.min.css");
-
-const dontTranslate = noTranslation ?? Element === "div";
 ---
 
 <Element
   class={`${className} notranslate ${getTextClass(markdown ? "markdown" : (importance ?? (subtitle ? "small" : Element)), format ?? (title ? "heading" : subtitle ? "detail" : undefined))}`}
   {...props}
-  >{
-    dontTranslate ? (
-      <slot />
-    ) : (
-      <Translate {...i18nOptions}>
-        <slot />
-      </Translate>
-    )
-  }</Element
+  ><Translate disable={Element === "div"} {...translateProps}
+    ><slot /></Translate
+  ></Element
 >

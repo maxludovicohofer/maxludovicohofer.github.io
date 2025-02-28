@@ -1,4 +1,7 @@
-import { getDocumentId } from "@layouts/document/Document.astro";
+import {
+  getEntryId,
+  type DocumentCollectionKey,
+} from "@layouts/document/Document.astro";
 import { capitalize, getHumanPathSection, toTitleCase } from "./text";
 import type { CollectionEntry, CollectionKey } from "astro:content";
 import dayjs from "dayjs";
@@ -11,23 +14,23 @@ import { VALID_INPUT_FORMATS } from "node_modules/astro/dist/assets/consts";
 export type PostCollectionKey = Extract<CollectionKey, "projects" | "thoughts">;
 
 export const getTitle = (
-  post: CollectionEntry<PostCollectionKey> | undefined
+  entry: CollectionEntry<DocumentCollectionKey> | undefined
 ) => {
-  if (!post) return;
+  if (!entry) return;
 
-  if (post.data.title) return post.data.title;
+  if (entry.data.title) return entry.data.title;
 
-  const rawTitle = getHumanPathSection(getDocumentId(post)!);
-  return post.collection === "projects"
+  const rawTitle = getHumanPathSection(getEntryId(entry)!);
+  return entry.collection === "projects"
     ? toTitleCase(rawTitle)
     : capitalize(rawTitle);
 };
 
 export const getPublishingDate = (
-  post: CollectionEntry<PostCollectionKey> | undefined,
+  entry: CollectionEntry<DocumentCollectionKey> | undefined,
   frontmatter?: Record<string, any>
 ) => {
-  if (post?.data.publishingDate) return dayjs(post.data.publishingDate);
+  if (entry?.data.publishingDate) return dayjs(entry.data.publishingDate);
 
   if (!frontmatter) return;
 
@@ -36,25 +39,25 @@ export const getPublishingDate = (
   return dayjs.utc(frontmatter.created || undefined);
 };
 
-export const getPostCover = (
-  post: CollectionEntry<PostCollectionKey> | undefined
+export const getCover = (
+  entry: CollectionEntry<PostCollectionKey> | undefined
 ) => {
-  if (!post) return;
+  if (!entry) return;
 
-  if (post.data.youTubeID) {
+  if (entry.data.youTubeID) {
     return {
-      id: post.data.youTubeID,
-      aspect: post.data.youTubeAspectRatio,
+      id: entry.data.youTubeID,
+      aspect: entry.data.youTubeAspectRatio,
     } satisfies ComponentProps<typeof Video>["youTubeInfo"] as ComponentProps<
       typeof Video
     >["youTubeInfo"];
   }
 
-  const imageFolder = `/src/data/${post.collection}/`;
+  const imageFolder = `/src/data/${entry.collection}/`;
   const images = import.meta.glob<{ default: ImageMetadata }>(
     "/src/data/**/*.{png,jpg,jpeg,gif,webp,svg}"
   );
-  const imagePath = `${imageFolder}${post.id}`;
+  const imagePath = `${imageFolder}${entry.id}`;
   const image =
     images[
       `${imagePath}.${VALID_INPUT_FORMATS.find(
@@ -62,7 +65,7 @@ export const getPostCover = (
       )}`
     ];
 
-  if (post.collection === "projects" && !post.data.draft && !image) {
+  if (entry.collection === "projects" && !entry.data.draft && !image) {
     // Projects require image
     throw new Error(
       `An image for "${imagePath}" does not exist in pattern: "${imageFolder}*.{${VALID_INPUT_FORMATS.join(
@@ -74,11 +77,11 @@ export const getPostCover = (
   return image;
 };
 
-export const getDownloadLinks = (entry?: { data: object }) => {
-  function isDownloadableEntry(entry?: {
-    data: object;
-  }): entry is { data: { downloadLinks: string[] } } {
-    return !!(entry && Object.hasOwn(entry.data, "downloadLinks"));
+export const getDownloadLinks = (entry: { data: object } | undefined) => {
+  function isDownloadableEntry(
+    test: typeof entry
+  ): test is { data: { downloadLinks: string[] } } {
+    return !!(test && Object.hasOwn(test.data, "downloadLinks"));
   }
 
   if (!isDownloadableEntry(entry) || !entry.data.downloadLinks.length) return;
@@ -86,11 +89,11 @@ export const getDownloadLinks = (entry?: { data: object }) => {
   return entry.data.downloadLinks;
 };
 
-export const getDevelopmentTime = (entry?: { data: object }) => {
-  function isDevelopmentTimeEntry(entry?: {
-    data: object;
-  }): entry is { data: { developmentTime: string } } {
-    return !!(entry && Object.hasOwn(entry.data, "developmentTime"));
+export const getDevelopmentTime = (entry: { data: object } | undefined) => {
+  function isDevelopmentTimeEntry(
+    test: typeof entry
+  ): test is { data: { developmentTime: string } } {
+    return !!(test && Object.hasOwn(test.data, "developmentTime"));
   }
 
   if (!isDevelopmentTimeEntry(entry)) return;
@@ -103,15 +106,15 @@ export const getDevelopmentTime = (entry?: { data: object }) => {
 type Category = NonNullable<CollectionEntry<"projects">["data"]["category"]>;
 
 export function getCategory<F extends boolean>(
-  entry?: { data: object },
+  entry: { data: object } | undefined,
   noFormat?: F
 ):
   | (F extends true ? Category : `Published ${Lowercase<Category>}` | Category)
   | undefined {
-  function isCategoryEntry(entry?: { data: object }): entry is {
+  function isCategoryEntry(test: typeof entry): test is {
     data: { category: Category };
   } {
-    return !!(entry && Object.hasOwn(entry.data, "category"));
+    return !!(test && Object.hasOwn(test.data, "category"));
   }
 
   let category = isCategoryEntry(entry) ? entry.data.category : undefined;
@@ -134,11 +137,11 @@ export function getCategory<F extends boolean>(
   ) as any;
 }
 
-export function getGroup(entry?: { data: object }) {
-  function isGroupEntry(entry?: { data: object }): entry is {
+export function getGroup(entry: { data: object } | undefined) {
+  function isGroupEntry(test: typeof entry): test is {
     data: { group: string };
   } {
-    return !!(entry && Object.hasOwn(entry.data, "group"));
+    return !!(test && Object.hasOwn(test.data, "group"));
   }
 
   return isGroupEntry(entry) ? entry.data.group : undefined;

@@ -7,6 +7,8 @@ import type { ComponentProps } from "astro/types";
 import Card from "@layouts/Card.astro";
 import DocumentText from "./DocumentText.astro";
 import PostText from "@post/PostText.astro";
+import { isLocalizedEntry, getEntryLocale } from "@integrations/astro-server";
+import { getSentenceDelimiters } from "@integrations/i18n";
 
 interface Props
   extends ComponentProps<typeof DocumentText>,
@@ -14,14 +16,18 @@ interface Props
   inline?: boolean;
 }
 
-const { inline, ...props } = Astro.props;
+const { inline, entryProps, ...props } = Astro.props;
 
 // prettier-ignore
 export type DocumentCollectionKey = Extract<CollectionKey, "docs" | PostCollectionKey>;
 
-export const getDocumentId = (
-  document: CollectionEntry<DocumentCollectionKey>
-) => document?.id && getPathSection(document.id);
+export const getEntryId = <C extends CollectionKey>(
+  entry: CollectionEntry<C> | string
+) => {
+  const id = typeof entry === "string" ? entry : entry?.id;
+
+  return id && getPathSection(id);
+};
 
 export const getDescription = <C extends CollectionKey>(
   entry?: CollectionEntry<C>,
@@ -45,7 +51,9 @@ export const getDescription = <C extends CollectionKey>(
 
   if (sentences) {
     const splitSentences = (description ?? cleanMarkdown(cleanBody)).split(
-      /\.\s+/
+      new RegExp(
+        `[${isLocalizedEntry(entry) ? getSentenceDelimiters(getEntryLocale(entry)) : getSentenceDelimiters()}]\\s+`
+      )
     );
 
     description = `${splitSentences.slice(0, sentences).join(". ")}.`;
@@ -63,16 +71,28 @@ export const getDescription = <C extends CollectionKey>(
 
   return description;
 };
+
+const noTranslation = isLocalizedEntry(props.entry);
+
+const textProps: Props = {
+  ...props,
+  entryProps: {
+    ...((noTranslation ? { noTranslation } : {}) satisfies Partial<
+      Props["entryProps"]
+    >),
+    ...entryProps,
+  },
+};
 ---
 
 {
   inline ? (
-    <PostText {...props}>
+    <PostText {...textProps}>
       <slot />
     </PostText>
   ) : (
     <Card class="min-h-dvh rounded-none shadow-none">
-      <DocumentText {...props}>
+      <DocumentText {...textProps}>
         <slot />
       </DocumentText>
     </Card>

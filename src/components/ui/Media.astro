@@ -3,12 +3,12 @@ import { Image, type ImgAttributes } from "astro:assets";
 import type { ComponentProps } from "astro/types";
 import Video from "./Video.astro";
 import { getAspectClass } from "@integrations/tailwind";
-import type { getPostCover } from "@integrations/content";
+import type { getCover } from "@integrations/content";
 import { i18n } from "@integrations/i18n";
 
 interface Props
   extends Omit<ComponentProps<typeof Video>, "src" | "youTubeInfo"> {
-  src: NonNullable<ReturnType<typeof getPostCover>> | ImageMetadata | string;
+  src: NonNullable<ReturnType<typeof getCover>> | ImageMetadata | string;
   alt: string;
   aspect?: ComponentProps<typeof Video>["youTubeInfo"]["aspect"];
   loading?: ImgAttributes["loading"];

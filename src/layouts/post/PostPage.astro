@@ -1,4 +1,5 @@
 ---
+import { isLocalizedEntry } from "@integrations/astro-server";
 import { getTitle } from "@integrations/content";
 import { getDescription } from "@layouts/document/Document.astro";
 import Page from "@layouts/Page.astro";
@@ -11,9 +12,14 @@ interface Props extends Omit<ComponentProps<typeof Post>, "entry"> {
 }
 
 const { entry } = Astro.props;
+
+const noTranslation = isLocalizedEntry(entry);
 ---
 
-<Page title={getTitle(entry)} description={getDescription(entry, 2)}
+<Page
+  title={getTitle(entry)}
+  description={getDescription(entry, 2)}
+  noTranslation={noTranslation}
   ><Post fullWidthAfter {...Astro.props}
     ><slot name="footer" slot="footer" />
     <PostList

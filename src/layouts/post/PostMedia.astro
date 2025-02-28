@@ -73,19 +73,19 @@ const stringAlt = textAlt.reduce(
     ><Media alt={stringAlt} {...props} /></Fullscreenable
   >{
     descriptiveAlt && (
-      <Text subtitle class="not-prose mt-4 -mb-4" noTranslation>
+      <Text subtitle class="not-prose mt-4 -mb-4">
         {textAlt.length === 1
           ? textAlt[0]
-          : textAlt.map((text, index) => (
-              <>
-                {index !== 0 && (
-                  <Link {...links[index - 1]}>{links[index - 1]!.slot}</Link>
-                )}
-                <Text subtitle tag="span">
+          : textAlt.map((text, index) => {
+              const { slot, ...props } = index !== 0 ? links[index - 1]! : {};
+
+              return (
+                <>
+                  {slot && <Link {...props}>{slot}</Link>}
                   {text}
-                </Text>
-              </>
-            ))}
+                </>
+              );
+            })}
       </Text>
     )
   }</Dissolving

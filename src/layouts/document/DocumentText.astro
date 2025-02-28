@@ -8,7 +8,7 @@ interface Props extends ComponentProps<typeof PostText> {}
 
 <PostText
   class="font-['Segoe_UI','Noto_Sans_Japanese'] prose-li:list-disc"
-  contentProps={{ components: { img: DocumentMedia } }}
+  entryProps={{ components: { img: DocumentMedia } }}
   {...Astro.props}
 >
   <slot />

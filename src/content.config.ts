@@ -33,7 +33,9 @@ const tech = defineCollection({
 });
 
 const documents = z.object({
+  title: z.string().optional(),
   draft: z.boolean().optional(),
+  publishingDate: z.date().max(new Date()).optional(),
 });
 
 const docs = defineCollection({
@@ -43,8 +45,6 @@ const docs = defineCollection({
 
 const posts = documents
   .extend({
-    title: z.string().optional(),
-    publishingDate: z.date().max(new Date()).optional(),
     youTubeID: z.string().optional(),
     youTubeAspectRatio: z.enum(["16/9", "16/10", "1/1"]).optional(),
   })

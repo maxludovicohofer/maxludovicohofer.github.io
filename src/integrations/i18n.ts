@@ -1,17 +1,17 @@
-import { defaultLocale, type locales } from "@integrations/astro-config.mjs";
+import { defaultLocale, locales } from "@integrations/astro-config.mjs";
 import type { AstroGlobal } from "astro";
 import { getEntry, type CollectionEntry } from "astro:content";
 import { DEEPL_API_KEY } from "astro:env/server";
 import * as deepl from "deepl-node";
 import { translationsPath } from "src/content.config";
-import { diff, fixNewLines, highlightCharacter } from "./text";
+import { diff, fixNewLines, getPathSection, highlightCharacter } from "./text";
 import { groupBy, indexOfMin } from "./array";
 
 const deeplTrans = DEEPL_API_KEY
   ? new deepl.Translator(DEEPL_API_KEY)
   : undefined;
 
-type PossibleTranslations = Exclude<
+export type PossibleTranslations = Exclude<
   (typeof locales)[number],
   typeof defaultLocale
 >;
@@ -27,10 +27,19 @@ export type I18nOptions = deepl.TranslatorOptions &
   Partial<Record<PossibleTranslations, string>> &
   TranslateOptions;
 
+export const getSentenceDelimiters = (locale?: (typeof locales)[number]) => {
+  const delimiters: Record<(typeof locales)[number], string> = {
+    en: ".?!",
+    ja: "。？！",
+  };
+
+  return delimiters[locale ?? defaultLocale];
+};
+
 export const i18n = (astro: AstroGlobal, globalOptions?: I18nOptions) => {
   return async (text: string, options?: I18nOptions) => {
     const toLocale =
-      (astro.currentLocale as (typeof locales)[number] | undefined) ??
+      (astro.currentLocale as PossibleTranslations | undefined) ??
       defaultLocale;
 
     if (toLocale === defaultLocale) return text;
@@ -59,12 +68,17 @@ const queueTranslation = async (
   // Custom translation
   if (options?.[toLocale]) return options[toLocale];
 
-  // Do not translate empty or divs
-  if (!text || text.trimStart().startsWith("<div")) return text;
+  const cleanText = fixNewLines(text.trim());
+
+  // Do not translate following cases
+  if (
+    !cleanText ||
+    cleanText.startsWith("<div") ||
+    cleanText.startsWith('<span class="katex"')
+  )
+    return cleanText;
 
   const entryTranslations = (await getEntry("translations", toLocale))?.data;
-
-  const cleanText = fixNewLines(text);
 
   // Check if in astro entry
   if (entryTranslations?.[cleanText]) {
@@ -82,7 +96,8 @@ const queueTranslation = async (
   if (import.meta.env.DEV && !options?.force) return `${cleanText} (t)`;
 
   // Cache miss
-  debugCacheMiss(cleanText, Object.keys(entryTranslations!));
+  if (!options?.noCache)
+    debugCacheMiss(cleanText, Object.keys(entryTranslations!));
 
   translateBuffer.push({ text: cleanText, toLocale, options });
   return (await translate(options))[toLocale]![cleanText]!.translation;
@@ -222,4 +237,12 @@ const debugCacheMiss = (text: string, cacheKeys: string[]) => {
       highlightCharacter(cacheKeys[closestKeyIndex]!, firstDifferenceIndex)
     )}`
   );
+};
+
+export const getLocaleFromPath = (path: string) => {
+  const possibleLocale = getPathSection(path, 0) as PossibleTranslations;
+
+  if (locales.includes(possibleLocale)) return possibleLocale;
+
+  return undefined;
 };

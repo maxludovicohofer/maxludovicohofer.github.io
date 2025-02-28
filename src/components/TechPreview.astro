@@ -10,7 +10,7 @@ interface Props extends ComponentProps<typeof PostPreview> {}
 const title: CollectionKey = "tech";
 ---
 
-<PostPreview readMore={title} tag="div" {...Astro.props}>
+<PostPreview contentProps={{ tag: "div" }} readMore={title} {...Astro.props}>
   <Fragment slot="title">{capitalize(title)}</Fragment>
   <TechList compact class="grid-cols-2 gap-1" />
 </PostPreview>

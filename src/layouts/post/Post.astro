@@ -12,16 +12,16 @@ import { getLinkName } from "@integrations/text";
 import {
   getTitle,
   getPublishingDate,
-  getPostCover,
+  getCover,
   getCategory,
   getDownloadLinks,
   type PostCollectionKey,
 } from "@integrations/content";
 import { i18n } from "@integrations/i18n";
+import { isLocalizedEntry } from "@integrations/astro-server";
 
 interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollectionKey>;
-  tag?: ComponentProps<typeof Document>["tag"];
   fullWidth?: boolean | undefined;
   fullWidthAfter?: boolean | undefined;
   inline?: boolean | undefined;
@@ -32,7 +32,6 @@ interface Props extends HTMLAttributes<"div"> {
 
 const {
   entry,
-  tag,
   fullWidth,
   fullWidthAfter,
   inline,
@@ -50,7 +49,7 @@ const publishingDate = getPublishingDate(
   entry,
   remarkPluginFrontmatter
 )?.format("D MMMM YYYY");
-const cover = getPostCover(entry);
+const cover = getCover(entry);
 const downloadLinks = getDownloadLinks(entry);
 const category = getCategory(entry);
 const t = i18n(Astro);
@@ -60,6 +59,8 @@ const fullWidthClass = `w-full ${inline ? "" : "pb-24 lg:pb-10"}`;
 
 const widthClass = `${fullWidthClass} px-6 ${fullWidth ? "lg:px-24" : "max-w-[40rem] 2xl:max-w-[70rem]"}`;
 const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
+
+const noTranslation = isLocalizedEntry(entry);
 ---
 
 {
@@ -99,15 +100,22 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
             </Text>
           )
         }
-        <Text tag={container ? "h2" : "h1"}
+        <Text
+          tag={container ? "h2" : "h1"}
+          {...(noTranslation && !container
+            ? { translateProps: { disable: noTranslation } }
+            : {}) satisfies Partial<ComponentProps<typeof Text>>}
           ><slot name="title">{title}</slot></Text
         >
         {category && <Text subtitle>{category}</Text>}
         <Document
           inline
           entry={entry}
-          tag={tag}
+          tag={Content || container ? "div" : undefined}
           class={`${Content ? "is-entry" : ""} ${publishingDate ? "mt-4" : "mt-6"}`}
+          {...(noTranslation
+            ? { entryProps: { noTranslation } }
+            : {}) satisfies Partial<ComponentProps<typeof Document>>}
           {...contentProps}><slot /></Document
         >
         {

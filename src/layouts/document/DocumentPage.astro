@@ -1,14 +1,21 @@
 ---
 import Page from "@layouts/Page.astro";
 import type { ComponentProps } from "astro/types";
-import { getCollection } from "astro:content";
 import Document, {
   getDescription,
-  getDocumentId,
+  getEntryId,
   type DocumentCollectionKey,
 } from "./Document.astro";
 import type { GetStaticPathsResult } from "astro";
 import { getStaticPaths as getBasePaths } from "@pages/index.astro";
+import {
+  getAllDocuments,
+  getUniqueEntries,
+  getLocalizedEntries,
+  isLocalizedEntry,
+} from "@integrations/astro-server";
+import { getLocaleFromPath } from "@integrations/i18n";
+import { getTitle } from "@integrations/content";
 
 interface Props extends ComponentProps<typeof Document> {}
 
@@ -28,23 +35,45 @@ export const mergePaths = <B extends GetStaticPathsResult,P extends GetStaticPat
 // Generate a new path for every collection entry
 export const makeDocumentPaths =
   <C extends DocumentCollectionKey>(collection: C) =>
-  async () =>
-    mergePaths(
+  async () => {
+    const allDocuments = await getAllDocuments(collection);
+
+    const paths = mergePaths(
       await getBasePaths(),
-      (
-        await getCollection(
-          collection,
-          ({ data: { draft } }) => import.meta.env.DEV || !draft
-        )
-      ).map((entry) => ({
-        params: { id: getDocumentId(entry) },
+      getUniqueEntries(allDocuments).map((entry) => ({
+        params: { id: getEntryId(entry) },
         props: { entry },
       }))
-    );
+    ).map((pathInfo) => {
+      const locale =
+        pathInfo.params.path !== undefined
+          ? getLocaleFromPath(pathInfo.params.path)
+          : undefined;
+
+      return {
+        ...pathInfo,
+        props: {
+          ...pathInfo.props,
+          entry: getLocalizedEntries(
+            pathInfo.props.entry,
+            allDocuments,
+            locale
+          ),
+        },
+      };
+    });
+
+    return paths;
+  };
 
 const { entry } = Astro.props;
+
+const noTranslation = isLocalizedEntry(entry);
 ---
 
-<Page description={getDescription(entry, 2)}
+<Page
+  title={getTitle(entry)}
+  description={getDescription(entry, 2)}
+  noTranslation={noTranslation}
   ><Document markdown {...Astro.props}><slot /></Document>
 </Page>

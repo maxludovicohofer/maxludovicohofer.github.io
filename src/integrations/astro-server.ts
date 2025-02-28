@@ -3,12 +3,18 @@ import {
   getCollection,
   getEntries,
   render,
+  type CollectionEntry,
   type CollectionKey,
   type DataEntryMap,
   type Flatten,
   type ReferenceDataEntry,
 } from "astro:content";
-import { getPathSections, makePath, standardizePath } from "./text";
+import {
+  getPathSection,
+  getPathSections,
+  makePath,
+  standardizePath,
+} from "./text";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import addArticle from "indefinite";
 import {
@@ -25,6 +31,12 @@ import {
   swap,
 } from "./array";
 import { remap } from "./math";
+import {
+  getEntryId,
+  type DocumentCollectionKey,
+} from "@layouts/document/Document.astro";
+import { locales } from "./astro-config.mts";
+import type { PossibleTranslations } from "./i18n";
 
 export const getRole = async (astro: AstroGlobal) => {
   const roles = await getCollection("roles");
@@ -199,25 +211,10 @@ export const getSortedPosts = async <C extends PostCollectionKey>(
   collection: C,
   excluded: string[] = []
 ) => {
-  const entries = await getCollection(
-    collection,
-    ({ data: { draft }, id }) =>
-      (import.meta.env.DEV || !draft) && excluded.every((entry) => id !== entry)
+  const groupedEntries = await matchRoles(
+    astro,
+    await getSortedDocuments(astro, collection, excluded)
   );
-
-  const datedEntries = await Promise.all(
-    entries.map(async (entry) => ({
-      ...entry,
-      publishingDate: getPublishingDate(
-        entry,
-        (
-          await render(entry)
-        ).remarkPluginFrontmatter
-      )!,
-    }))
-  );
-
-  const groupedEntries = await matchRoles(astro, datedEntries);
 
   // Sort individual categories by latest first
   return (
@@ -231,4 +228,73 @@ export const getSortedPosts = async <C extends PostCollectionKey>(
       .reverse()
       .flat()
   );
+};
+
+type ExceptFirst<T extends unknown[]> = T extends [any, ...infer U] ? U : never;
+
+export const getSortedDocuments = async <C extends DocumentCollectionKey>(
+  astro: AstroGlobal,
+  collection: C,
+  ...params: ExceptFirst<Parameters<typeof getAllDocuments>>
+) => {
+  const allDocuments = await getAllDocuments(collection, ...params);
+
+  const locale = astro.currentLocale as PossibleTranslations;
+
+  const entries = getUniqueEntries(allDocuments).map((entry) =>
+    getLocalizedEntries(entry, allDocuments, locale)
+  );
+
+  // Sort by latest first
+  return (
+    await Promise.all(
+      entries.map(async (entry) => ({
+        ...entry,
+        publishingDate: getPublishingDate(
+          entry,
+          (
+            await render(entry)
+          ).remarkPluginFrontmatter
+        )!,
+      }))
+    )
+  ).sort((a, b) => (b.publishingDate.isAfter(a.publishingDate) ? 1 : -1));
+};
+
+export const getAllDocuments = async <C extends DocumentCollectionKey>(
+  collection: C,
+  excluded?: string[]
+) => {
+  const excludedDocuments = excluded ?? [];
+
+  return await getCollection(
+    collection,
+    ({ data: { draft }, id }) =>
+      (import.meta.env.DEV || !draft) &&
+      !excludedDocuments.some((entry) => getEntryId(id) === getEntryId(entry))
+  );
+};
+
+export const getUniqueEntries = <C extends CollectionKey>(
+  entries: CollectionEntry<C>[]
+) => entries.filter((entry) => !isLocalizedEntry(entry));
+
+export const isLocalizedEntry = <C extends CollectionKey>(
+  entry: CollectionEntry<C> | undefined
+) => !!entry && locales.includes(getEntryLocale(entry));
+
+export const getEntryLocale = <C extends CollectionKey>(
+  entry: CollectionEntry<C>
+) => getPathSection(entry.id, -2) as PossibleTranslations;
+
+export const getLocalizedEntries = <C extends CollectionKey>(
+  entry: CollectionEntry<C>,
+  allEntries: CollectionEntry<C>[],
+  locale?: PossibleTranslations
+) => {
+  const localizedId = locale && `${locale}/${getEntryId(entry)}`;
+
+  return localizedId
+    ? allEntries.find(({ id }) => id.endsWith(localizedId)) ?? entry
+    : entry;
 };

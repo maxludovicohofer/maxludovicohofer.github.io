@@ -3,9 +3,10 @@ import { i18n, type I18nOptions } from "@integrations/i18n";
 
 interface Props extends I18nOptions {
   disable?: boolean;
+  debug?: boolean;
 }
 
-const { disable, ...props } = Astro.props;
+const { disable, debug, ...props } = Astro.props;
 
 const t = i18n(Astro);
 
