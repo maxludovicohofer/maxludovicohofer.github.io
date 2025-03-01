@@ -18,6 +18,7 @@ interface Props extends HTMLAttributes<"a"> {
   prefetch?: "viewport" | "load" | "hover";
   noEvent?: boolean;
   noBase?: boolean;
+  noLocale?: boolean;
 }
 
 const {
@@ -27,6 +28,7 @@ const {
   prefetch = "viewport",
   noEvent,
   noBase,
+  noLocale,
   "data-umami-event": umamiEvent,
   ...props
 } = Astro.props;
@@ -107,7 +109,7 @@ const isExternal =
   }`}
   href={noBase || isExternal || href === undefined
     ? href
-    : await addBaseToLink(Astro, href?.toString())}
+    : await addBaseToLink(Astro, href?.toString(), noLocale)}
   target={isExternal ? "_blank" : "_self"}
   rel={isExternal ? "noopener noreferrer" : undefined}
   data-astro-prefetch={!hrefString || isExternal || isFileLink(hrefString)

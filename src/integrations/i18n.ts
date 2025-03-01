@@ -4,7 +4,13 @@ import { getEntry, type CollectionEntry } from "astro:content";
 import { DEEPL_API_KEY } from "astro:env/server";
 import * as deepl from "deepl-node";
 import { translationsPath } from "src/content.config";
-import { diff, fixNewLines, getPathSection, highlightCharacter } from "./text";
+import {
+  diff,
+  fixNewLines,
+  getPathSection,
+  highlightCharacter,
+  standardizePath,
+} from "./text";
 import { groupBy, indexOfMin } from "./array";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
@@ -29,20 +35,27 @@ export type I18nOptions = deepl.TranslatorOptions &
   Partial<Record<PossibleTranslations, string>> &
   TranslateOptions;
 
-export const getSentenceDelimiters = (locale?: (typeof locales)[number]) => {
-  const delimiters: Record<(typeof locales)[number], string> = {
-    en: ".?!",
-    ja: "。？！",
-  };
-
-  return delimiters[locale ?? defaultLocale];
+export type LocaleInfo = {
+  languageName: string;
+  delimiters: string;
 };
+
+const localeInfo: Record<(typeof locales)[number], LocaleInfo> = {
+  en: { languageName: "English", delimiters: ".?!" },
+  ja: { languageName: "日本語", delimiters: "。？！" },
+};
+
+export const getSentenceDelimiters = <L extends (typeof locales)[number]>(
+  locale?: L
+) => localeInfo[locale ?? defaultLocale].delimiters;
+
+export const getLanguageName = <L extends (typeof locales)[number]>(
+  locale?: L
+) => localeInfo[locale ?? defaultLocale].languageName;
 
 export const i18n = (astro: AstroGlobal, globalOptions?: I18nOptions) => {
   return async (text: string, options?: I18nOptions) => {
-    const toLocale =
-      (astro.currentLocale as PossibleTranslations | undefined) ??
-      defaultLocale;
+    const toLocale = getCurrentLocale(astro);
 
     if (toLocale === defaultLocale) return text;
 
@@ -160,7 +173,7 @@ const translate = async (translateOptions?: TranslateOptions) => {
             { translation, api: "deepl" },
           ]) satisfies [
             string,
-            CollectionEntry<"translations">["data"][keyof CollectionEntry<"translations">["data"]]
+            CollectionEntry<"translations">["data"][keyof CollectionEntry<"translations">["data"]],
           ][]
         ),
       };
@@ -232,12 +245,12 @@ const debugCacheMiss = (text: string, cacheKeys: string[]) => {
   console.warn(
     `i18n debug: cache miss.
       ${textName}: ${" ".repeat(
-      closestCachedName.length - textName.length
-    )}${JSON.stringify(highlightCharacter(text, firstDifferenceIndex))}
+        closestCachedName.length - textName.length
+      )}${JSON.stringify(highlightCharacter(text, firstDifferenceIndex))}
       ${"-".repeat(100)}
       ${closestCachedName}: ${JSON.stringify(
-      highlightCharacter(cacheKeys[closestKeyIndex]!, firstDifferenceIndex)
-    )}`
+        highlightCharacter(cacheKeys[closestKeyIndex]!, firstDifferenceIndex)
+      )}`
   );
 };
 
@@ -252,8 +265,7 @@ export const getLocaleFromPath = (path: string) => {
 export const setLocale = async (astro: AstroGlobal) => {
   dayjs.extend(localizedFormat);
 
-  const translateLocale = (astro.currentLocale ??
-    defaultLocale) as (typeof locales)[number];
+  const translateLocale = getCurrentLocale(astro);
 
   switch (translateLocale) {
     case "ja":
@@ -262,4 +274,16 @@ export const setLocale = async (astro: AstroGlobal) => {
   }
 
   dayjs.locale(translateLocale);
+};
+
+export const getCurrentLocale = (astro: AstroGlobal) =>
+  (astro.currentLocale ?? defaultLocale) as (typeof locales)[number];
+
+export const getPathWithoutLocale = (path: string) => {
+  const standardPath = standardizePath(path);
+  const [maybeLocale, ...sections] = standardPath.split("/");
+
+  return locales.includes(maybeLocale as (typeof locales)[number])
+    ? sections.join("/")
+    : standardPath;
 };

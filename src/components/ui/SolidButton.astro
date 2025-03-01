@@ -4,7 +4,7 @@ import Translate from "./Translate.astro";
 
 interface Props extends HTMLAttributes<"button"> {
   rounded?: boolean;
-  fullHeight?: boolean;
+  fullSize?: boolean;
   noRounding?: boolean;
   translateProps?: ComponentProps<typeof Translate>;
 }
@@ -12,7 +12,7 @@ interface Props extends HTMLAttributes<"button"> {
 const {
   class: className = "",
   rounded,
-  fullHeight,
+  fullSize,
   noRounding,
   translateProps,
   ...props
@@ -20,6 +20,6 @@ const {
 ---
 
 <button
-  class={`${className} notranslate group bg-zinc-950 hover:bg-yellow-400 active:bg-yellow-600 dark:bg-zinc-100 dark:hover:bg-yellow-200 dark:active:bg-yellow-400 text-zinc-100 dark:text-zinc-950 hover:text-zinc-950 hover:scale-105 active:scale-95 shadow-md ${fullHeight ? "" : "h-11 2xl:h-16"} ${rounded ? "rounded-3xl" : `${noRounding ? "" : "rounded-xl"}`}`}
+  class={`${className} notranslate group bg-zinc-950 hover:bg-yellow-400 active:bg-yellow-600 dark:bg-zinc-100 dark:hover:bg-yellow-200 dark:active:bg-yellow-400 text-zinc-100 dark:text-zinc-950 hover:text-zinc-950 hover:scale-105 active:scale-95 shadow-md ${fullSize ? "" : "h-11 2xl:h-16 p-2"} ${rounded ? "rounded-full" : `${noRounding ? "" : "rounded-xl"}`}`}
   {...props}><Translate {...translateProps}><slot /></Translate></button
 >

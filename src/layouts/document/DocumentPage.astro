@@ -11,7 +11,7 @@ import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 import {
   getAllDocuments,
   getUniqueEntries,
-  getLocalizedEntries,
+  getLocalizedEntry,
   isLocalizedEntry,
 } from "@integrations/astro-server";
 import { getLocaleFromPath } from "@integrations/i18n";
@@ -58,11 +58,7 @@ export const makeDocumentPaths =
         ...pathInfo,
         props: {
           ...pathInfo.props,
-          entry: getLocalizedEntries(
-            pathInfo.props.entry,
-            allDocuments,
-            locale
-          ),
+          entry: getLocalizedEntry(pathInfo.props.entry, allDocuments, locale),
         },
       };
     });

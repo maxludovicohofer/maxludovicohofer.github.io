@@ -1,0 +1,73 @@
+---
+import { locales } from "@integrations/astro-config.mts";
+import { getLanguageName, getPathWithoutLocale } from "@integrations/i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { standardizePath } from "@integrations/text";
+import { getCurrentLocale } from "@integrations/i18n";
+import Button from "./Button.astro";
+import Text from "./Text.astro";
+
+// TODO MAKE LOCALE BUTTON WORK ON MOBILE
+// TODO FIX BACK BUTTON WHEN CLICKING LOCALE SELECT
+// TODO HANDLE KATEX TRANSLATION CORRECTLY
+---
+
+<div
+  class="absolute top-0 size-full flex flex-col items-end pointer-events-none"
+>
+  <div class="locale-select-surface grid gap-4 m-4">
+    <Button
+      rounded
+      class="locale-select inline pointer-events-auto px-3"
+      translateProps={{
+        disable: true,
+      }}
+      ><Text importance="button" format="branded-button" class="mb-0.5">🌐</Text
+      ></Button
+    >
+    {
+      locales
+        .filter((locale) => locale !== getCurrentLocale(Astro))
+        .map((locale) => (
+          <Button
+            class="locale-link hidden pointer-events-auto"
+            noLocale
+            href={standardizePath(
+              getRelativeLocaleUrl(
+                locale,
+                getPathWithoutLocale(Astro.url.pathname)
+              )
+            )}
+            translateProps={{
+              disable: true,
+            }}
+          >
+            {getLanguageName(locale)}
+          </Button>
+        ))
+    }
+  </div>
+</div>
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const localeLinks = document.querySelectorAll(".locale-link");
+
+    const localeSelect = document.querySelector<HTMLElement>(".locale-select")!;
+
+    localeSelect.addEventListener("pointerenter", () => {
+      localeSelect.classList.replace("inline", "hidden");
+
+      localeLinks.forEach((link) => link.classList.replace("hidden", "inline"));
+    });
+
+    const localeSelectSurface = document.querySelector<HTMLElement>(
+      ".locale-select-surface"
+    )!;
+
+    localeSelectSurface.addEventListener("pointerleave", () => {
+      localeSelect.classList.replace("hidden", "inline");
+
+      localeLinks.forEach((link) => link.classList.replace("inline", "hidden"));
+    });
+  });
+</script>

@@ -41,6 +41,7 @@ export type TextFormat =
   | "detail"
   | "base"
   | "branded"
+  | "branded-button"
   | "none";
 
 export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
@@ -55,7 +56,9 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
     detail: "text-zinc-400 leading-6",
     base: "text-zinc-500 dark:text-zinc-300",
     branded:
-      "text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-400 dark:shadow-yellow-200 print:shadow-black",
+      "text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-600 dark:shadow-yellow-200 print:shadow-black",
+    ["branded-button"]:
+      "text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-200 dark:shadow-yellow-600 print:shadow-black",
     none: "",
   };
 

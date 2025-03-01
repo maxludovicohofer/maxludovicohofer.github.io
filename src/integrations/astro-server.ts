@@ -35,8 +35,8 @@ import {
   getEntryId,
   type DocumentCollectionKey,
 } from "@layouts/document/Document.astro";
-import { locales } from "./astro-config.mts";
-import type { PossibleTranslations } from "./i18n";
+import { defaultLocale, locales } from "./astro-config.mts";
+import { getCurrentLocale, type PossibleTranslations } from "./i18n";
 
 export const getRole = async (astro: AstroGlobal) => {
   const roles = await getCollection("roles");
@@ -62,15 +62,19 @@ export const getRole = async (astro: AstroGlobal) => {
   };
 };
 
-export const addBaseToLink = async (astro: AstroGlobal, link: string = "") => {
+export const addBaseToLink = async (
+  astro: AstroGlobal,
+  link: string = "",
+  noLocale?: boolean
+) => {
   const { role, isDefault } = await getRole(astro);
 
   const linkWithRole = isDefault ? link : `${makePath(role.id)}/${link}`;
 
-  const locale = astro.currentLocale;
+  const locale = noLocale ? undefined : getCurrentLocale(astro);
 
   return `/${
-    locale
+    locale && locale !== defaultLocale
       ? standardizePath(getRelativeLocaleUrl(locale, linkWithRole))
       : linkWithRole
   }`;
@@ -78,7 +82,7 @@ export const addBaseToLink = async (astro: AstroGlobal, link: string = "") => {
 
 export const getEntriesSafe = async <
   C extends CollectionKey,
-  E extends keyof DataEntryMap[C] = string
+  E extends keyof DataEntryMap[C] = string,
 >(
   entries: ReferenceDataEntry<C, E>[]
 ) => {
@@ -100,7 +104,7 @@ export const getEntriesSafe = async <
 export const matchRoles = async <
   E extends {
     data: Partial<Pick<Flatten<DataEntryMap["projects"]>["data"], "roles">>;
-  }
+  },
 >(
   astro: AstroGlobal,
   entries: E[]
@@ -239,11 +243,16 @@ export const getSortedDocuments = async <C extends DocumentCollectionKey>(
 ) => {
   const allDocuments = await getAllDocuments(collection, ...params);
 
-  const locale = astro.currentLocale as PossibleTranslations;
+  const locale = getCurrentLocale(astro);
+  const translateLocale =
+    locale && locale !== defaultLocale ? locale : undefined;
 
-  const entries = getUniqueEntries(allDocuments).map((entry) =>
-    getLocalizedEntries(entry, allDocuments, locale)
-  );
+  const uniqueEntries = getUniqueEntries(allDocuments);
+  const entries = translateLocale
+    ? uniqueEntries.map((entry) =>
+        getLocalizedEntry(entry, allDocuments, translateLocale)
+      )
+    : uniqueEntries;
 
   // Sort by latest first
   return (
@@ -252,9 +261,7 @@ export const getSortedDocuments = async <C extends DocumentCollectionKey>(
         ...entry,
         publishingDate: getPublishingDate(
           entry,
-          (
-            await render(entry)
-          ).remarkPluginFrontmatter
+          (await render(entry)).remarkPluginFrontmatter
         )!,
       }))
     )
@@ -287,7 +294,7 @@ export const getEntryLocale = <C extends CollectionKey>(
   entry: CollectionEntry<C>
 ) => getPathSection(entry.id, -2) as PossibleTranslations;
 
-export const getLocalizedEntries = <C extends CollectionKey>(
+export const getLocalizedEntry = <C extends CollectionKey>(
   entry: CollectionEntry<C>,
   allEntries: CollectionEntry<C>[],
   locale?: PossibleTranslations
@@ -295,6 +302,6 @@ export const getLocalizedEntries = <C extends CollectionKey>(
   const localizedId = locale && `${locale}/${getEntryId(entry)}`;
 
   return localizedId
-    ? allEntries.find(({ id }) => id.endsWith(localizedId)) ?? entry
+    ? (allEntries.find(({ id }) => id.endsWith(localizedId)) ?? entry)
     : entry;
 };
