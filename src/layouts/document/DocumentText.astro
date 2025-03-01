@@ -4,28 +4,14 @@ import DocumentMedia from "@document/DocumentMedia.astro";
 import PostText from "@layouts/post/PostText.astro";
 
 interface Props extends ComponentProps<typeof PostText> {}
+
+const { class: className = "", ...props } = Astro.props;
 ---
 
 <PostText
-  class="font-['Segoe_UI','Noto_Sans_Japanese'] prose-li:list-disc"
+  class={`${className} prose-li:list-disc`}
   entryProps={{ components: { img: DocumentMedia } }}
-  {...Astro.props}
+  {...props}
 >
   <slot />
 </PostText>
-<style>
-  @font-face {
-    font-family: "Segoe UI";
-    src:
-      local("Segoe UI"),
-      url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff2)
-        format("woff2");
-  }
-  @font-face {
-    font-family: "Noto Sans Japanese";
-    src:
-      local("Noto Sans Japanese"),
-      url(//fonts.gstatic.com/ea/notosansjapanese/v6/NotoSansJP-Thin.woff2)
-        format("woff2");
-  }
-</style>

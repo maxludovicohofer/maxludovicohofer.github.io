@@ -42,6 +42,8 @@ const completeDescription = noTranslation
 <!doctype html>
 <html lang={Astro.currentLocale}>
   <head>
+    <slot name="head" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 

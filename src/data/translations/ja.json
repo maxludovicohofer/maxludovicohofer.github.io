@@ -43,10 +43,6 @@
     "translation": "<li>\nデスクトップ、モバイル、オンライン、ローカルマルチプレイ向けのゲームを作った。特にゲームデザイン、レベルデザイン、物理システムに力を入れています。 </li> <li>\n英語、ドイツ語、イタリア語に堪能です。日本語は限定プロ（N3）レベルです。フランス語とスペイン語も基礎レベルで理解できます。</li>",
     "api": "deepl"
   },
-  "Max Hofer \\ Resume": {
-    "translation": "マックス・ホーファー",
-    "api": "deepl"
-  },
   "Portrait of Max Ludovico Hofer": {
     "translation": "マックス・ルドヴィコ・ホーファーの肖像",
     "api": "deepl"
@@ -63,10 +59,6 @@
     "translation": "試す",
     "api": "deepl"
   },
-  "Max Hofer \\ Act By Belief": {
-    "translation": "マックス・ホーファー",
-    "api": "deepl"
-  },
   "Play": {
     "translation": "プレー",
     "api": "deepl"
@@ -77,10 +69,6 @@
   },
   "Read in 2 min<br>▼": {
     "translation": "2分で読む<br>▼",
-    "api": "deepl"
-  },
-  "Max Hofer \\ Ambulance": {
-    "translation": "マックス・ホーファー救急車",
     "api": "deepl"
   },
   "The task is clear: take patients to the hospital before their situation becomes critical. Simple enough, if not for your unruly vehicle.": {
@@ -99,10 +87,6 @@
     "translation": "<li>救急車はハンドリングと衝突が不安定で、直感的に感じられるが、物理的に誇張されている。また、滑稽な目的のために、空を飛ぶような隠れた悪用可能なバグも残してある。</li>\n<li>マップ、歩行者、患者の位置はプロシージャル生成されており、ある程度のリプレイ性を持たせている。</li>\n<li>このプロトタイプの最大の難関は、プレイヤーに乗り物を適度にコントロールさせることだった。私はこの努力を過小評価しており、コアなゲームプレイに集中するために機能を捨てなければならなかった。</li>",
     "api": "deepl"
   },
-  "Max Hofer \\ Duchessa's World": {
-    "translation": "マックス・ホーファー、『ドゥシェッサの世界』を出版",
-    "api": "deepl"
-  },
   "Duchessa is an easily scared humanoid cat, and when she hears a loud noise, her instincts tell her to run away as fast as she can. Her eyes, one yellow and one blue, allow her to access another dimension: the cat realm.": {
     "translation": "ドゥシェッサは怖がりやすい人型の猫で、大きな音を聞くと本能のままに全力で逃げる。彼女の目は黄色と青色で、猫の領域という別の次元にアクセスすることができる。",
     "api": "deepl"
@@ -113,10 +97,6 @@
   },
   "<li>The player can traverse platforms by moving, jumping, and switching realms. Timing, momentum, and knowledge of block patterns are key to completing a level without the timer running out. Duchessa has three lives that get reset after each completed stage.</li>\n<li>The game is organized in 30-seconds levels with dynamic difficulty, assembled at runtime from different block patterns. Each block pattern has an associated difficulty that gets compared to the player’s skill, evaluated based on their proficiency at the game. Block patterns are composed of blocks of the two realms and movement-altering platforms, like an uplifting tornado.</li>\n<li>Given the limited time and simple design, I replaced the GDD with drawing each platform behavior on a blackboard for the team to see, combining brainstorming and design. Also, we kept graphic fidelity to a minimum to maximize device compatibility.</li>": {
     "translation": "<li>プレイヤーは、移動、ジャンプ、領域の切り替えによってプラットフォームを移動することができる。タイマーが切れることなくレベルをクリアするには、タイミング、勢い、ブロックパターンの知識が鍵となる。Duchessaには3つのライフがあり、ステージをクリアするごとにリセットされる。</li>\n<li>ゲームは動的な難易度を持つ30秒のレベルで構成され、異なるブロックパターンから実行時に組み立てられる。各ブロックパターンには難易度が設定されており、その難易度はプレイヤーの技量と比較される。ブロックパターンは、2つの領域のブロックと、高揚する竜巻のような動きを変えるプラットフォームで構成される。</li>\n<li>限られた時間とシンプルなデザインを考慮し、GDDの代わりに各プラットフォームの挙動を黒板に描いてチームに見せ、ブレインストーミングとデザインを組み合わせた。また、デバイスの互換性を最大限に高めるため、グラフィックの忠実度は最小限にとどめました。</li>",
-    "api": "deepl"
-  },
-  "Max Hofer \\ Lolita": {
-    "translation": "マックス・ホーファー",
     "api": "deepl"
   },
   "A little girl living in a village is unjustly punished by her patriarchal community and runs away into the nearby woods. As she wanders through the never ending trees, she will be protected by a dark mysterious entity, that grants her the power to turn into the fantastical animals she encounters along the way.": {
@@ -131,10 +111,6 @@
     "translation": "<li>このゲームでは、最初はステルスゲームプレイを推奨しているが、キャラクターの進化を反映させるため、キャラクターが強くなるにつれて攻撃的な行為に対する罰を減らしている。デザインの課題は、両方のスタイルに役立つエレガントなスキルを考案することだった。例えば、ゴースト・バタフライはオブジェクトを通過して透明化するが、敵を通過して背後から攻撃することもできる。</li>\n<li>ロリータのスキルは変身で、それぞれに独自の操作とカメラがある。これらのスキルのトリガーは、本能と戦う感覚をシミュレートするために、潜在的に不随意的な行動である。例えば、敵を長く見つめすぎたり、実行ボタンを押したりするようなものだ。ゲーム序盤は操作と戦うが、ストーリーが進むにつれて、攻撃的な使い方を学んでいく。また、すべてのサウンドとUI要素が世界に配置されており、プレイヤーはゲームの魔法の森にどっぷり浸かることができる。</li>\n<li>AIにできるだけ直感的に対抗できるように、人間の知覚を模倣した動作をプログラムしました。これは最大の開発課題であることが判明した。コード上の数字が直感的に動作するかどうかをチェックするために、何度も行ったり来たりする必要があったからだ。そのため、コードを簡単に微調整できるように工夫し、反復作業をかなりスピードアップさせた。</li>",
     "api": "deepl"
   },
-  "Max Hofer \\ Inversion": {
-    "translation": "マックス・ホーファー",
-    "api": "deepl"
-  },
   "A spaceship robot's job is to ensure the vessel's integrity. When a critical failure occurs near a black hole, you and a colleague in the opposite part of the ship are woken up to fix the issue.": {
     "translation": "宇宙船ロボットの仕事は、船の完全性を保証することだ。ブラックホール付近で重大な故障が発生すると、あなたと船の反対側にいる同僚がその問題を解決するために起こされる。",
     "api": "deepl"
@@ -145,10 +121,6 @@
   },
   "<li>Players interact with the black hole to switch characters. They solve puzzles by selecting one object with each robot and negating properties such as gravity, polarity, and movement direction.</li>\n<li>Inversion is designed as a meditative experience. The black hole is a cosmic horror weenie central to the story, the gameplay, and the feeling of emptiness. Furthermore, puzzle rooms are thematically linked to the story, following an essential level design that gives space to thought.</li>\n<li>Since the inversion action occurs after both robots settle on a selection, only the last character’s effect is shown. In hindsight, both effects should have been visible, ideally transitioning the game to co-op.</li>": {
     "translation": "<li>プレイヤーはブラックホールを操作してキャラクターを切り替える。それぞれのロボットでオブジェクトを1つ選び、重力、極性、移動方向などの特性を否定することでパズルを解く。</li>\n<li>インバージョン」は瞑想的な体験としてデザインされている。ブラックホールは、ストーリー、ゲームプレイ、虚無感の中心となる宇宙的なホラーである。さらに、パズルの部屋はストーリーとテーマ的にリンクしており、考えるスペースを与える本質的なレベルデザインに従っている。</li>\n<li>逆転のアクションは、両方のロボットが選択に落ち着いた後に発生するため、最後のキャラクターの効果しか表示されない。今にして思えば、両方のエフェクトを表示し、理想的にはゲームを協力プレイに移行させるべきだった。</li>",
-    "api": "deepl"
-  },
-  "Max Hofer \\ Madreterra": {
-    "translation": "マックス・ホーファー",
     "api": "deepl"
   },
   "In the galactic empire of Madreterra, humanity evolved to avoid conflict. Instead, political discussion is resolved through covert planetary wars waged by the richest, marketed as land reclamation efforts.": {
@@ -163,10 +135,6 @@
     "translation": "<li>各ゲームの前に、プレイヤーは弾丸の種類とスペシャルスキルの種類を選び、ジャンプは常に予測された目的地に向かってキャラクターを引き寄せる。弾丸は着弾時に植物を成長させ、プレイヤーはそれを防御や地形に利用できる。プレイヤーは3回命中すると敗北し、自動装填式の弾倉を持つ。同時に、特殊スキルはテレポートなど、ゲームをダイナミックにする戦術ツールでもある。</li>\n<li>4対4のフリーフォーオール戦は乾燥した小惑星で行われる。ゲーム中、銃弾は平坦な風景を複雑に入り組んだ垂直のジャングルに変え、勝利に必要なスキルを高めていく。また、視認性の問題に影響されるダイジェスティック UI についても実験しました。</li>\n<li>Unreal Engine とそのマーケットプレイスのパッケージは重力の切り替えをサポートしていなかったため、一から動的重力をコーディングする必要がありました。これは最終的に、プレイヤーの入力に基づいて希望する目的地を推測し、スムーズで直感的なジャンプを実行するために軌道と重力を動的に調整することに発展しました。また、コードベースとアセットを再利用可能なドラッグ＆ドロップ・コンポーネントに整理したことで、今日までプロトタイピングのスピードが10倍になった。</li>",
     "api": "deepl"
   },
-  "Max Hofer \\ Steelsilk Championship": {
-    "translation": "マックス・ホーファー ◎ スティールシルク・チャンピオンシップ",
-    "api": "deepl"
-  },
   "In the year 2980, a much anticipated robotics competition takes place: a team of miniature remote-control arachnoids fend off the creepy crawlies of three different biomes. Before each round, enemies receive a random bonus, and each spider has to choose a bonus for itself.": {
     "translation": "2980年、待望のロボット競技会が開催される。ミニチュアの遠隔操作アラクノイドのチームが、3つの異なるバイオームに生息する不気味な生き物を撃退する。各ラウンドの前に、敵にはランダムなボーナスが与えられ、各クモは自分でボーナスを選ばなければならない。",
     "api": "deepl"
@@ -177,10 +145,6 @@
   },
   "<li>The game was originally thought out for 4 players, but we scaled the number of characters down to 2, while allowing 1 to 4 players. I designed the two heroes to have opposite playstyles that relied on each other to truly shine. For example, one spider specializes in areas of effect, but only the other spider is fast enough to herd enemies, making interplay a necessity.</li>\n<li>Spawned enemies change based on the biome and have different movesets that must be countered by the most effective character. Arenas are progressively harder, and enemy spawn rates increase as the stage timer reaches zero and players have to take refuge in an underground elevator.</li>\n<li>In the elevator, enemies receive a random bonus and players must choose a bonus among three, before the next stage begins. Bonuses have a rarity system, with the rarest ones completely changing a hero’s playstyle. After three stages, players view a leaderboard and can decide to restart to beat their score.</li>\n<li>Given the lack of details of the original concept document, the biggest challenge was team alignment with the GDD, which I had to write during production. It came to me that we could use the GDD to also track work, by coloring text that was WIP or completed. This greatly increased speed, quality, and morale, since the team became more involved in the big picture.</li>": {
     "translation": "<li>このゲームは当初4人用として考えられていたが、キャラクター数を2人に減らし、1人から4人までプレイできるようにした。私は2人のヒーローが真に輝くために、互いに依存し合う正反対のプレイスタイルを持つようにデザインした。例えば、片方のスパイダーは効果範囲に特化しているが、もう片方のスパイダーだけは敵を群れさせるのに十分なスピードを持っているため、相互作用が必要になってくる。</li>\n<li>出現する敵はバイオームによって変化し、異なるムーブセットを持つため、最も効果的なキャラクターが対抗しなければならない。アリーナは徐々に難しくなり、ステージのタイマーがゼロになると敵の出現率が上昇し、プレイヤーは地下エレベーターに避難しなければならなくなる。</li>\n<li>エレベーター内では敵にランダムなボーナスが与えられ、プレイヤーは次のステージが始まる前に3つのボーナスから1つを選ばなければならない。ボーナスにはレアリティシステムがあり、最もレアなものはヒーローのプレイスタイルを完全に変化させる。ステージが3つ終わるとリーダーボードが表示され、プレイヤーは自分のスコアを更新するためにリスタートを決めることができる。</li>\n<li>当初のコンセプト・ドキュメントの詳細が不足していたため、制作中に私が書かなければならなかったGDDとの整合性が最大の課題でした。GDDを使って、WIPや完了したテキストに色をつけることで、作業を追跡することもできると思いついた。これにより、チームは全体像により深く関わるようになり、スピード、品質、士気が大幅に向上した。</li>",
-    "api": "deepl"
-  },
-  "Max Hofer \\ Projects": {
-    "translation": "マックス・ホーファー",
     "api": "deepl"
   },
   "All my projects.": {
@@ -223,20 +187,12 @@
     "translation": "15年の経験",
     "api": "deepl"
   },
-  "Max Hofer \\ Tech": {
-    "translation": "マックス・ホーファー",
-    "api": "deepl"
-  },
   "Max Hofer's tech stack.": {
     "translation": "マックス・ホーファーの技術スタック",
     "api": "deepl"
   },
   "2 years \nof experience": {
     "translation": "経験2年",
-    "api": "deepl"
-  },
-  "Max Hofer \\ Flow vs immersion": {
-    "translation": "マックス・ホーファー",
     "api": "deepl"
   },
   "The best videogames can be approached in two ways: as *activities* and as *entertainment*. ![[Breath of the Wild(https://wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild)] is a masterclass in balancing both approaches.](https://youtube.com/watch?v=Q9sAzTOjl6s)\n\nAs activities, games impart a rhythm to a player's thought process and physical actions.": {
@@ -267,10 +223,6 @@
     "translation": "は、両方のアプローチをバランスさせた傑作だ。",
     "api": "deepl"
   },
-  "Max Hofer \\ Debugging fun": {
-    "translation": "デバッグの楽しみ",
-    "api": "deepl"
-  },
   "*\"What is fun?\"* is probably the most important question for a game designer. Many incredible designers have elaborated their own answers, which now define their style.": {
     "translation": "*ゲームデザイナーにとって、「面白さとは何か？多くの素晴らしいデザイナーが自分なりの答えを導き出し、それが今や彼らのスタイルを定義している。",
     "api": "deepl"
@@ -283,20 +235,12 @@
     "translation": "はユーモアに基づいた面白いゲームだ。",
     "api": "deepl"
   },
-  "Max Hofer \\ Thoughts": {
-    "translation": "マックス・ホーファー",
-    "api": "deepl"
-  },
   "All my blog posts and thoughts about videogames, the industry and work.": {
     "translation": "ビデオゲーム、ゲーム業界、仕事に関する私のブログ記事や考えをすべて掲載。",
     "api": "deepl"
   },
   "View my resume": {
     "translation": "履歴書を見る",
-    "api": "deepl"
-  },
-  "Max Hofer \\ Game design": {
-    "translation": "マックス・ホーファー",
     "api": "deepl"
   },
   "Max Hofer's portfolio and blog.": {
@@ -431,36 +375,12 @@
     "translation": "5 2024年2月",
     "api": "deepl"
   },
-  "Published game \\ 1 April 2024": {
-    "translation": "公開ゲーム 2024年4月1日",
-    "api": "deepl"
-  },
   "Steelsilk Championship": {
     "translation": "スティールシルク選手権",
     "api": "deepl"
   },
   "Couch co-op rougelite hero shoot &#39;em up with three arenas.": {
     "translation": "3つのアリーナがあるカウチCo-opルージュライトヒーローシューティング'emアップ。",
-    "api": "deepl"
-  },
-  "Prototype \\ 12 May 2024": {
-    "translation": "プロトタイプ",
-    "api": "deepl"
-  },
-  "Prototype \\ 22 July 2024": {
-    "translation": "プロトタイプ",
-    "api": "deepl"
-  },
-  "Prototype \\ 27 December 2023": {
-    "translation": "試作品 2023年12月27日",
-    "api": "deepl"
-  },
-  "Prototype \\ 4 December 2023": {
-    "translation": "プロトタイプ",
-    "api": "deepl"
-  },
-  "Prototype \\ 6 October 2023": {
-    "translation": "試作品 2023年10月6日",
     "api": "deepl"
   },
   "Lolita": {
@@ -525,10 +445,6 @@
   },
   "6 October 2023": {
     "translation": "6 2023年10月",
-    "api": "deepl"
-  },
-  "Published tool \\ 5 February 2024": {
-    "translation": "発行ツール 2024年2月5日",
     "api": "deepl"
   },
   "This prototype is a silly driving game where an out of control ambulance saves lives while inadvertently running over pedestrians. It’s made for fans of ridiculous games, where wack physics allow for funny slapstick gameplay. Ambulance was made for a game jam with the theme “unfortunately, you’re the bad guy”. We wanted to create a simple experience with potential for hilarious moments.": {
@@ -979,10 +895,6 @@
     "translation": "すべての考えを見る<br>▼",
     "api": "deepl"
   },
-  "Max Hofer \\ AI programming": {
-    "translation": "マックス・ホーファー◆AIプログラミング",
-    "api": "deepl"
-  },
   "I'm an AI programmer specialized in mechanics, combat, and systems.": {
     "translation": "私はメカニック、戦闘、システムを専門とするAIプログラマーです。",
     "api": "deepl"
@@ -1096,7 +1008,7 @@
     "api": "deepl"
   },
   ",": {
-    "translation": ",",
+    "translation": "、",
     "api": "deepl"
   },
   "Resume": {
@@ -1141,6 +1053,14 @@
   },
   "AI programming": {
     "translation": "AIプログラミング",
+    "api": "deepl"
+  },
+  "<span class=\" notranslate  text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-400 dark:shadow-yellow-200 print:shadow-black\">👜</span> Portfolio 🡢\n<a class=\" notranslate not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://maxludovicohofer.github.io/ja\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Github (Resume)\" data-umami-event-url=\"https://maxludovicohofer.github.io/ja\">https://maxludovicohofer.github.io/ja</a> <br><span class=\" notranslate  text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-400 dark:shadow-yellow-200 print:shadow-black\">📬</span> <a class=\" notranslate not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"mailto:hofermaxludovico@gmail.com\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Hofermaxludovico@gmail.com (Resume)\" data-umami-event-url=\"mailto:hofermaxludovico@gmail.com\">hofermaxludovico@gmail.com</a>": {
+    "translation": "<span class=\" notranslate  text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-400 dark:shadow-yellow-200 print:shadow-black\">👜</span>ポートフォリオ<a class=\" notranslate not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://maxludovicohofer.github.io/ja\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Github (Resume)\" data-umami-event-url=\"https://maxludovicohofer.github.io/ja\">🡢 https://maxludovicohofer.github.io/ja</a><br>📬<span class=\" notranslate  text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-400 dark:shadow-yellow-200 print:shadow-black\">hofermaxludovic</span> <a class=\" notranslate not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"mailto:hofermaxludovico@gmail.com\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Hofermaxludovico@gmail.com (Resume)\" data-umami-event-url=\"mailto:hofermaxludovico@gmail.com\">o@gmail.com</a>",
+    "api": "deepl"
+  },
+  "<span class=\" notranslate  text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-400 dark:shadow-yellow-200 print:shadow-black\">👜</span> Portfolio 🡢\n<a class=\" notranslate not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://maxludovicohofer.github.io/ja/ai-programmer\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Github (Resume)\" data-umami-event-url=\"https://maxludovicohofer.github.io/ja/ai-programmer\">https://maxludovicohofer.github.io/ja/ai-programmer</a> <br><span class=\" notranslate  text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-400 dark:shadow-yellow-200 print:shadow-black\">📬</span> <a class=\" notranslate not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"mailto:hofermaxludovico@gmail.com\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Hofermaxludovico@gmail.com (Resume)\" data-umami-event-url=\"mailto:hofermaxludovico@gmail.com\">hofermaxludovico@gmail.com</a>": {
+    "translation": "<span class=\" notranslate  text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-400 dark:shadow-yellow-200 print:shadow-black\">👜</span>ポートフォリオ<a class=\" notranslate not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://maxludovicohofer.github.io/ja/ai-programmer\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Github (Resume)\" data-umami-event-url=\"https://maxludovicohofer.github.io/ja/ai-programmer\">🡢 https://maxludovicohofer.github.io/ja/ai-programmer</a><br>📬<span class=\" notranslate  text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-400 dark:shadow-yellow-200 print:shadow-black\">hofermaxludovic</span> <a class=\" notranslate not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"mailto:hofermaxludovico@gmail.com\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Hofermaxludovico@gmail.com (Resume)\" data-umami-event-url=\"mailto:hofermaxludovico@gmail.com\">o@gmail.com</a>",
     "api": "deepl"
   }
 }

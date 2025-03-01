@@ -55,7 +55,7 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
     detail: "text-zinc-400 leading-6",
     base: "text-zinc-500 dark:text-zinc-300",
     branded:
-      "text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-400 dark:shadow-yellow-200",
+      "text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-400 dark:shadow-yellow-200 print:shadow-black",
     none: "",
   };
 

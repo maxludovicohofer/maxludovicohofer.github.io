@@ -16,6 +16,10 @@ import {
 } from "@integrations/astro-server";
 import { getLocaleFromPath } from "@integrations/i18n";
 import { getTitle } from "@integrations/content";
+import "@fontsource-variable/noto-sans";
+import "@fontsource-variable/noto-sans-jp";
+import "@fontsource-variable/noto-emoji";
+import "@fontsource-variable/noto-sans-symbols";
 
 interface Props extends ComponentProps<typeof Document> {}
 
@@ -75,5 +79,9 @@ const noTranslation = isLocalizedEntry(entry);
   title={getTitle(entry)}
   description={getDescription(entry, 2)}
   noTranslation={noTranslation}
-  ><Document markdown {...Astro.props}><slot /></Document>
-</Page>
+  ><Document
+    markdown
+    class="font-['Noto_Sans_Variable','Noto_Sans_JP_Variable','Noto_Emoji_Variable','Noto_Sans_Symbols_Variable']"
+    {...Astro.props}><slot /></Document
+  ></Page
+>
