@@ -8,16 +8,30 @@ import { render } from "astro:content";
 
 interface Props extends ComponentProps<typeof Text> {
   entry?: CollectionEntry<DocumentCollectionKey> | undefined;
-  entryProps?: Omit<ComponentProps<typeof DocumentContent>, "Content">;
+  entryProps?: ComponentProps<typeof DocumentContent>;
+  inline?: boolean;
 }
 
-const { entry, entryProps, ...props } = Astro.props;
+const { entry, entryProps, inline, ...props } = Astro.props;
 
 const { Content } = entry ? await render(entry) : {};
+
+const contentProps: ComponentProps<typeof DocumentContent> = {
+  Content,
+  ...entryProps,
+};
 ---
 
-<Text markdown={!!Content} {...props}
-  >{
-    Content ? <DocumentContent Content={Content} {...entryProps} /> : <slot />
-  }</Text
->
+{
+  inline ? (
+    <DocumentContent {...contentProps}>
+      <slot />
+    </DocumentContent>
+  ) : (
+    <Text markdown={!!Content} {...props}>
+      <DocumentContent {...contentProps}>
+        <slot />
+      </DocumentContent>
+    </Text>
+  )
+}

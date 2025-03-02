@@ -7,7 +7,7 @@ import List from "@components/ui/List.astro";
 import DocumentMedia from "@components/ui/mdx/DocumentMedia.astro";
 
 interface Props {
-  Content: AstroComponentFactory;
+  Content?: AstroComponentFactory | undefined;
   components?: Partial<Record<HTMLTag, (args: any) => any>>;
   noTranslation?: boolean;
 }
@@ -15,11 +15,17 @@ interface Props {
 const { Content, components, noTranslation } = Astro.props;
 ---
 
-<Content
-  components={{
-    a: Link,
-    img: DocumentMedia,
-    ...(noTranslation ? {} : { p: Text, ul: List }),
-    ...components,
-  }}
-/>
+{
+  Content ? (
+    <Content
+      components={{
+        a: Link,
+        img: DocumentMedia,
+        ...(noTranslation ? {} : { p: Text, ul: List }),
+        ...components,
+      }}
+    />
+  ) : (
+    <slot />
+  )
+}
