@@ -17,10 +17,8 @@ const { hasBack, ...props } = Astro.props;
 
 // TODO HANDLE KATEX TRANSLATION CORRECTLY
 
-const translateLocales = locales.filter(
-  (locale) => locale !== getCurrentLocale(Astro)
-);
-
+const currentLocale = getCurrentLocale(Astro);
+const translateLocales = locales.filter((locale) => locale !== currentLocale);
 const multipleChoice = translateLocales.length > 1;
 ---
 
@@ -61,7 +59,6 @@ const multipleChoice = translateLocales.length > 1;
   document.addEventListener("astro:page-load", () => {
     const preferredLocale = getPreferredLocale();
     const path = window.location.pathname;
-
     if (preferredLocale !== getLocaleFromPath(path)) {
       window.location.replace(
         `/${addLocaleToLink(getPathWithoutLocale(path), preferredLocale)}`
