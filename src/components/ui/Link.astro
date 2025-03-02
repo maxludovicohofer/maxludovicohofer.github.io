@@ -1,6 +1,5 @@
 ---
 import {
-  getLinkName,
   getMaximumWordsInLimit,
   isMailLink,
   isRemoteLink,
@@ -9,7 +8,7 @@ import {
   isGeoLink,
   standardizePath,
 } from "@integrations/text";
-import { addBaseToLink } from "@integrations/astro-server";
+import { addBaseToLink, getLinkName } from "@integrations/astro-server";
 import type { AstroGlobal } from "astro";
 import type { HTMLAttributes } from "astro/types";
 import { i18n } from "@integrations/i18n-server";
@@ -36,12 +35,15 @@ const {
 
 const t = i18n(Astro);
 
-export const formatUmamiEvent = (astro: AstroGlobal, eventName: string) => {
+export const formatUmamiEvent = async (
+  astro: AstroGlobal,
+  eventName: string
+) => {
   // Max characters - formatting characters
   const usableCharacters = 50 - 3;
 
   const pageName = getMaximumWordsInLimit(
-    getLinkName(astro.url.pathname) || "Homepage",
+    (await getLinkName(astro, astro.url.pathname)) || "Homepage",
     usableCharacters * 0.2
   );
 
@@ -63,7 +65,7 @@ export const getUmamiLinkEvent = async (
   const getAnchorName = async () => {
     const anchor = await astro.slots.render("default");
     return anchor?.trim().search(/^<[\S\s]+>$/) !== -1
-      ? getLinkName(href?.toString() ?? "")
+      ? await getLinkName(astro, href?.toString() ?? "")
       : anchor;
   };
 
@@ -86,7 +88,7 @@ export const getUmamiLinkEvent = async (
 const umamiEventInfo = noEvent ? {} : await getUmamiLinkEvent(Astro, href);
 
 if (umamiEventInfo["data-umami-event"]) {
-  umamiEventInfo["data-umami-event"] = formatUmamiEvent(
+  umamiEventInfo["data-umami-event"] = await formatUmamiEvent(
     Astro,
     umamiEventInfo["data-umami-event"]
   );
@@ -124,7 +126,7 @@ const isExternal =
   ><slot
     >{
       hrefString
-        ? getLinkName(hrefString, true).toLocaleLowerCase()
+        ? (await getLinkName(Astro, hrefString, true)).toLocaleLowerCase()
         : await t("Link")
     }</slot
   ></a

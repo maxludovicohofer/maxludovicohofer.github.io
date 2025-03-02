@@ -30,7 +30,7 @@ const buttonProps:
   type: "button",
   class: `${className} cursor-pointer font-semibold duration-150 hover:shadow-lg active:shadow ${inline ? "" : "w-full"} ${getTextClass(importance ?? "button", format ?? "none")}`,
   ...(umamiEvent
-    ? { "data-umami-event": formatUmamiEvent(Astro, umamiEvent) }
+    ? { "data-umami-event": await formatUmamiEvent(Astro, umamiEvent) }
     : {}),
   ...props,
 };

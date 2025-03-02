@@ -9,7 +9,17 @@ import {
   type Flatten,
   type ReferenceDataEntry,
 } from "astro:content";
-import { getPathSection, getPathSections, makePath } from "./text";
+import {
+  capitalize,
+  getHumanPathSection,
+  getPathSection,
+  getPathSections,
+  isGeoLink,
+  isMailLink,
+  isRemoteLink,
+  isTelLink,
+  makePath,
+} from "./text";
 import addArticle from "indefinite";
 import {
   getCategory,
@@ -31,7 +41,11 @@ import {
 } from "@layouts/document/Document.astro";
 import { defaultLocale, locales } from "./astro-config.mts";
 import { getCurrentLocale } from "./i18n-server";
-import { addLocaleToLink, type PossibleTranslations } from "./i18n";
+import {
+  addLocaleToLink,
+  getPathWithoutLocale,
+  type PossibleTranslations,
+} from "./i18n";
 
 export const getRole = async (astro: AstroGlobal) => {
   const roles = await getCollection("roles");
@@ -70,6 +84,21 @@ export const addBaseToLink = async (
     linkWithRole,
     noLocale ? undefined : getCurrentLocale(astro)
   )}`;
+};
+
+export const getPathWithoutBase = async (astro: AstroGlobal, path: string) => {
+  const pathWithoutLocale = getPathWithoutLocale(path);
+
+  const { role, isDefault } = await getRole(astro);
+
+  if (!isDefault) {
+    const rolePath = makePath(role.id);
+
+    if (pathWithoutLocale.startsWith(rolePath))
+      return pathWithoutLocale.slice(rolePath.length);
+  }
+
+  return pathWithoutLocale;
 };
 
 export const getEntriesSafe = async <
@@ -299,4 +328,42 @@ export const getLocalizedEntry = <C extends CollectionKey>(
   return localizedId
     ? allEntries.find(({ id }) => id.endsWith(localizedId)) ?? entry
     : entry;
+};
+
+export const getLinkName = async (
+  astro: AstroGlobal,
+  link: string,
+  pretty?: boolean
+) => {
+  let linkName = "";
+
+  if (isRemoteLink(link)) {
+    const url = new URL(link);
+
+    if (!pretty) {
+      linkName = url.host.split(".").at(-2)!;
+    } else {
+      linkName =
+        url.hostname === "maps.google.com" ? url.searchParams.get("q")! : link;
+    }
+  } else if (isMailLink(link)) {
+    linkName = link.slice(7);
+  } else if (isTelLink(link)) {
+    linkName = link.slice(4);
+
+    if (pretty) {
+      const sections = linkName.match(/.{1,3}/g)!;
+      if (sections.at(-1)!.length < 3) {
+        sections[sections.length - 2] = `${sections.at(-2)}${sections.pop()}`;
+      }
+
+      linkName = sections.join(" ");
+    }
+  } else if (isGeoLink(link)) {
+    linkName = link.slice(4);
+  } else {
+    linkName = getHumanPathSection(await getPathWithoutBase(astro, link));
+  }
+
+  return capitalize(linkName);
 };

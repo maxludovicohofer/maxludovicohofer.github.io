@@ -7,7 +7,7 @@ import LinkedIn from "@images/logos/linkedin.svg?raw";
 import PostPreview from "@post/PostPreview.astro";
 import type { ComponentProps } from "astro/types";
 import Fullscreenable from "@ui/Fullscreenable.astro";
-import { getLinkName } from "@integrations/text";
+import { getLinkName } from "@integrations/astro-server";
 import { addBaseToLink, getRole } from "@integrations/astro-server";
 import { getPrintPath } from "@integrations/pdf.mjs";
 import { getSpecializationSentence } from "@integrations/docs";
@@ -25,6 +25,10 @@ const specializationSentence = await getSpecializationSentence(Astro);
 
 const t = i18n(Astro);
 const viewResumeSentence = await t("View my resume");
+
+const profilePictureEventName = await getLinkName(Astro, ProfilePicture.src);
+
+console.log(profilePictureEventName);
 ---
 
 <PostPreview {...Astro.props}
@@ -32,7 +36,7 @@ const viewResumeSentence = await t("View my resume");
     <Fullscreenable
       class="!max-w-14 2xl:!max-w-20 !rounded-full hover:scale-125"
       noAnimation
-      data-umami-event={getLinkName(ProfilePicture.src)}
+      data-umami-event={profilePictureEventName}
       ><Media
         src={ProfilePicture}
         class="rounded-full"

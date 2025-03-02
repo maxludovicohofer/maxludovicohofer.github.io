@@ -8,7 +8,7 @@ import PostCover from "@post/PostCover.astro";
 import Link from "@ui/Link.astro";
 import Button from "@ui/Button.astro";
 import Document from "@document/Document.astro";
-import { getLinkName } from "@integrations/text";
+import { getLinkName } from "@integrations/astro-server";
 import {
   getTitle,
   getPublishingDate,
@@ -133,12 +133,17 @@ const noTranslation = isLocalizedEntry(entry);
               {downloadLinks.length > 1 && (
                 <Text subtitle class={`-mb-4 w-full ${buttonWidthClass}`}>
                   Or
-                  {downloadLinks.slice(1).map((link, index, { length }) => (
-                    <>
-                      <Link href={link}>{getLinkName(link)}</Link>
-                      {index !== length - 1 ? ", " : ""}
-                    </>
-                  ))}
+                  {downloadLinks
+                    .slice(1)
+                    .map(async (link, index, { length }) => {
+                      const linkName = await getLinkName(Astro, link);
+                      return (
+                        <>
+                          <Link href={link}>{linkName}</Link>
+                          {index !== length - 1 ? ", " : ""}
+                        </>
+                      );
+                    })}
                 </Text>
               )}
             </div>
