@@ -83,9 +83,8 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
     u: {},
     ul: {},
     li: {
-      classes: "list-[kannada] marker:text-zinc-400 dark:marker:text-zinc-500",
-      prose:
-        "prose-li:list-[kannada] prose-li:marker:text-zinc-400 dark:prose-li:marker:text-zinc-500",
+      classes: "marker:text-zinc-400 dark:marker:text-zinc-500",
+      prose: "prose-li:marker:text-zinc-400 dark:prose-li:marker:text-zinc-500",
     },
     em: {},
     h1: {
@@ -123,7 +122,7 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
       format: "none",
     },
     "button-icon": {
-      classes: "text-3xl 2xl:text-7xl",
+      classes: "text-3xl 2xl:text-4xl",
       format: "none",
     },
   };

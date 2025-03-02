@@ -15,8 +15,8 @@ const { class: className = "", buttonName, href, ...buttonProps } = Astro.props;
 ---
 
 <Button
-  class={`${buttonName ?? (href ? "back-link" : "back-button")} ${className} fixed left-6 lg:left-9 top-[calc(100dvh-5rem)] lg:top-12 !size-[2.8rem] 2xl:!size-[6rem] hover:scale-110 active:scale-75`}
   rounded
+  class={`${buttonName ?? (href ? "back-link" : "back-button")} ${className} fixed left-6 top-[calc(100dvh-5rem)] lg:top-12 !size-14 lg:!size-[2.8rem] hover:scale-110 active:scale-75`}
   href={href}
   translateProps={{ disable: true }}
   data-base={await addBaseToLink(Astro)}

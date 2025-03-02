@@ -15,15 +15,13 @@ interface Props extends HTMLAttributes<"div"> {
 
 const { hasBack, ...props } = Astro.props;
 
-// TODO HANDLE KATEX TRANSLATION CORRECTLY
-
 const currentLocale = getCurrentLocale(Astro);
 const translateLocales = locales.filter((locale) => locale !== currentLocale);
 const multipleChoice = translateLocales.length > 1;
 ---
 
 <div
-  class={`absolute ${hasBack ? "top-6 lg:top-12 right-6 lg:right-8" : "top-4 right-4"} size-full flex flex-col items-end pointer-events-none`}
+  class={`absolute ${hasBack ? "top-6 lg:top-12 right-6" : "top-4 right-4"} size-full flex flex-col items-end pointer-events-none`}
   {...props}
 >
   <div class="locale-select-surface grid gap-4 pointer-events-auto">
@@ -33,7 +31,7 @@ const multipleChoice = translateLocales.length > 1;
         <Button
           rounded
           linkClass="locale-anchor"
-          class={`locale-link ${multipleChoice ? "hidden" : ""} text-xs`}
+          class={`locale-link ${multipleChoice ? "hidden" : ""} !text-xs`}
           href={standardizePath(
             getRelativeLocaleUrl(
               locale,

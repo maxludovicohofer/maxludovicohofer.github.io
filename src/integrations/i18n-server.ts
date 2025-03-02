@@ -75,6 +75,8 @@ const queueTranslation = async (
 
   const cleanText = fixNewLines(text.trim());
 
+  // TODO HANDLE KATEX TRANSLATION CORRECTLY, AND H1-H6 etc
+
   // Do not translate following cases
   if (
     !cleanText ||

@@ -1,26 +1,24 @@
 ---
 import type { AstroComponentFactory } from "astro/runtime/server/index.js";
-import MarkdownMedia from "@document/MarkdownMedia.astro";
-import DocumentHidden from "@document/DocumentHidden.astro";
 import Link from "@ui/Link.astro";
 import type { HTMLTag } from "astro/types";
 import Text from "@components/ui/Text.astro";
 import List from "@components/ui/List.astro";
+import DocumentMedia from "@components/ui/mdx/DocumentMedia.astro";
 
 interface Props {
   Content: AstroComponentFactory;
-  preview?: boolean;
   components?: Partial<Record<HTMLTag, (args: any) => any>>;
   noTranslation?: boolean;
 }
 
-const { Content, preview, components, noTranslation } = Astro.props;
+const { Content, components, noTranslation } = Astro.props;
 ---
 
 <Content
   components={{
     a: Link,
-    img: preview ? DocumentHidden : MarkdownMedia,
+    img: DocumentMedia,
     ...(noTranslation ? {} : { p: Text, ul: List }),
     ...components,
   }}

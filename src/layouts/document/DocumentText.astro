@@ -1,17 +1,23 @@
 ---
 import type { ComponentProps } from "astro/types";
-import DocumentMedia from "@document/DocumentMedia.astro";
-import PostText from "@layouts/post/PostText.astro";
+import Text from "@components/ui/Text.astro";
+import DocumentContent from "./DocumentContent.astro";
+import type { CollectionEntry } from "astro:content";
+import type { DocumentCollectionKey } from "./Document.astro";
+import { render } from "astro:content";
 
-interface Props extends ComponentProps<typeof PostText> {}
+interface Props extends ComponentProps<typeof Text> {
+  entry?: CollectionEntry<DocumentCollectionKey> | undefined;
+  entryProps?: Omit<ComponentProps<typeof DocumentContent>, "Content">;
+}
 
-const { class: className = "", ...props } = Astro.props;
+const { entry, entryProps, ...props } = Astro.props;
+
+const { Content } = entry ? await render(entry) : {};
 ---
 
-<PostText
-  class={`${className} prose-li:list-disc`}
-  entryProps={{ components: { img: DocumentMedia } }}
-  {...props}
+<Text markdown={!!Content} {...props}
+  >{
+    Content ? <DocumentContent Content={Content} {...entryProps} /> : <slot />
+  }</Text
 >
-  <slot />
-</PostText>
