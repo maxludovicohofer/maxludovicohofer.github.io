@@ -70,9 +70,8 @@ export const getUmamiLinkEvent = async (
   };
 
   if (
-    href &&
-    !href.toString().startsWith("http") &&
-    !href.toString().includes(".")
+    !href ||
+    (!href.toString().startsWith("http") && !href.toString().includes("."))
   ) {
     // Local link, already tracked by Umami
     return {};

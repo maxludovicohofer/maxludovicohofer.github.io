@@ -27,8 +27,6 @@ const t = i18n(Astro);
 const viewResumeSentence = await t("View my resume");
 
 const profilePictureEventName = await getLinkName(Astro, ProfilePicture.src);
-
-console.log(profilePictureEventName);
 ---
 
 <PostPreview {...Astro.props}
