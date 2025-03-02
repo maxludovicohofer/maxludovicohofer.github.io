@@ -53,14 +53,19 @@ const multipleChoice = translateLocales.length > 1;
 <script>
   import { getLocaleFromPath, getPathWithoutLocale } from "@integrations/i18n";
   import { getPreferredLocale, addLocaleToLink } from "@integrations/i18n";
+  import { getPrintOptions } from "@integrations/pdf.mjs";
 
   document.addEventListener("astro:page-load", () => {
-    const preferredLocale = getPreferredLocale();
     const path = window.location.pathname;
-    if (preferredLocale !== getLocaleFromPath(path)) {
-      window.location.replace(
-        `/${addLocaleToLink(getPathWithoutLocale(path), preferredLocale)}`
-      );
+
+    // Printable documents should keep their language
+    if (!getPrintOptions(path)) {
+      const preferredLocale = getPreferredLocale();
+      if (preferredLocale !== getLocaleFromPath(path)) {
+        window.location.replace(
+          `/${addLocaleToLink(getPathWithoutLocale(path), preferredLocale)}`
+        );
+      }
     }
 
     document

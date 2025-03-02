@@ -9,6 +9,7 @@ import { groupBy, indexOfMin } from "./array";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import type { PossibleTranslations } from "./i18n";
+import { parse } from "node-html-parser";
 
 const deeplTrans = DEEPL_API_KEY
   ? new deepl.Translator(DEEPL_API_KEY)
@@ -75,15 +76,21 @@ const queueTranslation = async (
 
   const cleanText = fixNewLines(text.trim());
 
-  // TODO HANDLE KATEX TRANSLATION CORRECTLY, AND H1-H6 etc
+  if (!cleanText) return cleanText;
 
-  // Do not translate following cases
-  if (
-    !cleanText ||
-    cleanText.startsWith("<div") ||
-    cleanText.startsWith('<span class="katex"')
-  )
-    return cleanText;
+  // If is HTML, if all immediate children are non-translatable, don't translate
+  // This is just a shallow check, could still translate non-translatable html
+  if (cleanText.startsWith("<")) {
+    const parsedHTML = parse(cleanText);
+
+    if (
+      parsedHTML.children.every(
+        (element) => element.getAttribute("translate") === "no"
+      )
+    ) {
+      return cleanText;
+    }
+  }
 
   const entryTranslations = (await getEntry("translations", toLocale))?.data;
 

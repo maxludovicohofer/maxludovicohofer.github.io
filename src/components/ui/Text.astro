@@ -36,8 +36,9 @@ if (markdown) import("katex/dist/katex.min.css");
 ---
 
 <Element
-  class={`${className} notranslate ${getTextClass(markdown ? "markdown" : (importance ?? (subtitle ? "small" : Element)), format ?? (title ? "heading" : subtitle ? "detail" : undefined))}`}
+  class={`${className} ${getTextClass(markdown ? "markdown" : (importance ?? (subtitle ? "small" : Element)), format ?? (title ? "heading" : subtitle ? "detail" : undefined))}`}
   {...props}
+  translate="no"
   ><Translate disable={Element === "div"} {...translateProps}
     ><slot /></Translate
   ></Element

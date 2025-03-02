@@ -20,6 +20,7 @@ const {
 ---
 
 <button
-  class={`${className} notranslate group bg-zinc-950 hover:bg-yellow-400 active:bg-yellow-600 dark:bg-zinc-100 dark:hover:bg-yellow-200 dark:active:bg-yellow-400 text-zinc-100 dark:text-zinc-950 hover:text-zinc-950 hover:scale-105 active:scale-95 shadow-md ${fullSize ? "" : `${rounded ? "p-1" : "px-2 py-2.5 2xl:p-3"}`} ${rounded ? "rounded-full aspect-square" : `${noRounding ? "" : "rounded-xl"}`}`}
-  {...props}><Translate {...translateProps}><slot /></Translate></button
+  class={`${className} group bg-zinc-950 hover:bg-yellow-400 active:bg-yellow-600 dark:bg-zinc-100 dark:hover:bg-yellow-200 dark:active:bg-yellow-400 text-zinc-100 dark:text-zinc-950 hover:text-zinc-950 hover:scale-105 active:scale-95 shadow-md ${fullSize ? "" : `${rounded ? "p-1" : "px-2 py-2.5 2xl:p-3"}`} ${rounded ? "rounded-full aspect-square" : `${noRounding ? "" : "rounded-xl"}`}`}
+  {...props}
+  translate="no"><Translate {...translateProps}><slot /></Translate></button
 >

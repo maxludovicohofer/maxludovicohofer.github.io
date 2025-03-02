@@ -5,6 +5,7 @@ import DocumentContent from "./DocumentContent.astro";
 import type { CollectionEntry } from "astro:content";
 import type { DocumentCollectionKey } from "./Document.astro";
 import { render } from "astro:content";
+import DocumentMedia from "./DocumentMedia.astro";
 
 interface Props extends ComponentProps<typeof Text> {
   entry?: CollectionEntry<DocumentCollectionKey> | undefined;
@@ -16,9 +17,15 @@ const { entry, entryProps, inline, ...props } = Astro.props;
 
 const { Content } = entry ? await render(entry) : {};
 
+const { components, ...otherEntryProps } = entryProps ?? {};
+
 const contentProps: ComponentProps<typeof DocumentContent> = {
   Content,
-  ...entryProps,
+  components: {
+    img: DocumentMedia,
+    ...components,
+  },
+  ...otherEntryProps,
 };
 ---
 

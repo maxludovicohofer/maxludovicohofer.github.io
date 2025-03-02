@@ -4,7 +4,7 @@ import type { CollectionEntry } from "astro:content";
 import { render } from "astro:content";
 import Card from "@layouts/Card.astro";
 import type { ComponentProps, HTMLAttributes } from "astro/types";
-import CoverMedia from "@post/CoverMedia.astro";
+import PostCover from "@post/PostCover.astro";
 import Link from "@ui/Link.astro";
 import Button from "@ui/Button.astro";
 import Document from "@document/Document.astro";
@@ -66,7 +66,7 @@ const noTranslation = isLocalizedEntry(entry);
 {
   cover && (
     <div class="lg:hidden fixed left-0 right-0 mx-auto">
-      <CoverMedia cover={cover} entry={entry!} class="h-[55vh] -mt-[39vh]" />
+      <PostCover cover={cover} entry={entry!} class="h-[55vh] -mt-[39vh]" />
     </div>
   )
 }
@@ -85,7 +85,7 @@ const noTranslation = isLocalizedEntry(entry);
         {
           cover && (
             <div class="hidden lg:inline">
-              <CoverMedia cover={cover} entry={entry!} class="h-[40vh] mb-6" />
+              <PostCover cover={cover} entry={entry!} class="h-[40vh] mb-6" />
             </div>
           )
         }
@@ -123,10 +123,12 @@ const noTranslation = isLocalizedEntry(entry);
             <div class="flex flex-col items-center mt-8 mb-7">
               <Button
                 href={downloadLinks[0]}
-                importance="p"
                 linkClass={buttonWidthClass}
+                translateProps={{ disable: true }}
               >
-                <div class="group-hover:animate-pulse">{action}</div>
+                <Text class="group-hover:animate-pulse" importance="button">
+                  {action}
+                </Text>
               </Button>
               {downloadLinks.length > 1 && (
                 <Text subtitle class={`-mb-4 w-full ${buttonWidthClass}`}>

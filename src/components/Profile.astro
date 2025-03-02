@@ -56,6 +56,9 @@ const viewResumeSentence = await t("View my resume");
     class="mt-2"
     href={import.meta.env.DEV ? resumePageLink : resumeLink}
     noBase
-    ><div class="group-hover:animate-pulse">{viewResumeSentence}</div></Button
+    translateProps={{ disable: true }}
+    ><Text class="group-hover:animate-pulse" importance="button"
+      >{viewResumeSentence}</Text
+    ></Button
   >
 </PostPreview>

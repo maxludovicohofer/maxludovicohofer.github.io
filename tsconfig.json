@@ -7,7 +7,7 @@
     "paths": {
       "@components/*": ["src/components/*"],
       "@ui/*": ["src/components/ui/*"],
-      "@mdx/*": ["src/components/ui/mdx/*"],
+      "@markdown/*": ["src/components/ui/markdown/*"],
       "@integrations/*": ["src/integrations/*"],
       "@images/*": ["src/images/*"],
       "@layouts/*": ["src/layouts/*"],
