@@ -84,9 +84,9 @@ const queueTranslation = async (
     const parsedHTML = parse(cleanText);
 
     if (
-      parsedHTML.children.every(
-        (element) => element.getAttribute("translate") === "no"
-      )
+      parsedHTML.children
+        .filter(({ tagName }) => tagName !== "SCRIPT")
+        .every((element) => element.getAttribute("translate") === "no")
     ) {
       return cleanText;
     }
