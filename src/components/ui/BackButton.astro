@@ -1,6 +1,8 @@
 ---
 import Button from "./Button.astro";
 import type { ComponentProps } from "astro/types";
+import Text from "./Text.astro";
+import { addBaseToLink } from "@integrations/astro-server";
 
 interface Props extends ComponentProps<typeof Button> {
   buttonName?: string;
@@ -13,23 +15,38 @@ const { class: className = "", buttonName, href, ...buttonProps } = Astro.props;
 ---
 
 <Button
-  class={`${buttonName ?? (href ? "back-link" : "back-button")} ${className} fixed left-6 lg:left-9 top-[calc(100dvh-5rem)] lg:top-12 max-w-14 lg:max-w-10 min-h-14 lg:min-h-0 lg:max-h-10 lg:p-0 hover:scale-110 active:scale-75`}
+  class={`${buttonName ?? (href ? "back-link" : "back-button")} ${className} fixed left-6 lg:left-9 top-[calc(100dvh-5rem)] lg:top-12 !size-[2.8rem] 2xl:!size-[6rem] hover:scale-110 active:scale-75`}
   rounded
-  importance="h1"
   href={href}
+  translateProps={{ disable: true }}
+  data-base={await addBaseToLink(Astro)}
   {...buttonProps}
 >
-  <p class="mt-[-0.2rem] ml-[-0.1rem] lg:ml-[-0.2rem]">◂</p>
+  <Text
+    importance="button-icon"
+    class="mt-[-0.2rem] ml-[-0.1rem] lg:ml-[-0.2rem]"
+    translateProps={{ disable: true }}>◂</Text
+  >
 </Button>
 <script>
   import { saveScrollPosition } from "@integrations/astro";
 
-  // Executed once to set back fallback
-  const startLocation = location.pathname;
-  const startState = history.state;
+  // Executed once to correct back, when not starting from homepage
+  const backButton =
+    document.querySelector<HTMLButtonElement>("button.back-button");
 
-  history.replaceState({ scrollX: 0, scrollY: 0 }, "", "/");
-  history.pushState(startState, "", startLocation);
+  if (backButton) {
+    const startLocation = location.pathname;
+    const startState = history.state;
+
+    history.replaceState(
+      { scrollX: 0, scrollY: 0 },
+      "",
+      backButton.dataset.base
+    );
+
+    history.pushState(startState, "", startLocation);
+  }
 
   const back = () => {
     saveScrollPosition();

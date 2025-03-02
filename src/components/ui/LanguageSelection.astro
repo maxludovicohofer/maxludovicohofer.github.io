@@ -1,94 +1,84 @@
 ---
 import { locales } from "@integrations/astro-config.mts";
-import { getLanguageName, getPathWithoutLocale } from "@integrations/i18n";
+import { getLanguageName } from "@integrations/i18n-server";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { standardizePath } from "@integrations/text";
-import { getCurrentLocale } from "@integrations/i18n";
+import { getCurrentLocale } from "@integrations/i18n-server";
 import Button from "./Button.astro";
-import Text from "./Text.astro";
+import type { HTMLAttributes } from "astro/types";
+import LanguageButton from "./LanguageButton.astro";
+import { getPathWithoutLocale } from "@integrations/i18n";
 
-// TODO MAKE LOCALE BUTTON WORK ON MOBILE
-// TODO FIX BACK BUTTON WHEN CLICKING LOCALE SELECT
+interface Props extends HTMLAttributes<"div"> {
+  hasBack?: boolean;
+}
+
+const { hasBack, ...props } = Astro.props;
+
 // TODO HANDLE KATEX TRANSLATION CORRECTLY
+
+const translateLocales = locales.filter(
+  (locale) => locale !== getCurrentLocale(Astro)
+);
+
+const multipleChoice = translateLocales.length > 1;
 ---
 
 <div
-  class="absolute top-0 size-full flex flex-col items-end pointer-events-none"
+  class={`absolute ${hasBack ? "top-6 lg:top-12 right-6 lg:right-8" : "top-4 right-4"} size-full flex flex-col items-end pointer-events-none`}
+  {...props}
 >
-  <div class="locale-select-surface grid gap-4 m-4">
-    <Button
-      rounded
-      class="locale-select inline pointer-events-auto px-3"
-      translateProps={{
-        disable: true,
-      }}
-      ><Text importance="button" format="branded-button" class="mb-0.5">🌐</Text
-      ></Button
-    >
+  <div class="locale-select-surface grid gap-4 pointer-events-auto">
+    {multipleChoice && <LanguageButton />}
     {
-      locales
-        .filter((locale) => locale !== getCurrentLocale(Astro))
-        .map((locale) => (
-          <Button
-            class="locale-link hidden pointer-events-auto"
-            noLocale
-            href={standardizePath(
-              getRelativeLocaleUrl(
-                locale,
-                getPathWithoutLocale(Astro.url.pathname)
-              )
-            )}
-            translateProps={{
-              disable: true,
-            }}
-            prefetch="hover"
-          >
-            {getLanguageName(locale)}
-          </Button>
-        ))
+      translateLocales.map((locale) => (
+        <Button
+          rounded
+          linkClass="locale-anchor"
+          class={`locale-link ${multipleChoice ? "hidden" : ""} text-xs`}
+          href={standardizePath(
+            getRelativeLocaleUrl(
+              locale,
+              getPathWithoutLocale(Astro.url.pathname)
+            )
+          )}
+          noBase
+          translateProps={{
+            disable: true,
+          }}
+          prefetch="hover"
+        >
+          {getLanguageName(locale)}
+        </Button>
+      ))
     }
   </div>
 </div>
 <script>
+  import { getLocaleFromPath, getPathWithoutLocale } from "@integrations/i18n";
+  import { getPreferredLocale, addLocaleToLink } from "@integrations/i18n";
+
   document.addEventListener("astro:page-load", () => {
-    const localeLinks =
-      document.querySelectorAll<HTMLButtonElement>(".locale-link");
+    const preferredLocale = getPreferredLocale();
+    const path = window.location.pathname;
 
-    const localeSelect = document.querySelector<HTMLElement>(".locale-select")!;
-
-    const showLocales = () => {
-      localeSelect.classList.replace("inline", "hidden");
-
-      localeLinks.forEach((link) => link.classList.replace("hidden", "inline"));
-    };
-
-    const hideLocales = () => {
-      localeSelect.classList.replace("hidden", "inline");
-
-      localeLinks.forEach((link) => link.classList.replace("inline", "hidden"));
-    };
-
-    localeSelect.addEventListener("mouseenter", () => {
-      showLocales();
-
-      document
-        .querySelector<HTMLElement>(".locale-select-surface")!
-        .addEventListener("mouseleave", hideLocales, {
-          once: true,
-        });
-    });
-
-    localeSelect.addEventListener("pointerdown", () => {
-      localeLinks.forEach((link) => (link.disabled = true));
-
-      showLocales();
-
-      setTimeout(
-        () => localeLinks.forEach((link) => (link.disabled = false)),
-        600
+    if (preferredLocale !== getLocaleFromPath(path)) {
+      window.location.replace(
+        `/${addLocaleToLink(getPathWithoutLocale(path), preferredLocale)}`
       );
+    }
 
-      setTimeout(() => hideLocales(), 5000);
-    });
+    document
+      .querySelectorAll<HTMLAnchorElement>(".locale-anchor")
+      .forEach((link) =>
+        link.addEventListener("click", () => {
+          localStorage.setItem(
+            "language",
+            getLocaleFromPath(new URL(link.href).pathname)
+          );
+
+          history.replaceState(history.state, "", link.href);
+        })
+      );
   });
 </script>

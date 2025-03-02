@@ -1,0 +1,69 @@
+---
+import type { ComponentProps } from "astro/types";
+import Button from "./Button.astro";
+import Text from "./Text.astro";
+
+interface Props extends ComponentProps<typeof Button> {}
+---
+
+<Button
+  rounded
+  class="locale-select inline"
+  translateProps={{
+    disable: true,
+  }}
+  {...Astro.props}
+  ><Text
+    importance="button"
+    format="branded-button"
+    class="mb-0.5"
+    translateProps={{ disable: true }}>🌐</Text
+  ></Button
+>
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const localeButtons =
+      document.querySelectorAll<HTMLButtonElement>(".locale-link");
+
+    const localeSelect = document.querySelector<HTMLElement>(".locale-select")!;
+
+    const showLocales = () => {
+      localeSelect.classList.replace("inline", "hidden");
+
+      localeButtons.forEach((link) =>
+        link.classList.replace("hidden", "inline")
+      );
+    };
+
+    const hideLocales = () => {
+      localeSelect.classList.replace("hidden", "inline");
+
+      localeButtons.forEach((link) =>
+        link.classList.replace("inline", "hidden")
+      );
+    };
+
+    localeSelect.addEventListener("mouseenter", () => {
+      showLocales();
+
+      document
+        .querySelector<HTMLElement>(".locale-select-surface")!
+        .addEventListener("mouseleave", hideLocales, {
+          once: true,
+        });
+    });
+
+    localeSelect.addEventListener("pointerdown", () => {
+      localeButtons.forEach((link) => (link.disabled = true));
+
+      showLocales();
+
+      setTimeout(
+        () => localeButtons.forEach((link) => (link.disabled = false)),
+        600
+      );
+
+      setTimeout(() => hideLocales(), 5000);
+    });
+  });
+</script>

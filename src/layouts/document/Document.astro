@@ -8,7 +8,7 @@ import Card from "@layouts/Card.astro";
 import DocumentText from "./DocumentText.astro";
 import PostText from "@post/PostText.astro";
 import { isLocalizedEntry, getEntryLocale } from "@integrations/astro-server";
-import { getSentenceDelimiters } from "@integrations/i18n";
+import { getSentenceDelimiters } from "@integrations/i18n-server";
 
 interface Props
   extends ComponentProps<typeof DocumentText>,

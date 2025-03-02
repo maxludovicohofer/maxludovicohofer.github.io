@@ -9,13 +9,7 @@ import {
   type Flatten,
   type ReferenceDataEntry,
 } from "astro:content";
-import {
-  getPathSection,
-  getPathSections,
-  makePath,
-  standardizePath,
-} from "./text";
-import { getRelativeLocaleUrl } from "astro:i18n";
+import { getPathSection, getPathSections, makePath } from "./text";
 import addArticle from "indefinite";
 import {
   getCategory,
@@ -36,7 +30,8 @@ import {
   type DocumentCollectionKey,
 } from "@layouts/document/Document.astro";
 import { defaultLocale, locales } from "./astro-config.mts";
-import { getCurrentLocale, type PossibleTranslations } from "./i18n";
+import { getCurrentLocale } from "./i18n-server";
+import { addLocaleToLink, type PossibleTranslations } from "./i18n";
 
 export const getRole = async (astro: AstroGlobal) => {
   const roles = await getCollection("roles");
@@ -71,18 +66,15 @@ export const addBaseToLink = async (
 
   const linkWithRole = isDefault ? link : `${makePath(role.id)}/${link}`;
 
-  const locale = noLocale ? undefined : getCurrentLocale(astro);
-
-  return `/${
-    locale && locale !== defaultLocale
-      ? standardizePath(getRelativeLocaleUrl(locale, linkWithRole))
-      : linkWithRole
-  }`;
+  return `/${addLocaleToLink(
+    linkWithRole,
+    noLocale ? undefined : getCurrentLocale(astro)
+  )}`;
 };
 
 export const getEntriesSafe = async <
   C extends CollectionKey,
-  E extends keyof DataEntryMap[C] = string,
+  E extends keyof DataEntryMap[C] = string
 >(
   entries: ReferenceDataEntry<C, E>[]
 ) => {
@@ -104,7 +96,7 @@ export const getEntriesSafe = async <
 export const matchRoles = async <
   E extends {
     data: Partial<Pick<Flatten<DataEntryMap["projects"]>["data"], "roles">>;
-  },
+  }
 >(
   astro: AstroGlobal,
   entries: E[]
@@ -261,7 +253,9 @@ export const getSortedDocuments = async <C extends DocumentCollectionKey>(
         ...entry,
         publishingDate: getPublishingDate(
           entry,
-          (await render(entry)).remarkPluginFrontmatter
+          (
+            await render(entry)
+          ).remarkPluginFrontmatter
         )!,
       }))
     )
@@ -297,11 +291,12 @@ export const getEntryLocale = <C extends CollectionKey>(
 export const getLocalizedEntry = <C extends CollectionKey>(
   entry: CollectionEntry<C>,
   allEntries: CollectionEntry<C>[],
-  locale?: PossibleTranslations
+  locale?: (typeof locales)[number]
 ) => {
-  const localizedId = locale && `${locale}/${getEntryId(entry)}`;
+  const localizedId =
+    locale && locale !== defaultLocale && `${locale}/${getEntryId(entry)}`;
 
   return localizedId
-    ? (allEntries.find(({ id }) => id.endsWith(localizedId)) ?? entry)
+    ? allEntries.find(({ id }) => id.endsWith(localizedId)) ?? entry
     : entry;
 };

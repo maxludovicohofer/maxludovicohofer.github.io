@@ -5,7 +5,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import PostPage from "@post/PostPage.astro";
 import { makeDocumentPaths } from "@document/DocumentPage.astro";
 import { getDevelopmentTime } from "@integrations/content";
-import { setLocale } from "@integrations/i18n";
+import { setLocale } from "@integrations/i18n-server";
 
 export const getStaticPaths = makeDocumentPaths("projects");
 

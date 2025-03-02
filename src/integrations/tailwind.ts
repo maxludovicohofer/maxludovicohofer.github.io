@@ -33,6 +33,7 @@ export type TextSize =
   | "small"
   | "container"
   | "button"
+  | "button-icon"
   | "markdown";
 
 export type TextFormat =
@@ -119,6 +120,10 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
     },
     button: {
       classes: "text-base 2xl:text-3xl",
+      format: "none",
+    },
+    "button-icon": {
+      classes: "text-3xl 2xl:text-7xl",
       format: "none",
     },
   };

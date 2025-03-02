@@ -5,7 +5,7 @@ import ModalSlot from "./ModalSlot.astro";
 import { capitalize, getHumanPathSection } from "@integrations/text";
 import { getPrintOptions } from "@integrations/pdf.mts";
 import { getRole } from "@integrations/astro-server";
-import { getCurrentLocale, i18n } from "@integrations/i18n";
+import { getCurrentLocale, i18n } from "@integrations/i18n-server";
 import LanguageSelection from "@components/ui/LanguageSelection.astro";
 
 interface Props {
@@ -38,6 +38,8 @@ const formattedDescription = description
 const completeDescription = noTranslation
   ? formattedDescription
   : await t(formattedDescription);
+
+const hasBack = !homepage && !getPrintOptions(Astro.url.pathname);
 ---
 
 <!doctype html>
@@ -66,10 +68,8 @@ const completeDescription = noTranslation
       data-website-id="4cbde35d-908e-44ec-b45c-9face0570614"></script>
   </head>
   <body class="bg-zinc-200 dark:bg-zinc-950"
-    ><slot /><LanguageSelection />{
-      !homepage && !getPrintOptions(Astro.url.pathname) && (
-        <BackButton href={backHref} prefetch="load" />
-      )
+    ><slot /><LanguageSelection hasBack={hasBack} />{
+      hasBack && <BackButton href={backHref} prefetch="load" />
     }
     <ModalSlot />
     <script>

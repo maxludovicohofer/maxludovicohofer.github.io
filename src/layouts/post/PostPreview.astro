@@ -18,7 +18,7 @@ import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import { getDescription, getEntryId } from "@layouts/document/Document.astro";
 import { isLocalizedEntry } from "@integrations/astro-server";
-import { i18n, setLocale } from "@integrations/i18n";
+import { i18n, setLocale } from "@integrations/i18n-server";
 
 interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollectionKey> | undefined;
