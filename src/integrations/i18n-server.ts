@@ -4,12 +4,11 @@ import { getEntry, type CollectionEntry } from "astro:content";
 import { DEEPL_API_KEY } from "astro:env/server";
 import * as deepl from "deepl-node";
 import { translationsPath } from "src/content.config";
-import { diff, fixNewLines, highlightCharacter, standardizePath } from "./text";
+import { diff, fixNewLines, highlightCharacter } from "./text";
 import { groupBy, indexOfMin } from "./array";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import type { PossibleTranslations } from "./i18n";
-import { getRelativeLocaleUrl } from "astro:i18n";
 
 const deeplTrans = DEEPL_API_KEY
   ? new deepl.Translator(DEEPL_API_KEY)
