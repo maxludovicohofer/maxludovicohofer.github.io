@@ -13,7 +13,7 @@ interface Props extends HTMLAttributes<"div"> {
   hasBack?: boolean;
 }
 
-const { hasBack, ...props } = Astro.props;
+const { class: className = "", hasBack, ...props } = Astro.props;
 
 const currentLocale = getCurrentLocale(Astro);
 const translateLocales = locales.filter((locale) => locale !== currentLocale);
@@ -21,7 +21,7 @@ const multipleChoice = translateLocales.length > 1;
 ---
 
 <div
-  class={`absolute ${hasBack ? "top-6 lg:top-12 right-6" : "top-4 right-4"} size-full flex flex-col items-end pointer-events-none`}
+  class={`${className} absolute ${hasBack ? "top-6 lg:top-12 right-6" : "top-4 right-4"} size-full flex flex-col items-end pointer-events-none`}
   {...props}
 >
   <div class="locale-select-surface grid gap-4 pointer-events-auto">
