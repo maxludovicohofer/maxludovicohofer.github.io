@@ -71,13 +71,14 @@ const multipleChoice = translateLocales.length > 1;
     document
       .querySelectorAll<HTMLAnchorElement>(".locale-anchor")
       .forEach((link) =>
-        link.addEventListener("click", () => {
+        link.addEventListener("click", (e) => {
           localStorage.setItem(
             "language",
             getLocaleFromPath(new URL(link.href).pathname)
           );
 
-          history.replaceState(history.state, "", link.href);
+          e.preventDefault();
+          window.location.replace(link.href);
         })
       );
   });
