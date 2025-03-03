@@ -1234,5 +1234,97 @@
   "Agency (options and possibilities)": {
     "translation": "代理店（選択肢と可能性）",
     "api": "deepl"
+  },
+  "Worked as desktop and full stack programmer.": {
+    "translation": "デスクトップおよびフルスタックプログラマーとして勤務。",
+    "api": "deepl"
+  },
+  "Iteratively designed UI/UX and customer journey with clients to maximize conversions.": {
+    "translation": "コンバージョンを最大化するために、クライアントとUI/UXとカスタマージャーニーを繰り返し設計。",
+    "api": "deepl"
+  },
+  "Worked with a mobile first approach to maximize intuitiveness.": {
+    "translation": "直感性を最大化するため、モバイル・ファーストのアプローチを採用。",
+    "api": "deepl"
+  },
+  "User experience designer": {
+    "translation": "ユーザー・エクスペリエンス・デザイナー",
+    "api": "deepl"
+  },
+  "Lead game designer (school)": {
+    "translation": "リード・ゲーム・デザイナー（学校）",
+    "api": "deepl"
+  },
+  "Designed and directed an award-winning published indie game, completed in 3 months by an average team of 18.": {
+    "translation": "平均18人のチームが3ヶ月で完成させた、受賞歴のあるパブリッシング・インディーゲームのデザインとディレクション。",
+    "api": "deepl"
+  },
+  "Designed multiple prototypes for clients and game jams, following provided requirements.": {
+    "translation": "クライアントやゲームジャムのために、提供された要件に従って複数のプロトタイプを設計。",
+    "api": "deepl"
+  },
+  "Acted as technical lead for strategy with business partners.": {
+    "translation": "ビジネスパートナーとの戦略に関する技術的リードを務める。",
+    "api": "deepl"
+  },
+  "Game designer": {
+    "translation": "ゲームデザイナー",
+    "api": "deepl"
+  },
+  "Designing prototypes to challenge my skills in core mechanics, while developing systems and prototype tooling.": {
+    "translation": "プロトタイプを設計し、コアメカニクスのスキルに挑戦しながら、システムやプロトタイプツールを開発する。",
+    "api": "deepl"
+  },
+  "Studied the game development and CG pipeline, using the latest industry standards.": {
+    "translation": "最新の業界標準を用いたゲーム開発とCGパイプラインを研究。",
+    "api": "deepl"
+  },
+  "Software engineering (not graduated)": {
+    "translation": "ソフトウェア工学（未卒業）",
+    "api": "deepl"
+  },
+  "Studied rendering and performance optimization in depth.": {
+    "translation": "レンダリングとパフォーマンスの最適化を徹底的に研究。",
+    "api": "deepl"
+  },
+  "Technical art": {
+    "translation": "テクニカルアート",
+    "api": "deepl"
+  },
+  "Studied physics, math for games, electronics, and advanced computer science.": {
+    "translation": "物理学、ゲーム数学、電子工学、高度なコンピューター・サイエンスを学んだ。",
+    "api": "deepl"
+  },
+  "Developed videogames and desktop apps in most major languages.": {
+    "translation": "ほとんどの主要言語でビデオゲームやデスクトップアプリを開発。",
+    "api": "deepl"
+  },
+  "Programmed gameplay and systems for an award-winning published indie game.": {
+    "translation": "受賞歴のあるパブリッシング・インディーゲームのゲームプレイとシステムをプログラム。",
+    "api": "deepl"
+  },
+  "Programmed multiple prototypes, developing custom systems and tooling.": {
+    "translation": "複数のプロトタイプをプログラムし、カスタムシステムとツールを開発。",
+    "api": "deepl"
+  },
+  "Game programmer (school)": {
+    "translation": "ゲームプログラマー（学校）",
+    "api": "deepl"
+  },
+  "Programmed a web app using scrum and BDD.": {
+    "translation": "スクラムとBDDを使ってウェブアプリをプログラミング。",
+    "api": "deepl"
+  },
+  "Developed an efficient optimization algorithm for salesmen scheduling, running on mobile phones.": {
+    "translation": "携帯電話上で動作する販売員スケジューリングのための効率的な最適化アルゴリズムを開発。",
+    "api": "deepl"
+  },
+  "AI programmer": {
+    "translation": "AIプログラマー",
+    "api": "deepl"
+  },
+  "Developing AI systems and prototype tooling.": {
+    "translation": "AIシステムとプロトタイプツールの開発。",
+    "api": "deepl"
   }
 }
