@@ -1,6 +1,7 @@
 - id: Self study
-  school: true
   start: 2024-03-01
+  school: true
+  translateId: true
   skills:
     - job: Game designer
       achievements:
