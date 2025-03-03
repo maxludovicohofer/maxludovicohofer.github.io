@@ -122,7 +122,7 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
       format: "none",
     },
     "button-icon": {
-      classes: "text-5xl lg:text-3xl 2xl:text-4xl",
+      classes: "text-4xl lg:text-3xl 2xl:text-4xl",
       format: "none",
     },
   };
