@@ -3,7 +3,8 @@
   "cSpell.words": ["deepl", "Diegetic", "Umami"],
   "yaml.schemas": {
     "src/data/tech.schema.json": "src/data/tech.yaml",
-    "src/data/roles.schema.json": "src/data/roles.yaml"
+    "src/data/roles.schema.json": "src/data/roles.yaml",
+    "src/data/know-how.schema.json": "src/data/know-how.yaml"
   },
   "json.schemas": [
     {

@@ -3,13 +3,20 @@ import {
   type DocumentCollectionKey,
 } from "@layouts/document/Document.astro";
 import { capitalize, getHumanPathSection, toTitleCase } from "./text";
-import type { CollectionEntry, CollectionKey } from "astro:content";
+import {
+  getCollection,
+  type CollectionEntry,
+  type CollectionKey,
+} from "astro:content";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import utc from "dayjs/plugin/utc";
 import type Video from "@components/ui/Video.astro";
 import type { ComponentProps } from "astro/types";
 import { VALID_INPUT_FORMATS } from "node_modules/astro/dist/assets/consts";
+import { groupBy } from "./array";
+import { matchRoles } from "./astro-server";
+import type { AstroGlobal } from "astro";
 
 export type PostCollectionKey = Extract<CollectionKey, "projects" | "thoughts">;
 
@@ -137,7 +144,7 @@ export function getCategory<F extends boolean>(
   ) as any;
 }
 
-export function getGroup(entry: { data: object } | undefined) {
+export const getGroup = (entry: { data: object } | undefined) => {
   function isGroupEntry(test: typeof entry): test is {
     data: { group: string };
   } {
@@ -145,4 +152,55 @@ export function getGroup(entry: { data: object } | undefined) {
   }
 
   return isGroupEntry(entry) ? entry.data.group : undefined;
-}
+};
+
+export const getKnowHow = async (astro: AstroGlobal) => {
+  const knowHow = await Promise.all(
+    (
+      await getCollection("know-how")
+    ).map(async ({ data: { start, end, skills, ...data } }) => ({
+      start: dayjs(start),
+      end: end && dayjs(end),
+      skills: Object.values(
+        await matchRoles(
+          astro,
+          skills.map((skill) => ({ data: { roles: [skill.id], ...skill } }))
+        )
+      )
+        // Apply priorities
+        .reverse()
+        .flat()
+        .map((skill) => skill!.data),
+      ...data,
+    }))
+  );
+
+  const displayedKnowHow = knowHow.map(({ skills, ...data }) => ({
+    skill: skills[0]!,
+    ...data,
+  }));
+
+  // TODO MATCH SKILLS TO ROLE
+
+  knowHow.forEach(({ school, skills, ...data }, index) => {
+    if (!school) return;
+
+    const workSkill = skills.find(({ countAsWork }) => countAsWork);
+
+    if (!workSkill) return;
+
+    displayedKnowHow[index]!.skill = skills.filter(
+      (skill) => skill !== workSkill
+    )[0]!;
+    displayedKnowHow.push({ ...data, skill: workSkill });
+  });
+
+  // Sort by end date
+  displayedKnowHow.sort((a, b) =>
+    !b.end || (a.end && b.end.isAfter(a.end)) ? 1 : -1
+  );
+
+  return groupBy(displayedKnowHow, ({ school }) =>
+    school ? "education" : "experience"
+  );
+};

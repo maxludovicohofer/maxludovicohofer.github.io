@@ -1,0 +1,65 @@
+---
+import { getKnowHow } from "@integrations/content";
+import Text from "./ui/Text.astro";
+import { capitalize } from "@integrations/text";
+import { i18n, setLocale } from "@integrations/i18n-server";
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+
+const knowHow = await getKnowHow(Astro);
+
+await setLocale(Astro);
+dayjs.extend(duration);
+
+const formatDateRange = (start: dayjs.Dayjs, end?: dayjs.Dayjs) => {
+  const today = dayjs();
+  const dates = [start, end ?? today] as const;
+
+  const dropMonthDate = today.subtract(dayjs.duration({ years: 5 }));
+  const showMonth =
+    dates[1].diff(dates[0], "year") < 1 ||
+    dates.some((date) => date > dropMonthDate);
+
+  return dates
+    .map((date) => {
+      if (date === today) return "Present";
+
+      if (showMonth) return date.format("YYYY-MM");
+
+      return date.format("YYYY");
+    })
+    .join(" - ");
+};
+
+const t = i18n(Astro);
+---
+
+{
+  Object.entries(knowHow).map(([title, experiences]) => (
+    <>
+      <Text tag="h2">{capitalize(title)}</Text>
+      <ol class="list-none ps-0">
+        {experiences.map(async ({ skill, id, start, end, translateId }) => {
+          const translatedId = translateId ? await t(id) : id;
+          const comma = await t(",");
+
+          return (
+            <li class="ps-0">
+              <Text tag="h3">{skill.id.id}</Text>
+              <Text tag="h4" subtitle translateProps={{ disable: true }}>
+                {translatedId}
+                {comma}
+                {formatDateRange(start, end)}
+              </Text>
+              <ol class="list-disc">
+                {skill.achievements.map((achievement) => (
+                  <Text tag="li">{achievement}</Text>
+                ))}
+              </ol>
+            </li>
+          );
+        })}
+      </ol>
+    </>
+  ))
+}

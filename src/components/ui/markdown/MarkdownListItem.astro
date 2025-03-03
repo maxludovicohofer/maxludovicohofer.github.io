@@ -7,4 +7,4 @@ interface Props extends ComponentProps<typeof Text> {}
 const { ...props } = Astro.props;
 ---
 
-<Text tag="ul" {...props}><slot /></Text>
+<Text tag="li" {...props}><slot /></Text>

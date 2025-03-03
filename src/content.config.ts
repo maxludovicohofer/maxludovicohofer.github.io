@@ -32,10 +32,30 @@ const tech = defineCollection({
     .merge(roleContent),
 });
 
+const maxDate = new Date();
+const minDate = new Date("1997-09-01");
+
+const knowHow = defineCollection({
+  loader: file("src/data/know-how.yaml"),
+  schema: fileSchema.extend({
+    start: z.date().max(maxDate).min(minDate),
+    end: z.date().max(maxDate).min(minDate).optional(),
+    school: z.boolean().optional(),
+    skills: z.array(
+      z.object({
+        id: reference("roles"),
+        achievements: z.string().array(),
+        countAsWork: z.boolean().optional(),
+      })
+    ),
+    translateId: z.boolean().optional(),
+  }),
+});
+
 const documents = z.object({
   title: z.string().optional(),
   draft: z.boolean().optional(),
-  publishingDate: z.date().max(new Date()).optional(),
+  publishingDate: z.date().max(maxDate).min(minDate).optional(),
 });
 
 const docs = defineCollection({
@@ -84,6 +104,7 @@ const translations = defineCollection({
 export const collections = {
   roles,
   tech,
+  ["know-how"]: knowHow,
   docs,
   projects,
   thoughts,

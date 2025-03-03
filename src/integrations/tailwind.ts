@@ -19,7 +19,6 @@ export type TextTag =
   | "div"
   | "b"
   | "u"
-  | "ul"
   | "li"
   | "em"
   | "span"
@@ -81,7 +80,6 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
     span: {},
     b: { classes: "font-normal" },
     u: {},
-    ul: {},
     li: {
       classes: "marker:text-zinc-400 dark:marker:text-zinc-500",
       prose: "prose-li:marker:text-zinc-400 dark:prose-li:marker:text-zinc-500",

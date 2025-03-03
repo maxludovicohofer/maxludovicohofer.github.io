@@ -8,7 +8,7 @@ import MarkdownH2 from "@components/ui/markdown/MarkdownH2.astro";
 import MarkdownH3 from "@components/ui/markdown/MarkdownH3.astro";
 import MarkdownH4 from "@components/ui/markdown/MarkdownH4.astro";
 import MarkdownP from "@components/ui/markdown/MarkdownP.astro";
-import MarkdownList from "@components/ui/markdown/MarkdownList.astro";
+import MarkdownListItem from "@components/ui/markdown/MarkdownListItem.astro";
 import MarkdownSpan from "@components/ui/markdown/MarkdownSpan.astro";
 
 interface Props {
@@ -35,7 +35,7 @@ const { Content, components, noTranslation } = Astro.props;
               h3: MarkdownH3,
               h4: MarkdownH4,
               span: MarkdownSpan,
-              ul: MarkdownList,
+              li: MarkdownListItem,
             }),
         ...components,
       }}

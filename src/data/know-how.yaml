@@ -1,0 +1,53 @@
+- id: INattivo Soc. Cons. a.r.l.
+  start: 2021-05-01
+  end: 2022-03-01
+  skills:
+    - id: Project manager
+      achievements:
+        - Envisioned and lead development of innovative B2C and B2B solutions in the credit brokerage sector.
+        - Worked as a DevOps full stack programmer.
+    - id: Full stack programmer
+      achievements:
+        - Programmed stuff.
+- id: Zulu Medical
+  start: 2019-11-01
+  end: 2021-04-01
+  skills:
+    - id: Technical lead
+      achievements:
+        - Managed R&D innovation in the telemedicine sector.
+        - Worked as a scrum master, and desktop and full stack programmer.
+
+- id: BigRock Institute of Magic Technologies
+  start: 2023-09-01
+  end: 2024-03-01
+  school: true
+  skills:
+    - id: Game director for school projects
+      countAsWork: true
+      achievements:
+        - Directed a published game, completed in 3 months by an average team of 18. The game won People's Choice at "The Rookies Awards".
+        - Designed and lead development of multiple prototypes for clients or gamejams, completed by teams of 5.
+    - id: Technical art for videogames
+      achievements:
+        - Studied the game development pipeline, using the latest industry standards.
+        - Specialized in design and technical aspects.
+- id: University of Padua
+  start: 2016-09-01
+  end: 2019-09-01
+  school: true
+  translateId: true
+  skills:
+    - id: Software engineering (Not graduated)
+      achievements:
+        - Learned physics, math for games, electronics, and advanced computer science.
+- id: High school
+  start: 2011-09-01
+  end: 2016-09-01
+  school: true
+  translateId: true
+  skills:
+    - id: Computer science
+      achievements:
+        - Studied programming for videogames, desktop, web, data analysis, and electronics, in most major languages, from assembly to python.
+        - Won school programming competition and top 25% placement at national team programming competition.

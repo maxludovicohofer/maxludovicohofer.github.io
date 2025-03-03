@@ -17,6 +17,7 @@ import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { i18n, setLocale } from "@integrations/i18n-server";
+import KnowHow from "@components/KnowHow.astro";
 
 export const getStaticPaths = getBasePaths;
 
@@ -39,6 +40,9 @@ dayjs.extend(relativeTime);
 
 const t = i18n(Astro);
 const address = ADDRESS ? await t(ADDRESS, { noCache: true }) : undefined;
+
+const portfolioSentence = await t("Portfolio");
+const relocateSentence = await t("(open to relocate)");
 ---
 
 <DocumentPage>
@@ -52,17 +56,22 @@ const address = ADDRESS ? await t(ADDRESS, { noCache: true }) : undefined;
       specializationSentence
     }.</Text
   >
-  <Text tag="span"
-    ><Text tag="span" format="branded">👜</Text> Portfolio 🡢
+  <span
+    ><Text tag="span" format="branded" translateProps={{ disable: true }}
+      >👜</Text
+    >
+    {portfolioSentence} 🡢
     <Link href={portfolioLink} />
-    <br /><Text tag="span" format="branded">📬</Text>
-    <Link href="mailto:hofermaxludovico@gmail.com" /></Text
+    <br /><Text tag="span" format="branded" translateProps={{ disable: true }}
+      >📬</Text
+    >
+    <Link href="mailto:hofermaxludovico@gmail.com" /></span
   >
   {
     PHONE_NUMBER && (
       <>
         <br />
-        <Text tag="span" format="branded">
+        <Text tag="span" format="branded" translateProps={{ disable: true }}>
           📞
         </Text>
         <Link href={`tel:${PHONE_NUMBER}`} />
@@ -73,78 +82,15 @@ const address = ADDRESS ? await t(ADDRESS, { noCache: true }) : undefined;
     ADDRESS && (
       <>
         <br />
-        <Text tag="span" format="branded">
+        <Text tag="span" format="branded" translateProps={{ disable: true }}>
           📍
         </Text>
         <Link href={`https://maps.google.com/?q=${ADDRESS}`}>{address}</Link>{" "}
-        <Text tag="span">(open to relocate)</Text>
+        {relocateSentence}
       </>
     )
-  }
-  <Text tag="h2">Experience</Text>
-  <Text tag="h3">Game director for school projects</Text>
-  <Text tag="h4" subtitle
-    >BigRock Institute of Magic Technologies - 09/23 - 03/24</Text
-  >
-  <Text tag="ul">
-    <li>
-      Directed a published game, completed in 3 months by an average team of 18.
-      The game won People's Choice at "The Rookies Awards".
-    </li>
-    <li>
-      Designed and lead development of multiple prototypes for clients or game
-      jams, completed by teams of 5.
-    </li>
-  </Text>
-  <Text tag="h3">Project manager</Text>
-  <Text tag="h4" subtitle>INattivo Soc. Cons. a.r.l. - 05/21 - 03/22</Text>
-  <Text tag="ul">
-    <li>
-      Envisioned and lead development of innovative B2C and B2B solutions in the
-      credit brokerage sector.
-    </li>
-    <li>Worked as a DevOps full stack programmer.</li>
-  </Text>
-  <Text tag="h3">Technical lead</Text>
-  <Text tag="h4" subtitle>Zulu Medical - 11/19 - 04/21</Text>
-  <Text tag="ul">
-    <li>Managed R&D innovation in the telemedicine sector.</li>
-    <li>Worked as a scrum master, and desktop and full stack programmer.</li>
-  </Text>
-  <Text tag="h2">Education</Text>
-  <Text tag="h3">Technical art for videogames</Text>
-  <Text tag="h4" subtitle
-    >BigRock Institute of Magic Technologies - 09/23 - 03/24</Text
-  >
-  <Text tag="ul">
-    <li>
-      Studied the game development pipeline, using the latest industry
-      standards.
-    </li>
-    <li>Specialized in design and technical aspects.</li>
-  </Text>
-  <Text tag="h3">Software engineering (Not graduated)</Text>
-  <Text tag="h4" subtitle>University of Padua - 2016 - 2019</Text>
-  <Text tag="ul">
-    <li>
-      Learned physics, math for games, electronics, and advanced computer
-      science.
-    </li>
-  </Text>
-  <Text tag="h3">Computer science</Text>
-  <Text tag="h4" subtitle>High school - 2011 - 2016</Text>
-  <Text tag="ul">
-    <li>
-      Studied programming for videogames, desktop, web, data analysis, and
-      electronics, in most major languages, from assembly to python.
-    </li>
-    <li>
-      Won school programming competition and top 25% placement at national team
-      programming competition.
-    </li>
-  </Text>
-  <Text tag="h2">Skills</Text>
-  <Text tag="ul" class="grid grid-cols-3" translateProps={{ disable: true }}>
+  }<KnowHow /><Text tag="h2">Skills</Text>
+  <ul class="grid grid-cols-3">
     {
       tech.map(async ({ data: { id, experience } }) => {
         const techItem = `${await t(id)}${await t(",")} ${dayjs.duration(experience).humanize()}`;
@@ -152,28 +98,30 @@ const address = ADDRESS ? await t(ADDRESS, { noCache: true }) : undefined;
         return <li class="pr-7 my-0.5">{techItem}</li>;
       })
     }
-  </Text>
-  <Text tag="ul" class="-mt-3">
-    <li>
+  </ul>
+  <ul class="-mt-3">
+    <Text tag="li">
       I made games for desktop, mobile, and online and local multiplayer. {
         workFieldsSentence
       }
-    </li>
-    <li>
+    </Text>
+    <Text tag="li">
       I am fluent in English, German, and Italian. I'm at Japanese limited
       professional (N3) level. I also understand French and Spanish at a basic
       level.
-    </li>
-  </Text>
+    </Text>
+  </ul>
   <Text tag="h3">Extra</Text>
-  <Text tag="ul">
-    <li>I keep up to date with the latest technology and research.</li>
-    <li>
+  <ul>
+    <Text tag="li"
+      >I keep up to date with the latest technology and research.</Text
+    >
+    <Text tag="li">
       I am passionate about cinema and arts, especially cyberpunk and cosmic
       horror.
-    </li>
-    <li>
+    </Text>
+    <Text tag="li">
       I create electronic music and worked as mixing and mastering engineer.
-    </li>
-  </Text>
+    </Text>
+  </ul>
 </DocumentPage>

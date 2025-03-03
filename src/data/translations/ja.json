@@ -11,44 +11,8 @@
     "translation": "📍",
     "api": "deepl"
   },
-  "<li>Managed R&D innovation in the telemedicine sector.</li> <li>Worked as a scrum master, and desktop and full stack programmer.</li>": {
-    "translation": "<li>遠隔医療分野におけるR&amp;Dイノベーションを管理。</li> <li>スクラム・マスター、デスクトップ・フルスタック・プログラマー。</li>",
-    "api": "deepl"
-  },
-  "<li>\nDirected a published game, completed in 3 months by an average team of 18.\n      The game won People's Choice at \"The Rookies Awards\".\n</li> <li>\nDesigned and lead development of multiple prototypes for clients or game\n      jams, completed by teams of 5.\n</li>": {
-    "translation": "<li>\nルーキーズ・アワード」でピープルズ・チョイスを受賞。</li> <li>\nクライアントやゲーム・ジャムのために複数のプロトタイプをデザインし、開発を指揮。</li>",
-    "api": "deepl"
-  },
-  "<li>\nEnvisioned and lead development of innovative B2C and B2B solutions in the\n      credit brokerage sector.\n</li> <li>Worked as a DevOps full stack programmer.</li>": {
-    "translation": "<li>\nクレジット・ブローカー分野における革新的なB2CおよびB2Bソリューションを構想し、開発をリード。</li> <li>DevOpsフルスタックプログラマーとして勤務。</li>",
-    "api": "deepl"
-  },
-  "<li>\nStudied the game development pipeline, using the latest industry\n      standards.\n</li> <li>Specialized in design and technical aspects.</li>": {
-    "translation": "<li>\n最新の業界標準を用いたゲーム開発パイプラインを研究。</li> <li>デザインと技術面に特化。</li>",
-    "api": "deepl"
-  },
-  "<li>\nLearned physics, math for games, electronics, and advanced computer\n      science.\n</li>": {
-    "translation": "<li>\n物理学、ゲームのための数学、電子工学、高度なコンピューター・サイエンスを学んだ。</li>",
-    "api": "deepl"
-  },
-  "<li>I keep up to date with the latest technology and research.</li> <li>\nI am very passionate about cinema and arts, especially cyberpunk and\n      cosmic horror.\n</li> <li>\nI create electronic music and worked as mixing and mastering engineer.\n</li>": {
-    "translation": "<li>私は常に最新のテクノロジーと研究に取り組んでいます。</li> <li>\n映画やアート、特にサイバーパンクやコズミック・ホラーにとても情熱を持っています。</li> <li>\nエレクトロニック・ミュージックを制作し、ミキシング＆マスタリング・エンジニアとして働いています。</li>",
-    "api": "deepl"
-  },
-  "<li>\nStudied programming for videogames, desktop, web, data analysis, and\n      electronics, in most major languages, from assembly to python.\n</li> <li>\nWon school programming competition and top 25% placement at national team\n      programming competition.\n</li>": {
-    "translation": "<li>\nビデオゲーム、デスクトップ、ウェブ、データ分析、電子工学のためのプログラミングを、アセンブリからパイソンまで、ほとんどの主要言語で学ぶ。</li> <li>\n校内プログラミング・コンテストで優勝、全国チーム・プログラミング・コンテストで上位25%に入賞。</li>",
-    "api": "deepl"
-  },
-  "<li>\nI made games for desktop, mobile, and online and local multiplayer. I am especially involved in game design, level design, and physics systems. </li> <li>\nI am fluent in English, German, and Italian. I'm at Japanese limited\n      professional (N3) level. I also understand French and Spanish at a basic\n      level.\n</li>": {
-    "translation": "<li>\nデスクトップ、モバイル、オンライン、ローカルマルチプレイ向けのゲームを作った。特にゲームデザイン、レベルデザイン、物理システムに力を入れています。 </li> <li>\n英語、ドイツ語、イタリア語に堪能です。日本語は限定プロ（N3）レベルです。フランス語とスペイン語も基礎レベルで理解できます。</li>",
-    "api": "deepl"
-  },
   "Portrait of Max Ludovico Hofer": {
     "translation": "マックス・ルドヴィコ・ホーファーの肖像",
-    "api": "deepl"
-  },
-  "<li>\nI made games for desktop, mobile, and online and local multiplayer. I am especially involved in AI programming and decision trees. </li> <li>\nI am fluent in English, German, and Italian. I'm at Japanese limited\n      professional (N3) level. I also understand French and Spanish at a basic\n      level.\n</li>": {
-    "translation": "<li>\nデスクトップ、モバイル、オンライン、ローカル・マルチプレイヤー用のゲームを作った。特にAIプログラミングと決定木に取り組んでいます。 </li> <li>\n英語、ドイツ語、イタリア語に堪能です。日本語は限定プロ（N3）レベルです。フランス語とスペイン語も基礎レベルで理解できます。</li>",
     "api": "deepl"
   },
   "Try": {
@@ -79,20 +43,12 @@
     "translation": "ベタな色使いが気分を明るくする。",
     "api": "deepl"
   },
-  "<li>The ambulance has unstable handling and collisions, feeling intuitive but physically exaggerated. Also, we left in hidden exploitable bugs, like flying, for comedic purposes.</li>\n<li>The map, pedestrians, and patient positions are procedurally generated, enabling some replayability value.</li>\n<li>The biggest challenge of this prototype was giving the player just the right amount of control over the vehicle. I underestimated this effort and had to discard features to focus on the core gameplay.</li>": {
-    "translation": "<li>救急車はハンドリングと衝突が不安定で、直感的に感じられるが、物理的に誇張されている。また、滑稽な目的のために、空を飛ぶような隠れた悪用可能なバグも残してある。</li>\n<li>マップ、歩行者、患者の位置はプロシージャル生成されており、ある程度のリプレイ性を持たせている。</li>\n<li>このプロトタイプの最大の難関は、プレイヤーに乗り物を適度にコントロールさせることだった。私はこの努力を過小評価しており、コアなゲームプレイに集中するために機能を捨てなければならなかった。</li>",
-    "api": "deepl"
-  },
   "Duchessa is an easily scared humanoid cat, and when she hears a loud noise, her instincts tell her to run away as fast as she can. Her eyes, one yellow and one blue, allow her to access another dimension: the cat realm.": {
     "translation": "ドゥシェッサは怖がりやすい人型の猫で、大きな音を聞くと本能のままに全力で逃げる。彼女の目は黄色と青色で、猫の領域という別の次元にアクセスすることができる。",
     "api": "deepl"
   },
   "Blue and green blocks are in different realms.": {
     "translation": "青と緑のブロックは異なる領域にある。",
-    "api": "deepl"
-  },
-  "<li>The player can traverse platforms by moving, jumping, and switching realms. Timing, momentum, and knowledge of block patterns are key to completing a level without the timer running out. Duchessa has three lives that get reset after each completed stage.</li>\n<li>The game is organized in 30-seconds levels with dynamic difficulty, assembled at runtime from different block patterns. Each block pattern has an associated difficulty that gets compared to the player’s skill, evaluated based on their proficiency at the game. Block patterns are composed of blocks of the two realms and movement-altering platforms, like an uplifting tornado.</li>\n<li>Given the limited time and simple design, I replaced the GDD with drawing each platform behavior on a blackboard for the team to see, combining brainstorming and design. Also, we kept graphic fidelity to a minimum to maximize device compatibility.</li>": {
-    "translation": "<li>プレイヤーは、移動、ジャンプ、領域の切り替えによってプラットフォームを移動することができる。タイマーが切れることなくレベルをクリアするには、タイミング、勢い、ブロックパターンの知識が鍵となる。Duchessaには3つのライフがあり、ステージをクリアするごとにリセットされる。</li>\n<li>ゲームは動的な難易度を持つ30秒のレベルで構成され、異なるブロックパターンから実行時に組み立てられる。各ブロックパターンには難易度が設定されており、その難易度はプレイヤーの技量と比較される。ブロックパターンは、2つの領域のブロックと、高揚する竜巻のような動きを変えるプラットフォームで構成される。</li>\n<li>限られた時間とシンプルなデザインを考慮し、GDDの代わりに各プラットフォームの挙動を黒板に描いてチームに見せ、ブレインストーミングとデザインを組み合わせた。また、デバイスの互換性を最大限に高めるため、グラフィックの忠実度は最小限にとどめました。</li>",
     "api": "deepl"
   },
   "A little girl living in a village is unjustly punished by her patriarchal community and runs away into the nearby woods. As she wanders through the never ending trees, she will be protected by a dark mysterious entity, that grants her the power to turn into the fantastical animals she encounters along the way.": {
@@ -103,20 +59,12 @@
     "translation": "参考画像 © Loputyn.",
     "api": "deepl"
   },
-  "<li>The game starts out encouraging stealth gameplay, but reduces punishment for being aggressive as the character becomes more powerful, to reflect her evolution. The challenge of the design was to come up with elegant skills useful for both styles. For example, the ghost butterfly makes the character pass through objects and be invisible, but can also be used to pass through enemies and attack them from behind.</li>\n<li>Lolita’s skills are her transformations, each with its unique controls and camera. The triggers of these skills are potentially involuntary actions to simulate the feeling of fighting one’s instincts, for example staring for too long at enemies, or pressing the run button. At the beginning of the game, you fight the controls; but as the story goes on, you learn how to use them offensively. Also, every sound and UI element is placed in the world, so that the player can fully immerse in the game’s magical forest.</li>\n<li>To make countering the AI as intuitive as possible, I programmed behavior that mimics human perception. This turned out to be the biggest development challenge, as it required a lot of back and forth to check if numbers in code behaved intuitively. Therefore, I spent some effort to make the code easily tweakable and considerably sped up iterations.</li>": {
-    "translation": "<li>このゲームでは、最初はステルスゲームプレイを推奨しているが、キャラクターの進化を反映させるため、キャラクターが強くなるにつれて攻撃的な行為に対する罰を減らしている。デザインの課題は、両方のスタイルに役立つエレガントなスキルを考案することだった。例えば、ゴースト・バタフライはオブジェクトを通過して透明化するが、敵を通過して背後から攻撃することもできる。</li>\n<li>ロリータのスキルは変身で、それぞれに独自の操作とカメラがある。これらのスキルのトリガーは、本能と戦う感覚をシミュレートするために、潜在的に不随意的な行動である。例えば、敵を長く見つめすぎたり、実行ボタンを押したりするようなものだ。ゲーム序盤は操作と戦うが、ストーリーが進むにつれて、攻撃的な使い方を学んでいく。また、すべてのサウンドとUI要素が世界に配置されており、プレイヤーはゲームの魔法の森にどっぷり浸かることができる。</li>\n<li>AIにできるだけ直感的に対抗できるように、人間の知覚を模倣した動作をプログラムしました。これは最大の開発課題であることが判明した。コード上の数字が直感的に動作するかどうかをチェックするために、何度も行ったり来たりする必要があったからだ。そのため、コードを簡単に微調整できるように工夫し、反復作業をかなりスピードアップさせた。</li>",
-    "api": "deepl"
-  },
   "A spaceship robot's job is to ensure the vessel's integrity. When a critical failure occurs near a black hole, you and a colleague in the opposite part of the ship are woken up to fix the issue.": {
     "translation": "宇宙船ロボットの仕事は、船の完全性を保証することだ。ブラックホール付近で重大な故障が発生すると、あなたと船の反対側にいる同僚がその問題を解決するために起こされる。",
     "api": "deepl"
   },
   "Looking at the black hole switches characters.": {
     "translation": "ブラックホールを見ると、キャラクターが入れ替わる。",
-    "api": "deepl"
-  },
-  "<li>Players interact with the black hole to switch characters. They solve puzzles by selecting one object with each robot and negating properties such as gravity, polarity, and movement direction.</li>\n<li>Inversion is designed as a meditative experience. The black hole is a cosmic horror weenie central to the story, the gameplay, and the feeling of emptiness. Furthermore, puzzle rooms are thematically linked to the story, following an essential level design that gives space to thought.</li>\n<li>Since the inversion action occurs after both robots settle on a selection, only the last character’s effect is shown. In hindsight, both effects should have been visible, ideally transitioning the game to co-op.</li>": {
-    "translation": "<li>プレイヤーはブラックホールを操作してキャラクターを切り替える。それぞれのロボットでオブジェクトを1つ選び、重力、極性、移動方向などの特性を否定することでパズルを解く。</li>\n<li>インバージョン」は瞑想的な体験としてデザインされている。ブラックホールは、ストーリー、ゲームプレイ、虚無感の中心となる宇宙的なホラーである。さらに、パズルの部屋はストーリーとテーマ的にリンクしており、考えるスペースを与える本質的なレベルデザインに従っている。</li>\n<li>逆転のアクションは、両方のロボットが選択に落ち着いた後に発生するため、最後のキャラクターの効果しか表示されない。今にして思えば、両方のエフェクトを表示し、理想的にはゲームを協力プレイに移行させるべきだった。</li>",
     "api": "deepl"
   },
   "In the galactic empire of Madreterra, humanity evolved to avoid conflict. Instead, political discussion is resolved through covert planetary wars waged by the richest, marketed as land reclamation efforts.": {
@@ -127,20 +75,12 @@
     "translation": "ダイジェティックUIは、アクションが発生する画面中央にフォーカスを向ける。",
     "api": "deepl"
   },
-  "<li>Before each game, players choose a bullet type and special skill type, while jumping always gravitates the character towards their predicted destination. Bullets grow plants on impact, that players can use for defense or terrain. Players are defeated if hit 3 times, and possess auto-reloading magazines. At the same time, special skills are tactical tools that keep the game dynamic, for example a teleport.</li>\n<li>The 4v4 free-for-all matches take place on arid asteroids. During the game, bullets transform the flat landscape into an intricate vertical jungle, increasing the skill required to win. I also experimented with diegetic UI affected by visibility issues, possibly solved by a separate render pass.</li>\n<li>Since Unreal Engine and its marketplace packages did not support gravity switching, I had to code dynamic gravity from the ground up. This eventually evolved into inferring the player’s desired destination based on their inputs, and dynamically adjusting the trajectory and gravity to execute a smooth and intuitive jump. Also, I organized my codebase and assets into reusable drag and drop components that 10x my prototyping speed to this day.</li>": {
-    "translation": "<li>各ゲームの前に、プレイヤーは弾丸の種類とスペシャルスキルの種類を選び、ジャンプは常に予測された目的地に向かってキャラクターを引き寄せる。弾丸は着弾時に植物を成長させ、プレイヤーはそれを防御や地形に利用できる。プレイヤーは3回命中すると敗北し、自動装填式の弾倉を持つ。同時に、特殊スキルはテレポートなど、ゲームをダイナミックにする戦術ツールでもある。</li>\n<li>4対4のフリーフォーオール戦は乾燥した小惑星で行われる。ゲーム中、銃弾は平坦な風景を複雑に入り組んだ垂直のジャングルに変え、勝利に必要なスキルを高めていく。また、視認性の問題に影響されるダイジェスティック UI についても実験しました。</li>\n<li>Unreal Engine とそのマーケットプレイスのパッケージは重力の切り替えをサポートしていなかったため、一から動的重力をコーディングする必要がありました。これは最終的に、プレイヤーの入力に基づいて希望する目的地を推測し、スムーズで直感的なジャンプを実行するために軌道と重力を動的に調整することに発展しました。また、コードベースとアセットを再利用可能なドラッグ＆ドロップ・コンポーネントに整理したことで、今日までプロトタイピングのスピードが10倍になった。</li>",
-    "api": "deepl"
-  },
   "In the year 2980, a much anticipated robotics competition takes place: a team of miniature remote-control arachnoids fend off the creepy crawlies of three different biomes. Before each round, enemies receive a random bonus, and each spider has to choose a bonus for itself.": {
     "translation": "2980年、待望のロボット競技会が開催される。ミニチュアの遠隔操作アラクノイドのチームが、3つの異なるバイオームに生息する不気味な生き物を撃退する。各ラウンドの前に、敵にはランダムなボーナスが与えられ、各クモは自分でボーナスを選ばなければならない。",
     "api": "deepl"
   },
   "Concept art by the incredible Francesco Chiari.": {
     "translation": "素晴らしいフランチェスコ・キアリによるコンセプトアート。",
-    "api": "deepl"
-  },
-  "<li>The game was originally thought out for 4 players, but we scaled the number of characters down to 2, while allowing 1 to 4 players. I designed the two heroes to have opposite playstyles that relied on each other to truly shine. For example, one spider specializes in areas of effect, but only the other spider is fast enough to herd enemies, making interplay a necessity.</li>\n<li>Spawned enemies change based on the biome and have different movesets that must be countered by the most effective character. Arenas are progressively harder, and enemy spawn rates increase as the stage timer reaches zero and players have to take refuge in an underground elevator.</li>\n<li>In the elevator, enemies receive a random bonus and players must choose a bonus among three, before the next stage begins. Bonuses have a rarity system, with the rarest ones completely changing a hero’s playstyle. After three stages, players view a leaderboard and can decide to restart to beat their score.</li>\n<li>Given the lack of details of the original concept document, the biggest challenge was team alignment with the GDD, which I had to write during production. It came to me that we could use the GDD to also track work, by coloring text that was WIP or completed. This greatly increased speed, quality, and morale, since the team became more involved in the big picture.</li>": {
-    "translation": "<li>このゲームは当初4人用として考えられていたが、キャラクター数を2人に減らし、1人から4人までプレイできるようにした。私は2人のヒーローが真に輝くために、互いに依存し合う正反対のプレイスタイルを持つようにデザインした。例えば、片方のスパイダーは効果範囲に特化しているが、もう片方のスパイダーだけは敵を群れさせるのに十分なスピードを持っているため、相互作用が必要になってくる。</li>\n<li>出現する敵はバイオームによって変化し、異なるムーブセットを持つため、最も効果的なキャラクターが対抗しなければならない。アリーナは徐々に難しくなり、ステージのタイマーがゼロになると敵の出現率が上昇し、プレイヤーは地下エレベーターに避難しなければならなくなる。</li>\n<li>エレベーター内では敵にランダムなボーナスが与えられ、プレイヤーは次のステージが始まる前に3つのボーナスから1つを選ばなければならない。ボーナスにはレアリティシステムがあり、最もレアなものはヒーローのプレイスタイルを完全に変化させる。ステージが3つ終わるとリーダーボードが表示され、プレイヤーは自分のスコアを更新するためにリスタートを決めることができる。</li>\n<li>当初のコンセプト・ドキュメントの詳細が不足していたため、制作中に私が書かなければならなかったGDDとの整合性が最大の課題でした。GDDを使って、WIPや完了したテキストに色をつけることで、作業を追跡することもできると思いついた。これにより、チームは全体像により深く関わるようになり、スピード、品質、士気が大幅に向上した。</li>",
     "api": "deepl"
   },
   "All my projects.": {
@@ -197,10 +137,6 @@
   },
   "Graphic explanation of \"Debugging fun\".": {
     "translation": "デバッグの楽しさ」をグラフィックで解説。",
-    "api": "deepl"
-  },
-  "<li>Rewards (should be proportional to fun and increase other modifiers to create a loop)</li>\n<li>Stress and relax (risk, tension, and urgency)</li>\n<li>Reward prospects (promise rewards, interest, curiosity, and motivation)</li>\n<li>Intuitiveness (physics, controls, level design, logic complexity, and fairness)</li>\n<li>Coolness (artistic appeal, wow factor)</li>\n<li>Agency (options and possibilities)</li>": {
-    "translation": "<li>報酬（楽しさに比例し、他の修正要素を増やしてループを作るべきである）</li>\n<li>ストレスとリラックス（リスク、緊張、緊急性）</li>\n<li>報酬の見込み（報酬の約束、興味、好奇心、やる気）</li>\n<li>直感性（物理、コントロール、レベルデザイン、ロジックの複雑さ、公平性）</li>\n<li>かっこよさ（芸術的魅力、驚きの要素）</li>\n<li>エージェンシー（選択肢、可能性）</li>",
     "api": "deepl"
   },
   "Graphic explanation of \"Flow vs immersion\".": {
@@ -279,10 +215,6 @@
     "translation": "おまけ",
     "api": "deepl"
   },
-  "<li class=\"pr-7 my-0.5\"> Unreal Engine, 5 years </li><li class=\"pr-7 my-0.5\"> Unity, a year </li><li class=\"pr-7 my-0.5\"> C++, 5 years </li><li class=\"pr-7 my-0.5\"> C#, 5 years </li><li class=\"pr-7 my-0.5\"> Blueprints, 3 years </li><li class=\"pr-7 my-0.5\"> Maya, a year </li><li class=\"pr-7 my-0.5\"> Photoshop, 3 years </li><li class=\"pr-7 my-0.5\"> Illustrator, 3 years </li><li class=\"pr-7 my-0.5\"> Gaea, 6 months </li><li class=\"pr-7 my-0.5\"> FL Studio, 15 years </li><li class=\"pr-7 my-0.5\"> HLSL, a year </li><li class=\"pr-7 my-0.5\"> Houdini, 6 months </li><li class=\"pr-7 my-0.5\"> Substance designer, 6 months </li>": {
-    "translation": "<li class=\"pr-7 my-0.5\">アンリアルエンジン 5年 </li><li class=\"pr-7 my-0.5\">ユニティ、1年 </li><li class=\"pr-7 my-0.5\">C++, 5年 </li><li class=\"pr-7 my-0.5\">C#、5年 </li><li class=\"pr-7 my-0.5\">ブループリント、3年 </li><li class=\"pr-7 my-0.5\">Maya, 1年 </li><li class=\"pr-7 my-0.5\">フォトショップ、3年 </li><li class=\"pr-7 my-0.5\">イラストレーター、3年 </li><li class=\"pr-7 my-0.5\">ガイア、6カ月 </li><li class=\"pr-7 my-0.5\">FL Studio, 15年 </li><li class=\"pr-7 my-0.5\">HLSL, 1年 </li><li class=\"pr-7 my-0.5\">Houdini, 6ヵ月 </li><li class=\"pr-7 my-0.5\">Substance designer、6カ月 </li>",
-    "api": "deepl"
-  },
   "Skills": {
     "translation": "スキル",
     "api": "deepl"
@@ -337,10 +269,6 @@
   },
   "High school - 2011 - 2016": {
     "translation": "高校 - 2011 - 2016",
-    "api": "deepl"
-  },
-  "<li class=\"pr-7 my-0.5\"> Unreal Engine, 5 years </li><li class=\"pr-7 my-0.5\"> Unity, a year </li><li class=\"pr-7 my-0.5\"> C++, 5 years </li><li class=\"pr-7 my-0.5\"> C#, 5 years </li><li class=\"pr-7 my-0.5\"> ECS, 3 years </li><li class=\"pr-7 my-0.5\"> HLSL, a year </li><li class=\"pr-7 my-0.5\"> Python, 3 years </li><li class=\"pr-7 my-0.5\"> Java, 2 years </li><li class=\"pr-7 my-0.5\"> Agile, 3 years </li><li class=\"pr-7 my-0.5\"> TDD, 3 years </li><li class=\"pr-7 my-0.5\"> SQL, 5 years </li><li class=\"pr-7 my-0.5\"> AWS, 5 years </li><li class=\"pr-7 my-0.5\"> CI \\ CD, 3 years </li><li class=\"pr-7 my-0.5\"> Mobile, 2 years </li><li class=\"pr-7 my-0.5\"> Full stack, 5 years </li>": {
-    "translation": "<li class=\"pr-7 my-0.5\">アンリアルエンジン 5年 </li><li class=\"pr-7 my-0.5\">ユニティ、1年 </li><li class=\"pr-7 my-0.5\">C++, 5年 </li><li class=\"pr-7 my-0.5\">C#、5年 </li><li class=\"pr-7 my-0.5\">ECS、3年 </li><li class=\"pr-7 my-0.5\">HLSL, 1年 </li><li class=\"pr-7 my-0.5\">Python, 3年 </li><li class=\"pr-7 my-0.5\">Java, 2年 </li><li class=\"pr-7 my-0.5\">アジャイル, 3年 </li><li class=\"pr-7 my-0.5\">TDD,3年 </li><li class=\"pr-7 my-0.5\">SQL, 5年 </li><li class=\"pr-7 my-0.5\">AWS,5年 </li><li class=\"pr-7 my-0.5\">CI CD, 3年 </li><li class=\"pr-7 my-0.5\">モバイル, 2年 </li><li class=\"pr-7 my-0.5\">フルスタック, 5年 </li>",
     "api": "deepl"
   },
   "Solo developed in 14 days.": {
@@ -923,10 +851,6 @@
     "translation": "信念は、センサーからの信号や既存の信念を解釈することもできる。信号には脳のデータと依存関係グラフが含まれ、更新が必要な信念だけを保証する。",
     "api": "deepl"
   },
-  "<li>The system comes with a fully documented API and in-game debugger targeted at Unity programmers. The debugger displays a text overlay with the quasi-realtime beliefs of every brain, and brain IDs on top of their bodies. A simple code demonstration of basic functionality is also provided.</li>\n<li>The codebase amounts to around 1500 lines including documentation. The API was designed for a smooth developer experience and ease of extension. Also, the Act By Belief workflow can be achieved in existing decision tree systems without relying on this API.</li>\n<li>The biggest development challenge was C#‘s type system, forcing me to introduce some slow reflection. To save on performance, I plan to migrate this system to a C++ library in the near future.</li>": {
-    "translation": "<li>このシステムには、完全に文書化されたAPIと、Unityプログラマーを対象としたゲーム内デバッガーが付属しています。デバッガーは、各ブレインの準リアルタイムの信念をテキストオーバーレイで表示し、ブレインIDをボディの上に表示します。基本機能の簡単なコードデモも提供されています。</li>\n<li>コードベースはドキュメントを含めて1500行程度。APIは、開発者がスムーズに操作でき、拡張しやすいように設計されている。また、Act By Beliefワークフローは、このAPIに頼らなくても既存の決定木システムで実現できる。</li>\n<li>最大の開発課題はC#の型システムであり、低速なリフレクションの導入を余儀なくされた。パフォーマンスを節約するため、近い将来、このシステムをC++ライブラリに移行する予定である。</li>",
-    "api": "deepl"
-  },
   "Game AI is often a checklist that settles on specific behavior. While maybe easy to debug, this does not follow a fluid thought process, easily resulting in robotic behavior. Reusing these imperative decision trees can be daunting, as they couple AI with gameplay. With Act By Belief, I aim to address these issues through a <a class=\"  not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Maslow hierarchy (Act by)\" data-umami-event-url=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\">Maslow hierarchy</a>-inspired declarative method that is performant, easy to use and debug.": {
     "translation": "ゲームのAIは、チェックリストで特定の動作を決めることが多い。デバッグはしやすいかもしれないが、これでは流動的な思考プロセスには従わず、ロボットのような挙動になりやすい。このような命令型の決定木を再利用することは、AIとゲームプレイを結びつけることになるため、大変なことだ。Act By Beliefでは、<a class=\"  not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Maslow hierarchy (Act by)\" data-umami-event-url=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\">マズロー階層にインスパイアされた</a>宣言的手法によって、パフォーマンスと使いやすさ、デバッグのしやすさを実現し、これらの問題に対処することを目指しています。",
     "api": "deepl"
@@ -987,14 +911,6 @@
     "translation": "Steelsilkのメインメニュー。",
     "api": "deepl"
   },
-  "<li class=\"pr-7 my-0.5\"> Unreal Engine, 5年 </li><li class=\"pr-7 my-0.5\"> Unity, 1年 </li><li class=\"pr-7 my-0.5\"> C++, 5年 </li><li class=\"pr-7 my-0.5\"> C#, 5年 </li><li class=\"pr-7 my-0.5\"> Blueprints, 3年 </li><li class=\"pr-7 my-0.5\"> Maya, 1年 </li><li class=\"pr-7 my-0.5\"> Photoshop, 3年 </li><li class=\"pr-7 my-0.5\"> Illustrator, 3年 </li><li class=\"pr-7 my-0.5\"> Gaea, 6ヶ月 </li><li class=\"pr-7 my-0.5\"> FL Studio, 15年 </li><li class=\"pr-7 my-0.5\"> HLSL, 1年 </li><li class=\"pr-7 my-0.5\"> Houdini, 6ヶ月 </li><li class=\"pr-7 my-0.5\"> Substance designer, 6ヶ月 </li>": {
-    "translation": "<li class=\"pr-7 my-0.5\">アンリアル・エンジン、5年 </li><li class=\"pr-7 my-0.5\">ユニティ、1年 </li><li class=\"pr-7 my-0.5\">C++、5年 </li><li class=\"pr-7 my-0.5\">C#、5年 </li><li class=\"pr-7 my-0.5\">ブループリント、3年 </li><li class=\"pr-7 my-0.5\">Maya, 1年 </li><li class=\"pr-7 my-0.5\">フォトショップ, 3年 </li><li class=\"pr-7 my-0.5\">イラストレーター, 3年 </li><li class=\"pr-7 my-0.5\">ガイア, 6ヶ月 </li><li class=\"pr-7 my-0.5\">FL Studio, 15年 </li><li class=\"pr-7 my-0.5\">HLSL, 1年 </li><li class=\"pr-7 my-0.5\">Houdini, 6ヶ月 </li><li class=\"pr-7 my-0.5\">サブスタンス・デザイナー, 6ヶ月 </li>",
-    "api": "deepl"
-  },
-  "<li class=\"pr-7 my-0.5\"> Unreal Engine, 5年 </li><li class=\"pr-7 my-0.5\"> Unity, 1年 </li><li class=\"pr-7 my-0.5\"> C++, 5年 </li><li class=\"pr-7 my-0.5\"> C#, 5年 </li><li class=\"pr-7 my-0.5\"> ECS, 3年 </li><li class=\"pr-7 my-0.5\"> HLSL, 1年 </li><li class=\"pr-7 my-0.5\"> Python, 3年 </li><li class=\"pr-7 my-0.5\"> Java, 2年 </li><li class=\"pr-7 my-0.5\"> Agile, 3年 </li><li class=\"pr-7 my-0.5\"> TDD, 3年 </li><li class=\"pr-7 my-0.5\"> SQL, 5年 </li><li class=\"pr-7 my-0.5\"> AWS, 5年 </li><li class=\"pr-7 my-0.5\"> CI \\ CD, 3年 </li><li class=\"pr-7 my-0.5\"> Mobile, 2年 </li><li class=\"pr-7 my-0.5\"> Full stack, 5年 </li>": {
-    "translation": "<li class=\"pr-7 my-0.5\">アンリアル・エンジン、5年 </li><li class=\"pr-7 my-0.5\">ユニティ、1年 </li><li class=\"pr-7 my-0.5\">C++、5年 </li><li class=\"pr-7 my-0.5\">C#、5年 </li><li class=\"pr-7 my-0.5\">ECS、3年 </li><li class=\"pr-7 my-0.5\">HLSL、1年 </li><li class=\"pr-7 my-0.5\">Python, 3年 </li><li class=\"pr-7 my-0.5\">Java, 2年 </li><li class=\"pr-7 my-0.5\">アジャイル, 3年 </li><li class=\"pr-7 my-0.5\">TDD, 3年 </li><li class=\"pr-7 my-0.5\">SQL, 5年 </li><li class=\"pr-7 my-0.5\">AWS, 5年 </li><li class=\"pr-7 my-0.5\">CI </li><li class=\"pr-7 my-0.5\">モバイル, 2年 </li><li class=\"pr-7 my-0.5\">フルスタック, 5年 </li>",
-    "api": "deepl"
-  },
   ",": {
     "translation": "、",
     "api": "deepl"
@@ -1043,20 +959,8 @@
     "translation": "AIプログラミング",
     "api": "deepl"
   },
-  "<li>I keep up to date with the latest technology and research.</li> <li>\nI am passionate about cinema and arts, especially cyberpunk and cosmic\n      horror.\n</li> <li>\nI create electronic music and worked as mixing and mastering engineer.\n</li>": {
-    "translation": "<li>私は最新のテクノロジーと研究に常にアンテナを張っている。</li> <li>\n映画と芸術、特にサイバーパンクとコズミック・ホラーに情熱を持っている。</li> <li>\nエレクトロニック・ミュージックを制作し、ミキシング＆マスタリング・エンジニアとして働いています。</li>",
-    "api": "deepl"
-  },
   "🌐": {
     "translation": "🌐",
-    "api": "deepl"
-  },
-  "<span class=\"  text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-600 dark:shadow-yellow-200 print:shadow-black\" translate=\"no\">👜</span> Portfolio 🡢\n<a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://maxludovicohofer.github.io/ja\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Github (Resume)\" data-umami-event-url=\"https://maxludovicohofer.github.io/ja\" translate=\"no\">https://maxludovicohofer.github.io/ja</a> <br><span class=\"  text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-600 dark:shadow-yellow-200 print:shadow-black\" translate=\"no\">📬</span> <a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"mailto:hofermaxludovico@gmail.com\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Hofermaxludovico@gmail.com (Resume)\" data-umami-event-url=\"mailto:hofermaxludovico@gmail.com\" translate=\"no\">hofermaxludovico@gmail.com</a>": {
-    "translation": "<span class=\"  text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-600 dark:shadow-yellow-200 print:shadow-black\" translate=\"no\">👜</span> ポートフォリオ 🡢<a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://maxludovicohofer.github.io/ja\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Github (Resume)\" data-umami-event-url=\"https://maxludovicohofer.github.io/ja\" translate=\"no\">https://maxludovicohofer.github.io/ja</a> <br><span class=\"  text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-600 dark:shadow-yellow-200 print:shadow-black\" translate=\"no\">📬</span> <a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"mailto:hofermaxludovico@gmail.com\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Hofermaxludovico@gmail.com (Resume)\" data-umami-event-url=\"mailto:hofermaxludovico@gmail.com\" translate=\"no\">hofermaxludovico@gmail.com</a>",
-    "api": "deepl"
-  },
-  "<span class=\"  text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-600 dark:shadow-yellow-200 print:shadow-black\" translate=\"no\">👜</span> Portfolio 🡢\n<a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://maxludovicohofer.github.io/ja/ai-programmer\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Github (Resume)\" data-umami-event-url=\"https://maxludovicohofer.github.io/ja/ai-programmer\" translate=\"no\">https://maxludovicohofer.github.io/ja/ai-programmer</a> <br><span class=\"  text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-600 dark:shadow-yellow-200 print:shadow-black\" translate=\"no\">📬</span> <a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"mailto:hofermaxludovico@gmail.com\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Hofermaxludovico@gmail.com (Resume)\" data-umami-event-url=\"mailto:hofermaxludovico@gmail.com\" translate=\"no\">hofermaxludovico@gmail.com</a>": {
-    "translation": "<span class=\"  text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-600 dark:shadow-yellow-200 print:shadow-black\" translate=\"no\">👜</span> ポートフォリオ 🡢<a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://maxludovicohofer.github.io/ja/ai-programmer\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Github (Resume)\" data-umami-event-url=\"https://maxludovicohofer.github.io/ja/ai-programmer\" translate=\"no\">https://maxludovicohofer.github.io/ja/ai-programmer</a> <br><span class=\"  text-transparent [text-shadow:_0_0_0_var(--tw-shadow-color)] shadow-yellow-600 dark:shadow-yellow-200 print:shadow-black\" translate=\"no\">📬</span> <a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"mailto:hofermaxludovico@gmail.com\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Hofermaxludovico@gmail.com (Resume)\" data-umami-event-url=\"mailto:hofermaxludovico@gmail.com\" translate=\"no\">hofermaxludovico@gmail.com</a>",
     "api": "deepl"
   },
   "Design": {
@@ -1129,6 +1033,206 @@
   },
   "<a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Breath of the Wild (Flow vs)\" data-umami-event-url=\"https://wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild\">Breath of the Wild</a> is a masterclass at balancing both approaches.": {
     "translation": "<a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Breath of the Wild (Flow vs)\" data-umami-event-url=\"https://wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild\">ブレス・オブ・ザ・ワイルド</a>』はその両方のアプローチをバランスよくこなした傑作だ。",
+    "api": "deepl"
+  },
+  "Portfolio": {
+    "translation": "ポートフォリオ",
+    "api": "deepl"
+  },
+  "I am passionate about cinema and arts, especially cyberpunk and cosmic\n      horror.": {
+    "translation": "私は映画と芸術、特にサイバーパンクとコズミック・ホラーに情熱を持っている。",
+    "api": "deepl"
+  },
+  "University of Padua": {
+    "translation": "パドヴァ大学",
+    "api": "deepl"
+  },
+  "High school": {
+    "translation": "高校",
+    "api": "deepl"
+  },
+  "I made games for desktop, mobile, and online and local multiplayer. I am especially involved in game design, level design, and physics systems.": {
+    "translation": "デスクトップ、モバイル、オンライン、ローカルマルチプレイ向けのゲームを作った。特にゲームデザイン、レベルデザイン、物理システムに関わっています。",
+    "api": "deepl"
+  },
+  "I am fluent in English, German, and Italian. I'm at Japanese limited\n      professional (N3) level. I also understand French and Spanish at a basic\n      level.": {
+    "translation": "英語、ドイツ語、イタリア語に堪能です。日本語は限定専門職（N3）レベルです。フランス語とスペイン語も基礎レベルで理解できます。",
+    "api": "deepl"
+  },
+  "I keep up to date with the latest technology and research.": {
+    "translation": "私は常に最新の技術や研究を取り入れている。",
+    "api": "deepl"
+  },
+  "Directed a published game, completed in 3 months by an average team of 18. The game won People&#39;s Choice at &quot;The Rookies Awards&quot;.": {
+    "translation": "平均18人のチームが3カ月で完成させたパブリッシング・ゲームを監督。このゲームは「ルーキーズ・アワード」でピープル・チョイスを受賞した。",
+    "api": "deepl"
+  },
+  "Designed and lead development of multiple prototypes for clients or gamejams, completed by teams of 5.": {
+    "translation": "クライアントやゲームジャムのために複数のプロトタイプをデザインし、開発をリード。",
+    "api": "deepl"
+  },
+  "Envisioned and lead development of innovative B2C and B2B solutions in the credit brokerage sector.": {
+    "translation": "クレジット・ブローカー分野における革新的なB2CおよびB2Bソリューションを構想し、開発を主導。",
+    "api": "deepl"
+  },
+  "Worked as a DevOps full stack programmer.": {
+    "translation": "DevOpsフルスタックプログラマーとして勤務。",
+    "api": "deepl"
+  },
+  "Managed R&amp;D innovation in the telemedicine sector.": {
+    "translation": "遠隔医療分野における研究開発イノベーションを管理。",
+    "api": "deepl"
+  },
+  "Worked as a scrum master, and desktop and full stack programmer.": {
+    "translation": "スクラムマスター、デスクトップおよびフルスタックプログラマーとして勤務。",
+    "api": "deepl"
+  },
+  "Studied the game development pipeline, using the latest industry standards.": {
+    "translation": "最新の業界標準を用いたゲーム開発パイプラインを研究。",
+    "api": "deepl"
+  },
+  "Specialized in design and technical aspects.": {
+    "translation": "デザイン、技術面を専門とする。",
+    "api": "deepl"
+  },
+  "I create electronic music and worked as mixing and mastering engineer.": {
+    "translation": "エレクトロニック・ミュージックを創作し、ミキシング＆マスタリング・エンジニアとして働いている。",
+    "api": "deepl"
+  },
+  "Studied programming for videogames, desktop, web, data analysis, and electronics, in most major languages, from assembly to python.": {
+    "translation": "ゲーム、デスクトップ、ウェブ、データ分析、電子工学のためのプログラミングを、アセンブラからパイソンまで、ほとんどの主要言語で学んだ。",
+    "api": "deepl"
+  },
+  "Won school programming competition and top 25% placement at national team programming competition.": {
+    "translation": "学校対抗プログラミング大会で優勝、全国チーム対抗プログラミング大会で上位25%に入賞。",
+    "api": "deepl"
+  },
+  "Learned physics, math for games, electronics, and advanced computer science.": {
+    "translation": "物理学、ゲームのための数学、電子工学、高度なコンピューター・サイエンスを学んだ。",
+    "api": "deepl"
+  },
+  "I made games for desktop, mobile, and online and local multiplayer. I am especially involved in AI programming and decision trees.": {
+    "translation": "デスクトップ、モバイル、オンライン、ローカル・マルチプレイヤー用のゲームを作った。特にAIプログラミングと決定木に力を入れています。",
+    "api": "deepl"
+  },
+  "Full stack programmer": {
+    "translation": "フルスタックプログラマー",
+    "api": "deepl"
+  },
+  "Programmed stuff.": {
+    "translation": "プログラムされたものだ。",
+    "api": "deepl"
+  },
+  "The system comes with a fully documented API and in-game debugger targeted at Unity programmers. The debugger displays a text overlay with the quasi-realtime beliefs of every brain, and brain IDs on top of their bodies. A simple code demonstration of basic functionality is also provided.": {
+    "translation": "このシステムには、完全に文書化されたAPIと、Unityプログラマーを対象としたゲーム内デバッガーが付属しています。デバッガーは、各ブレインの準リアルタイムの信念をテキストオーバーレイで表示し、ブレインIDをボディの上に表示します。基本機能の簡単なコードデモも提供されています。",
+    "api": "deepl"
+  },
+  "The codebase amounts to around 1500 lines including documentation. The API was designed for a smooth developer experience and ease of extension. Also, the Act By Belief workflow can be achieved in existing decision tree systems without relying on this API.": {
+    "translation": "コードベースはドキュメントを含めて1500行程度である。APIは開発者がスムーズに操作でき、拡張が容易になるように設計されている。また、Act By Beliefワークフローは、このAPIに頼らなくても既存の決定木システムで実現できる。",
+    "api": "deepl"
+  },
+  "The biggest development challenge was C#‘s type system, forcing me to introduce some slow reflection. To save on performance, I plan to migrate this system to a C++ library in the near future.": {
+    "translation": "最大の開発課題はC#の型システムで、遅いリフレクションの導入を余儀なくされた。パフォーマンスを節約するため、近い将来、このシステムをC++ライブラリに移行する予定だ。",
+    "api": "deepl"
+  },
+  "The ambulance has unstable handling and collisions, feeling intuitive but physically exaggerated. Also, we left in hidden exploitable bugs, like flying, for comedic purposes.": {
+    "translation": "救急車はハンドリングと衝突が不安定で、直感的に感じられるが、物理的に誇張されている。また、滑稽な目的のために、空を飛ぶような隠れた悪用可能なバグを残しておいた。",
+    "api": "deepl"
+  },
+  "The map, pedestrians, and patient positions are procedurally generated, enabling some replayability value.": {
+    "translation": "マップ、歩行者、患者の位置はプロシージャル生成されるため、ある程度のリプレイバリューがある。",
+    "api": "deepl"
+  },
+  "The player can traverse platforms by moving, jumping, and switching realms. Timing, momentum, and knowledge of block patterns are key to completing a level without the timer running out. Duchessa has three lives that get reset after each completed stage.": {
+    "translation": "プレイヤーは、移動、ジャンプ、領域の切り替えによってプラットフォームを移動することができる。タイマーが切れることなくレベルをクリアするには、タイミング、勢い、ブロックパターンの知識が鍵となる。Duchessaには3つのライフがあり、ステージをクリアするごとにリセットされる。",
+    "api": "deepl"
+  },
+  "The game is organized in 30-seconds levels with dynamic difficulty, assembled at runtime from different block patterns. Each block pattern has an associated difficulty that gets compared to the player’s skill, evaluated based on their proficiency at the game. Block patterns are composed of blocks of the two realms and movement-altering platforms, like an uplifting tornado.": {
+    "translation": "ゲームは、異なるブロックパターンから実行時に組み立てられる、動的な難易度を持つ30秒のレベルで構成されている。各ブロックパターンには難易度が設定されており、その難易度はプレイヤーの技量と比較される。ブロックパターンは2つの領域のブロックと、竜巻のように動きを変えるプラットフォームで構成されている。",
+    "api": "deepl"
+  },
+  "Given the limited time and simple design, I replaced the GDD with drawing each platform behavior on a blackboard for the team to see, combining brainstorming and design. Also, we kept graphic fidelity to a minimum to maximize device compatibility.": {
+    "translation": "限られた時間とシンプルなデザインを考慮し、私はGDDの代わりに各プラットフォームの動作を黒板に描いてチームに見せ、ブレーンストーミングとデザインを組み合わせました。また、デバイスの互換性を最大限に高めるため、グラフィックの忠実度は最小限にとどめました。",
+    "api": "deepl"
+  },
+  "Spawned enemies change based on the biome and have different movesets that must be countered by the most effective character. Arenas are progressively harder, and enemy spawn rates increase as the stage timer reaches zero and players have to take refuge in an underground elevator.": {
+    "translation": "出現する敵はバイオームによって変化し、異なるムーブセットを持つため、最も効果的なキャラクターで対抗しなければならない。アリーナは徐々に難しくなり、ステージのタイマーがゼロになると敵の出現率が上がり、プレイヤーは地下エレベーターに避難しなければならなくなる。",
+    "api": "deepl"
+  },
+  "In the elevator, enemies receive a random bonus and players must choose a bonus among three, before the next stage begins. Bonuses have a rarity system, with the rarest ones completely changing a hero’s playstyle. After three stages, players view a leaderboard and can decide to restart to beat their score.": {
+    "translation": "エレベーター内では敵にランダムなボーナスが与えられ、プレイヤーは次のステージが始まる前に3つのボーナスの中から1つを選ばなければならない。ボーナスにはレアリティシステムがあり、最もレアなものはヒーローのプレイスタイルを完全に変化させる。ステージが3つ終わると、プレイヤーはリーダーボードを見ることができ、自分のスコアを更新するためにリスタートを決めることができる。",
+    "api": "deepl"
+  },
+  "Given the lack of details of the original concept document, the biggest challenge was team alignment with the GDD, which I had to write during production. It came to me that we could use the GDD to also track work, by coloring text that was WIP or completed. This greatly increased speed, quality, and morale, since the team became more involved in the big picture.": {
+    "translation": "オリジナルのコンセプト・ドキュメントの詳細が不足していたため、最大の課題は、制作中に私が書かなければならなかったGDDとチームの整合性をとることだった。GDDを使って、WIPや完了したテキストに色をつけることで、作業のトラッキングもできるのではないかと思いつきました。これにより、チームは全体像により深く関わるようになり、スピード、品質、士気が大幅に向上した。",
+    "api": "deepl"
+  },
+  "The game was originally thought out for 4 players, but we scaled the number of characters down to 2, while allowing 1 to 4 players. I designed the two heroes to have opposite playstyles that relied on each other to truly shine. For example, one spider specializes in areas of effect, but only the other spider is fast enough to herd enemies, making interplay a necessity.": {
+    "translation": "このゲームは当初4人用として考えられていたが、キャラクター数を2人に減らし、1人から4人までプレイできるようにした。私は2人のヒーローが真に輝くために、互いに依存し合う正反対のプレイスタイルを持つようにデザインした。例えば、片方のスパイダーは効果的なエリアを得意とするが、もう片方のスパイダーだけは敵を群れさせるのに十分なスピードがある。",
+    "api": "deepl"
+  },
+  "The game starts out encouraging stealth gameplay, but reduces punishment for being aggressive as the character becomes more powerful, to reflect her evolution. The challenge of the design was to come up with elegant skills useful for both styles. For example, the ghost butterfly makes the character pass through objects and be invisible, but can also be used to pass through enemies and attack them from behind.": {
+    "translation": "このゲームでは、最初はステルスゲームプレイを推奨しているが、キャラクターの進化を反映させるため、キャラクターが強くなるにつれて攻撃的な行為に対する罰を減らしている。デザインの課題は、両方のスタイルに役立つエレガントなスキルを考案することだった。例えば、ゴースト・バタフライはオブジェクトを通過して透明化するが、敵を通過して背後から攻撃することもできる。",
+    "api": "deepl"
+  },
+  "Lolita’s skills are her transformations, each with its unique controls and camera. The triggers of these skills are potentially involuntary actions to simulate the feeling of fighting one’s instincts, for example staring for too long at enemies, or pressing the run button. At the beginning of the game, you fight the controls; but as the story goes on, you learn how to use them offensively. Also, every sound and UI element is placed in the world, so that the player can fully immerse in the game’s magical forest.": {
+    "translation": "ロリータのスキルは変身であり、それぞれに独自の操作とカメラがある。これらのスキルのトリガーは、本能と戦う感覚をシミュレートするために、潜在的に不随意的な行動である。例えば、敵を長く見つめすぎたり、実行ボタンを押したり。ゲーム序盤は操作と戦うが、ストーリーが進むにつれて、攻撃的な使い方を学んでいく。また、あらゆる音やUI要素が世界観の中に配置されているため、プレイヤーはゲームの中の不思議な森にどっぷりと浸ることができる。",
+    "api": "deepl"
+  },
+  "To make countering the AI as intuitive as possible, I programmed behavior that mimics human perception. This turned out to be the biggest development challenge, as it required a lot of back and forth to check if numbers in code behaved intuitively. Therefore, I spent some effort to make the code easily tweakable and considerably sped up iterations.": {
+    "translation": "AIにできるだけ直感的に対抗できるように、私は人間の知覚を模倣した動作をプログラムした。これは最大の開発課題であることが判明した。コード内の数字が直感的に動作するかどうかをチェックするために、何度も行ったり来たりする必要があったからだ。そのため、コードを簡単に微調整できるように工夫し、反復作業をかなりスピードアップさせた。",
+    "api": "deepl"
+  },
+  "Before each game, players choose a bullet type and special skill type, while jumping always gravitates the character towards their predicted destination. Bullets grow plants on impact, that players can use for defense or terrain. Players are defeated if hit 3 times, and possess auto-reloading magazines. At the same time, special skills are tactical tools that keep the game dynamic, for example a teleport.": {
+    "translation": "各ゲームの前に、プレイヤーは弾丸の種類とスペシャルスキルの種類を選び、ジャンプは常に予測された目的地に向かってキャラクターを引き寄せる。弾丸は着弾時に植物を成長させ、プレイヤーはそれを防御や地形に利用できる。プレイヤーは3回命中すると敗北し、自動装填式の弾倉を持つ。同時に、スペシャルスキルはテレポートなど、ゲームをダイナミックにする戦術的なツールでもある。",
+    "api": "deepl"
+  },
+  "The 4v4 free-for-all matches take place on arid asteroids. During the game, bullets transform the flat landscape into an intricate vertical jungle, increasing the skill required to win. I also experimented with diegetic UI affected by visibility issues, possibly solved by a separate render pass.": {
+    "translation": "4対4のフリーフォーオールの試合は、乾燥した小惑星で行われる。ゲーム中、弾丸は平坦な風景を複雑に入り組んだ垂直のジャングルに変え、勝利に必要なスキルを高めていく。また、視認性の問題に影響されるダイジェスティックUIについても実験してみた。",
+    "api": "deepl"
+  },
+  "Since Unreal Engine and its marketplace packages did not support gravity switching, I had to code dynamic gravity from the ground up. This eventually evolved into inferring the player’s desired destination based on their inputs, and dynamically adjusting the trajectory and gravity to execute a smooth and intuitive jump. Also, I organized my codebase and assets into reusable drag and drop components that 10x my prototyping speed to this day.": {
+    "translation": "Unreal Engine とそのマーケットプレイスのパッケージは重力の切り替えをサポートしていなかったため、一から動的な重力をコーディングする必要がありました。これは最終的に、プレイヤーの入力に基づいて希望する目的地を推測し、軌道と重力を動的に調整して、スムーズで直感的なジャンプを実行するように進化しました。また、コードベースとアセットを再利用可能なドラッグ＆ドロップ・コンポーネントに整理したことで、今日までプロトタイピングのスピードが10倍になった。",
+    "api": "deepl"
+  },
+  "Players interact with the black hole to switch characters. They solve puzzles by selecting one object with each robot and negating properties such as gravity, polarity, and movement direction.": {
+    "translation": "プレイヤーはブラックホールを操作してキャラクターを切り替える。それぞれのロボットでオブジェクトを1つ選び、重力、極性、移動方向などの特性を否定することでパズルを解く。",
+    "api": "deepl"
+  },
+  "Inversion is designed as a meditative experience. The black hole is a cosmic horror weenie central to the story, the gameplay, and the feeling of emptiness. Furthermore, puzzle rooms are thematically linked to the story, following an essential level design that gives space to thought.": {
+    "translation": "インバージョン」は瞑想体験としてデザインされている。ブラックホールは、ストーリー、ゲームプレイ、そして虚無感の中心となるコズミック・ホラーである。さらに、パズルの部屋はストーリーとテーマ的にリンクしており、考えるスペースを与える本質的なレベルデザインに従っている。",
+    "api": "deepl"
+  },
+  "Since the inversion action occurs after both robots settle on a selection, only the last character’s effect is shown. In hindsight, both effects should have been visible, ideally transitioning the game to co-op.": {
+    "translation": "反転アクションは両方のロボットが選択を確定した後に発生するため、最後のキャラクターのエフェクトしか表示されない。今にして思えば、両方のエフェクトを表示し、理想的にはゲームを協力プレイに移行させるべきだった。",
+    "api": "deepl"
+  },
+  "The biggest challenge of this prototype was giving the player just the right amount of control over the vehicle. I underestimated this effort and had to discard features to focus on the core gameplay.": {
+    "translation": "このプロトタイプの最大の難関は、プレイヤーに乗り物を適度にコントロールさせることだった。私はこの努力を過小評価しており、コアなゲームプレイに集中するために機能を捨てなければならなかった。",
+    "api": "deepl"
+  },
+  "Rewards (should be proportional to fun and increase other modifiers to create a loop)": {
+    "translation": "報酬（楽しさに比例し、ループを作るために他の修正要素を増やすべきである）",
+    "api": "deepl"
+  },
+  "Stress and relax (risk, tension, and urgency)": {
+    "translation": "ストレスとリラックス（リスク、緊張、緊急性）",
+    "api": "deepl"
+  },
+  "Reward prospects (promise rewards, interest, curiosity, and motivation)": {
+    "translation": "報酬の見込み（報酬、興味、好奇心、やる気を約束する）",
+    "api": "deepl"
+  },
+  "Intuitiveness (physics, controls, level design, logic complexity, and fairness)": {
+    "translation": "直感性（物理、コントロール、レベルデザイン、ロジックの複雑さ、公平性）",
+    "api": "deepl"
+  },
+  "Coolness (artistic appeal, wow factor)": {
+    "translation": "かっこよさ（芸術的魅力、驚きの要素）",
+    "api": "deepl"
+  },
+  "Agency (options and possibilities)": {
+    "translation": "代理店（選択肢と可能性）",
     "api": "deepl"
   }
 }
