@@ -1306,5 +1306,9 @@
   "Developing AI systems and prototype tooling.": {
     "translation": "AIシステムとプロトタイプツールの開発。",
     "api": "deepl"
+  },
+  "Self study": {
+    "translation": "自習",
+    "api": "deepl"
   }
 }
