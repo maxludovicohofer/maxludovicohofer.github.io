@@ -25,7 +25,7 @@ const developmentDuration = getDevelopmentTime(Astro.props.entry)!.humanize();
     ><PostFooter
       value={soloDeveloped
         ? `Solo developed in ${developmentDuration}`
-        : `Made in ${developmentDuration} by an average team of ${team}`}
+        : `Made in ${developmentDuration} by a team of ${team}`}
       >Development</PostFooter
     >{
       !soloDeveloped && (
