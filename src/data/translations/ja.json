@@ -1290,5 +1290,25 @@
   "Made in 3ヶ月 by a team of 20.": {
     "translation": "20人のチームによって3ヶ月で作られた。",
     "api": "deepl"
+  },
+  "Game designer, team lead, gameplay programmer, UI designer, technical artist.": {
+    "translation": "ゲームデザイナー、チームリーダー、ゲームプレイプログラマー、UIデザイナー、テクニカルアーティスト。",
+    "api": "deepl"
+  },
+  "Game designer, team lead, gameplay programmer, sound artist, technical artist.": {
+    "translation": "ゲームデザイナー、チームリーダー、ゲームプレイプログラマー、サウンドアーティスト、テクニカルアーティスト。",
+    "api": "deepl"
+  },
+  "Game director, team lead, gameplay programmer, writer, shader artist, sound artist, lighting artist.": {
+    "translation": "ゲーム・ディレクター、チーム・リーダー、ゲームプレイ・プログラマー、ライター、シェーダー・アーティスト、サウンド・アーティスト、ライティング・アーティスト。",
+    "api": "deepl"
+  },
+  "Game designer, gameplay programmer, AI programmer.": {
+    "translation": "ゲームデザイナー、ゲームプレイプログラマー、AIプログラマー。",
+    "api": "deepl"
+  },
+  "Game director, tech team lead, sound lead, camera lead, UI/UX lead.": {
+    "translation": "ゲームディレクター、技術チームリード、サウンドリード、カメラリード、UI/UXリード。",
+    "api": "deepl"
   }
 }
