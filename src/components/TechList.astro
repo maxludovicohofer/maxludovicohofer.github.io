@@ -1,5 +1,5 @@
 ---
-import { matchRoles } from "@integrations/astro-server";
+import { applyMatch, matchRoles } from "@integrations/astro-server";
 import { i18n, setLocale } from "@integrations/i18n-server";
 import { capitalize } from "@integrations/text";
 import Text from "@ui/Text.astro";
@@ -17,24 +17,27 @@ interface Props extends HTMLAttributes<"ol"> {
 const { class: className = "", compact, ...props } = Astro.props;
 
 export const getTech = async (astro: AstroGlobal) => {
-  const applyMatch = <T,>(matchResult: Partial<Record<any, T[]>>) => {
+  const applyThreshold = <T,>(matchResult: Partial<Record<any, T[]>>) => {
     // Number from 0-10 that filters out weak matches
     const threshold = 4;
-    return Object.entries(matchResult)
-      .filter(([matchScore]) => Number(matchScore) > threshold)
-      .reverse()
-      .flatMap(([_, value]) => value!);
+    return applyMatch(
+      Object.fromEntries(
+        Object.entries(matchResult).filter(
+          ([matchScore]) => Number(matchScore) > threshold
+        )
+      )
+    );
   };
 
   return await Promise.all(
-    applyMatch(await matchRoles(astro, await getCollection("tech"))).map(
+    applyThreshold(await matchRoles(astro, await getCollection("tech"))).map(
       async (tech) => {
         const roleFunctionalities = tech.data.functionalities?.filter(
           (functionality) => typeof functionality !== "string"
         );
 
         if (roleFunctionalities?.length) {
-          const matchedFunctionalities = applyMatch(
+          const matchedFunctionalities = applyThreshold(
             await matchRoles(
               astro,
               roleFunctionalities.map((functionality) => ({

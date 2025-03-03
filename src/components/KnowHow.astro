@@ -39,26 +39,37 @@ const t = i18n(Astro);
     <>
       <Text tag="h2">{capitalize(title)}</Text>
       <ol class="list-none ps-0">
-        {experiences.map(async ({ skill, id, start, end, translateId }) => {
-          const translatedId = translateId ? await t(id) : id;
-          const comma = await t(",");
+        {experiences.map(
+          async ({
+            skill: { job, achievements, countAsWork },
+            id,
+            start,
+            end,
+            translateId,
+          }) => {
+            const translatedId = translateId ? await t(id) : id;
+            const comma = `${await t(",")} `;
 
-          return (
-            <li class="ps-0">
-              <Text tag="h3">{skill.id.id}</Text>
-              <Text tag="h4" subtitle translateProps={{ disable: true }}>
-                {translatedId}
-                {comma}
-                {formatDateRange(start, end)}
-              </Text>
-              <ol class="list-disc">
-                {skill.achievements.map((achievement) => (
-                  <Text tag="li">{achievement}</Text>
-                ))}
-              </ol>
-            </li>
-          );
-        })}
+            return (
+              <li class="ps-0">
+                <Text tag="h3">
+                  {job.id}
+                  {countAsWork ? " (school)" : ""}
+                </Text>
+                <Text tag="h4" subtitle translateProps={{ disable: true }}>
+                  {translatedId}
+                  {comma}
+                  {formatDateRange(start, end)}
+                </Text>
+                <ol class="list-disc">
+                  {achievements.map((achievement) => (
+                    <Text tag="li">{achievement}</Text>
+                  ))}
+                </ol>
+              </li>
+            );
+          }
+        )}
       </ol>
     </>
   ))

@@ -16,6 +16,7 @@
 - id: AI programmer
   matches:
     - AI tool programmer
+    - AI programming
   workFields:
     - AI programming
     - decision trees

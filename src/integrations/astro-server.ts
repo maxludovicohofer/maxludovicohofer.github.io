@@ -124,7 +124,7 @@ export const getEntriesSafe = async <
 
 export const matchRoles = async <
   E extends {
-    data: Partial<Pick<Flatten<DataEntryMap["projects"]>["data"], "roles">>;
+    data: Partial<Pick<CollectionEntry<"projects">["data"], "roles">>;
   }
 >(
   astro: AstroGlobal,
@@ -230,6 +230,13 @@ export const matchRoles = async <
 
   return scoredEntities;
 };
+
+export const applyMatch = <T extends Partial<Record<any, any[]>>>(
+  matchResult: T
+) =>
+  Object.values(matchResult as unknown as Record<any, NonNullable<T[keyof T]>>)
+    .reverse()
+    .flat();
 
 export const getSortedPosts = async <C extends PostCollectionKey>(
   astro: AstroGlobal,

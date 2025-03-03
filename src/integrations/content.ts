@@ -15,7 +15,7 @@ import type Video from "@components/ui/Video.astro";
 import type { ComponentProps } from "astro/types";
 import { VALID_INPUT_FORMATS } from "node_modules/astro/dist/assets/consts";
 import { groupBy } from "./array";
-import { matchRoles } from "./astro-server";
+import { applyMatch, matchRoles } from "./astro-server";
 import type { AstroGlobal } from "astro";
 
 export type PostCollectionKey = Extract<CollectionKey, "projects" | "thoughts">;
@@ -161,16 +161,12 @@ export const getKnowHow = async (astro: AstroGlobal) => {
     ).map(async ({ data: { start, end, skills, ...data } }) => ({
       start: dayjs(start),
       end: end && dayjs(end),
-      skills: Object.values(
+      skills: applyMatch(
         await matchRoles(
           astro,
-          skills.map((skill) => ({ data: { roles: [skill.id], ...skill } }))
+          skills.map((skill) => ({ data: { roles: [skill.job], ...skill } }))
         )
-      )
-        // Apply priorities
-        .reverse()
-        .flat()
-        .map((skill) => skill!.data),
+      ).map(({ data }) => data),
       ...data,
     }))
   );
@@ -180,19 +176,17 @@ export const getKnowHow = async (astro: AstroGlobal) => {
     ...data,
   }));
 
-  // TODO MATCH SKILLS TO ROLE
-
-  knowHow.forEach(({ school, skills, ...data }, index) => {
+  knowHow.forEach(({ skills, school, ...data }, index) => {
     if (!school) return;
 
-    const workSkill = skills.find(({ countAsWork }) => countAsWork);
+    const workSkills = skills.filter(({ countAsWork }) => countAsWork);
 
-    if (!workSkill) return;
+    if (!workSkills.length) return;
 
     displayedKnowHow[index]!.skill = skills.filter(
-      (skill) => skill !== workSkill
+      (skill) => !workSkills.includes(skill)
     )[0]!;
-    displayedKnowHow.push({ ...data, skill: workSkill });
+    displayedKnowHow.push({ ...data, skill: workSkills[0]! });
   });
 
   // Sort by end date
@@ -200,7 +194,12 @@ export const getKnowHow = async (astro: AstroGlobal) => {
     !b.end || (a.end && b.end.isAfter(a.end)) ? 1 : -1
   );
 
-  return groupBy(displayedKnowHow, ({ school }) =>
+  const { experience, education } = groupBy(displayedKnowHow, ({ school }) =>
     school ? "education" : "experience"
   );
+
+  return {
+    ...(experience ? { experience } : {}),
+    ...(education ? { education } : {}),
+  };
 };

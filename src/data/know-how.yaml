@@ -1,36 +1,64 @@
+- id: Self study
+  school: true
+  start: 2024-03-01
+  skills:
+    - job: Game designer
+      achievements:
+        - Designing prototypes to challenge my skills in core mechanics, while developing systems and prototype tooling.
+        - Studied rendering and performance optimization in depth.
+    - job: Game programmer
+      achievements:
+        - Developing physics-based mechanics, systems and prototype tooling.
+        - Studied rendering and performance optimization in depth.
+    - job: AI programmer
+      achievements:
+        - Developing AI systems and prototype tooling.
 - id: INattivo Soc. Cons. a.r.l.
   start: 2021-05-01
   end: 2022-03-01
   skills:
-    - id: Project manager
+    - job: Project manager
       achievements:
         - Envisioned and lead development of innovative B2C and B2B solutions in the credit brokerage sector.
-        - Worked as a DevOps full stack programmer.
-    - id: Full stack programmer
+        - Managed cross-functional team of 4 to replace old systems.
+    - job: User experience designer
       achievements:
-        - Programmed stuff.
+        - Iteratively designed UI/UX and customer journey with clients to maximize conversions.
+        - Worked with a mobile first approach to maximize intuitiveness.
+    - job: Full stack programmer
+      achievements:
+        - Programmed a web app using scrum and BDD.
+        - Developed an efficient optimization algorithm for salesmen scheduling, running on mobile phones.
 - id: Zulu Medical
   start: 2019-11-01
   end: 2021-04-01
   skills:
-    - id: Technical lead
+    - job: Technical lead
       achievements:
-        - Managed R&D innovation in the telemedicine sector.
-        - Worked as a scrum master, and desktop and full stack programmer.
-
+        - Worked as desktop and full stack programmer.
+        - Acted as technical lead for strategy with business partners.
+    - job: Scrum master
+      achievements:
+        - Contributed to the company's cultural shift from waterfall to agile.
+        - Scrum master for a team of 4 programmers.
 - id: BigRock Institute of Magic Technologies
   start: 2023-09-01
   end: 2024-03-01
   school: true
   skills:
-    - id: Game director for school projects
+    - job: Lead game designer
       countAsWork: true
       achievements:
-        - Directed a published game, completed in 3 months by an average team of 18. The game won People's Choice at "The Rookies Awards".
-        - Designed and lead development of multiple prototypes for clients or gamejams, completed by teams of 5.
-    - id: Technical art for videogames
+        - Designed and directed an award-winning published indie game, completed in 3 months by an average team of 18.
+        - Designed multiple prototypes for clients and game jams, following provided requirements.
+    - job: Game programmer
+      countAsWork: true
       achievements:
-        - Studied the game development pipeline, using the latest industry standards.
+        - Programmed gameplay and systems for an award-winning published indie game.
+        - Programmed multiple prototypes, developing custom systems and tooling.
+    - job: Technical art
+      achievements:
+        - Studied the game development and CG pipeline, using the latest industry standards.
         - Specialized in design and technical aspects.
 - id: University of Padua
   start: 2016-09-01
@@ -38,16 +66,16 @@
   school: true
   translateId: true
   skills:
-    - id: Software engineering (Not graduated)
+    - job: Software engineering (not graduated)
       achievements:
-        - Learned physics, math for games, electronics, and advanced computer science.
+        - Studied physics, math for games, electronics, and advanced computer science.
 - id: High school
   start: 2011-09-01
   end: 2016-09-01
   school: true
   translateId: true
   skills:
-    - id: Computer science
+    - job: Computer science
       achievements:
-        - Studied programming for videogames, desktop, web, data analysis, and electronics, in most major languages, from assembly to python.
+        - Developed videogames and desktop apps in most major languages.
         - Won school programming competition and top 25% placement at national team programming competition.

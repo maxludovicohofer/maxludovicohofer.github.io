@@ -43,7 +43,7 @@ const knowHow = defineCollection({
     school: z.boolean().optional(),
     skills: z.array(
       z.object({
-        id: reference("roles"),
+        job: reference("roles"),
         achievements: z.string().array(),
         countAsWork: z.boolean().optional(),
       })
