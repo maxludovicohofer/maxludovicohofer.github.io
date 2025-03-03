@@ -6,7 +6,6 @@ import {
   type CollectionEntry,
   type CollectionKey,
   type DataEntryMap,
-  type Flatten,
   type ReferenceDataEntry,
 } from "astro:content";
 import {

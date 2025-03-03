@@ -6,13 +6,16 @@
       achievements:
         - Designing prototypes to challenge my skills in core mechanics, while developing systems and prototype tooling.
         - Studied rendering and performance optimization in depth.
+
     - job: Game programmer
       achievements:
         - Developing physics-based mechanics, systems and prototype tooling.
         - Studied rendering and performance optimization in depth.
+
     - job: AI programmer
       achievements:
         - Developing AI systems and prototype tooling.
+
 - id: INattivo Soc. Cons. a.r.l.
   start: 2021-05-01
   end: 2022-03-01
@@ -21,14 +24,17 @@
       achievements:
         - Envisioned and lead development of innovative B2C and B2B solutions in the credit brokerage sector.
         - Managed cross-functional team of 4 to replace old systems.
+
     - job: User experience designer
       achievements:
         - Iteratively designed UI/UX and customer journey with clients to maximize conversions.
         - Worked with a mobile first approach to maximize intuitiveness.
+
     - job: Full stack programmer
       achievements:
         - Programmed a web app using scrum and BDD.
         - Developed an efficient optimization algorithm for salesmen scheduling, running on mobile phones.
+
 - id: Zulu Medical
   start: 2019-11-01
   end: 2021-04-01
@@ -37,10 +43,12 @@
       achievements:
         - Worked as desktop and full stack programmer.
         - Acted as technical lead for strategy with business partners.
+
     - job: Scrum master
       achievements:
         - Contributed to the company's cultural shift from waterfall to agile.
         - Scrum master for a team of 4 programmers.
+
 - id: BigRock Institute of Magic Technologies
   start: 2023-09-01
   end: 2024-03-01
@@ -51,15 +59,18 @@
       achievements:
         - Designed and directed an award-winning published indie game, completed in 3 months by an average team of 18.
         - Designed multiple prototypes for clients and game jams, following provided requirements.
+
     - job: Game programmer
       countAsWork: true
       achievements:
         - Programmed gameplay and systems for an award-winning published indie game.
         - Programmed multiple prototypes, developing custom systems and tooling.
+
     - job: Technical art
       achievements:
         - Studied the game development and CG pipeline, using the latest industry standards.
         - Specialized in design and technical aspects.
+
 - id: University of Padua
   start: 2016-09-01
   end: 2019-09-01
@@ -69,6 +80,7 @@
     - job: Software engineering (not graduated)
       achievements:
         - Studied physics, math for games, electronics, and advanced computer science.
+
 - id: High school
   start: 2011-09-01
   end: 2016-09-01
