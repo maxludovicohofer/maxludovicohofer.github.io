@@ -1270,5 +1270,25 @@
   "Self study": {
     "translation": "自習",
     "api": "deepl"
+  },
+  "Designed and directed an award-winning published indie game, completed in 3 months by a team of 20.": {
+    "translation": "20人のチームが3ヶ月で完成させた、受賞歴のあるパブリッシング・インディーゲームのデザインとディレクション。",
+    "api": "deepl"
+  },
+  "Made in 3日 by a team of 5.": {
+    "translation": "5人のチームによって3日で作られた。",
+    "api": "deepl"
+  },
+  "Made in 5日 by a team of 5.": {
+    "translation": "5人のチームによって5日で作られた。",
+    "api": "deepl"
+  },
+  "Made in 7日 by a team of 2.": {
+    "translation": "2人のチームによって7日で作られた。",
+    "api": "deepl"
+  },
+  "Made in 3ヶ月 by a team of 20.": {
+    "translation": "20人のチームによって3ヶ月で作られた。",
+    "api": "deepl"
   }
 }
