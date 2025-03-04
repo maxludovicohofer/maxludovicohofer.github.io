@@ -165,6 +165,8 @@ const translate = async (translateOptions?: TranslateOptions) => {
           (
             await deeplTrans.translateText(texts, defaultLocale, toLocale, {
               tagHandling: "html",
+              formality: "prefer_more",
+              modelType: "prefer_quality_optimized",
               ...options,
             })
           ).map(({ text: translation }, index) => [
