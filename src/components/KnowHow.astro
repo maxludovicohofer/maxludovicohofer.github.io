@@ -2,7 +2,12 @@
 import { getKnowHow } from "@integrations/content";
 import Text from "./ui/Text.astro";
 import { capitalize } from "@integrations/text";
-import { i18n, setLocale } from "@integrations/i18n-server";
+import {
+  getCurrentLocale,
+  i18n,
+  localeInfo,
+  setLocale,
+} from "@integrations/i18n-server";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 
@@ -20,13 +25,15 @@ const formatDateRange = (start: dayjs.Dayjs, end?: dayjs.Dayjs) => {
     dates[1].diff(dates[0], "year") < 1 ||
     dates.some((date) => date > dropMonthDate);
 
+  const localeFunctions = localeInfo[getCurrentLocale(Astro)];
+
   return dates
     .map((date) => {
       if (date === today) return "Present";
 
-      if (showMonth) return date.format("YYYY-MM");
+      if (showMonth) return localeFunctions.getYearMonth(date.format("ll"));
 
-      return date.format("YYYY");
+      return localeFunctions.getYear(date.format("LL"));
     })
     .join(" - ");
 };

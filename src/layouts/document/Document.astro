@@ -8,7 +8,8 @@ import Card from "@layouts/Card.astro";
 import DocumentText from "./DocumentText.astro";
 import PostText from "@post/PostText.astro";
 import { isLocalizedEntry, getEntryLocale } from "@integrations/astro-server";
-import { getSentenceDelimiters } from "@integrations/i18n-server";
+import { localeInfo } from "@integrations/i18n-server";
+import { defaultLocale } from "@integrations/astro-config.mjs";
 
 interface Props
   extends ComponentProps<typeof DocumentText>,
@@ -52,7 +53,7 @@ export const getDescription = <C extends CollectionKey>(
   if (sentences) {
     const splitSentences = (description ?? cleanMarkdown(cleanBody)).split(
       new RegExp(
-        `[${isLocalizedEntry(entry) ? getSentenceDelimiters(getEntryLocale(entry)) : getSentenceDelimiters()}]\\s+`
+        `[${isLocalizedEntry(entry) ? localeInfo[getEntryLocale(entry)].delimiters : localeInfo[defaultLocale].delimiters}]\\s+`
       )
     );
 

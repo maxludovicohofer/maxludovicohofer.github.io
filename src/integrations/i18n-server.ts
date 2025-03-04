@@ -29,20 +29,24 @@ export type I18nOptions = deepl.TranslatorOptions &
 export type LocaleInfo = {
   languageName: string;
   delimiters: string;
+  getYearMonth: (date: string) => string;
+  getYear: (date: string) => string;
 };
 
-const localeInfo: Record<(typeof locales)[number], LocaleInfo> = {
-  en: { languageName: "English", delimiters: ".?!" },
-  ja: { languageName: "日本語", delimiters: "。？！" },
+export const localeInfo: Record<(typeof locales)[number], LocaleInfo> = {
+  en: {
+    languageName: "English",
+    delimiters: ".?!",
+    getYear: (date) => date.replaceAll(/\D+/g, "").slice(-4),
+    getYearMonth: (date) => date.replace(/\d+,/, ""),
+  },
+  ja: {
+    languageName: "日本語",
+    delimiters: "。？！",
+    getYear: (date) => date.replaceAll(/\b\d{1,2}[日月]/g, ""),
+    getYearMonth: (date) => date.replaceAll(/\b\d{1,2}日/g, ""),
+  },
 };
-
-export const getSentenceDelimiters = <L extends (typeof locales)[number]>(
-  locale?: L
-) => localeInfo[locale ?? defaultLocale].delimiters;
-
-export const getLanguageName = <L extends (typeof locales)[number]>(
-  locale?: L
-) => localeInfo[locale ?? defaultLocale].languageName;
 
 export const i18n = (astro: AstroGlobal, globalOptions?: I18nOptions) => {
   return async (text: string, options?: I18nOptions) => {

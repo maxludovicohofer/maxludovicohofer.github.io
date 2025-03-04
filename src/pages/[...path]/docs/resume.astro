@@ -41,27 +41,26 @@ const address = ADDRESS ? await t(ADDRESS, { noCache: true }) : undefined;
 
 const portfolioSentence = await t("Portfolio");
 const relocateSentence = await t("(open to relocate)");
+
+// TODO PHASE 2 UPDATE LINKEDIN AUTOMATICALLY
 ---
 
-<DocumentPage>
-  <DocumentMedia
+<DocumentPage
+  ><DocumentMedia
     src={Photo}
     alt="HIDDEN Portrait of Max Ludovico Hofer ASPECT 1/1 TOP"
-  />
-  <Text tag="h1">Max Ludovico Hofer</Text>
-  <Text
+  /><Text tag="h1">Max Ludovico Hofer</Text><Text
     >{capitalize(role.id)} experienced in leadership and software, {
       specializationSentence
     }.</Text
-  >
-  <span
+  ><span
     ><Text tag="span" format="branded" translateProps={{ disable: true }}
       >👜</Text
     >
-    {portfolioSentence} 🡢
-    <Link href={portfolioLink} />
-    <br /><Text tag="span" format="branded" translateProps={{ disable: true }}
-      >📬</Text
+    {portfolioSentence} 🡢 <Link href={portfolioLink} /><br /><Text
+      tag="span"
+      format="branded"
+      translateProps={{ disable: true }}>📬</Text
     >
     <Link href="mailto:hofermaxludovico@gmail.com" /></span
   >
@@ -87,39 +86,30 @@ const relocateSentence = await t("(open to relocate)");
         {relocateSentence}
       </>
     )
-  }<KnowHow /><Text tag="h2">Skills</Text>
-  <ul class="grid grid-cols-3">
+  }<KnowHow /><Text tag="h2">Skills</Text><ul class="grid grid-cols-3">
     {
       tech.map(async ({ data: { id, experience } }) => {
-        const techItem = `${await t(id)}${await t(",")} ${dayjs.duration(experience).humanize()}`;
+        const techItem = `${await t(id)} ${await t("(")}${dayjs.duration(experience).humanize().replace("a ", "1 ")}${await t(")")}`;
 
         return <li class="pr-7 my-0.5">{techItem}</li>;
       })
     }
-  </ul>
-  <ul class="-mt-3">
+  </ul><ul class="-mt-3">
     <Text tag="li">
-      I made games for desktop, mobile, and online and local multiplayer. {
+      Made games for desktop, mobile, and online and local multiplayer. {
         workFieldsSentence
       }
+    </Text><Text tag="li">
+      Fluent in English, German, and Italian (C2). Limited professional level in
+      Japanese (N3). Basic level in Spanish and French (A2).
     </Text>
-    <Text tag="li">
-      I am fluent in English, German, and Italian. I'm at Japanese limited
-      professional (N3) level. I also understand French and Spanish at a basic
-      level.
-    </Text>
-  </ul>
-  <Text tag="h3">Extra</Text>
-  <ul>
+  </ul><Text tag="h3">Extra</Text><ul>
     <Text tag="li"
-      >I keep up to date with the latest technology and research.</Text
-    >
-    <Text tag="li">
-      I am passionate about cinema and arts, especially cyberpunk and cosmic
-      horror.
+      >Keeping up to date with the latest technology and research.</Text
+    ><Text tag="li">
+      Passionate about cinema and arts, especially cyberpunk and cosmic horror.
+    </Text><Text tag="li">
+      Creating electronic music and worked as mixing and mastering engineer.
     </Text>
-    <Text tag="li">
-      I create electronic music and worked as mixing and mastering engineer.
-    </Text>
-  </ul>
-</DocumentPage>
+  </ul></DocumentPage
+>

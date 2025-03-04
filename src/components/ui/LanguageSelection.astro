@@ -1,6 +1,6 @@
 ---
 import { locales } from "@integrations/astro-config.mts";
-import { getLanguageName } from "@integrations/i18n-server";
+import { localeInfo } from "@integrations/i18n-server";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { standardizePath } from "@integrations/text";
 import { getCurrentLocale } from "@integrations/i18n-server";
@@ -29,6 +29,7 @@ const multipleChoice = translateLocales.length > 1;
     {
       translateLocales.map((locale) => (
         <Button
+          outline
           rounded
           linkClass="locale-anchor"
           class={`locale-link ${multipleChoice ? "hidden" : ""} !text-xs`}
@@ -44,7 +45,7 @@ const multipleChoice = translateLocales.length > 1;
           }}
           prefetch="hover"
         >
-          {getLanguageName(locale)}
+          {localeInfo[locale].languageName}
         </Button>
       ))
     }

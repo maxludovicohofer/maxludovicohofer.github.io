@@ -28,5 +28,5 @@ export const getWorkFieldsSentence = async (astro: AstroGlobal) => {
 
   if (!workFields) return "";
 
-  return `I am especially involved in ${toTextList(workFields)}.`;
+  return `Especially involved in ${toTextList(workFields)}.`;
 };

@@ -4,9 +4,15 @@ import { getPathSections } from "./text";
 export const getPrintOptions: PagesFunction = (pathname) => {
   const sections = getPathSections(pathname);
 
-  if (sections.at(-2) === "docs") {
+  const indexOfDocs = sections.slice(0, -1).indexOf("docs");
+  if (indexOfDocs !== -1) {
+    const [docs] = sections.splice(indexOfDocs, 1);
+    const fileName = sections.pop();
+
+    // Order folders by specific-first
     sections.reverse();
-    return `${[...sections.slice(1), sections[0]].join("/")}.pdf`;
+
+    return `${[docs, ...sections, fileName].join("/")}.pdf`;
   } else if (sections.at(-1) === "pdf") {
     return `${sections.join("/")}.pdf`;
   } else return;
