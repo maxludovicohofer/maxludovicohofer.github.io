@@ -1086,5 +1086,41 @@
   "Profiling": {
     "translation": "プロファイリング",
     "api": "deepl"
+  },
+  "(": {
+    "translation": "（",
+    "api": "deepl"
+  },
+  "Keeping up to date with the latest technology and research.": {
+    "translation": "最新技術と研究に遅れずについていくこと。",
+    "api": "deepl"
+  },
+  "Passionate about cinema and arts, especially cyberpunk and cosmic horror.": {
+    "translation": "映画と芸術、特にサイバーパンクと宇宙ホラーに情熱を傾けています。",
+    "api": "deepl"
+  },
+  "Creating electronic music and worked as mixing and mastering engineer.": {
+    "translation": "電子音楽の制作とミキシング・マスタリングエンジニアとして働いていました。",
+    "api": "deepl"
+  },
+  "Made games for desktop, mobile, and online and local multiplayer. Especially involved in game design, level design, and physics systems.": {
+    "translation": "デスクトップ、モバイル、オンライン、ローカルマルチプレイヤー用のゲームを制作しました。特に、ゲームデザイン、レベルデザイン、物理システムに携わりました。",
+    "api": "deepl"
+  },
+  "Fluent in English, German, and Italian (C2). Limited professional level in\n      Japanese (N3). Basic level in Spanish and French (A2).": {
+    "translation": "英語、ドイツ語、イタリア語に堪能（C2）。\n      日本語はビジネスレベル（N3）。スペイン語とフランス語は初級レベル（A2）。",
+    "api": "deepl"
+  },
+  "Designed prototypes to challenge my skills in core mechanics, while developing systems and prototype tooling.": {
+    "translation": "システムとプロトタイプ工具の開発を行いながら、コアメカニックのスキルを試すためのプロトタイプを設計しました。",
+    "api": "deepl"
+  },
+  ")": {
+    "translation": ")",
+    "api": "deepl"
+  },
+  "Made games for desktop, mobile, and online and local multiplayer. Especially involved in AI programming and decision trees.": {
+    "translation": "デスクトップ、モバイル、オンラインおよびローカルマルチプレイヤー用のゲームを制作しました。特にAIプログラミングと決定木に携わりました。",
+    "api": "deepl"
   }
 }
