@@ -136,7 +136,7 @@
     "api": "deepl"
   },
   "I made games for desktop, mobile, and online and local multiplayer. I am especially involved in game design, level design, and physics systems.": {
-    "translation": "私は、デスクトップ、モバイル、オンライン、ローカルマルチプレイヤー用のゲームを作りました。特に、ゲームデザイン、レベルデザイン、物理システムに携わっています。",
+    "translation": "デスクトップ、モバイル、オンライン、ローカルマルチプレイヤー用のゲームを作りました。特に、ゲームデザイン、レベルデザイン、物理システムに携わっています。",
     "api": "deepl"
   },
   "I am fluent in English, German, and Italian. I'm at Japanese limited\n      professional (N3) level. I also understand French and Spanish at a basic\n      level.": {
@@ -148,7 +148,7 @@
     "api": "deepl"
   },
   "I keep up to date with the latest technology and research.": {
-    "translation": "私は最新のテクノロジーや研究に常に目を向けています。",
+    "translation": "最新のテクノロジーや研究に常に目を向けています。",
     "api": "deepl"
   },
   "Lead game designer (school)": {
@@ -280,7 +280,7 @@
     "api": "deepl"
   },
   "I made games for desktop, mobile, and online and local multiplayer. I am especially involved in AI programming and decision trees.": {
-    "translation": "私は、デスクトップ、モバイル、オンライン、ローカルマルチプレイヤー用のゲームを作りました。特に、AIプログラミングと決定木に携わっています。",
+    "translation": "デスクトップ、モバイル、オンライン、ローカルマルチプレイヤー用のゲームを作りました。特に、AIプログラミングと決定木に携わっています。",
     "api": "deepl"
   },
   "I am passionate about cinema and arts, especially cyberpunk and cosmic\n      horror.": {
@@ -360,15 +360,11 @@
     "api": "deepl"
   },
   "Play": {
-    "translation": "再生",
+    "translation": "プレイ",
     "api": "deepl"
   },
   "Published tool": {
     "translation": "公開されたツール",
-    "api": "deepl"
-  },
-  "試してみてください": {
-    "translation": "試してみてください",
     "api": "deepl"
   },
   "Other projects": {
@@ -591,10 +587,6 @@
     "translation": "2980年、待ちに待ったロボット競技会が開催されます。小型のリモコン操縦クモ型ロボットのチームが、3つの異なる生物群系の虫たちを撃退します。各ラウンドの前に、敵にはランダムなボーナスが与えられ、各クモは自分自身にボーナスを選択しなければなりません。",
     "api": "deepl"
   },
-  "再生": {
-    "translation": "再生",
-    "api": "deepl"
-  },
   "Steelsilk&#39;s main menu.": {
     "translation": "Steelsilkのメインメニューです。",
     "api": "deepl"
@@ -748,7 +740,7 @@
     "api": "deepl"
   },
   "All my projects.": {
-    "translation": "私のすべてのプロジェクト。",
+    "translation": "すべてのプロジェクト。",
     "api": "deepl"
   },
   "Link": {
@@ -1024,7 +1016,7 @@
     "api": "deepl"
   },
   "View my resume": {
-    "translation": "私の履歴書をご覧ください。",
+    "translation": "履歴書をご覧",
     "api": "deepl"
   },
   "Game design": {
@@ -1035,16 +1027,12 @@
     "translation": "マックス・ホーファーのポートフォリオとブログ。",
     "api": "deepl"
   },
-  "私の履歴書をご覧ください。": {
-    "translation": "私の履歴書をご覧ください。",
-    "api": "deepl"
-  },
   "Close up of Max Ludovico Hofer": {
     "translation": "マックス・ルドヴィコ・ホーファーのクローズアップ",
     "api": "deepl"
   },
   "I'm a technical game designer specialized in mechanics, combat, AI, and systems.": {
-    "translation": "私はメカニック、戦闘、AI、システムを専門とするテクニカルゲームデザイナーです。",
+    "translation": "メカニック、戦闘、AI、システムを専門とするテクニカルゲームデザイナーです。",
     "api": "deepl"
   },
   "<span class=\"katex\" translate=\"no\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>o</mi><mi>t</mi><mi>h</mi><mi>e</mi><mi>r</mi><mspace></mspace><mtext> </mtext><mi>n</mi><mi>e</mi><mi>e</mi><mi>d</mi><mi>s</mi></mrow><annotation encoding=\"application/x-tex\">other\\ needs</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">o</span><span class=\"mord mathnormal\">t</span><span class=\"mord mathnormal\">h</span><span class=\"mord mathnormal\" style=\"margin-right:0.02778em\">er</span><span class=\"mspace allowbreak\"></span><span class=\"mspace\" style=\"margin-right:0.1667em\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">n</span><span class=\"mord mathnormal\">ee</span><span class=\"mord mathnormal\">d</span><span class=\"mord mathnormal\">s</span></span></span></span> would be additional human cravings, such as humor, sex, movement, food, vertigo, needs of the <a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Maslow hierarchy (Homepage)\" data-umami-event-url=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\">Maslow hierarchy</a>. These are generally less explored, but are equally as valid for the concept of fun.": {
@@ -1068,7 +1056,7 @@
     "api": "deepl"
   },
   "I'm an AI programmer specialized in mechanics, combat, and systems.": {
-    "translation": "私は、メカニック、戦闘、システムを専門とするAIプログラマーです。",
+    "translation": "メカニック、戦闘、システムを専門とするAIプログラマーです。",
     "api": "deepl"
   },
   "Simulations": {
@@ -1116,11 +1104,15 @@
     "api": "deepl"
   },
   ")": {
-    "translation": ")",
+    "translation": "）",
     "api": "deepl"
   },
   "Made games for desktop, mobile, and online and local multiplayer. Especially involved in AI programming and decision trees.": {
     "translation": "デスクトップ、モバイル、オンラインおよびローカルマルチプレイヤー用のゲームを制作しました。特にAIプログラミングと決定木に携わりました。",
+    "api": "deepl"
+  },
+  "Fluent in English, German, and Italian (C2). Limited professional level\n      in Japanese (N3). Basic level in Spanish and French (A2).": {
+    "translation": "英語、ドイツ語、イタリア語に堪能（C2）。\n      日本語はビジネスレベル（N3）。スペイン語とフランス語は初級レベル（A2）。",
     "api": "deepl"
   }
 }

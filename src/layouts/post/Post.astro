@@ -126,9 +126,7 @@ const noTranslation = isLocalizedEntry(entry);
                 linkClass={buttonWidthClass}
                 translateProps={{ disable: true }}
               >
-                <Text class="group-hover:animate-pulse" importance="button">
-                  {action}
-                </Text>
+                <div class="group-hover:animate-pulse">{action}</div>
               </Button>
               {downloadLinks.length > 1 && (
                 <Text subtitle class={`-mb-4 w-full ${buttonWidthClass}`}>

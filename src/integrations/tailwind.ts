@@ -46,8 +46,8 @@ export type TextFormat =
 
 export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
   const headingsBase = [
-    "text-zinc-950 dark:text-zinc-100 print:text-cyan-700",
-    "prose-headings:text-zinc-950 prose-headings:dark:text-zinc-100 prose-headings:print:text-cyan-700",
+    "text-zinc-950 dark:text-zinc-100 print:text-cyan-700 print:break-after-avoid",
+    "prose-headings:text-zinc-950 prose-headings:dark:text-zinc-100 prose-headings:print:text-cyan-700 prose-headings:print:break-after-avoid",
   ] as const;
 
   const formats: Record<NonNullable<typeof format>, string> = {
@@ -81,8 +81,10 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
     b: { classes: "font-normal" },
     u: {},
     li: {
-      classes: "marker:text-zinc-400 dark:marker:text-zinc-500",
-      prose: "prose-li:marker:text-zinc-400 dark:prose-li:marker:text-zinc-500",
+      classes:
+        "marker:text-zinc-400 dark:marker:text-zinc-500 print:break-before-avoid",
+      prose:
+        "prose-li:marker:text-zinc-400 dark:prose-li:marker:text-zinc-500 prose-li:print:break-before-avoid",
     },
     em: {},
     h1: {

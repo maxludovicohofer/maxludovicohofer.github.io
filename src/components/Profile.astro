@@ -59,8 +59,6 @@ const profilePictureEventName = await getLinkName(Astro, ProfilePicture.src);
     href={import.meta.env.DEV ? resumePageLink : resumeLink}
     noBase
     translateProps={{ disable: true }}
-    ><Text class="group-hover:animate-pulse" importance="button"
-      >{viewResumeSentence}</Text
-    ></Button
+    ><div class="group-hover:animate-pulse">{viewResumeSentence}</div></Button
   >
 </PostPreview>
