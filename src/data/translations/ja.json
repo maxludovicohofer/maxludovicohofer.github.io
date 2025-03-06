@@ -1114,5 +1114,9 @@
   "Fluent in English, German, and Italian (C2). Limited professional level\n      in Japanese (N3). Basic level in Spanish and French (A2).": {
     "translation": "英語、ドイツ語、イタリア語に堪能（C2）。\n      日本語はビジネスレベル（N3）。スペイン語とフランス語は初級レベル（A2）。",
     "api": "deepl"
+  },
+  "Developed technological strategy with business partners.": {
+    "translation": "ビジネスパートナーと技術戦略を策定しました。",
+    "api": "deepl"
   }
 }
