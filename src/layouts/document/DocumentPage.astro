@@ -21,7 +21,9 @@ import "@fontsource-variable/noto-sans-jp";
 import "@fontsource-variable/noto-emoji";
 import "@fontsource/noto-sans-symbols-2";
 
-interface Props extends ComponentProps<typeof Document> {}
+interface Props extends ComponentProps<typeof Document> {
+  pageProps?: ComponentProps<typeof Page>;
+}
 
 // prettier-ignore
 export const mergePaths = <B extends GetStaticPathsResult,P extends GetStaticPathsResult>(
@@ -66,7 +68,7 @@ export const makeDocumentPaths =
     return paths;
   };
 
-const { entry } = Astro.props;
+const { entry, pageProps, ...props } = Astro.props;
 
 const noTranslation = isLocalizedEntry(entry);
 ---
@@ -75,9 +77,11 @@ const noTranslation = isLocalizedEntry(entry);
   title={getTitle(entry)}
   description={getDescription(entry, 2)}
   noTranslation={noTranslation}
+  {...pageProps}
   ><Document
     markdown
     class="font-['Noto_Sans_Variable','Noto_Sans_JP_Variable','Noto_Emoji_Variable','Noto_Sans_Symbols_2']"
-    {...Astro.props}><slot /></Document
+    entry={entry}
+    {...props}><slot /></Document
   ></Page
 >

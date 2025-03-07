@@ -1,0 +1,38 @@
+---
+import { getStaticPaths as getBasePaths } from "@pages/index.astro";
+import DocumentPage from "@layouts/document/DocumentPage.astro";
+import Text from "@components/ui/Text.astro";
+import ResumePicture from "@components/docs/ResumePicture.astro";
+
+export const getStaticPaths = () => getBasePaths({ allowedLocales: ["ja"] });
+---
+
+<DocumentPage pageProps={{ noTranslation: true }}>
+  <div class="grid grid-flow-col grid-cols-3">
+    <div class="col-span-2">
+      <Text title translateProps={{ disable: true }}>Title</Text>
+      <table class="border-2">
+        <thead
+          ><tr
+            ><th class="border-r-2 last:border-r-0">Hey</th><th
+              class="border-r-2 last:border-r-0">Another</th
+            ></tr
+          ></thead
+        ><tbody
+          ><tr
+            ><th class="border-r-2 last:border-r-0">Here</th><th
+              class="border-r-2 last:border-r-0">There</th
+            ></tr
+          ><tr
+            ><th class="border-r-2 last:border-r-0">Here</th><th
+              class="border-r-2 last:border-r-0">There</th
+            ></tr
+          ></tbody
+        >
+      </table>
+    </div>
+    <div class="flex items-center justify-center">
+      <ResumePicture />
+    </div>
+  </div>
+</DocumentPage>

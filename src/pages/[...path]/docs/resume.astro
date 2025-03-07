@@ -1,9 +1,7 @@
 ---
 import Text from "@components/ui/Text.astro";
-import Photo from "@images/profile-picture-straight.jpg";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
 import Link from "@components/ui/Link.astro";
-import DocumentMedia from "@document/DocumentMedia.astro";
 import { ADDRESS, PHONE_NUMBER } from "astro:env/server";
 import { capitalize } from "@integrations/text";
 import { getStaticPaths as getBasePaths } from "@pages/index.astro";
@@ -17,7 +15,8 @@ import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { i18n, setLocale } from "@integrations/i18n-server";
-import KnowHow from "@components/KnowHow.astro";
+import KnowHow from "@components/docs/ResumeKnowHow.astro";
+import ResumePicture from "@components/docs/ResumePicture.astro";
 
 export const getStaticPaths = getBasePaths;
 
@@ -46,10 +45,7 @@ const relocateSentence = await t("(open to relocate)");
 ---
 
 <DocumentPage
-  ><DocumentMedia
-    src={Photo}
-    alt="HIDDEN Portrait of Max Ludovico Hofer ASPECT 1/1 TOP"
-  /><Text tag="h1">Max Ludovico Hofer</Text><Text
+  ><ResumePicture /><Text tag="h1">Max Ludovico Hofer</Text><Text
     >{capitalize(role.id)} experienced in leadership and software, {
       specializationSentence
     }.</Text

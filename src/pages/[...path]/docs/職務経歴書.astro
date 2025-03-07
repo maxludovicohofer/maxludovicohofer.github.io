@@ -1,0 +1,8 @@
+---
+import { getStaticPaths as getBasePaths } from "@pages/index.astro";
+import DocumentPage from "@layouts/document/DocumentPage.astro";
+
+export const getStaticPaths = () => getBasePaths({ allowedLocales: ["ja"] });
+---
+
+<DocumentPage />
