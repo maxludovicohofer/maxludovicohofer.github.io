@@ -18,7 +18,7 @@ import { i18n, setLocale } from "@integrations/i18n-server";
 import KnowHow from "@components/docs/ResumeKnowHow.astro";
 import ResumePicture from "@components/docs/ResumePicture.astro";
 
-export const getStaticPaths = getBasePaths;
+export const getStaticPaths = () => getBasePaths({ excludedLocales: ["ja"] });
 
 const { role } = await getRole(Astro);
 

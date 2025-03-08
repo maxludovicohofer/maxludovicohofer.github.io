@@ -1118,5 +1118,9 @@
   "Developed technological strategy with business partners.": {
     "translation": "ビジネスパートナーと技術戦略を策定しました。",
     "api": "deepl"
+  },
+  ".": {
+    "translation": "。",
+    "api": "deepl"
   }
 }

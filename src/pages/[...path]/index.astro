@@ -11,21 +11,31 @@ import { defaultLocale, locales } from "@integrations/astro-config.mts";
 
 export const getStaticPaths = async (options?: {
   allowedLocales?: (typeof locales)[number][];
+  excludedLocales?: (typeof locales)[number][];
   allowedRoles?: string[];
+  excludedRoles?: string[];
 }) => {
   let localePaths = [undefined, ...locales.slice(1)];
   const roles = (await getCollection("roles")).map(({ id }) => makePath(id));
   let rolePaths = [undefined, ...roles.slice(1)];
 
-  if (options?.allowedLocales) {
-    localePaths = localePaths.filter((locale) =>
-      options.allowedLocales!.includes(locale ?? defaultLocale)
+  if (options?.allowedLocales || options?.excludedLocales) {
+    localePaths = localePaths.filter(
+      (locale) =>
+        (!options.allowedLocales ||
+          options.allowedLocales.includes(locale ?? defaultLocale)) &&
+        (!options.excludedLocales ||
+          !options.excludedLocales.includes(locale ?? defaultLocale))
     );
   }
 
-  if (options?.allowedRoles) {
-    rolePaths = rolePaths.filter((role) =>
-      options.allowedRoles!.includes(role ?? roles[0]!)
+  if (options?.allowedRoles || options?.excludedRoles) {
+    rolePaths = rolePaths.filter(
+      (role) =>
+        (!options.allowedRoles ||
+          options.allowedRoles.includes(role ?? roles[0]!)) &&
+        (!options.excludedRoles ||
+          !options.excludedRoles.includes(role ?? roles[0]!))
     );
   }
 

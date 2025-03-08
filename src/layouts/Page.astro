@@ -27,16 +27,17 @@ const formattedTitle = capitalize(
       ? (role.data.workFields?.[0] ?? role.id)
       : getHumanPathSection(Astro.originPathname))
 );
-
 const completeTitle = `${await t("Max Hofer")} \\ ${noTranslation ? formattedTitle : await t(formattedTitle)}`;
 
 const formattedDescription = description
   ? capitalize(description)
-  : `${formattedTitle}.`;
-
-const completeDescription = noTranslation
+  : formattedTitle;
+const translatedDescription = noTranslation
   ? formattedDescription
   : await t(formattedDescription);
+const completeDescription = description
+  ? translatedDescription
+  : `${translatedDescription}${await t(".")}`;
 
 const hasBack = !homepage;
 ---

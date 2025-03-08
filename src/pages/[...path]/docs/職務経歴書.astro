@@ -5,4 +5,4 @@ import DocumentPage from "@layouts/document/DocumentPage.astro";
 export const getStaticPaths = () => getBasePaths({ allowedLocales: ["ja"] });
 ---
 
-<DocumentPage />
+<DocumentPage pageProps={{ noTranslation: true }} />
