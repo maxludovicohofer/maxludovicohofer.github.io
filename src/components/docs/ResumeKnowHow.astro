@@ -53,6 +53,7 @@ const t = i18n(Astro);
             start,
             end,
             translateId,
+            dropOut,
           }) => {
             const translatedId = translateId ? await t(id) : id;
             const comma = `${await t(",")} `;
@@ -62,6 +63,7 @@ const t = i18n(Astro);
                 <Text tag="h3">
                   {job.id}
                   {countAsWork ? " (school)" : ""}
+                  {dropOut ? " (not graduated)" : ""}
                 </Text>
                 <Text tag="h4" subtitle translateProps={{ disable: true }}>
                   {translatedId}

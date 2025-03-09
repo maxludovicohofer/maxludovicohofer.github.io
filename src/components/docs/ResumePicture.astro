@@ -5,9 +5,15 @@ import type { ComponentProps } from "astro/types";
 
 interface Props
   extends Omit<ComponentProps<typeof DocumentMedia>, "src" | "alt"> {}
+
+const { ...props } = Astro.props;
 ---
 
 <DocumentMedia
   src={Photo}
-  alt="HIDDEN Portrait of Max Ludovico Hofer ASPECT 1/1 TOP"
+  alt="HIDDEN Portrait of Max Ludovico Hofer"
+  class="h-32"
+  top
+  aspect="1/1"
+  {...props}
 />

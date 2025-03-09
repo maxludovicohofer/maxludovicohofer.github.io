@@ -124,11 +124,11 @@
     "api": "deepl"
   },
   "Experience": {
-    "translation": "経験",
+    "translation": "職歴",
     "api": "deepl"
   },
   "Education": {
-    "translation": "教育",
+    "translation": "学歴",
     "api": "deepl"
   },
   "Skills": {
@@ -1121,6 +1121,42 @@
   },
   ".": {
     "translation": "。",
+    "api": "deepl"
+  },
+  "Current": {
+    "translation": "現在",
+    "api": "deepl"
+  },
+  "Italy": {
+    "translation": "イタリア",
+    "api": "deepl"
+  },
+  "Hofer Max Ludovico": {
+    "translation": "ホーファー マックス ルドヴィコ",
+    "api": "deepl"
+  },
+  "technical art": {
+    "translation": "テクニカルアート",
+    "api": "deepl"
+  },
+  "technical lead": {
+    "translation": "テクニカルリード",
+    "api": "deepl"
+  },
+  "user experience designer": {
+    "translation": "ユーザーエクスペリエンスデザイナー",
+    "api": "deepl"
+  },
+  "software engineering": {
+    "translation": "ソフトウェアエンジニアリング",
+    "api": "deepl"
+  },
+  "computer science": {
+    "translation": "コンピュータサイエンス",
+    "api": "deepl"
+  },
+  "full stack programmer": {
+    "translation": "フルスタックプログラマー",
     "api": "deepl"
   }
 }

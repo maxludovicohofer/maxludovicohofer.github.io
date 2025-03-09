@@ -41,6 +41,7 @@ const knowHow = defineCollection({
     start: z.date().max(maxDate).min(minDate),
     end: z.date().max(maxDate).min(minDate).optional(),
     school: z.boolean().optional(),
+    dropOut: z.boolean().optional(),
     skills: z.array(
       z.object({
         job: reference("roles"),
@@ -66,7 +67,7 @@ const docs = defineCollection({
 const posts = documents
   .extend({
     youTubeID: z.string().optional(),
-    youTubeAspectRatio: z.enum(["16/9", "16/10", "1/1"]).optional(),
+    youTubeAspectRatio: z.enum(["16/9", "16/10", "1/1", "3/4"]).optional(),
   })
   .merge(roleContent);
 

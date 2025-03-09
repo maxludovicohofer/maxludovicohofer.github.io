@@ -17,6 +17,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { i18n, setLocale } from "@integrations/i18n-server";
 import KnowHow from "@components/docs/ResumeKnowHow.astro";
 import ResumePicture from "@components/docs/ResumePicture.astro";
+import { mail } from "@components/Profile.astro";
 
 export const getStaticPaths = () => getBasePaths({ excludedLocales: ["ja"] });
 
@@ -44,8 +45,10 @@ const relocateSentence = await t("(open to relocate)");
 // TODO PHASE 2 UPDATE LINKEDIN AUTOMATICALLY
 ---
 
-<DocumentPage
-  ><ResumePicture /><Text tag="h1">Max Ludovico Hofer</Text><Text
+<DocumentPage>
+  <ResumePicture />
+  <Text tag="h1">Max Ludovico Hofer</Text>
+  <Text
     >{capitalize(role.id)} experienced in leadership and software, {
       specializationSentence
     }.</Text
@@ -58,7 +61,7 @@ const relocateSentence = await t("(open to relocate)");
       format="branded"
       translateProps={{ disable: true }}>📬</Text
     >
-    <Link href="mailto:hofermaxludovico@gmail.com" /></span
+    <Link href={`mailto:${mail}`} /></span
   >
   {
     PHONE_NUMBER && (
@@ -82,7 +85,10 @@ const relocateSentence = await t("(open to relocate)");
         {relocateSentence}
       </>
     )
-  }<KnowHow /><Text tag="h2">Skills</Text><ul class="grid grid-cols-3">
+  }
+  <KnowHow />
+  <Text tag="h2">Skills</Text>
+  <ul class="grid grid-cols-3">
     {
       tech.map(async ({ data: { id, experience } }) => {
         const techItem = `${await t(id)} ${await t("(")}${dayjs.duration(experience).humanize().replace("a ", "1 ")}${await t(")")}`;
@@ -90,22 +96,27 @@ const relocateSentence = await t("(open to relocate)");
         return <li class="pr-7 my-0.5">{techItem}</li>;
       })
     }
-  </ul><ul class="-mt-3">
+  </ul>
+  <ul class="-mt-3">
     <Text tag="li"
       >Made games for desktop, mobile, and online and local multiplayer. {
         workFieldsSentence
       }</Text
-    ><Text tag="li"
+    >
+    <Text tag="li"
       >Fluent in English, German, and Italian (C2). Limited professional level
       in Japanese (N3). Basic level in Spanish and French (A2).</Text
     >
-  </ul><Text tag="h3">Extra</Text><ul>
+  </ul>
+  <Text tag="h3">Extra</Text><ul>
     <Text tag="li"
       >Keeping up to date with the latest technology and research.</Text
-    ><Text tag="li"
+    >
+    <Text tag="li"
       >Passionate about cinema and arts, especially cyberpunk and cosmic horror.</Text
-    ><Text tag="li"
+    >
+    <Text tag="li"
       >Creating electronic music and worked as mixing and mastering engineer.</Text
     >
-  </ul></DocumentPage
->
+  </ul>
+</DocumentPage>

@@ -1,38 +1,248 @@
 ---
 import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
-import Text from "@components/ui/Text.astro";
 import ResumePicture from "@components/docs/ResumePicture.astro";
+import dayjs from "dayjs";
+import { i18n, setLocale } from "@integrations/i18n-server";
+import Text from "@components/ui/Text.astro";
+import { ADDRESS, PHONE_NUMBER } from "astro:env/server";
+import Link from "@components/ui/Link.astro";
+import { mail } from "@components/Profile.astro";
+import { getKnowHow } from "@integrations/content";
+import { capitalize } from "@integrations/text";
 
 export const getStaticPaths = () => getBasePaths({ allowedLocales: ["ja"] });
+
+await setLocale(Astro);
+
+const today = dayjs();
+const dateOfBirth = dayjs("1997-09-01");
+
+const t = i18n(Astro);
+const address = ADDRESS ? await t(ADDRESS, { noCache: true }) : undefined;
+
+const knowHow = await getKnowHow(Astro);
+const history = Object.fromEntries(
+  Object.entries(knowHow)
+    .reverse()
+    .map(([category, experiences]) => [
+      category,
+      experiences
+        .filter(
+          ({ id, skill: { countAsWork } }) =>
+            id !== "Self study" && !countAsWork
+        )
+        .flatMap((experience) => [
+          { ...experience, end: undefined },
+          { ...experience, start: undefined },
+        ])
+        .sort((a, b) => {
+          const aDate = a.end ?? a.start;
+          const bDate = b.end ?? b.start;
+          return !bDate || (aDate && bDate.isAfter(aDate)) ? -1 : 1;
+        }),
+    ])
+);
+
+const current = await t("Current");
 ---
 
 <DocumentPage pageProps={{ noTranslation: true }}>
-  <div class="grid grid-flow-col grid-cols-3">
+  <div class="grid grid-flow-col grid-cols-3 gap-4">
     <div class="col-span-2">
-      <Text title translateProps={{ disable: true }}>Title</Text>
-      <table class="border-2">
-        <thead
-          ><tr
-            ><th class="border-r-2 last:border-r-0">Hey</th><th
-              class="border-r-2 last:border-r-0">Another</th
-            ></tr
-          ></thead
-        ><tbody
-          ><tr
-            ><th class="border-r-2 last:border-r-0">Here</th><th
-              class="border-r-2 last:border-r-0">There</th
-            ></tr
-          ><tr
-            ><th class="border-r-2 last:border-r-0">Here</th><th
-              class="border-r-2 last:border-r-0">There</th
-            ></tr
-          ></tbody
-        >
+      <div class="flex items-baseline">
+        <h1 class="tracking-[1.5rem]">履歴書</h1>
+        <span class="flex-grow text-right">{today.format("ll")}現在</span>
+      </div>
+      <table class="mt-4 mb-0">
+        <tbody>
+          <tr>
+            <td colspan="100%">
+              <b class="mr-2">フリガナ</b>
+              <Text tag="span">Hofer Max Ludovico</Text>
+            </td>
+          </tr>
+          <tr>
+            <td class="py-5" colspan="100%">
+              <b class="mr-2">氏名</b>
+              <Text tag="span" translateProps={{ disable: true }}
+                >Hofer Max Ludovico</Text
+              >
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b class="mr-2">国籍</b>
+              <Text tag="span">Italy</Text>
+            </td>
+            <td
+              >{dateOfBirth.format("ll")}生（満{
+                today.diff(dateOfBirth, "years")
+              }歳）</td
+            >
+            <td class="relative w-0">
+              <b class="absolute top-0 left-1 text-xs">性別</b>
+              男
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
     <div class="flex items-center justify-center">
-      <ResumePicture />
+      <ResumePicture class="h-44" top={false} aspect="3/4" marginClass="!m-0" />
     </div>
   </div>
+  <table class="-mt-[2px]">
+    <tbody>
+      {
+        (ADDRESS || PHONE_NUMBER) && (
+          <tr>
+            {ADDRESS && (
+              <td>
+                <b class="mr-2">フリガナ</b>
+                <Link href={`https://maps.google.com/?q=${ADDRESS}`}>
+                  {address}
+                </Link>
+              </td>
+            )}
+            {PHONE_NUMBER && (
+              <td class="w-0">
+                <b class="mr-2">電話</b>
+                <Link href={`tel:${PHONE_NUMBER}`} />
+              </td>
+            )}
+          </tr>
+        )
+      }
+      <tr>
+        {
+          ADDRESS && (
+            <td>
+              <b>現住所</b>
+              <br />
+              <Link href={`https://maps.google.com/?q=${ADDRESS}`}>
+                {ADDRESS}
+              </Link>
+            </td>
+          )
+        }
+        <td>
+          <b>メール</b><br />
+          <Link href={`mailto:${mail}`} />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table>
+    <thead>
+      <tr>
+        <th class="text-center w-0">年</th>
+        <th class="text-center w-0">月</th>
+        <th class="text-center">学歴・職歴</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        Object.entries(history).map(async ([category, experiences]) => {
+          const translatedCategory = await t(capitalize(category));
+
+          return (
+            <>
+              <tr>
+                <th colspan="100%" class="text-center">
+                  {translatedCategory}
+                </th>
+              </tr>
+              {experiences.map(
+                async ({
+                  start,
+                  end,
+                  id,
+                  skill,
+                  school,
+                  translateId,
+                  dropOut,
+                }) => {
+                  const date = start ?? end;
+                  const baseSentence = `${translateId ? await t(id) : id} ${await t(skill.job.id.toLowerCase())}`;
+                  const sentence = start
+                    ? `${baseSentence} ${school ? "入学" : "入社"}`
+                    : school
+                      ? `${baseSentence} ${dropOut ? "中退" : "卒業"}`
+                      : "一身上の都合により退職";
+
+                  return (
+                    <tr>
+                      <td class="text-center">
+                        {date?.format("YYYY") ?? current}
+                      </td>
+                      <td class="text-center">
+                        {date?.format("M") ?? current}
+                      </td>
+                      <td>{sentence}</td>
+                    </tr>
+                  );
+                }
+              )}
+            </>
+          );
+        })
+      }
+      <tr>
+        <td colspan="100%" class="text-right">以上</td>
+      </tr>
+    </tbody>
+  </table>
+  <table>
+    <thead>
+      <tr>
+        <th class="text-center w-0">年</th>
+        <th class="text-center w-0">月</th>
+        <th class="text-center">免許・資格</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2024</td>
+        <td>2</td>
+        <td>特になし</td>
+      </tr>
+    </tbody>
+  </table>
+  <table>
+    <tbody>
+      <tr>
+        <td rowspan="100%" class="w-10">
+          <b>志望の動機、特技、好きな学科、アピールポイントなど</b><br />
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          Lorem Ipsum has been the industry's standard dummy text ever since the
+          1500s, when an unknown printer took a galley of type and scrambled it to
+          make a type specimen book. It has survived not only five centuries, but
+          also the leap into electronic typesetting, remaining essentially unchanged.
+          It was popularised in the 1960s with the release of Letraset sheets containing
+          Lorem Ipsum passa
+        </td>
+        <td colspan="100%">通勤時間</td>
+      </tr>
+      <tr>
+        <td colspan="100%">扶養家族数（配偶者を除く）</td>
+      </tr>
+      <tr>
+        <td>配偶者</td>
+        <td>配偶者の扶養義務</td>
+      </tr>
+    </tbody>
+  </table>
+  <table>
+    <thead>
+      <tr>
+        <th>本人希望記入欄</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>貴社規定に従います。</td>
+      </tr>
+    </tbody>
+  </table>
 </DocumentPage>

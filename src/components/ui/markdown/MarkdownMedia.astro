@@ -2,9 +2,11 @@
 import PostMedia from "@post/PostMedia.astro";
 import type { ComponentProps } from "astro/types";
 
-interface Props extends ComponentProps<typeof PostMedia> {}
+interface Props extends ComponentProps<typeof PostMedia> {
+  top?: boolean;
+}
 
-const { class: className = "", alt, ...props } = Astro.props;
+const { class: className = "", alt, top, ...props } = Astro.props;
 
 const getAttribute = (
   altText: string,
@@ -27,29 +29,28 @@ const getAttribute = (
   };
 };
 
-const { value: eager, cleanedAlt: altWithoutEager } = getAttribute(
+const { value: eagerValue, cleanedAlt: altWithoutEager } = getAttribute(
   alt,
   "EAGER",
   true
 );
 
-const { value: aspect, cleanedAlt: altWithoutAspect } = getAttribute(
-  altWithoutEager,
-  "ASPECT"
-);
+const { value: aspectValue, cleanedAlt: altWithoutAspect } =
+  props.aspect !== undefined
+    ? { value: props.aspect, cleanedAlt: altWithoutEager }
+    : getAttribute(altWithoutEager, "ASPECT");
 
-const { value: top, cleanedAlt: altWithoutTop } = getAttribute(
-  altWithoutAspect,
-  "TOP",
-  true
-);
+const { value: topValue, cleanedAlt: altWithoutTop } =
+  top !== undefined
+    ? { value: top, cleanedAlt: altWithoutAspect }
+    : getAttribute(altWithoutAspect, "TOP", true);
 ---
 
 <PostMedia
   alt={altWithoutTop}
-  class={`${className} h-[40vh] ${aspect ? "!w-auto" : ""}`}
-  marginClass={top ? "!mt-0 !mb-6" : ""}
-  loading={eager ? "eager" : undefined}
-  aspect={aspect as ComponentProps<typeof PostMedia>["aspect"]}
+  class={`${className} h-[40vh] ${aspectValue ? "!w-auto" : ""}`}
+  marginClass={topValue ? "mt-0 mb-6" : ""}
+  loading={eagerValue ? "eager" : undefined}
+  aspect={aspectValue as ComponentProps<typeof PostMedia>["aspect"]}
   {...props}
 />
