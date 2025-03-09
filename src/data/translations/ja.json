@@ -1158,5 +1158,49 @@
   "full stack programmer": {
     "translation": "フルスタックプログラマー",
     "api": "deepl"
+  },
+  "C1 english certificate with merit in all categories": {
+    "translation": "C1英語検定の全項目で優秀な成績を収めた証明書",
+    "api": "deepl"
+  },
+  "Advanced programming techniques": {
+    "translation": "高度なプログラミング技術",
+    "api": "deepl"
+  },
+  "Japanese": {
+    "translation": "日本語",
+    "api": "deepl"
+  },
+  "English": {
+    "translation": "英語",
+    "api": "deepl"
+  },
+  "Italian": {
+    "translation": "イタリア語",
+    "api": "deepl"
+  },
+  "German": {
+    "translation": "ドイツ語",
+    "api": "deepl"
+  },
+  "French": {
+    "translation": "フランス語",
+    "api": "deepl"
+  },
+  "everyday": {
+    "translation": "日常会話",
+    "api": "deepl"
+  },
+  "native": {
+    "translation": "ネイティブ",
+    "api": "deepl"
+  },
+  "fluent": {
+    "translation": "流暢",
+    "api": "deepl"
+  },
+  "Spanish": {
+    "translation": "スペイン語",
+    "api": "deepl"
   }
 }

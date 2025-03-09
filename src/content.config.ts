@@ -53,6 +53,25 @@ const knowHow = defineCollection({
   }),
 });
 
+const certifications = defineCollection({
+  loader: file("src/data/certifications.yaml"),
+  schema: fileSchema.extend({
+    institution: z.string(),
+    date: z.date().max(maxDate).min(minDate),
+    content: reference("projects").optional(),
+    translateInstitution: z.boolean().optional(),
+    type: z.enum(["award"]).optional(),
+  }),
+});
+
+const languages = defineCollection({
+  loader: file("src/data/languages.yaml"),
+  schema: fileSchema.extend({
+    code: z.string(),
+    level: z.enum(["native", "fluent", "business", "everyday"]),
+  }),
+});
+
 const documents = z.object({
   title: z.string().optional(),
   draft: z.boolean().optional(),
@@ -106,6 +125,8 @@ export const collections = {
   roles,
   tech,
   ["know-how"]: knowHow,
+  certifications,
+  languages,
   docs,
   projects,
   thoughts,

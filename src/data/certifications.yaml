@@ -1,0 +1,26 @@
+- id: Game of The Year - People's choice award
+  date: 2024-08-01
+  institution: The Rookies
+  content: Steelsilk Championship
+  type: award
+
+- id: Advanced programming techniques
+  date: 2015-01-01
+  institution: High school
+  translateInstitution: true
+
+- id: 24th place at the national team programming competition
+  date: 2015-01-01
+  institution: High school
+  translateInstitution: true
+  type: award
+
+- id: C1 english certificate with merit in all categories
+  date: 2015-01-01
+  institution: Trinity College London
+
+- id: 1st place at the school solo programming competition
+  date: 2014-01-01
+  institution: High school
+  translateInstitution: true
+  type: award

@@ -8,7 +8,11 @@ import Text from "@components/ui/Text.astro";
 import { ADDRESS, PHONE_NUMBER } from "astro:env/server";
 import Link from "@components/ui/Link.astro";
 import { mail } from "@components/Profile.astro";
-import { getKnowHow } from "@integrations/content";
+import {
+  getKnowHow,
+  getCertifications,
+  getLanguages,
+} from "@integrations/content";
 import { capitalize } from "@integrations/text";
 
 export const getStaticPaths = () => getBasePaths({ allowedLocales: ["ja"] });
@@ -45,14 +49,24 @@ const history = Object.fromEntries(
 );
 
 const current = await t("Current");
+
+const qualifications = (await getCertifications()).filter(
+  ({ type }) => type !== "award"
+);
+
+const languages = await getLanguages(Astro);
+
+// TODO FILL MOTIVATION
+// TODO ALSO USE LANGUAGES DATA IN NORMAL RESUME
+// TODO WORK HISTORY DOCUMENT
 ---
 
 <DocumentPage pageProps={{ noTranslation: true }}>
   <div class="grid grid-flow-col grid-cols-3 gap-4">
     <div class="col-span-2">
-      <div class="flex items-baseline">
+      <div class="flex items-baseline justify-between">
         <h1 class="tracking-[1.5rem]">履歴書</h1>
-        <span class="flex-grow text-right">{today.format("ll")}現在</span>
+        <span>{today.format("ll")}現在</span>
       </div>
       <table class="mt-4 mb-0">
         <tbody>
@@ -89,7 +103,12 @@ const current = await t("Current");
       </table>
     </div>
     <div class="flex items-center justify-center">
-      <ResumePicture class="h-44" top={false} aspect="3/4" marginClass="!m-0" />
+      <ResumePicture
+        class="!h-44 rounded-none"
+        top={false}
+        aspect="3/4"
+        marginClass="!m-0"
+      />
     </div>
   </div>
   <table class="-mt-[2px]">
@@ -202,34 +221,87 @@ const current = await t("Current");
       </tr>
     </thead>
     <tbody>
+      {
+        qualifications.map(
+          async ({ date, id, institution, translateInstitution }) => (
+            <tr>
+              <td class="text-center">{date.format("YYYY")}</td>
+              <td class="text-center">{date.format("M")}</td>
+              <td>
+                {await t(id)}
+                {await t("(")}
+                {translateInstitution ? await t(institution) : institution}
+                {await t(")")}
+              </td>
+            </tr>
+          )
+        )
+      }
       <tr>
-        <td>2024</td>
-        <td>2</td>
-        <td>特になし</td>
+        <td colspan="100%" class="text-right">以上</td>
       </tr>
     </tbody>
   </table>
   <table>
     <tbody>
       <tr>
-        <td rowspan="100%" class="w-10">
+        <td rowspan="100%">
           <b>志望の動機、特技、好きな学科、アピールポイントなど</b><br />
           Lorem Ipsum is simply dummy text of the printing and typesetting industry.
           Lorem Ipsum has been the industry's standard dummy text ever since the
           1500s, when an unknown printer took a galley of type and scrambled it to
-          make a type specimen book. It has survived not only five centuries, but
-          also the leap into electronic typesetting, remaining essentially unchanged.
-          It was popularised in the 1960s with the release of Letraset sheets containing
-          Lorem Ipsum passa
+          make a type specimen book.
         </td>
-        <td colspan="100%">通勤時間</td>
+        <td class="relative" colspan="100%">
+          <b>通勤時間</b>
+          <div class="flex flex-col items-center my-2 gap-2">
+            <div class="h-6"></div>
+            <div class="flex gap-12">
+              <span>約</span><span>時間</span><span>分</span>
+            </div>
+          </div>
+        </td>
       </tr>
       <tr>
-        <td colspan="100%">扶養家族数（配偶者を除く）</td>
+        <td colspan="100%">
+          <b>扶養家族数（配偶者を除く）</b>
+          <div class="text-center">0</div>
+          <div class="text-end">人</div>
+        </td>
+        <tr>
+          <td class="w-32">
+            <b>配偶者</b>
+            <div class="text-center">無</div>
+          </td>
+          <td class="w-44">
+            <b>配偶者の扶養義務</b>
+            <div class="text-center">無</div>
+          </td>
+        </tr>
       </tr>
+    </tbody>
+  </table>
+  <table>
+    <thead>
       <tr>
-        <td>配偶者</td>
-        <td>配偶者の扶養義務</td>
+        <th>語学レベル</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        languages.map(async ({ id, level }) => (
+          <tr>
+            <td>
+              {await t(id)}
+              {await t("(")}
+              {await t(level)}
+              {await t(")")}
+            </td>
+          </tr>
+        ))
+      }
+      <tr>
+        <td colspan="100%" class="text-right">以上</td>
       </tr>
     </tbody>
   </table>

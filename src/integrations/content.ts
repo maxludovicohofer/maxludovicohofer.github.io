@@ -17,6 +17,7 @@ import { VALID_INPUT_FORMATS } from "node_modules/astro/dist/assets/consts";
 import { groupBy } from "./array";
 import { applyMatch, matchRoles } from "./astro-server";
 import type { AstroGlobal } from "astro";
+import { getCurrentLocale } from "./i18n-server";
 
 export type PostCollectionKey = Extract<CollectionKey, "projects" | "thoughts">;
 
@@ -202,4 +203,28 @@ export const getKnowHow = async (astro: AstroGlobal) => {
     ...(experience ? { experience } : {}),
     ...(education ? { education } : {}),
   };
+};
+
+export const getCertifications = async () => {
+  const certifications = (await getCollection("certifications")).map(
+    ({ data: { date, ...data } }) => ({ date: dayjs(date), ...data })
+  );
+
+  // Sort by date
+  certifications.sort((a, b) => (b.date.isAfter(a.date) ? 1 : -1));
+
+  return certifications;
+};
+
+export const getLanguages = async (astro: AstroGlobal) => {
+  const languages = (await getCollection("languages")).map(({ data }) => data);
+
+  const locale = getCurrentLocale(astro);
+
+  // Sort by currentLocale
+  languages.sort((a) =>
+    a.code.startsWith(locale) || locale.startsWith(a.code) ? -1 : 1
+  );
+
+  return languages;
 };

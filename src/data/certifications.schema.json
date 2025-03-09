@@ -1,0 +1,11 @@
+{
+  "$ref": "#/definitions/certifications",
+  "definitions": {
+    "certifications": {
+      "type": "array",
+      "items": {
+        "$ref": "../../.astro/collections/certifications.schema.json"
+      }
+    }
+  }
+}

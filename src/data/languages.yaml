@@ -1,0 +1,23 @@
+- id: English
+  code: en
+  level: native
+
+- id: Italian
+  code: it
+  level: native
+
+- id: German
+  code: de
+  level: fluent
+
+- id: Japanese
+  code: ja
+  level: everyday
+
+- id: French
+  code: fr
+  level: everyday
+
+- id: Spanish
+  code: es
+  level: everyday
