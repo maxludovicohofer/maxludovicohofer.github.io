@@ -1234,5 +1234,13 @@
   "I value attention to detail, embrace cutting-edge technologies, and enjoy fostering collaboration to achieve excellent results. Currently transitioning from software engineering to videogame AI programming, which is my lifelong passion.": {
     "translation": "私は細部へのこだわりを大切にし、最先端の技術を取り入れ、優れた成果を達成するためのコラボレーションを育むことを楽しんでいます。現在、ソフトウェアエンジニアリングからビデオゲームAIプログラミングへと移行中であり、これは私の生涯の情熱です。",
     "api": "deepl"
+  },
+  "I&#39;m a technical game designer specialized in mechanics, combat, AI, and systems.": {
+    "translation": "私はメカニック、戦闘、AI、システムを専門とするテクニカルゲームデザイナーです。",
+    "api": "deepl"
+  },
+  "I&#39;m an AI programmer specialized in mechanics, combat, and systems.": {
+    "translation": "私はメカニック、戦闘、システムに特化したAIプログラマーです。",
+    "api": "deepl"
   }
 }
