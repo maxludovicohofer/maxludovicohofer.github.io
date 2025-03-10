@@ -42,6 +42,7 @@ const knowHow = defineCollection({
     end: z.date().max(maxDate).min(minDate).optional(),
     school: z.boolean().optional(),
     dropOut: z.boolean().optional(),
+    reasonForLeaving: z.string().optional(),
     skills: z.array(
       z.object({
         job: reference("roles"),

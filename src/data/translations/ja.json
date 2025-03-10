@@ -1202,5 +1202,25 @@
   "Spanish": {
     "translation": "スペイン語",
     "api": "deepl"
+  },
+  "Left company for personal reasons": {
+    "translation": "一身上の都合により退職",
+    "api": "deepl"
+  },
+  "Left company to pursue career change": {
+    "translation": "キャリアチェンジのため退職",
+    "api": "deepl"
+  },
+  "I will comply with company regulations": {
+    "translation": "貴社規定に従います",
+    "api": "deepl"
+  },
+  "I am deeply inspired by your innovative game design and would be honored to contribute to your team. I value attention to detail, embrace cutting-edge technologies, and enjoy fostering collaboration to achieve excellent results. Currently transitioning from software engineering to game design, which is my lifelong passion.": {
+    "translation": "貴社の革新的なゲームデザインに深く感銘を受け、貴社チームに貢献できることを光栄に思います。細部へのこだわりを大切にし、最先端の技術を取り入れ、優れた成果を達成するためのコラボレーションを育むことを楽しんでいます。現在、ソフトウェアエンジニアリングからゲームデザインへと転向しており、ゲームデザインは私の生涯の情熱です。",
+    "api": "deepl"
+  },
+  "I am deeply inspired by your innovative AI programming and would be honored to contribute to your team. I value attention to detail, embrace cutting-edge technologies, and enjoy fostering collaboration to achieve excellent results. Currently transitioning from software engineering to videogame AI programming, which is my lifelong passion.": {
+    "translation": "貴社の革新的なAIプログラミングに深く感銘を受け、貴社チームに貢献できることを光栄に思います。細部へのこだわりを大切にし、最先端の技術を取り入れ、優れた成果を達成するためのコラボレーションを促進することを楽しんでいます。現在、ソフトウェアエンジニアリングからビデオゲームAIプログラミングへと移行しており、これは私の生涯の情熱です。",
+    "api": "deepl"
   }
 }

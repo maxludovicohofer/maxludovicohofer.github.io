@@ -20,6 +20,7 @@
 - id: INattivo Soc. Cons. a.r.l.
   start: 2021-05-01
   end: 2022-03-01
+  reasonForLeaving: Left company to pursue career change
   skills:
     - job: Project manager
       achievements:

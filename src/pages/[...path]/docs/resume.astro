@@ -3,7 +3,7 @@ import Text from "@components/ui/Text.astro";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
 import Link from "@components/ui/Link.astro";
 import { ADDRESS, PHONE_NUMBER } from "astro:env/server";
-import { capitalize } from "@integrations/text";
+import { capitalize, toTextList } from "@integrations/text";
 import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 import { addBaseToLink, getRole } from "@integrations/astro-server";
 import {
@@ -15,9 +15,11 @@ import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { i18n, setLocale } from "@integrations/i18n-server";
-import KnowHow from "@components/docs/ResumeKnowHow.astro";
+import ResumeKnowHow from "@components/docs/ResumeKnowHow.astro";
 import ResumePicture from "@components/docs/ResumePicture.astro";
 import { mail } from "@components/Profile.astro";
+import { getLanguages } from "@integrations/content";
+import { groupBy } from "@integrations/array";
 
 export const getStaticPaths = () => getBasePaths({ excludedLocales: ["ja"] });
 
@@ -41,6 +43,8 @@ const address = ADDRESS ? await t(ADDRESS, { noCache: true }) : undefined;
 
 const portfolioSentence = await t("Portfolio");
 const relocateSentence = await t("(open to relocate)");
+
+const languages = groupBy(await getLanguages(Astro), ({ level }) => level);
 
 // TODO PHASE 2 UPDATE LINKEDIN AUTOMATICALLY
 ---
@@ -86,7 +90,7 @@ const relocateSentence = await t("(open to relocate)");
       </>
     )
   }
-  <KnowHow />
+  <ResumeKnowHow />
   <Text tag="h2">Skills</Text>
   <ul class="grid grid-cols-3">
     {
@@ -104,8 +108,12 @@ const relocateSentence = await t("(open to relocate)");
       }</Text
     >
     <Text tag="li"
-      >Fluent in English, German, and Italian (C2). Limited professional level
-      in Japanese (N3). Basic level in Spanish and French (A2).</Text
+      >{
+        Object.entries(languages).map(
+          async ([level, languages]) =>
+            `${await t(capitalize(level))} ${await t("in")} ${await t(toTextList(languages.map(({ id }) => id)))}${await t(".")} `
+        )
+      }</Text
     >
   </ul>
   <Text tag="h3">Extra</Text><ul>

@@ -4,29 +4,53 @@ import { toTextList } from "./text";
 import { getCollection } from "astro:content";
 
 export const getSpecializationSentence = async (astro: AstroGlobal) => {
-  const { role } = await getRole(astro);
+  const {
+    role: {
+      data: { id, specializations },
+    },
+  } = await getRole(astro);
 
-  const specializations =
-    role.data.specializations ??
-    (await getCollection("roles"))[0]?.data.specializations;
+  const resolvedSpecializations =
+    specializations ?? (await getCollection("roles"))[0]?.data.specializations;
 
-  return specializations
+  return resolvedSpecializations
     ? `specialized in ${toTextList(
-        specializations.filter(
+        resolvedSpecializations.filter(
           (specialization) =>
-            role.id.search(new RegExp(`\\b${specialization}\\b`)) === -1
+            id.search(new RegExp(`\\b${specialization}\\b`)) === -1
         )
       )}`
     : "";
 };
 
 export const getWorkFieldsSentence = async (astro: AstroGlobal) => {
-  const { role } = await getRole(astro);
+  const {
+    role: {
+      data: { workFields },
+    },
+  } = await getRole(astro);
 
-  const workFields =
-    role.data.workFields ?? (await getCollection("roles"))[0]?.data.workFields;
+  const resolvedWorkFields =
+    workFields ?? (await getCollection("roles"))[0]?.data.workFields;
 
-  if (!workFields) return "";
+  if (!resolvedWorkFields) return "";
 
-  return `Especially involved in ${toTextList(workFields)}.`;
+  return `Especially involved in ${toTextList(resolvedWorkFields)}.`;
+};
+
+export const getMotivationSentence = async (astro: AstroGlobal) => {
+  const {
+    role: {
+      data: { workFields },
+    },
+  } = await getRole(astro);
+
+  const mainWorkField = (workFields ??
+    (await getCollection("roles"))[0]?.data.workFields)?.[0];
+
+  if (!mainWorkField) return "";
+
+  return `I am deeply inspired by your innovative ${mainWorkField} and would be honored to contribute to your team. I value attention to detail, embrace cutting-edge technologies, and enjoy fostering collaboration to achieve excellent results. Currently transitioning from software engineering to ${
+    mainWorkField.includes("game") ? "" : "videogame "
+  }${mainWorkField}, which is my lifelong passion.`;
 };

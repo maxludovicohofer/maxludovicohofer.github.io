@@ -109,7 +109,7 @@ export const highlightCharacter = (
   index: number,
   charactersAfter: number = 0
 ) =>
-  `${text.slice(0, index)}❌${text[index] ?? ""}❌${text.slice(
+  `${text.slice(0, index)}➡️${text[index] ?? ""}⬅️${text.slice(
     index + 1,
     charactersAfter ? index + charactersAfter : undefined
   )}`;

@@ -14,6 +14,7 @@ import {
   getLanguages,
 } from "@integrations/content";
 import { capitalize } from "@integrations/text";
+import { getMotivationSentence } from "@integrations/docs";
 
 export const getStaticPaths = () => getBasePaths({ allowedLocales: ["ja"] });
 
@@ -56,9 +57,11 @@ const qualifications = (await getCertifications()).filter(
 
 const languages = await getLanguages(Astro);
 
-// TODO FILL MOTIVATION
-// TODO ALSO USE LANGUAGES DATA IN NORMAL RESUME
 // TODO WORK HISTORY DOCUMENT
+
+const complySentence = await t("I will comply with company regulations");
+
+const motivationSentence = await t(await getMotivationSentence(Astro));
 ---
 
 <DocumentPage pageProps={{ noTranslation: true }}>
@@ -170,9 +173,7 @@ const languages = await getLanguages(Astro);
               <tr>
                 <th />
                 <th />
-                <th class="text-center">
-                  {translatedCategory}
-                </th>
+                <th class="text-center">{translatedCategory}</th>
               </tr>
               {experiences.map(
                 async ({
@@ -183,6 +184,7 @@ const languages = await getLanguages(Astro);
                   school,
                   translateId,
                   dropOut,
+                  reasonForLeaving,
                 }) => {
                   const date = start ?? end;
                   const baseSentence = `${translateId ? await t(id) : id} ${await t(skill.job.id.toLowerCase())}`;
@@ -190,7 +192,9 @@ const languages = await getLanguages(Astro);
                     ? `${baseSentence} ${school ? "入学" : "入社"}`
                     : school
                       ? `${baseSentence} ${dropOut ? "中退" : "卒業"}`
-                      : "一身上の都合により退職";
+                      : reasonForLeaving
+                        ? await t(reasonForLeaving)
+                        : await t("Left company for personal reasons");
 
                   return (
                     <tr>
@@ -210,6 +214,8 @@ const languages = await getLanguages(Astro);
         })
       }
       <tr>
+        <td></td>
+        <td></td>
         <td colspan="100%" class="text-right">以上</td>
       </tr>
     </tbody>
@@ -239,9 +245,6 @@ const languages = await getLanguages(Astro);
           )
         )
       }
-      <tr>
-        <td colspan="100%" class="text-right">以上</td>
-      </tr>
     </tbody>
   </table>
   <table>
@@ -249,10 +252,7 @@ const languages = await getLanguages(Astro);
       <tr>
         <td rowspan="100%">
           <b>志望の動機、特技、好きな学科、アピールポイントなど</b><br />
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          Lorem Ipsum has been the industry's standard dummy text ever since the
-          1500s, when an unknown printer took a galley of type and scrambled it to
-          make a type specimen book.
+          {motivationSentence}
         </td>
         <td class="relative" colspan="100%">
           <b>通勤時間</b>
@@ -302,9 +302,6 @@ const languages = await getLanguages(Astro);
           </tr>
         ))
       }
-      <tr>
-        <td colspan="100%" class="text-right">以上</td>
-      </tr>
     </tbody>
   </table>
   <table>
@@ -315,7 +312,7 @@ const languages = await getLanguages(Astro);
     </thead>
     <tbody>
       <tr>
-        <td>貴社規定に従います。</td>
+        <td>{complySentence}</td>
       </tr>
     </tbody>
   </table>
