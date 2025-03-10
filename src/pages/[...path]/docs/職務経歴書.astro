@@ -1,8 +1,98 @@
 ---
 import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
+import { setLocale } from "@integrations/i18n-server";
+import dayjs from "dayjs";
+// import { getKnowHow } from "@integrations/content";
 
 export const getStaticPaths = () => getBasePaths({ allowedLocales: ["ja"] });
+
+await setLocale(Astro);
+
+const today = dayjs();
+
+// const t = i18n(Astro);
+
+// const knowHow = await getKnowHow(Astro);
 ---
 
-<DocumentPage pageProps={{ noTranslation: true }} />
+<DocumentPage pageProps={{ noTranslation: true }}>
+  <div class="flex items-baseline justify-between">
+    <h1 class="tracking-[1.5rem]">職務経歴書</h1>
+    {today.format("ll")}<br />
+    陸波 玉夫（氏名）
+  </div>
+  <h2>■職務要約</h2>
+  <p>
+    主にコーポレートサイトやキャンペーンサイトの製作に携わってきました。効果を高め、納期まで滞り
+    のないディレクションを行うことを意識しています。また、自ら知識を深めるべくHTML5やCSSの勉
+    強も行っております。
+  </p>
+  <h2>■活かせる経験・知識・技術</h2>
+  <h3>【得意分野】</h3>
+  <ul>
+    <li>大規模サイトにおけるWebプロデュース＆ディレクション</li>
+    <li>Webだけでなく他メディア展開も含めたプロモーションプランニング</li>
+  </ul>
+  <h3>【使用可能ツール】</h3>
+  <ul>
+    <li>PowerPoint、Illustrator、Photoshop</li>
+    <li>HTML、CSS</li>
+  </ul>
+  <h2>■職務経歴詳細</h2>
+  <p>
+    20xx年1月～ 現在、転職活動中<br />
+    20xx年4月～20xx年12月 〇〇〇〇株式会社 **部****チーム
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th class="text-center">期間</th>
+        <th class="text-center">業務内容</th>
+        <th class="text-center">環境</th>
+        <th class="text-center">役割／規模</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>20xx年4月～20xx年12月</td>
+        <td>
+          国内系保険会社コーポレートサイトリニューアル<br /><br />
+          [概要] 3年ぶりの全面リニューアル<br />
+          http://（URL).co.jp<br /><br />
+          [担当業務] 予算管理、クライアント折衝、企画書 作成、プレゼンテーション、コンセプトメイク、全
+          体の進捗管理<br /><br />
+          [ポイント]
+          <ul>
+            <li>初の大規模リニューアル案件をコンペ受注</li>
+            <li>自社内で更新可能のCMS構築（Wordpress）も提案</li>
+            <li>プロデューサーとしての実績が認められ社長賞を獲得</li>
+          </ul>
+        </td>
+        <td>
+          JavaScript<br />
+          Perl<br />
+          PHP<br />
+          Wordpress<br /><br />
+          [使用ツール]<br />
+          PowerPoint
+        </td>
+        <td>
+          [規模]<br />
+          50名（うち外注スタッフ5名） <br /><br />
+          [役職]<br />
+          プロデューサー
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <h2>■自己PR</h2>
+  <p>
+    目標実現を意識したサイトデザインを心がけ、プロデューサーとしてクライアントと制作スタッフの要
+    望の調整を行ってまいりました。常に目標と認識の確認を行い、プロジェクトメンバー全員が最新情報
+    と当事者意識を持ち、一丸となってプロジェクトを進行させることを心がけました。その結果、担当プ
+    ロジェクトの目標はすべて達成し、納期も遅れることはありませんでした。
+    今後も、クライアントとメンバー双方が満足できるプロジェクト管理者を目指したいと考えています。
+  </p>
+  <p class="text-right">以上</p>
+</DocumentPage>

@@ -57,8 +57,6 @@ const qualifications = (await getCertifications()).filter(
 
 const languages = await getLanguages(Astro);
 
-// TODO WORK HISTORY DOCUMENT
-
 const complySentence = await t("I will comply with company regulations");
 
 const motivationSentence = await t(await getMotivationSentence(Astro));
@@ -69,7 +67,7 @@ const motivationSentence = await t(await getMotivationSentence(Astro));
     <div class="col-span-2">
       <div class="flex items-baseline justify-between">
         <h1 class="tracking-[1.5rem]">履歴書</h1>
-        <span>{today.format("ll")}現在</span>
+        {today.format("ll")}現在
       </div>
       <table class="mt-4 mb-0">
         <tbody>

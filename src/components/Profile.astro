@@ -21,21 +21,33 @@ export const mail = "hofermaxludovico@gmail.com";
 const t = i18n(Astro);
 const { role } = await getRole(Astro);
 
-const resumePageLink = await addBaseToLink(
-  Astro,
-  `docs/${getCurrentLocale(Astro) === "ja" ? "履歴書" : "resume"}`
+const viewResumeSentence = await t("View my resume");
+const viewWorkHistorySentence = await t("View my work history");
+
+const documentPageLinks = await Promise.all(
+  (getCurrentLocale(Astro) === "ja"
+    ? [
+        { path: "docs/履歴書", button: viewResumeSentence },
+        { path: "docs/職務経歴書", button: viewWorkHistorySentence },
+      ]
+    : [{ path: "docs/resume", button: viewResumeSentence }]
+  ).map(async ({ path, ...link }) => ({
+    path: await addBaseToLink(Astro, path),
+    ...link,
+  }))
 );
-const resumeLink = `/${getPrintPath(resumePageLink)}`;
+const documentLinks = documentPageLinks.map(({ path, ...link }) => ({
+  path: `/${getPrintPath(path)}`,
+  ...link,
+}));
 
 const specializationSentence = await getSpecializationSentence(Astro);
-
-const viewResumeSentence = await t("View my resume");
 
 const profilePictureEventName = await getLinkName(Astro, ProfilePicture.src);
 ---
 
-<PostPreview {...Astro.props}
-  ><div slot="header" class="flex items-center gap-x-4 mb-6">
+<PostPreview {...Astro.props}>
+  <div slot="header" class="flex items-center gap-x-4 mb-6">
     <Fullscreenable
       class="!max-w-14 2xl:!max-w-20 !rounded-full hover:scale-125"
       noAnimation
@@ -46,7 +58,8 @@ const profilePictureEventName = await getLinkName(Astro, ProfilePicture.src);
         alt="Close up of Max Ludovico Hofer"
         loading="eager"
       /></Fullscreenable
-    ><div>
+    >
+    <div>
       <Text tag="h3">Max Ludovico Hofer</Text><div
         class="flex items-center gap-0.5 -ml-0.5 2xl:-ml-1"
       >
@@ -57,13 +70,23 @@ const profilePictureEventName = await getLinkName(Astro, ProfilePicture.src);
         >
       </div>
     </div>
-  </div>I'm {role.data.withArticle}{" "}
-  {specializationSentence}.<Button
-    slot="footer"
-    class="mt-2"
-    href={import.meta.env.DEV ? resumePageLink : resumeLink}
-    noBase
-    translateProps={{ disable: true }}
-    ><div class="group-hover:animate-pulse">{viewResumeSentence}</div></Button
-  >
+  </div>
+  I'm {role.data.withArticle}{" "}
+  {specializationSentence}.
+  <div slot="footer" class="flex mt-2">
+    {
+      (import.meta.env.DEV ? documentPageLinks : documentLinks).map(
+        ({ path, button }, index, array) => (
+          <Button
+            href={path}
+            noBase
+            class={`${index === 0 ? "" : "rounded-l-none hover:rounded-l-xl h-full"} ${index === array.length - 1 ? "" : "rounded-r-none hover:rounded-r-xl h-full"}`}
+            translateProps={{ disable: true }}
+          >
+            <div class="group-hover:animate-pulse">{button}</div>
+          </Button>
+        )
+      )
+    }
+  </div>
 </PostPreview>

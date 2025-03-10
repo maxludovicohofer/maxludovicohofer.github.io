@@ -2,6 +2,7 @@ import type { AstroGlobal } from "astro";
 import { getRole } from "./astro-server";
 import { toTextList } from "./text";
 import { getCollection } from "astro:content";
+import { PHONE_NUMBER } from "astro:env/server";
 
 export const getSpecializationSentence = async (astro: AstroGlobal) => {
   const {
@@ -50,7 +51,12 @@ export const getMotivationSentence = async (astro: AstroGlobal) => {
 
   if (!mainWorkField) return "";
 
-  return `I am deeply inspired by your innovative ${mainWorkField} and would be honored to contribute to your team. I value attention to detail, embrace cutting-edge technologies, and enjoy fostering collaboration to achieve excellent results. Currently transitioning from software engineering to ${
+  // Do not include company motivation if public
+  return `${
+    PHONE_NUMBER
+      ? `I am deeply inspired by your innovative ${mainWorkField} and would be honored to contribute to your team. `
+      : ""
+  }I value attention to detail, embrace cutting-edge technologies, and enjoy fostering collaboration to achieve excellent results. Currently transitioning from software engineering to ${
     mainWorkField.includes("game") ? "" : "videogame "
   }${mainWorkField}, which is my lifelong passion.`;
 };
