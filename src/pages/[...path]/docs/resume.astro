@@ -5,11 +5,8 @@ import Link from "@components/ui/Link.astro";
 import { ADDRESS, PHONE_NUMBER } from "astro:env/server";
 import { capitalize, toTextList } from "@integrations/text";
 import { getStaticPaths as getBasePaths } from "@pages/index.astro";
-import { addBaseToLink, getRole } from "@integrations/astro-server";
-import {
-  getSpecializationSentence,
-  getWorkFieldsSentence,
-} from "@integrations/docs";
+import { addBaseToLink } from "@integrations/astro-server";
+import { getSummary, getWorkFieldsSentence } from "@integrations/docs";
 import { getTech } from "@components/TechList.astro";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
@@ -23,12 +20,8 @@ import { groupBy } from "@integrations/array";
 
 export const getStaticPaths = () => getBasePaths({ excludedLocales: ["ja"] });
 
-const { role } = await getRole(Astro);
-
 const portfolioVersion = await addBaseToLink(Astro);
 const portfolioLink = `${import.meta.env.SITE}${portfolioVersion === "/" ? "" : portfolioVersion}`;
-
-const specializationSentence = await getSpecializationSentence(Astro);
 
 const workFieldsSentence = await getWorkFieldsSentence(Astro);
 
@@ -46,17 +39,15 @@ const relocateSentence = await t("(open to relocate)");
 
 const languages = groupBy(await getLanguages(Astro), ({ level }) => level);
 
+const summary = await getSummary(Astro);
+
 // TODO PHASE 2 UPDATE LINKEDIN AUTOMATICALLY
 ---
 
 <DocumentPage>
   <ResumePicture />
   <Text tag="h1">Max Ludovico Hofer</Text>
-  <Text
-    >{capitalize(role.id)} experienced in leadership and software, {
-      specializationSentence
-    }.</Text
-  ><span
+  <Text>{summary}</Text><span
     ><Text tag="span" format="branded" translateProps={{ disable: true }}
       >👜</Text
     >

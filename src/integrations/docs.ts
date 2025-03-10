@@ -1,28 +1,8 @@
 import type { AstroGlobal } from "astro";
 import { getRole } from "./astro-server";
-import { toTextList } from "./text";
+import { capitalize, toTextList } from "./text";
 import { getCollection } from "astro:content";
 import { PHONE_NUMBER } from "astro:env/server";
-
-export const getSpecializationSentence = async (astro: AstroGlobal) => {
-  const {
-    role: {
-      data: { id, specializations },
-    },
-  } = await getRole(astro);
-
-  const resolvedSpecializations =
-    specializations ?? (await getCollection("roles"))[0]?.data.specializations;
-
-  return resolvedSpecializations
-    ? `specialized in ${toTextList(
-        resolvedSpecializations.filter(
-          (specialization) =>
-            id.search(new RegExp(`\\b${specialization}\\b`)) === -1
-        )
-      )}`
-    : "";
-};
 
 export const getWorkFieldsSentence = async (astro: AstroGlobal) => {
   const {
@@ -59,4 +39,34 @@ export const getMotivationSentence = async (astro: AstroGlobal) => {
   }I value attention to detail, embrace cutting-edge technologies, and enjoy fostering collaboration to achieve excellent results. Currently transitioning from software engineering to ${
     mainWorkField.includes("game") ? "" : "videogame "
   }${mainWorkField}, which is my lifelong passion.`;
+};
+
+export const getSummary = async (astro: AstroGlobal, short?: boolean) => {
+  const {
+    role: {
+      data: { id, withArticle, specializations },
+    },
+  } = await getRole(astro);
+
+  const resolvedSpecializations =
+    specializations ?? (await getCollection("roles"))[0]?.data.specializations;
+
+  const specializationSentence = resolvedSpecializations
+    ? `specialized in ${toTextList(
+        resolvedSpecializations.filter(
+          (specialization) =>
+            id.search(new RegExp(`\\b${specialization}\\b`)) === -1
+        )
+      )}`
+    : "";
+
+  return `${
+    short
+      ? `I'm ${withArticle}`
+      : `${capitalize(id)} experienced in leadership and software`
+  }${
+    specializationSentence
+      ? `${short ? "" : ","} ${specializationSentence}`
+      : ""
+  }.`;
 };

@@ -1,8 +1,10 @@
 ---
 import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
-import { setLocale } from "@integrations/i18n-server";
+import { i18n, setLocale } from "@integrations/i18n-server";
 import dayjs from "dayjs";
+import { getSummary } from "@integrations/docs";
+import Text from "@components/ui/Text.astro";
 // import { getKnowHow } from "@integrations/content";
 
 export const getStaticPaths = () => getBasePaths({ allowedLocales: ["ja"] });
@@ -11,23 +13,22 @@ await setLocale(Astro);
 
 const today = dayjs();
 
-// const t = i18n(Astro);
+const t = i18n(Astro);
 
 // const knowHow = await getKnowHow(Astro);
+
+const name = await t("Hofer Max Ludovico");
+const summary = await getSummary(Astro);
 ---
 
 <DocumentPage pageProps={{ noTranslation: true }}>
-  <div class="flex items-baseline justify-between">
-    <h1 class="tracking-[1.5rem]">職務経歴書</h1>
+  <h1 class="!text-2xl text-center">職務経歴書</h1>
+  <div class="text-right mt-6">
     {today.format("ll")}<br />
-    陸波 玉夫（氏名）
+    {name}（氏名）
   </div>
   <h2>■職務要約</h2>
-  <p>
-    主にコーポレートサイトやキャンペーンサイトの製作に携わってきました。効果を高め、納期まで滞り
-    のないディレクションを行うことを意識しています。また、自ら知識を深めるべくHTML5やCSSの勉
-    強も行っております。
-  </p>
+  <Text>{summary}</Text>
   <h2>■活かせる経験・知識・技術</h2>
   <h3>【得意分野】</h3>
   <ul>

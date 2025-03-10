@@ -8,9 +8,9 @@ import PostPreview from "@post/PostPreview.astro";
 import type { ComponentProps } from "astro/types";
 import Fullscreenable from "@ui/Fullscreenable.astro";
 import { getLinkName } from "@integrations/astro-server";
-import { addBaseToLink, getRole } from "@integrations/astro-server";
+import { addBaseToLink } from "@integrations/astro-server";
 import { getPrintPath } from "@integrations/pdf.mjs";
-import { getSpecializationSentence } from "@integrations/docs";
+import { getSummary } from "@integrations/docs";
 import Media from "./ui/Media.astro";
 import { getCurrentLocale, i18n } from "@integrations/i18n-server";
 
@@ -19,7 +19,6 @@ interface Props extends ComponentProps<typeof PostPreview> {}
 export const mail = "hofermaxludovico@gmail.com";
 
 const t = i18n(Astro);
-const { role } = await getRole(Astro);
 
 const viewResumeSentence = await t("View my resume");
 const viewWorkHistorySentence = await t("View my work history");
@@ -41,7 +40,7 @@ const documentLinks = documentPageLinks.map(({ path, ...link }) => ({
   ...link,
 }));
 
-const specializationSentence = await getSpecializationSentence(Astro);
+const summary = await getSummary(Astro, true);
 
 const profilePictureEventName = await getLinkName(Astro, ProfilePicture.src);
 ---
@@ -71,16 +70,15 @@ const profilePictureEventName = await getLinkName(Astro, ProfilePicture.src);
       </div>
     </div>
   </div>
-  I'm {role.data.withArticle}{" "}
-  {specializationSentence}.
-  <div slot="footer" class="flex mt-2">
+  {summary}
+  <div slot="footer" class="flex mt-2 gap-0.5">
     {
       (import.meta.env.DEV ? documentPageLinks : documentLinks).map(
         ({ path, button }, index, array) => (
           <Button
             href={path}
             noBase
-            class={`${index === 0 ? "" : "rounded-l-none hover:rounded-l-xl h-full"} ${index === array.length - 1 ? "" : "rounded-r-none hover:rounded-r-xl h-full"}`}
+            class={`${index === 0 ? "" : "rounded-l-none h-full"} ${index === array.length - 1 ? "" : "rounded-r-none h-full"}`}
             translateProps={{ disable: true }}
           >
             <div class="group-hover:animate-pulse">{button}</div>
