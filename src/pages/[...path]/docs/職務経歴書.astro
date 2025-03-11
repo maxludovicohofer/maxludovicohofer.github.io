@@ -4,7 +4,7 @@ import DocumentPage from "@layouts/document/DocumentPage.astro";
 import { i18n, setLocale } from "@integrations/i18n-server";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
-import { getSummary } from "@integrations/docs";
+import { getSummary, getSelfPRSentence } from "@integrations/docs";
 import {
   getCategory,
   getKnowHow,
@@ -21,6 +21,7 @@ import { applyMatch } from "@integrations/astro-server";
 import { getEntryId } from "@layouts/document/Document.astro";
 import ShokumuEntry from "@components/docs/ShokumuEntry.astro";
 import { getTech } from "@components/TechList.astro";
+import Text from "@components/ui/Text.astro";
 
 export const getStaticPaths = () => getBasePaths({ allowedLocales: ["ja"] });
 
@@ -47,6 +48,8 @@ const experienceTechThreshold = 1;
 
 // TODO WRITE SELF PR
 // TODO CHECK EDGE FAVORITES FOR HOW TO WRITE THE TWO RESUMES
+
+const selfPRSentence = await getSelfPRSentence(Astro);
 ---
 
 <DocumentPage
@@ -115,7 +118,7 @@ const experienceTechThreshold = 1;
                 <thead>
                   <tr>
                     <th class="text-center w-56">範囲</th>
-                    <th class="text-center min-w-72">業務内容</th>
+                    <th class="text-center min-w-80">業務内容</th>
                     <th class="text-center w-56">環境</th>
                   </tr>
                 </thead>
@@ -185,12 +188,6 @@ const experienceTechThreshold = 1;
       )
   }
   <h2>■自己PR</h2>
-  <p>
-    目標実現を意識したサイトデザインを心がけ、プロデューサーとしてクライアントと制作スタッフの要
-    望の調整を行ってまいりました。常に目標と認識の確認を行い、プロジェクトメンバー全員が最新情報
-    と当事者意識を持ち、一丸となってプロジェクトを進行させることを心がけました。その結果、担当プ
-    ロジェクトの目標はすべて達成し、納期も遅れることはありませんでした。
-    今後も、クライアントとメンバー双方が満足できるプロジェクト管理者を目指したいと考えています。
-  </p>
+  <Text>{selfPRSentence}</Text>
   <p class="text-right">以上</p>
 </DocumentPage>

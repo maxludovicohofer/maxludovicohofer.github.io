@@ -71,3 +71,20 @@ export const getSummary = async (astro: AstroGlobal, short?: boolean) => {
     }`
   );
 };
+
+export const getSelfPRSentence = async (astro: AstroGlobal) => {
+  const {
+    role: {
+      data: { workFields },
+    },
+  } = await getRole(astro);
+
+  const mainWorkField = (workFields ??
+    (await getCollection("roles"))[0]?.data.workFields)?.[0];
+
+  if (!mainWorkField) return "";
+
+  return `I value attention to detail, embrace cutting-edge technologies, and enjoy fostering collaboration to achieve excellent results. Currently transitioning from software engineering to ${
+    mainWorkField.includes("game") ? "" : "videogame "
+  }${mainWorkField}, which is my lifelong passion.`;
+};
