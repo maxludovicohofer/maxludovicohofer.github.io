@@ -18,6 +18,12 @@ import { getMotivationSentence } from "@integrations/docs";
 
 export const getStaticPaths = () => getBasePaths({ allowedLocales: ["ja"] });
 
+interface Props {
+  company?: string;
+}
+
+const { company } = Astro.props;
+
 await setLocale(Astro);
 
 const today = dayjs();
@@ -59,7 +65,7 @@ const languages = await getLanguages(Astro);
 
 const complySentence = await t("I will comply with company regulations");
 
-const motivationSentence = await t(await getMotivationSentence(Astro));
+const motivationSentence = await t(await getMotivationSentence(Astro, company));
 const relocateSentence = `${await t("open to relocate")}`;
 ---
 

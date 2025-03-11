@@ -67,46 +67,69 @@ export const getTech = async (
     })
   );
 
-const tech = await getTech(Astro);
+export const getTechList = async (...params: Parameters<typeof getTech>) => {
+  const tech = await getTech(...params);
+  const renderedGroups: string[] = [];
 
-const renderedGroups: string[] = [];
+  const formatExperience = async (experience: string) => {
+    await setLocale(params[0]);
+    dayjs.extend(duration);
+    dayjs.extend(relativeTime);
+
+    return capitalize(dayjs.duration(experience).humanize());
+  };
+
+  return (
+    await Promise.all(
+      (await getTech(...params)).map(
+        async ({ data: { id, experience, group, functionalities } }) => {
+          if (group) {
+            if (renderedGroups.includes(group)) return;
+            else renderedGroups.push(group);
+          }
+
+          const content = group
+            ? tech.filter(
+                ({ data: { group: groupToCheck } }) => groupToCheck === group
+              )
+            : (functionalities?.map((functionality) => ({
+                id: functionality,
+                data: undefined,
+              })) ?? []);
+
+          return {
+            title: group ?? id,
+            experience: group ? undefined : await formatExperience(experience),
+            items: await Promise.all(
+              content.map(async ({ id, data }) => ({
+                title: id,
+                experience: data && (await formatExperience(data.experience)),
+              }))
+            ),
+          };
+        }
+      )
+    )
+  ).filter((tech) => !!tech);
+};
+
+const techList = await getTechList(Astro);
+
+const toExperienceText = async (experience: string) => {
+  const t = i18n(Astro);
+
+  return `${capitalize(experience)} ${await t("of experience")}`;
+};
 
 // TODO PHASE 2 REFERENCE PROJECTS WHERE THE TECH IS USED. MOST LIKELY SHOW THEM ON HOVER/INTERSECT (MOBILE). COULD BE INDIVIDUAL PROJECTS OR JUST (USED IN 3 GAMES, 2 PROTOTYPES ...)
-
-await setLocale(Astro);
-dayjs.extend(duration);
-dayjs.extend(relativeTime);
-
-const t = i18n(Astro);
-
-const getExperience = async (experience: string) =>
-  `${capitalize(dayjs.duration(experience).humanize())} ${await t("of experience")}`;
 ---
 
 <ol class={`${className} grid`} {...props}>
   {
-    tech.map(async ({ data: { id, experience, group, functionalities } }) => {
-      const isGroup = group && !compact;
+    techList.map(async ({ title, experience, items }) => {
+      const rowSpan = (compact ? 1 : items.length) / 8;
 
-      if (isGroup) {
-        if (renderedGroups.includes(group)) return;
-        else renderedGroups.push(group);
-      }
-
-      const content = isGroup
-        ? tech.filter(
-            ({ data: { group: groupToCheck } }) => groupToCheck === group
-          )
-        : (functionalities?.map((functionality) => ({
-            id: functionality,
-            data: undefined,
-          })) ?? []);
-
-      const rowSpan = (compact ? 1 : content.length) / 8;
-      const title = isGroup ? group : id;
-
-      const experienceSentence =
-        experience && !isGroup && (await getExperience(experience));
+      const experienceText = experience && (await toExperienceText(experience));
 
       return (
         <li
@@ -117,27 +140,27 @@ const getExperience = async (experience: string) =>
           </Text>
           {!compact && (
             <>
-              {experienceSentence && (
+              {experienceText && (
                 <Text subtitle tag="span" translateProps={{ disable: true }}>
-                  {experienceSentence}
+                  {experienceText}
                 </Text>
               )}
-              {content.length !== 0 && (
+              {items.length !== 0 && (
                 <ol class="ml-8">
-                  {content.map(async (item) => {
-                    const experienceSentence =
-                      item.data && (await getExperience(item.data.experience));
+                  {items.map(async ({ title, experience }) => {
+                    const experienceText =
+                      experience && (await toExperienceText(experience));
 
                     return (
                       <li>
-                        <Text tag="span">{item.id}</Text>
-                        {experienceSentence && (
+                        <Text tag="span">{title}</Text>
+                        {experienceText && (
                           <Text
                             subtitle
                             tag="span"
                             translateProps={{ disable: true }}
                           >
-                            {experienceSentence}
+                            {experienceText}
                           </Text>
                         )}
                       </li>

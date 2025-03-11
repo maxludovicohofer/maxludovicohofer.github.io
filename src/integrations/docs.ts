@@ -18,7 +18,10 @@ export const getWorkFieldsSentence = async (astro: AstroGlobal) => {
   return `Especially involved in ${toTextList(resolvedWorkFields)}.`;
 };
 
-export const getMotivationSentence = async (astro: AstroGlobal) => {
+export const getMotivationSentence = async (
+  astro: AstroGlobal,
+  company?: string
+) => {
   const {
     role: {
       data: { workFields },
@@ -30,10 +33,9 @@ export const getMotivationSentence = async (astro: AstroGlobal) => {
 
   if (!mainWorkField) return "";
 
-  // Do not include company motivation if public
   return `${
-    astro.url.hostname !== astro.site?.hostname
-      ? `I am deeply inspired by your innovative ${mainWorkField} and would be honored to contribute to your team. `
+    company
+      ? `I am deeply inspired by ${company}'s innovative ${mainWorkField} and would be honored to contribute to your team. `
       : ""
   }I value attention to detail, embrace cutting-edge technologies, and enjoy fostering collaboration to achieve excellent results. Currently transitioning from software engineering to ${
     mainWorkField.includes("game") ? "" : "videogame "
@@ -72,7 +74,10 @@ export const getSummary = async (astro: AstroGlobal, short?: boolean) => {
   );
 };
 
-export const getSelfPRSentence = async (astro: AstroGlobal) => {
+export const getSelfPRSentence = async (
+  astro: AstroGlobal,
+  company?: string
+) => {
   const {
     role: {
       data: { workFields },
@@ -84,7 +89,9 @@ export const getSelfPRSentence = async (astro: AstroGlobal) => {
 
   if (!mainWorkField) return "";
 
-  return `I value attention to detail, embrace cutting-edge technologies, and enjoy fostering collaboration to achieve excellent results. Currently transitioning from software engineering to ${
-    mainWorkField.includes("game") ? "" : "videogame "
-  }${mainWorkField}, which is my lifelong passion.`;
+  return `My background in software development and leadership has allowed me to develop hard and soft skills that I wish to contribute to the game industry. While new to the professional world of videogames, I have been involved in ${mainWorkField} on academic and personal projects my whole life. I value self-teaching, teamwork, and sharing knowledge with colleagues.${
+    company
+      ? ` I aspire to grow my skills further while learning from a forward-thinking company like ${company}.`
+      : ""
+  }`;
 };

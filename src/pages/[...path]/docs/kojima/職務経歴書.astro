@@ -1,0 +1,10 @@
+---
+import WorkHistory, {
+  getStaticPaths as getBasePaths,
+} from "@pages/docs/職務経歴書.astro";
+import { company } from "./履歴書.astro";
+
+export const getStaticPaths = getBasePaths;
+---
+
+<WorkHistory company={company} />

@@ -1,0 +1,11 @@
+---
+import Resume, {
+  getStaticPaths as getBasePaths,
+} from "@pages/docs/履歴書.astro";
+
+export const getStaticPaths = getBasePaths;
+
+export const company = "Kojima Productions";
+---
+
+<Resume company={company} />

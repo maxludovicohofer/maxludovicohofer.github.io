@@ -20,10 +20,16 @@ import {
 import { applyMatch } from "@integrations/astro-server";
 import { getEntryId } from "@layouts/document/Document.astro";
 import ShokumuEntry from "@components/docs/ShokumuEntry.astro";
-import { getTech } from "@components/TechList.astro";
+import { getTech, getTechList } from "@components/TechList.astro";
 import Text from "@components/ui/Text.astro";
 
 export const getStaticPaths = () => getBasePaths({ allowedLocales: ["ja"] });
+
+interface Props {
+  company?: string;
+}
+
+const { company } = Astro.props;
 
 await setLocale(Astro);
 dayjs.extend(duration);
@@ -45,11 +51,13 @@ const projectMatchThreshold = 1;
 const durationThreshold = dayjs.duration({ days: 4 });
 
 const experienceTechThreshold = 1;
+const techList = await getTechList(Astro);
 
-// TODO WRITE SELF PR
-// TODO CHECK EDGE FAVORITES FOR HOW TO WRITE THE TWO RESUMES
+const selfPRSentence = await getSelfPRSentence(Astro, company);
 
-const selfPRSentence = await getSelfPRSentence(Astro);
+// TODO PHASE 2 SHOULD ALSO GET ALL SKILLS OF EXPERIENCES, AND REMOVE EXPERIENCES IF IRRELEVANT
+// TODO PHASE 2 SHOULD HAVE A MAX NUMBER OF ENTRIES AND SELECT BASED ON THAT MAX NUMBER
+// TODO PHASE 2 SPECIFY TIME GAPS AS "SELF STUDY FOR CAREER CHANGE"
 ---
 
 <DocumentPage
@@ -83,7 +91,7 @@ const selfPRSentence = await getSelfPRSentence(Astro);
           tech,
           team,
         }) => {
-          const organization = `${translateId ? await t(id) : id}${countAsWork ? `${await t("(")}${await t("school")}${await t(")")}` : ""}`;
+          const organization = `${translateId ? await t(id) : id}${await t("(")}${countAsWork ? await t("school") : "正社員として勤務"}${await t(")")}`;
 
           const matchedProjects =
             projects &&
@@ -100,7 +108,7 @@ const selfPRSentence = await getSelfPRSentence(Astro);
               .filter(
                 (project) => getDevelopmentTime(project)! > durationThreshold
               )
-              .slice(0, 3)
+              .slice(0, 2)
               .sort((a, b) =>
                 b.publishingDate.isAfter(a.publishingDate) ? 1 : -1
               );
@@ -187,6 +195,47 @@ const selfPRSentence = await getSelfPRSentence(Astro);
         }
       )
   }
+  <h2>■テクニカルスキル</h2>
+  <table>
+    <thead>
+      <tr>
+        <th class="text-center w-0 min-w-36">種類</th>
+        <th class="text-center w-0 text-nowrap">使用期間</th>
+        <th class="text-center">機能</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        techList.map(async ({ title, experience, items }) => {
+          const translatedTitle = await t(title);
+
+          return (
+            <tr>
+              <td>{translatedTitle}</td>
+              <td class="text-right">
+                {experience || (
+                  <ol class="list-none ps-0 my-0">
+                    {items.map(({ experience }) => (
+                      <li class="ps-0 my-0">{experience}</li>
+                    ))}
+                  </ol>
+                )}
+              </td>
+              <td>
+                <ol class="list-none ps-0 my-0">
+                  {items.map(async ({ title }) => (
+                    <Text tag="li" class="ps-0 my-0">
+                      {title}
+                    </Text>
+                  ))}
+                </ol>
+              </td>
+            </tr>
+          );
+        })
+      }
+    </tbody>
+  </table>
   <h2>■自己PR</h2>
   <Text>{selfPRSentence}</Text>
   <p class="text-right">以上</p>
