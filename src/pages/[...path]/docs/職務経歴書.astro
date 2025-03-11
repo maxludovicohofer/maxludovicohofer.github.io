@@ -3,90 +3,256 @@ import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
 import { i18n, setLocale } from "@integrations/i18n-server";
 import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
 import { getSummary } from "@integrations/docs";
 import Text from "@components/ui/Text.astro";
-// import { getKnowHow } from "@integrations/content";
+import {
+  getCategory,
+  getKnowHow,
+  getPublishingDate,
+  getDevelopmentTime,
+  getTeam,
+} from "@integrations/content";
+import { getFormattedDates } from "@components/docs/ResumeKnowHow.astro";
+import Link from "@components/ui/Link.astro";
+import {
+  getMatchedPosts,
+  getSiteLink,
+  matchRoles,
+} from "@integrations/astro-server";
+import { applyMatch } from "@integrations/astro-server";
+import { capitalize, toTextList } from "@integrations/text";
+import { getEntryId } from "@layouts/document/Document.astro";
+import { getTech } from "@components/TechList.astro";
 
 export const getStaticPaths = () => getBasePaths({ allowedLocales: ["ja"] });
 
 await setLocale(Astro);
+dayjs.extend(duration);
 
 const today = dayjs();
 
 const t = i18n(Astro);
 
-// const knowHow = await getKnowHow(Astro);
-
 const name = await t("Hofer Max Ludovico");
 const summary = await getSummary(Astro);
+
+const { experience } = await getKnowHow(Astro);
+
+const portfolioSentence = await t("Portfolio");
+const portfolioLink = await getSiteLink(Astro);
+
+// Number from 0-10 that filters out weak matches
+const matchThreshold = 1;
+const durationThreshold = dayjs.duration({ days: 4 });
+
+const experienceTechThreshold = 0;
+
+// TODO WRITE SELF PR
 ---
 
 <DocumentPage pageProps={{ noTranslation: true }}>
   <h1 class="!text-2xl text-center">職務経歴書</h1>
   <div class="text-right mt-6">
-    {today.format("ll")}<br />
+    {today.format("ll")}
+    <br />
     {name}（氏名）
   </div>
   <h2>■職務要約</h2>
   <Text>{summary}</Text>
-  <h2>■活かせる経験・知識・技術</h2>
-  <h3>【得意分野】</h3>
-  <ul>
-    <li>大規模サイトにおけるWebプロデュース＆ディレクション</li>
-    <li>Webだけでなく他メディア展開も含めたプロモーションプランニング</li>
-  </ul>
-  <h3>【使用可能ツール】</h3>
-  <ul>
-    <li>PowerPoint、Illustrator、Photoshop</li>
-    <li>HTML、CSS</li>
-  </ul>
+  {portfolioSentence} 🡢 <Link href={portfolioLink} />
   <h2>■職務経歴詳細</h2>
-  <p>
-    20xx年1月～ 現在、転職活動中<br />
-    20xx年4月～20xx年12月 〇〇〇〇株式会社 **部****チーム
-  </p>
-  <table>
-    <thead>
-      <tr>
-        <th class="text-center">期間</th>
-        <th class="text-center">業務内容</th>
-        <th class="text-center">環境</th>
-        <th class="text-center">役割／規模</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>20xx年4月～20xx年12月</td>
-        <td>
-          国内系保険会社コーポレートサイトリニューアル<br /><br />
-          [概要] 3年ぶりの全面リニューアル<br />
-          http://（URL).co.jp<br /><br />
-          [担当業務] 予算管理、クライアント折衝、企画書 作成、プレゼンテーション、コンセプトメイク、全
-          体の進捗管理<br /><br />
-          [ポイント]
-          <ul>
-            <li>初の大規模リニューアル案件をコンペ受注</li>
-            <li>自社内で更新可能のCMS構築（Wordpress）も提案</li>
-            <li>プロデューサーとしての実績が認められ社長賞を獲得</li>
-          </ul>
-        </td>
-        <td>
-          JavaScript<br />
-          Perl<br />
-          PHP<br />
-          Wordpress<br /><br />
-          [使用ツール]<br />
-          PowerPoint
-        </td>
-        <td>
-          [規模]<br />
-          50名（うち外注スタッフ5名） <br /><br />
-          [役職]<br />
-          プロデューサー
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  {
+    experience &&
+      Object.values(experience).map(
+        async ({
+          id,
+          translateId,
+          start,
+          end,
+          skill: { job, achievements, countAsWork },
+          projects,
+          tech,
+          team,
+        }) => {
+          const organization = `${translateId ? await t(id) : id}${countAsWork ? `${await t("(")}${await t("school")}${await t(")")}` : ""}`;
+          const dates = await getFormattedDates(Astro, start, end);
+          const translatedJob = await t(job.id);
+          const matchedProjects =
+            projects &&
+            (await getMatchedPosts(Astro, "projects", {
+              entries: projects.map(({ id, ...project }) => ({
+                // Fixes project IDs
+                id: `${id}/${id}`,
+                ...project,
+              })),
+            }));
+          const projectData =
+            matchedProjects &&
+            applyMatch(matchedProjects, matchThreshold).filter(
+              (project) => getDevelopmentTime(project)! > durationThreshold
+            );
+
+          const experienceTechIds = tech?.map(({ id }) => id);
+          const experienceTechToDisplay = experienceTechIds
+            ? (await getTech(Astro, experienceTechThreshold)).filter(({ id }) =>
+                experienceTechIds.includes(id)
+              )
+            : [];
+
+          const soloExperience =
+            !team || (team.internal === 1 && !team.external);
+          const experienceScaleText = soloExperience
+            ? await t("Solo")
+            : `${team.internal}名${team.external ? `（うち外注スタッフ${team.external}名）` : ""}`;
+
+          return (
+            <>
+              <h3>{organization}</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="text-center">期間</th>
+                    <th class="text-center">業務内容</th>
+                    <th class="text-center">環境</th>
+                    <th class="text-center">規模</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {projectData?.length ? (
+                    projectData.map(async (project) => {
+                      const publishingDate = getPublishingDate(project);
+                      const dates = await getFormattedDates(
+                        Astro,
+                        publishingDate?.subtract(getDevelopmentTime(project)!)!,
+                        publishingDate
+                      );
+
+                      const category = await t(getCategory(project)!);
+
+                      const team = getTeam(project);
+
+                      const {
+                        collection,
+                        id,
+                        data: { roles, tech, awards },
+                      } = project;
+
+                      const soloDeveloped =
+                        !team || (team.internal === 1 && !team.external);
+                      const scaleText = soloDeveloped
+                        ? await t("Solo")
+                        : `${team.internal}名${team.external ? `（うち外注スタッフ${team.external}名）` : ""}`;
+
+                      const projectLink = await getSiteLink(
+                        Astro,
+                        `${collection}/${getEntryId(id)}`
+                      );
+
+                      const rolesToDisplay = applyMatch(
+                        await matchRoles(
+                          Astro,
+                          roles.map((roleInfo) => ({
+                            data: roleInfo,
+                            roles: [roleInfo.role],
+                          }))
+                        )
+                      );
+
+                      const rolesSentence = `${await t(capitalize(toTextList(rolesToDisplay.slice(0, 3).map(({ role: { id } }) => id))))}${await t(".")}`;
+
+                      const achievementsToDisplay = [
+                        ...(awards?.map((award) => `Won ${award}`) ?? []),
+                        ...rolesToDisplay.flatMap(
+                          ({ achievements }) => achievements
+                        ),
+                      ].slice(0, 2);
+
+                      const techIds = tech.map(({ id }) => id);
+                      const techToDisplay = (await getTech(Astro)).filter(
+                        ({ id }) => techIds.includes(id)
+                      );
+
+                      return (
+                        <tr>
+                          <td>{dates.join("～")}</td>
+                          <td>
+                            [役職] {rolesSentence}
+                            <br />
+                            <br />
+                            [ポイント]
+                            <ul class="mt-0">
+                              {achievementsToDisplay.map((achievement) => (
+                                <Text tag="li">{capitalize(achievement)}.</Text>
+                              ))}
+                            </ul>
+                            <Link href={projectLink} />
+                          </td>
+                          <td>
+                            {techToDisplay.map(async ({ id }, index) => {
+                              const translatedId = await t(id);
+
+                              return (
+                                <>
+                                  {index ? <br /> : ""}
+                                  {translatedId}
+                                </>
+                              );
+                            })}
+                          </td>
+                          <td>
+                            [プロジェクト]
+                            <br />
+                            {category}
+                            <br />
+                            <br />
+                            [チーム]
+                            <br />
+                            {scaleText}
+                          </td>
+                        </tr>
+                      );
+                    })
+                  ) : (
+                    <tr>
+                      <td>{dates.join("～")}</td>
+                      <td>
+                        [担当業務] {translatedJob}
+                        <br />
+                        <br />
+                        [ポイント]
+                        <ul>
+                          {achievements.map((achievement) => (
+                            <Text tag="li">{achievement}</Text>
+                          ))}
+                        </ul>
+                      </td>
+                      <td>
+                        {experienceTechToDisplay.map(async ({ id }, index) => {
+                          const translatedId = await t(id);
+
+                          return (
+                            <>
+                              {index ? <br /> : ""}
+                              {translatedId}
+                            </>
+                          );
+                        })}
+                      </td>
+                      <td>
+                        [会社]
+                        <br />
+                        {experienceScaleText}
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </>
+          );
+        }
+      )
+  }
   <h2>■自己PR</h2>
   <p>
     目標実現を意識したサイトデザインを心がけ、プロデューサーとしてクライアントと制作スタッフの要

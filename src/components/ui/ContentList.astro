@@ -27,7 +27,7 @@ const {
 } = Astro.props;
 
 const sortedEntries: CollectionEntry<PostCollectionKey>[] =
-  await getSortedPosts(Astro, collection, exclude);
+  await getSortedPosts(Astro, collection, { excluded: exclude });
 ---
 
 <ol

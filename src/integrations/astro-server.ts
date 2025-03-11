@@ -46,6 +46,8 @@ import {
   type PossibleTranslations,
 } from "./i18n";
 
+type ExceptFirst<T extends unknown[]> = T extends [any, ...infer U] ? U : never;
+
 export const getRole = async (astro: AstroGlobal) => {
   const roles = await getCollection("roles");
   // Look for role in path sections
@@ -85,6 +87,15 @@ export const addBaseToLink = async (
   )}`;
 };
 
+export const getSiteLink = async (
+  ...params: Parameters<typeof addBaseToLink>
+) => {
+  const portfolioVersion = await addBaseToLink(...params);
+  return `${import.meta.env.SITE}${
+    portfolioVersion === "/" ? "" : portfolioVersion
+  }`;
+};
+
 export const getPathWithoutBase = async (astro: AstroGlobal, path: string) => {
   const pathWithoutLocale = getPathWithoutLocale(path);
 
@@ -121,13 +132,9 @@ export const getEntriesSafe = async <
   return unsafeEntries;
 };
 
-export const matchRoles = async <
-  E extends {
-    data: Partial<Pick<CollectionEntry<"projects">["data"], "roles">>;
-  }
->(
+export const matchRoles = async <D>(
   astro: AstroGlobal,
-  entries: E[]
+  entries: { data?: D; roles?: ReferenceDataEntry<"roles", string>[] }[]
 ) => {
   const role = (await getRole(astro)).role;
 
@@ -153,6 +160,10 @@ export const matchRoles = async <
   });
 
   const notMatchers = role.data.notMatches?.map(({ id }) => makeMatcher(id));
+
+  function isEntry(entry: any): entry is { data: object } {
+    return !!entry && typeof entry.data === "object";
+  }
 
   const match = (test: string | string[]) => {
     let testValue = test;
@@ -198,18 +209,20 @@ export const matchRoles = async <
   };
 
   // Group by match score
-  const scoredEntities = groupBy(entries, (entry) => {
+  const scoredEntities = groupBy(entries, ({ data, roles }) => {
     let matchScore = 0;
 
-    const topic = getCategory(entry) ?? getGroup(entry);
+    const topic = isEntry(data)
+      ? getCategory(data) ?? getGroup(data)
+      : undefined;
     if (topic) {
       const score = match(topic);
       matchScore += score;
     }
 
-    const roles = entry.data.roles?.map(({ id }) => id);
-    if (roles) {
-      const score = match(roles);
+    const roleNames = roles?.map(({ id }) => id);
+    if (roleNames) {
+      const score = match(roleNames);
       matchScore += score;
     } else {
       // If roles are undefined, distinguish from no match
@@ -227,41 +240,64 @@ export const matchRoles = async <
     );
   }
 
-  return scoredEntities;
+  return Object.fromEntries(
+    Object.entries(scoredEntities).map(([priority, entries]) => [
+      priority,
+      entries!.map(({ data }) => data!),
+    ])
+  );
 };
 
 export const applyMatch = <T extends Partial<Record<any, any[]>>>(
-  matchResult: T
+  matchResult: T,
+  // Number from 0-10 that filters out weak matches
+  threshold: number = 0
 ) =>
-  Object.values(matchResult as unknown as Record<any, NonNullable<T[keyof T]>>)
+  Object.values(
+    (threshold
+      ? Object.fromEntries(
+          Object.entries(matchResult).filter(
+            ([matchScore]) => Number(matchScore) > threshold
+          )
+        )
+      : matchResult) as unknown as Record<any, NonNullable<T[keyof T]>>
+  )
     .reverse()
     .flat();
 
 export const getSortedPosts = async <C extends PostCollectionKey>(
   astro: AstroGlobal,
   collection: C,
-  excluded: string[] = []
+  ...params: ExceptFirst<ExceptFirst<Parameters<typeof getMatchedPosts>>>
+) => applyMatch(await getMatchedPosts(astro, collection, ...params));
+
+export const getMatchedPosts = async <C extends PostCollectionKey>(
+  astro: AstroGlobal,
+  collection: C,
+  ...params: ExceptFirst<ExceptFirst<Parameters<typeof getSortedDocuments>>>
 ) => {
   const groupedEntries = await matchRoles(
     astro,
-    await getSortedDocuments(astro, collection, excluded)
+    (
+      await getSortedDocuments(astro, collection, ...params)
+    ).map((document) => ({
+      data: document,
+      roles:
+        document.collection === "projects"
+          ? document.data.roles.map(({ role }) => role)
+          : document.data.roles,
+    }))
   );
 
   // Sort individual categories by latest first
-  return (
-    Object.values(groupedEntries)
-      .map((entries) =>
-        entries!.toSorted((a, b) =>
-          b.publishingDate.isAfter(a.publishingDate) ? 1 : -1
-        )
-      )
-      // Apply priorities
-      .reverse()
-      .flat()
+  Object.values(groupedEntries).forEach((entries) =>
+    entries.sort((a, b) =>
+      b.publishingDate.isAfter(a.publishingDate) ? 1 : -1
+    )
   );
-};
 
-type ExceptFirst<T extends unknown[]> = T extends [any, ...infer U] ? U : never;
+  return groupedEntries;
+};
 
 export const getSortedDocuments = async <C extends DocumentCollectionKey>(
   astro: AstroGlobal,
@@ -297,18 +333,27 @@ export const getSortedDocuments = async <C extends DocumentCollectionKey>(
   ).sort((a, b) => (b.publishingDate.isAfter(a.publishingDate) ? 1 : -1));
 };
 
-export const getAllDocuments = async <C extends DocumentCollectionKey>(
+export const getAllDocuments = async <
+  C extends DocumentCollectionKey,
+  E extends keyof DataEntryMap[DocumentCollectionKey] = string
+>(
   collection: C,
-  excluded?: string[]
+  options?: {
+    excluded?: string[];
+    entries?: ReferenceDataEntry<DocumentCollectionKey, E>[];
+  }
 ) => {
-  const excludedDocuments = excluded ?? [];
+  const excludedDocuments = options?.excluded ?? [];
 
-  return await getCollection(
-    collection,
-    ({ data: { draft }, id }) =>
-      (import.meta.env.DEV || !draft) &&
-      !excludedDocuments.some((entry) => getEntryId(id) === getEntryId(entry))
-  );
+  const documentFilter = ({ data: { draft }, id }: CollectionEntry<C>) =>
+    (import.meta.env.DEV || !draft) &&
+    !excludedDocuments.some((entry) => getEntryId(id) === getEntryId(entry));
+
+  return options?.entries
+    ? (
+        await getEntriesSafe(options.entries as ReferenceDataEntry<C, E>[])
+      ).filter(documentFilter)
+    : await getCollection(collection, documentFilter);
 };
 
 export const getUniqueEntries = <C extends CollectionKey>(

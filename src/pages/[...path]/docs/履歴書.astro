@@ -60,6 +60,7 @@ const languages = await getLanguages(Astro);
 const complySentence = await t("I will comply with company regulations");
 
 const motivationSentence = await t(await getMotivationSentence(Astro));
+const relocateSentence = `${await t("open to relocate")}`;
 ---
 
 <DocumentPage pageProps={{ noTranslation: true }}>
@@ -147,7 +148,8 @@ const motivationSentence = await t(await getMotivationSentence(Astro));
           )
         }
         <td>
-          <b>メール</b><br />
+          <b>メール</b>
+          <br />
           <Link href={`mailto:${mail}`} />
         </td>
       </tr>
@@ -249,7 +251,8 @@ const motivationSentence = await t(await getMotivationSentence(Astro));
     <tbody>
       <tr>
         <td rowspan="100%">
-          <b>志望の動機、特技、好きな学科、アピールポイントなど</b><br />
+          <b>志望の動機、特技、好きな学科、アピールポイントなど</b>
+          <br />
           {motivationSentence}
         </td>
         <td class="relative" colspan="100%">
@@ -311,6 +314,9 @@ const motivationSentence = await t(await getMotivationSentence(Astro));
     <tbody>
       <tr>
         <td>{complySentence}</td>
+      </tr>
+      <tr>
+        <td>{relocateSentence}</td>
       </tr>
     </tbody>
   </table>

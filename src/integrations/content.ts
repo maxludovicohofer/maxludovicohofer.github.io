@@ -155,19 +155,34 @@ export const getGroup = (entry: { data: object } | undefined) => {
   return isGroupEntry(entry) ? entry.data.group : undefined;
 };
 
+export const getTeam = (entry: { data: object } | undefined) => {
+  function isTeamEntry(test: typeof entry): test is {
+    data: { team: NonNullable<CollectionEntry<"projects">["data"]["team"]> };
+  } {
+    return !!(test && Object.hasOwn(test.data, "team"));
+  }
+
+  return isTeamEntry(entry)
+    ? typeof entry.data.team === "number"
+      ? { internal: entry.data.team }
+      : entry.data.team
+    : undefined;
+};
+
 export const getKnowHow = async (astro: AstroGlobal) => {
   const knowHow = await Promise.all(
     (
       await getCollection("know-how")
-    ).map(async ({ data: { start, end, skills, ...data } }) => ({
+    ).map(async ({ data: { start, end, team, skills, ...data } }) => ({
       start: dayjs(start),
       end: end && dayjs(end),
+      team: getTeam({ data: { team } }),
       skills: applyMatch(
         await matchRoles(
           astro,
-          skills.map((skill) => ({ data: { roles: [skill.job], ...skill } }))
+          skills.map((skill) => ({ data: skill, roles: [skill.job] }))
         )
-      ).map(({ data }) => data),
+      ),
       ...data,
     }))
   );

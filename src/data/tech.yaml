@@ -148,6 +148,12 @@
   roles:
     - Programmer
 
+- id: NoSQL
+  experience: P1Y
+  group: Programming
+  roles:
+    - Programmer
+
 - id: AWS
   experience: P5Y
   group: Programming
@@ -171,6 +177,16 @@
   group: Programming
   roles:
     - Programmer
+
+- id: Excel
+  experience: P5Y
+  functionalities:
+    - Macros
+    - Tables
+    - Automation
+  roles:
+    - Project manager
+    - Balance
 
 - id: Houdini
   experience: P6M

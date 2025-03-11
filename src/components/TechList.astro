@@ -16,52 +16,48 @@ interface Props extends HTMLAttributes<"ol"> {
 
 const { class: className = "", compact, ...props } = Astro.props;
 
-export const getTech = async (astro: AstroGlobal) => {
-  const applyThreshold = <T,>(matchResult: Partial<Record<any, T[]>>) => {
-    // Number from 0-10 that filters out weak matches
-    const threshold = 4;
-    return applyMatch(
-      Object.fromEntries(
-        Object.entries(matchResult).filter(
-          ([matchScore]) => Number(matchScore) > threshold
-        )
-      )
-    );
-  };
+export const getTech = async (astro: AstroGlobal, threshold: number = 4) =>
+  await Promise.all(
+    applyMatch(
+      await matchRoles(
+        astro,
+        (await getCollection("tech")).map((tech) => ({
+          data: tech,
+          roles: tech.data.roles,
+        }))
+      ),
+      threshold
+    ).map(async (tech) => {
+      const roleFunctionalities = tech.data.functionalities?.filter(
+        (functionality) => typeof functionality !== "string"
+      );
 
-  return await Promise.all(
-    applyThreshold(await matchRoles(astro, await getCollection("tech"))).map(
-      async (tech) => {
-        const roleFunctionalities = tech.data.functionalities?.filter(
-          (functionality) => typeof functionality !== "string"
+      if (roleFunctionalities?.length) {
+        const matchedFunctionalities = applyMatch(
+          await matchRoles(
+            astro,
+            roleFunctionalities.map((functionality) => ({
+              data: functionality,
+              roles: functionality.roles,
+            }))
+          ),
+          threshold
         );
 
-        if (roleFunctionalities?.length) {
-          const matchedFunctionalities = applyThreshold(
-            await matchRoles(
-              astro,
-              roleFunctionalities.map((functionality) => ({
-                data: functionality,
-              }))
-            )
-          ).map(({ data }) => data);
-
-          // Filter and map functionalities
-          tech.data.functionalities = tech.data.functionalities!.flatMap(
-            (functionality) =>
-              typeof functionality === "string"
-                ? [functionality]
-                : matchedFunctionalities.includes(functionality)
-                  ? [functionality.id]
-                  : []
-          );
-        }
-
-        return tech;
+        // Filter and map functionalities
+        tech.data.functionalities = tech.data.functionalities!.flatMap(
+          (functionality) =>
+            typeof functionality === "string"
+              ? [functionality]
+              : matchedFunctionalities.includes(functionality)
+                ? [functionality.id]
+                : []
+        );
       }
-    )
+
+      return tech;
+    })
   );
-};
 
 const tech = await getTech(Astro);
 

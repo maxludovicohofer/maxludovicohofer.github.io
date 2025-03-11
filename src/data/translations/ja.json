@@ -1242,5 +1242,193 @@
   "I&#39;m an AI programmer specialized in mechanics, combat, and systems.": {
     "translation": "私はメカニック、戦闘、システムに特化したAIプログラマーです。",
     "api": "deepl"
+  },
+  "open to relocate": {
+    "translation": "移転を検討中",
+    "api": "deepl"
+  },
+  "school": {
+    "translation": "がっこう",
+    "api": "deepl"
+  },
+  "NoSQL": {
+    "translation": "NoSQL",
+    "api": "deepl"
+  },
+  "Lead game designer": {
+    "translation": "リードゲームデザイナー",
+    "api": "deepl"
+  },
+  "Solo": {
+    "translation": "ソロ",
+    "api": "deepl"
+  },
+  "Lead game designer, technical team lead, and technical animation lead": {
+    "translation": "リードゲームデザイナー、テクニカルチームリード、テクニカルアニメーションリード",
+    "api": "deepl"
+  },
+  "Game designer, technical artist, and team lead": {
+    "translation": "ゲームデザイナー、テクニカルアーティスト、チームリーダー",
+    "api": "deepl"
+  },
+  "Lead game designer, team lead, and gameplay programmer": {
+    "translation": "リードゲームデザイナー、チームリーダー、ゲームプレイプログラマー",
+    "api": "deepl"
+  },
+  "Won Rookie awards 2024 &quot;Game of the year - People&#39;s choice&quot;.": {
+    "translation": "2024年の「ゲーム・オブ・ザ・イヤー - ピープルズ・チョイス」で新人賞を受賞しました。",
+    "api": "deepl"
+  },
+  "Designed an arcade co-op rougelike with a top-down view, with emphasis on collaboration and theorycrafting.": {
+    "translation": "トップダウンビューのアーケード型協力型ローグライクゲームを設計しました。協力プレイと戦略構築に重点を置いています。",
+    "api": "deepl"
+  },
+  "Designed a slow paced meditative puzzle game.": {
+    "translation": "ゆっくりとしたペースで瞑想的なパズルゲームをデザインしました。",
+    "api": "deepl"
+  },
+  "Organized pipeline with artists for procedural content.": {
+    "translation": "手続き型コンテンツのアーティストによる組織化されたパイプライン。",
+    "api": "deepl"
+  },
+  "Designed an addictive game loop for mobile with only two controls.": {
+    "translation": "たった2つの操作だけで、モバイル用の中毒性のあるゲームループを設計しました。",
+    "api": "deepl"
+  },
+  "Led a team of 4 to a satisfying final product.": {
+    "translation": "4人のチームを率いて、満足のいく最終製品を作り上げました。",
+    "api": "deepl"
+  },
+  "Excel": {
+    "translation": "エクセル",
+    "api": "deepl"
+  },
+  "Game programmer": {
+    "translation": "ゲームプログラマー",
+    "api": "deepl"
+  },
+  "Camera programmer, gameplay programmer, and lead game designer": {
+    "translation": "カメラプログラマー、ゲームプレイプログラマー、リードゲームデザイナー",
+    "api": "deepl"
+  },
+  "Gameplay programmer, game designer, and team lead": {
+    "translation": "ゲームプレイプログラマー、ゲームデザイナー、チームリーダー",
+    "api": "deepl"
+  },
+  "Gameplay programmer, lead game designer, and team lead": {
+    "translation": "ゲームプレイプログラマー、リードゲームデザイナー、チームリーダー",
+    "api": "deepl"
+  },
+  "Tool programmer and AI programmer": {
+    "translation": "ツールプログラマーおよびAIプログラマー",
+    "api": "deepl"
+  },
+  "Moved and programmed camera to follow characters in cutscenes and awkward places on the map.": {
+    "translation": "カットシーンやマップ上の不自然な場所にいるキャラクターを追うようにカメラを移動し、プログラムしました。",
+    "api": "deepl"
+  },
+  "Created a performant, easy to use tool with a convenient debug UI.": {
+    "translation": "使いやすく、便利なデバッグUIを備えた高性能なツールを作成しました。",
+    "api": "deepl"
+  },
+  "Developed a custom AI system with satisfying results.": {
+    "translation": "満足のいく結果をもたらすカスタムAIシステムを開発しました。",
+    "api": "deepl"
+  },
+  "Programmed physics changes and story events.": {
+    "translation": "プログラムされた物理法則の変更とストーリーイベント。",
+    "api": "deepl"
+  },
+  "Programmed a dynamic difficulty system that significantly increase repeatability.": {
+    "translation": "再現性を大幅に向上させる動的な難易度システムをプログラムしました。",
+    "api": "deepl"
+  },
+  "Added procedural level design that followed dynamic difficulty.": {
+    "translation": "動的な難易度に合わせた手続き型レベルデザインを追加しました。",
+    "api": "deepl"
+  },
+  "Game designer, UI designer, technical artist.": {
+    "translation": "ゲームデザイナー、UIデザイナー、テクニカルアーティスト。",
+    "api": "deepl"
+  },
+  "Game designer, technical artist.": {
+    "translation": "ゲームデザイナー、テクニカルアーティスト。",
+    "api": "deepl"
+  },
+  "Unreal Engine, Maya, Illustrator, Photoshop, FL Studio, Mobile.": {
+    "translation": "Unreal Engine、Maya、Illustrator、Photoshop、FL Studio、Mobile。",
+    "api": "deepl"
+  },
+  "Lead game designer.": {
+    "translation": "リードゲームデザイナー。",
+    "api": "deepl"
+  },
+  "Game AI is often a checklist that settles on specific behavior. While maybe easy to debug, this does not follow a fluid thought process, easily resulting in robotic behavior. Reusing these imperative decision trees can be daunting, as they couple AI with gameplay. With Act By Belief, I aim to address these issues through a <a class=\" not-prose underline text-nowrap print:text-wrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Maslow hierarchy (Act by)\" data-umami-event-url=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\">Maslow hierarchy</a>-inspired declarative method that is performant, easy to use and debug.": {
+    "translation": "ゲームAIは、特定の動作を定めるチェックリストであることがよくあります。デバッグは簡単かもしれませんが、流動的な思考プロセスに従うものではないため、ロボットのような動作になりがちです。これらの命令型決定ツリーを再利用することは、AIとゲームプレイを結びつけるため、困難を伴う可能性があります。Act By Beliefでは、<a class=\" not-prose underline text-nowrap print:text-wrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Maslow hierarchy (Act by)\" data-umami-event-url=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\">マズローの欲求階層説に着想を得た</a>宣言型メソッドにより、これらの問題に対処することを目指しています。このメソッドは、パフォーマンスに優れ、使いやすく、デバッグも簡単です。",
+    "api": "deepl"
+  },
+  "Unreal Engine, Illustrator, Photoshop, C++.": {
+    "translation": "Unreal Engine、Illustrator、Photoshop、C++。",
+    "api": "deepl"
+  },
+  "Lead game designer, technical team lead, technical animation lead.": {
+    "translation": "リードゲームデザイナー、テクニカルチームリード、テクニカルアニメーションリード。",
+    "api": "deepl"
+  },
+  "Made in 3ヶ月 by a team of 24.": {
+    "translation": "24人のチームで3ヶ月で制作。",
+    "api": "deepl"
+  },
+  "Concept art by the incredible <a class=\" not-prose underline text-nowrap print:text-wrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://www.artstation.com/wdys\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Francesco Chiari (Steelsilk)\" data-umami-event-url=\"https://www.artstation.com/wdys\">Francesco Chiari</a>.": {
+    "translation": "素晴らしい<a class=\" not-prose underline text-nowrap print:text-wrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://www.artstation.com/wdys\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Francesco Chiari (Steelsilk)\" data-umami-event-url=\"https://www.artstation.com/wdys\">フランチェスコ・キアリ</a>によるコンセプトアート。",
+    "api": "deepl"
+  },
+  "Game designer, UI designer.": {
+    "translation": "ゲームデザイナー、UIデザイナー。",
+    "api": "deepl"
+  },
+  "Gameplay programmer.": {
+    "translation": "ゲームプレイプログラマー。",
+    "api": "deepl"
+  },
+  "Camera programmer, gameplay programmer.": {
+    "translation": "カメラプログラマー、ゲームプレイプログラマー。",
+    "api": "deepl"
+  },
+  "AI programmer, tool programmer, gameplay programmer.": {
+    "translation": "AIプログラマー、ツールプログラマー、ゲームプレイプログラマー。",
+    "api": "deepl"
+  },
+  "<span class=\"katex\" translate=\"no\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>o</mi><mi>t</mi><mi>h</mi><mi>e</mi><mi>r</mi><mspace></mspace><mtext> </mtext><mi>n</mi><mi>e</mi><mi>e</mi><mi>d</mi><mi>s</mi></mrow><annotation encoding=\"application/x-tex\">other\\ needs</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">o</span><span class=\"mord mathnormal\">t</span><span class=\"mord mathnormal\">h</span><span class=\"mord mathnormal\" style=\"margin-right:0.02778em\">er</span><span class=\"mspace allowbreak\"></span><span class=\"mspace\" style=\"margin-right:0.1667em\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">n</span><span class=\"mord mathnormal\">ee</span><span class=\"mord mathnormal\">d</span><span class=\"mord mathnormal\">s</span></span></span></span> would be additional human cravings, such as humor, sex, movement, food, vertigo, needs of the <a class=\" not-prose underline text-nowrap print:text-wrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Maslow hierarchy (Flow vs)\" data-umami-event-url=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\">Maslow hierarchy</a>. These are generally less explored, but are equally as valid for the concept of fun.": {
+    "translation": "<span class=\"katex\" translate=\"no\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>o</mi><mi>t</mi><mi>h</mi><mi>e</mi><mi>r</mi><mspace></mspace><mtext> </mtext><mi>n</mi><mi>e</mi><mi>e</mi><mi>d</mi><mi>s</mi></mrow><annotation encoding=\"application/x-tex\">other\\ needs</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">o</span><span class=\"mord mathnormal\">t</span><span class=\"mord mathnormal\">h</span><span class=\"mord mathnormal\" style=\"margin-right:0.02778em\">er</span><span class=\"mspace allowbreak\"></span><span class=\"mspace\" style=\"margin-right:0.1667em\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">n</span><span class=\"mord mathnormal\">ee</span><span class=\"mord mathnormal\">d</span><span class=\"mord mathnormal\">s</span></span></span></span>それは、ユーモア、セックス、動き、食べ物、めまい、<a class=\" not-prose underline text-nowrap print:text-wrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Maslow hierarchy (Flow vs)\" data-umami-event-url=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\">マズローの欲求階層における</a>ニーズなど、人間のさらなる欲求でしょう。これらは一般的にあまり研究されていませんが、楽しさの概念としては同様に有効です。",
+    "api": "deepl"
+  },
+  "<a class=\" not-prose underline text-nowrap print:text-wrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Breath of the Wild (Flow vs)\" data-umami-event-url=\"https://wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild\">Breath of the Wild</a> is a masterclass at balancing both approaches.": {
+    "translation": "<a class=\" not-prose underline text-nowrap print:text-wrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Breath of the Wild (Flow vs)\" data-umami-event-url=\"https://wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild\">ブレス オブ ザ ワイルドは</a>、両方のアプローチをバランスよく組み合わせた傑作です。",
+    "api": "deepl"
+  },
+  "<a class=\" not-prose underline text-nowrap print:text-wrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/Astro_Bot\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Astro Bot (Flow vs)\" data-umami-event-url=\"https://wikipedia.org/wiki/Astro_Bot\">Astro Bot</a> is the perfect activity game.": {
+    "translation": "<a class=\" not-prose underline text-nowrap print:text-wrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/Astro_Bot\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Astro Bot (Flow vs)\" data-umami-event-url=\"https://wikipedia.org/wiki/Astro_Bot\">アストロボット</a>は、完璧な活動ゲームです。",
+    "api": "deepl"
+  },
+  "<a class=\" not-prose underline text-nowrap print:text-wrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/What_Remains_of_Edith_Finch\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"What Remains of Edith Finch (Flow vs)\" data-umami-event-url=\"https://wikipedia.org/wiki/What_Remains_of_Edith_Finch\">What Remains of Edith Finch</a> is very effective as entertainment.": {
+    "translation": "<a class=\" not-prose underline text-nowrap print:text-wrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/What_Remains_of_Edith_Finch\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"What Remains of Edith Finch (Flow vs)\" data-umami-event-url=\"https://wikipedia.org/wiki/What_Remains_of_Edith_Finch\">『エディス・フィンチの世界』は</a>エンターテイメントとして非常に効果的です。",
+    "api": "deepl"
+  },
+  "<span class=\"katex\" translate=\"no\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>o</mi><mi>t</mi><mi>h</mi><mi>e</mi><mi>r</mi><mspace></mspace><mtext> </mtext><mi>n</mi><mi>e</mi><mi>e</mi><mi>d</mi><mi>s</mi></mrow><annotation encoding=\"application/x-tex\">other\\ needs</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">o</span><span class=\"mord mathnormal\">t</span><span class=\"mord mathnormal\">h</span><span class=\"mord mathnormal\" style=\"margin-right:0.02778em\">er</span><span class=\"mspace allowbreak\"></span><span class=\"mspace\" style=\"margin-right:0.1667em\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">n</span><span class=\"mord mathnormal\">ee</span><span class=\"mord mathnormal\">d</span><span class=\"mord mathnormal\">s</span></span></span></span> would be additional human cravings, such as humor, sex, movement, food, vertigo, needs of the <a class=\" not-prose underline text-nowrap print:text-wrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Maslow hierarchy (Debugging)\" data-umami-event-url=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\">Maslow hierarchy</a>. These are generally less explored, but are equally as valid for the concept of fun.": {
+    "translation": "<span class=\"katex\" translate=\"no\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>o</mi><mi>t</mi><mi>h</mi><mi>e</mi><mi>r</mi><mspace></mspace><mtext> </mtext><mi>n</mi><mi>e</mi><mi>e</mi><mi>d</mi><mi>s</mi></mrow><annotation encoding=\"application/x-tex\">other\\ needs</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">o</span><span class=\"mord mathnormal\">t</span><span class=\"mord mathnormal\">h</span><span class=\"mord mathnormal\" style=\"margin-right:0.02778em\">er</span><span class=\"mspace allowbreak\"></span><span class=\"mspace\" style=\"margin-right:0.1667em\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">n</span><span class=\"mord mathnormal\">ee</span><span class=\"mord mathnormal\">d</span><span class=\"mord mathnormal\">s</span></span></span></span>それは、ユーモア、セックス、動き、食べ物、めまい、<a class=\" not-prose underline text-nowrap print:text-wrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Maslow hierarchy (Debugging)\" data-umami-event-url=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\">マズローの欲求階層における</a>ニーズなど、人間のさらなる欲求でしょう。これらは一般的にあまり研究されていませんが、楽しさの概念としては同様に有効です。",
+    "api": "deepl"
+  },
+  "<a class=\" not-prose underline text-nowrap print:text-wrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/The_Stanley_Parable\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"The Stanley Parable (Debugging)\" data-umami-event-url=\"https://wikipedia.org/wiki/The_Stanley_Parable\">The Stanley Parable</a> is an interesting game based on humor.": {
+    "translation": "<a class=\" not-prose underline text-nowrap print:text-wrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/The_Stanley_Parable\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"The Stanley Parable (Debugging)\" data-umami-event-url=\"https://wikipedia.org/wiki/The_Stanley_Parable\">The Stanley Parable</a>はユーモアを基調とした面白いゲームです。",
+    "api": "deepl"
+  },
+  "<span class=\"katex\" translate=\"no\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>o</mi><mi>t</mi><mi>h</mi><mi>e</mi><mi>r</mi><mspace></mspace><mtext> </mtext><mi>n</mi><mi>e</mi><mi>e</mi><mi>d</mi><mi>s</mi></mrow><annotation encoding=\"application/x-tex\">other\\ needs</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">o</span><span class=\"mord mathnormal\">t</span><span class=\"mord mathnormal\">h</span><span class=\"mord mathnormal\" style=\"margin-right:0.02778em\">er</span><span class=\"mspace allowbreak\"></span><span class=\"mspace\" style=\"margin-right:0.1667em\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">n</span><span class=\"mord mathnormal\">ee</span><span class=\"mord mathnormal\">d</span><span class=\"mord mathnormal\">s</span></span></span></span> would be additional human cravings, such as humor, sex, movement, food, vertigo, needs of the <a class=\" not-prose underline text-nowrap print:text-wrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Maslow hierarchy (Thoughts)\" data-umami-event-url=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\">Maslow hierarchy</a>. These are generally less explored, but are equally as valid for the concept of fun.": {
+    "translation": "<span class=\"katex\" translate=\"no\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>o</mi><mi>t</mi><mi>h</mi><mi>e</mi><mi>r</mi><mspace></mspace><mtext> </mtext><mi>n</mi><mi>e</mi><mi>e</mi><mi>d</mi><mi>s</mi></mrow><annotation encoding=\"application/x-tex\">other\\ needs</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">o</span><span class=\"mord mathnormal\">t</span><span class=\"mord mathnormal\">h</span><span class=\"mord mathnormal\" style=\"margin-right:0.02778em\">er</span><span class=\"mspace allowbreak\"></span><span class=\"mspace\" style=\"margin-right:0.1667em\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">n</span><span class=\"mord mathnormal\">ee</span><span class=\"mord mathnormal\">d</span><span class=\"mord mathnormal\">s</span></span></span></span>それは、ユーモア、セックス、動き、食べ物、めまい、<a class=\" not-prose underline text-nowrap print:text-wrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Maslow hierarchy (Thoughts)\" data-umami-event-url=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\">マズローの欲求階層における</a>ニーズなど、人間のさらなる欲求でしょう。これらは一般的にあまり研究されていませんが、楽しさの概念としては同様に有効です。",
+    "api": "deepl"
+  },
+  "<span class=\"katex\" translate=\"no\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>o</mi><mi>t</mi><mi>h</mi><mi>e</mi><mi>r</mi><mspace></mspace><mtext> </mtext><mi>n</mi><mi>e</mi><mi>e</mi><mi>d</mi><mi>s</mi></mrow><annotation encoding=\"application/x-tex\">other\\ needs</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">o</span><span class=\"mord mathnormal\">t</span><span class=\"mord mathnormal\">h</span><span class=\"mord mathnormal\" style=\"margin-right:0.02778em\">er</span><span class=\"mspace allowbreak\"></span><span class=\"mspace\" style=\"margin-right:0.1667em\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">n</span><span class=\"mord mathnormal\">ee</span><span class=\"mord mathnormal\">d</span><span class=\"mord mathnormal\">s</span></span></span></span> would be additional human cravings, such as humor, sex, movement, food, vertigo, needs of the <a class=\" not-prose underline text-nowrap print:text-wrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Maslow hierarchy (Homepage)\" data-umami-event-url=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\">Maslow hierarchy</a>. These are generally less explored, but are equally as valid for the concept of fun.": {
+    "translation": "<span class=\"katex\" translate=\"no\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>o</mi><mi>t</mi><mi>h</mi><mi>e</mi><mi>r</mi><mspace></mspace><mtext> </mtext><mi>n</mi><mi>e</mi><mi>e</mi><mi>d</mi><mi>s</mi></mrow><annotation encoding=\"application/x-tex\">other\\ needs</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">o</span><span class=\"mord mathnormal\">t</span><span class=\"mord mathnormal\">h</span><span class=\"mord mathnormal\" style=\"margin-right:0.02778em\">er</span><span class=\"mspace allowbreak\"></span><span class=\"mspace\" style=\"margin-right:0.1667em\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">n</span><span class=\"mord mathnormal\">ee</span><span class=\"mord mathnormal\">d</span><span class=\"mord mathnormal\">s</span></span></span></span>それは、ユーモア、セックス、動き、食べ物、めまい、<a class=\" not-prose underline text-nowrap print:text-wrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Maslow hierarchy (Homepage)\" data-umami-event-url=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\">マズローの欲求階層における</a>ニーズなど、人間のさらなる欲求でしょう。これらは一般的にあまり研究されていませんが、楽しさの概念としては同様に有効です。",
+    "api": "deepl"
   }
 }

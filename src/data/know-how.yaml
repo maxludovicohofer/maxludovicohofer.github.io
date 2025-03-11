@@ -2,6 +2,20 @@
   start: 2024-03-01
   school: true
   translateId: true
+  projects:
+    - hexelied
+    - madreterra
+    - lolita
+  tech:
+    - Houdini
+    - Maya
+    - ZBrush
+    - Marvelous designer
+    - Substance designer
+    - Photoshop
+    - Illustrator
+    - Krita
+    - FL Studio
   skills:
     - job: Game designer
       achievements:
@@ -20,7 +34,23 @@
 - id: INattivo Soc. Cons. a.r.l.
   start: 2021-05-01
   end: 2022-03-01
+  team:
+    internal: 10
+    external: 2
   reasonForLeaving: Left company to pursue career change
+  tech:
+    - Python
+    - Agile
+    - TDD
+    - SQL
+    - NoSQL
+    - AWS
+    - CI \ CD
+    - Mobile
+    - Full stack
+    - Excel
+    - Photoshop
+    - Illustrator
   skills:
     - job: Project manager
       achievements:
@@ -40,6 +70,21 @@
 - id: Zulu Medical
   start: 2019-11-01
   end: 2021-04-30
+  team:
+    internal: 6
+    external: 15
+  tech:
+    - C++
+    - C#
+    - Python
+    - Agile
+    - SQL
+    - AWS
+    - CI \ CD
+    - Mobile
+    - Full stack
+    - Photoshop
+    - Illustrator
   skills:
     - job: Technical lead
       achievements:
@@ -55,6 +100,26 @@
   start: 2023-09-01
   end: 2024-02-28
   school: true
+  projects:
+    - steelsilk-championship
+    - duchessas-world
+    - inversion
+    - act-by-belief
+    - ambulance
+  tech:
+    - HLSL
+    - AWS
+    - Excel
+    - Houdini
+    - Maya
+    - ZBrush
+    - Substance painter
+    - Photoshop
+    - Illustrator
+    - After effects
+    - Premiere
+    - Gaea
+    - FL Studio
   skills:
     - job: Lead game designer
       countAsWork: true
@@ -79,6 +144,11 @@
   school: true
   dropOut: true
   translateId: true
+  tech:
+    - C++
+    - Python
+    - Java
+    - SQL
   skills:
     - job: Software engineering
       achievements:
@@ -89,6 +159,15 @@
   end: 2016-06-09
   school: true
   translateId: true
+  tech:
+    - Unreal Engine
+    - C++
+    - C
+    - C#
+    - Assembly x86
+    - Java
+    - SQL
+    - Excel
   skills:
     - job: Computer science
       achievements:
