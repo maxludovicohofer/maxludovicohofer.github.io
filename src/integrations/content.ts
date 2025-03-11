@@ -17,7 +17,7 @@ import { VALID_INPUT_FORMATS } from "node_modules/astro/dist/assets/consts";
 import { groupBy } from "./array";
 import { applyMatch, matchRoles } from "./astro-server";
 import type { AstroGlobal } from "astro";
-import { getCurrentLocale } from "./i18n-server";
+import { getCurrentLocale } from "./i18n";
 
 export type PostCollectionKey = Extract<CollectionKey, "projects" | "thoughts">;
 
@@ -152,7 +152,9 @@ export const getGroup = (entry: { data: object } | undefined) => {
     return !!(test && Object.hasOwn(test.data, "group"));
   }
 
-  return isGroupEntry(entry) ? entry.data.group : undefined;
+  if (!isGroupEntry(entry)) return;
+
+  return entry.data.group;
 };
 
 export const getTeam = (entry: { data: object } | undefined) => {
@@ -162,11 +164,14 @@ export const getTeam = (entry: { data: object } | undefined) => {
     return !!(test && Object.hasOwn(test.data, "team"));
   }
 
-  return isTeamEntry(entry)
-    ? typeof entry.data.team === "number"
-      ? { internal: entry.data.team }
-      : entry.data.team
-    : undefined;
+  if (!isTeamEntry(entry)) return;
+
+  if (typeof entry.data.team !== "number") return entry.data.team;
+
+  return { internal: entry.data.team, external: 0 } satisfies Exclude<
+    NonNullable<CollectionEntry<"projects">["data"]["team"]>,
+    number
+  >;
 };
 
 export const getKnowHow = async (astro: AstroGlobal) => {

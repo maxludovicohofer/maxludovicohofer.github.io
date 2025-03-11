@@ -43,7 +43,7 @@ const teamContent = z.object({
     .or(
       z.object({
         internal: z.number().int().positive(),
-        external: z.number().int().positive().optional(),
+        external: z.number().int().positive(),
       })
     )
     .optional(),

@@ -1,13 +1,15 @@
 ---
 import { locales } from "@integrations/astro-config.mts";
-import { localeInfo } from "@integrations/i18n-server";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { standardizePath } from "@integrations/text";
-import { getCurrentLocale } from "@integrations/i18n-server";
 import Button from "./Button.astro";
 import type { HTMLAttributes } from "astro/types";
 import LanguageButton from "./LanguageButton.astro";
-import { getPathWithoutLocale } from "@integrations/i18n";
+import {
+  getCurrentLocale,
+  getPathWithoutLocale,
+  localeInfo,
+} from "@integrations/i18n";
 
 interface Props extends HTMLAttributes<"div"> {
   hasBack?: boolean;

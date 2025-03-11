@@ -1,11 +1,15 @@
 ---
-import { applyMatch, matchRoles } from "@integrations/astro-server";
+import {
+  applyMatch,
+  getCollectionAdvanced,
+  matchRoles,
+  type GetCollectionOptions,
+} from "@integrations/astro-server";
 import { i18n, setLocale } from "@integrations/i18n-server";
 import { capitalize } from "@integrations/text";
 import Text from "@ui/Text.astro";
 import type { AstroGlobal } from "astro";
 import type { HTMLAttributes } from "astro/types";
-import { getCollection } from "astro:content";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -16,12 +20,16 @@ interface Props extends HTMLAttributes<"ol"> {
 
 const { class: className = "", compact, ...props } = Astro.props;
 
-export const getTech = async (astro: AstroGlobal, threshold: number = 4) =>
+export const getTech = async (
+  astro: AstroGlobal,
+  threshold: number = 4,
+  options?: GetCollectionOptions<"tech">
+) =>
   await Promise.all(
     applyMatch(
       await matchRoles(
         astro,
-        (await getCollection("tech")).map((tech) => ({
+        (await getCollectionAdvanced("tech", options)).map((tech) => ({
           data: tech,
           roles: tech.data.roles,
         }))

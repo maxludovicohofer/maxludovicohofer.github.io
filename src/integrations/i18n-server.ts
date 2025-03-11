@@ -1,4 +1,4 @@
-import { defaultLocale, locales } from "@integrations/astro-config.mjs";
+import { defaultLocale } from "@integrations/astro-config.mjs";
 import type { AstroGlobal } from "astro";
 import { getEntry, type CollectionEntry } from "astro:content";
 import { DEEPL_API_KEY } from "astro:env/server";
@@ -8,7 +8,7 @@ import { diff, fixNewLines, highlightCharacter } from "./text";
 import { groupBy, indexOfMin } from "./array";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
-import type { PossibleTranslations } from "./i18n";
+import { getCurrentLocale, type PossibleTranslations } from "./i18n";
 import { parse } from "node-html-parser";
 
 const deeplTrans = DEEPL_API_KEY
@@ -25,28 +25,6 @@ export type TranslateOptions = {
 export type I18nOptions = deepl.TranslatorOptions &
   Partial<Record<PossibleTranslations, string>> &
   TranslateOptions;
-
-export type LocaleInfo = {
-  languageName: string;
-  delimiters: string;
-  getYearMonth: (date: string) => string;
-  getYear: (date: string) => string;
-};
-
-export const localeInfo: Record<(typeof locales)[number], LocaleInfo> = {
-  en: {
-    languageName: "English",
-    delimiters: ".?!",
-    getYear: (date) => date.replaceAll(/\D+/g, "").slice(-4),
-    getYearMonth: (date) => date.replace(/\d+,/, ""),
-  },
-  ja: {
-    languageName: "日本語",
-    delimiters: "。？！",
-    getYear: (date) => date.replaceAll(/\b\d{1,2}[日月]/g, ""),
-    getYearMonth: (date) => date.replaceAll(/\b\d{1,2}日/g, ""),
-  },
-};
 
 export const i18n = (astro: AstroGlobal, globalOptions?: I18nOptions) => {
   return async (text: string, options?: I18nOptions) => {
@@ -272,6 +250,3 @@ export const setLocale = async (astro: AstroGlobal) => {
 
   dayjs.locale(translateLocale);
 };
-
-export const getCurrentLocale = (astro: AstroGlobal) =>
-  (astro.currentLocale ?? defaultLocale) as (typeof locales)[number];

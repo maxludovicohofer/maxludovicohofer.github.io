@@ -2,15 +2,11 @@
 import { getKnowHow } from "@integrations/content";
 import Text from "@components/ui/Text.astro";
 import { capitalize } from "@integrations/text";
-import {
-  getCurrentLocale,
-  i18n,
-  localeInfo,
-  setLocale,
-} from "@integrations/i18n-server";
+import { i18n, setLocale } from "@integrations/i18n-server";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import type { AstroGlobal } from "astro";
+import { getCurrentLocale, localeInfo } from "@integrations/i18n";
 
 const knowHow = await getKnowHow(Astro);
 

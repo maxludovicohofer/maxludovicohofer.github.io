@@ -1,3 +1,7 @@
+import type { AstroGlobal } from "astro";
+import { defaultLocale } from "./astro-config.mts";
+import { getCurrentLocale, localeInfo } from "./i18n";
+
 export const toSentenceCase = (text: string) =>
   text.charAt(0).toLocaleUpperCase() + text.slice(1).toLocaleLowerCase();
 
@@ -6,6 +10,17 @@ export const toTitleCase = (text: string) =>
 
 export const capitalize = (text: string) =>
   text.charAt(0).toLocaleUpperCase() + text.slice(1);
+
+export const endDot = (text: string, astro?: AstroGlobal) =>
+  text.search(
+    new RegExp(
+      `[${
+        localeInfo[astro ? getCurrentLocale(astro) : defaultLocale].delimiters
+      }]$`
+    )
+  ) !== -1
+    ? text
+    : `${text}.`;
 
 export const isRemoteLink = (link: string) => link.startsWith("http");
 

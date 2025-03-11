@@ -1,5 +1,5 @@
 ---
-import { capitalize } from "@integrations/text";
+import { endDot, capitalize } from "@integrations/text";
 import Text from "@ui/Text.astro";
 import type { ComponentProps } from "astro/types";
 
@@ -12,5 +12,5 @@ const { value, ...props } = Astro.props;
 
 <Text tag="b"><slot /></Text>
 <Text subtitle tag="span" {...props}
-  >{capitalize(Array.isArray(value) ? value.join(", ") : value)}.</Text
+  >{endDot(capitalize(Array.isArray(value) ? value.join(", ") : value))}</Text
 >

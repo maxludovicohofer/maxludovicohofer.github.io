@@ -9,6 +9,7 @@ import {
   type ReferenceDataEntry,
 } from "astro:content";
 import {
+  endDot,
   capitalize,
   getHumanPathSection,
   getPathSection,
@@ -39,11 +40,11 @@ import {
   type DocumentCollectionKey,
 } from "@layouts/document/Document.astro";
 import { defaultLocale, locales } from "./astro-config.mts";
-import { getCurrentLocale } from "./i18n-server";
 import {
   addLocaleToLink,
   getPathWithoutLocale,
   type PossibleTranslations,
+  getCurrentLocale,
 } from "./i18n";
 
 type ExceptFirst<T extends unknown[]> = T extends [any, ...infer U] ? U : never;
@@ -333,27 +334,48 @@ export const getSortedDocuments = async <C extends DocumentCollectionKey>(
   ).sort((a, b) => (b.publishingDate.isAfter(a.publishingDate) ? 1 : -1));
 };
 
-export const getAllDocuments = async <
-  C extends DocumentCollectionKey,
-  E extends keyof DataEntryMap[DocumentCollectionKey] = string
+export const getAllDocuments = async <C extends DocumentCollectionKey>(
+  collection: C,
+  ...params: ExceptFirst<Parameters<typeof getCollectionAdvanced>>
+) =>
+  await getCollectionAdvanced(collection, {
+    filter: ({ data: { draft } }) => import.meta.env.DEV || !draft,
+    ...params[0],
+  });
+
+export interface GetCollectionOptions<
+  C extends CollectionKey,
+  E extends keyof DataEntryMap[CollectionKey] = string
+> {
+  excluded?: string[];
+  entries?: ReferenceDataEntry<CollectionKey, E>[];
+  filter?: (entry: CollectionEntry<C>) => boolean | undefined;
+}
+
+export const getCollectionAdvanced = async <
+  C extends CollectionKey,
+  E extends keyof DataEntryMap[CollectionKey] = string
 >(
   collection: C,
-  options?: {
-    excluded?: string[];
-    entries?: ReferenceDataEntry<DocumentCollectionKey, E>[];
-  }
+  options?: GetCollectionOptions<C, E>
 ) => {
-  const excludedDocuments = options?.excluded ?? [];
+  const excluded = options?.excluded?.map((entry) => getEntryId(entry)) ?? [];
+  const filter = options?.filter;
+  const queryFilter: NonNullable<NonNullable<typeof options>["filter"]> = (
+    entry
+  ) => {
+    if (filter && !filter(entry)) return;
 
-  const documentFilter = ({ data: { draft }, id }: CollectionEntry<C>) =>
-    (import.meta.env.DEV || !draft) &&
-    !excludedDocuments.some((entry) => getEntryId(id) === getEntryId(entry));
+    const entryId = getEntryId(entry);
+
+    return excluded.every((excludedId) => entryId !== excludedId);
+  };
 
   return options?.entries
     ? (
         await getEntriesSafe(options.entries as ReferenceDataEntry<C, E>[])
-      ).filter(documentFilter)
-    : await getCollection(collection, documentFilter);
+      ).filter(queryFilter)
+    : await getCollection(collection, queryFilter);
 };
 
 export const getUniqueEntries = <C extends CollectionKey>(

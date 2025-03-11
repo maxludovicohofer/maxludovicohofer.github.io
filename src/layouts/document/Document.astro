@@ -1,15 +1,15 @@
 ---
 import type { CollectionKey, CollectionEntry } from "astro:content";
 import { cleanMarkdown } from "@integrations/markdown";
-import { capitalize, getPathSection } from "@integrations/text";
+import { endDot, capitalize, getPathSection } from "@integrations/text";
 import type { PostCollectionKey } from "@integrations/content";
 import type { ComponentProps } from "astro/types";
 import Card from "@layouts/Card.astro";
 import DocumentText from "./DocumentText.astro";
 import PostText from "@post/PostText.astro";
 import { isLocalizedEntry, getEntryLocale } from "@integrations/astro-server";
-import { localeInfo } from "@integrations/i18n-server";
 import { defaultLocale } from "@integrations/astro-config.mjs";
+import { localeInfo } from "@integrations/i18n";
 
 interface Props
   extends ComponentProps<typeof DocumentText>,
@@ -57,7 +57,7 @@ export const getDescription = <C extends CollectionKey>(
       )
     );
 
-    description = `${splitSentences.slice(0, sentences).join(". ")}.`;
+    description = endDot(`${splitSentences.slice(0, sentences).join(". ")}`);
   }
 
   if (shortenStart) {

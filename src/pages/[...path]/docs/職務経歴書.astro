@@ -13,7 +13,6 @@ import {
   getDevelopmentTime,
   getTeam,
 } from "@integrations/content";
-import { getFormattedDates } from "@components/docs/ResumeKnowHow.astro";
 import Link from "@components/ui/Link.astro";
 import {
   getMatchedPosts,
@@ -21,8 +20,8 @@ import {
   matchRoles,
 } from "@integrations/astro-server";
 import { applyMatch } from "@integrations/astro-server";
-import { capitalize, toTextList } from "@integrations/text";
 import { getEntryId } from "@layouts/document/Document.astro";
+import ShokumuEntry from "@components/docs/ShokumuEntry.astro";
 import { getTech } from "@components/TechList.astro";
 
 export const getStaticPaths = () => getBasePaths({ allowedLocales: ["ja"] });
@@ -48,7 +47,13 @@ const durationThreshold = dayjs.duration({ days: 4 });
 
 const experienceTechThreshold = 0;
 
+// TODO MAKE UMAMIEVENT WITH ORIGINAL PATHNAME (CHECK OTHER USES OF ASTRO URL)
+// TODO CHANGE LINK NAME IF CLICKING ON MAXLUDOVICO.GITHUB (SHOULD BE PROCeSSED AS LOCAL LINK)
+// TODO FIX DATES AND ORDER OF ACT BY BELIEF IN SHOKUMU AI PROGRAMMER (ORDER BASED ON END DATE)
+// TODO CHECK EDGE FAVORITES FOR HOW TO WRITE THE TWO RESUMES
 // TODO WRITE SELF PR
+// TODO FIX PAGING ISSUES
+// TODO PORTFOLIO LINK FOR AI PROGRAMMER SHOULD NOT HAVE END SLASH
 ---
 
 <DocumentPage pageProps={{ noTranslation: true }}>
@@ -76,8 +81,7 @@ const experienceTechThreshold = 0;
           team,
         }) => {
           const organization = `${translateId ? await t(id) : id}${countAsWork ? `${await t("(")}${await t("school")}${await t(")")}` : ""}`;
-          const dates = await getFormattedDates(Astro, start, end);
-          const translatedJob = await t(job.id);
+
           const matchedProjects =
             projects &&
             (await getMatchedPosts(Astro, "projects", {
@@ -87,24 +91,17 @@ const experienceTechThreshold = 0;
                 ...project,
               })),
             }));
-          const projectData =
+          const relevantProjects =
             matchedProjects &&
             applyMatch(matchedProjects, matchThreshold).filter(
               (project) => getDevelopmentTime(project)! > durationThreshold
             );
 
-          const experienceTechIds = tech?.map(({ id }) => id);
-          const experienceTechToDisplay = experienceTechIds
-            ? (await getTech(Astro, experienceTechThreshold)).filter(({ id }) =>
-                experienceTechIds.includes(id)
-              )
-            : [];
-
-          const soloExperience =
-            !team || (team.internal === 1 && !team.external);
-          const experienceScaleText = soloExperience
-            ? await t("Solo")
-            : `${team.internal}名${team.external ? `（うち外注スタッフ${team.external}名）` : ""}`;
+          const experienceTech =
+            tech &&
+            (await getTech(Astro, experienceTechThreshold, {
+              entries: tech,
+            }));
 
           return (
             <>
@@ -112,25 +109,16 @@ const experienceTechThreshold = 0;
               <table>
                 <thead>
                   <tr>
-                    <th class="text-center">期間</th>
-                    <th class="text-center">業務内容</th>
-                    <th class="text-center">環境</th>
-                    <th class="text-center">規模</th>
+                    <th class="text-center w-44">期間</th>
+                    <th class="text-center min-w-60">業務内容</th>
+                    <th class="text-center w-44">環境</th>
+                    <th class="text-center w-44">規模</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {projectData?.length ? (
-                    projectData.map(async (project) => {
-                      const publishingDate = getPublishingDate(project);
-                      const dates = await getFormattedDates(
-                        Astro,
-                        publishingDate?.subtract(getDevelopmentTime(project)!)!,
-                        publishingDate
-                      );
-
-                      const category = await t(getCategory(project)!);
-
-                      const team = getTeam(project);
+                  {relevantProjects?.length ? (
+                    relevantProjects.map(async (project) => {
+                      const projectEnd = getPublishingDate(project)!;
 
                       const {
                         collection,
@@ -138,18 +126,7 @@ const experienceTechThreshold = 0;
                         data: { roles, tech, awards },
                       } = project;
 
-                      const soloDeveloped =
-                        !team || (team.internal === 1 && !team.external);
-                      const scaleText = soloDeveloped
-                        ? await t("Solo")
-                        : `${team.internal}名${team.external ? `（うち外注スタッフ${team.external}名）` : ""}`;
-
-                      const projectLink = await getSiteLink(
-                        Astro,
-                        `${collection}/${getEntryId(id)}`
-                      );
-
-                      const rolesToDisplay = applyMatch(
+                      const projectRoles = applyMatch(
                         await matchRoles(
                           Astro,
                           roles.map((roleInfo) => ({
@@ -159,92 +136,42 @@ const experienceTechThreshold = 0;
                         )
                       );
 
-                      const rolesSentence = `${await t(capitalize(toTextList(rolesToDisplay.slice(0, 3).map(({ role: { id } }) => id))))}${await t(".")}`;
-
-                      const achievementsToDisplay = [
-                        ...(awards?.map((award) => `Won ${award}`) ?? []),
-                        ...rolesToDisplay.flatMap(
-                          ({ achievements }) => achievements
-                        ),
-                      ].slice(0, 2);
-
-                      const techIds = tech.map(({ id }) => id);
-                      const techToDisplay = (await getTech(Astro)).filter(
-                        ({ id }) => techIds.includes(id)
-                      );
+                      const projectTech = await getTech(Astro, undefined, {
+                        entries: tech,
+                      });
 
                       return (
-                        <tr>
-                          <td>{dates.join("～")}</td>
-                          <td>
-                            [役職] {rolesSentence}
-                            <br />
-                            <br />
-                            [ポイント]
-                            <ul class="mt-0">
-                              {achievementsToDisplay.map((achievement) => (
-                                <Text tag="li">{capitalize(achievement)}.</Text>
-                              ))}
-                            </ul>
-                            <Link href={projectLink} />
-                          </td>
-                          <td>
-                            {techToDisplay.map(async ({ id }, index) => {
-                              const translatedId = await t(id);
-
-                              return (
-                                <>
-                                  {index ? <br /> : ""}
-                                  {translatedId}
-                                </>
-                              );
-                            })}
-                          </td>
-                          <td>
-                            [プロジェクト]
-                            <br />
-                            {category}
-                            <br />
-                            <br />
-                            [チーム]
-                            <br />
-                            {scaleText}
-                          </td>
-                        </tr>
+                        <ShokumuEntry
+                          start={projectEnd.subtract(
+                            getDevelopmentTime(project)!
+                          )}
+                          end={projectEnd}
+                          roles={projectRoles.map(({ role }) => role)}
+                          points={[
+                            ...(awards?.map((award) => `Won ${award}`) ?? []),
+                            ...projectRoles.flatMap(
+                              ({ achievements }) => achievements
+                            ),
+                          ]}
+                          link={await getSiteLink(
+                            Astro,
+                            `${collection}/${getEntryId(id)}`
+                          )}
+                          tech={projectTech}
+                          projectType={getCategory(project)}
+                          team={getTeam(project)!}
+                        />
                       );
                     })
                   ) : (
-                    <tr>
-                      <td>{dates.join("～")}</td>
-                      <td>
-                        [担当業務] {translatedJob}
-                        <br />
-                        <br />
-                        [ポイント]
-                        <ul>
-                          {achievements.map((achievement) => (
-                            <Text tag="li">{achievement}</Text>
-                          ))}
-                        </ul>
-                      </td>
-                      <td>
-                        {experienceTechToDisplay.map(async ({ id }, index) => {
-                          const translatedId = await t(id);
-
-                          return (
-                            <>
-                              {index ? <br /> : ""}
-                              {translatedId}
-                            </>
-                          );
-                        })}
-                      </td>
-                      <td>
-                        [会社]
-                        <br />
-                        {experienceScaleText}
-                      </td>
-                    </tr>
+                    <ShokumuEntry
+                      start={start}
+                      end={end}
+                      roles={[job]}
+                      points={achievements}
+                      tech={experienceTech!}
+                      team={team!}
+                    />
                   )}
                 </tbody>
               </table>

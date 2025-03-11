@@ -1,6 +1,6 @@
 import type { AstroGlobal } from "astro";
 import { getRole } from "./astro-server";
-import { capitalize, toTextList } from "./text";
+import { endDot, capitalize, toTextList } from "./text";
 import { getCollection } from "astro:content";
 import { PHONE_NUMBER } from "astro:env/server";
 
@@ -60,13 +60,15 @@ export const getSummary = async (astro: AstroGlobal, short?: boolean) => {
       )}`
     : "";
 
-  return `${
-    short
-      ? `I'm ${withArticle}`
-      : `${capitalize(id)} experienced in leadership and software`
-  }${
-    specializationSentence
-      ? `${short ? "" : ","} ${specializationSentence}`
-      : ""
-  }.`;
+  return endDot(
+    `${
+      short
+        ? `I'm ${withArticle}`
+        : `${capitalize(id)} experienced in leadership and software`
+    }${
+      specializationSentence
+        ? `${short ? "" : ","} ${specializationSentence}`
+        : ""
+    }`
+  );
 };

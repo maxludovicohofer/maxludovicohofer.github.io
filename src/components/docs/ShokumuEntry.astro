@@ -1,0 +1,85 @@
+---
+import Link from "@components/ui/Link.astro";
+import Text from "@components/ui/Text.astro";
+import { capitalize, toTextList, endDot } from "@integrations/text";
+import type dayjs from "dayjs";
+import { getFormattedDates } from "./ResumeKnowHow.astro";
+import { i18n } from "@integrations/i18n-server";
+import type { ReferenceDataEntry } from "astro:content";
+import type { ComponentProps } from "astro/types";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  start: dayjs.Dayjs;
+  end?: dayjs.Dayjs | undefined;
+  roles: ReferenceDataEntry<"roles">[];
+  points: string[];
+  link?: ComponentProps<typeof Link>["href"] | undefined;
+  tech: CollectionEntry<"tech">[];
+  projectType?: string | undefined;
+  team: { internal: number; external: number };
+}
+
+const { start, end, roles, points, link, tech, projectType, team } =
+  Astro.props;
+
+const t = i18n(Astro);
+
+const dates = await getFormattedDates(Astro, start, end);
+
+const rolesSentence = `${await t(capitalize(toTextList(roles.slice(0, 3).map(({ id }) => id))))}${await t(".")}`;
+
+const type = projectType && (await t(projectType));
+const soloDeveloped = !team || (team.internal === 1 && !team.external);
+const scaleText = soloDeveloped
+  ? await t("Solo")
+  : `${team.internal + team.external}名${team.external ? `（うち外注スタッフ${team.external}名）` : ""}`;
+---
+
+<tr>
+  <td>{dates.join("～")}</td>
+  <td>
+    [役職] {rolesSentence}
+    <br />
+    <br />
+    [ポイント]
+    <ul class="mt-0">
+      {
+        points
+          .slice(0, 2)
+          .map((point) => <Text tag="li">{endDot(capitalize(point))}</Text>)
+      }
+    </ul>
+    {link && <Link class="!text-wrap" href={link} />}
+  </td>
+  <td>
+    {
+      tech.map(async ({ id }, index) => {
+        const translatedId = await t(id);
+
+        return (
+          <>
+            {index ? <br /> : ""}
+            {translatedId}
+          </>
+        );
+      })
+    }
+  </td>
+  <td>
+    {
+      type && (
+        <>
+          [プロジェクト]
+          <br />
+          {type}
+          <br />
+          <br />
+        </>
+      )
+    }
+    [チーム]
+    <br />
+    {scaleText}
+  </td>
+</tr>
