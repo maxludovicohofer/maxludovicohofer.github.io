@@ -1,4 +1,4 @@
-import { defaultLocale } from "@integrations/astro-config.mjs";
+import { defaultLocale } from "@integrations/astro-config.mts";
 import type { AstroGlobal } from "astro";
 import { getEntry, type CollectionEntry } from "astro:content";
 import { DEEPL_API_KEY } from "astro:env/server";
@@ -8,8 +8,9 @@ import { diff, fixNewLines, highlightCharacter } from "./text";
 import { groupBy, indexOfMin } from "./array";
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
-import { getCurrentLocale, type PossibleTranslations } from "./i18n";
+import { type PossibleTranslations } from "./i18n";
 import { parse } from "node-html-parser";
+import { getCurrentLocale } from "./i18n-special";
 
 const deeplTrans = DEEPL_API_KEY
   ? new deepl.Translator(DEEPL_API_KEY)

@@ -9,7 +9,6 @@ import {
   type ReferenceDataEntry,
 } from "astro:content";
 import {
-  endDot,
   capitalize,
   getHumanPathSection,
   getPathSection,
@@ -44,15 +43,15 @@ import {
   addLocaleToLink,
   getPathWithoutLocale,
   type PossibleTranslations,
-  getCurrentLocale,
 } from "./i18n";
+import { getCurrentLocale } from "./i18n-special";
 
 type ExceptFirst<T extends unknown[]> = T extends [any, ...infer U] ? U : never;
 
 export const getRole = async (astro: AstroGlobal) => {
   const roles = await getCollection("roles");
   // Look for role in path sections
-  const pathSections = getPathSections(astro.url.pathname, 0, 2).filter(
+  const pathSections = getPathSections(astro.originPathname, 0, 2).filter(
     (section) => !!section
   );
 
@@ -414,7 +413,11 @@ export const getLinkName = async (
     const url = new URL(link);
 
     if (!pretty) {
-      linkName = url.host.split(".").at(-2)!;
+      if (url.hostname === astro.site?.hostname) {
+        linkName = await getLocalLinkName(astro, url.pathname);
+      } else {
+        linkName = url.host.split(".").at(-2)!;
+      }
     } else {
       linkName =
         url.hostname === "maps.google.com" ? url.searchParams.get("q")! : link;
@@ -435,8 +438,11 @@ export const getLinkName = async (
   } else if (isGeoLink(link)) {
     linkName = link.slice(4);
   } else {
-    linkName = getHumanPathSection(await getPathWithoutBase(astro, link));
+    linkName = await getLocalLinkName(astro, link);
   }
 
   return capitalize(linkName);
 };
+
+export const getLocalLinkName = async (astro: AstroGlobal, link: string) =>
+  getHumanPathSection(await getPathWithoutBase(astro, link)) || "Homepage";

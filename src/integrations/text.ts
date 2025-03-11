@@ -1,6 +1,6 @@
 import type { AstroGlobal } from "astro";
 import { defaultLocale } from "./astro-config.mts";
-import { getCurrentLocale, localeInfo } from "./i18n";
+import { getCurrentLocale, localeInfo } from "./i18n-special";
 
 export const toSentenceCase = (text: string) =>
   text.charAt(0).toLocaleUpperCase() + text.slice(1).toLocaleLowerCase();

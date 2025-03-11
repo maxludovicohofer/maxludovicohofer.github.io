@@ -9,7 +9,7 @@ import DocumentText from "./DocumentText.astro";
 import PostText from "@post/PostText.astro";
 import { isLocalizedEntry, getEntryLocale } from "@integrations/astro-server";
 import { defaultLocale } from "@integrations/astro-config.mjs";
-import { localeInfo } from "@integrations/i18n";
+import { localeInfo } from "@integrations/i18n-special";
 
 interface Props
   extends ComponentProps<typeof DocumentText>,
@@ -53,7 +53,7 @@ export const getDescription = <C extends CollectionKey>(
   if (sentences) {
     const splitSentences = (description ?? cleanMarkdown(cleanBody)).split(
       new RegExp(
-        `[${isLocalizedEntry(entry) ? localeInfo[getEntryLocale(entry)].delimiters : localeInfo[defaultLocale].delimiters}]\\s+`
+        `[${localeInfo[isLocalizedEntry(entry) ? getEntryLocale(entry) : defaultLocale].delimiters}]\\s+`
       )
     );
 

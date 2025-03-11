@@ -5,11 +5,8 @@ import { standardizePath } from "@integrations/text";
 import Button from "./Button.astro";
 import type { HTMLAttributes } from "astro/types";
 import LanguageButton from "./LanguageButton.astro";
-import {
-  getCurrentLocale,
-  getPathWithoutLocale,
-  localeInfo,
-} from "@integrations/i18n";
+import { getPathWithoutLocale } from "@integrations/i18n";
+import { getCurrentLocale, localeInfo } from "@integrations/i18n-special";
 
 interface Props extends HTMLAttributes<"div"> {
   hasBack?: boolean;

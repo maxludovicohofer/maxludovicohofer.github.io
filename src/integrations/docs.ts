@@ -33,7 +33,7 @@ export const getMotivationSentence = async (astro: AstroGlobal) => {
 
   // Do not include company motivation if public
   return `${
-    PHONE_NUMBER
+    astro.url.hostname !== astro.site?.hostname
       ? `I am deeply inspired by your innovative ${mainWorkField} and would be honored to contribute to your team. `
       : ""
   }I value attention to detail, embrace cutting-edge technologies, and enjoy fostering collaboration to achieve excellent results. Currently transitioning from software engineering to ${

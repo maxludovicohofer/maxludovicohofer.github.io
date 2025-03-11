@@ -17,7 +17,7 @@ import { VALID_INPUT_FORMATS } from "node_modules/astro/dist/assets/consts";
 import { groupBy } from "./array";
 import { applyMatch, matchRoles } from "./astro-server";
 import type { AstroGlobal } from "astro";
-import { getCurrentLocale } from "./i18n";
+import { getCurrentLocale } from "./i18n-special";
 
 export type PostCollectionKey = Extract<CollectionKey, "projects" | "thoughts">;
 

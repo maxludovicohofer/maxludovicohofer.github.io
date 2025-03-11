@@ -43,7 +43,7 @@ export const formatUmamiEvent = async (
   const usableCharacters = 50 - 3;
 
   const pageName = getMaximumWordsInLimit(
-    (await getLinkName(astro, astro.url.pathname)) || "Homepage",
+    await getLinkName(astro, astro.originPathname),
     usableCharacters * 0.2
   );
 
@@ -86,7 +86,7 @@ export const getUmamiLinkEvent = async (
 
 const umamiEventInfo = noEvent ? {} : await getUmamiLinkEvent(Astro, href);
 
-if (umamiEventInfo["data-umami-event"]) {
+if (umamiEventInfo["data-umami-event"] !== undefined) {
   umamiEventInfo["data-umami-event"] = await formatUmamiEvent(
     Astro,
     umamiEventInfo["data-umami-event"]
