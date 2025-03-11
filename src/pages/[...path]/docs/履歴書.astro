@@ -63,7 +63,10 @@ const motivationSentence = await t(await getMotivationSentence(Astro));
 const relocateSentence = `${await t("open to relocate")}`;
 ---
 
-<DocumentPage pageProps={{ noTranslation: true }}>
+<DocumentPage
+  class="prose-headings:print:text-inherit"
+  pageProps={{ noTranslation: true }}
+>
   <div class="grid grid-flow-col grid-cols-3 gap-4">
     <div class="col-span-2">
       <div class="flex items-baseline justify-between">

@@ -49,7 +49,10 @@ const experienceTechThreshold = 1;
 // TODO CHECK EDGE FAVORITES FOR HOW TO WRITE THE TWO RESUMES
 ---
 
-<DocumentPage pageProps={{ noTranslation: true }}>
+<DocumentPage
+  class="prose-headings:print:text-inherit"
+  pageProps={{ noTranslation: true }}
+>
   <h1 class="!text-2xl text-center">職務経歴書</h1>
   <div class="text-right mt-6">
     {today.format("ll")}
@@ -112,7 +115,7 @@ const experienceTechThreshold = 1;
                 <thead>
                   <tr>
                     <th class="text-center w-56">範囲</th>
-                    <th class="text-center min-w-80">業務内容</th>
+                    <th class="text-center min-w-72">業務内容</th>
                     <th class="text-center w-56">環境</th>
                   </tr>
                 </thead>
