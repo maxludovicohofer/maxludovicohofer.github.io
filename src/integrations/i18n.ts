@@ -42,5 +42,5 @@ export const getPathWithoutLocale = (path: string) => {
 
 export const addLocaleToLink = (link: string, locale?: string) =>
   locale && locale !== defaultLocale
-    ? standardizePath(getRelativeLocaleUrl(locale, link))
+    ? getRelativeLocaleUrl(locale, link)
     : link;

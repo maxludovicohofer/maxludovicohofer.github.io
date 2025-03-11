@@ -5,11 +5,9 @@ import { i18n, setLocale } from "@integrations/i18n-server";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import { getSummary } from "@integrations/docs";
-import Text from "@components/ui/Text.astro";
 import {
   getCategory,
   getKnowHow,
-  getPublishingDate,
   getDevelopmentTime,
   getTeam,
 } from "@integrations/content";
@@ -34,7 +32,7 @@ const today = dayjs();
 const t = i18n(Astro);
 
 const name = await t("Hofer Max Ludovico");
-const summary = await getSummary(Astro);
+const summary = await t(await getSummary(Astro));
 
 const { experience } = await getKnowHow(Astro);
 
@@ -42,16 +40,13 @@ const portfolioSentence = await t("Portfolio");
 const portfolioLink = await getSiteLink(Astro);
 
 // Number from 0-10 that filters out weak matches
-const matchThreshold = 1;
+const projectMatchThreshold = 1;
 const durationThreshold = dayjs.duration({ days: 4 });
 
-const experienceTechThreshold = 0;
+const experienceTechThreshold = 1;
 
-// TODO FIX DATES AND ORDER OF ACT BY BELIEF IN SHOKUMU AI PROGRAMMER (ORDER BASED ON END DATE)
 // TODO WRITE SELF PR
-// TODO FIX PAGING ISSUES
 // TODO CHECK EDGE FAVORITES FOR HOW TO WRITE THE TWO RESUMES
-// TODO PORTFOLIO LINK FOR AI PROGRAMMER SHOULD NOT HAVE END SLASH
 ---
 
 <DocumentPage pageProps={{ noTranslation: true }}>
@@ -62,8 +57,12 @@ const experienceTechThreshold = 0;
     {name}（氏名）
   </div>
   <h2>■職務要約</h2>
-  <Text>{summary}</Text>
-  {portfolioSentence} 🡢 <Link href={portfolioLink} />
+  <p>
+    {summary}
+    <br />
+    <br />
+    {portfolioSentence} 🡢 <Link href={portfolioLink} />
+  </p>
   <h2>■職務経歴詳細</h2>
   {
     experience &&
@@ -91,9 +90,14 @@ const experienceTechThreshold = 0;
             }));
           const relevantProjects =
             matchedProjects &&
-            applyMatch(matchedProjects, matchThreshold).filter(
-              (project) => getDevelopmentTime(project)! > durationThreshold
-            );
+            applyMatch(matchedProjects, projectMatchThreshold)
+              .filter(
+                (project) => getDevelopmentTime(project)! > durationThreshold
+              )
+              .slice(0, 3)
+              .sort((a, b) =>
+                b.publishingDate.isAfter(a.publishingDate) ? 1 : -1
+              );
 
           const experienceTech =
             tech &&
@@ -107,26 +111,18 @@ const experienceTechThreshold = 0;
               <table>
                 <thead>
                   <tr>
-                    <th class="text-center w-44">期間</th>
-                    <th class="text-center min-w-60">業務内容</th>
-                    <th class="text-center w-44">環境</th>
-                    <th class="text-center w-44">規模</th>
+                    <th class="text-center w-56">範囲</th>
+                    <th class="text-center min-w-96">業務内容</th>
+                    <th class="text-center w-56">環境</th>
                   </tr>
                 </thead>
                 <tbody>
                   {relevantProjects?.length ? (
                     relevantProjects.map(async (project) => {
-                      const projectEnd = getPublishingDate(project)!;
-
-                      // console.log(
-                      //   projectEnd
-                      //     .subtract(getDevelopmentTime(project)!)
-                      //     .format("l")
-                      // );
-
                       const {
                         collection,
                         id,
+                        publishingDate,
                         data: { roles, tech, awards },
                       } = project;
 
@@ -146,10 +142,11 @@ const experienceTechThreshold = 0;
 
                       return (
                         <ShokumuEntry
-                          start={projectEnd.subtract(
-                            getDevelopmentTime(project)!
+                          start={publishingDate.subtract(
+                            //! Dayjs has issue with weeks at the moment, so must transform in ms
+                            getDevelopmentTime(project)!.asMilliseconds()
                           )}
-                          end={projectEnd}
+                          end={publishingDate}
                           roles={projectRoles.map(({ role }) => role)}
                           points={[
                             ...(awards?.map((award) => `Won ${award}`) ?? []),

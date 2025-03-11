@@ -21,6 +21,7 @@ import { groupBy } from "@integrations/array";
 export const getStaticPaths = () => getBasePaths({ excludedLocales: ["ja"] });
 
 const portfolioLink = await getSiteLink(Astro);
+console.log(portfolioLink);
 
 const workFieldsSentence = await getWorkFieldsSentence(Astro);
 

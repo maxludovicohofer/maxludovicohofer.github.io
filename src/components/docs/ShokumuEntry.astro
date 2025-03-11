@@ -37,49 +37,49 @@ const scaleText = soloDeveloped
 ---
 
 <tr>
-  <td>{dates.join("～")}</td>
+  <td>
+    [期間]
+    <br />
+    {dates.join("～")}
+    <br />
+    <br />
+    [規模]
+    <br />
+    {scaleText}
+    {
+      type && (
+        <>
+          <br />
+          <br />
+          [プロジェクト]
+          <br />
+          {type}
+        </>
+      )
+    }
+  </td>
   <td>
     [役職] {rolesSentence}
     <br />
     <br />
     [ポイント]
-    <ul class="mt-0">
+    <ul class="mt-0 last:-mb-2">
       {
         points
-          .slice(0, 2)
+          .slice(0, 3)
           .map((point) => <Text tag="li">{endDot(capitalize(point))}</Text>)
       }
     </ul>
     {link && <Link class="!text-wrap" href={link} />}
   </td>
   <td>
-    {
-      tech.map(async ({ id }, index) => {
-        const translatedId = await t(id);
-
-        return (
-          <>
-            {index ? <br /> : ""}
-            {translatedId}
-          </>
-        );
-      })
-    }
-  </td>
-  <td>
-    {
-      type && (
-        <>
-          [プロジェクト]
-          <br />
-          {type}
-          <br />
-          <br />
-        </>
-      )
-    }
-    [チーム]
-    <br />
-    {scaleText}
+    <ul class="list-none ps-0 my-0">
+      {
+        tech.map(async ({ id }) => {
+          const translatedId = await t(id);
+          return <li class="my-0 ps-0">{translatedId}</li>;
+        })
+      }
+    </ul>
   </td>
 </tr>

@@ -81,10 +81,8 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
     b: { classes: "font-normal" },
     u: {},
     li: {
-      classes:
-        "marker:text-zinc-400 dark:marker:text-zinc-500 print:break-before-avoid",
-      prose:
-        "prose-li:marker:text-zinc-400 dark:prose-li:marker:text-zinc-500 prose-li:print:break-before-avoid",
+      classes: "marker:text-zinc-400 dark:marker:text-zinc-500",
+      prose: "prose-li:marker:text-zinc-400 dark:prose-li:marker:text-zinc-500",
     },
     em: {},
     h1: {
@@ -135,7 +133,7 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
       .filter((text) => !!text)
       .join(" ")} ${
       formats.base
-    } prose-pre:rounded-3xl prose-pre:whitespace-pre-wrap prose-pre:text-xs prose-pre:sm:text-base prose-pre:2xl:text-2xl prose-th:border-2 prose-th:py-2 prose-th:px-4 prose-td:border-2 prose-td:px-4 prose-table:print:break-inside-avoid-page`;
+    } prose-pre:rounded-3xl prose-pre:whitespace-pre-wrap prose-pre:text-xs prose-pre:sm:text-base prose-pre:2xl:text-2xl prose-ul:print:break-inside-avoid-page prose-ol:print:break-inside-avoid-page prose-th:border-2 prose-th:py-2 prose-th:px-4 prose-td:border-2 prose-td:px-4 prose-tr:print:break-inside-avoid-page`;
   }
 
   return `${elements[size].classes ?? ""} ${

@@ -18,6 +18,7 @@ import {
   isRemoteLink,
   isTelLink,
   makePath,
+  standardizePath,
 } from "./text";
 import addArticle from "indefinite";
 import {
@@ -81,9 +82,11 @@ export const addBaseToLink = async (
 
   const linkWithRole = isDefault ? link : `${makePath(role.id)}/${link}`;
 
-  return `/${addLocaleToLink(
-    linkWithRole,
-    noLocale ? undefined : getCurrentLocale(astro)
+  return `/${standardizePath(
+    addLocaleToLink(
+      linkWithRole,
+      noLocale ? undefined : getCurrentLocale(astro)
+    )
   )}`;
 };
 
