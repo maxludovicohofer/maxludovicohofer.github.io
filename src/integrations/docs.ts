@@ -2,7 +2,6 @@ import type { AstroGlobal } from "astro";
 import { getRole } from "./astro-server";
 import { endDot, capitalize, toTextList } from "./text";
 import { getCollection } from "astro:content";
-import { PHONE_NUMBER } from "astro:env/server";
 
 export const getWorkFieldsSentence = async (astro: AstroGlobal) => {
   const {

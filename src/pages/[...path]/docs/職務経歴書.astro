@@ -48,9 +48,9 @@ const durationThreshold = dayjs.duration({ days: 4 });
 const experienceTechThreshold = 0;
 
 // TODO FIX DATES AND ORDER OF ACT BY BELIEF IN SHOKUMU AI PROGRAMMER (ORDER BASED ON END DATE)
-// TODO CHECK EDGE FAVORITES FOR HOW TO WRITE THE TWO RESUMES
 // TODO WRITE SELF PR
 // TODO FIX PAGING ISSUES
+// TODO CHECK EDGE FAVORITES FOR HOW TO WRITE THE TWO RESUMES
 // TODO PORTFOLIO LINK FOR AI PROGRAMMER SHOULD NOT HAVE END SLASH
 ---
 
@@ -117,6 +117,12 @@ const experienceTechThreshold = 0;
                   {relevantProjects?.length ? (
                     relevantProjects.map(async (project) => {
                       const projectEnd = getPublishingDate(project)!;
+
+                      // console.log(
+                      //   projectEnd
+                      //     .subtract(getDevelopmentTime(project)!)
+                      //     .format("l")
+                      // );
 
                       const {
                         collection,
