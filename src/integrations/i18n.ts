@@ -32,7 +32,7 @@ export const getPreferredLocale = () => {
 };
 
 export const getPathWithoutLocale = (path: string) => {
-  const standardPath = standardizePath(path);
+  const standardPath = standardizePath(path).slice(1);
   const [maybeLocale, ...sections] = standardPath.split("/");
 
   return locales.includes(maybeLocale as (typeof locales)[number])

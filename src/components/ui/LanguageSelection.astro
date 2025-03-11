@@ -1,7 +1,6 @@
 ---
 import { locales } from "@integrations/astro-config.mts";
 import { getRelativeLocaleUrl } from "astro:i18n";
-import { standardizePath } from "@integrations/text";
 import Button from "./Button.astro";
 import type { HTMLAttributes } from "astro/types";
 import LanguageButton from "./LanguageButton.astro";
@@ -32,11 +31,9 @@ const multipleChoice = translateLocales.length > 1;
           rounded
           linkClass="locale-anchor"
           class={`locale-link ${multipleChoice ? "hidden" : ""} !text-xs`}
-          href={standardizePath(
-            getRelativeLocaleUrl(
-              locale,
-              getPathWithoutLocale(Astro.url.pathname)
-            )
+          href={getRelativeLocaleUrl(
+            locale,
+            getPathWithoutLocale(Astro.url.pathname)
           )}
           noBase
           translateProps={{
@@ -54,6 +51,7 @@ const multipleChoice = translateLocales.length > 1;
   import { getLocaleFromPath, getPathWithoutLocale } from "@integrations/i18n";
   import { getPreferredLocale, addLocaleToLink } from "@integrations/i18n";
   import { getPrintOptions } from "@integrations/pdf.mjs";
+  import { standardizePath } from "@integrations/text";
 
   document.addEventListener("astro:page-load", () => {
     const path = window.location.pathname;
@@ -63,7 +61,9 @@ const multipleChoice = translateLocales.length > 1;
       const preferredLocale = getPreferredLocale();
       if (preferredLocale !== getLocaleFromPath(path)) {
         window.location.replace(
-          `/${addLocaleToLink(getPathWithoutLocale(path), preferredLocale)}`
+          standardizePath(
+            addLocaleToLink(getPathWithoutLocale(path), preferredLocale)
+          )
         );
       }
     }

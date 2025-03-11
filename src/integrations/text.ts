@@ -60,7 +60,7 @@ export const getMaximumWordsInLimit = (text: string, limit: number) => {
 };
 
 export const standardizePath = (pathname: string) =>
-  pathname.replace(/(^\/+)|(\/+$)/g, "");
+  `/${pathname.replace(/(^\/+)|(\/+$)/g, "")}`;
 
 export const getPathSection = (pathname: string, position: number = -1) =>
   getPathSections(pathname).at(position);
@@ -70,6 +70,7 @@ export const getPathSections = (
   ...params: Parameters<string[]["slice"]>
 ) =>
   standardizePath(pathname)
+    .slice(1)
     .split("/")
     .slice(...params);
 

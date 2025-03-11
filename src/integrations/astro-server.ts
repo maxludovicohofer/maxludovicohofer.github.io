@@ -82,12 +82,12 @@ export const addBaseToLink = async (
 
   const linkWithRole = isDefault ? link : `${makePath(role.id)}/${link}`;
 
-  return `/${standardizePath(
+  return standardizePath(
     addLocaleToLink(
       linkWithRole,
       noLocale ? undefined : getCurrentLocale(astro)
     )
-  )}`;
+  );
 };
 
 export const getSiteLink = async (

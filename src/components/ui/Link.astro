@@ -112,7 +112,7 @@ const isExternal =
   href={isExternal || href === undefined || href === null
     ? href
     : noBase
-      ? `/${standardizePath(href.toString())}`
+      ? standardizePath(href.toString())
       : await addBaseToLink(Astro, href?.toString(), noLocale)}
   target={isExternal ? "_blank" : "_self"}
   rel={isExternal ? "noopener noreferrer" : undefined}

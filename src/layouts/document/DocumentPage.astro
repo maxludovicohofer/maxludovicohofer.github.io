@@ -68,7 +68,7 @@ export const makeDocumentPaths =
     return paths;
   };
 
-const { entry, pageProps, ...props } = Astro.props;
+const { entry, pageProps, class: className = "", ...props } = Astro.props;
 
 const noTranslation = isLocalizedEntry(entry);
 ---
@@ -80,7 +80,7 @@ const noTranslation = isLocalizedEntry(entry);
   {...pageProps}
   ><Document
     markdown
-    class="font-['Noto_Sans_Variable','Noto_Sans_JP_Variable','Noto_Emoji_Variable','Noto_Sans_Symbols_2']"
+    class={`${className} font-['Noto_Sans_Variable','Noto_Sans_JP_Variable','Noto_Emoji_Variable','Noto_Sans_Symbols_2']`}
     entry={entry}
     {...props}><slot /></Document
   ></Page
