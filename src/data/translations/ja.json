@@ -1578,5 +1578,9 @@
   "My background in software development and leadership has allowed me to develop hard and soft skills that I wish to contribute to the game industry. While new to the professional world of videogames, I have been involved in AI programming on academic and personal projects my whole life. I value self-teaching, teamwork, and sharing knowledge with colleagues.": {
     "translation": "ソフトウェア開発とリーダーシップの経験から、ゲーム業界に貢献できるハードスキルとソフトスキルを身につけることができました。ビデオゲーム業界でのプロとしての経験は浅いですが、学術的および個人的なプロジェクトでAIプログラミングにずっと携わってきました。独学、チームワーク、同僚との知識の共有を大切にしています。",
     "api": "deepl"
+  },
+  "Read development": {
+    "translation": "開発を読む",
+    "api": "deepl"
   }
 }

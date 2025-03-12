@@ -18,7 +18,8 @@ import { mail } from "@components/Profile.astro";
 import { getLanguages } from "@integrations/content";
 import { groupBy } from "@integrations/array";
 
-export const getStaticPaths = () => getBasePaths({ excludedLocales: ["ja"] });
+export const getStaticPaths = (...params: Parameters<typeof getBasePaths>) =>
+  getBasePaths({ excludedLocales: ["ja"], ...params[0] });
 
 const portfolioLink = await getSiteLink(Astro);
 

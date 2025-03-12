@@ -16,7 +16,8 @@ import {
 import { capitalize } from "@integrations/text";
 import { getMotivationSentence } from "@integrations/docs";
 
-export const getStaticPaths = () => getBasePaths({ allowedLocales: ["ja"] });
+export const getStaticPaths = (...params: Parameters<typeof getBasePaths>) =>
+  getBasePaths({ allowedLocales: ["ja"], ...params[0] });
 
 interface Props {
   company?: string;
@@ -96,10 +97,6 @@ const relocateSentence = `${await t("open to relocate")}`;
             </td>
           </tr>
           <tr>
-            <td>
-              <b class="mr-2">国籍</b>
-              <Text tag="span">Italy</Text>
-            </td>
             <td
               >{dateOfBirth.format("ll")}生（満{
                 today.diff(dateOfBirth, "years")

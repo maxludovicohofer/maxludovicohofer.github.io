@@ -40,12 +40,15 @@ export const mergePaths = <B extends GetStaticPathsResult,P extends GetStaticPat
 
 // Generate a new path for every collection entry
 export const makeDocumentPaths =
-  <C extends DocumentCollectionKey>(collection: C) =>
+  <C extends DocumentCollectionKey>(
+    collection: C,
+    ...params: Parameters<typeof getBasePaths>
+  ) =>
   async () => {
     const allDocuments = await getAllDocuments(collection);
 
     const paths = mergePaths(
-      await getBasePaths(),
+      await getBasePaths(...params),
       getUniqueEntries(allDocuments).map((entry) => ({
         params: { id: getEntryId(entry) },
         props: { entry },

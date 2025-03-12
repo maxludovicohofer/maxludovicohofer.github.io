@@ -1,5 +1,4 @@
 ---
-import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
 import { i18n, setLocale } from "@integrations/i18n-server";
 import dayjs from "dayjs";
@@ -22,8 +21,9 @@ import { getEntryId } from "@layouts/document/Document.astro";
 import ShokumuEntry from "@components/docs/ShokumuEntry.astro";
 import { getTech, getTechList } from "@components/TechList.astro";
 import Text from "@components/ui/Text.astro";
+import { getStaticPaths as getBasePaths } from "./履歴書.astro";
 
-export const getStaticPaths = () => getBasePaths({ allowedLocales: ["ja"] });
+export const getStaticPaths = getBasePaths;
 
 interface Props {
   company?: string;

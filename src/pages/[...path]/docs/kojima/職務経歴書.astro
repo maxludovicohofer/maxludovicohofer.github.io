@@ -1,8 +1,6 @@
 ---
-import WorkHistory, {
-  getStaticPaths as getBasePaths,
-} from "@pages/docs/職務経歴書.astro";
-import { company } from "./履歴書.astro";
+import WorkHistory from "@pages/docs/職務経歴書.astro";
+import { company, getStaticPaths as getBasePaths } from "./履歴書.astro";
 
 export const getStaticPaths = getBasePaths;
 ---
