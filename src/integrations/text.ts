@@ -14,14 +14,8 @@ export const capitalize = (text: string) =>
 export const uncapitalize = (text: string) =>
   text.charAt(0).toLocaleLowerCase() + text.slice(1);
 
-export const endDot = (text: string, astro?: AstroGlobal) =>
-  text.search(
-    new RegExp(
-      `[${
-        localeInfo[astro ? getCurrentLocale(astro) : defaultLocale].delimiters
-      }]$`
-    )
-  ) !== -1
+export const endDot = (text: string) =>
+  text.search(new RegExp(`[${localeInfo[defaultLocale].delimiters}]$`)) !== -1
     ? text
     : `${text}.`;
 

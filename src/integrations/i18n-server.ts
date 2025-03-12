@@ -10,7 +10,7 @@ import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import { type PossibleTranslations } from "./i18n";
 import { parse } from "node-html-parser";
-import { getCurrentLocale } from "./i18n-special";
+import { getCurrentLocale, localeInfo } from "./i18n-special";
 
 const deeplTrans = DEEPL_API_KEY
   ? new deepl.Translator(DEEPL_API_KEY)
@@ -265,3 +265,10 @@ export const setLocale = async (astro: AstroGlobal) => {
 
   dayjs.locale(translateLocale);
 };
+
+export const endDotLocalized = async (text: string, astro: AstroGlobal) =>
+  text.search(
+    new RegExp(`[${localeInfo[getCurrentLocale(astro)].delimiters}]$`)
+  ) !== -1
+    ? text
+    : `${text}${await i18n(astro)(".")}`;

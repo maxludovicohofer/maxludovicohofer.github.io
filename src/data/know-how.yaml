@@ -1,4 +1,4 @@
-- id: Self study
+- id: self study
   start: 2024-03-01
   school: true
   translateId: true
@@ -17,55 +17,74 @@
     - Krita
     - FL Studio
   skills:
-    - job: Game designer
+    - job: game designer
+      tasks:
+        - designing and developing prototypes
+        - writing collaboration and marketing documents
       achievements:
-        - Designed prototypes to challenge my skills in core mechanics, while developing systems and prototype tooling.
-        - Studied rendering and performance optimization in depth.
+        - designed prototypes to challenge my skills in core mechanics, while developing systems and prototype tooling
+        - studied rendering and performance optimization in depth
 
-    - job: Game programmer
+    - job: game programmer
+      tasks:
+        - coding game features
+        - creating tools and systems
       achievements:
-        - Developing physics-based mechanics, systems and prototype tooling.
-        - Studied rendering and performance optimization in depth.
+        - developing physics-based mechanics, systems and prototype tooling
+        - studied rendering and performance optimization in depth
 
     - job: AI programmer
+      tasks:
+        - coding intuitive AI
       achievements:
-        - Developing AI systems and prototype tooling.
+        - developing AI systems and prototype tooling
 
-- id: INattivo Soc. Cons. a.r.l.
+- id: INattivo Soc. Cons. a.r.l
   start: 2021-05-01
   end: 2022-03-01
   team:
     internal: 10
     external: 2
-  reasonForLeaving: Left company to pursue career change
+  reasonForLeaving: left company to pursue career change
   tech:
     - Python
-    - Agile
+    - agile
     - TDD
     - SQL
     - NoSQL
     - AWS
     - CI \ CD
-    - Mobile
-    - Full stack
+    - mobile
+    - full stack
     - Excel
     - Photoshop
     - Illustrator
   skills:
-    - job: Project manager
+    - job: project manager
+      tasks:
+        - managing budget and resources of technological projects
+        - communicating with the board to envision new projects
       achievements:
-        - Envisioned and lead development of innovative B2C and B2B solutions in the credit brokerage sector.
-        - Managed cross-functional team of 4 to replace old systems.
+        - envisioned and lead development of innovative B2C and B2B solutions in the credit brokerage sector
+        - managed cross-functional team of 4 to replace old systems
 
-    - job: User experience designer
+    - job: user experience designer
+      tasks:
+        - designing and developing UX for sales team and end clients
+        - adapting the UX to the workflow of the company
+        - showcasing the UI to the board
+        - iterating on the design with user feedback
       achievements:
-        - Iteratively designed UI/UX and customer journey with clients to maximize conversions.
-        - Worked with a mobile first approach to maximize intuitiveness.
+        - iteratively designed UI/UX and customer journey with clients to maximize conversions
+        - worked with a mobile first approach to maximize intuitiveness
 
-    - job: Full stack programmer
+    - job: full stack programmer
+      tasks:
+        - programming a realtime data-heavy web app
+        - managing servers and CI/CD
       achievements:
-        - Programmed a web app using scrum and BDD.
-        - Developed an efficient optimization algorithm for salesmen scheduling, running on mobile phones.
+        - programmed a progressive web app using scrum and BDD
+        - developed an efficient optimization algorithm for salesmen scheduling, running on mobile phones
 
 - id: Zulu Medical
   start: 2019-11-01
@@ -77,24 +96,38 @@
     - C++
     - C#
     - Python
-    - Agile
+    - agile
     - SQL
     - AWS
     - CI \ CD
-    - Mobile
-    - Full stack
+    - mobile
+    - full stack
     - Photoshop
     - Illustrator
   skills:
-    - job: Technical lead
+    - job: technical lead
+      tasks:
+        - planning the company's technological development
       achievements:
-        - Developed technological strategy with business partners.
-        - Worked as desktop and full stack programmer.
+        - developed technological strategy with business partners
+        - worked as desktop and full stack programmer
 
-    - job: Scrum master
+    - job: scrum master
+      tasks:
+        - solving collaboration challenges
+        - fostering communication and meetings
       achievements:
-        - Contributed to the company's cultural shift from waterfall to agile.
-        - Scrum master for a team of 4 programmers.
+        - contributed to the company's cultural shift from waterfall to agile
+        - scrum master for a team of 4 programmers
+
+    - job: programmer
+      tasks:
+        - developing realtime web apps
+        - developing desktop apps that communicate with medical devices
+        - managing servers and CI/CD
+      achievements:
+        - developed technological strategy with business partners
+        - worked as desktop and full stack programmer
 
 - id: BigRock Institute of Magic Technologies
   start: 2023-09-01
@@ -121,22 +154,31 @@
     - Gaea
     - FL Studio
   skills:
-    - job: Lead game designer
+    - job: lead game designer
       countAsWork: true
+      tasks:
+        - writing documents to communicate game specifications
+        - brainstorming and prototyping game ideas
+        - bringing colleagues together to solve problems
       achievements:
-        - Designed and directed an award-winning published indie game, completed in 3 months by a team of 20.
-        - Designed multiple prototypes for clients and game jams, following provided requirements.
+        - designed and directed a published indie game, completed in 3 months by a team of 20
+        - designed multiple prototypes for clients and game jams, following provided requirements
 
-    - job: Game programmer
+    - job: game programmer
       countAsWork: true
+      tasks:
+        - programming gameplay and core systems
+        - extending engine tools to better fit the project's use cases
       achievements:
-        - Programmed gameplay and systems for an award-winning published indie game.
-        - Programmed multiple prototypes, developing custom systems and tooling.
+        - programmed gameplay and systems for an award-winning published indie game
+        - programmed multiple prototypes, developing custom systems and tooling
 
-    - job: Technical art
+    - job: technical art
+      tasks:
+        - studied the game development and CG pipeline, using the latest industry standards
       achievements:
-        - Studied the game development and CG pipeline, using the latest industry standards.
-        - Specialized in design and technical aspects.
+        - worked on several prototypes and one published game
+        - specialized in design and technical aspects
 
 - id: University of Padua
   start: 2016-09-01
@@ -150,11 +192,13 @@
     - Java
     - SQL
   skills:
-    - job: Software engineering
+    - job: software engineering
+      tasks:
+        - studied physics, math for games, electronics, and advanced computer science
       achievements:
-        - Studied physics, math for games, electronics, and advanced computer science.
+        - greatly improved my fundamental math and engineering skills
 
-- id: High school
+- id: high school
   start: 2011-09-01
   end: 2016-06-09
   school: true
@@ -169,7 +213,10 @@
     - SQL
     - Excel
   skills:
-    - job: Computer science
+    - job: computer science
+      tasks:
+        - studied base knowledge of computer science theory
+        - programmed platformer, fighting, and board games
       achievements:
-        - Developed videogames and desktop apps in most major languages.
-        - Won school programming competition and top 25% placement at national team programming competition.
+        - won school programming competition and top 25% placement at national team programming competition
+        - developed videogames and desktop apps in most major languages

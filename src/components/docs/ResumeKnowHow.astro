@@ -68,14 +68,16 @@ const t = i18n(Astro);
             translateId,
             dropOut,
           }) => {
-            const translatedId = translateId ? await t(id) : id;
+            const translatedId = translateId
+              ? await t(capitalize(id))
+              : capitalize(id);
             const comma = `${await t(",")} `;
             const dates = await getFormattedDates(Astro, start, end);
 
             return (
               <li class="ps-0">
                 <Text tag="h3">
-                  {job.id}
+                  {capitalize(job.id)}
                   {countAsWork ? " (school)" : ""}
                   {dropOut ? " (not graduated)" : ""}
                 </Text>
@@ -86,7 +88,7 @@ const t = i18n(Astro);
                 </Text>
                 <ol class="list-disc">
                   {achievements.map((achievement) => (
-                    <Text tag="li">{achievement}</Text>
+                    <Text tag="li">{capitalize(achievement)}</Text>
                   ))}
                 </ol>
               </li>

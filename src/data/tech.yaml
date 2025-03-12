@@ -1,351 +1,351 @@
 - id: Unreal Engine
   experience: P5Y
   functionalities:
-    - id: Online and local multiplayer
+    - id: online and local multiplayer
       roles:
-        - Game designer
-        - Programmer
-    - Visual scripting
-    - Coding and engine extensions
+        - game designer
+        - programmer
+    - visual scripting
+    - coding and engine extensions
     - AI
     - UI
-    - id: Animation blueprints, state machines, and montages
+    - id: animation blueprints, state machines, and montages
       roles:
-        - Game designer
-    - Control rig
-    - id: Cinematics and sequencer
+        - game designer
+    - control rig
+    - id: cinematics and sequencer
       dontTranslateId: true
       roles:
-        - Game designer
+        - game designer
     - id: MetaSound and audio
       roles:
-        - Game designer
-        - Sound designer
-    - id: Level editor
+        - game designer
+        - sound designer
+    - id: level editor
       roles:
-        - Game designer
-    - id: Editor extensions
+        - game designer
+    - id: editor extensions
       roles:
-        - Programmer
-    - id: Modeling
+        - programmer
+    - id: modeling
       roles:
-        - Game designer
+        - game designer
         - 3D artist
-    - id: Shaders
+    - id: shaders
       roles:
-        - Programmer
+        - programmer
         - 3D artist
-    - id: Materials and textures
+    - id: materials and textures
       roles:
         - 3D artist
     - id: Niagara
       dontTranslateId: true
       roles:
-        - Programmer
-        - Shader artist
-    - id: Landscape and foliage
+        - programmer
+        - shader artist
+    - id: landscape and foliage
       roles:
         - 3D artist
-    - id: Retargeting
+    - id: retargeting
       roles:
-        - Technical animator
-    - id: Profiling
+        - technical animator
+    - id: profiling
       roles:
-        - Programmer
+        - programmer
     - id: Nanite
       dontTranslateId: true
       roles:
         - 3D artist
-        - Technical artist
-    - id: Lighting
+        - technical artist
+    - id: lighting
       roles:
-        - Technical artist
+        - technical artist
     - id: UV and mesh editors
       roles:
         - 3D artist
-        - Technical artist
-    - id: Runtime virtual textures
+        - technical artist
+    - id: runtime virtual textures
       roles:
-        - Technical artist
+        - technical artist
   roles:
-    - Game designer
-    - Programmer
-    - Technical artist
+    - game designer
+    - programmer
+    - technical artist
 
 - id: Unity
   experience: P1Y
   functionalities:
-    - Visual scripting
-    - Coding
-    - id: Level editor
+    - visual scripting
+    - coding
+    - id: level editor
       roles:
-        - Game designer
+        - game designer
     - id: 2D sprites
       roles:
         - 3D artist
   roles:
-    - Game designer
-    - Programmer
-    - Technical artist
+    - game designer
+    - programmer
+    - technical artist
 
 - id: C++
   experience: P5Y
-  group: Programming
+  group: programming
   roles:
-    - Game designer
-    - Programmer
+    - game designer
+    - programmer
 
 - id: C#
   experience: P5Y
-  group: Programming
+  group: programming
   roles:
-    - Game designer
-    - Programmer
+    - game designer
+    - programmer
 
 - id: ECS
   experience: P3Y
-  group: Programming
+  group: programming
   roles:
-    - Programmer
+    - programmer
 
 - id: Blueprints
   experience: P3Y
-  group: Programming
+  group: programming
   roles:
-    - Game designer
+    - game designer
 
 - id: HLSL
   experience: P1Y
-  group: Programming
+  group: programming
   roles:
-    - Programmer
-    - Technical artist
+    - programmer
+    - technical artist
 
 - id: Python
   experience: P3Y
-  group: Programming
+  group: programming
   roles:
-    - Programmer
+    - programmer
 
 - id: Java
   experience: P2Y
-  group: Programming
+  group: programming
   roles:
-    - Programmer
+    - programmer
 
-- id: Agile
+- id: agile
   translateId: true
   experience: P3Y
-  group: Programming
+  group: programming
   roles:
-    - Programmer
+    - programmer
 
 - id: TDD
   experience: P3Y
-  group: Programming
+  group: programming
   roles:
-    - Programmer
+    - programmer
 
 - id: SQL
   experience: P5Y
-  group: Programming
+  group: programming
   roles:
-    - Programmer
+    - programmer
 
 - id: NoSQL
   experience: P1Y
-  group: Programming
+  group: programming
   roles:
-    - Programmer
+    - programmer
 
 - id: AWS
   experience: P5Y
-  group: Programming
+  group: programming
   roles:
-    - Programmer
+    - programmer
 
 - id: CI \ CD
   experience: P3Y
-  group: Programming
+  group: programming
   roles:
-    - Programmer
+    - programmer
 
-- id: Mobile
+- id: mobile
   translateId: true
   experience: P2Y
-  group: Programming
+  group: programming
   roles:
-    - Programmer
+    - programmer
 
-- id: Full stack
+- id: full stack
   translateId: true
   experience: P5Y
-  group: Programming
+  group: programming
   roles:
-    - Programmer
+    - programmer
 
 - id: Excel
   experience: P5Y
   functionalities:
-    - Macros
-    - Tables
-    - Automation
+    - macros
+    - tables
+    - automation
   roles:
-    - Project manager
-    - Balance
+    - project manager
+    - balance
 
 - id: Houdini
   experience: P6M
   functionalities:
-    - Simulations
-    - Offline lighting
-    - Offline rendering
+    - simulations
+    - offline lighting
+    - offline rendering
   roles:
     - 3D artist
-    - Technical artist
+    - technical artist
 
 - id: Maya
   experience: P1Y
   functionalities:
-    - Modeling
-    - Animation
+    - modeling
+    - animation
     - id: UV
       roles:
         - 3D artist
-    - id: Retopology
+    - id: retopology
       roles:
         - 3D artist
-    - Rigging
-    - id: Grooming with cards
+    - rigging
+    - id: grooming with cards
       roles:
         - 3D artist
-    - id: Blend shapes
+    - id: blend shapes
       roles:
         - 3D artist
   roles:
-    - Game designer
+    - game designer
     - 3D artist
-    - Technical artist
+    - technical artist
 
 - id: ZBrush
   experience: P1Y
   functionalities:
-    - Sculpting
-    - Exporting maps
+    - sculpting
+    - exporting maps
   roles:
     - 3D artist
 
 - id: Marvelous designer
   experience: P6M
   functionalities:
-    - Character clothing
-    - Cloth simulation
+    - character clothing
+    - cloth simulation
   roles:
     - 3D artist
 
 - id: Substance designer
   experience: P6M
   functionalities:
-    - Exporting maps
-    - Smart materials
+    - exporting maps
+    - smart materials
   roles:
     - 3D artist
-    - Technical artist
+    - technical artist
 
 - id: Substance painter
   experience: P6M
   functionalities:
-    - Texturing
-    - Baking
+    - texturing
+    - baking
   roles:
     - 3D artist
 
 - id: Photoshop
   experience: P3Y
   functionalities:
-    - Creating alphas
-    - Modifying textures
-    - id: Editing pictures
+    - creating alphas
+    - modifying textures
+    - id: editing pictures
       roles:
         - 3D artist
   roles:
-    - Game designer
+    - game designer
     - 3D artist
-    - Technical artist
+    - technical artist
 
 - id: Illustrator
   experience: P3Y
   functionalities:
-    - Creating UI elements
-    - Creating icons
+    - creating UI elements
+    - creating icons
   roles:
-    - Game designer
+    - game designer
     - 3D artist
-    - Technical artist
+    - technical artist
 
 - id: Krita
   experience: P6M
   functionalities:
-    - Concept drawings
+    - concept drawings
   roles:
     - 3D artist
 
 - id: After effects
   experience: P3Y
   functionalities:
-    - Compositing
-    - Video effects
+    - compositing
+    - video effects
     - 2D animation
-    - Scripting
+    - scripting
   roles:
     - 3D artist
 
 - id: Premiere
   experience: P3Y
   functionalities:
-    - Montage
-    - Video and audio editing
+    - montage
+    - video and audio editing
   roles:
     - 3D artist
 
 - id: FontLab
   experience: P1Y
   functionalities:
-    - Creating fonts
+    - creating fonts
   roles:
     - 3D artist
 
 - id: Gaea
   experience: P6M
   functionalities:
-    - Landscape generation
+    - landscape generation
   roles:
-    - Game designer
+    - game designer
     - 3D artist
-    - Technical artist
+    - technical artist
 
 - id: TouchDesigner
   experience: P2Y
   functionalities:
-    - Sound-reacting visuals
-    - Scripting
+    - sound-reacting visuals
+    - scripting
   roles:
-    - Sound designer
+    - sound designer
 
 - id: FL Studio
   experience: P15Y
   functionalities:
-    - Sound design
-    - id: Music production
+    - sound design
+    - id: music production
       roles:
-        - Music
-    - id: Mixing and mastering
+        - music
+    - id: mixing and mastering
       roles:
-        - Sound
-    - id: Recording
+        - sound
+    - id: recording
       roles:
-        - Sound
+        - sound
   roles:
-    - Game designer
-    - Music
-    - Sound
+    - game designer
+    - music
+    - sound

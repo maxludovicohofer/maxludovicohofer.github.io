@@ -6,7 +6,7 @@ import Resume, {
 export const getStaticPaths = (...params: Parameters<typeof getBasePaths>) =>
   getBasePaths({ localOnly: true, ...params[0] });
 
-export const company = "Kojima Productions";
+export const company = "コジマプロダクション";
 ---
 
 <Resume company={company} />

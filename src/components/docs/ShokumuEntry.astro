@@ -13,6 +13,7 @@ interface Props {
   start: dayjs.Dayjs;
   end?: dayjs.Dayjs | undefined;
   roles: ReferenceDataEntry<"roles">[];
+  responsibilities: string[];
   points: string[];
   link?: ComponentProps<typeof Link>["href"] | undefined;
   tech: ReturnType<typeof compactTechList>;
@@ -20,8 +21,17 @@ interface Props {
   team: { internal: number; external: number };
 }
 
-const { start, end, roles, points, link, tech, projectType, team } =
-  Astro.props;
+const {
+  start,
+  end,
+  roles,
+  responsibilities,
+  points,
+  link,
+  tech,
+  projectType,
+  team,
+} = Astro.props;
 
 const t = i18n(Astro);
 
@@ -32,7 +42,8 @@ const scaleText = soloDeveloped
   ? await t("Solo")
   : `${team.internal + team.external}名${team.external ? `（うち外注スタッフ${team.external}名）` : ""}`;
 
-const rolesSentence = `${await t(capitalize(toTextList(roles.slice(0, 3).map(({ id }) => id))))}${await t(".")}`;
+const rolesSentence = `${await t(endDot(capitalize(toTextList(roles.slice(0, 3).map(({ id }) => id)))))}`;
+const responsibilitiesSentence = `${await t(endDot(capitalize(toTextList(responsibilities.slice(0, 3)))))}`;
 const linkText = await t("Read development");
 ---
 
@@ -60,6 +71,8 @@ const linkText = await t("Read development");
   </td>
   <td>
     [役職] {rolesSentence}
+    <br />
+    [職責] {responsibilitiesSentence}
     <br />
     <br />
     [ポイント]

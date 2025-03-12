@@ -1,17 +1,17 @@
 - id: Game of The Year - People's choice award
   date: 2024-08-01
   institution: The Rookies
-  content: Steelsilk Championship
+  content: steelsilk-championship
   type: award
 
-- id: Advanced programming techniques
+- id: advanced programming techniques
   date: 2015-01-01
-  institution: High school
+  institution: high school
   translateInstitution: true
 
 - id: 24th place at the national team programming competition
   date: 2015-01-01
-  institution: High school
+  institution: high school
   translateInstitution: true
   type: award
 
@@ -21,6 +21,6 @@
 
 - id: 1st place at the school solo programming competition
   date: 2014-01-01
-  institution: High school
+  institution: high school
   translateInstitution: true
   type: award

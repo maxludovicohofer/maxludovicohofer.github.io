@@ -46,7 +46,7 @@ const history = Object.fromEntries(
       experiences
         .filter(
           ({ id, skill: { countAsWork } }) =>
-            id !== "Self study" && !countAsWork
+            id !== "self study" && !countAsWork
         )
         .flatMap((experience) => [
           { ...experience, end: undefined },
@@ -71,7 +71,7 @@ const languages = await getLanguages(Astro);
 const complySentence = await t("I will comply with company regulations");
 
 const motivationSentence = await getMotivationSentence(Astro, company);
-const relocateSentence = `${await t("open to relocate")}`;
+const relocateSentence = `${await t("Open to relocate")}`;
 
 const myName = await getMyName(Astro);
 ---
@@ -187,13 +187,13 @@ const myName = await getMyName(Astro);
                   reasonForLeaving,
                 }) => {
                   const date = start ?? end;
-                  const baseSentence = `${translateId ? await t(id) : id} ${await t(skill.job.id.toLowerCase())}`;
+                  const baseSentence = `${translateId ? await t(capitalize(id)) : capitalize(id)} ${await t(skill.job.id)}`;
                   const sentence = start
                     ? `${baseSentence} ${school ? "入学" : "入社"}`
                     : school
                       ? `${baseSentence} ${dropOut ? "中退" : "卒業"}`
                       : reasonForLeaving
-                        ? await t(reasonForLeaving)
+                        ? await t(capitalize(reasonForLeaving))
                         : await t("Left company for personal reasons");
 
                   return (
@@ -236,9 +236,11 @@ const myName = await getMyName(Astro);
               <td class="text-center">{date.format("YYYY")}</td>
               <td class="text-center">{date.format("M")}</td>
               <td>
-                {await t(id)}
+                {await t(capitalize(id))}
                 {await t("(")}
-                {translateInstitution ? await t(institution) : institution}
+                {translateInstitution
+                  ? await t(capitalize(institution))
+                  : capitalize(institution)}
                 {await t(")")}
               </td>
             </tr>

@@ -124,7 +124,7 @@ export function getCategory<F extends boolean>(
   entry: { data: object } | undefined,
   noFormat?: F
 ):
-  | (F extends true ? Category : `Published ${Lowercase<Category>}` | Category)
+  | (F extends true ? Category : `Published ${Category}` | Category)
   | undefined {
   function isCategoryEntry(test: typeof entry): test is {
     data: { category: Category };
@@ -141,14 +141,12 @@ export function getCategory<F extends boolean>(
 
     //? Games are assumed to be at least 1 month of development
     category = (
-      developmentTime.months() ? "Game" : "Prototype"
+      developmentTime.months() ? "game" : "prototype"
     ) satisfies Category;
   }
 
   return (
-    !noFormat && getDownloadLinks(entry)
-      ? `Published ${category.toLocaleLowerCase()}`
-      : category
+    !noFormat && getDownloadLinks(entry) ? `Published ${category}` : category
   ) as any;
 }
 
@@ -352,11 +350,17 @@ export const getTechList = async (...params: Parameters<typeof getTech>) => {
               })) ?? [];
 
           return {
-            title: group ? await t(group) : translateId ? await t(id) : id,
+            title: group
+              ? await t(capitalize(group))
+              : translateId
+              ? await t(capitalize(id))
+              : capitalize(id),
             experience: group ? undefined : await formatExperience(experience),
             items: await Promise.all(
               content.map(async ({ id, data }) => ({
-                title: data.translateId ? await t(id) : id,
+                title: data.translateId
+                  ? await t(capitalize(id))
+                  : capitalize(id),
                 experience:
                   data.experience && (await formatExperience(data.experience)),
               }))

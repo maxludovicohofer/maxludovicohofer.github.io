@@ -72,6 +72,7 @@ const knowHow = defineCollection({
       skills: z.array(
         z.object({
           job: reference("roles"),
+          tasks: z.string().array(),
           achievements: z.string().array(),
           countAsWork: z.boolean().optional(),
         })
@@ -120,7 +121,7 @@ const projects = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "src/data/projects" }),
   schema: posts
     .extend({
-      category: z.enum(["Game", "Prototype", "Tool"]).optional(),
+      category: z.enum(["game", "prototype", "tool"]).optional(),
       developmentTime: z.string().duration(),
       tech: z.array(reference("tech")),
       downloadLinks: z.array(z.string().url()).optional(),
@@ -128,6 +129,7 @@ const projects = defineCollection({
       roles: z.array(
         z.object({
           role: reference("roles"),
+          tasks: z.string().array(),
           achievements: z.array(z.string()),
         })
       ),

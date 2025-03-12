@@ -55,6 +55,8 @@ const techList = await getTechList(Astro);
 
 const selfPRSentence = await getSelfPRSentence(Astro, company);
 
+// TODO ADD OCCUPATIONS AND KEYWORD SYSTEM
+
 // TODO PHASE 2 SHOULD ALSO GET ALL SKILLS OF EXPERIENCES, AND REMOVE EXPERIENCES IF IRRELEVANT
 // TODO PHASE 2 SHOULD HAVE A MAX NUMBER OF ENTRIES AND SELECT BASED ON THAT MAX NUMBER
 // TODO PHASE 2 SPECIFY TIME GAPS AS "SELF STUDY FOR CAREER CHANGE"
@@ -86,7 +88,7 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
           translateId,
           start,
           end,
-          skill: { job, achievements, countAsWork },
+          skill: { job, tasks, achievements, countAsWork },
           projects,
           tech,
           team,
@@ -166,6 +168,9 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
                           )}
                           end={publishingDate}
                           roles={projectRoles.map(({ role }) => role)}
+                          responsibilities={projectRoles.flatMap(
+                            ({ tasks }) => tasks
+                          )}
                           points={[
                             ...(awards?.map((award) => `Won ${award}`) ?? []),
                             ...projectRoles.flatMap(
@@ -187,6 +192,7 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
                       start={start}
                       end={end}
                       roles={[job]}
+                      responsibilities={tasks}
                       points={achievements}
                       tech={experienceTech!}
                       team={team!}
