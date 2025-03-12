@@ -107,10 +107,6 @@
     "translation": "フーディニー",
     "api": "deepl"
   },
-  "Technical game designer experienced in leadership and software, specialized in mechanics, combat, AI, and systems.": {
-    "translation": "リーダーシップとソフトウェアに精通したテクニカルゲームデザイナーで、メカニック、戦闘、AI、システムに専門特化しています。",
-    "api": "deepl"
-  },
   "Self study": {
     "translation": "独学",
     "api": "deepl"
@@ -253,10 +249,6 @@
   },
   "Java": {
     "translation": "ジャワ",
-    "api": "deepl"
-  },
-  "AI programmer experienced in leadership and software, specialized in mechanics, combat, and systems.": {
-    "translation": "リーダーシップとソフトウェアに精通したAIプログラマーで、メカニック、戦闘、システムに特化しています。",
     "api": "deepl"
   },
   "AWS": {
@@ -1031,10 +1023,6 @@
     "translation": "マックス・ルドヴィコ・ホーファーのクローズアップ",
     "api": "deepl"
   },
-  "I'm a technical game designer specialized in mechanics, combat, AI, and systems.": {
-    "translation": "メカニック、戦闘、AI、システムを専門とするテクニカルゲームデザイナーです。",
-    "api": "deepl"
-  },
   "<span class=\"katex\" translate=\"no\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>o</mi><mi>t</mi><mi>h</mi><mi>e</mi><mi>r</mi><mspace></mspace><mtext> </mtext><mi>n</mi><mi>e</mi><mi>e</mi><mi>d</mi><mi>s</mi></mrow><annotation encoding=\"application/x-tex\">other\\ needs</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">o</span><span class=\"mord mathnormal\">t</span><span class=\"mord mathnormal\">h</span><span class=\"mord mathnormal\" style=\"margin-right:0.02778em\">er</span><span class=\"mspace allowbreak\"></span><span class=\"mspace\" style=\"margin-right:0.1667em\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">n</span><span class=\"mord mathnormal\">ee</span><span class=\"mord mathnormal\">d</span><span class=\"mord mathnormal\">s</span></span></span></span> would be additional human cravings, such as humor, sex, movement, food, vertigo, needs of the <a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Maslow hierarchy (Homepage)\" data-umami-event-url=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\">Maslow hierarchy</a>. These are generally less explored, but are equally as valid for the concept of fun.": {
     "translation": "<span class=\"katex\" translate=\"no\"><span class=\"katex-mathml\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>o</mi><mi>t</mi><mi>h</mi><mi>e</mi><mi>r</mi><mspace></mspace><mtext> </mtext><mi>n</mi><mi>e</mi><mi>e</mi><mi>d</mi><mi>s</mi></mrow><annotation encoding=\"application/x-tex\">other\\ needs</annotation></semantics></math></span><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">o</span><span class=\"mord mathnormal\">t</span><span class=\"mord mathnormal\">h</span><span class=\"mord mathnormal\" style=\"margin-right:0.02778em\">er</span><span class=\"mspace allowbreak\"></span><span class=\"mspace\" style=\"margin-right:0.1667em\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:0.6944em\"></span><span class=\"mord mathnormal\">n</span><span class=\"mord mathnormal\">ee</span><span class=\"mord mathnormal\">d</span><span class=\"mord mathnormal\">s</span></span></span></span>それは、ユーモア、セックス、動き、食べ物、めまい、<a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150\" href=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Maslow hierarchy (Homepage)\" data-umami-event-url=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\">マズローの欲求階層における</a>ニーズなど、人間のさらなる欲求でしょう。これらは一般的にあまり研究されていませんが、楽しさの概念としては同様に有効です。",
     "api": "deepl"
@@ -1053,10 +1041,6 @@
   },
   "AI programming": {
     "translation": "AIプログラミング",
-    "api": "deepl"
-  },
-  "I'm an AI programmer specialized in mechanics, combat, and systems.": {
-    "translation": "メカニック、戦闘、システムを専門とするAIプログラマーです。",
     "api": "deepl"
   },
   "Simulations": {
@@ -1233,14 +1217,6 @@
   },
   "I value attention to detail, embrace cutting-edge technologies, and enjoy fostering collaboration to achieve excellent results. Currently transitioning from software engineering to videogame AI programming, which is my lifelong passion.": {
     "translation": "私は細部へのこだわりを大切にし、最先端の技術を取り入れ、優れた成果を達成するためのコラボレーションを育むことを楽しんでいます。現在、ソフトウェアエンジニアリングからビデオゲームAIプログラミングへと移行中であり、これは私の生涯の情熱です。",
-    "api": "deepl"
-  },
-  "I&#39;m a technical game designer specialized in mechanics, combat, AI, and systems.": {
-    "translation": "私はメカニック、戦闘、AI、システムを専門とするテクニカルゲームデザイナーです。",
-    "api": "deepl"
-  },
-  "I&#39;m an AI programmer specialized in mechanics, combat, and systems.": {
-    "translation": "私はメカニック、戦闘、システムに特化したAIプログラマーです。",
     "api": "deepl"
   },
   "open to relocate": {
@@ -1581,6 +1557,22 @@
   },
   "Read development": {
     "translation": "開発を読む",
+    "api": "deepl"
+  },
+  "Technical game designer experienced in leadership and software, specialized in mechanics, combat, AI, and systems.": {
+    "translation": "リーダーシップとソフトウェアに精通したテクニカルゲームデザイナーで、メカニック、戦闘、AI、システムに専門特化しています。",
+    "api": "deepl"
+  },
+  "AI programmer experienced in leadership and software, specialized in mechanics, combat, and systems.": {
+    "translation": "リーダーシップとソフトウェアに精通したAIプログラマーで、メカニック、戦闘、システムに特化しています。",
+    "api": "deepl"
+  },
+  "I'm a technical game designer specialized in mechanics, combat, AI, and systems.": {
+    "translation": "私はメカニック、戦闘、AI、システムを専門とするテクニカルゲームデザイナーです。",
+    "api": "deepl"
+  },
+  "I'm an AI programmer specialized in mechanics, combat, and systems.": {
+    "translation": "私は、メカニック、戦闘、システムを専門とするAIプログラマーです。",
     "api": "deepl"
   }
 }
