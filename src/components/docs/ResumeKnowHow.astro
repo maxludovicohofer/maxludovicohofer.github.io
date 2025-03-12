@@ -6,7 +6,7 @@ import { i18n, setLocale } from "@integrations/i18n-server";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import type { AstroGlobal } from "astro";
-import { getCurrentLocale, localeInfo } from "@integrations/i18n-special";
+import { getLocaleInfo } from "@integrations/i18n-special";
 
 const knowHow = await getKnowHow(Astro);
 
@@ -38,7 +38,7 @@ export const getFormattedDates = async (
     dates[1].diff(dates[0], "year") < 1 ||
     dates.some((date) => date > dropMonthDate);
 
-  const { getYear, getYearMonth } = localeInfo[getCurrentLocale(astro)];
+  const { getYear, getYearMonth } = getLocaleInfo(astro);
 
   return dates.map((date) => {
     if (date === today) return "Present";

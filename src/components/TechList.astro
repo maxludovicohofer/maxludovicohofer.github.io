@@ -16,7 +16,7 @@ const techList = await getTechList(Astro);
 const toExperienceText = async (experience: string) => {
   const t = i18n(Astro);
 
-  return `${capitalize(experience)} ${await t("of experience")}`;
+  return `${capitalize(experience)}${await t(" ")}${await t("of experience")}`;
 };
 
 // TODO PHASE 2 REFERENCE PROJECTS WHERE THE TECH IS USED. MOST LIKELY SHOW THEM ON HOVER/INTERSECT (MOBILE). COULD BE INDIVIDUAL PROJECTS OR JUST (USED IN 3 GAMES, 2 PROTOTYPES ...)

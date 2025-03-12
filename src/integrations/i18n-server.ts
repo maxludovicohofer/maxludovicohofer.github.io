@@ -25,7 +25,7 @@ export type TranslateOptions = {
 
 export type I18nOptions = deepl.TranslatorOptions &
   Partial<Record<PossibleTranslations, string>> &
-  TranslateOptions;
+  TranslateOptions & { interpolate?: string | string[] };
 
 export const i18n = (astro: AstroGlobal, globalOptions?: I18nOptions) => {
   return async (text: string, options?: I18nOptions) => {
@@ -33,10 +33,24 @@ export const i18n = (astro: AstroGlobal, globalOptions?: I18nOptions) => {
 
     if (toLocale === defaultLocale) return text;
 
-    return await queueTranslation(text, toLocale, {
+    const translation = await queueTranslation(text, toLocale, {
       ...globalOptions,
       ...options,
     });
+
+    if (options?.interpolate) {
+      const replacerText =
+        typeof options.interpolate === "string"
+          ? [options.interpolate]
+          : options.interpolate;
+
+      return replacerText.reduce(
+        (interpolated, replacer) => interpolated.replace("{}", replacer),
+        translation
+      );
+    }
+
+    return translation;
   };
 };
 
@@ -57,7 +71,7 @@ const queueTranslation = async (
   // Custom translation
   if (options?.[toLocale]) return options[toLocale];
 
-  const cleanText = fixNewLines(text.trim());
+  const cleanText = text === " " ? text : fixNewLines(text.trim());
 
   if (!cleanText) return cleanText;
 

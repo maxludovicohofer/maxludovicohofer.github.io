@@ -40,7 +40,7 @@ const today = dayjs();
 const t = i18n(Astro);
 
 const name = await t("Hofer Max Ludovico");
-const summary = await t(await getSummary(Astro));
+const summary = await getSummary(Astro);
 
 const { experience } = await getKnowHow(Astro);
 
@@ -242,6 +242,6 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
     </tbody>
   </table>
   <h2>■自己PR</h2>
-  <Text>{selfPRSentence}</Text>
+  <p>{selfPRSentence}</p>
   <p class="text-right">以上</p>
 </DocumentPage>

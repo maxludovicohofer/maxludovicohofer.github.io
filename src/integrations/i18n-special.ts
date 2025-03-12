@@ -25,3 +25,6 @@ export const localeInfo: Record<(typeof locales)[number], LocaleInfo> = {
 
 export const getCurrentLocale = (astro: AstroGlobal) =>
   (astro.currentLocale ?? defaultLocale) as (typeof locales)[number];
+
+export const getLocaleInfo = (astro: AstroGlobal) =>
+  localeInfo[getCurrentLocale(astro)];

@@ -14,7 +14,6 @@ import { getSummary } from "@integrations/docs";
 import Media from "./ui/Media.astro";
 import { i18n } from "@integrations/i18n-server";
 import { getCurrentLocale } from "@integrations/i18n-special";
-import { removeWatashiWa } from "@integrations/l10n";
 
 interface Props extends ComponentProps<typeof PostPreview> {}
 
@@ -42,7 +41,7 @@ const documentLinks = documentPageLinks.map(({ path, ...link }) => ({
   ...link,
 }));
 
-const summary = removeWatashiWa(await t(await getSummary(Astro, true)));
+const summary = await getSummary(Astro, true);
 
 const profilePictureEventName = await getLinkName(Astro, ProfilePicture.src);
 ---

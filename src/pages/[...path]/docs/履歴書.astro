@@ -15,7 +15,6 @@ import {
 } from "@integrations/content";
 import { capitalize } from "@integrations/text";
 import { getMotivationSentence } from "@integrations/docs";
-import { removeWatashiWa } from "@integrations/l10n";
 
 export const getStaticPaths = (...params: Parameters<typeof getBasePaths>) =>
   getBasePaths({ allowedLocales: ["ja"], ...params[0] });
@@ -67,9 +66,7 @@ const languages = await getLanguages(Astro);
 
 const complySentence = await t("I will comply with company regulations");
 
-const motivationSentence = removeWatashiWa(
-  await t(await getMotivationSentence(Astro, company))
-);
+const motivationSentence = await getMotivationSentence(Astro, company);
 const relocateSentence = `${await t("open to relocate")}`;
 ---
 
