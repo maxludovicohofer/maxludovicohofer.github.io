@@ -57,10 +57,18 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
                 importance === "content-list-highlight"
                   ? importance
                   : undefined,
+              ...(entry.collection === "projects"
+                ? {
+                    translateProps: { disable: true },
+                  }
+                : {}),
             }}
             entry={entry}
             {...(entry.collection === "projects"
-              ? { startHeading: "Design", short: true }
+              ? {
+                  startHeading: "Design",
+                  short: true,
+                }
               : {})}
           />
         </Card>

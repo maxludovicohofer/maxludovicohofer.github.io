@@ -28,6 +28,7 @@ interface Props extends HTMLAttributes<"div"> {
   container?: boolean;
   contentProps?: ComponentProps<typeof Text>;
   afterProps?: ComponentProps<typeof Text>;
+  titleProps?: ComponentProps<typeof Text>;
 }
 
 const {
@@ -39,6 +40,7 @@ const {
   class: className = "",
   contentProps,
   afterProps,
+  titleProps,
   ...props
 } = Astro.props;
 
@@ -105,7 +107,7 @@ const noTranslation = isLocalizedEntry(entry);
           {...(noTranslation && !container
             ? { translateProps: { disable: noTranslation } }
             : {}) satisfies Partial<ComponentProps<typeof Text>>}
-          ><slot name="title">{title}</slot></Text
+          {...titleProps}><slot name="title">{title}</slot></Text
         >
         {category && <Text subtitle>{category}</Text>}
         <Document

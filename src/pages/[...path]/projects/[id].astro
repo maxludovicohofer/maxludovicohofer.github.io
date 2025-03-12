@@ -30,7 +30,7 @@ const developmentDuration = getDevelopmentTime(Astro.props.entry)!.humanize();
 // TODO PHASE 2 USE HREF ON PAGE BACK, BUT GET HREF DINAMICALLY
 ---
 
-<PostPage {...Astro.props}
+<PostPage titleProps={{ translateProps: { disable: true } }} {...Astro.props}
   ><Fragment slot="footer"
     ><PostFooter
       value={soloDeveloped
