@@ -19,8 +19,8 @@ export function getCoverAlt(post: CollectionEntry<PostCollectionKey>) {
   const title = getTitle(post)!;
 
   return post.collection === "projects"
-    ? `${title} gameplay.`
-    : `Graphic explanation of "${title}".`;
+    ? `${title} gameplay`
+    : `Graphic explanation of "${title}"`;
 }
 ---
 

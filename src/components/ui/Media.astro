@@ -5,6 +5,7 @@ import Video from "./Video.astro";
 import { getAspectClass } from "@integrations/tailwind";
 import type { getCover } from "@integrations/content";
 import { i18n } from "@integrations/i18n-server";
+import { endDot } from "@integrations/text";
 
 interface Props
   extends Omit<ComponentProps<typeof Video>, "src" | "youTubeInfo"> {
@@ -63,7 +64,7 @@ const mediaClass = `${className} size-full ${asMarkdownImage?.format === "svg" ?
   ) : (
     <Image
       src={isMarkdownImage(src) ? src : typeof src === "string" ? src : src()}
-      alt={await t(alt)}
+      alt={await t(endDot(alt))}
       class={`${mediaClass} ${aspect ? getAspectClass(aspect) : ""}`}
       loading={loading}
       {...(props as any)}
