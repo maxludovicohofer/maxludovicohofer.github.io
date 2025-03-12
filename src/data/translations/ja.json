@@ -1606,5 +1606,13 @@
   "Close up of Hofer Max Ludovico": {
     "translation": "ホーファー・マックス・ルドヴィコのクローズアップ",
     "api": "deepl"
+  },
+  "Portrait of Hofer Max Ludovico.": {
+    "translation": "ホーファー・マックス・ルドヴィコの肖像。",
+    "api": "deepl"
+  },
+  "Close up of Hofer Max Ludovico.": {
+    "translation": "ホーファー・マックス・ルドヴィコのクローズアップ。",
+    "api": "deepl"
   }
 }
