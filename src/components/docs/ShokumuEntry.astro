@@ -82,12 +82,7 @@ const linkText = await t("Read development");
   </td>
   <td>
     <ul class="list-none ps-0 my-0">
-      {
-        tech.map(async ({ title }) => {
-          const translatedId = await t(title);
-          return <li class="my-0 ps-0">{translatedId}</li>;
-        })
-      }
+      {tech.map(({ title }) => <li class="my-0 ps-0">{title}</li>)}
     </ul>
   </td>
 </tr>
