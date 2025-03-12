@@ -5,6 +5,7 @@ import Dissolving from "@ui/Dissolving.astro";
 import Media from "@ui/Media.astro";
 import Text from "@ui/Text.astro";
 import Link from "@ui/Link.astro";
+import { endDot } from "@integrations/text";
 
 interface Props extends ComponentProps<typeof Media> {
   noMargin?: boolean;
@@ -26,7 +27,7 @@ const [descriptiveAlt, hiddenAlt] = alt.split("HIDDEN ");
 const realAlt = (hiddenAlt || descriptiveAlt!).trim();
 
 // Check for links in alt
-const textAlt = [realAlt];
+const textAlt = [endDot(realAlt)];
 const links: ComponentProps<typeof Link>[] = [];
 
 const altLinks = textAlt
