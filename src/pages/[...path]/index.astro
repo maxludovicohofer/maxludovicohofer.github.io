@@ -8,6 +8,7 @@ import PostListPreview from "@post/PostListPreview.astro";
 import { getCollection } from "astro:content";
 import { makePath } from "@integrations/text";
 import { defaultLocale, locales } from "@integrations/astro-config.mts";
+import { BUILD_MODE } from "astro:env/server";
 
 export const getStaticPaths = async (options?: {
   allowedLocales?: (typeof locales)[number][];
@@ -16,13 +17,7 @@ export const getStaticPaths = async (options?: {
   excludedRoles?: string[];
   localOnly?: boolean;
 }) => {
-  if (options?.localOnly) {
-    const { hostname } = await import("os");
-
-    console.log(hostname());
-
-    if (hostname() !== Astro.site?.hostname) return [];
-  }
+  if (options?.localOnly && BUILD_MODE !== "local") return [];
 
   let localePaths = [undefined, ...locales.slice(1)];
   const roles = (await getCollection("roles")).map(({ id }) => makePath(id));

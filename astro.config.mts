@@ -22,6 +22,12 @@ export default defineConfig({
   site: "https://maxludovicohofer.github.io",
   env: {
     schema: {
+      BUILD_MODE: envField.enum({
+        context: "server",
+        access: "secret",
+        values: ["public", "local"],
+        default: "local",
+      }),
       SENTRY_AUTH_TOKEN: envField.string({
         context: "server",
         access: "secret",

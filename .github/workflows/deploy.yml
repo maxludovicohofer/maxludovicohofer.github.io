@@ -43,6 +43,7 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         env:
+          BUILD_MODE: public
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
           DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
         # with:
