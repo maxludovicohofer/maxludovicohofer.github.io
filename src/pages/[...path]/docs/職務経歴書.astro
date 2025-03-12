@@ -3,7 +3,7 @@ import DocumentPage from "@layouts/document/DocumentPage.astro";
 import { i18n, setLocale } from "@integrations/i18n-server";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
-import { getSummary, getSelfPRSentence } from "@integrations/docs";
+import { getSummary, getSelfPRSentence, getMyName } from "@integrations/docs";
 import {
   getCategory,
   getKnowHow,
@@ -38,7 +38,7 @@ const today = dayjs();
 
 const t = i18n(Astro);
 
-const name = await t("Hofer Max Ludovico");
+const myName = await getMyName(Astro);
 const summary = await getSummary(Astro);
 
 const { experience } = await getKnowHow(Astro);
@@ -68,7 +68,7 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
   <div class="text-right mt-6">
     {today.format("ll")}
     <br />
-    {name}（氏名）
+    {myName.translated}（氏名）
   </div>
   <h2>■職務要約</h2>
   <p>

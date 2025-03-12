@@ -2,11 +2,16 @@
 import Text from "@components/ui/Text.astro";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
 import Link from "@components/ui/Link.astro";
-import { ADDRESS, PHONE_NUMBER } from "astro:env/server";
+import { PHONE_NUMBER } from "astro:env/server";
 import { capitalize, toTextList, uncapitalize } from "@integrations/text";
 import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 import { getSiteLink } from "@integrations/astro-server";
-import { getSummary, getWorkFieldsSentence } from "@integrations/docs";
+import {
+  getAddress,
+  getMyName,
+  getSummary,
+  getWorkFieldsSentence,
+} from "@integrations/docs";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -35,21 +40,23 @@ dayjs.extend(duration);
 dayjs.extend(relativeTime);
 
 const t = i18n(Astro);
-const address = ADDRESS ? await t(ADDRESS, { noCache: true }) : undefined;
+const address = await getAddress(Astro);
 
 const portfolioSentence = await t("Portfolio");
-const relocateSentence = `${await t("(")}${await t("open to relocate")}${await t(")")}`;
+const relocateSentence = `${await t(" ")}${await t("(")}${await t("open to relocate")}${await t(")")}`;
 
 const languages = groupBy(await getLanguages(Astro), ({ level }) => level);
 
 const summary = await getSummary(Astro);
+
+const myName = await getMyName(Astro);
 
 // TODO PHASE 2 UPDATE LINKEDIN AUTOMATICALLY
 ---
 
 <DocumentPage>
   <ResumePicture />
-  <Text tag="h1">Max Ludovico Hofer</Text>
+  <h1>{myName.translated}</h1>
   <p>{summary}</p>
   <span>
     <Text tag="span" format="branded" translateProps={{ disable: true }}
@@ -73,24 +80,19 @@ const summary = await getSummary(Astro);
       </>
     )
   }
-  {
-    ADDRESS && (
-      <>
-        <br />
-        <Text tag="span" format="branded" translateProps={{ disable: true }}>
-          📍
-        </Text>
-        <Link href={`https://maps.google.com/?q=${ADDRESS}`}>{address}</Link>{" "}
-        {relocateSentence}
-      </>
-    )
-  }
+  <br />
+  <Text tag="span" format="branded" translateProps={{ disable: true }}>
+    📍
+  </Text>
+  <Link href={`https://maps.google.com/?q=${address.raw}`}
+    >{address.translated}</Link
+  >{relocateSentence}
   <ResumeKnowHow />
   <Text tag="h2">Skills</Text>
   <ul class="grid grid-cols-3">
     {
       techList.map(async ({ title, experience }) => {
-        const techItem = `${title} ${await t("(")}${uncapitalize(experience!)}${await t(")")}`;
+        const techItem = `${title}${await t(" ")}${await t("(")}${uncapitalize(experience!)}${await t(")")}`;
 
         return <li class="pr-7 my-0.5">{techItem}</li>;
       })
@@ -106,7 +108,7 @@ const summary = await getSummary(Astro);
       >{
         Object.entries(languages).map(
           async ([level, languages]) =>
-            `${await t(capitalize(level))} ${await t("in")} ${await t(toTextList(languages.map(({ id }) => id)))}${await t(".")} `
+            `${await t(capitalize(level))}${await t(" ")}${await t("in")}${await t(" ")}${await t(toTextList(languages.map(({ id }) => id)))}${await t(".")}${await t(" ")}`
         )
       }</Text
     >

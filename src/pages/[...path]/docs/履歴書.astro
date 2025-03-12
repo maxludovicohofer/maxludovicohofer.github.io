@@ -4,8 +4,7 @@ import DocumentPage from "@layouts/document/DocumentPage.astro";
 import ResumePicture from "@components/docs/ResumePicture.astro";
 import dayjs from "dayjs";
 import { i18n, setLocale } from "@integrations/i18n-server";
-import Text from "@components/ui/Text.astro";
-import { ADDRESS, PHONE_NUMBER } from "astro:env/server";
+import { PHONE_NUMBER } from "astro:env/server";
 import Link from "@components/ui/Link.astro";
 import { mail } from "@components/Profile.astro";
 import {
@@ -14,7 +13,11 @@ import {
   getLanguages,
 } from "@integrations/content";
 import { capitalize } from "@integrations/text";
-import { getMotivationSentence } from "@integrations/docs";
+import {
+  getAddress,
+  getMotivationSentence,
+  getMyName,
+} from "@integrations/docs";
 
 export const getStaticPaths = (...params: Parameters<typeof getBasePaths>) =>
   getBasePaths({ allowedLocales: ["ja"], ...params[0] });
@@ -31,7 +34,8 @@ const today = dayjs();
 const dateOfBirth = dayjs("1997-09-01");
 
 const t = i18n(Astro);
-const address = ADDRESS ? await t(ADDRESS, { noCache: true }) : undefined;
+
+const address = await getAddress(Astro);
 
 const knowHow = await getKnowHow(Astro);
 const history = Object.fromEntries(
@@ -68,6 +72,8 @@ const complySentence = await t("I will comply with company regulations");
 
 const motivationSentence = await getMotivationSentence(Astro, company);
 const relocateSentence = `${await t("open to relocate")}`;
+
+const myName = await getMyName(Astro);
 ---
 
 <DocumentPage
@@ -85,15 +91,13 @@ const relocateSentence = `${await t("open to relocate")}`;
           <tr>
             <td colspan="100%">
               <b class="mr-2">フリガナ</b>
-              <Text tag="span">Hofer Max Ludovico</Text>
+              {myName.translated}
             </td>
           </tr>
           <tr>
             <td class="py-5" colspan="100%">
               <b class="mr-2">氏名</b>
-              <Text tag="span" translateProps={{ disable: true }}
-                >Hofer Max Ludovico</Text
-              >
+              {myName.rawButOrdered}
             </td>
           </tr>
           <tr>
@@ -121,38 +125,28 @@ const relocateSentence = `${await t("open to relocate")}`;
   </div>
   <table class="-mt-[2px]">
     <tbody>
-      {
-        (ADDRESS || PHONE_NUMBER) && (
-          <tr>
-            {ADDRESS && (
-              <td>
-                <b class="mr-2">フリガナ</b>
-                <Link href={`https://maps.google.com/?q=${ADDRESS}`}>
-                  {address}
-                </Link>
-              </td>
-            )}
-            {PHONE_NUMBER && (
-              <td class="w-0">
-                <b class="mr-2">電話</b>
-                <Link href={`tel:${PHONE_NUMBER}`} />
-              </td>
-            )}
-          </tr>
-        )
-      }
       <tr>
-        {
-          ADDRESS && (
-            <td>
-              <b>現住所</b>
-              <br />
-              <Link href={`https://maps.google.com/?q=${ADDRESS}`}>
-                {ADDRESS}
-              </Link>
-            </td>
-          )
-        }
+        <td>
+          <b class="mr-2">フリガナ</b>
+          <br />
+          <Link href={`https://maps.google.com/?q=${address.raw}`}>
+            {address.translated}
+          </Link>
+        </td>
+        <td class="w-0">
+          <b class="mr-2">電話</b>
+          <br />
+          {PHONE_NUMBER && <Link href={`tel:${PHONE_NUMBER}`} />}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>現住所</b>
+          <br />
+          <Link href={`https://maps.google.com/?q=${address.raw}`}>
+            {address.raw}
+          </Link>
+        </td>
         <td>
           <b>メール</b>
           <br />

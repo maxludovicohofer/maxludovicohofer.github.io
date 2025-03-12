@@ -42,7 +42,7 @@ export default defineConfig({
         access: "secret",
         optional: true,
       }),
-      ADDRESS: envField.string({
+      FULL_ADDRESS: envField.string({
         context: "server",
         access: "secret",
         optional: true,

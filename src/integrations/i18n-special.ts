@@ -4,6 +4,8 @@ import { defaultLocale, type locales } from "./astro-config.mts";
 export type LocaleInfo = {
   languageName: string;
   delimiters: string;
+  surnameFirst?: boolean;
+  nameSeparator?: string;
   getYearMonth: (date: string) => string;
   getYear: (date: string) => string;
 };
@@ -18,6 +20,8 @@ export const localeInfo: Record<(typeof locales)[number], LocaleInfo> = {
   ja: {
     languageName: "日本語",
     delimiters: "。？！",
+    surnameFirst: true,
+    nameSeparator: "・",
     getYear: (date) => date.replaceAll(/\b\d{1,2}[日月]/g, ""),
     getYearMonth: (date) => date.replaceAll(/\b\d{1,2}日/g, ""),
   },

@@ -10,7 +10,7 @@ import Fullscreenable from "@ui/Fullscreenable.astro";
 import { getLinkName } from "@integrations/astro-server";
 import { addBaseToLink } from "@integrations/astro-server";
 import { getPrintPath } from "@integrations/pdf.mjs";
-import { getSummary } from "@integrations/docs";
+import { getMyName, getSummary } from "@integrations/docs";
 import Media from "./ui/Media.astro";
 import { i18n } from "@integrations/i18n-server";
 import { getCurrentLocale } from "@integrations/i18n-special";
@@ -44,6 +44,8 @@ const documentLinks = documentPageLinks.map(({ path, ...link }) => ({
 const summary = await getSummary(Astro, true);
 
 const profilePictureEventName = await getLinkName(Astro, ProfilePicture.src);
+
+const myName = await getMyName(Astro);
 ---
 
 <PostPreview
@@ -58,14 +60,15 @@ const profilePictureEventName = await getLinkName(Astro, ProfilePicture.src);
       ><Media
         src={ProfilePicture}
         class="rounded-full"
-        alt="Close up of Max Ludovico Hofer"
+        alt={`Close up of ${myName.rawButOrdered}`}
         loading="eager"
       /></Fullscreenable
     >
     <div>
-      <Text tag="h3">Max Ludovico Hofer</Text><div
-        class="flex items-center gap-0.5 -ml-0.5 2xl:-ml-1"
+      <Text tag="h3" translateProps={{ disable: true }}
+        >{myName.translated}</Text
       >
+      <div class="flex items-center gap-0.5 -ml-0.5 2xl:-ml-1">
         <Link
           href="https://linkedin.com/in/maxludovicohofer"
           class="!size-6 2xl:!size-8 drop-shadow-md hover:drop-shadow-lg active:drop-shadow"

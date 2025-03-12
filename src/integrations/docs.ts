@@ -4,6 +4,8 @@ import { endDot, capitalize, toTextList } from "./text";
 import { getCollection } from "astro:content";
 import { i18n } from "./i18n-server";
 import { removeWatashiWa } from "./l10n";
+import { FULL_ADDRESS } from "astro:env/server";
+import { getLocaleInfo } from "./i18n-special";
 
 export const getWorkFieldsSentence = async (astro: AstroGlobal) => {
   const {
@@ -126,4 +128,31 @@ export const getSelfPRSentence = async (
         : ""
     }`
   );
+};
+
+export const getAddress = async (astro: AstroGlobal) => {
+  const t = i18n(astro);
+
+  const address = FULL_ADDRESS ?? "Paese 31038 near Venice, Italy";
+
+  return { raw: address, translated: await t(address, { noCache: true }) };
+};
+
+export const getMyName = async (astro: AstroGlobal) => {
+  const t = i18n(astro);
+
+  const fullName = ["Max Ludovico", "Hofer"];
+
+  const { surnameFirst, nameSeparator } = getLocaleInfo(astro);
+  if (surnameFirst) fullName.reverse();
+
+  const nameParts = fullName.flatMap((part) => part.split(" "));
+
+  const shortNameParts = fullName.map((part) => part.split(" ")[0]);
+
+  return {
+    rawButOrdered: nameParts.join(" "),
+    translated: await t(nameParts.join(nameSeparator ?? " ")),
+    translatedShort: await t(shortNameParts.join(nameSeparator)),
+  };
 };

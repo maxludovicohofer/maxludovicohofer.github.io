@@ -2,11 +2,12 @@
 import { ClientRouter } from "astro:transitions";
 import BackButton from "@ui/BackButton.astro";
 import ModalSlot from "./ModalSlot.astro";
-import { capitalize, getHumanPathSection } from "@integrations/text";
+import { capitalize, endDot, getHumanPathSection } from "@integrations/text";
 import { getRole } from "@integrations/astro-server";
 import { i18n } from "@integrations/i18n-server";
 import LanguageSelection from "@components/ui/LanguageSelection.astro";
 import { getCurrentLocale } from "@integrations/i18n-special";
+import { getMyName } from "@integrations/docs";
 
 interface Props {
   title?: string | undefined;
@@ -22,23 +23,23 @@ const t = i18n(Astro);
 
 const { role } = await getRole(Astro);
 
+const myName = await getMyName(Astro);
+
 const formattedTitle = capitalize(
   title ??
     (homepage
       ? (role.data.workFields?.[0] ?? role.id)
       : getHumanPathSection(Astro.originPathname))
 );
-const completeTitle = `${await t("Max Hofer")} \\ ${noTranslation ? formattedTitle : await t(formattedTitle)}`;
+const completeTitle = `${myName.translatedShort} \\ ${noTranslation ? formattedTitle : await t(formattedTitle)}`;
 
 const formattedDescription = description
   ? capitalize(description)
   : formattedTitle;
-const translatedDescription = noTranslation
-  ? formattedDescription
-  : await t(formattedDescription);
-const completeDescription = description
-  ? translatedDescription
-  : `${translatedDescription}${await t(".")}`;
+const completeDescription = endDot(
+  noTranslation ? formattedDescription : await t(formattedDescription),
+  Astro
+);
 
 const hasBack = !homepage;
 ---
