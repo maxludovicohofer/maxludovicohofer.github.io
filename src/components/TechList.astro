@@ -1,117 +1,15 @@
 ---
-import {
-  applyMatch,
-  getCollectionAdvanced,
-  matchRoles,
-  type GetCollectionOptions,
-} from "@integrations/astro-server";
-import { i18n, setLocale } from "@integrations/i18n-server";
+import { i18n } from "@integrations/i18n-server";
 import { capitalize } from "@integrations/text";
 import Text from "@ui/Text.astro";
-import type { AstroGlobal } from "astro";
 import type { HTMLAttributes } from "astro/types";
-import dayjs from "dayjs";
-import duration from "dayjs/plugin/duration";
-import relativeTime from "dayjs/plugin/relativeTime";
+import { getTechList, compactTechList } from "@integrations/content";
 
 interface Props extends HTMLAttributes<"ol"> {
   compact?: boolean;
 }
 
 const { class: className = "", compact, ...props } = Astro.props;
-
-export const getTech = async (
-  astro: AstroGlobal,
-  threshold: number = 4,
-  options?: GetCollectionOptions<"tech">
-) =>
-  await Promise.all(
-    applyMatch(
-      await matchRoles(
-        astro,
-        (await getCollectionAdvanced("tech", options)).map((tech) => ({
-          data: tech,
-          roles: tech.data.roles,
-        }))
-      ),
-      threshold
-    ).map(async (tech) => {
-      const roleFunctionalities = tech.data.functionalities?.filter(
-        (functionality) => typeof functionality !== "string"
-      );
-
-      if (roleFunctionalities?.length) {
-        const matchedFunctionalities = applyMatch(
-          await matchRoles(
-            astro,
-            roleFunctionalities.map((functionality) => ({
-              data: functionality,
-              roles: functionality.roles,
-            }))
-          ),
-          threshold
-        );
-
-        // Filter and map functionalities
-        tech.data.functionalities = tech.data.functionalities!.flatMap(
-          (functionality) =>
-            typeof functionality === "string"
-              ? [functionality]
-              : matchedFunctionalities.includes(functionality)
-                ? [functionality.id]
-                : []
-        );
-      }
-
-      return tech;
-    })
-  );
-
-export const getTechList = async (...params: Parameters<typeof getTech>) => {
-  const tech = await getTech(...params);
-  const renderedGroups: string[] = [];
-
-  const formatExperience = async (experience: string) => {
-    await setLocale(params[0]);
-    dayjs.extend(duration);
-    dayjs.extend(relativeTime);
-
-    return capitalize(dayjs.duration(experience).humanize());
-  };
-
-  return (
-    await Promise.all(
-      (await getTech(...params)).map(
-        async ({ data: { id, experience, group, functionalities } }) => {
-          if (group) {
-            if (renderedGroups.includes(group)) return;
-            else renderedGroups.push(group);
-          }
-
-          const content = group
-            ? tech.filter(
-                ({ data: { group: groupToCheck } }) => groupToCheck === group
-              )
-            : (functionalities?.map((functionality) => ({
-                id: functionality,
-                data: undefined,
-              })) ?? []);
-
-          return {
-            title: group ?? id,
-            experience: group ? undefined : await formatExperience(experience),
-            items: await Promise.all(
-              content.map(async ({ id, data }) => ({
-                title: id,
-                experience: data && (await formatExperience(data.experience)),
-              }))
-            ),
-          };
-        }
-      )
-    )
-  ).filter((tech) => !!tech);
-};
 
 const techList = await getTechList(Astro);
 
@@ -126,52 +24,55 @@ const toExperienceText = async (experience: string) => {
 
 <ol class={`${className} grid`} {...props}>
   {
-    techList.map(async ({ title, experience, items }) => {
-      const rowSpan = (compact ? 1 : items.length) / 8;
+    (compact ? compactTechList(techList) : techList).map(
+      async ({ title, experience, items }) => {
+        const rowSpan = (items?.length ?? 0) / 8;
 
-      const experienceText = experience && (await toExperienceText(experience));
+        const experienceText =
+          experience && (await toExperienceText(experience));
 
-      return (
-        <li
-          class={`${rowSpan < 2 ? "row-span-1" : rowSpan < 3 ? "row-span-2" : rowSpan < 4 ? "row-span-3" : rowSpan < 5 ? "row-span-4" : "row-span-5"}`}
-        >
-          <Text tag={compact ? undefined : "h3"} class="inline">
-            {title}
-          </Text>
-          {!compact && (
-            <>
-              {experienceText && (
-                <Text subtitle tag="span" translateProps={{ disable: true }}>
-                  {experienceText}
-                </Text>
-              )}
-              {items.length !== 0 && (
-                <ol class="ml-8">
-                  {items.map(async ({ title, experience }) => {
-                    const experienceText =
-                      experience && (await toExperienceText(experience));
+        return (
+          <li
+            class={`${compact ? "" : rowSpan < 2 ? "row-span-1" : rowSpan < 3 ? "row-span-2" : rowSpan < 4 ? "row-span-3" : rowSpan < 5 ? "row-span-4" : "row-span-5"}`}
+          >
+            <Text tag={compact ? undefined : "h3"} class="inline">
+              {title}
+            </Text>
+            {!compact && (
+              <>
+                {experienceText && (
+                  <Text subtitle tag="span" translateProps={{ disable: true }}>
+                    {experienceText}
+                  </Text>
+                )}
+                {items && items.length !== 0 && (
+                  <ol class="ml-8">
+                    {items.map(async ({ title, experience }) => {
+                      const experienceText =
+                        experience && (await toExperienceText(experience));
 
-                    return (
-                      <li>
-                        <Text tag="span">{title}</Text>
-                        {experienceText && (
-                          <Text
-                            subtitle
-                            tag="span"
-                            translateProps={{ disable: true }}
-                          >
-                            {experienceText}
-                          </Text>
-                        )}
-                      </li>
-                    );
-                  })}
-                </ol>
-              )}
-            </>
-          )}
-        </li>
-      );
-    })
+                      return (
+                        <li>
+                          <Text tag="span">{title}</Text>
+                          {experienceText && (
+                            <Text
+                              subtitle
+                              tag="span"
+                              translateProps={{ disable: true }}
+                            >
+                              {experienceText}
+                            </Text>
+                          )}
+                        </li>
+                      );
+                    })}
+                  </ol>
+                )}
+              </>
+            )}
+          </li>
+        );
+      }
+    )
   }
 </ol>

@@ -10,14 +10,21 @@ import {
 } from "astro:content";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
+import relativeTime from "dayjs/plugin/relativeTime";
 import utc from "dayjs/plugin/utc";
 import type Video from "@components/ui/Video.astro";
 import type { ComponentProps } from "astro/types";
 import { VALID_INPUT_FORMATS } from "node_modules/astro/dist/assets/consts";
 import { groupBy } from "./array";
-import { applyMatch, matchRoles } from "./astro-server";
+import {
+  applyMatch,
+  getCollectionAdvanced,
+  matchRoles,
+  type GetCollectionOptions,
+} from "./astro-server";
 import type { AstroGlobal } from "astro";
 import { getCurrentLocale } from "./i18n-special";
+import { setLocale } from "./i18n-server";
 
 export type PostCollectionKey = Extract<CollectionKey, "projects" | "thoughts">;
 
@@ -248,3 +255,114 @@ export const getLanguages = async (astro: AstroGlobal) => {
 
   return languages;
 };
+
+export const getTech = async (
+  astro: AstroGlobal,
+  threshold: number = 4,
+  options?: GetCollectionOptions<"tech">
+) =>
+  await Promise.all(
+    applyMatch(
+      await matchRoles(
+        astro,
+        (
+          await getCollectionAdvanced("tech", options)
+        ).map((tech) => ({
+          data: tech,
+          roles: tech.data.roles,
+        }))
+      ),
+      threshold
+    ).map(async (tech) => {
+      const roleFunctionalities = tech.data.functionalities?.filter(
+        (functionality) => typeof functionality !== "string"
+      );
+
+      if (roleFunctionalities?.length) {
+        const matchedFunctionalities = applyMatch(
+          await matchRoles(
+            astro,
+            roleFunctionalities.map((functionality) => ({
+              data: functionality,
+              roles: functionality.roles,
+            }))
+          ),
+          threshold
+        );
+
+        // Filter and map functionalities
+        tech.data.functionalities = tech.data.functionalities!.flatMap(
+          (functionality) =>
+            typeof functionality === "string"
+              ? [functionality]
+              : matchedFunctionalities.includes(functionality)
+              ? [functionality.id]
+              : []
+        );
+      }
+
+      return tech;
+    })
+  );
+
+export const getTechList = async (...params: Parameters<typeof getTech>) => {
+  const tech = await getTech(...params);
+  const renderedGroups: string[] = [];
+
+  const formatExperience = async (experience: string) => {
+    await setLocale(params[0]);
+    dayjs.extend(duration);
+    dayjs.extend(relativeTime);
+
+    return capitalize(
+      dayjs.duration(experience).humanize().replace("a ", "1 ")
+    );
+  };
+
+  return (
+    await Promise.all(
+      (
+        await getTech(...params)
+      ).map(async ({ data: { id, experience, group, functionalities } }) => {
+        if (group) {
+          if (renderedGroups.includes(group)) return;
+          else renderedGroups.push(group);
+        }
+
+        const content = group
+          ? tech.filter(
+              ({ data: { group: groupToCheck } }) => groupToCheck === group
+            )
+          : functionalities?.map((functionality) => ({
+              id:
+                typeof functionality === "string"
+                  ? functionality
+                  : functionality.id,
+              data: undefined,
+            })) ?? [];
+
+        return {
+          title: group ?? id,
+          experience: group ? undefined : await formatExperience(experience),
+          items: await Promise.all(
+            content.map(async ({ id, data }) => ({
+              title: id,
+              experience: data && (await formatExperience(data.experience)),
+            }))
+          ),
+          isGroup: !!group,
+        };
+      })
+    )
+  ).filter((tech) => !!tech);
+};
+
+export const compactTechList = (
+  techListResult: Awaited<ReturnType<typeof getTechList>>
+) =>
+  techListResult.flatMap((tech) =>
+    tech.isGroup
+      ? (tech.items as ((typeof tech.items)[number] &
+          Partial<Omit<typeof tech, keyof (typeof tech.items)[number]>>)[])
+      : tech
+  );

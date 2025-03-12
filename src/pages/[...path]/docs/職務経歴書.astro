@@ -9,6 +9,8 @@ import {
   getKnowHow,
   getDevelopmentTime,
   getTeam,
+  getTechList,
+  compactTechList,
 } from "@integrations/content";
 import Link from "@components/ui/Link.astro";
 import {
@@ -19,7 +21,6 @@ import {
 import { applyMatch } from "@integrations/astro-server";
 import { getEntryId } from "@layouts/document/Document.astro";
 import ShokumuEntry from "@components/docs/ShokumuEntry.astro";
-import { getTech, getTechList } from "@components/TechList.astro";
 import Text from "@components/ui/Text.astro";
 import { getStaticPaths as getBasePaths } from "./履歴書.astro";
 
@@ -115,9 +116,11 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
 
           const experienceTech =
             tech &&
-            (await getTech(Astro, experienceTechThreshold, {
-              entries: tech,
-            }));
+            compactTechList(
+              await getTechList(Astro, experienceTechThreshold, {
+                entries: tech,
+              })
+            );
 
           return (
             <>
@@ -150,9 +153,11 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
                         )
                       );
 
-                      const projectTech = await getTech(Astro, undefined, {
-                        entries: tech,
-                      });
+                      const projectTech = compactTechList(
+                        await getTechList(Astro, undefined, {
+                          entries: tech,
+                        })
+                      );
 
                       return (
                         <ShokumuEntry

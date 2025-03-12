@@ -11,6 +11,9 @@ export const toTitleCase = (text: string) =>
 export const capitalize = (text: string) =>
   text.charAt(0).toLocaleUpperCase() + text.slice(1);
 
+export const uncapitalize = (text: string) =>
+  text.charAt(0).toLocaleLowerCase() + text.slice(1);
+
 export const endDot = (text: string, astro?: AstroGlobal) =>
   text.search(
     new RegExp(

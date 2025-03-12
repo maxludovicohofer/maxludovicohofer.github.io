@@ -7,7 +7,7 @@ import { getFormattedDates } from "./ResumeKnowHow.astro";
 import { i18n } from "@integrations/i18n-server";
 import type { ReferenceDataEntry } from "astro:content";
 import type { ComponentProps } from "astro/types";
-import type { CollectionEntry } from "astro:content";
+import type { compactTechList } from "@integrations/content";
 
 interface Props {
   start: dayjs.Dayjs;
@@ -15,7 +15,7 @@ interface Props {
   roles: ReferenceDataEntry<"roles">[];
   points: string[];
   link?: ComponentProps<typeof Link>["href"] | undefined;
-  tech: CollectionEntry<"tech">[];
+  tech: ReturnType<typeof compactTechList>;
   projectType?: string | undefined;
   team: { internal: number; external: number };
 }
@@ -83,8 +83,8 @@ const linkText = await t("Read development");
   <td>
     <ul class="list-none ps-0 my-0">
       {
-        tech.map(async ({ id }) => {
-          const translatedId = await t(id);
+        tech.map(async ({ title }) => {
+          const translatedId = await t(title);
           return <li class="my-0 ps-0">{translatedId}</li>;
         })
       }
