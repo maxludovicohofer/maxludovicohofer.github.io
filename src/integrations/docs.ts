@@ -5,7 +5,8 @@ import { getCollection } from "astro:content";
 import { i18n } from "./i18n-server";
 import { removeWatashiWa } from "./l10n";
 import { FULL_ADDRESS } from "astro:env/server";
-import { getLocaleInfo } from "./i18n-special";
+import { getLocaleInfo, localeInfo } from "./i18n-special";
+import { defaultLocale } from "./astro-config.mts";
 
 export const getWorkFieldsSentence = async (astro: AstroGlobal) => {
   const {
@@ -150,9 +151,13 @@ export const getMyName = async (astro: AstroGlobal) => {
 
   const shortNameParts = fullName.map((part) => part.split(" ")[0]);
 
+  const separator = nameSeparator ?? " ";
+
   return {
-    rawButOrdered: nameParts.join(" "),
-    translated: await t(nameParts.join(nameSeparator ?? " ")),
-    translatedShort: await t(shortNameParts.join(nameSeparator)),
+    rawButOrdered: nameParts.join(
+      localeInfo[defaultLocale].nameSeparator ?? " "
+    ),
+    translated: await t(nameParts.join(separator)),
+    translatedShort: await t(shortNameParts.join(separator)),
   };
 };
