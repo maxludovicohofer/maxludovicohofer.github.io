@@ -26,8 +26,17 @@ const tech = defineCollection({
       experience: z.string().duration(),
       group: z.string().optional(),
       functionalities: z
-        .array(z.string().or(fileSchema.merge(roleContent)))
+        .array(
+          z.string().or(
+            fileSchema
+              .extend({
+                dontTranslateId: z.boolean().optional(),
+              })
+              .merge(roleContent)
+          )
+        )
         .optional(),
+      translateId: z.boolean().optional(),
     })
     .merge(roleContent),
 });

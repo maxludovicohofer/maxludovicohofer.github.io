@@ -14,6 +14,7 @@
         - Game designer
     - Control rig
     - id: Cinematics and sequencer
+      dontTranslateId: true
       roles:
         - Game designer
     - id: MetaSound and audio
@@ -38,6 +39,7 @@
       roles:
         - 3D artist
     - id: Niagara
+      dontTranslateId: true
       roles:
         - Programmer
         - Shader artist
@@ -51,6 +53,7 @@
       roles:
         - Programmer
     - id: Nanite
+      dontTranslateId: true
       roles:
         - 3D artist
         - Technical artist
@@ -131,6 +134,7 @@
     - Programmer
 
 - id: Agile
+  translateId: true
   experience: P3Y
   group: Programming
   roles:
@@ -167,12 +171,14 @@
     - Programmer
 
 - id: Mobile
+  translateId: true
   experience: P2Y
   group: Programming
   roles:
     - Programmer
 
 - id: Full stack
+  translateId: true
   experience: P5Y
   group: Programming
   roles:

@@ -35,7 +35,11 @@ const toExperienceText = async (experience: string) => {
           <li
             class={`${compact ? "" : rowSpan < 2 ? "row-span-1" : rowSpan < 3 ? "row-span-2" : rowSpan < 4 ? "row-span-3" : rowSpan < 5 ? "row-span-4" : "row-span-5"}`}
           >
-            <Text tag={compact ? undefined : "h3"} class="inline">
+            <Text
+              tag={compact ? undefined : "h3"}
+              class="inline"
+              translateProps={{ disable: true }}
+            >
               {title}
             </Text>
             {!compact && (
@@ -53,7 +57,7 @@ const toExperienceText = async (experience: string) => {
 
                       return (
                         <li>
-                          <Text tag="span">{title}</Text>
+                          <span>{title}</span>
                           {experienceText && (
                             <Text
                               subtitle

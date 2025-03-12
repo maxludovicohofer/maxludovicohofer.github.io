@@ -90,7 +90,7 @@ const summary = await getSummary(Astro);
   <ul class="grid grid-cols-3">
     {
       techList.map(async ({ title, experience }) => {
-        const techItem = `${await t(title)} ${await t("(")}${uncapitalize(experience!)}${await t(")")}`;
+        const techItem = `${title} ${await t("(")}${uncapitalize(experience!)}${await t(")")}`;
 
         return <li class="pr-7 my-0.5">{techItem}</li>;
       })

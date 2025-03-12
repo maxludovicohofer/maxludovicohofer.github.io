@@ -21,7 +21,6 @@ import {
 import { applyMatch } from "@integrations/astro-server";
 import { getEntryId } from "@layouts/document/Document.astro";
 import ShokumuEntry from "@components/docs/ShokumuEntry.astro";
-import Text from "@components/ui/Text.astro";
 import { getStaticPaths as getBasePaths } from "./履歴書.astro";
 
 export const getStaticPaths = getBasePaths;
@@ -211,33 +210,27 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
     </thead>
     <tbody>
       {
-        techList.map(async ({ title, experience, items }) => {
-          const translatedTitle = await t(title);
-
-          return (
-            <tr>
-              <td>{translatedTitle}</td>
-              <td class="text-right">
-                {experience || (
-                  <ol class="list-none ps-0 my-0">
-                    {items.map(({ experience }) => (
-                      <li class="ps-0 my-0">{experience}</li>
-                    ))}
-                  </ol>
-                )}
-              </td>
-              <td>
+        techList.map(({ title, experience, items }) => (
+          <tr>
+            <td>{title}</td>
+            <td class="text-right">
+              {experience || (
                 <ol class="list-none ps-0 my-0">
-                  {items.map(async ({ title }) => (
-                    <Text tag="li" class="ps-0 my-0">
-                      {title}
-                    </Text>
+                  {items.map(({ experience }) => (
+                    <li class="ps-0 my-0">{experience}</li>
                   ))}
                 </ol>
-              </td>
-            </tr>
-          );
-        })
+              )}
+            </td>
+            <td>
+              <ol class="list-none ps-0 my-0">
+                {items.map(({ title }) => (
+                  <li class="ps-0 my-0">{title}</li>
+                ))}
+              </ol>
+            </td>
+          </tr>
+        ))
       }
     </tbody>
   </table>

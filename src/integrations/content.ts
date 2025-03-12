@@ -24,7 +24,7 @@ import {
 } from "./astro-server";
 import type { AstroGlobal } from "astro";
 import { getCurrentLocale } from "./i18n-special";
-import { setLocale } from "./i18n-server";
+import { i18n, setLocale } from "./i18n-server";
 
 export type PostCollectionKey = Extract<CollectionKey, "projects" | "thoughts">;
 
@@ -319,40 +319,52 @@ export const getTechList = async (...params: Parameters<typeof getTech>) => {
     );
   };
 
+  const t = i18n(params[0]);
+
   return (
     await Promise.all(
       (
         await getTech(...params)
-      ).map(async ({ data: { id, experience, group, functionalities } }) => {
-        if (group) {
-          if (renderedGroups.includes(group)) return;
-          else renderedGroups.push(group);
+      ).map(
+        async ({
+          data: { id, experience, group, functionalities, translateId },
+        }) => {
+          if (group) {
+            if (renderedGroups.includes(group)) return;
+            else renderedGroups.push(group);
+          }
+
+          const content = group
+            ? tech.filter(
+                ({ data: { group: groupToCheck } }) => groupToCheck === group
+              )
+            : functionalities?.map((functionality) => ({
+                id:
+                  typeof functionality === "string"
+                    ? functionality
+                    : functionality.id,
+                data: {
+                  experience: undefined,
+                  translateId:
+                    typeof functionality === "string" ||
+                    !functionality.dontTranslateId,
+                },
+              })) ?? [];
+
+          return {
+            title: group ? await t(group) : translateId ? await t(id) : id,
+            experience: group ? undefined : await formatExperience(experience),
+            items: await Promise.all(
+              content.map(async ({ id, data }) => ({
+                title: data.translateId ? await t(id) : id,
+                experience:
+                  data.experience && (await formatExperience(data.experience)),
+              }))
+            ),
+            isGroup: !!group,
+          };
         }
-
-        const content = group
-          ? tech.filter(
-              ({ data: { group: groupToCheck } }) => groupToCheck === group
-            )
-          : functionalities?.map((functionality) => ({
-              id:
-                typeof functionality === "string"
-                  ? functionality
-                  : functionality.id,
-              data: undefined,
-            })) ?? [];
-
-        return {
-          title: group ?? id,
-          experience: group ? undefined : await formatExperience(experience),
-          items: await Promise.all(
-            content.map(async ({ id, data }) => ({
-              title: id,
-              experience: data && (await formatExperience(data.experience)),
-            }))
-          ),
-          isGroup: !!group,
-        };
-      })
+      )
     )
   ).filter((tech) => !!tech);
 };
