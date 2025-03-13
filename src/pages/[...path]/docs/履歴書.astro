@@ -45,8 +45,8 @@ const history = Object.fromEntries(
       category,
       experiences
         .filter(
-          ({ id, skill: { countAsWork } }) =>
-            id !== "self study" && !countAsWork
+          ({ id, school, countAsExperience }) =>
+            !id.startsWith("self ") && !(school && countAsExperience)
         )
         .flatMap((experience) => [
           { ...experience, end: undefined },

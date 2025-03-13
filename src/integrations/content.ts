@@ -179,7 +179,12 @@ export const getTeam = (entry: { data: object } | undefined) => {
   >;
 };
 
-export const getKnowHow = async (astro: AstroGlobal) => {
+export const getKnowHow = async (
+  astro: AstroGlobal,
+  options?: {
+    allProjects?: boolean | undefined;
+  }
+) => {
   const knowHow = await Promise.all(
     (
       await getCollection("know-how")
@@ -199,20 +204,29 @@ export const getKnowHow = async (astro: AstroGlobal) => {
 
   const displayedKnowHow = knowHow.map(({ skills, ...data }) => ({
     skill: skills[0]!,
+    countAsExperience: !data.school,
     ...data,
   }));
 
-  knowHow.forEach(({ skills, school, ...data }, index) => {
-    if (!school) return;
+  knowHow.forEach(({ skills, ...data }, index) => {
+    if (!data.school) return;
 
-    const workSkills = skills.filter(({ countAsWork }) => countAsWork);
-
+    // Handle school experience
+    const workSkills = skills.filter(
+      ({ countAsWork }) =>
+        countAsWork || (options?.allProjects && data.projects?.length)
+    );
     if (!workSkills.length) return;
 
+    // Move skill to experience
     displayedKnowHow[index]!.skill = skills.filter(
       (skill) => !workSkills.includes(skill)
     )[0]!;
-    displayedKnowHow.push({ ...data, skill: workSkills[0]! });
+    displayedKnowHow.push({
+      ...data,
+      countAsExperience: true,
+      skill: workSkills[0]!,
+    });
   });
 
   // Sort by end date
@@ -220,8 +234,9 @@ export const getKnowHow = async (astro: AstroGlobal) => {
     !b.end || (a.end && b.end.isAfter(a.end)) ? 1 : -1
   );
 
-  const { experience, education } = groupBy(displayedKnowHow, ({ school }) =>
-    school ? "education" : "experience"
+  const { experience, education } = groupBy(
+    displayedKnowHow,
+    ({ countAsExperience }) => (countAsExperience ? "experience" : "education")
   );
 
   return {

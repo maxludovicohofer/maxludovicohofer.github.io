@@ -19,6 +19,7 @@ interface Props {
   tech: ReturnType<typeof compactTechList>;
   projectType?: string | undefined;
   team: { internal: number; external: number };
+  full?: boolean | undefined;
 }
 
 const {
@@ -31,6 +32,7 @@ const {
   tech,
   projectType,
   team,
+  full,
 } = Astro.props;
 
 const t = i18n(Astro);
@@ -43,43 +45,56 @@ const scaleText = soloDeveloped
   : `${team.internal + team.external}名${team.external ? `（うち外注スタッフ${team.external}名）` : ""}`;
 
 const rolesSentence = `${await t(endDot(capitalize(toTextList(roles.slice(0, 2).map(({ id }) => id)))))}`;
-const responsibilitiesSentence = `${await t(endDot(capitalize(toTextList(responsibilities.slice(0, 2)))))}`;
+const responsibilitiesSentence = full
+  ? undefined
+  : `${await t(endDot(capitalize(toTextList(responsibilities.slice(0, full ? undefined : 2)))))}`;
 const linkText = await t("Read development");
 ---
 
 <tr>
   <td>
-    [期間]
-    <br />
+    <h5>[期間]</h5>
     {dates.join("～")}
     <br />
     <br />
-    [規模]
-    <br />
+    <h5>[規模]</h5>
     {scaleText}
     {
       type && (
         <>
           <br />
           <br />
-          [プロジェクト]
-          <br />
+          <h5>[プロジェクト]</h5>
           {type}
         </>
       )
     }
   </td>
   <td>
-    [役職] {rolesSentence}
+    <h5 class="inline">[役職]</h5>
+    {rolesSentence}
     <br />
-    [職責] {responsibilitiesSentence}
-    <br />
-    <br />
-    [ポイント]
+    <h5 class={full ? "" : "inline"}>[職責]</h5>
+    {
+      responsibilitiesSentence ? (
+        <>
+          {responsibilitiesSentence}
+          <br />
+          <br />
+        </>
+      ) : (
+        <ul class="mt-0">
+          {responsibilities.map((responsibility) => (
+            <Text tag="li">{endDot(capitalize(responsibility))}</Text>
+          ))}
+        </ul>
+      )
+    }
+    <h5>[ポイント]</h5>
     <ul class="mt-0 last:-mb-2">
       {
         points
-          .slice(0, 2)
+          .slice(0, full ? undefined : 2)
           .map((point) => <Text tag="li">{endDot(capitalize(point))}</Text>)
       }
     </ul>

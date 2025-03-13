@@ -1750,5 +1750,433 @@
   "Unreal Engine, Maya, ZBrush, FL Studio, Excel.": {
     "translation": "Unreal Engine、Maya、ZBrush、FL Studio、Excel。",
     "api": "deepl"
+  },
+  "Game designer and UI designer.": {
+    "translation": "ゲームデザイナー兼UIデザイナー。",
+    "api": "deepl"
+  },
+  "Lead game designer and team lead.": {
+    "translation": "リードゲームデザイナー兼チームリーダー。",
+    "api": "deepl"
+  },
+  "Game designer and gameplay programmer.": {
+    "translation": "ゲームデザイナー兼ゲームプレイプログラマー。",
+    "api": "deepl"
+  },
+  "Designing story-driven mechanics, designing the prototype map, designing an immersive simple UI, programming mechanics, programming realistic AI with a patrol routine, programming tools to simplify level design, designing nature sounds and music, following a magic forest theme, and writing a magic story that followed a transforming child.": {
+    "translation": "ストーリー主導のメカニクス設計、プロトタイプマップの設計、没入感のあるシンプルなUIの設計、メカニクスのプログラミング、パトロールルーチンを備えた現実的なAIのプログラミング、レベルデザインを簡素化するツールのプログラミング、自然音と音楽の設計、魔法の森をテーマにしたストーリー、変身する子供を主人公にした魔法のストーリーの執筆。",
+    "api": "deepl"
+  },
+  "Designing a fast-paced multiplayer game and programmed online mechanics and game gravity.": {
+    "translation": "テンポの速いマルチプレイヤーゲームの設計と、オンラインのメカニックとゲームの重力をプログラムしました。",
+    "api": "deepl"
+  },
+  "Planning, designing and developing the game prototype for a game jam, designing and developing a procedural map, designing intuitive UI to give the player a goal, coming up and communicating a procedural content pipeline with artists and programmers, organizing the team to efficiently deliver the game, managing brainstorming sessions and team morale, and programming the game mechanics and procedural content.": {
+    "translation": "ゲームジャム用のゲームプロトタイプの企画、設計、開発、プロシージャルマップの設計と開発、プレイヤーに目標を与える直感的なUIの設計、アーティストやプログラマーとのプロシージャルコンテンツパイプラインの策定と伝達、効率的にゲームを完成させるためのチーム編成、ブレインストーミングセッションとチームの士気の管理、ゲームメカニクスとプロシージャルコンテンツのプログラミング。",
+    "api": "deepl"
+  },
+  "Designing game pillars, levels, enemies, and loops, based on provided game concept, writing game documents to clarify communication and collaborate with colleagues, holding game vision, and leading team to realizing it, balancing characters, combat, and difficulty, overseeing tasks, project status, and morale of the technical team, holding daily programming lessons for juniors, communicating with other departments, supporting the animation team's efforts for procedural critters and flying characters, providing the sound team with specifications, handling sound team priorities and tasks, directing and programming the camera for cutscenes and gameplay, optimizing visibility and accessibility, managing UI/UX of the game to align with the game vision, programming UI systems to simplify development, programming characters, game systems and infrastructure, a rougelike card system, and tooling for the team, and handling IT and source control.": {
+    "translation": "ゲームの柱、レベル、敵、ループの設計、提供されたゲームコンセプトに基づくゲーム文書の作成によるコミュニケーションの明確化と同僚との共同作業、ゲームビジョンの保持とチームを率いての実現、キャラクター、戦闘、難易度のバランス調整、技術チームのタスク、プロジェクト状況、士気の監督、後輩へのプログラミングの日常的な指導、他部署とのコミュニケーション、アニメーションチームのプロシージャルなクリーチャーや飛行キャラクターの取り組みのサポート、サウンドチームへの仕様提供、サウンドチームの優先事項とタスクの処理、カットシーンとゲームプレイのカメラのディレクションとプログラミング、可視性とアクセシビリティの最適化、ゲームビジョンに沿ったゲームのUI/UXの管理、開発を簡素化するUIシステムのプログラミング、キャラクター、ゲームシステム、インフラストラクチャ、ルーグライクカードシステム、チーム用ツールのプログラミング、ITとソースコントロールの処理などです。",
+    "api": "deepl"
+  },
+  "Designing a low-end procedural mobile platformer following client specifications, designing and developing a procedural map, coming up and communicating a procedural content pipeline with artists and programmers, handling low-end mobile performance, managing communication and tasks of the team, handling priorities and scope, programming the game's mechanics and procedural systems, selecting the character's sounds and game music, and implementing the sounds in the game.": {
+    "translation": "クライアントの仕様書に従ってローエンドのモバイルプラットフォームゲームを設計し、プロシージャルマップを設計・開発し、アーティストやプログラマーとプロシージャルコンテンツのパイプラインを考案・伝達し、ローエンドのモバイルパフォーマンスを処理し、チームのコミュニケーションとタスクを管理し、優先順位と範囲を処理し、ゲームのメカニックとプロシージャルシステムをプログラミングし、キャラクターのサウンドとゲーム音楽を選択し、ゲームにサウンドを実装しました。",
+    "api": "deepl"
+  },
+  "Designing a game based on a specified floor plan, designing the map and puzzles, planning a backlog and overseeing task completion, managing the team's scope and tasks, programming the tutorial and the game mechanics, writing mystery screenplay that evolves with player progression, authoring a black hole and object selection shaders, designing AI voices for the characters, composing the game's music, and authoring environmental storytelling through lighting.": {
+    "translation": "指定されたフロアプランに基づくゲームの設計、マップとパズルの設計、バックログの計画とタスク完了の監督、チームのスコープとタスクの管理、チュートリアルとゲームメカニクスのプログラミング、プレイヤーの進行とともに展開するミステリー脚本の執筆、ブラックホールとオブジェクト選択シェーダーのオーサリング、キャラクターのAI音声の設計、ゲーム音楽の作曲、照明による環境ストーリーのオーサリング。",
+    "api": "deepl"
+  },
+  "Designed a complex gravity switch mechanic, that allows players to jump to any point in space.": {
+    "translation": "プレイヤーが空間上の任意の地点にジャンプできる複雑な重力スイッチの仕組みを設計しました。",
+    "api": "deepl"
+  },
+  "Designed a stealth-action hybrid with character transformations and multiuse skills.": {
+    "translation": "キャラクターの変身とマルチスキルを搭載したステルスアクションのハイブリッドを設計しました。",
+    "api": "deepl"
+  },
+  "Authored diegetic UI using VFXs to immerse the player.": {
+    "translation": "VFXを使用したダイアログ風のUIを作成し、プレイヤーを没入させました。",
+    "api": "deepl"
+  },
+  "Developed tools to easily place AI agents and control patrol paths.": {
+    "translation": "AIエージェントを簡単に配置し、巡回経路を制御できるツールを開発しました。",
+    "api": "deepl"
+  },
+  "Programmed level design tools that helped to control enemies and story events.": {
+    "translation": "敵やストーリーイベントを制御するのに役立った、プログラムされたレベルデザインツール。",
+    "api": "deepl"
+  },
+  "Authored magic music and diegetic birds sounds to reproduce woods.": {
+    "translation": "森を再現するために、魔法のような音楽と物語の中の鳥の鳴き声を制作しました。",
+    "api": "deepl"
+  },
+  "Wrote a hero&#39;s journey story that matched the evolution from a stealth to an action game.": {
+    "translation": "ステルスゲームからアクションゲームへの進化に合わせたヒーローの旅の物語を書きました。",
+    "api": "deepl"
+  },
+  "Won creativity award at school.": {
+    "translation": "学校で創造性賞を受賞しました。",
+    "api": "deepl"
+  },
+  "Designed funny physics-based driving game and vehicle movement.": {
+    "translation": "物理法則に基づいた面白い運転ゲームと車両の動きを設計しました。",
+    "api": "deepl"
+  },
+  "Brought the game&#39;s vision to life with all departments and held weekly meet ups to keep everyone up to date.": {
+    "translation": "ゲームのビジョンを全部署に浸透させ、全員が最新情報を共有できるよう、毎週ミーティングを開催しました。",
+    "api": "deepl"
+  },
+  "Players understood the game&#39;s goal with minimal visual clutter.": {
+    "translation": "プレーヤーは、視覚的な混乱を最小限に抑え、ゲームの目標を理解しました。",
+    "api": "deepl"
+  },
+  "Developed an effective minimal-effort pipeline to meet the strict deadline.": {
+    "translation": "厳しい納期を満たすために、最小限の労力で効果的なパイプラインを開発しました。",
+    "api": "deepl"
+  },
+  "Directed a cross-functional team on a stressful deadline.": {
+    "translation": "ストレスの多い納期に、部門横断的なチームを指揮しました。",
+    "api": "deepl"
+  },
+  "Designed realtime online procedural map generation.": {
+    "translation": "リアルタイムオンライン手続き型地図生成を設計しました。",
+    "api": "deepl"
+  },
+  "Changed engine movement component to include dynamic gravity.": {
+    "translation": "エンジン移動コンポーネントを変更し、動的な重力を含めるようにしました。",
+    "api": "deepl"
+  },
+  "Organized code in reusable drag and drop components to speed up prototyping.": {
+    "translation": "再利用可能なドラッグ＆ドロップコンポーネントに整理されたコードを配置し、プロトタイプの作成を高速化。",
+    "api": "deepl"
+  },
+  "Led a technical team of 14 programmers, designers, animators, and shader artists to our first published game.": {
+    "translation": "14人のプログラマー、デザイナー、アニメーター、シェーダーアーティストからなる技術チームを率いて、当社初のゲームをリリースしました。",
+    "api": "deepl"
+  },
+  "Developed a deterministic procedural animation system to simplify development.": {
+    "translation": "開発を簡素化する決定論的な手続き型アニメーションシステムを開発しました。",
+    "api": "deepl"
+  },
+  "Led UI designers to an accessible graphic style that emphasized the futuristic setting of the game.": {
+    "translation": "UIデザイナーをゲームの未来的な設定を強調するアクセシブルなグラフィックスタイルへと導きました。",
+    "api": "deepl"
+  },
+  "The UI supports keyboard, mouse, and multiple controllers.": {
+    "translation": "UIは、キーボード、マウス、複数のコントローラーに対応しています。",
+    "api": "deepl"
+  },
+  "Programmed responsive and fun character skills.": {
+    "translation": "反応が良く、楽しい性格のスキルをプログラムしました。",
+    "api": "deepl"
+  },
+  "Programmed multiple procedural systems and a custom attribute system that favored ease of development.": {
+    "translation": "開発の容易性を重視した複数の手続きシステムとカスタム属性システムをプログラムしました。",
+    "api": "deepl"
+  },
+  "Achieved low-end mobile device compatibility.": {
+    "translation": "ローエンドのモバイルデバイスとの互換性を実現しました。",
+    "api": "deepl"
+  },
+  "Led music composers and sound designers to an energetic atmosphere, to match the frenetic gameplay.": {
+    "translation": "ゲームの熱狂的な雰囲気に合わせて、作曲家とサウンドデザイナーがエネルギッシュな雰囲気を作り出しました。",
+    "api": "deepl"
+  },
+  "Successfully managed scope creep to deliver the project in time.": {
+    "translation": "スコープの拡大をうまく管理し、プロジェクトを期限内に完了させました。",
+    "api": "deepl"
+  },
+  "Added an infinite procedural map that followed dynamic difficulty.": {
+    "translation": "動的な難易度に追随する無限の手順マップを追加しました。",
+    "api": "deepl"
+  },
+  "Mixed, mastered, and programmed sound and music for the game.": {
+    "translation": "ゲーム用のサウンドと音楽をミックスし、マスタリングし、プログラムしました。",
+    "api": "deepl"
+  },
+  "Programmed systemic physics changes and story events.": {
+    "translation": "プログラムされたシステム物理の変更とストーリーイベント。",
+    "api": "deepl"
+  },
+  "Wrote multi-layered lore and screenplay for the game.": {
+    "translation": "ゲームの多層的な設定と脚本を執筆しました。",
+    "api": "deepl"
+  },
+  "Designed a minimalistic meditative sci-fi puzzle game.": {
+    "translation": "ミニマルな瞑想的なSFパズルゲームをデザインしました。",
+    "api": "deepl"
+  },
+  "Managed scope creep to deliver the project in time.": {
+    "translation": "スコープの拡大を管理し、プロジェクトを期限内に完了させました。",
+    "api": "deepl"
+  },
+  "Developed a realistic black hole shader.": {
+    "translation": "リアルなブラックホールシェーダーを開発しました。",
+    "api": "deepl"
+  },
+  "AI programmer and tool programmer.": {
+    "translation": "AIプログラマーおよびツールプログラマー。",
+    "api": "deepl"
+  },
+  "Gameplay programmer and game designer.": {
+    "translation": "ゲームプレイプログラマー兼ゲームデザイナー。",
+    "api": "deepl"
+  },
+  "Gameplay programmer and lead game designer.": {
+    "translation": "ゲームプレイプログラマー兼リードゲームデザイナー。",
+    "api": "deepl"
+  },
+  "Programmed online mechanics and game gravity and designing a fast-paced multiplayer game.": {
+    "translation": "オンラインの力学とゲームの重力をプログラムし、テンポの速いマルチプレイヤーゲームを設計しました。",
+    "api": "deepl"
+  },
+  "Programming realistic AI with a patrol routine, programming tools to simplify level design, programming mechanics, designing story-driven mechanics, designing the prototype map, designing an immersive simple UI, designing nature sounds and music, following a magic forest theme, and writing a magic story that followed a transforming child.": {
+    "translation": "巡回ルーチンを備えた現実的なAIのプログラミング、レベルデザインを簡素化するプログラミングツール、メカニクスのプログラミング、ストーリー主導のメカニクスの設計、プロトタイプマップの設計、没入感のあるシンプルなUIの設計、自然音と音楽の設計、魔法の森をテーマにしたストーリーの執筆、変身する子供を題材にした魔法のストーリーの執筆。",
+    "api": "deepl"
+  },
+  "Programming the game mechanics and procedural content, planning, designing and developing the game prototype for a game jam, designing and developing a procedural map, organizing the team to efficiently deliver the game, managing brainstorming sessions and team morale, designing intuitive UI to give the player a goal, and coming up and communicating a procedural content pipeline with artists and programmers.": {
+    "translation": "ゲームの仕組みと手続き型コンテンツのプログラミング、ゲームジャム用のゲームプロトタイプの企画、設計、開発、手続き型マップの設計と開発、ゲームを効率的に制作するためのチーム編成、ブレーンストーミングセッションとチームの士気の管理、プレイヤーに目標を与える直感的なUIの設計、アーティストやプログラマーとの手続き型コンテンツパイプラインの策定と伝達。",
+    "api": "deepl"
+  },
+  "Directing and programming the camera for cutscenes and gameplay, optimizing visibility and accessibility, programming characters, game systems and infrastructure, a rougelike card system, and tooling for the team, handling IT and source control, designing game pillars, levels, enemies, and loops, based on provided game concept, writing game documents to clarify communication and collaborate with colleagues, holding game vision, and leading team to realizing it, balancing characters, combat, and difficulty, overseeing tasks, project status, and morale of the technical team, holding daily programming lessons for juniors, communicating with other departments, providing the sound team with specifications, handling sound team priorities and tasks, managing UI/UX of the game to align with the game vision, programming UI systems to simplify development, and supporting the animation team's efforts for procedural critters and flying characters.": {
+    "translation": "カットシーンとゲームプレイにおけるカメラの指示とプログラミング、視認性とアクセシビリティの最適化、キャラクター、ゲームシステム、インフラストラクチャ、ローグライクカードシステム、チーム用ツールのプログラミング、ITとソースコントロールの処理、提供されたゲームコンセプトに基づくゲームの柱、レベル、敵、ループの設計、コミュニケーションを明確にし、同僚と協力するためのゲーム文書の作成、ゲームビジョンの保持とチームを率いてその実現、キャラクター、戦闘、難易度のバランス調整、タスク、プロジェクトの進捗状況、技術チームの士気、後輩へのプログラミングの日常的な指導、他部署とのコミュニケーション、サウンドチームへの仕様書の提供、サウンドチームの優先事項とタスクの処理、ゲームビジョンに沿ったゲームのUI/UXの管理、開発を簡素化するUIシステムのプログラミング、アニメーションチームのプロシージャルなクリーチャーや飛行キャラクターの取り組みのサポート。",
+    "api": "deepl"
+  },
+  "Developed a flexible AI system that follows a natural thought process.": {
+    "translation": "自然な思考プロセスに従う柔軟なAIシステムを開発しました。",
+    "api": "deepl"
+  },
+  "Programming the game's mechanics and procedural systems, designing a low-end procedural mobile platformer following client specifications, designing and developing a procedural map, managing communication and tasks of the team, handling priorities and scope, selecting the character's sounds and game music, implementing the sounds in the game, coming up and communicating a procedural content pipeline with artists and programmers, and handling low-end mobile performance.": {
+    "translation": "ゲームのメカニックとプロシージャルシステムのプログラミング、クライアントの仕様に基づくローエンドのプロシージャルモバイルプラットフォーマーの設計、プロシージャルマップの設計と開発、チームのコミュニケーションとタスクの管理、優先順位とスコープの処理、キャラクターのサウンドとゲーム音楽の選択、ゲームへのサウンドの実装、アーティストやプログラマーとのプロシージャルコンテンツパイプラインの策定とコミュニケーション、ローエンドのモバイルパフォーマンスの処理。",
+    "api": "deepl"
+  },
+  "Programmed skills, camera, and movement, that changed based on character transformation.": {
+    "translation": "プログラムされたスキル、カメラ、動きは、キャラクターの変身に合わせて変化しました。",
+    "api": "deepl"
+  },
+  "Programmed an efficient tile-based procedural map generation algorithm.": {
+    "translation": "効率的なタイルベースの手続き型マップ生成アルゴリズムをプログラムしました。",
+    "api": "deepl"
+  },
+  "Programmed AI that reacts intuitively to weather conditions and visibility issues.": {
+    "translation": "天候や視界の問題に直感的に反応するようプログラムされたAI。",
+    "api": "deepl"
+  },
+  "Programming the tutorial and the game mechanics, designing a game based on a specified floor plan, designing the map and puzzles, planning a backlog and overseeing task completion, managing the team's scope and tasks, writing mystery screenplay that evolves with player progression, authoring a black hole and object selection shaders, designing AI voices for the characters, composing the game's music, and authoring environmental storytelling through lighting.": {
+    "translation": "チュートリアルとゲームメカニクスのプログラミング、指定のフロアプランに基づくゲームの設計、マップとパズルの設計、バックログの計画とタスク完了の監督、チームのスコープとタスクの管理、プレイヤーの進行に合わせて展開するミステリー脚本の執筆、ブラックホールとオブジェクト選択シェーダーのオーサリング、キャラクターのAI音声の設計、ゲーム音楽の作曲、照明による環境ストーリーテリングのオーサリング。",
+    "api": "deepl"
+  },
+  "Engineered robotic voiceovers, and composed slow eerie music.": {
+    "translation": "エンジニアリングされたロボット音声と、不気味なスローミュージックを制作しました。",
+    "api": "deepl"
+  },
+  "Worked on interior and exterior lighting for a space station setting.": {
+    "translation": "宇宙ステーションの内外装の照明を手がけました。",
+    "api": "deepl"
+  },
+  "Designing story-driven mechanics.": {
+    "translation": "ストーリー主導のメカニックを設計する。",
+    "api": "deepl"
+  },
+  "Designing the prototype map.": {
+    "translation": "プロトタイプマップの設計。",
+    "api": "deepl"
+  },
+  "Designing an immersive simple UI.": {
+    "translation": "没入感のあるシンプルなUIを設計しています。",
+    "api": "deepl"
+  },
+  "Programming mechanics.": {
+    "translation": "プログラミングの仕組み。",
+    "api": "deepl"
+  },
+  "Programming realistic AI with a patrol routine.": {
+    "translation": "巡回ルーチンを備えた現実的なAIのプログラミング。",
+    "api": "deepl"
+  },
+  "Programming tools to simplify level design.": {
+    "translation": "レベルデザインを簡素化するプログラミングツール。",
+    "api": "deepl"
+  },
+  "Designing nature sounds and music, following a magic forest theme.": {
+    "translation": "魔法の森をテーマに、自然の音や音楽をデザインします。",
+    "api": "deepl"
+  },
+  "Writing a magic story that followed a transforming child.": {
+    "translation": "変身する子供を描いた魔法の物語を執筆。",
+    "api": "deepl"
+  },
+  "Planning, designing and developing the game prototype for a game jam.": {
+    "translation": "ゲームジャム用のゲームプロトタイプの企画、設計、開発。",
+    "api": "deepl"
+  },
+  "Designing and developing a procedural map.": {
+    "translation": "手続き型マップの設計と開発。",
+    "api": "deepl"
+  },
+  "Designing intuitive UI to give the player a goal.": {
+    "translation": "プレイヤーにゴールを与える直感的なUIを設計する。",
+    "api": "deepl"
+  },
+  "Coming up and communicating a procedural content pipeline with artists and programmers.": {
+    "translation": "アーティストやプログラマーと、手順的なコンテンツパイプラインについて話し合い、伝達すること。",
+    "api": "deepl"
+  },
+  "Organizing the team to efficiently deliver the game.": {
+    "translation": "試合を効率的に行うためのチーム編成。",
+    "api": "deepl"
+  },
+  "Managing brainstorming sessions and team morale.": {
+    "translation": "ブレインストーミングセッションとチームの士気の管理。",
+    "api": "deepl"
+  },
+  "Programming the game mechanics and procedural content.": {
+    "translation": "ゲームの仕組みと手続き型コンテンツのプログラミング。",
+    "api": "deepl"
+  },
+  "Designing game pillars, levels, enemies, and loops, based on provided game concept.": {
+    "translation": "提供されたゲームコンセプトに基づき、ゲームの柱、レベル、敵、ループを設計します。",
+    "api": "deepl"
+  },
+  "Writing game documents to clarify communication and collaborate with colleagues.": {
+    "translation": "ゲームのドキュメントを書いてコミュニケーションを明確にし、同僚と協力する。",
+    "api": "deepl"
+  },
+  "Holding game vision, and leading team to realizing it.": {
+    "translation": "ゲームビジョンを掲げ、それを実現するチームを率いる。",
+    "api": "deepl"
+  },
+  "Balancing characters, combat, and difficulty.": {
+    "translation": "キャラクター、戦闘、難易度のバランス。",
+    "api": "deepl"
+  },
+  "Overseeing tasks, project status, and morale of the technical team.": {
+    "translation": "技術チームのタスク、プロジェクトの進捗状況、士気を管理する。",
+    "api": "deepl"
+  },
+  "Holding daily programming lessons for juniors.": {
+    "translation": "ジュニア向けに毎日プログラミングレッスンを開催しています。",
+    "api": "deepl"
+  },
+  "Communicating with other departments.": {
+    "translation": "他部署とのコミュニケーション。",
+    "api": "deepl"
+  },
+  "Supporting the animation team&#39;s efforts for procedural critters and flying characters.": {
+    "translation": "アニメーションチームの、手続き型クリーチャーや飛行キャラクターの制作をサポートしています。",
+    "api": "deepl"
+  },
+  "Providing the sound team with specifications.": {
+    "translation": "サウンドチームに仕様を提供します。",
+    "api": "deepl"
+  },
+  "Directing and programming the camera for cutscenes and gameplay, optimizing visibility and accessibility.": {
+    "translation": "カットシーンとゲームプレイにおけるカメラの操作とプログラミング、視認性とアクセシビリティの最適化。",
+    "api": "deepl"
+  },
+  "Handling sound team priorities and tasks.": {
+    "translation": "チームの優先事項とタスクを適切に処理する。",
+    "api": "deepl"
+  },
+  "Managing UI/UX of the game to align with the game vision.": {
+    "translation": "ゲームのビジョンに沿ったゲームのUI/UXの管理。",
+    "api": "deepl"
+  },
+  "Programming UI systems to simplify development.": {
+    "translation": "開発を簡素化するUIシステムのプログラミング。",
+    "api": "deepl"
+  },
+  "Programming characters, game systems and infrastructure, a rougelike card system, and tooling for the team.": {
+    "translation": "キャラクター、ゲームシステム、インフラストラクチャのプログラミング、ローグライクなカードシステム、チーム用のツール。",
+    "api": "deepl"
+  },
+  "Designing a low-end procedural mobile platformer following client specifications.": {
+    "translation": "クライアントの仕様書に従って、ローエンドのモバイルプラットフォーム向けアクションゲームを設計します。",
+    "api": "deepl"
+  },
+  "Handling low-end mobile performance.": {
+    "translation": "ローエンドのモバイルパフォーマンスの処理。",
+    "api": "deepl"
+  },
+  "Managing communication and tasks of the team.": {
+    "translation": "チームのコミュニケーションとタスクの管理。",
+    "api": "deepl"
+  },
+  "Handling priorities and scope.": {
+    "translation": "優先順位と範囲の処理。",
+    "api": "deepl"
+  },
+  "Programming the game&#39;s mechanics and procedural systems.": {
+    "translation": "ゲームのメカニクスと手続き型システムのプログラミング。",
+    "api": "deepl"
+  },
+  "Selecting the character&#39;s sounds and game music.": {
+    "translation": "キャラクターの音声とゲーム音楽の選択。",
+    "api": "deepl"
+  },
+  "Implementing the sounds in the game.": {
+    "translation": "ゲームにサウンドを実装する。",
+    "api": "deepl"
+  },
+  "Handling IT and source control.": {
+    "translation": "ITとソースコード管理を担当しています。",
+    "api": "deepl"
+  },
+  "Designing a fast-paced multiplayer game.": {
+    "translation": "テンポの速いマルチプレイヤーゲームの設計。",
+    "api": "deepl"
+  },
+  "Programmed online mechanics and game gravity.": {
+    "translation": "オンラインの力学とゲームの重力をプログラムしました。",
+    "api": "deepl"
+  },
+  "Designing a game based on a specified floor plan.": {
+    "translation": "指定された間取り図に基づいてゲームを設計します。",
+    "api": "deepl"
+  },
+  "Designing the map and puzzles.": {
+    "translation": "地図とパズルのデザイン。",
+    "api": "deepl"
+  },
+  "Planning a backlog and overseeing task completion.": {
+    "translation": "バックログの計画とタスク完了の監督。",
+    "api": "deepl"
+  },
+  "Managing the team&#39;s scope and tasks.": {
+    "translation": "チームのスコープとタスクの管理。",
+    "api": "deepl"
+  },
+  "Programming the tutorial and the game mechanics.": {
+    "translation": "チュートリアルとゲームの仕組みをプログラミングする。",
+    "api": "deepl"
+  },
+  "Writing mystery screenplay that evolves with player progression.": {
+    "translation": "プレイヤーの進行状況に応じて展開するミステリー脚本を執筆。",
+    "api": "deepl"
+  },
+  "Authoring a black hole and object selection shaders.": {
+    "translation": "ブラックホールとオブジェクト選択シェーダーのオーサリング。",
+    "api": "deepl"
+  },
+  "Designing AI voices for the characters.": {
+    "translation": "キャラクターのAIボイスをデザインする。",
+    "api": "deepl"
+  },
+  "Composing the game&#39;s music.": {
+    "translation": "ゲーム音楽の作曲。",
+    "api": "deepl"
+  },
+  "Authoring environmental storytelling through lighting.": {
+    "translation": "照明による環境ストーリーテリングの作成。",
+    "api": "deepl"
+  },
+  "Creating a performant AI tool.": {
+    "translation": "高性能なAIツールの作成。",
+    "api": "deepl"
+  },
+  "Designing and developing AI agents following a custom model.": {
+    "translation": "カスタムモデルに従ってAIエージェントを設計・開発します。",
+    "api": "deepl"
   }
 }

@@ -25,7 +25,8 @@ export type TextTag =
   | "h1"
   | "h2"
   | "h3"
-  | "h4";
+  | "h4"
+  | "h5";
 
 export type TextSize =
   | "content-list-highlight"
@@ -104,6 +105,10 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
       prose: "prose-h4:-mt-2 prose-h4:italic prose-h4:font-normal",
       format: "subheading",
     },
+    h5: {
+      prose:
+        "prose-h5:font-semibold prose-h5:print:font-normal prose-h5:text-balance",
+    },
     container: {
       classes: "text-2xl lg:text-3xl 2xl:text-4xl",
       format: "heading",
@@ -133,7 +138,7 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
       .filter((text) => !!text)
       .join(" ")} ${
       formats.base
-    } prose-pre:rounded-3xl prose-pre:whitespace-pre-wrap prose-pre:text-xs prose-pre:sm:text-base prose-pre:2xl:text-2xl prose-ul:print:break-inside-avoid-page prose-ol:print:break-inside-avoid-page prose-th:border-2 prose-th:py-2 prose-th:px-4 prose-td:border-2 prose-td:px-4 prose-tr:print:break-inside-avoid-page`;
+    } prose-pre:rounded-3xl prose-pre:whitespace-pre-wrap prose-pre:text-xs prose-pre:sm:text-base prose-pre:2xl:text-2xl prose-ul:print:break-inside-avoid-page prose-ul:print:has-[li:nth-child(6)]:break-inside-auto prose-ol:print:break-inside-avoid-page prose-ol:print:has-[li:nth-child(6)]:break-inside-auto prose-th:border-2 prose-th:py-2 prose-th:px-4 prose-td:border-2 prose-td:px-4 prose-tr:print:break-inside-avoid-page prose-tr:print:first:break-inside-auto`;
   }
 
   return `${elements[size].classes ?? ""} ${

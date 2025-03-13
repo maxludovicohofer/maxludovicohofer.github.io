@@ -28,9 +28,10 @@ export const getStaticPaths = getBasePaths;
 
 interface Props {
   company?: string;
+  full?: boolean;
 }
 
-const { company } = Astro.props;
+const { company, full } = Astro.props;
 
 await setLocale(Astro);
 dayjs.extend(duration);
@@ -42,7 +43,7 @@ const t = i18n(Astro);
 const myName = await getMyName(Astro);
 const summary = await getSummary(Astro);
 
-const { experience } = await getKnowHow(Astro);
+const { experience } = await getKnowHow(Astro, { allProjects: full });
 
 const portfolioSentence = await t("Portfolio");
 const portfolioLink = await getSiteLink(Astro);
@@ -55,8 +56,6 @@ const experienceTechThreshold = 1;
 const techList = await getTechList(Astro);
 
 const selfPRSentence = await getSelfPRSentence(Astro, company);
-
-// TODO KEYWORD SYSTEM COULD MAP KEYWORDS TO CERTAIN CONTENT, FOR EXAMPLE CHANGING TASKS IN JOBS OR TECH
 
 // TODO PHASE 2 SHOULD ALSO GET ALL SKILLS OF EXPERIENCES, AND REMOVE EXPERIENCES IF IRRELEVANT
 // TODO PHASE 2 SHOULD HAVE A MAX NUMBER OF ENTRIES AND SELECT BASED ON THAT MAX NUMBER
@@ -87,14 +86,24 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
         async ({
           id,
           translateId,
+          school,
+          countAsExperience,
           start,
           end,
-          skill: { job, tasks, achievements, countAsWork },
+          skill: { job, tasks, achievements },
           projects,
           tech,
           team,
         }) => {
-          const organization = `${translateId ? await t(capitalize(id)) : capitalize(id)}${await t("(")}${countAsWork ? await t("school") : "正社員として勤務"}${await t(")")}`;
+          const organization = `${translateId ? await t(capitalize(id)) : capitalize(id)}${id.startsWith("self ") ? "" : `${await t("(")}${countAsExperience && school ? await t("school") : "正社員として勤務"}${await t(")")}`}`;
+
+          const experienceTech =
+            tech &&
+            compactTechList(
+              await getTechList(Astro, experienceTechThreshold, {
+                entries: tech,
+              })
+            );
 
           const matchedProjects =
             projects &&
@@ -104,25 +113,19 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
                 id: `${id}/${id}`,
                 ...project,
               })),
+              noDrafts: true,
             }));
+
           const relevantProjects =
             matchedProjects &&
             applyMatch(matchedProjects, projectMatchThreshold)
-              .filter(
-                (project) => getDevelopmentTime(project)! > durationThreshold
+              .filter((project) =>
+                full ? true : getDevelopmentTime(project)! > durationThreshold
               )
-              .slice(0, 2)
+              .slice(0, full ? undefined : 2)
               .sort((a, b) =>
                 b.publishingDate.isAfter(a.publishingDate) ? 1 : -1
               );
-
-          const experienceTech =
-            tech &&
-            compactTechList(
-              await getTechList(Astro, experienceTechThreshold, {
-                entries: tech,
-              })
-            );
 
           return (
             <>
@@ -185,6 +188,7 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
                           tech={projectTech}
                           projectType={getCategory(project)}
                           team={getTeam(project)!}
+                          full={full}
                         />
                       );
                     })

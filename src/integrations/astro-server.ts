@@ -336,13 +336,17 @@ export const getSortedDocuments = async <C extends DocumentCollectionKey>(
   ).sort((a, b) => (b.publishingDate.isAfter(a.publishingDate) ? 1 : -1));
 };
 
-export const getAllDocuments = async <C extends DocumentCollectionKey>(
+export const getAllDocuments = async <
+  C extends DocumentCollectionKey,
+  E extends keyof DataEntryMap[DocumentCollectionKey] = string
+>(
   collection: C,
-  ...params: ExceptFirst<Parameters<typeof getCollectionAdvanced>>
+  options?: GetCollectionOptions<C, E> & { noDrafts?: boolean }
 ) =>
   await getCollectionAdvanced(collection, {
-    filter: ({ data: { draft } }) => import.meta.env.DEV || !draft,
-    ...params[0],
+    filter: ({ data: { draft } }) =>
+      !draft || (import.meta.env.DEV && !options?.noDrafts),
+    ...options,
   });
 
 export interface GetCollectionOptions<
