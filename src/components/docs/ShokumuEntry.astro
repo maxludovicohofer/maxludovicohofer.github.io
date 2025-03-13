@@ -42,8 +42,8 @@ const scaleText = soloDeveloped
   ? await t("Solo")
   : `${team.internal + team.external}名${team.external ? `（うち外注スタッフ${team.external}名）` : ""}`;
 
-const rolesSentence = `${await t(endDot(capitalize(toTextList(roles.slice(0, 3).map(({ id }) => id)))))}`;
-const responsibilitiesSentence = `${await t(endDot(capitalize(toTextList(responsibilities.slice(0, 3)))))}`;
+const rolesSentence = `${await t(endDot(capitalize(toTextList(roles.slice(0, 2).map(({ id }) => id)))))}`;
+const responsibilitiesSentence = `${await t(endDot(capitalize(toTextList(responsibilities.slice(0, 2)))))}`;
 const linkText = await t("Read development");
 ---
 
@@ -79,7 +79,7 @@ const linkText = await t("Read development");
     <ul class="mt-0 last:-mb-2">
       {
         points
-          .slice(0, 3)
+          .slice(0, 2)
           .map((point) => <Text tag="li">{endDot(capitalize(point))}</Text>)
       }
     </ul>

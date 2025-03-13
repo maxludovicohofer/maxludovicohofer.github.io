@@ -1694,5 +1694,61 @@
   "play": {
     "translation": "演じる",
     "api": "deepl"
+  },
+  "Designing and developing UX for sales team and end clients and adapting the UX to the workflow of the company.": {
+    "translation": "営業チームとエンドユーザー向けのUXを設計・開発し、そのUXを会社のワークフローに適応させる。",
+    "api": "deepl"
+  },
+  "Lead game designer and technical team lead.": {
+    "translation": "リードゲームデザイナー兼テクニカルチームリーダー。",
+    "api": "deepl"
+  },
+  "Game designer and technical artist.": {
+    "translation": "ゲームデザイナー兼テクニカルアーティスト。",
+    "api": "deepl"
+  },
+  "Designing a low-end procedural mobile platformer following client specifications and designing and developing a procedural map.": {
+    "translation": "クライアントの仕様書に従って、ローエンドのプロシージャルなモバイルプラットフォーマーを設計し、プロシージャルなマップを設計・開発しました。",
+    "api": "deepl"
+  },
+  "Developed an easy to work on level design pipeline.": {
+    "translation": "作業しやすいレベルデザインのパイプラインを開発しました。",
+    "api": "deepl"
+  },
+  "Developing realtime web apps and developing desktop apps that communicate with medical devices.": {
+    "translation": "リアルタイムのウェブアプリの開発と、医療機器と通信するデスクトップアプリの開発。",
+    "api": "deepl"
+  },
+  "Programmed a progressive web app using scrum and TDD.": {
+    "translation": "スクラムとTDDを使用してプログレッシブウェブアプリをプログラミングしました。",
+    "api": "deepl"
+  },
+  "Camera programmer and gameplay programmer.": {
+    "translation": "カメラプログラマーおよびゲームプレイプログラマー。",
+    "api": "deepl"
+  },
+  "Created a complex AI structure with less than 1ms tree traversal time per agent.": {
+    "translation": "エージェント1人当たりのツリー走査時間が1ミリ秒未満の複雑なAI構造を作成しました。",
+    "api": "deepl"
+  },
+  "Directing and programming the camera for cutscenes and gameplay, optimizing visibility and accessibility and programming characters, game systems and infrastructure, a rougelike card system, and tooling for the team.": {
+    "translation": "カットシーンとゲームプレイにおけるカメラの演出とプログラミング、視認性とアクセス性の最適化、キャラクター、ゲームシステム、インフラストラクチャ、ルーグライクカードシステム、チーム用ツールのプログラミング。",
+    "api": "deepl"
+  },
+  "Programmed camera to continuously follow characters in cutscenes and awkward map locations.": {
+    "translation": "カットシーンやわかりにくいマップ上のキャラクターを、カメラをプログラムして常に追跡する。",
+    "api": "deepl"
+  },
+  "Designing game pillars, levels, enemies, and loops, based on provided game concept and writing game documents to clarify communication and collaborate with colleagues.": {
+    "translation": "提供されたゲームコンセプトに基づいて、ゲームの柱、レベル、敵、ループを設計し、コミュニケーションを明確にし、同僚と協力するためのゲーム文書を作成します。",
+    "api": "deepl"
+  },
+  "Created an easy to use debug UI.": {
+    "translation": "使いやすいデバッグUIを作成しました。",
+    "api": "deepl"
+  },
+  "Unreal Engine, Maya, ZBrush, FL Studio, Excel.": {
+    "translation": "Unreal Engine、Maya、ZBrush、FL Studio、Excel。",
+    "api": "deepl"
   }
 }

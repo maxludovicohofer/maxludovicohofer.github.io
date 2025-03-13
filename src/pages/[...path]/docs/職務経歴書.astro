@@ -22,6 +22,7 @@ import { applyMatch } from "@integrations/astro-server";
 import { getEntryId } from "@layouts/document/Document.astro";
 import ShokumuEntry from "@components/docs/ShokumuEntry.astro";
 import { getStaticPaths as getBasePaths } from "./履歴書.astro";
+import { capitalize } from "@integrations/text";
 
 export const getStaticPaths = getBasePaths;
 
@@ -55,7 +56,6 @@ const techList = await getTechList(Astro);
 
 const selfPRSentence = await getSelfPRSentence(Astro, company);
 
-// TODO ADD OCCUPATIONS (MDX) AND KEYWORD SYSTEM
 // TODO KEYWORD SYSTEM COULD MAP KEYWORDS TO CERTAIN CONTENT, FOR EXAMPLE CHANGING TASKS IN JOBS OR TECH
 
 // TODO PHASE 2 SHOULD ALSO GET ALL SKILLS OF EXPERIENCES, AND REMOVE EXPERIENCES IF IRRELEVANT
@@ -94,7 +94,7 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
           tech,
           team,
         }) => {
-          const organization = `${translateId ? await t(id) : id}${await t("(")}${countAsWork ? await t("school") : "正社員として勤務"}${await t(")")}`;
+          const organization = `${translateId ? await t(capitalize(id)) : capitalize(id)}${await t("(")}${countAsWork ? await t("school") : "正社員として勤務"}${await t(")")}`;
 
           const matchedProjects =
             projects &&

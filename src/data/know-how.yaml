@@ -83,7 +83,7 @@
         - programming a realtime data-heavy web app
         - managing servers and CI/CD
       achievements:
-        - programmed a progressive web app using scrum and BDD
+        - programmed a progressive web app using scrum and TDD
         - developed an efficient optimization algorithm for salesmen scheduling, running on mobile phones
 
 - id: Zulu Medical
