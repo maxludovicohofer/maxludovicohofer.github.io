@@ -1686,5 +1686,13 @@
   "Unreal Engine, Maya, Illustrator, Photoshop, FL Studio, mobile.": {
     "translation": "Unreal Engine、Maya、Illustrator、Photoshop、FL Studio、モバイル。",
     "api": "deepl"
+  },
+  "try": {
+    "translation": "試みる",
+    "api": "deepl"
+  },
+  "play": {
+    "translation": "演じる",
+    "api": "deepl"
   }
 }
