@@ -1610,5 +1610,81 @@
   "Close up of Hofer Max Ludovico.": {
     "translation": "ホーファー・マックス・ルドヴィコのクローズアップ。",
     "api": "deepl"
+  },
+  "Open to relocate": {
+    "translation": "移転可能",
+    "api": "deepl"
+  },
+  "programmer": {
+    "translation": "プログラマー",
+    "api": "deepl"
+  },
+  "Technical lead.": {
+    "translation": "テクニカルリーダー。",
+    "api": "deepl"
+  },
+  "User experience designer.": {
+    "translation": "ユーザーエクスペリエンスデザイナー。",
+    "api": "deepl"
+  },
+  "Planning the company's technological development.": {
+    "translation": "会社の技術開発計画を立案する。",
+    "api": "deepl"
+  },
+  "Designing and developing UX for sales team and end clients, adapting the UX to the workflow of the company, and showcasing the UI to the board.": {
+    "translation": "営業チームとエンドユーザー向けのUXの設計と開発、UXを会社のワークフローに適応させること、UIを役員会に紹介すること。",
+    "api": "deepl"
+  },
+  "prototype": {
+    "translation": "プロトタイプ",
+    "api": "deepl"
+  },
+  "Lead game designer, technical team lead, and technical animation lead.": {
+    "translation": "リードゲームデザイナー、テクニカルチームリード、テクニカルアニメーションリード。",
+    "api": "deepl"
+  },
+  "Game designer, technical artist, and team lead.": {
+    "translation": "ゲームデザイナー、テクニカルアーティスト、チームリーダー。",
+    "api": "deepl"
+  },
+  "TODO, TODO, and TODO.": {
+    "translation": "TODO、TODO、TODO。",
+    "api": "deepl"
+  },
+  "Full stack programmer.": {
+    "translation": "フルスタックプログラマー。",
+    "api": "deepl"
+  },
+  "Programmer.": {
+    "translation": "プログラマー。",
+    "api": "deepl"
+  },
+  "Camera programmer, gameplay programmer, and lead game designer.": {
+    "translation": "カメラプログラマー、ゲームプレイプログラマー、リードゲームデザイナー。",
+    "api": "deepl"
+  },
+  "Tool programmer and AI programmer.": {
+    "translation": "ツールプログラマーおよびAIプログラマー。",
+    "api": "deepl"
+  },
+  "Programming a realtime data-heavy web app and managing servers and CI/CD.": {
+    "translation": "リアルタイムで大量のデータを扱うウェブアプリのプログラミングと、サーバーおよびCI/CDの管理。",
+    "api": "deepl"
+  },
+  "Developing realtime web apps, developing desktop apps that communicate with medical devices, and managing servers and CI/CD.": {
+    "translation": "リアルタイムのウェブアプリの開発、医療機器と通信するデスクトップアプリの開発、サーバーとCI/CDの管理。",
+    "api": "deepl"
+  },
+  "Creating a performant AI tool and designing and developing AI agents following a custom model.": {
+    "translation": "高性能なAIツールの作成と、カスタムモデルに従ったAIエージェントの設計および開発。",
+    "api": "deepl"
+  },
+  "Programmed a progressive web app using scrum and BDD.": {
+    "translation": "スクラムとBDDを使用してプログレッシブウェブアプリをプログラミングしました。",
+    "api": "deepl"
+  },
+  "Unreal Engine, Maya, Illustrator, Photoshop, FL Studio, mobile.": {
+    "translation": "Unreal Engine、Maya、Illustrator、Photoshop、FL Studio、モバイル。",
+    "api": "deepl"
   }
 }
