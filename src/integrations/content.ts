@@ -124,7 +124,7 @@ export function getCategory<F extends boolean>(
   entry: { data: object } | undefined,
   noFormat?: F
 ):
-  | (F extends true ? Category : `Published ${Category}` | Category)
+  | (F extends true ? Category : `published ${Category}` | Category)
   | undefined {
   function isCategoryEntry(test: typeof entry): test is {
     data: { category: Category };
@@ -146,7 +146,7 @@ export function getCategory<F extends boolean>(
   }
 
   return (
-    !noFormat && getDownloadLinks(entry) ? `Published ${category}` : category
+    !noFormat && getDownloadLinks(entry) ? `published ${category}` : category
   ) as any;
 }
 

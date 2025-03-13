@@ -19,6 +19,7 @@ import { getDescription, getEntryId } from "@layouts/document/Document.astro";
 import { isLocalizedEntry } from "@integrations/astro-server";
 import { i18n, setLocale } from "@integrations/i18n-server";
 import PostText from "./PostText.astro";
+import { capitalize } from "@integrations/text";
 
 interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollectionKey> | undefined;
@@ -90,9 +91,10 @@ const publishingDate =
 
 const t = i18n(Astro);
 
-const subtitle = [category && (await t(category)), publishingDate].filter(
-  (part) => !!part
-);
+const subtitle = [
+  category && (await t(capitalize(category))),
+  publishingDate,
+].filter((part) => !!part);
 
 const noTranslation = isLocalizedEntry(entry);
 ---

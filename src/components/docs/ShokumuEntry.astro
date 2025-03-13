@@ -36,7 +36,7 @@ const {
 const t = i18n(Astro);
 
 const dates = await getFormattedDates(Astro, start, end);
-const type = projectType && (await t(projectType));
+const type = projectType && (await t(capitalize(projectType)));
 const soloDeveloped = !team || (team.internal === 1 && !team.external);
 const scaleText = soloDeveloped
   ? await t("Solo")

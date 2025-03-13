@@ -19,6 +19,7 @@ import {
 } from "@integrations/content";
 import { i18n } from "@integrations/i18n-server";
 import { isLocalizedEntry } from "@integrations/astro-server";
+import { capitalize } from "@integrations/text";
 
 interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollectionKey>;
@@ -55,7 +56,7 @@ const cover = getCover(entry);
 const downloadLinks = getDownloadLinks(entry);
 const category = getCategory(entry);
 const t = i18n(Astro);
-const action = await t(category === "Published tool" ? "Try" : "Play");
+const action = await t(category === "published tool" ? "try" : "play");
 
 const fullWidthClass = `w-full ${inline ? "" : "pb-24 lg:pb-10"}`;
 
@@ -109,7 +110,7 @@ const noTranslation = isLocalizedEntry(entry);
             : {}) satisfies Partial<ComponentProps<typeof Text>>}
           {...titleProps}><slot name="title">{title}</slot></Text
         >
-        {category && <Text subtitle>{category}</Text>}
+        {category && <Text subtitle>{capitalize(category)}</Text>}
         <Document
           inline
           entry={entry}
@@ -128,7 +129,9 @@ const noTranslation = isLocalizedEntry(entry);
                 linkClass={buttonWidthClass}
                 translateProps={{ disable: true }}
               >
-                <div class="group-hover:animate-pulse">{action}</div>
+                <div class="group-hover:animate-pulse">
+                  {capitalize(action)}
+                </div>
               </Button>
               {downloadLinks.length > 1 && (
                 <Text subtitle class={`-mb-4 w-full ${buttonWidthClass}`}>
