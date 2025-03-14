@@ -2178,5 +2178,29 @@
   "Designing and developing AI agents following a custom model.": {
     "translation": "カスタムモデルに従ってAIエージェントを設計・開発します。",
     "api": "deepl"
+  },
+  "Currently transitioning from software engineering to videogame engine programming, which is my lifelong passion.": {
+    "translation": "現在、ソフトウェアエンジニアリングからビデオゲームエンジンプログラミングへの転向中です。これは私の生涯の情熱です。",
+    "api": "deepl"
+  },
+  "System programmer experienced in leadership and software, specialized in mechanics, combat, AI, and systems.": {
+    "translation": "リーダーシップとソフトウェアに精通したシステムプログラマーで、メカニック、戦闘、AI、システムに特化しています。",
+    "api": "deepl"
+  },
+  "While new to the professional world of videogames, I have been involved in engine programming on academic and personal projects my whole life.": {
+    "translation": "ビデオゲーム業界では新参者ですが、学術的および個人的なプロジェクトでは、生涯にわたってエンジンプログラミングに携わってきました。",
+    "api": "deepl"
+  },
+  "Tool programmer, gameplay programmer, AI programmer.": {
+    "translation": "ツールプログラマー、ゲームプレイプログラマー、AIプログラマー。",
+    "api": "deepl"
+  },
+  "I'm a system programmer specialized in mechanics, combat, AI, and systems.": {
+    "translation": "私は、メカニック、戦闘、AI、システムを専門とするシステムプログラマーです。",
+    "api": "deepl"
+  },
+  "Engine programming": {
+    "translation": "エンジンプログラミング",
+    "api": "deepl"
   }
 }
