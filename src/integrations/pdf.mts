@@ -1,14 +1,16 @@
 import type { PagesFunction } from "astro-pdf";
 import { getPathSections } from "./text";
-import { getMyName } from "@integrations/docs";
+import { getShortName, myName } from "./astro-config.mts";
 
-export const getPrintOptions: PagesFunction = async (pathname) => {
+export const getPrintOptions: PagesFunction = (pathname) => {
   const sections = getPathSections(pathname);
 
   const indexOfDocs = sections.slice(0, -1).indexOf("docs");
   if (indexOfDocs !== -1) {
     const [docs] = sections.splice(indexOfDocs, 1);
-    const fileName = `${(await getMyName()).translatedShort}-${sections.pop()}`;
+    const fileName = `${getShortName([myName.surname, myName.name])
+      .join("-")
+      .toLocaleLowerCase()}-${sections.pop()}`;
 
     // Order folders by specific-first
     sections.reverse();

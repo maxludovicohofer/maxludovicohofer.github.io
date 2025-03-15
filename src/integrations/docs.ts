@@ -6,7 +6,7 @@ import { i18n } from "./i18n-server";
 import { removeWatashiWa } from "./l10n";
 import { FULL_ADDRESS } from "astro:env/server";
 import { getLocaleInfo, localeInfo } from "./i18n-special";
-import { defaultLocale } from "./astro-config.mts";
+import { defaultLocale, getShortName, myName } from "./astro-config.mts";
 
 export const getWorkFieldsSentence = async (astro: AstroGlobal) => {
   const {
@@ -141,15 +141,14 @@ export const getAddress = async (astro: AstroGlobal) => {
 
 export const getMyName = async (astro: AstroGlobal) => {
   const t = i18n(astro);
-
-  const fullName = ["Max Ludovico", "Hofer"];
-
   const { surnameFirst, nameSeparator } = getLocaleInfo(astro);
-  if (surnameFirst) fullName.reverse();
+
+  const fullName = surnameFirst
+    ? [myName.surname, myName.name]
+    : [myName.name, myName.surname];
 
   const nameParts = fullName.flatMap((part) => part.split(" "));
-
-  const shortNameParts = fullName.map((part) => part.split(" ")[0]);
+  const shortNameParts = getShortName(fullName);
 
   const separator = nameSeparator ?? " ";
 

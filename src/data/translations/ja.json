@@ -2202,5 +2202,13 @@
   "Engine programming": {
     "translation": "エンジンプログラミング",
     "api": "deepl"
+  },
+  "I am deeply inspired by {}'s innovative engine programming and would be honored to contribute to your team.": {
+    "translation": "私は、{}の革新的なエンジンプログラミングに深く感銘を受けており、貴社チームに貢献できることを光栄に思います。",
+    "api": "deepl"
+  },
+  "Tool programmer and gameplay programmer.": {
+    "translation": "ツールプログラマーおよびゲームプレイプログラマー。",
+    "api": "deepl"
   }
 }
