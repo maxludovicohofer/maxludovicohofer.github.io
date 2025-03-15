@@ -2,7 +2,7 @@ import type { AstroGlobal } from "astro";
 import { getRole } from "./astro-server";
 import { endDot, capitalize, toTextList } from "./text";
 import { getCollection } from "astro:content";
-import { i18n } from "./i18n-server";
+import { i18n, type I18nOptions } from "./i18n-server";
 import { removeWatashiWa } from "./l10n";
 import { FULL_ADDRESS } from "astro:env/server";
 import { getLocaleInfo, localeInfo } from "./i18n-special";
@@ -131,12 +131,15 @@ export const getSelfPRSentence = async (
   );
 };
 
-export const getAddress = async (astro: AstroGlobal) => {
+export const getAddress = async (astro: AstroGlobal, options?: I18nOptions) => {
   const t = i18n(astro);
 
   const address = FULL_ADDRESS ?? "Paese 31038 near Venice, Italy";
 
-  return { raw: address, translated: await t(address, { noCache: true }) };
+  return {
+    raw: address,
+    translated: await t(address, { noCache: true, ...options }),
+  };
 };
 
 export const getMyName = async (astro: AstroGlobal) => {

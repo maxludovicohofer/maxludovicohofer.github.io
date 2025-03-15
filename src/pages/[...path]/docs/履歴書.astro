@@ -35,7 +35,7 @@ const dateOfBirth = dayjs("1997-09-01");
 
 const t = i18n(Astro);
 
-const address = await getAddress(Astro);
+const address = await getAddress(Astro, { modelType: "latency_optimized" });
 
 const knowHow = await getKnowHow(Astro);
 const history = Object.fromEntries(

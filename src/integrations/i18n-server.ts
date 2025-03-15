@@ -23,7 +23,7 @@ export type TranslateOptions = {
   noCache?: boolean;
 };
 
-export type I18nOptions = deepl.TranslatorOptions &
+export type I18nOptions = deepl.TranslateTextOptions &
   Partial<Record<PossibleTranslations, string>> &
   TranslateOptions & { interpolate?: string | string[] };
 
@@ -63,6 +63,10 @@ let translateBuffer: {
   options?: I18nOptions | undefined;
 }[] = [];
 
+const localCache: Partial<
+  Record<PossibleTranslations, CollectionEntry<"translations">["data"]>
+> = {};
+
 const queueTranslation = async (
   text: string,
   toLocale: PossibleTranslations,
@@ -87,6 +91,9 @@ const queueTranslation = async (
     ) {
       return cleanText;
     }
+
+    // Translation only works consistently in production env, because astro adds html attributes in dev
+    if (import.meta.env.DEV && !options?.force) return `${cleanText} (t)`;
   }
 
   const entryTranslations = (await getEntry("translations", toLocale))?.data;
@@ -97,13 +104,11 @@ const queueTranslation = async (
   } else {
     // Check if in file but not in astro entry
     //? This can happen if translated in current session
-    const fileTranslation = (await getTranslationsFile(toLocale))?.[cleanText]
-      ?.translation;
-
-    if (fileTranslation) return fileTranslation;
+    const unbuiltTranslation = localCache[toLocale]?.[cleanText]?.translation;
+    if (unbuiltTranslation) return unbuiltTranslation;
   }
 
-  // Translation only works consistently in production env, because astro adds html attributes in dev
+  // Do not translate in dev to save money
   if (import.meta.env.DEV && !options?.force) return `${cleanText} (t)`;
 
   // Cache miss
@@ -144,10 +149,6 @@ const translate = async (translateOptions?: TranslateOptions) => {
     )
   );
 
-  const translations: Partial<
-    Record<PossibleTranslations, CollectionEntry<"translations">["data"]>
-  > = {};
-
   for (const locale in translateInfoGroups) {
     const toLocale = locale as PossibleTranslations;
 
@@ -185,10 +186,7 @@ const translate = async (translateOptions?: TranslateOptions) => {
       if (options?.noCache) uncachedTexts.push(...texts);
     }
 
-    localeTranslations = {
-      ...(await getTranslationsFile(toLocale)),
-      ...localeTranslations,
-    };
+    localCache[toLocale] = { ...localCache[toLocale], ...localeTranslations };
 
     const { writeFileSync } = await import("node:fs");
 
@@ -197,7 +195,10 @@ const translate = async (translateOptions?: TranslateOptions) => {
       `${translationsPath}/${toLocale}.json`,
       JSON.stringify(
         Object.fromEntries(
-          Object.entries(localeTranslations).filter(
+          Object.entries({
+            ...(await getTranslationsFile(toLocale)),
+            ...localeTranslations,
+          }).filter(
             // Remove texts that are not to be cached
             ([text]) => !uncachedTexts.includes(text)
           )
@@ -206,12 +207,13 @@ const translate = async (translateOptions?: TranslateOptions) => {
         2
       )
     );
-
-    translateBuffer = [];
-    translations[toLocale] = localeTranslations;
   }
 
-  return translations;
+  translateBuffer = [];
+
+  console.log(localCache);
+
+  return localCache;
 };
 
 const getTranslationsFile = async (locale: PossibleTranslations) => {
