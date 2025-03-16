@@ -1,5 +1,5 @@
 import type { Credentials, OAuth2Client } from "google-auth-library";
-import { auth, youtube, youtube_v3 } from "@googleapis/youtube";
+import { auth, youtube, type youtube_v3 } from "@googleapis/youtube";
 import type { GaxiosError } from "gaxios";
 import type { APIContext, AstroGlobal } from "astro";
 
