@@ -3,12 +3,12 @@ import Page from "@layouts/Page.astro";
 import Bento from "@layouts/Bento.astro";
 import Profile from "@components/Profile.astro";
 import TechPreview from "@components/TechPreview.astro";
-import Video from "@ui/Video.astro";
 import PostListPreview from "@post/PostListPreview.astro";
 import { getCollection } from "astro:content";
 import { makePath } from "@integrations/text";
 import { defaultLocale, locales } from "@integrations/astro-config.mts";
 import { BUILD_MODE } from "astro:env/server";
+import Showreel from "@components/Showreel.astro";
 
 export const getStaticPaths = async (options?: {
   allowedLocales?: (typeof locales)[number][];
@@ -62,11 +62,7 @@ export const getStaticPaths = async (options?: {
 <Page description="My portfolio and blog" homepage>
   <Bento>
     <Profile slot="1-small" />
-    <Video
-      slot="2-medium"
-      youTubeInfo={{ id: "m0KhK_J0LiQ", aspect: "16/10" }}
-      showSubtitles
-    />
+    <Showreel slot="2-medium" />
     <PostListPreview
       slot="3-large"
       collection="projects"

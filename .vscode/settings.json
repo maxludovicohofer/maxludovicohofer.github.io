@@ -6,7 +6,8 @@
     "src/data/roles.schema.json": "src/data/roles.yaml",
     "src/data/know-how.schema.json": "src/data/know-how.yaml",
     "src/data/certifications.schema.json": "src/data/certifications.yaml",
-    "src/data/languages.schema.json": "src/data/languages.yaml"
+    "src/data/languages.schema.json": "src/data/languages.yaml",
+    ".astro/collections/videos.schema.json": "src/data/videos/*.yaml"
   },
   "json.schemas": [
     {

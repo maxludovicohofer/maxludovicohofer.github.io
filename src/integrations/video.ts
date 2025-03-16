@@ -1,18 +1,16 @@
 import dayjs from "dayjs";
 import duration, { type Duration } from "dayjs/plugin/duration";
-import {
-  addBaseToLink,
-  applyMatch,
-  getSortedPosts,
-  matchRoles,
-} from "./astro-server";
+import { applyMatch, getSortedPosts, matchRoles } from "./astro-server";
 import type { AstroGlobal } from "astro";
 import { getEntryId } from "@layouts/document/Document.astro";
 import { capitalize, endDot } from "./text";
 import { i18n } from "./i18n-server";
-// import { getShowreels } from "./google";
+import { callApi } from "./google";
+import { getCurrentLocale } from "./i18n-special";
 
 export const generateShowreelCaptions = async (astro: AstroGlobal) => {
+  dayjs.extend(duration);
+
   const projects = [
     "steelsilk-championship",
     "lolita",
@@ -20,8 +18,14 @@ export const generateShowreelCaptions = async (astro: AstroGlobal) => {
     "duchessas-world",
   ];
 
-  const scenesPerProject = 5;
-  const secondsPerProject = 30;
+  // TODO PHASE 2 USE GET READING TIME TO CORRECTLY FIT CAPTIONS IN SHOWREEL
+
+  const captionsPerProject = 5;
+  const totalCaptions = projects.length * captionsPerProject;
+  const showreelDuration = dayjs.duration({ minutes: 2 });
+  const captionDuration = dayjs.duration(
+    showreelDuration.asMilliseconds() / totalCaptions
+  );
 
   const posts = (
     await getSortedPosts(astro, "projects", {
@@ -53,7 +57,7 @@ export const generateShowreelCaptions = async (astro: AstroGlobal) => {
         return [
           ...matchedRoles
             .flatMap(({ achievements }) => achievements)
-            .slice(0, secondsPerProject / scenesPerProject - (awards ? 2 : 1)),
+            .slice(0, captionsPerProject - (awards ? 1 : 0)),
           ...(awards ? [`Won ${awards[0]}`] : []),
         ];
       })
@@ -62,34 +66,107 @@ export const generateShowreelCaptions = async (astro: AstroGlobal) => {
 
   const t = i18n(astro);
 
-  dayjs.extend(duration);
-
   const captions: { start: Duration; end: Duration; text: string }[] = [];
 
-  for (let index = 0; index < projects.length * scenesPerProject; index++) {
-    const start = dayjs.duration(
-      index * (secondsPerProject / scenesPerProject) * 1000
-    );
+  for (let index = 0; index < totalCaptions; index++) {
+    const start = dayjs.duration(index * captionDuration.asMilliseconds());
     captions.push({
       start,
-      end: start.add({ seconds: secondsPerProject / scenesPerProject }),
+      end: start.add(captionDuration),
       text: await t(endDot(capitalize(subtitles[index]!))),
     });
   }
 
-  const { writeFile } = await import("fs/promises");
+  return captions
+    .map(
+      ({ start, end, text }, index) =>
+        `${index}\n${start.format("HH:mm:ss,SSS")} --> ${end.format(
+          "HH:mm:ss,SSS"
+        )}\n${text}`
+    )
+    .join("\n\n");
+};
 
-  await writeFile(
-    `src/data/videos/showreel-captions-${(await addBaseToLink(astro)).split("/").slice(1).reverse().join("-")}.srt`,
-    captions
-      .map(
-        ({ start, end, text }, index) =>
-          `${index}\n${start.format("HH:mm:ss,SSS")} --> ${end.format("HH:mm:ss,SSS")}\n${text}`
-      )
-      .join("\n\n")
+export const getShowreel = async (astro: AstroGlobal) => {
+  const playlists = await callApi(
+    ({ channels: { list } }, params) =>
+      list({
+        ...params,
+        mine: true,
+        part: ["contentDetails"],
+        fields: [
+          params.fields,
+          "items(contentDetails/relatedPlaylists/uploads)",
+        ].join(),
+      }),
+    astro,
+    "https://www.googleapis.com/auth/youtube.readonly"
   );
 
-  // console.log((await getShowreels(astro)).data.items);
+  if (playlists === null) return;
 
-  // TODO USE YOUTUBE DATA API TO DUPLICATE SHOWREEL FOR EACH ROLE AND AUTO UPLOAD CAPTIONS FOR IT FROM PORTFOLIO DATA
+  const uploadPlaylist = playlists?.items?.map(
+    ({ contentDetails }) => contentDetails?.relatedPlaylists?.uploads
+  )[0];
+
+  if (!uploadPlaylist) throw new Error("Google: no uploads playlist found.");
+
+  const showreel = await callApi(
+    ({ playlistItems: { list } }, params) =>
+      list({
+        ...params,
+        playlistId: uploadPlaylist,
+        part: ["contentDetails", "snippet"],
+        fields: [
+          params.fields,
+          "items(contentDetails/videoId,snippet/title)",
+        ].join(),
+      }),
+    astro,
+    "https://www.googleapis.com/auth/youtube.readonly"
+  );
+
+  return showreel?.items?.find(({ snippet }) =>
+    snippet?.title?.startsWith("Showreel")
+  )?.contentDetails?.videoId;
+};
+
+export const setCaptions = async (
+  astro: AstroGlobal,
+  videoId: string,
+  captions: string
+) => {
+  const captionLocale = getCurrentLocale(astro);
+
+  const existingCaption = (
+    await callApi(
+      ({ captions: { list } }, { fields, ...params }) =>
+        list({
+          ...params,
+          videoId,
+          part: ["id", "snippet"],
+          fields: "items(id,snippet/language)",
+        }),
+      astro,
+      "https://www.googleapis.com/auth/youtube.readonly"
+    )
+  )?.items?.find(({ snippet }) => snippet?.language === captionLocale)?.id;
+
+  if (!existingCaption) {
+    // Insert
+    return;
+  } else {
+    // Update
+    return await callApi(
+      ({ captions: { update } }, { fields, ...params }) =>
+        update({
+          ...params,
+          requestBody: { id: existingCaption },
+          media: { body: captions },
+          part: ["id"],
+        }),
+      astro,
+      "https://www.googleapis.com/auth/youtube.force-ssl"
+    );
+  }
 };

@@ -4,11 +4,8 @@ import TechList from "@components/TechList.astro";
 import Post from "@post/Post.astro";
 import { capitalize } from "@integrations/text";
 import { getStaticPaths as getBasePaths } from "@pages/index.astro";
-import { generateShowreelCaptions } from "@integrations/video";
 
 export const getStaticPaths = getBasePaths;
-
-await generateShowreelCaptions(Astro);
 ---
 
 <Page description="My tech stack" backHref=""

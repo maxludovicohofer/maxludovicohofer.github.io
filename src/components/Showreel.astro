@@ -1,0 +1,55 @@
+---
+import Video from "@ui/Video.astro";
+import { generateShowreelCaptions } from "@integrations/video";
+import { applyMatch, getRole, matchRoles } from "@integrations/astro-server";
+import { getEntry } from "astro:content";
+import { getCurrentLocale } from "@integrations/i18n-special";
+import { dump } from "js-yaml";
+import { locales } from "@integrations/astro-config.mts";
+
+const { data: showreels, filePath } = (await getEntry("videos", "showreel"))!;
+
+// TODO PHASE 2 GENERATE ROLE-MATCHED SHOWREEL BASED ON PROJECTS VIDEOS
+
+const showreel = applyMatch(
+  await matchRoles(
+    Astro,
+    showreels.map((showreel) => ({ data: showreel, roles: [showreel.role] }))
+  )
+)[0]!;
+
+if (showreel.role.id !== (await getRole(Astro)).role.id) {
+  // TODO DUPLICATE SHOWREEL WITH ROLE TITLE IF NOT PRESENT FOR ROLE
+}
+
+const currentLocale = getCurrentLocale(Astro);
+const generatedCaptions = await generateShowreelCaptions(Astro);
+
+// Update captions if non existent for current locale or different
+if (
+  showreel.data.every(
+    ({ locale, captions }) =>
+      locale !== currentLocale || captions !== generatedCaptions
+  )
+) {
+  const showreelLocaleData = showreels[showreels.indexOf(showreel)]!.data;
+  showreelLocaleData.push({
+    locale: currentLocale,
+    captions: generatedCaptions,
+  });
+  showreelLocaleData.sort(
+    (a, b) => locales.indexOf(a.locale) - locales.indexOf(b.locale)
+  );
+
+  // TODO FIX
+  // console.log(await setCaptions(Astro, showreel.youtubeId, captions));
+
+  const { writeFile } = await import("fs/promises");
+  writeFile(filePath!, dump(showreels));
+}
+---
+
+<Video
+  youTubeInfo={{ id: showreel.youtubeId, aspect: "16/10" }}
+  showSubtitles
+/>

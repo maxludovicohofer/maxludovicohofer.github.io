@@ -1,5 +1,6 @@
 import { defineCollection, reference, z } from "astro:content";
 import { file, glob } from "astro/loaders";
+import { locales } from "@integrations/astro-config.mjs";
 
 const fileSchema = z.object({
   id: z.string(),
@@ -154,6 +155,19 @@ const translations = defineCollection({
   ),
 });
 
+const videos = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.yaml", base: "src/data/videos" }),
+  schema: z.array(
+    z.object({
+      role: reference("roles"),
+      youtubeId: z.string(),
+      data: z.array(
+        z.object({ locale: z.enum(locales), captions: z.string() })
+      ),
+    })
+  ),
+});
+
 // Export a single `collections` object to register your collection(s)
 export const collections = {
   roles,
@@ -165,4 +179,5 @@ export const collections = {
   projects,
   thoughts,
   translations,
+  videos,
 };
