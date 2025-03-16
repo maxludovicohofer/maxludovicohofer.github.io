@@ -15,8 +15,6 @@ interface ClientSecret {
 
 const credentialsPath = `.credentials/google.json`;
 
-console.log(credentialsPath);
-
 let authorization: OAuth2Client | undefined;
 
 export const authorize = async (astro: AstroGlobal) => {

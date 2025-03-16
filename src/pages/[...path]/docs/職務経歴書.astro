@@ -148,7 +148,7 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
                         data: { roles, tech, awards },
                       } = project;
 
-                      const projectRoles = applyMatch(
+                      const matchedRoles = applyMatch(
                         await matchRoles(
                           Astro,
                           roles.map((roleInfo) => ({
@@ -171,13 +171,13 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
                             getDevelopmentTime(project)!.asMilliseconds()
                           )}
                           end={publishingDate}
-                          roles={projectRoles.map(({ role }) => role)}
-                          responsibilities={projectRoles.flatMap(
+                          roles={matchedRoles.map(({ role }) => role)}
+                          responsibilities={matchedRoles.flatMap(
                             ({ tasks }) => tasks
                           )}
                           points={[
                             ...(awards?.map((award) => `Won ${award}`) ?? []),
-                            ...projectRoles.flatMap(
+                            ...matchedRoles.flatMap(
                               ({ achievements }) => achievements
                             ),
                           ]}
