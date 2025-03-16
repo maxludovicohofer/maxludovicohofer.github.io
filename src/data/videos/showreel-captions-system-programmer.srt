@@ -1,0 +1,79 @@
+0
+00:00:00,000 --> 00:00:06,000
+Programmed camera to continuously follow characters in cutscenes and awkward map locations.
+
+1
+00:00:06,000 --> 00:00:12,000
+Programmed responsive and fun character skills.
+
+2
+00:00:12,000 --> 00:00:18,000
+Programmed multiple procedural systems and a custom attribute system that favored ease of development.
+
+3
+00:00:18,000 --> 00:00:24,000
+Designed an arcade co-op rougelike with a top-down view, with emphasis on collaboration and theorycrafting.
+
+4
+00:00:24,000 --> 00:00:30,000
+Won Rookie awards 2024 "Game of the year - People's choice".
+
+5
+00:00:30,000 --> 00:00:36,000
+Programmed level design tools that helped to control enemies and story events.
+
+6
+00:00:36,000 --> 00:00:42,000
+Programmed skills, camera, and movement, that changed based on character transformation.
+
+7
+00:00:42,000 --> 00:00:48,000
+Programmed AI that reacts intuitively to weather conditions and visibility issues.
+
+8
+00:00:48,000 --> 00:00:54,000
+Developed tools to easily place AI agents and control patrol paths.
+
+9
+00:00:54,000 --> 00:01:00,000
+Designed a stealth-action hybrid with character transformations and multiuse skills.
+
+10
+00:01:00,000 --> 00:01:06,000
+Programmed systemic physics changes and story events.
+
+11
+00:01:06,000 --> 00:01:12,000
+Designed a minimalistic meditative sci-fi puzzle game.
+
+12
+00:01:12,000 --> 00:01:18,000
+Managed scope creep to deliver the project in time.
+
+13
+00:01:18,000 --> 00:01:24,000
+Wrote multi-layered lore and screenplay for the game.
+
+14
+00:01:24,000 --> 00:01:30,000
+Developed a realistic black hole shader.
+
+15
+00:01:30,000 --> 00:01:36,000
+Programmed a dynamic difficulty system that significantly increase repeatability.
+
+16
+00:01:36,000 --> 00:01:42,000
+Added an infinite procedural map that followed dynamic difficulty.
+
+17
+00:01:42,000 --> 00:01:48,000
+Designed an addictive game loop for mobile with only two controls.
+
+18
+00:01:48,000 --> 00:01:54,000
+Successfully managed scope creep to deliver the project in time.
+
+19
+00:01:54,000 --> 00:02:00,000
+Mixed, mastered, and programmed sound and music for the game.

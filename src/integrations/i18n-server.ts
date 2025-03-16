@@ -174,7 +174,7 @@ const translate = async (translateOptions?: TranslateOptions) => {
             { translation, api: "deepl" },
           ]) satisfies [
             string,
-            CollectionEntry<"translations">["data"][keyof CollectionEntry<"translations">["data"]]
+            CollectionEntry<"translations">["data"][keyof CollectionEntry<"translations">["data"]],
           ][]
         ),
       };
@@ -213,8 +213,6 @@ const translate = async (translateOptions?: TranslateOptions) => {
 
   translateBuffer = [];
 
-  console.log(localCache);
-
   return localCache;
 };
 
@@ -247,12 +245,12 @@ const debugCacheMiss = (text: string, cacheKeys: string[]) => {
   console.warn(
     `i18n debug: cache miss.
       ${textName}: ${" ".repeat(
-      closestCachedName.length - textName.length
-    )}${JSON.stringify(highlightCharacter(text, firstDifferenceIndex))}
+        closestCachedName.length - textName.length
+      )}${JSON.stringify(highlightCharacter(text, firstDifferenceIndex))}
       ${"-".repeat(100)}
       ${closestCachedName}: ${JSON.stringify(
-      highlightCharacter(cacheKeys[closestKeyIndex]!, firstDifferenceIndex)
-    )}`
+        highlightCharacter(cacheKeys[closestKeyIndex]!, firstDifferenceIndex)
+      )}`
   );
 };
 

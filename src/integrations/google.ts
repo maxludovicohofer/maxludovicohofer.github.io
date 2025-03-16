@@ -1,7 +1,7 @@
 import type { Credentials, OAuth2Client } from "google-auth-library";
 import { auth, youtube, youtube_v3 } from "@googleapis/youtube";
 import type { GaxiosError } from "gaxios";
-import type { AstroGlobal } from "astro";
+import type { APIContext, AstroGlobal } from "astro";
 
 interface ClientSecret {
   web: {
@@ -45,26 +45,26 @@ export const authorize = async (astro: AstroGlobal) => {
   return authorization;
 };
 
-export const completeAuthorization = async (astro: AstroGlobal) => {
+export const completeAuthorization = async (astro: APIContext) => {
   const responseCode = astro.url.searchParams.get("code");
 
-  if (!responseCode) return;
+  if (responseCode) {
+    let credentials: Credentials;
 
-  let credentials: Credentials;
+    try {
+      credentials = (await (await getOAuthClient(astro)).getToken(responseCode))
+        .tokens;
+    } catch (e) {
+      const error = e as GaxiosError;
+      throw new Error(
+        `Google: error while trying to retrieve access token: ${error.message}`
+      );
+    }
 
-  try {
-    credentials = (await (await getOAuthClient(astro)).getToken(responseCode))
-      .tokens;
-  } catch (e) {
-    const error = e as GaxiosError;
-    throw new Error(
-      `Google: error while trying to retrieve access token: ${error.message}`
-    );
+    storeCredentials(credentials);
   }
 
-  storeCredentials(credentials);
-
-  return astro.redirect(astro.url.searchParams.get("state")!);
+  return astro.redirect(astro.url.searchParams.get("state") ?? "/");
 };
 
 const storeCredentials = async (token: Credentials) => {
@@ -80,7 +80,7 @@ const storeCredentials = async (token: Credentials) => {
   writeFile(credentialsPath, JSON.stringify(token));
 };
 
-const getOAuthClient = async (astro: AstroGlobal) => {
+const getOAuthClient = async (astro: APIContext) => {
   const { readFile } = await import("fs/promises");
 
   let clientSecret: string;
