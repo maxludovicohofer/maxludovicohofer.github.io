@@ -63,6 +63,8 @@ let translateBuffer: {
   options?: I18nOptions | undefined;
 }[] = [];
 
+// TODO PHASE 2 CLEAN TRANSLATION FILE. FOR EXAMPLE AFTER BUILD, DELETE KEYS THAT DID NOT UNDERGO TRANSLATE PROCESS.
+
 const localCache: Partial<
   Record<PossibleTranslations, CollectionEntry<"translations">["data"]>
 > = {};

@@ -1,0 +1,11 @@
+---
+import { completeAuthorization } from "@integrations/google";
+
+export const getStaticPaths = () => [
+  { params: { path: undefined }, props: {} },
+];
+
+export const prerender = false;
+
+return await completeAuthorization(Astro);
+---
