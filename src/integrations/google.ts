@@ -1,23 +1,18 @@
 import type { Credentials, OAuth2Client } from "google-auth-library";
-import { auth, youtube, type youtube_v3 } from "@googleapis/youtube";
+import { auth, youtube } from "@googleapis/youtube";
 import type { GaxiosError } from "gaxios";
 import type { APIContext, AstroGlobal } from "astro";
 
-interface ClientSecret {
-  web: {
-    client_id: string;
-    client_secret: string;
-    project_id: string;
-    auth_uri: string;
-    token_uri: string;
-  };
-}
-
 const credentialsPath = `.credentials/google.json`;
+
+const scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"] as const;
 
 let authorization: OAuth2Client | undefined;
 
-export const authorize = async (astro: AstroGlobal) => {
+export const getAuth = async (
+  astro: AstroGlobal,
+  scope: typeof scopes | (typeof scopes)[number]
+) => {
   if (authorization) return authorization;
 
   const oAuthClient = await getOAuthClient(astro);
@@ -35,7 +30,7 @@ export const authorize = async (astro: AstroGlobal) => {
         access_type: "offline",
         // If modifying these scopes, delete your previously saved credentials
         // at ~/.credentials/youtube-nodejs-quickstart.json
-        scope: ["https://www.googleapis.com/auth/youtube.readonly"],
+        scope: scope as string | string[],
         state: astro.url.pathname,
       })}`
     );
@@ -80,6 +75,16 @@ const storeCredentials = async (token: Credentials) => {
   writeFile(credentialsPath, JSON.stringify(token));
 };
 
+interface ClientSecret {
+  web?: {
+    client_id: string;
+    client_secret: string;
+    project_id: string;
+    auth_uri: string;
+    token_uri: string;
+  };
+}
+
 const getOAuthClient = async (astro: APIContext) => {
   const { readFile } = await import("fs/promises");
 
@@ -94,45 +99,81 @@ const getOAuthClient = async (astro: APIContext) => {
     );
   }
 
-  const {
-    web: { client_id, client_secret },
-  } = JSON.parse(clientSecret) as ClientSecret;
+  const { web } = JSON.parse(clientSecret) as ClientSecret;
+
+  if (!web) {
+    throw new Error(
+      'Google: wrong client_secret file. Expected "web" property.'
+    );
+  }
 
   return new auth.OAuth2(
-    client_id,
-    client_secret,
+    web.client_id,
+    web.client_secret,
     `${astro.url.origin}/oauthcallback`
   );
 };
 
-export const getChannel = async (...params: Parameters<typeof authorize>) => {
-  const api = youtube("v3");
+// export const getChannel = async (astro: AstroGlobal) => {
+// try {
+//   await captions.list({
+//     auth: await getAuth(
+//       astro,
+//       "https://www.googleapis.com/auth/youtube.force-ssl"
+//     ),
+//     part: ["id", "snippet"],
+//   });
+// } catch (e) {
+//   const error = e as GaxiosError;
+//   throw new Error(`Google: the API returned an error: ${error.message}`);
+// }
+// let retrievedChannels: youtube_v3.Schema$Channel[] | undefined;
+// try {
+//   retrievedChannels = (
+//     await channels.list({
+//       auth: await getAuth(...params),
+//       part: ["snippet", "contentDetails", "statistics"],
+//       forUsername: "GoogleDevelopers",
+//     })
+//   ).data.items;
+// } catch (e) {
+//   const error = e as GaxiosError;
+//   throw new Error(`Google: the API returned an error: ${error.message}`);
+// }
+// if (!retrievedChannels?.length) {
+//   console.log("Google: no channel found.");
+//   return;
+// }
+// console.log(
+//   "Google: this channel's ID is %s. Its title is '%s', and " +
+//     "it has %s views.",
+//   retrievedChannels[0]!.id,
+//   retrievedChannels[0]!.snippet?.title,
+//   retrievedChannels[0]!.statistics?.viewCount
+// );
+// };
 
-  let channels: youtube_v3.Schema$Channel[] | undefined;
+export const getShowreels = async (astro: AstroGlobal) => {
+  return await callApi(
+    ({ videos }, auth) => videos.list({ auth, part: ["id", "snippet"] }),
+    astro,
+    "https://www.googleapis.com/auth/youtube.force-ssl"
+  );
+};
 
+const service = youtube("v3");
+
+export const callApi = async <R>(
+  call: (
+    api: typeof service,
+    auth: Awaited<ReturnType<typeof getAuth>>
+  ) => Promise<R>,
+  ...params: Parameters<typeof getAuth>
+) => {
   try {
-    channels = (
-      await api.channels.list({
-        auth: authorization ?? (await authorize(...params)),
-        part: ["snippet", "contentDetails", "statistics"],
-        forUsername: "GoogleDevelopers",
-      })
-    ).data.items;
+    return await call(service, await getAuth(...params));
   } catch (e) {
     const error = e as GaxiosError;
     throw new Error(`Google: the API returned an error: ${error.message}`);
   }
-
-  if (!channels?.length) {
-    console.log("Google: no channel found.");
-    return;
-  }
-
-  console.log(
-    "Google: this channel's ID is %s. Its title is '%s', and " +
-      "it has %s views.",
-    channels[0]!.id,
-    channels[0]!.snippet?.title,
-    channels[0]!.statistics?.viewCount
-  );
 };

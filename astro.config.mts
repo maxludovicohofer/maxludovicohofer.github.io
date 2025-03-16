@@ -15,6 +15,7 @@ import sentry from "@sentry/astro";
 import pdf from "astro-pdf";
 import { getPrintOptions } from "./src/integrations/pdf.mts";
 import { locales } from "./src/integrations/astro-config.mts";
+import node from "@astrojs/node";
 //! Removed spotlight because of slow performance/memory leak
 
 // https://astro.build/config
@@ -92,5 +93,12 @@ export default defineConfig({
   i18n: {
     locales,
     defaultLocale: locales[0],
+  },
+
+  adapter: node({
+    mode: "standalone",
+  }),
+  build: {
+    client: "./",
   },
 });

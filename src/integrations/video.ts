@@ -10,6 +10,7 @@ import type { AstroGlobal } from "astro";
 import { getEntryId } from "@layouts/document/Document.astro";
 import { capitalize, endDot } from "./text";
 import { i18n } from "./i18n-server";
+// import { getShowreels } from "./google";
 
 export const generateShowreelCaptions = async (astro: AstroGlobal) => {
   const projects = [
@@ -87,6 +88,8 @@ export const generateShowreelCaptions = async (astro: AstroGlobal) => {
       )
       .join("\n\n")
   );
+
+  // console.log((await getShowreels(astro)).data.items);
 
   // TODO USE YOUTUBE DATA API TO DUPLICATE SHOWREEL FOR EACH ROLE AND AUTO UPLOAD CAPTIONS FOR IT FROM PORTFOLIO DATA
 };
