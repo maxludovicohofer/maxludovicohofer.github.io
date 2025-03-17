@@ -24,7 +24,7 @@ const scopes = [
 ] as const;
 
 interface GoogleError extends GaxiosError {
-  errors: [{ message: string; domain: string; reason: string }];
+  errors?: [{ message: string; domain: string; reason: string }];
 }
 
 let authorization: OAuth2Client | undefined;
@@ -187,7 +187,7 @@ export const callApi = async <R>(
       ).data;
     } catch (e) {
       const error = e as GoogleError;
-      if (error.errors[0].reason === "quotaExceeded") {
+      if (error.errors?.[0].reason === "quotaExceeded") {
         console.info("Google: quota exceeded");
         return null;
       }

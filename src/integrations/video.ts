@@ -7,6 +7,7 @@ import { capitalize, endDot } from "./text";
 import { i18n } from "./i18n-server";
 import { callApi } from "./google";
 import { getCurrentLocale } from "./i18n-special";
+import { defaultLocale } from "./astro-config.mts";
 
 export const generateShowreelCaptions = async (astro: AstroGlobal) => {
   dayjs.extend(duration);
@@ -89,13 +90,13 @@ export const generateShowreelCaptions = async (astro: AstroGlobal) => {
 
 export const getShowreel = async (astro: AstroGlobal) => {
   const playlists = await callApi(
-    ({ channels }, params) =>
+    ({ channels }, { fields, ...params }) =>
       channels.list({
         ...params,
         mine: true,
         part: ["contentDetails"],
         fields: [
-          params.fields,
+          fields,
           "items(contentDetails/relatedPlaylists/uploads)",
         ].join(),
       }),
@@ -111,24 +112,75 @@ export const getShowreel = async (astro: AstroGlobal) => {
 
   if (!uploadPlaylist) throw new Error("Google: no uploads playlist found.");
 
-  const showreel = await callApi(
-    ({ playlistItems }, params) =>
-      playlistItems.list({
-        ...params,
-        playlistId: uploadPlaylist,
-        part: ["contentDetails", "snippet"],
-        fields: [
-          params.fields,
-          "items(contentDetails/videoId,snippet/title)",
-        ].join(),
-      }),
-    astro,
-    "https://www.googleapis.com/auth/youtube.readonly"
-  );
+  const showreelId = (
+    await callApi(
+      ({ playlistItems }, { fields, ...params }) =>
+        playlistItems.list({
+          ...params,
+          playlistId: uploadPlaylist,
+          part: ["contentDetails", "snippet"],
+          fields: [
+            fields,
+            "items(contentDetails/videoId,snippet/title)",
+          ].join(),
+        }),
+      astro,
+      "https://www.googleapis.com/auth/youtube.readonly"
+    )
+  )?.items?.find(({ snippet }) => snippet?.title?.startsWith("Showreel"))
+    ?.contentDetails?.videoId;
 
-  return showreel?.items?.find(({ snippet }) =>
-    snippet?.title?.startsWith("Showreel")
-  )?.contentDetails?.videoId;
+  if (!showreelId) return;
+
+  return (
+    await callApi(
+      ({ videos }, { fields, ...params }) =>
+        videos.list({
+          ...params,
+          id: [showreelId],
+          part: ["snippet"],
+          fields: [fields, "items(snippet/categoryId)"].join(),
+        }),
+      astro,
+      "https://www.googleapis.com/auth/youtube.readonly"
+    )
+  )?.items?.[0]?.snippet?.categoryId;
+};
+
+export const setYouTubeVideo = async (
+  astro: AstroGlobal,
+  videoPath: string,
+  title: string,
+  categoryId: string,
+  videoId?: string
+) => {
+  // TODO PHASE 2 UPDATE (DELETE AND RECREATE) IF VIDEOID PRESENT
+  if (videoId) return;
+
+  const { createReadStream } = await import("fs");
+
+  return (
+    await callApi(
+      ({ videos }, { fields, ...params }) =>
+        videos.insert({
+          ...params,
+          media: { body: createReadStream(videoPath) },
+          part: ["snippet", "status"],
+          requestBody: {
+            snippet: {
+              title,
+              categoryId,
+              defaultLanguage: defaultLocale,
+            },
+            status: {
+              privacyStatus: "unlisted",
+            },
+          },
+        }),
+      astro,
+      "https://www.googleapis.com/auth/youtube.upload"
+    )
+  )?.id;
 };
 
 export const setYouTubeCaptions = async (
@@ -163,3 +215,47 @@ export const setYouTubeCaptions = async (
       "https://www.googleapis.com/auth/youtube.force-ssl"
     )
   )?.id;
+
+export const updateYouTubeVideoLocalization = async (
+  astro: AstroGlobal,
+  videoId: string,
+  title: string
+) => {
+  const localizations = (
+    await callApi(
+      ({ videos }, { fields, ...params }) =>
+        videos.list({
+          ...params,
+          id: [videoId],
+          part: ["localizations"],
+          fields: [fields, "items(localizations)"].join(),
+        }),
+      astro,
+      "https://www.googleapis.com/auth/youtube.readonly"
+    )
+  )?.items?.[0];
+
+  if (localizations === null) return;
+
+  const t = i18n(astro);
+  const localizedTitle = await t(title, { force: true });
+
+  return (
+    await callApi(
+      ({ videos }, { fields, ...params }) =>
+        videos.update({
+          ...params,
+          part: ["localizations"],
+          requestBody: {
+            id: videoId,
+            localizations: {
+              ...localizations?.localizations,
+              [getCurrentLocale(astro)]: { title: localizedTitle },
+            },
+          },
+        }),
+      astro,
+      "https://www.googleapis.com/auth/youtube.upload"
+    )
+  )?.id;
+};

@@ -161,6 +161,7 @@ const videos = defineCollection({
     z.object({
       role: reference("roles"),
       youTubeId: z.string(),
+      categoryId: z.string(),
       captions: z.array(
         z.object({
           locale: z.enum(locales),

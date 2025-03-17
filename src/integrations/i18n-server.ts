@@ -27,9 +27,13 @@ export type I18nOptions = deepl.TranslateTextOptions &
   Partial<Record<PossibleTranslations, string>> &
   TranslateOptions & { interpolate?: string | string[] };
 
-export const i18n = (astro: AstroGlobal, globalOptions?: I18nOptions) => {
+export const i18n = (
+  astro: AstroGlobal | PossibleTranslations,
+  globalOptions?: I18nOptions
+) => {
   return async (text: string, options?: I18nOptions) => {
-    const toLocale = getCurrentLocale(astro);
+    const toLocale =
+      typeof astro === "string" ? astro : getCurrentLocale(astro);
 
     if (toLocale === defaultLocale) return text;
 
@@ -174,7 +178,7 @@ const translate = async (translateOptions?: TranslateOptions) => {
             { translation, api: "deepl" },
           ]) satisfies [
             string,
-            CollectionEntry<"translations">["data"][keyof CollectionEntry<"translations">["data"]],
+            CollectionEntry<"translations">["data"][keyof CollectionEntry<"translations">["data"]]
           ][]
         ),
       };
@@ -245,12 +249,12 @@ const debugCacheMiss = (text: string, cacheKeys: string[]) => {
   console.warn(
     `i18n debug: cache miss.
       ${textName}: ${" ".repeat(
-        closestCachedName.length - textName.length
-      )}${JSON.stringify(highlightCharacter(text, firstDifferenceIndex))}
+      closestCachedName.length - textName.length
+    )}${JSON.stringify(highlightCharacter(text, firstDifferenceIndex))}
       ${"-".repeat(100)}
       ${closestCachedName}: ${JSON.stringify(
-        highlightCharacter(cacheKeys[closestKeyIndex]!, firstDifferenceIndex)
-      )}`
+      highlightCharacter(cacheKeys[closestKeyIndex]!, firstDifferenceIndex)
+    )}`
   );
 };
 

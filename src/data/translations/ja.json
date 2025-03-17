@@ -2214,5 +2214,17 @@
   "Won Rookie awards 2024 \"Game of the year - People's choice\".": {
     "translation": "2024年「ゲーム・オブ・ザ・イヤー - ピープルズ・チョイス」で新人賞を受賞しました。",
     "api": "deepl"
+  },
+  "Showreel": {
+    "translation": "ショーリール",
+    "api": "deepl"
+  },
+  "AI programmer showreel": {
+    "translation": "AIプログラマーのショーリール",
+    "api": "deepl"
+  },
+  "System programmer showreel": {
+    "translation": "システムプログラマーのショーリール",
+    "api": "deepl"
   }
 }
