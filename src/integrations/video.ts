@@ -89,8 +89,8 @@ export const generateShowreelCaptions = async (astro: AstroGlobal) => {
 
 export const getShowreel = async (astro: AstroGlobal) => {
   const playlists = await callApi(
-    ({ channels: { list } }, params) =>
-      list({
+    ({ channels }, params) =>
+      channels.list({
         ...params,
         mine: true,
         part: ["contentDetails"],
@@ -112,8 +112,8 @@ export const getShowreel = async (astro: AstroGlobal) => {
   if (!uploadPlaylist) throw new Error("Google: no uploads playlist found.");
 
   const showreel = await callApi(
-    ({ playlistItems: { list } }, params) =>
-      list({
+    ({ playlistItems }, params) =>
+      playlistItems.list({
         ...params,
         playlistId: uploadPlaylist,
         part: ["contentDetails", "snippet"],
@@ -131,42 +131,35 @@ export const getShowreel = async (astro: AstroGlobal) => {
   )?.contentDetails?.videoId;
 };
 
-export const setCaptions = async (
+export const setYouTubeCaptions = async (
   astro: AstroGlobal,
+  newCaptions: string,
   videoId: string,
-  captions: string
-) => {
-  const captionLocale = getCurrentLocale(astro);
-
-  const existingCaption = (
+  captionId?: string
+) =>
+  (
     await callApi(
-      ({ captions: { list } }, { fields, ...params }) =>
-        list({
-          ...params,
-          videoId,
-          part: ["id", "snippet"],
-          fields: "items(id,snippet/language)",
-        }),
-      astro,
-      "https://www.googleapis.com/auth/youtube.readonly"
-    )
-  )?.items?.find(({ snippet }) => snippet?.language === captionLocale)?.id;
-
-  if (!existingCaption) {
-    // Insert
-    return;
-  } else {
-    // Update
-    return await callApi(
-      ({ captions: { update } }, { fields, ...params }) =>
-        update({
-          ...params,
-          requestBody: { id: existingCaption },
-          media: { body: captions },
-          part: ["id"],
-        }),
+      ({ captions }, { fields, ...params }) =>
+        captionId
+          ? captions.update({
+              ...params,
+              media: { body: newCaptions },
+              part: ["id"],
+              requestBody: { id: captionId },
+            })
+          : captions.insert({
+              ...params,
+              media: { body: newCaptions },
+              part: ["snippet"],
+              requestBody: {
+                snippet: {
+                  videoId,
+                  language: getCurrentLocale(astro),
+                  name: "",
+                },
+              },
+            }),
       astro,
       "https://www.googleapis.com/auth/youtube.force-ssl"
-    );
-  }
-};
+    )
+  )?.id;

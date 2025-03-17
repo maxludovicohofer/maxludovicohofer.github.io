@@ -59,7 +59,10 @@ export const getAuth = async (
 
   if (!oAuthClient.credentials.refresh_token) {
     throw new Error(
-      `Google: refresh at ${oAuthClient.generateAuthUrl({ ...tokenSettings, prompt: "consent" })}`
+      `Google: refresh at ${oAuthClient.generateAuthUrl({
+        ...tokenSettings,
+        prompt: "consent",
+      })}`
     );
   }
 
@@ -145,6 +148,9 @@ const getOAuthClient = async (astro: APIContext) => {
 
 const service = youtube("v3");
 
+/**
+ * Returns null if quota exceeded.
+ */
 export const callApi = async <R>(
   call: (
     api: typeof service,
@@ -181,7 +187,10 @@ export const callApi = async <R>(
       ).data;
     } catch (e) {
       const error = e as GoogleError;
-      if (error.errors[0].reason === "quotaExceeded") return null;
+      if (error.errors[0].reason === "quotaExceeded") {
+        console.info("Google: quota exceeded");
+        return null;
+      }
 
       throw new Error(`Google: the API returned an error: ${error.message}`);
     }

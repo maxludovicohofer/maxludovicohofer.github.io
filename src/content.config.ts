@@ -160,9 +160,13 @@ const videos = defineCollection({
   schema: z.array(
     z.object({
       role: reference("roles"),
-      youtubeId: z.string(),
-      data: z.array(
-        z.object({ locale: z.enum(locales), captions: z.string() })
+      youTubeId: z.string(),
+      captions: z.array(
+        z.object({
+          locale: z.enum(locales),
+          youTubeId: z.string(),
+          text: z.string(),
+        })
       ),
     })
   ),

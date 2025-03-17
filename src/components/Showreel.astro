@@ -1,13 +1,20 @@
 ---
 import Video from "@ui/Video.astro";
-import { generateShowreelCaptions } from "@integrations/video";
+import {
+  generateShowreelCaptions,
+  setYouTubeCaptions,
+} from "@integrations/video";
 import { applyMatch, getRole, matchRoles } from "@integrations/astro-server";
 import { getEntry } from "astro:content";
 import { getCurrentLocale } from "@integrations/i18n-special";
 import { dump } from "js-yaml";
 import { locales } from "@integrations/astro-config.mts";
 
-const { data: showreels, filePath } = (await getEntry("videos", "showreel"))!;
+const {
+  id,
+  data: showreels,
+  filePath,
+} = (await getEntry("videos", "showreel"))!;
 
 // TODO PHASE 2 GENERATE ROLE-MATCHED SHOWREEL BASED ON PROJECTS VIDEOS
 
@@ -23,33 +30,54 @@ if (showreel.role.id !== (await getRole(Astro)).role.id) {
 }
 
 const currentLocale = getCurrentLocale(Astro);
-const generatedCaptions = await generateShowreelCaptions(Astro);
+const captions = await generateShowreelCaptions(Astro);
 
 // Update captions if non existent for current locale or different
 if (
-  showreel.data.every(
-    ({ locale, captions }) =>
-      locale !== currentLocale || captions !== generatedCaptions
+  showreel.captions.every(
+    ({ locale, text }) => locale !== currentLocale || text !== captions
   )
 ) {
-  const showreelLocaleData = showreels[showreels.indexOf(showreel)]!.data;
-  showreelLocaleData.push({
-    locale: currentLocale,
-    captions: generatedCaptions,
-  });
-  showreelLocaleData.sort(
-    (a, b) => locales.indexOf(a.locale) - locales.indexOf(b.locale)
+  const showreelCaptions = showreels[showreels.indexOf(showreel)]!.captions;
+
+  const existingCaption = showreelCaptions.find(
+    ({ locale }) => locale === currentLocale
   );
 
-  // TODO FIX
-  // console.log(await setCaptions(Astro, showreel.youtubeId, captions));
+  console.info(
+    `${existingCaption ? "Updating" : "Creating"} "${id} - ${showreel.role}"'s ${currentLocale} caption`
+  );
 
-  const { writeFile } = await import("fs/promises");
-  writeFile(filePath!, dump(showreels));
+  const captionId = await setYouTubeCaptions(
+    Astro,
+    captions,
+    showreel.youTubeId,
+    existingCaption?.youTubeId
+  );
+
+  if (captionId) {
+    // Update cache
+    if (existingCaption) {
+      showreelCaptions[showreelCaptions.indexOf(existingCaption)]!.text =
+        captions;
+    } else {
+      showreelCaptions.push({
+        locale: currentLocale,
+        youTubeId: captionId,
+        text: captions,
+      });
+      showreelCaptions.sort(
+        (a, b) => locales.indexOf(a.locale) - locales.indexOf(b.locale)
+      );
+    }
+
+    const { writeFile } = await import("fs/promises");
+    writeFile(filePath!, dump(showreels));
+  }
 }
 ---
 
 <Video
-  youTubeInfo={{ id: showreel.youtubeId, aspect: "16/10" }}
+  youTubeInfo={{ id: showreel.youTubeId, aspect: "16/10" }}
   showSubtitles
 />
