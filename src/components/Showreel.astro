@@ -30,16 +30,18 @@ let showreel = applyMatch(
 
 const { role, isDefault } = await getRole(Astro);
 
-const videoTitle = capitalize(`${isDefault ? "" : `${role.id} `}${id}`);
+const videoTitle = capitalize(id);
+const videoDescription = capitalize(isDefault ? "" : role.id);
 
 if (showreel.role.id !== role.id) {
   // Create video if nonexistent for role
-  console.info(`Creating ${videoTitle} video`);
+  console.info(`Creating ${videoTitle} video for ${role.id}`);
 
   const videoId = await setYouTubeVideo(
     Astro,
     "src/assets/videos/Showreel.mp4",
     videoTitle,
+    videoDescription,
     showreel.categoryId
   );
 
@@ -70,12 +72,15 @@ if (showreel.role.id === role.id) {
       showreel.captions.every(({ locale }) => locale !== currentLocale)
     ) {
       // Localize video
-      console.info(`Localizing ${videoTitle} in ${currentLocale}`);
+      console.info(
+        `Localizing ${videoTitle} for ${role.id} in ${currentLocale}`
+      );
 
       await updateYouTubeVideoLocalization(
         Astro,
         showreel.youTubeId,
-        videoTitle
+        videoTitle,
+        videoDescription
       );
     }
 
@@ -86,7 +91,7 @@ if (showreel.role.id === role.id) {
     );
 
     console.info(
-      `${existingCaption ? "Updating" : "Creating"} ${videoTitle}'s ${currentLocale} caption`
+      `${existingCaption ? "Updating" : "Creating"} ${videoTitle} for ${role.id}'s ${currentLocale} caption`
     );
 
     const captionId = await setYouTubeCaptions(

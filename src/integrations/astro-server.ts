@@ -75,7 +75,7 @@ export const getRole = async (astro: AstroGlobal) => {
 
 export const addBaseToLink = async (
   astro: AstroGlobal,
-  link: string = "",
+  link = "",
   noLocale?: boolean
 ) => {
   const { role, isDefault } = await getRole(astro);
@@ -254,7 +254,7 @@ export const matchRoles = async <D>(
 export const applyMatch = <T extends Partial<Record<any, any[]>>>(
   matchResult: T,
   // Number from 0-10 that filters out weak matches
-  threshold: number = 0
+  threshold = 0
 ) =>
   Object.values(
     (threshold

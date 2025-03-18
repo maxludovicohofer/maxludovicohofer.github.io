@@ -1,4 +1,4 @@
-export const clamp = (value: number, min: number = -1, max: number = 1) =>
+export const clamp = (value: number, min = -1, max = 1) =>
   Math.min(Math.max(value, min), max);
 
 const radianUnit = Math.PI / 180;
@@ -8,8 +8,17 @@ export const toDegrees = (radians: number) => radians / radianUnit;
 
 export const remap = (
   value: number,
-  fromMax: number = 1,
-  toMax: number = 1,
-  fromMin: number = 0,
-  toMin: number = 0
+  fromMax = 1,
+  toMax = 1,
+  fromMin = 0,
+  toMin = 0
 ) => toMin + ((toMax - toMin) * (value - fromMin)) / (fromMax - fromMin);
+
+export const roundTo = (
+  value: number,
+  step: number,
+  roundFunction = Math.round
+) => {
+  const inverse = 1 / step;
+  return (roundFunction ?? Math.round)(value * inverse) / inverse;
+};

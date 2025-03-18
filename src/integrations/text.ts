@@ -58,7 +58,7 @@ export const getMaximumWordsInLimit = (text: string, limit: number) => {
 export const standardizePath = (pathname: string) =>
   `/${pathname.replace(/(^\/+)|(\/+$)/g, "")}`;
 
-export const getPathSection = (pathname: string, position: number = -1) =>
+export const getPathSection = (pathname: string, position = -1) =>
   getPathSections(pathname).at(position)!;
 
 export const getPathSections = (
@@ -119,7 +119,7 @@ export const diff = (str1: string, str2: string) => {
 export const highlightCharacter = (
   text: string,
   index: number,
-  charactersAfter: number = 0
+  charactersAfter = 0
 ) =>
   `${text.slice(0, index)}➡️${text[index] ?? ""}⬅️${text.slice(
     index + 1,

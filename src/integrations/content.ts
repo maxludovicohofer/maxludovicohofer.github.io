@@ -269,7 +269,7 @@ export const getLanguages = async (astro: AstroGlobal) => {
 
 export const getTech = async (
   astro: AstroGlobal,
-  threshold: number = 4,
+  threshold = 4,
   options?: GetCollectionOptions<"tech">
 ) =>
   await Promise.all(
