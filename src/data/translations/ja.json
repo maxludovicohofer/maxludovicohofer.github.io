@@ -2290,5 +2290,17 @@
   "Technical team lead, lead game designer, sound lead, camera programmer, UI/UX lead, technical animation lead, gameplay programmer.": {
     "translation": "テクニカルチームリーダー、リードゲームデザイナー、サウンドリーダー、カメラプログラマー、UI/UXリーダー、テクニカルアニメーションリーダー、ゲームプレイプログラマー。",
     "api": "deepl"
+  },
+  "Via Pravato 35/C, Paese 31038, Italy": {
+    "translation": "イタリア、パエーゼ31038、プラヴァート通り35/C",
+    "api": "deepl"
+  },
+  "Team lead and lead game designer.": {
+    "translation": "チームリーダー兼リードゲームデザイナー。",
+    "api": "deepl"
+  },
+  "Team lead and gameplay programmer.": {
+    "translation": "チームリーダー兼ゲームプレイプログラマー。",
+    "api": "deepl"
   }
 }
