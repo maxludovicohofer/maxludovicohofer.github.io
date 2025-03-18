@@ -2242,5 +2242,13 @@
   "I'm a system programmer specialized in mechanics, combat, and AI.": {
     "translation": "私は、メカニック、戦闘、AIを専門とするシステムプログラマーです。",
     "api": "deepl"
+  },
+  "Awarded Rookie awards 2024 \"Game of the year - People's choice\".": {
+    "translation": "2024年のルーキー賞「ゲーム・オブ・ザ・イヤー - ピープルズ・チョイス」を受賞しました。",
+    "api": "deepl"
+  },
+  "Programmed a dynamic difficulty system that significantly increased repeatability.": {
+    "translation": "再現性を大幅に高める動的難易度システムをプログラムしました。",
+    "api": "deepl"
   }
 }
