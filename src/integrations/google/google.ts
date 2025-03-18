@@ -3,7 +3,9 @@ import { auth, youtube } from "@googleapis/youtube";
 import type { GaxiosError, GaxiosPromise } from "gaxios";
 import type { APIContext, AstroGlobal } from "astro";
 
-const credentialsPath = `.credentials/google.json`;
+const basePath = "src/integrations/google/";
+const credentialsPath = `${basePath}credentials.json`;
+const clientSecretPath = `${basePath}client_secret.json`;
 
 // https://developers.google.com/identity/protocols/oauth2/scopes#youtube
 const scopes = [
@@ -86,23 +88,13 @@ export const completeAuthorization = async (astro: APIContext) => {
       );
     }
 
-    storeCredentials(credentials);
+    // Store credentials
+    import("fs/promises").then(({ writeFile }) =>
+      writeFile(credentialsPath, JSON.stringify(credentials))
+    );
   }
 
   return astro.redirect(astro.url.searchParams.get("state") ?? "/");
-};
-
-const storeCredentials = async (token: Credentials) => {
-  const { mkdir, writeFile } = await import("fs/promises");
-  const { dirname } = await import("path");
-
-  try {
-    await mkdir(dirname(credentialsPath));
-  } catch {
-    // Directory exists
-  }
-
-  writeFile(credentialsPath, JSON.stringify(token));
 };
 
 interface ClientSecret {
@@ -122,10 +114,10 @@ const getOAuthClient = async (astro: APIContext) => {
 
   // Load client secrets from a local file.
   try {
-    clientSecret = await readFile("client_secret.json", "utf-8");
+    clientSecret = await readFile(clientSecretPath, "utf-8");
   } catch {
     throw new Error(
-      "Google: no client_secret file. Download and place in root."
+      `Google: no client_secret file. Download and place in ${basePath}.`
     );
   }
 

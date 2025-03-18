@@ -72,7 +72,15 @@ export const getSummary = async (astro: AstroGlobal, short?: boolean) => {
     ? `specialized in ${toTextList(
         resolvedSpecializations.filter(
           (specialization) =>
-            id.search(new RegExp(`\\b${specialization}\\b`)) === -1
+            id.search(
+              new RegExp(
+                `\\b${
+                  specialization.endsWith("s")
+                    ? `${specialization}*`
+                    : specialization
+                }\\b`
+              )
+            ) === -1
         )
       )}`
     : "";

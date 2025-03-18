@@ -34,7 +34,7 @@ const videoTitle = capitalize(`${isDefault ? "" : `${role.id} `}${id}`);
 
 if (showreel.role.id !== role.id) {
   // Create video if nonexistent for role
-  console.info(`Creating "${videoTitle}" video`);
+  console.info(`Creating ${videoTitle} video`);
 
   const videoId = await setYouTubeVideo(
     Astro,
@@ -70,7 +70,7 @@ if (showreel.role.id === role.id) {
       showreel.captions.every(({ locale }) => locale !== currentLocale)
     ) {
       // Localize video
-      console.info(`Localizing "${videoTitle}" in ${currentLocale}`);
+      console.info(`Localizing ${videoTitle} in ${currentLocale}`);
 
       await updateYouTubeVideoLocalization(
         Astro,
@@ -86,7 +86,7 @@ if (showreel.role.id === role.id) {
     );
 
     console.info(
-      `${existingCaption ? "Updating" : "Creating"} "${videoTitle}"'s ${currentLocale} caption`
+      `${existingCaption ? "Updating" : "Creating"} ${videoTitle}'s ${currentLocale} caption`
     );
 
     const captionId = await setYouTubeCaptions(

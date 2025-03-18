@@ -1,4 +1,4 @@
-import { completeAuthorization } from "@integrations/google";
+import { completeAuthorization } from "@integrations/google/google";
 import type { APIRoute } from "astro";
 
 export const prerender = false;

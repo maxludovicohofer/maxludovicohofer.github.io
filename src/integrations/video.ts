@@ -5,7 +5,7 @@ import type { AstroGlobal } from "astro";
 import { getEntryId } from "@layouts/document/Document.astro";
 import { capitalize, endDot } from "./text";
 import { i18n } from "./i18n-server";
-import { callApi } from "./google";
+import { callApi } from "./google/google";
 import { getCurrentLocale } from "./i18n-special";
 import { defaultLocale } from "./astro-config";
 

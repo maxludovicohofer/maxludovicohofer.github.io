@@ -25,5 +25,6 @@
 - id: system programmer
   matches:
     - tool programmer
+    - systems programmer
   workFields:
     - engine programming
