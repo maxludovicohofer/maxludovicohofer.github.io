@@ -2226,5 +2226,21 @@
   "System programmer showreel": {
     "translation": "システムプログラマーのショーリール",
     "api": "deepl"
+  },
+  "Paese 31038 near Venice, Italy": {
+    "translation": "イタリア、ベネチア近郊のペーゼ31038",
+    "api": "deepl"
+  },
+  "Designed an addictive game loop for mobile with simple mechanics.": {
+    "translation": "シンプルな仕組みで、モバイル用の中毒性のあるゲームループを設計しました。",
+    "api": "deepl"
+  },
+  "System programmer experienced in leadership and software, specialized in mechanics, combat, and AI.": {
+    "translation": "リーダーシップとソフトウェアに精通したシステムプログラマーで、メカニック、戦闘、AIを専門としています。",
+    "api": "deepl"
+  },
+  "I'm a system programmer specialized in mechanics, combat, and AI.": {
+    "translation": "私は、メカニック、戦闘、AIを専門とするシステムプログラマーです。",
+    "api": "deepl"
   }
 }
