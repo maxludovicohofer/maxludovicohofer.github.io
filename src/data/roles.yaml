@@ -2,6 +2,10 @@
 - id: technical game designer
   matches:
     - game director
+    - gameplay
+    - level designer
+    - programmer
+    - lead
   notMatches:
     - sound designer
   workFields:
@@ -16,8 +20,8 @@
 
 - id: AI programmer
   matches:
-    - AI tool programmer
-    - AI programming
+    - tool programmer
+    - team lead
   workFields:
     - AI programming
     - decision trees
@@ -26,5 +30,6 @@
   matches:
     - tool programmer
     - systems programmer
+    - team lead
   workFields:
     - engine programming

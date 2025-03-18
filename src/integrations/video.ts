@@ -107,7 +107,7 @@ export const generateShowreelCaptions = async (astro: AstroGlobal) => {
 };
 
 const getCaptionDuration = (text: string) =>
-  getReadingTime(text, { wordsPerMinute: 120 }).time;
+  getReadingTime(text, { wordsPerMinute: 150 }).time;
 
 const fitAndQuantizeSubtitles = <V extends VideoData>(
   videoData: V,
@@ -123,10 +123,12 @@ const fitAndQuantizeSubtitles = <V extends VideoData>(
   const getDuration = (...params: Parameters<typeof getCaptionDuration>) =>
     Math.max(
       Math.round((getCaptionDuration(...params) + addedDuration) / 1000),
-      5
+      4
     ) * 1000;
 
   let captions: { start: Duration; end: Duration; text: string }[] = [];
+
+  const captionCount = fromStart.length + (fromEnd?.length ?? 0);
 
   // Add from end to start of project
   let availableTimeFromStart = entryDuration;
@@ -156,16 +158,26 @@ const fitAndQuantizeSubtitles = <V extends VideoData>(
     for (let fromStartIndex = 0; ; fromStartIndex++) {
       const text = fromStart[fromStartIndex];
       if (!text) {
-        const durationIncrease = roundTo(
-          (availableTimeFromStart - captions.at(-1)!.end.asSeconds()) /
-            (fromStart.length + (fromEnd?.length ?? 0)),
-          0.5,
-          Math.ceil
+        // This value represents caution. Lower values are more imprecise but converge faster
+        const possibilityOfCutShift = 0.5;
+        const durationIncrease = Math.max(
+          roundTo(
+            ((availableTimeFromStart - captions.at(-1)!.end.asSeconds()) *
+              (1 - possibilityOfCutShift)) /
+              captionCount,
+            0.5,
+            Math.ceil
+          ),
+          0.5
         );
 
-        console.warn(
-          `Too few captions for "${videoEntry.toString()}". Artificially increasing duration by ${durationIncrease} seconds.`
-        );
+        if (!addedDuration) {
+          console.warn(
+            `Only ${captionCount} captions (${availableTimeFromEnd}s) for "${videoEntry.toString()}" (${entryDuration}s). Artificially increasing each caption by ${durationIncrease}s.`
+          );
+        } else {
+          console.warn(`+ ${durationIncrease}s.`);
+        }
 
         return fitAndQuantizeSubtitles(
           videoData,
@@ -181,7 +193,7 @@ const fitAndQuantizeSubtitles = <V extends VideoData>(
       let end = start.add(readingTime);
 
       // Handle cuts (quantize)
-      const currentCut = cuts[currentCutIndex];
+      let currentCut = cuts[currentCutIndex];
       if (currentCut !== undefined && end.asSeconds() > currentCut) {
         if (fromStartIndex) {
           // Move to next cut
@@ -197,6 +209,8 @@ const fitAndQuantizeSubtitles = <V extends VideoData>(
         ) {
           currentCutIndex++;
         }
+
+        currentCut = cuts[currentCutIndex];
       }
 
       // Handle ending
@@ -204,6 +218,7 @@ const fitAndQuantizeSubtitles = <V extends VideoData>(
         if (captionsFromEndCount) {
           // Match end and start
           const captionsFromEnd = captions.splice(0, captionsFromEndCount);
+
           if (
             currentCut !== undefined &&
             captionsFromEnd[0]!.start.asSeconds() > currentCut
