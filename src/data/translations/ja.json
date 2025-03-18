@@ -2250,5 +2250,45 @@
   "Programmed a dynamic difficulty system that significantly increased repeatability.": {
     "translation": "再現性を大幅に高める動的難易度システムをプログラムしました。",
     "api": "deepl"
+  },
+  "Game designer and team lead.": {
+    "translation": "ゲームデザイナー兼チームリーダー。",
+    "api": "deepl"
+  },
+  "Technical team lead and lead game designer.": {
+    "translation": "テクニカルチームのリーダーであり、リードゲームデザイナー。",
+    "api": "deepl"
+  },
+  "Overseeing tasks, project status, and morale of the technical team and holding daily programming lessons for juniors.": {
+    "translation": "技術チームのタスク、プロジェクトの進捗状況、士気を管理し、ジュニア向けに毎日プログラミングのレッスンを行っています。",
+    "api": "deepl"
+  },
+  "Game designer, team lead, gameplay programmer, technical artist.": {
+    "translation": "ゲームデザイナー、チームリーダー、ゲームプレイプログラマー、テクニカルアーティスト。",
+    "api": "deepl"
+  },
+  "Lead game designer, team lead, gameplay programmer.": {
+    "translation": "リードゲームデザイナー、チームリーダー、ゲームプレイプログラマー。",
+    "api": "deepl"
+  },
+  "Game designer, gameplay programmer, AI programmer, tool programmer, UI designer.": {
+    "translation": "ゲームデザイナー、ゲームプレイプログラマー、AIプログラマー、ツールプログラマー、UIデザイナー。",
+    "api": "deepl"
+  },
+  "Lead game designer, technical team lead, sound lead, camera programmer, UI/UX lead, technical animation lead, gameplay programmer.": {
+    "translation": "リードゲームデザイナー、テクニカルチームリード、サウンドリード、カメラプログラマー、UI/UXリード、テクニカルアニメーションリード、ゲームプレイプログラマー。",
+    "api": "deepl"
+  },
+  "Team lead, gameplay programmer.": {
+    "translation": "チームリーダー、ゲームプレイプログラマー。",
+    "api": "deepl"
+  },
+  "Team lead, lead game designer, gameplay programmer.": {
+    "translation": "チームリーダー、リードゲームデザイナー、ゲームプレイプログラマー。",
+    "api": "deepl"
+  },
+  "Technical team lead, lead game designer, sound lead, camera programmer, UI/UX lead, technical animation lead, gameplay programmer.": {
+    "translation": "テクニカルチームリーダー、リードゲームデザイナー、サウンドリーダー、カメラプログラマー、UI/UXリーダー、テクニカルアニメーションリーダー、ゲームプレイプログラマー。",
+    "api": "deepl"
   }
 }
