@@ -2,10 +2,9 @@ import type { Credentials, OAuth2Client } from "google-auth-library";
 import { auth, youtube } from "@googleapis/youtube";
 import type { GaxiosError, GaxiosPromise } from "gaxios";
 import type { APIContext, AstroGlobal } from "astro";
+import { GOOGLE_CLIENT_SECRET } from "astro:env/server";
 
-const basePath = "src/integrations/google/";
-const credentialsPath = `${basePath}credentials.json`;
-const clientSecretPath = `${basePath}client_secret.json`;
+const credentialsPath = "src/integrations/google/credentials.json";
 
 // https://developers.google.com/identity/protocols/oauth2/scopes#youtube
 const scopes = [
@@ -108,20 +107,7 @@ interface ClientSecret {
 }
 
 const getOAuthClient = async (astro: APIContext) => {
-  const { readFile } = await import("fs/promises");
-
-  let clientSecret: string;
-
-  // Load client secrets from a local file.
-  try {
-    clientSecret = await readFile(clientSecretPath, "utf-8");
-  } catch {
-    throw new Error(
-      `Google: no client_secret file. Download and place in ${basePath}.`
-    );
-  }
-
-  const { web } = JSON.parse(clientSecret) as ClientSecret;
+  const { web } = JSON.parse(GOOGLE_CLIENT_SECRET) as ClientSecret;
 
   if (!web) {
     throw new Error(

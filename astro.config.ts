@@ -21,12 +21,6 @@ export default defineConfig({
 
   env: {
     schema: {
-      BUILD_MODE: envField.enum({
-        context: "server",
-        access: "secret",
-        values: ["public", "local"],
-        default: "local",
-      }),
       SENTRY_AUTH_TOKEN: envField.string({
         context: "server",
         access: "secret",
@@ -34,7 +28,10 @@ export default defineConfig({
       DEEPL_API_KEY: envField.string({
         context: "server",
         access: "secret",
-        optional: true,
+      }),
+      GOOGLE_CLIENT_SECRET: envField.string({
+        context: "server",
+        access: "secret",
       }),
       PHONE_NUMBER: envField.string({
         context: "server",
@@ -45,6 +42,12 @@ export default defineConfig({
         context: "server",
         access: "secret",
         optional: true,
+      }),
+      BUILD_MODE: envField.enum({
+        context: "server",
+        access: "secret",
+        values: ["public", "local"],
+        default: "local",
       }),
     },
   },
