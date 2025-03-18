@@ -1,5 +1,5 @@
 ---
-import { locales } from "@integrations/astro-config.mts";
+import { locales } from "@integrations/astro-config";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import Button from "./Button.astro";
 import type { HTMLAttributes } from "astro/types";
@@ -50,7 +50,7 @@ const multipleChoice = translateLocales.length > 1;
 <script>
   import { getLocaleFromPath, getPathWithoutLocale } from "@integrations/i18n";
   import { getPreferredLocale, addLocaleToLink } from "@integrations/i18n";
-  import { getPrintOptions } from "@integrations/pdf.mjs";
+  import { getPrintOptions } from "@integrations/pdf";
   import { standardizePath } from "@integrations/text";
 
   document.addEventListener("astro:page-load", () => {

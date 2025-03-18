@@ -1,10 +1,7 @@
 import { defineConfig, envField } from "astro/config";
 import { loadEnv } from "vite";
 import remarkMath from "remark-math";
-import {
-  remarkCreated,
-  remarkMinutesRead,
-} from "./src/integrations/remark.mts";
+import { remarkCreated, remarkMinutesRead } from "./src/integrations/remark";
 import rehypeKatex, { type Options as KatexOptions } from "rehype-katex";
 
 import tailwind from "@astrojs/tailwind";
@@ -13,8 +10,8 @@ import partytown from "@astrojs/partytown";
 
 import sentry from "@sentry/astro";
 import pdf from "astro-pdf";
-import { getPrintOptions } from "./src/integrations/pdf.mts";
-import { locales } from "./src/integrations/astro-config.mts";
+import { getPrintOptions } from "./src/integrations/pdf";
+import { locales } from "./src/integrations/astro-config";
 import node from "@astrojs/node";
 //! Removed spotlight because of slow performance/memory leak
 

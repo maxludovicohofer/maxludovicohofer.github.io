@@ -7,7 +7,7 @@ import { capitalize, endDot } from "./text";
 import { i18n } from "./i18n-server";
 import { callApi } from "./google";
 import { getCurrentLocale } from "./i18n-special";
-import { defaultLocale } from "./astro-config.mts";
+import { defaultLocale } from "./astro-config";
 
 export const generateShowreelCaptions = async (astro: AstroGlobal) => {
   dayjs.extend(duration);

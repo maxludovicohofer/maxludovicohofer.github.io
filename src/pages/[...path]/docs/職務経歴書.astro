@@ -1,6 +1,6 @@
 ---
 import DocumentPage from "@layouts/document/DocumentPage.astro";
-import { i18n, setLocale } from "@integrations/i18n-server";
+import { i18n, setDayjsLocale } from "@integrations/i18n-server";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import { getSummary, getSelfPRSentence, getMyName } from "@integrations/docs";
@@ -33,7 +33,7 @@ interface Props {
 
 const { company, full } = Astro.props;
 
-await setLocale(Astro);
+await setDayjsLocale(Astro);
 dayjs.extend(duration);
 
 const today = dayjs();

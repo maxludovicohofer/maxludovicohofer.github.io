@@ -1,5 +1,5 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
-import { defaultLocale, locales } from "./astro-config.mts";
+import { defaultLocale, locales } from "./astro-config";
 import { getPathSection, standardizePath } from "./text";
 
 export type PossibleTranslations = Exclude<

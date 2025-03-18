@@ -24,7 +24,7 @@ import {
 } from "./astro-server";
 import type { AstroGlobal } from "astro";
 import { getCurrentLocale } from "./i18n-special";
-import { i18n, setLocale } from "./i18n-server";
+import { i18n, setDayjsLocale } from "./i18n-server";
 
 export type PostCollectionKey = Extract<CollectionKey, "projects" | "thoughts">;
 
@@ -35,7 +35,7 @@ export const getTitle = (
 
   if (entry.data.title) return entry.data.title;
 
-  const rawTitle = getHumanPathSection(getEntryId(entry)!);
+  const rawTitle = getHumanPathSection(getEntryId(entry));
   return entry.collection === "projects"
     ? toTitleCase(rawTitle)
     : capitalize(rawTitle);
@@ -63,9 +63,7 @@ export const getCover = (
     return {
       id: entry.data.youTubeID,
       aspect: entry.data.youTubeAspectRatio,
-    } satisfies ComponentProps<typeof Video>["youTubeInfo"] as ComponentProps<
-      typeof Video
-    >["youTubeInfo"];
+    } satisfies ComponentProps<typeof Video>["youTubeInfo"];
   }
 
   const imageFolder = `/src/data/${entry.collection}/`;
@@ -78,7 +76,7 @@ export const getCover = (
       `${imagePath}.${VALID_INPUT_FORMATS.find(
         (extension) => images[`${imagePath}.${extension}`]
       )}`
-    ];
+    ]?.();
 
   if (entry.collection === "projects" && !entry.data.draft && !image) {
     // Projects require image
@@ -305,12 +303,13 @@ export const getTech = async (
 
         // Filter and map functionalities
         tech.data.functionalities = tech.data.functionalities!.flatMap(
-          (functionality) =>
-            typeof functionality === "string"
-              ? [functionality]
-              : matchedFunctionalities.includes(functionality)
+          (functionality) => {
+            if (typeof functionality === "string") return [functionality];
+
+            return matchedFunctionalities.includes(functionality)
               ? [functionality.id]
-              : []
+              : [];
+          }
         );
       }
 
@@ -323,7 +322,7 @@ export const getTechList = async (...params: Parameters<typeof getTech>) => {
   const renderedGroups: string[] = [];
 
   const formatExperience = async (experience: string) => {
-    await setLocale(params[0]);
+    await setDayjsLocale(params[0]);
     dayjs.extend(duration);
     dayjs.extend(relativeTime);
 
@@ -364,12 +363,10 @@ export const getTechList = async (...params: Parameters<typeof getTech>) => {
                 },
               })) ?? [];
 
+          const title = capitalize(group ?? id);
+
           return {
-            title: group
-              ? await t(capitalize(group))
-              : translateId
-              ? await t(capitalize(id))
-              : capitalize(id),
+            title: translateId || group ? await t(title) : title,
             experience: group ? undefined : await formatExperience(experience),
             items: await Promise.all(
               content.map(async ({ id, data }) => ({

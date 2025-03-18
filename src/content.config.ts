@@ -1,6 +1,6 @@
 import { defineCollection, reference, z } from "astro:content";
 import { file, glob } from "astro/loaders";
-import { locales } from "@integrations/astro-config.mjs";
+import { locales } from "@integrations/astro-config";
 
 const fileSchema = z.object({
   id: z.string(),

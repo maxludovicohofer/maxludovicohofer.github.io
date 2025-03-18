@@ -5,7 +5,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import PostPage from "@post/PostPage.astro";
 import { makeDocumentPaths } from "@document/DocumentPage.astro";
 import { getDevelopmentTime, getTeam } from "@integrations/content";
-import { setLocale } from "@integrations/i18n-server";
+import { setDayjsLocale } from "@integrations/i18n-server";
 import { applyMatch, matchRoles } from "@integrations/astro-server";
 
 export const getStaticPaths = makeDocumentPaths("projects");
@@ -23,7 +23,7 @@ const displayedRoles = applyMatch(
   roleThreshold
 );
 
-await setLocale(Astro);
+await setDayjsLocale(Astro);
 dayjs.extend(relativeTime);
 const developmentDuration = getDevelopmentTime(Astro.props.entry)!.humanize();
 

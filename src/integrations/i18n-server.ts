@@ -1,4 +1,4 @@
-import { defaultLocale } from "@integrations/astro-config.mts";
+import { defaultLocale } from "@integrations/astro-config";
 import type { AstroGlobal } from "astro";
 import { getEntry, type CollectionEntry } from "astro:content";
 import { DEEPL_API_KEY } from "astro:env/server";
@@ -81,48 +81,40 @@ const queueTranslation = async (
   // Custom translation
   if (options?.[toLocale]) return options[toLocale];
 
+  // Special case for whitespace
   const cleanText = text === " " ? text : fixNewLines(text.trim());
-
   if (!cleanText) return cleanText;
 
-  // If is HTML, if all immediate children are non-translatable, don't translate
-  // This is just a shallow check, could still translate non-translatable html
+  // Check if HTML
   if (cleanText.startsWith("<")) {
-    const parsedHTML = parse(cleanText);
-
-    if (
-      parsedHTML.children
-        .filter(({ tagName }) => tagName !== "SCRIPT")
-        .every((element) => element.getAttribute("translate") === "no")
-    ) {
-      return cleanText;
-    }
-
-    // Translation only works consistently in production env, because astro adds html attributes in dev
+    // HTML translation only works in prod, because astro adds custom attributes in dev
     if (import.meta.env.DEV && !options?.force) return `${cleanText} (t)`;
+
+    if (!shouldTranslateHTML(cleanText)) return cleanText;
   }
 
-  const entryTranslations = (await getEntry("translations", toLocale))?.data;
-
-  // Check if in astro entry
-  if (entryTranslations?.[cleanText]) {
-    return entryTranslations[cleanText].translation;
-  } else {
-    // Check if in file but not in astro entry
-    //? This can happen if translated in current session
-    const unbuiltTranslation = localCache[toLocale]?.[cleanText]?.translation;
-    if (unbuiltTranslation) return unbuiltTranslation;
-  }
+  const translated = await getTranslated(toLocale);
+  const cached = translated[cleanText]?.translation;
+  if (cached !== undefined) return cached;
 
   // Do not translate in dev to save money
   if (import.meta.env.DEV && !options?.force) return `${cleanText} (t)`;
 
   // Cache miss
-  if (!options?.noCache)
-    debugCacheMiss(cleanText, Object.keys(entryTranslations!));
+  if (!options?.noCache) debugCacheMiss(cleanText, Object.keys(translated));
 
   translateBuffer.push({ text: cleanText, toLocale, options });
   return (await translate(options))[toLocale]![cleanText]!.translation;
+};
+
+const shouldTranslateHTML = (html: string) => {
+  const parsedHTML = parse(html);
+
+  // If is HTML, if all immediate children are non-translatable, don't translate
+  // This is just a shallow check, could still translate non-translatable html
+  return parsedHTML.children
+    .filter(({ tagName }) => tagName !== "SCRIPT" && tagName !== "STYLE")
+    .some((element) => element.getAttribute("translate") !== "no");
 };
 
 const translate = async (translateOptions?: TranslateOptions) => {
@@ -185,26 +177,22 @@ const translate = async (translateOptions?: TranslateOptions) => {
 
       // Translated
       translationCount += texts.length;
-      if (translateOptions?.debug) {
+      if (translateOptions?.debug)
         console.info(`i18n: translated ${texts.length} texts`);
-      }
 
       if (options?.noCache) uncachedTexts.push(...texts);
     }
 
     localCache[toLocale] = { ...localCache[toLocale], ...localeTranslations };
 
-    const { writeFileSync } = await import("node:fs");
+    const { writeFile } = await import("fs/promises");
 
     // Add to cache/file
-    writeFileSync(
+    await writeFile(
       `${translationsPath}/${toLocale}.json`,
       JSON.stringify(
         Object.fromEntries(
-          Object.entries({
-            ...(await getTranslationsFile(toLocale)),
-            ...localeTranslations,
-          }).filter(
+          Object.entries(await getTranslated(toLocale)).filter(
             // Remove texts that are not to be cached
             ([text]) => !uncachedTexts.includes(text)
           )
@@ -220,21 +208,10 @@ const translate = async (translateOptions?: TranslateOptions) => {
   return localCache;
 };
 
-const getTranslationsFile = async (locale: PossibleTranslations) => {
-  const { readFileSync } = await import("node:fs");
-
-  const filePath = `${translationsPath}/${locale}.json`;
-
-  let file = "";
-
-  try {
-    file = readFileSync(filePath, "utf-8");
-  } catch {
-    return undefined;
-  }
-
-  return JSON.parse(file) as CollectionEntry<"translations">["data"];
-};
+const getTranslated = async (locale: PossibleTranslations) => ({
+  ...(await getEntry("translations", locale))?.data,
+  ...localCache[locale],
+});
 
 const debugCacheMiss = (text: string, cacheKeys: string[]) => {
   const diffs = cacheKeys.map((key) => diff(key, text));
@@ -258,7 +235,7 @@ const debugCacheMiss = (text: string, cacheKeys: string[]) => {
   );
 };
 
-export const setLocale = async (astro: AstroGlobal) => {
+export const setDayjsLocale = async (astro: AstroGlobal) => {
   dayjs.extend(localizedFormat);
 
   const translateLocale = getCurrentLocale(astro);

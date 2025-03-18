@@ -15,7 +15,7 @@ import {
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { i18n, setLocale } from "@integrations/i18n-server";
+import { i18n, setDayjsLocale } from "@integrations/i18n-server";
 import ResumeKnowHow from "@components/docs/ResumeKnowHow.astro";
 import ResumePicture from "@components/docs/ResumePicture.astro";
 import { mail } from "@components/Profile.astro";
@@ -35,7 +35,7 @@ const workFieldsSentence = await getWorkFieldsSentence(Astro);
 
 const techList = compactTechList(await getTechList(Astro));
 
-await setLocale(Astro);
+await setDayjsLocale(Astro);
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
 

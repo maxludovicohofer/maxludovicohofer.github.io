@@ -39,7 +39,7 @@ import {
   getEntryId,
   type DocumentCollectionKey,
 } from "@layouts/document/Document.astro";
-import { defaultLocale, locales } from "./astro-config.mts";
+import { defaultLocale, locales } from "./astro-config";
 import {
   addLocaleToLink,
   getPathWithoutLocale,
@@ -293,11 +293,11 @@ export const getMatchedPosts = async <C extends PostCollectionKey>(
   );
 
   // Sort individual categories by latest first
-  Object.values(groupedEntries).forEach((entries) =>
+  Object.values(groupedEntries).forEach((entries) => {
     entries.sort((a, b) =>
       b.publishingDate.isAfter(a.publishingDate) ? 1 : -1
-    )
-  );
+    );
+  });
 
   return groupedEntries;
 };
@@ -412,36 +412,16 @@ export const getLocalizedEntry = <C extends CollectionKey>(
 export const getLinkName = async (
   astro: AstroGlobal,
   link: string,
-  pretty?: boolean
+  forDisplay?: boolean
 ) => {
-  let linkName = "";
+  let linkName: string;
 
   if (isRemoteLink(link)) {
-    const url = new URL(link);
-
-    if (!pretty) {
-      if (url.hostname === astro.site?.hostname) {
-        linkName = await getLocalLinkName(astro, url.pathname);
-      } else {
-        linkName = url.host.split(".").at(-2)!;
-      }
-    } else {
-      linkName =
-        url.hostname === "maps.google.com" ? url.searchParams.get("q")! : link;
-    }
+    linkName = await getRemoteLinkName(astro, link, forDisplay);
   } else if (isMailLink(link)) {
     linkName = link.slice(7);
   } else if (isTelLink(link)) {
-    linkName = link.slice(4);
-
-    if (pretty) {
-      const sections = linkName.match(/.{1,3}/g)!;
-      if (sections.at(-1)!.length < 3) {
-        sections[sections.length - 2] = `${sections.at(-2)}${sections.pop()}`;
-      }
-
-      linkName = sections.join(" ");
-    }
+    linkName = getTelLinkName(link, forDisplay);
   } else if (isGeoLink(link)) {
     linkName = link.slice(4);
   } else {
@@ -453,3 +433,36 @@ export const getLinkName = async (
 
 export const getLocalLinkName = async (astro: AstroGlobal, link: string) =>
   getHumanPathSection(await getPathWithoutBase(astro, link)) || "Homepage";
+
+export const getRemoteLinkName = async (
+  astro: AstroGlobal,
+  link: string,
+  forDisplay?: boolean
+) => {
+  const url = new URL(link);
+
+  if (forDisplay) {
+    return url.hostname === "maps.google.com"
+      ? url.searchParams.get("q")!
+      : link;
+  }
+
+  return url.hostname === astro.site?.hostname
+    ? await getLocalLinkName(astro, url.pathname)
+    : url.host.split(".").at(-2)!;
+};
+
+export const getTelLinkName = (link: string, forDisplay?: boolean) => {
+  const linkWithoutPrefix = link.slice(4);
+
+  if (forDisplay) {
+    const sections = linkWithoutPrefix.match(/.{1,3}/g)!;
+
+    if (sections.at(-1)!.length < 3)
+      sections[sections.length - 2] = `${sections.at(-2)}${sections.pop()}`;
+
+    return sections.join(" ");
+  }
+
+  return linkWithoutPrefix;
+};

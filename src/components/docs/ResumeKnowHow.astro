@@ -2,7 +2,7 @@
 import { getKnowHow } from "@integrations/content";
 import Text from "@components/ui/Text.astro";
 import { capitalize } from "@integrations/text";
-import { i18n, setLocale } from "@integrations/i18n-server";
+import { i18n, setDayjsLocale } from "@integrations/i18n-server";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import type { AstroGlobal } from "astro";
@@ -10,7 +10,7 @@ import { getLocaleInfo } from "@integrations/i18n-special";
 
 const knowHow = await getKnowHow(Astro);
 
-await setLocale(Astro);
+await setDayjsLocale(Astro);
 dayjs.extend(duration);
 
 export const getFormattedDates = async (
@@ -18,7 +18,7 @@ export const getFormattedDates = async (
   start: dayjs.Dayjs,
   end?: dayjs.Dayjs
 ) => {
-  await setLocale(astro);
+  await setDayjsLocale(astro);
   dayjs.extend(duration);
 
   const today = dayjs();

@@ -1,4 +1,4 @@
-import { defaultLocale } from "./astro-config.mts";
+import { defaultLocale } from "./astro-config";
 import { localeInfo } from "./i18n-special";
 
 export const toSentenceCase = (text: string) =>
@@ -59,7 +59,7 @@ export const standardizePath = (pathname: string) =>
   `/${pathname.replace(/(^\/+)|(\/+$)/g, "")}`;
 
 export const getPathSection = (pathname: string, position: number = -1) =>
-  getPathSections(pathname).at(position);
+  getPathSections(pathname).at(position)!;
 
 export const getPathSections = (
   pathname: string,
@@ -73,7 +73,7 @@ export const getPathSections = (
 export const getHumanPathSection = (
   ...params: Parameters<typeof getPathSection>
 ) =>
-  getPathSection(...params)!
+  getPathSection(...params)
     .replaceAll("-", " ")
     .split(".")[0]!;
 

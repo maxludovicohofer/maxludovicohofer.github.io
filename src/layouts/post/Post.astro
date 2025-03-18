@@ -69,7 +69,7 @@ const noTranslation = isLocalizedEntry(entry);
 {
   cover && (
     <div class="lg:hidden fixed left-0 right-0 mx-auto">
-      <PostCover cover={cover} entry={entry!} class="h-[55vh] -mt-[39vh]" />
+      <PostCover src={cover} entry={entry!} class="h-[55vh] -mt-[39vh]" />
     </div>
   )
 }
@@ -88,7 +88,7 @@ const noTranslation = isLocalizedEntry(entry);
         {
           cover && (
             <div class="hidden lg:inline">
-              <PostCover cover={cover} entry={entry!} class="h-[40vh] mb-6" />
+              <PostCover src={cover} entry={entry!} class="h-[40vh] mb-6" />
             </div>
           )
         }

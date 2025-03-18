@@ -8,7 +8,7 @@ import Card from "@layouts/Card.astro";
 import DocumentText from "./DocumentText.astro";
 import PostText from "@post/PostText.astro";
 import { isLocalizedEntry, getEntryLocale } from "@integrations/astro-server";
-import { defaultLocale } from "@integrations/astro-config.mjs";
+import { defaultLocale } from "@integrations/astro-config";
 import { localeInfo } from "@integrations/i18n-special";
 
 interface Props
@@ -25,7 +25,7 @@ export type DocumentCollectionKey = Extract<CollectionKey, "docs" | PostCollecti
 export const getEntryId = <C extends CollectionKey>(
   entry: CollectionEntry<C> | string
 ) => {
-  const id = typeof entry === "string" ? entry : entry?.id;
+  const id = typeof entry === "string" ? entry : entry.id;
 
   return id && getPathSection(id);
 };

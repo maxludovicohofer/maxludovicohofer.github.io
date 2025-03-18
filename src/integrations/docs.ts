@@ -6,7 +6,7 @@ import { i18n, type I18nOptions } from "./i18n-server";
 import { removeWatashiWa } from "./l10n";
 import { FULL_ADDRESS } from "astro:env/server";
 import { getLocaleInfo, localeInfo } from "./i18n-special";
-import { defaultLocale, getShortName, myName } from "./astro-config.mts";
+import { defaultLocale, getShortName, myName } from "./astro-config";
 
 export const getWorkFieldsSentence = async (astro: AstroGlobal) => {
   const {

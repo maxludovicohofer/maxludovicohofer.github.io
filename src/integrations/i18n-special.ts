@@ -1,5 +1,5 @@
 import type { AstroGlobal } from "astro";
-import { defaultLocale, type locales } from "./astro-config.mts";
+import { defaultLocale, type locales } from "./astro-config";
 
 export type LocaleInfo = {
   languageName: string;
