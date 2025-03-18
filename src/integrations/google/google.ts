@@ -2,7 +2,10 @@ import type { Credentials, OAuth2Client } from "google-auth-library";
 import { auth, youtube } from "@googleapis/youtube";
 import type { GaxiosError, GaxiosPromise } from "gaxios";
 import type { APIContext, AstroGlobal } from "astro";
-import { GOOGLE_CLIENT_SECRET } from "astro:env/server";
+import {
+  GOOGLE_CLIENT_SECRET,
+  GOOGLE_BASE_CREDENTIALS,
+} from "astro:env/server";
 
 const credentialsPath = "src/integrations/google/credentials.json";
 
@@ -47,16 +50,22 @@ export const getAuth = async (
     include_granted_scopes: true,
   };
 
-  // Check if we have previously stored a token.
+  // Check if existing credentials.
+  let credentials: string;
   try {
-    oAuthClient.credentials = JSON.parse(
-      await readFile(credentialsPath, "utf-8")
-    );
+    credentials = await readFile(credentialsPath, "utf-8");
   } catch {
-    throw new Error(
-      `Google: authorize at ${oAuthClient.generateAuthUrl(tokenSettings)}`
-    );
+    if (import.meta.env.DEV) {
+      throw new Error(
+        `Google: authorize at ${oAuthClient.generateAuthUrl(tokenSettings)}`
+      );
+    }
+
+    console.warn("Using base credentials.");
+    credentials = GOOGLE_BASE_CREDENTIALS;
   }
+
+  oAuthClient.credentials = JSON.parse(credentials);
 
   if (!oAuthClient.credentials.refresh_token) {
     throw new Error(

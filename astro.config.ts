@@ -33,6 +33,10 @@ export default defineConfig({
         context: "server",
         access: "secret",
       }),
+      GOOGLE_BASE_CREDENTIALS: envField.string({
+        context: "server",
+        access: "secret",
+      }),
       PHONE_NUMBER: envField.string({
         context: "server",
         access: "secret",
