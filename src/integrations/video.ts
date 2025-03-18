@@ -36,8 +36,7 @@ export const generateShowreelCaptions = async (astro: AstroGlobal) => {
       })),
     })
   ).sort(
-    (a, b) =>
-      projects.indexOf(getEntryId(a)!) - projects.indexOf(getEntryId(b)!)
+    (a, b) => projects.indexOf(getEntryId(a)) - projects.indexOf(getEntryId(b))
   );
 
   const subtitles = (

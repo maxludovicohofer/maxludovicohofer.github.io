@@ -27,11 +27,14 @@ export const getPrintPath = (documentPath: string) => {
     ? printOptions[0]
     : printOptions;
 
-  return printPath
-    ? typeof printPath === "string"
-      ? printPath
-      : typeof printPath === "boolean"
-      ? `${documentPath}.pdf`
-      : printPath.path?.toString()
-    : undefined;
+  if (!printPath) return;
+
+  switch (typeof printPath) {
+    case "string":
+      return printPath;
+    case "boolean":
+      return `${documentPath}.pdf`;
+  }
+
+  return printPath.path?.toString();
 };
