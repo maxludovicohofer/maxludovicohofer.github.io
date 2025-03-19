@@ -140,11 +140,13 @@
     - act-by-belief
     - ambulance
   tech:
+    - Unreal Engine
+    - Unity
+    - Maya
     - HLSL
     - AWS
     - Excel
     - Houdini
-    - Maya
     - ZBrush
     - Substance painter
     - Photoshop
@@ -196,7 +198,7 @@
       tasks:
         - studied physics, math for games, electronics, and advanced computer science
       achievements:
-        - greatly improved my fundamental math and engineering skills
+        - improved my math and engineering fundamentals
 
 - id: high school
   start: 2011-09-01
@@ -219,4 +221,4 @@
         - programmed platformer, fighting, and board games
       achievements:
         - won school programming competition and top 25% placement at national team programming competition
-        - developed videogames and desktop apps in most major languages
+        - developed videogames and desktop apps in major OOP and low-level languages
