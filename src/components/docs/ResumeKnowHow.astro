@@ -1,7 +1,7 @@
 ---
 import { getKnowHow } from "@integrations/content";
 import Text from "@components/ui/Text.astro";
-import { capitalize } from "@integrations/text";
+import { capitalize, endDot } from "@integrations/text";
 import { i18n, setDayjsLocale } from "@integrations/i18n-server";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
@@ -90,7 +90,7 @@ const t = i18n(Astro);
                 </Text>
                 <ol class="list-disc">
                   {achievements.map((achievement) => (
-                    <Text tag="li">{capitalize(achievement)}</Text>
+                    <Text tag="li">{capitalize(endDot(achievement))}</Text>
                   ))}
                 </ol>
               </li>
