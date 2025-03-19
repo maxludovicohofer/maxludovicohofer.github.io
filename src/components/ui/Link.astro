@@ -63,10 +63,12 @@ export const getUmamiLinkEvent = async (
   href?: Props["href"]
 ): Promise<UmamiLinkEvent> => {
   const getAnchorName = async () => {
-    const anchor = await astro.slots.render("default");
-    return anchor?.trim().search(/^<[\S\s]+>$/) !== -1
+    const content = astro.slots.has("default")
+      ? (await astro.slots.render("default")).trim()
+      : undefined;
+    return !content || /^<[\S\s]+>$/.test(content)
       ? await getLinkName(astro, href?.toString() ?? "")
-      : anchor;
+      : content;
   };
 
   if (

@@ -1,7 +1,7 @@
 ---
 import Link from "@components/ui/Link.astro";
 import Text from "@components/ui/Text.astro";
-import { capitalize, toTextList, endDot } from "@integrations/text";
+import { capitalize, toTextList, endDelimiter } from "@integrations/text";
 import type dayjs from "dayjs";
 import { getFormattedDates } from "./ResumeKnowHow.astro";
 import { i18n } from "@integrations/i18n-server";
@@ -44,10 +44,10 @@ const scaleText = soloDeveloped
   ? await t("Solo")
   : `${team.internal + team.external}名${team.external ? `（うち外注スタッフ${team.external}名）` : ""}`;
 
-const rolesSentence = `${await t(endDot(capitalize(toTextList(roles.slice(0, 2).map(({ id }) => id)))))}`;
+const rolesSentence = `${await t(endDelimiter(capitalize(toTextList(roles.slice(0, 2).map(({ id }) => id)))))}`;
 const responsibilitiesSentence = full
   ? undefined
-  : `${await t(endDot(capitalize(toTextList(responsibilities.slice(0, full ? undefined : 2)))))}`;
+  : `${await t(endDelimiter(capitalize(toTextList(responsibilities.slice(0, full ? undefined : 2)))))}`;
 const displayedPoints = full ? points : points.slice(0, 2);
 const linkText = await t("Read development");
 ---
@@ -84,7 +84,7 @@ const linkText = await t("Read development");
       full ? (
         <ul class="mt-0">
           {responsibilities.map((responsibility) => (
-            <Text tag="li">{endDot(capitalize(responsibility))}</Text>
+            <Text tag="li">{endDelimiter(capitalize(responsibility))}</Text>
           ))}
         </ul>
       ) : (
@@ -99,7 +99,7 @@ const linkText = await t("Read development");
     <ul class="mt-0 last:-mb-2">
       {
         displayedPoints.map((point) => (
-          <Text tag="li">{endDot(capitalize(point))}</Text>
+          <Text tag="li">{endDelimiter(capitalize(point))}</Text>
         ))
       }
     </ul>

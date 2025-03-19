@@ -97,6 +97,13 @@ const subtitle = [
 ].filter((part) => !!part);
 
 const noTranslation = isLocalizedEntry(entry);
+
+const finalReadMoreText = await t(
+  readMoreText ??
+    (isMarkdown
+      ? `Read in ${dayjs.duration({ minutes: Math.ceil(minutesToRead!) }).get("minutes")} min`
+      : "Read more")
+);
 ---
 
 <div class=`${className} post-preview h-full` {...props}>
@@ -184,11 +191,9 @@ const noTranslation = isLocalizedEntry(entry);
         class="post-preview-read-more"
         linkClass={`${readMoreClass} absolute bottom-0 left-0`}
         href={readMoreLink}
+        translateProps={{ disable: true }}
       >
-        {readMoreText ??
-          (isMarkdown
-            ? `Read in ${dayjs.duration({ minutes: Math.ceil(minutesToRead!) }).get("minutes")} min`
-            : "Read more")}
+        {finalReadMoreText}
         <br />▼
       </Button>
     )

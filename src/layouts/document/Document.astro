@@ -1,7 +1,7 @@
 ---
 import type { CollectionKey, CollectionEntry } from "astro:content";
 import { cleanMarkdown } from "@integrations/markdown";
-import { endDot, capitalize, getPathSection } from "@integrations/text";
+import { endDelimiter, capitalize, getPathSection } from "@integrations/text";
 import type { PostCollectionKey } from "@integrations/content";
 import type { ComponentProps } from "astro/types";
 import Card from "@layouts/Card.astro";
@@ -57,7 +57,9 @@ export const getDescription = <C extends CollectionKey>(
       )
     );
 
-    description = endDot(`${splitSentences.slice(0, sentences).join(". ")}`);
+    description = endDelimiter(
+      `${splitSentences.slice(0, sentences).join(". ")}`
+    );
   }
 
   if (shortenStart) {

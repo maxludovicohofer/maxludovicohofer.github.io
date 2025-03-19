@@ -49,7 +49,7 @@ const { value: topValue, cleanedAlt: altWithoutTop } =
 <PostMedia
   alt={altWithoutTop}
   class={`${className} h-[40vh] ${aspectValue ? "!w-auto" : ""}`}
-  marginClass={topValue ? "!mt-0 mb-6" : ""}
+  outerProps={{ class: topValue ? "!mt-0 mb-6" : "", translate: "no" }}
   loading={eagerValue ? "eager" : undefined}
   aspect={aspectValue as ComponentProps<typeof PostMedia>["aspect"]}
   {...props}

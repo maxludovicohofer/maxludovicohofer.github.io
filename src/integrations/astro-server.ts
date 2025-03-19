@@ -172,7 +172,7 @@ export const matchRoles = async <D>(
     let testValue = test;
 
     const testMatch = (singleTest: string, matcher: RegExp) =>
-      singleTest.search(matcher) !== -1;
+      matcher.test(singleTest);
 
     if (notMatchers) {
       const isNotMatching = (singleTest: string) =>
@@ -456,7 +456,7 @@ export const getTelLinkName = (link: string, forDisplay?: boolean) => {
   const linkWithoutPrefix = link.slice(4);
 
   if (forDisplay) {
-    const sections = linkWithoutPrefix.match(/.{1,3}/g)!;
+    const sections = /.{1,3}/g.exec(linkWithoutPrefix)!;
 
     if (sections.at(-1)!.length < 3)
       sections[sections.length - 2] = `${sections.at(-2)}${sections.pop()}`;

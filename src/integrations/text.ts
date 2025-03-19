@@ -13,10 +13,10 @@ export const capitalize = (text: string) =>
 export const uncapitalize = (text: string) =>
   text.charAt(0).toLocaleLowerCase() + text.slice(1);
 
-export const endDot = (text: string) =>
-  text.search(new RegExp(`[${localeInfo[defaultLocale].delimiters}]$`)) !== -1
+export const endDelimiter = (text: string, delimiter = ".") =>
+  new RegExp(`[${localeInfo[defaultLocale].delimiters}]$`).test(text)
     ? text
-    : `${text}.`;
+    : `${text}${delimiter}`;
 
 export const isRemoteLink = (link: string) => link.startsWith("http");
 

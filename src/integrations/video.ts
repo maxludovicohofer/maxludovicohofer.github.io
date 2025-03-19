@@ -3,7 +3,7 @@ import duration, { type Duration } from "dayjs/plugin/duration";
 import { applyMatch, getSortedPosts, matchRoles } from "./astro-server";
 import type { AstroGlobal } from "astro";
 import { getEntryId } from "@layouts/document/Document.astro";
-import { capitalize, endDot } from "./text";
+import { capitalize, endDelimiter } from "./text";
 import { i18n } from "./i18n-server";
 import { callApi } from "./google/google";
 import { getCurrentLocale } from "./i18n-special";
@@ -100,7 +100,7 @@ export const generateShowreelCaptions = async (astro: AstroGlobal) => {
         async ({ start, end, text }, index) =>
           `${index}\n${start.format("HH:mm:ss,SSS")} --> ${end.format(
             "HH:mm:ss,SSS"
-          )}\n${await t(endDot(capitalize(text)))}`
+          )}\n${await t(endDelimiter(capitalize(text)))}`
       )
     )
   ).join("\n\n");

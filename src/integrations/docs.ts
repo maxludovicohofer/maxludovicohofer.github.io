@@ -1,6 +1,6 @@
 import type { AstroGlobal } from "astro";
 import { getRole } from "./astro-server";
-import { endDot, capitalize, toTextList } from "./text";
+import { endDelimiter, capitalize, toTextList } from "./text";
 import { getCollection } from "astro:content";
 import { i18n, type I18nOptions } from "./i18n-server";
 import { removeWatashiWa } from "./l10n";
@@ -72,15 +72,13 @@ export const getSummary = async (astro: AstroGlobal, short?: boolean) => {
     ? `specialized in ${toTextList(
         resolvedSpecializations.filter(
           (specialization) =>
-            id.search(
-              new RegExp(
-                `\\b${
-                  specialization.endsWith("s")
-                    ? `${specialization}*`
-                    : specialization
-                }\\b`
-              )
-            ) === -1
+            !new RegExp(
+              `\\b${
+                specialization.endsWith("s")
+                  ? `${specialization}*`
+                  : specialization
+              }\\b`
+            ).test(id)
         )
       )}`
     : "";
@@ -89,7 +87,7 @@ export const getSummary = async (astro: AstroGlobal, short?: boolean) => {
 
   return removeWatashiWa(
     await t(
-      endDot(
+      endDelimiter(
         `${
           short
             ? `I'm ${withArticle}`

@@ -77,7 +77,7 @@ const queueTranslation = async (
   text: string,
   toLocale: PossibleTranslations,
   options?: I18nOptions
-) => {
+): Promise<string> => {
   // Custom translation
   if (options?.[toLocale]) return options[toLocale];
 
@@ -87,24 +87,41 @@ const queueTranslation = async (
 
   // Check if HTML
   if (cleanText.startsWith("<")) {
+    if (!shouldTranslateHTML(cleanText)) return cleanText;
+
     // HTML translation only works in prod, because astro adds custom attributes in dev
     if (import.meta.env.DEV && !options?.force) return `${cleanText} (t)`;
-
-    if (!shouldTranslateHTML(cleanText)) return cleanText;
   }
 
+  const endDelimiter =
+    new RegExp(`[^.][${localeInfo[defaultLocale].delimiters}]$`).exec(
+      cleanText
+    ) && cleanText.at(-1)!;
+  const textToTranslate = endDelimiter ? cleanText.slice(0, -1) : cleanText;
+
+  const formatTranslation = async (translation: string) =>
+    endDelimiter
+      ? await endDelimiterLocalized(translation, toLocale, endDelimiter)
+      : translation;
+
   const translated = await getTranslated(toLocale);
-  const cached = translated[cleanText]?.translation;
-  if (cached !== undefined) return cached;
+  const cached = translated[textToTranslate]?.translation;
+  if (cached !== undefined) return await formatTranslation(cached);
 
   // Do not translate in dev to save money
   if (import.meta.env.DEV && !options?.force) return `${cleanText} (t)`;
 
   // Cache miss
-  if (!options?.noCache) debugCacheMiss(cleanText, Object.keys(translated));
+  if (!options?.noCache)
+    debugCacheMiss(textToTranslate, Object.keys(translated));
 
-  translateBuffer.push({ text: cleanText, toLocale, options });
-  return (await translate(options))[toLocale]![cleanText]!.translation;
+  translateBuffer.push({ text: textToTranslate, toLocale, options });
+
+  return await formatTranslation(
+    (
+      await translate(options)
+    )[toLocale]![textToTranslate]!.translation
+  );
 };
 
 const shouldTranslateHTML = (html: string) => {
@@ -249,9 +266,14 @@ export const setDayjsLocale = async (astro: AstroGlobal) => {
   dayjs.locale(translateLocale);
 };
 
-export const endDotLocalized = async (text: string, astro: AstroGlobal) =>
-  text.search(
-    new RegExp(`[${localeInfo[getCurrentLocale(astro)].delimiters}]$`)
-  ) !== -1
+export const endDelimiterLocalized = async (
+  text: string,
+  astro: AstroGlobal | PossibleTranslations,
+  delimiter = "."
+) => {
+  const locale = typeof astro === "string" ? astro : getCurrentLocale(astro);
+
+  return new RegExp(`[${localeInfo[locale].delimiters}]$`).test(text)
     ? text
-    : `${text}${await i18n(astro)(".")}`;
+    : `${text}${await i18n(astro)(delimiter)}`;
+};
