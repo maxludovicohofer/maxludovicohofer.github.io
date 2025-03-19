@@ -198,36 +198,28 @@
       text: >-
         0
 
-        00:00:00,000 --> 00:00:06,000
-
-        Designed an arcade co-op rougelike with a top-down view, with emphasis
-        on collaboration and theorycrafting.
-
-
-        1
-
-        00:00:06,000 --> 00:00:18,000
-
-        Brought the game's vision to life with all departments and held weekly
-        meet ups to keep everyone up to date.
-
-
-        2
-
-        00:00:18,000 --> 00:00:26,000
+        00:00:00,000 --> 00:00:12,000
 
         Led a technical team of 14 programmers, designers, animators, and shader
         artists to our first published game.
 
 
-        3
+        1
+
+        00:00:12,000 --> 00:00:26,000
+
+        Designed an arcade co-op rougelike with a top-down view, with emphasis
+        on collaboration and theorycrafting.
+
+
+        2
 
         00:00:26,000 --> 00:00:30,000
 
         Awarded Rookie awards 2024 "Game of the year - People's choice".
 
 
-        4
+        3
 
         00:00:30,000 --> 00:00:42,000
 
@@ -235,14 +227,14 @@
         visibility issues.
 
 
-        5
+        4
 
         00:00:42,000 --> 00:00:49,000
 
         Developed tools to easily place AI agents and control patrol paths.
 
 
-        6
+        5
 
         00:00:49,000 --> 00:01:00,000
 
@@ -250,79 +242,97 @@
         events.
 
 
-        7
+        6
 
         00:01:00,000 --> 00:01:12,000
+
+        Managed scope creep to deliver the project in time.
+
+
+        7
+
+        00:01:12,000 --> 00:01:30,000
 
         Designed a minimalistic meditative sci-fi puzzle game.
 
 
         8
 
-        00:01:12,000 --> 00:01:30,000
-
-        Managed scope creep to deliver the project in time.
-
-
-        9
-
-        00:01:30,000 --> 00:01:40,000
+        00:01:30,000 --> 00:01:37,000
 
         Successfully managed scope creep to deliver the project in time.
 
 
-        10
+        9
 
-        00:01:40,000 --> 00:02:00,000
+        00:01:37,000 --> 00:01:43,000
 
         Programmed a dynamic difficulty system that significantly increased
         repeatability.
+
+
+        10
+
+        00:01:43,000 --> 00:01:49,000
+
+        Added an infinite procedural map that followed dynamic difficulty.
+
+
+        11
+
+        00:01:49,000 --> 00:02:00,000
+
+        Developed an easy to work on level design pipeline.
     - locale: ja
       youTubeId: AUieDaYwGCoGIMtR_HLPC9PKK43tuejQ82EB-Pa7s8OO
       text: |-
         0
-        00:00:00,000 --> 00:00:06,000
-        トップダウンビューのアーケード型協力型ローグライクゲームを設計しました。協力プレイと戦略構築に重点を置いています。
-
-        1
-        00:00:06,000 --> 00:00:18,000
-        ゲームのビジョンを全部署で共有し、毎週ミーティングを開催して、全員が最新情報を把握できるようにしました。
-
-        2
-        00:00:18,000 --> 00:00:26,000
+        00:00:00,000 --> 00:00:12,000
         14人のプログラマー、デザイナー、アニメーター、シェーダーアーティストからなる技術チームを率いて、当社初のゲームをリリースしました。
 
-        3
+        1
+        00:00:12,000 --> 00:00:26,000
+        トップダウンビューのアーケード型協力型ローグライクゲームを設計しました。協力プレイと戦略構築に重点を置いています。
+
+        2
         00:00:26,000 --> 00:00:30,000
         2024年のルーキー賞「ゲーム・オブ・ザ・イヤー - ピープルズ・チョイス」を受賞しました。
 
-        4
+        3
         00:00:30,000 --> 00:00:42,000
         天候や視界の問題に直感的に反応するようプログラムされたAI。
 
-        5
+        4
         00:00:42,000 --> 00:00:49,000
         AIエージェントを簡単に配置し、巡回経路を制御できるツールを開発しました。
 
-        6
+        5
         00:00:49,000 --> 00:01:00,000
         敵やストーリーイベントを制御するのに役立った、プログラムされたレベルデザインツール。
 
-        7
+        6
         00:01:00,000 --> 00:01:12,000
+        スコープの拡大を管理し、プロジェクトを期限内に完了させました。
+
+        7
+        00:01:12,000 --> 00:01:30,000
         ミニマルな瞑想的なSFパズルゲームをデザインしました。
 
         8
-        00:01:12,000 --> 00:01:30,000
-        スコープの拡大を管理し、プロジェクトを期限内に完了させました。
-
-        9
-        00:01:30,000 --> 00:01:40,000
+        00:01:30,000 --> 00:01:37,000
         スコープの拡大をうまく管理し、プロジェクトを期限内に完了させました。
 
-        10
-        00:01:40,000 --> 00:02:00,000
+        9
+        00:01:37,000 --> 00:01:43,000
         再現性を大幅に高める動的難易度システムをプログラムしました。
+
+        10
+        00:01:43,000 --> 00:01:49,000
+        動的な難易度に追随する無限の手順マップを追加しました。
+
+        11
+        00:01:49,000 --> 00:02:00,000
+        作業しやすいレベルデザインのパイプラインを開発しました。
 - role: system programmer
   youTubeId: zeMlXC6S9fQ
   categoryId: '22'
