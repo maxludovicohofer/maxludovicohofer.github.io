@@ -1,24 +1,44 @@
 ---
 import type { ComponentProps } from "astro/types";
-import DocumentMedia from "@document/DocumentMedia.astro";
-import PostText from "@layouts/post/PostText.astro";
+import Text from "@components/ui/Text.astro";
+import DocumentContent from "./DocumentContent.astro";
+import type { CollectionEntry } from "astro:content";
+import type { DocumentCollectionKey } from "./Document.astro";
+import { render } from "astro:content";
+import DocumentMedia from "./DocumentMedia.astro";
 
-interface Props extends ComponentProps<typeof PostText> {}
+interface Props extends ComponentProps<typeof Text> {
+  entry?: CollectionEntry<DocumentCollectionKey> | undefined;
+  entryProps?: ComponentProps<typeof DocumentContent>;
+  inline?: boolean;
+}
+
+const { entry, entryProps, inline, ...props } = Astro.props;
+
+const { Content } = entry ? await render(entry) : {};
+
+const { components, ...otherEntryProps } = entryProps ?? {};
+
+const contentProps: ComponentProps<typeof DocumentContent> = {
+  Content,
+  components: {
+    img: DocumentMedia,
+    ...components,
+  },
+  ...otherEntryProps,
+};
 ---
 
-<PostText
-  class="font-['Segoe_UI'] prose-li:list-disc"
-  contentProps={{ components: { img: DocumentMedia } }}
-  {...Astro.props}
->
-  <slot />
-</PostText>
-<style>
-  @font-face {
-    font-family: "Segoe UI";
-    src:
-      local("Segoe UI"),
-      url(//c.s-microsoft.com/static/fonts/segoe-ui/west-european/normal/latest.woff2)
-        format("woff2");
-  }
-</style>
+{
+  inline ? (
+    <DocumentContent {...contentProps}>
+      <slot />
+    </DocumentContent>
+  ) : (
+    <Text markdown={!!Content} {...props}>
+      <DocumentContent {...contentProps}>
+        <slot />
+      </DocumentContent>
+    </Text>
+  )
+}

@@ -1,0 +1,11 @@
+{
+  "$ref": "#/definitions/languages",
+  "definitions": {
+    "languages": {
+      "type": "array",
+      "items": {
+        "$ref": "../../.astro/collections/languages.schema.json"
+      }
+    }
+  }
+}

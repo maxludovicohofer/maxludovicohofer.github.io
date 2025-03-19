@@ -1,17 +1,22 @@
 ---
 import type { ComponentProps } from "astro/types";
-import MarkdownMedia from "@document/MarkdownMedia.astro";
+import MarkdownMedia from "@markdown/MarkdownMedia.astro";
+import { getTailwindValueFromClass } from "@integrations/tailwind";
 
 interface Props extends ComponentProps<typeof MarkdownMedia> {
   resolution?: number;
 }
 
-const { resolution = 7, ...props } = Astro.props;
+const { resolution = 7, class: className = "", ...props } = Astro.props;
+
+const height = getTailwindValueFromClass(className, "h");
+
+if (!height) throw new Error("Must specify height for document media");
 ---
 
 <MarkdownMedia
-  class="shadow-none !h-32"
-  width={resolution * 32}
+  class={`shadow-none ${className}`}
+  width={resolution * Number(height)}
   loading="eager"
   {...props}
 />

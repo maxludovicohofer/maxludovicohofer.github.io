@@ -1,0 +1,133 @@
+---
+import Video from "@ui/Video.astro";
+import {
+  setYouTubeVideo,
+  generateShowreelCaptions,
+  setYouTubeCaptions,
+  updateYouTubeVideoLocalization,
+} from "@integrations/video";
+import { applyMatch, getRole, matchRoles } from "@integrations/astro-server";
+import { getEntry } from "astro:content";
+import { getCurrentLocale } from "@integrations/i18n-special";
+import { dump } from "js-yaml";
+import { defaultLocale, locales } from "@integrations/astro-config";
+import { capitalize } from "@integrations/text";
+
+const {
+  id,
+  data: showreels,
+  filePath,
+} = (await getEntry("videos", "showreel"))!;
+
+// TODO PHASE 2 GENERATE ROLE-MATCHED SHOWREEL BASED ON PROJECTS VIDEOS
+
+let showreel = applyMatch(
+  await matchRoles(
+    Astro,
+    showreels.map((showreel) => ({ data: showreel, roles: [showreel.role] }))
+  )
+)[0]!;
+
+const { role, isDefault } = await getRole(Astro);
+
+const videoTitle = capitalize(id);
+const videoDescription = capitalize(isDefault ? "" : role.id);
+
+if (showreel.role.id !== role.id) {
+  // Create video if nonexistent for role
+  console.info(`Creating ${videoTitle} video for ${role.id}`);
+
+  const videoId = await setYouTubeVideo(
+    Astro,
+    "src/assets/videos/Showreel.mp4",
+    showreel.categoryId,
+    videoTitle,
+    videoDescription
+  );
+
+  if (videoId) {
+    // Update info
+    showreel = {
+      role,
+      youTubeId: videoId,
+      categoryId: showreel.categoryId,
+      captions: [],
+    };
+    showreels.push(showreel);
+  }
+}
+
+if (showreel.role.id === role.id) {
+  const currentLocale = getCurrentLocale(Astro);
+  const captions = await generateShowreelCaptions(Astro);
+
+  // Update captions if non existent for current locale (also localize video) or different
+  if (
+    showreel.captions.every(
+      ({ locale, text }) => locale !== currentLocale || text !== captions
+    )
+  ) {
+    if (
+      currentLocale !== defaultLocale &&
+      showreel.captions.every(({ locale }) => locale !== currentLocale)
+    ) {
+      // Localize video
+      console.info(
+        `Localizing ${videoTitle} for ${role.id} in ${currentLocale}`
+      );
+
+      await updateYouTubeVideoLocalization(
+        Astro,
+        showreel.youTubeId,
+        videoTitle,
+        videoDescription
+      );
+    }
+
+    const showreelCaptions = showreels[showreels.indexOf(showreel)]!.captions;
+
+    const existingCaption = showreelCaptions.find(
+      ({ locale }) => locale === currentLocale
+    );
+
+    console.info(
+      `${existingCaption ? "Updating" : "Creating"} ${videoTitle} for ${role.id}'s ${currentLocale} caption`
+    );
+
+    const captionId = await setYouTubeCaptions(
+      Astro,
+      captions,
+      showreel.youTubeId,
+      existingCaption?.youTubeId
+    );
+
+    if (captionId) {
+      // Update cache
+      if (existingCaption) {
+        showreelCaptions[showreelCaptions.indexOf(existingCaption)]!.text =
+          captions;
+      } else {
+        showreelCaptions.push({
+          locale: currentLocale,
+          youTubeId: captionId,
+          text: captions,
+        });
+        showreelCaptions.sort(
+          (a, b) => locales.indexOf(a.locale) - locales.indexOf(b.locale)
+        );
+      }
+
+      const { writeFile } = await import("fs/promises");
+      writeFile(
+        filePath!,
+        dump(showreels.map(({ role, ...data }) => ({ role: role.id, ...data })))
+      );
+    }
+  }
+}
+---
+
+<Video
+  youTubeInfo={{ id: showreel.youTubeId, aspect: "16/10" }}
+  showSubtitles
+/>

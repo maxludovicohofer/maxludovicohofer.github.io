@@ -1,0 +1,470 @@
+- role: technical game designer
+  youTubeId: FxSDPMJZ03o
+  categoryId: '22'
+  captions:
+    - locale: en
+      youTubeId: AUieDabOUo31LZm1Uivd0tqs2U5DD7_SVfL1PCbRMVCO
+      text: >-
+        0
+
+        00:00:00,000 --> 00:00:06,000
+
+        Designed an arcade co-op rougelike with a top-down view, with emphasis
+        on collaboration and theorycrafting.
+
+
+        1
+
+        00:00:06,000 --> 00:00:18,000
+
+        Brought the game's vision to life with all departments and held weekly
+        meet ups to keep everyone up to date.
+
+
+        2
+
+        00:00:18,000 --> 00:00:26,000
+
+        Led a technical team of 14 programmers, designers, animators, and shader
+        artists to our first published game.
+
+
+        3
+
+        00:00:26,000 --> 00:00:30,000
+
+        Awarded Rookie awards 2024 "Game of the year - People's choice".
+
+
+        4
+
+        00:00:30,000 --> 00:00:35,000
+
+        Designed a stealth-action hybrid with character transformations and
+        multiuse skills.
+
+
+        5
+
+        00:00:35,000 --> 00:00:42,000
+
+        Programmed skills, camera, and movement, that changed based on character
+        transformation.
+
+
+        6
+
+        00:00:42,000 --> 00:00:47,000
+
+        Programmed AI that reacts intuitively to weather conditions and
+        visibility issues.
+
+
+        7
+
+        00:00:47,000 --> 00:00:52,000
+
+        Developed tools to easily place AI agents and control patrol paths.
+
+
+        8
+
+        00:00:52,000 --> 00:01:00,000
+
+        Programmed level design tools that helped to control enemies and story
+        events.
+
+
+        9
+
+        00:01:00,000 --> 00:01:12,000
+
+        Designed a minimalistic meditative sci-fi puzzle game.
+
+
+        10
+
+        00:01:12,000 --> 00:01:30,000
+
+        Managed scope creep to deliver the project in time.
+
+
+        11
+
+        00:01:30,000 --> 00:01:36,000
+
+        Designed an addictive game loop for mobile with simple mechanics.
+
+
+        12
+
+        00:01:36,000 --> 00:01:42,000
+
+        Successfully managed scope creep to deliver the project in time.
+
+
+        13
+
+        00:01:42,000 --> 00:01:47,000
+
+        Programmed a dynamic difficulty system that significantly increased
+        repeatability.
+
+
+        14
+
+        00:01:47,000 --> 00:01:52,000
+
+        Added an infinite procedural map that followed dynamic difficulty.
+
+
+        15
+
+        00:01:52,000 --> 00:02:00,000
+
+        Developed an easy to work on level design pipeline.
+    - locale: ja
+      youTubeId: AUieDabRCCfwHhsEvAQdzz82vhe6gNEOUwF9325i0E4f
+      text: |-
+        0
+        00:00:00,000 --> 00:00:06,000
+        トップダウンビューのアーケード型協力型ローグライクゲームを設計しました。協力プレイと戦略構築に重点を置いています。
+
+        1
+        00:00:06,000 --> 00:00:18,000
+        ゲームのビジョンを全部署で共有し、毎週ミーティングを開催して、全員が最新情報を把握できるようにしました。
+
+        2
+        00:00:18,000 --> 00:00:26,000
+        14人のプログラマー、デザイナー、アニメーター、シェーダーアーティストからなる技術チームを率いて、当社初のゲームをリリースしました。
+
+        3
+        00:00:26,000 --> 00:00:30,000
+        2024年のルーキー賞「ゲーム・オブ・ザ・イヤー - ピープルズ・チョイス」を受賞しました。
+
+        4
+        00:00:30,000 --> 00:00:35,000
+        キャラクターの変身とマルチスキルを搭載したステルスアクションのハイブリッドを設計しました。
+
+        5
+        00:00:35,000 --> 00:00:42,000
+        プログラムされたスキル、カメラ、動きは、キャラクターの変身に合わせて変化しました。
+
+        6
+        00:00:42,000 --> 00:00:47,000
+        天候や視界の問題に直感的に反応するようプログラムされたAI。
+
+        7
+        00:00:47,000 --> 00:00:52,000
+        AIエージェントを簡単に配置し、巡回経路を制御できるツールを開発しました。
+
+        8
+        00:00:52,000 --> 00:01:00,000
+        敵やストーリーイベントを制御するのに役立った、プログラムされたレベルデザインツール。
+
+        9
+        00:01:00,000 --> 00:01:12,000
+        ミニマルな瞑想的なSFパズルゲームをデザインしました。
+
+        10
+        00:01:12,000 --> 00:01:30,000
+        スコープの拡大を管理し、プロジェクトを期限内に完了させました。
+
+        11
+        00:01:30,000 --> 00:01:36,000
+        シンプルな仕組みで、モバイル用の中毒性のあるゲームループを設計しました。
+
+        12
+        00:01:36,000 --> 00:01:42,000
+        スコープの拡大をうまく管理し、プロジェクトを期限内に完了させました。
+
+        13
+        00:01:42,000 --> 00:01:47,000
+        再現性を大幅に高める動的難易度システムをプログラムしました。
+
+        14
+        00:01:47,000 --> 00:01:52,000
+        動的な難易度に追随する無限の手順マップを追加しました。
+
+        15
+        00:01:52,000 --> 00:02:00,000
+        作業しやすいレベルデザインのパイプラインを開発しました。
+- role: AI programmer
+  youTubeId: ZbdX3tUbiNI
+  categoryId: '22'
+  captions:
+    - locale: en
+      youTubeId: AUieDab562v55E-7iEvSZ5j8E_nohpDVKMGzMaCf1z-C
+      text: >-
+        0
+
+        00:00:00,000 --> 00:00:12,000
+
+        Led a technical team of 14 programmers, designers, animators, and shader
+        artists to our first published game.
+
+
+        1
+
+        00:00:12,000 --> 00:00:26,000
+
+        Designed an arcade co-op rougelike with a top-down view, with emphasis
+        on collaboration and theorycrafting.
+
+
+        2
+
+        00:00:26,000 --> 00:00:30,000
+
+        Awarded Rookie awards 2024 "Game of the year - People's choice".
+
+
+        3
+
+        00:00:30,000 --> 00:00:42,000
+
+        Programmed AI that reacts intuitively to weather conditions and
+        visibility issues.
+
+
+        4
+
+        00:00:42,000 --> 00:00:49,000
+
+        Developed tools to easily place AI agents and control patrol paths.
+
+
+        5
+
+        00:00:49,000 --> 00:01:00,000
+
+        Programmed level design tools that helped to control enemies and story
+        events.
+
+
+        6
+
+        00:01:00,000 --> 00:01:12,000
+
+        Managed scope creep to deliver the project in time.
+
+
+        7
+
+        00:01:12,000 --> 00:01:30,000
+
+        Designed a minimalistic meditative sci-fi puzzle game.
+
+
+        8
+
+        00:01:30,000 --> 00:01:37,000
+
+        Successfully managed scope creep to deliver the project in time.
+
+
+        9
+
+        00:01:37,000 --> 00:01:43,000
+
+        Programmed a dynamic difficulty system that significantly increased
+        repeatability.
+
+
+        10
+
+        00:01:43,000 --> 00:01:49,000
+
+        Added an infinite procedural map that followed dynamic difficulty.
+
+
+        11
+
+        00:01:49,000 --> 00:02:00,000
+
+        Developed an easy to work on level design pipeline.
+    - locale: ja
+      youTubeId: AUieDaYwGCoGIMtR_HLPC9PKK43tuejQ82EB-Pa7s8OO
+      text: |-
+        0
+        00:00:00,000 --> 00:00:12,000
+        14人のプログラマー、デザイナー、アニメーター、シェーダーアーティストからなる技術チームを率いて、当社初のゲームをリリースしました。
+
+        1
+        00:00:12,000 --> 00:00:26,000
+        トップダウンビューのアーケード型協力型ローグライクゲームを設計しました。協力プレイと戦略構築に重点を置いています。
+
+        2
+        00:00:26,000 --> 00:00:30,000
+        2024年のルーキー賞「ゲーム・オブ・ザ・イヤー - ピープルズ・チョイス」を受賞しました。
+
+        3
+        00:00:30,000 --> 00:00:42,000
+        天候や視界の問題に直感的に反応するようプログラムされたAI。
+
+        4
+        00:00:42,000 --> 00:00:49,000
+        AIエージェントを簡単に配置し、巡回経路を制御できるツールを開発しました。
+
+        5
+        00:00:49,000 --> 00:01:00,000
+        敵やストーリーイベントを制御するのに役立った、プログラムされたレベルデザインツール。
+
+        6
+        00:01:00,000 --> 00:01:12,000
+        スコープの拡大を管理し、プロジェクトを期限内に完了させました。
+
+        7
+        00:01:12,000 --> 00:01:30,000
+        ミニマルな瞑想的なSFパズルゲームをデザインしました。
+
+        8
+        00:01:30,000 --> 00:01:37,000
+        スコープの拡大をうまく管理し、プロジェクトを期限内に完了させました。
+
+        9
+        00:01:37,000 --> 00:01:43,000
+        再現性を大幅に高める動的難易度システムをプログラムしました。
+
+        10
+        00:01:43,000 --> 00:01:49,000
+        動的な難易度に追随する無限の手順マップを追加しました。
+
+        11
+        00:01:49,000 --> 00:02:00,000
+        作業しやすいレベルデザインのパイプラインを開発しました。
+- role: system programmer
+  youTubeId: zeMlXC6S9fQ
+  categoryId: '22'
+  captions:
+    - locale: en
+      youTubeId: AUieDabKhT1OpA4P6RPP9sdoBfKNugGwaddolIX_KYUF
+      text: >-
+        0
+
+        00:00:00,000 --> 00:00:06,000
+
+        Designed an arcade co-op rougelike with a top-down view, with emphasis
+        on collaboration and theorycrafting.
+
+
+        1
+
+        00:00:06,000 --> 00:00:18,000
+
+        Brought the game's vision to life with all departments and held weekly
+        meet ups to keep everyone up to date.
+
+
+        2
+
+        00:00:18,000 --> 00:00:26,000
+
+        Led a technical team of 14 programmers, designers, animators, and shader
+        artists to our first published game.
+
+
+        3
+
+        00:00:26,000 --> 00:00:30,000
+
+        Awarded Rookie awards 2024 "Game of the year - People's choice".
+
+
+        4
+
+        00:00:30,000 --> 00:00:42,000
+
+        Programmed level design tools that helped to control enemies and story
+        events.
+
+
+        5
+
+        00:00:42,000 --> 00:00:49,000
+
+        Programmed skills, camera, and movement, that changed based on character
+        transformation.
+
+
+        6
+
+        00:00:49,000 --> 00:01:00,000
+
+        Programmed AI that reacts intuitively to weather conditions and
+        visibility issues.
+
+
+        7
+
+        00:01:00,000 --> 00:01:12,000
+
+        Designed a minimalistic meditative sci-fi puzzle game.
+
+
+        8
+
+        00:01:12,000 --> 00:01:30,000
+
+        Managed scope creep to deliver the project in time.
+
+
+        9
+
+        00:01:30,000 --> 00:01:40,000
+
+        Successfully managed scope creep to deliver the project in time.
+
+
+        10
+
+        00:01:40,000 --> 00:02:00,000
+
+        Programmed a dynamic difficulty system that significantly increased
+        repeatability.
+    - locale: ja
+      youTubeId: AUieDaYex5ed4RiE_urPhlII5JHHCBhd4xlBJ-UewtmA
+      text: |-
+        0
+        00:00:00,000 --> 00:00:06,000
+        トップダウンビューのアーケード型協力型ローグライクゲームを設計しました。協力プレイと戦略構築に重点を置いています。
+
+        1
+        00:00:06,000 --> 00:00:18,000
+        ゲームのビジョンを全部署で共有し、毎週ミーティングを開催して、全員が最新情報を把握できるようにしました。
+
+        2
+        00:00:18,000 --> 00:00:26,000
+        14人のプログラマー、デザイナー、アニメーター、シェーダーアーティストからなる技術チームを率いて、当社初のゲームをリリースしました。
+
+        3
+        00:00:26,000 --> 00:00:30,000
+        2024年のルーキー賞「ゲーム・オブ・ザ・イヤー - ピープルズ・チョイス」を受賞しました。
+
+        4
+        00:00:30,000 --> 00:00:42,000
+        敵やストーリーイベントを制御するのに役立った、プログラムされたレベルデザインツール。
+
+        5
+        00:00:42,000 --> 00:00:49,000
+        プログラムされたスキル、カメラ、動きは、キャラクターの変身に合わせて変化しました。
+
+        6
+        00:00:49,000 --> 00:01:00,000
+        天候や視界の問題に直感的に反応するようプログラムされたAI。
+
+        7
+        00:01:00,000 --> 00:01:12,000
+        ミニマルな瞑想的なSFパズルゲームをデザインしました。
+
+        8
+        00:01:12,000 --> 00:01:30,000
+        スコープの拡大を管理し、プロジェクトを期限内に完了させました。
+
+        9
+        00:01:30,000 --> 00:01:40,000
+        スコープの拡大をうまく管理し、プロジェクトを期限内に完了させました。
+
+        10
+        00:01:40,000 --> 00:02:00,000
+        再現性を大幅に高める動的難易度システムをプログラムしました。

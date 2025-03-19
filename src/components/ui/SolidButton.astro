@@ -1,22 +1,28 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import type { ComponentProps, HTMLAttributes } from "astro/types";
+import Translate from "./Translate.astro";
 
 interface Props extends HTMLAttributes<"button"> {
-  rounded?: boolean;
-  fullHeight?: boolean;
+  rounded?: boolean | undefined;
+  fullSize?: boolean;
   noRounding?: boolean;
+  outline?: boolean;
+  translateProps?: ComponentProps<typeof Translate>;
 }
 
 const {
   class: className = "",
   rounded,
-  fullHeight,
+  fullSize,
   noRounding,
+  translateProps,
+  outline,
   ...props
 } = Astro.props;
 ---
 
 <button
-  class={`${className} group bg-zinc-950 hover:bg-yellow-400 active:bg-yellow-600 dark:bg-zinc-100 dark:hover:bg-yellow-200 dark:active:bg-yellow-400 text-zinc-100 dark:text-zinc-950 hover:text-zinc-950 hover:scale-105 active:scale-95 shadow-md ${fullHeight ? "" : "h-11 2xl:h-16"} ${rounded ? "rounded-3xl" : `${noRounding ? "" : "rounded-xl"}`}`}
-  {...props}><slot /></button
+  class={`${className} group ${outline ? "border-2 border-zinc-400 hover:border-yellow-400 active:border-yellow-600 dark:hover:border-yellow-200 dark:active:border-yellow-400 text-zinc-400 hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400" : "bg-zinc-950 hover:bg-yellow-400 active:bg-yellow-600 dark:bg-zinc-100 dark:hover:bg-yellow-200 dark:active:bg-yellow-400 text-zinc-100 dark:text-zinc-950 hover:text-zinc-950"} hover:scale-105 active:scale-95 shadow-md ${fullSize ? "" : `${rounded ? "p-1" : "px-2 py-2.5 2xl:p-3"}`} ${rounded ? "rounded-full aspect-square" : `${noRounding ? "" : "rounded-xl"}`}`}
+  {...props}
+  translate="no"><Translate {...translateProps}><slot /></Translate></button
 >

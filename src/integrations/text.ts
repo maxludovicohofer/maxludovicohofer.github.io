@@ -1,11 +1,22 @@
+import { defaultLocale } from "./astro-config";
+import { localeInfo } from "./i18n-special";
+
 export const toSentenceCase = (text: string) =>
-  text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+  text.charAt(0).toLocaleUpperCase() + text.slice(1).toLocaleLowerCase();
 
 export const toTitleCase = (text: string) =>
   text.split(" ").map(capitalize).join(" ");
 
 export const capitalize = (text: string) =>
-  text.charAt(0).toUpperCase() + text.slice(1);
+  text.charAt(0).toLocaleUpperCase() + text.slice(1);
+
+export const uncapitalize = (text: string) =>
+  text.charAt(0).toLocaleLowerCase() + text.slice(1);
+
+export const endDot = (text: string) =>
+  text.search(new RegExp(`[${localeInfo[defaultLocale].delimiters}]$`)) !== -1
+    ? text
+    : `${text}.`;
 
 export const isRemoteLink = (link: string) => link.startsWith("http");
 
@@ -19,40 +30,6 @@ export const isFileLink = (link: string) =>
   isRemoteLink(link)
     ? new URL(link).pathname.includes(".")
     : link.includes(".");
-
-export const getLinkName = (link: string, pretty?: boolean) => {
-  let linkName = "";
-
-  if (isRemoteLink(link)) {
-    const url = new URL(link);
-
-    if (!pretty) {
-      linkName = url.host.split(".").at(-2)!;
-    } else {
-      linkName =
-        url.hostname === "maps.google.com" ? url.searchParams.get("q")! : link;
-    }
-  } else if (isMailLink(link)) {
-    linkName = link.slice(7);
-  } else if (isTelLink(link)) {
-    linkName = link.slice(4);
-
-    if (pretty) {
-      const sections = linkName.match(/.{1,3}/g)!;
-      if (sections.at(-1)!.length < 3) {
-        sections[sections.length - 2] = `${sections.at(-2)}${sections.pop()}`;
-      }
-
-      linkName = sections.join(" ");
-    }
-  } else if (isGeoLink(link)) {
-    linkName = link.slice(4);
-  } else {
-    linkName = getHumanPathSection(link);
-  }
-
-  return toSentenceCase(linkName);
-};
 
 export const getMaximumWordsInLimit = (text: string, limit: number) => {
   let shortened = text;
@@ -79,28 +56,29 @@ export const getMaximumWordsInLimit = (text: string, limit: number) => {
 };
 
 export const standardizePath = (pathname: string) =>
-  pathname.replace(/(^\/+)|(\/+$)/g, "");
+  `/${pathname.replace(/(^\/+)|(\/+$)/g, "")}`;
 
-export const getPathSection = (pathname: string, position: number = -1) =>
-  getPathSections(pathname).at(position);
+export const getPathSection = (pathname: string, position = -1) =>
+  getPathSections(pathname).at(position)!;
 
 export const getPathSections = (
   pathname: string,
   ...params: Parameters<string[]["slice"]>
 ) =>
   standardizePath(pathname)
+    .slice(1)
     .split("/")
     .slice(...params);
 
 export const getHumanPathSection = (
   ...params: Parameters<typeof getPathSection>
 ) =>
-  getPathSection(...params)!
+  getPathSection(...params)
     .replaceAll("-", " ")
     .split(".")[0]!;
 
 export const makePath = (humanName: string) =>
-  humanName.toLowerCase().replaceAll(" ", "-");
+  humanName.toLocaleLowerCase().replaceAll(" ", "-");
 
 export const toTextList = (text: string[]) => {
   const length = text.length;
@@ -113,3 +91,39 @@ export const toTextList = (text: string[]) => {
 
   return text[0] ?? "";
 };
+
+export const diff = (str1: string, str2: string) => {
+  const differences: {
+    index: number;
+    a: string;
+    aCode: number;
+    b: string;
+    bCode: number;
+  }[] = [];
+
+  Array.from({ length: Math.max(str1.length, str2.length) }).forEach((_, i) => {
+    if (str1[i] !== str2[i]) {
+      differences.push({
+        index: i,
+        a: str1[i]!,
+        aCode: str1.charCodeAt(i),
+        b: str2[i]!,
+        bCode: str2.charCodeAt(i),
+      });
+    }
+  });
+
+  return differences;
+};
+
+export const highlightCharacter = (
+  text: string,
+  index: number,
+  charactersAfter = 0
+) =>
+  `${text.slice(0, index)}➡️${text[index] ?? ""}⬅️${text.slice(
+    index + 1,
+    charactersAfter ? index + charactersAfter : undefined
+  )}`;
+
+export const fixNewLines = (text: string) => text.replaceAll("\r\n", "\n");

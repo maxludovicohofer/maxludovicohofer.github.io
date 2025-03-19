@@ -4,7 +4,7 @@ import type { PostCollectionKey } from "@integrations/content";
 import PostPreview from "@post/PostPreview.astro";
 import type { HTMLAttributes } from "astro/types";
 import type { CollectionEntry } from "astro:content";
-import { getDocumentId } from "@layouts/document/Document.astro";
+import { getEntryId } from "@layouts/document/Document.astro";
 import { makeHighlight } from "@integrations/tailwind";
 import { getSortedPosts } from "@integrations/astro-server";
 
@@ -27,7 +27,7 @@ const {
 } = Astro.props;
 
 const sortedEntries: CollectionEntry<PostCollectionKey>[] =
-  await getSortedPosts(Astro, collection, exclude);
+  await getSortedPosts(Astro, collection, { excluded: exclude });
 ---
 
 <ol
@@ -48,7 +48,7 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
         <Card
           tag="li"
           class={`content-list-card snap-center w-[80dvw] lg:w-full aspect-[16/10] min-h-[min(17rem,80dvh)] max-h-[min(18rem,80dvh)] animate-pulse ${highlightClass ?? ""}`}
-          data-slug={getDocumentId(entry)}
+          data-slug={getEntryId(entry)}
         >
           <PostPreview
             class="content-list-item invisible"
@@ -57,10 +57,18 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
                 importance === "content-list-highlight"
                   ? importance
                   : undefined,
+              ...(entry.collection === "projects"
+                ? {
+                    translateProps: { disable: true },
+                  }
+                : {}),
             }}
             entry={entry}
             {...(entry.collection === "projects"
-              ? { startHeading: "Design", short: true }
+              ? {
+                  startHeading: "Design",
+                  short: true,
+                }
               : {})}
           />
         </Card>

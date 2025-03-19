@@ -1,23 +1,46 @@
 ---
 import type { AstroComponentFactory } from "astro/runtime/server/index.js";
-import MarkdownMedia from "@document/MarkdownMedia.astro";
-import DocumentHidden from "@document/DocumentHidden.astro";
 import Link from "@ui/Link.astro";
 import type { HTMLTag } from "astro/types";
+import MarkdownMedia from "@markdown/MarkdownMedia.astro";
+import MarkdownH1 from "@components/ui/markdown/MarkdownH1.astro";
+import MarkdownH2 from "@components/ui/markdown/MarkdownH2.astro";
+import MarkdownH3 from "@components/ui/markdown/MarkdownH3.astro";
+import MarkdownH4 from "@components/ui/markdown/MarkdownH4.astro";
+import MarkdownP from "@components/ui/markdown/MarkdownP.astro";
+import MarkdownListItem from "@components/ui/markdown/MarkdownListItem.astro";
+import MarkdownSpan from "@components/ui/markdown/MarkdownSpan.astro";
 
 interface Props {
-  Content: AstroComponentFactory;
-  preview?: boolean;
+  Content?: AstroComponentFactory | undefined;
   components?: Partial<Record<HTMLTag, (args: any) => any>>;
+  noTranslation?: boolean;
 }
 
-const { Content, preview, components } = Astro.props;
+const { Content, components, noTranslation } = Astro.props;
 ---
 
-<Content
-  components={{
-    a: Link,
-    img: preview ? DocumentHidden : MarkdownMedia,
-    ...components,
-  }}
-/>
+{
+  Content ? (
+    <Content
+      components={{
+        a: Link,
+        img: MarkdownMedia,
+        ...(noTranslation
+          ? {}
+          : {
+              p: MarkdownP,
+              h1: MarkdownH1,
+              h2: MarkdownH2,
+              h3: MarkdownH3,
+              h4: MarkdownH4,
+              span: MarkdownSpan,
+              li: MarkdownListItem,
+            }),
+        ...components,
+      }}
+    />
+  ) : (
+    <slot />
+  )
+}

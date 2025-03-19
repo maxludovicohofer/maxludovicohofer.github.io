@@ -1,168 +1,128 @@
 ---
 import Text from "@components/ui/Text.astro";
-import Photo from "@images/profile-picture-straight.jpg";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
 import Link from "@components/ui/Link.astro";
-import DocumentMedia from "@layouts/document/DocumentMedia.astro";
-import { ADDRESS, PHONE_NUMBER } from "astro:env/server";
-import { capitalize } from "@integrations/text";
+import { PHONE_NUMBER } from "astro:env/server";
+import { capitalize, toTextList, uncapitalize } from "@integrations/text";
 import { getStaticPaths as getBasePaths } from "@pages/index.astro";
-import { addBaseToLink, getRole } from "@integrations/astro-server";
+import { getSiteLink } from "@integrations/astro-server";
 import {
-  getSpecializationSentence,
+  getAddress,
+  getMyName,
+  getSummary,
   getWorkFieldsSentence,
 } from "@integrations/docs";
-import { getTech } from "@components/TechList.astro";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { i18n, setDayjsLocale } from "@integrations/i18n-server";
+import ResumeKnowHow from "@components/docs/ResumeKnowHow.astro";
+import ResumePicture from "@components/docs/ResumePicture.astro";
+import { mail } from "@components/Profile.astro";
+import {
+  compactTechList,
+  getLanguages,
+  getTechList,
+} from "@integrations/content";
+import { groupBy } from "@integrations/array";
 
-export const getStaticPaths = getBasePaths;
+export const getStaticPaths = (...params: Parameters<typeof getBasePaths>) =>
+  getBasePaths({ excludedLocales: ["ja"], ...params[0] });
 
-const { role } = await getRole(Astro);
-
-const portfolioVersion = await addBaseToLink(Astro);
-const portfolioLink = `${import.meta.env.SITE}${portfolioVersion === "/" ? "" : portfolioVersion}`;
-
-const specializationSentence = await getSpecializationSentence(Astro);
+const portfolioLink = await getSiteLink(Astro);
 
 const workFieldsSentence = await getWorkFieldsSentence(Astro);
 
-const tech = await getTech(Astro);
+const techList = compactTechList(await getTechList(Astro));
 
+await setDayjsLocale(Astro);
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
+
+const t = i18n(Astro);
+const address = await getAddress(Astro);
+
+const portfolioSentence = await t("Portfolio");
+const relocateSentence = `${await t(" ")}${await t("(")}${await t("open to relocate")}${await t(")")}`;
+
+const languages = groupBy(await getLanguages(Astro), ({ level }) => level);
+
+const summary = await getSummary(Astro);
+
+const myName = await getMyName(Astro);
+
+// TODO PHASE 2 UPDATE LINKEDIN AUTOMATICALLY
 ---
 
 <DocumentPage>
-  <DocumentMedia
-    src={Photo}
-    alt="HIDDEN Portrait of Max Ludovico Hofer ASPECT 1/1 TOP"
-  />
-  <Text tag="h1">Max Ludovico Hofer</Text>
-  <Text
-    ><Text tag="span" format="branded">👜</Text> Portfolio:
-    <Link href={portfolioLink} />
-    <br /><Text tag="span" format="branded">📬</Text>
-    <Link href="mailto:hofermaxludovico@gmail.com" />
-    {
-      PHONE_NUMBER && (
-        <>
-          <br />
-          <Text tag="span" format="branded">
-            📞
-          </Text>
-          <Link href={`tel:${PHONE_NUMBER}`} />
-        </>
-      )
-    }
-    {
-      ADDRESS && (
-        <>
-          <br />
-          <Text tag="span" format="branded">
-            📍
-          </Text>
-          <Link href={`https://maps.google.com/?q=${ADDRESS}`}>{ADDRESS}</Link>{" "}
-          (open to relocate)
-        </>
-      )
-    }</Text
-  >
-  <Text tag="h2">Summary</Text>
-  <Text
-    >{capitalize(role.id)} experienced in leadership and software, {
-      specializationSentence
-    }.</Text
-  >
-  <Text tag="h2">Experience</Text>
-  <Text tag="h3">Game director for school projects</Text>
-  <Text tag="h4">BigRock Institute of Magic Technologies - 09/23 - 03/24</Text>
-  <ul>
-    <li>
-      Directed a published game, completed in 3 months by an average team of 18.
-      The game won People's Choice at "The Rookies Awards".
-    </li>
-    <li>
-      Designed and lead development of multiple prototypes for clients or game
-      jams, completed by teams of 5.
-    </li>
-  </ul>
-  <Text tag="h3">Project manager</Text>
-  <Text tag="h4">INattivo Soc. Cons. a.r.l. - 05/21 - 03/22</Text>
-  <ul>
-    <li>
-      Envisioned and lead development of innovative B2C and B2B solutions in the
-      credit brokerage sector.
-    </li>
-    <li>Worked as a DevOps full stack programmer.</li>
-  </ul>
-  <Text tag="h3">Technical lead</Text>
-  <Text tag="h4">Zulu Medical - 11/19 - 04/21</Text>
-  <ul>
-    <li>Managed R&D innovation in the telemedicine sector.</li>
-    <li>Worked as a scrum master, and desktop and full stack programmer.</li>
-  </ul>
-  <Text tag="h2">Education</Text>
-  <Text tag="h3">Technical art for videogames</Text>
-  <Text tag="h4">BigRock Institute of Magic Technologies - 09/23 - 03/24</Text>
-  <ul>
-    <li>
-      Studied the game development pipeline, using the latest industry
-      standards.
-    </li>
-    <li>Specialized in design and technical aspects.</li>
-  </ul>
-  <Text tag="h3">Software engineering (Not graduated)</Text>
-  <Text tag="h4">University of Padua - 2016 - 2019</Text>
-  <ul>
-    <li>
-      Learned physics, math for games, electronics, and advanced computer
-      science.
-    </li>
-  </ul>
-  <Text tag="h3">Computer science</Text>
-  <Text tag="h4">High school - 2011 - 2016</Text>
-  <ul>
-    <li>
-      Studied programming for videogames, desktop, web, data analysis, and
-      electronics, in most major languages, from assembly to python.
-    </li>
-    <li>
-      Won school programming competition and top 25% placement at national team
-      programming competition.
-    </li>
-  </ul>
+  <ResumePicture />
+  <h1>{myName.translated}</h1>
+  <p>{summary}</p>
+  <span>
+    <Text tag="span" format="branded" translateProps={{ disable: true }}
+      >👜</Text
+    >
+    {portfolioSentence} 🡢 <Link href={portfolioLink} />
+    <br />
+    <Text tag="span" format="branded" translateProps={{ disable: true }}
+      >📬</Text
+    >
+    <Link href={`mailto:${mail}`} />
+  </span>
+  {
+    PHONE_NUMBER && (
+      <>
+        <br />
+        <Text tag="span" format="branded" translateProps={{ disable: true }}>
+          📞
+        </Text>
+        <Link href={`tel:${PHONE_NUMBER}`} />
+      </>
+    )
+  }
+  <br />
+  <Text tag="span" format="branded" translateProps={{ disable: true }}>
+    📍
+  </Text>
+  <Link href={`https://maps.google.com/?q=${address.raw}`}
+    >{address.translated}</Link
+  >{relocateSentence}
+  <ResumeKnowHow />
   <Text tag="h2">Skills</Text>
-  <ul class="grid grid-cols-2">
+  <ul class="grid grid-cols-3">
     {
-      tech.map(({ data: { id, experience } }) => (
-        <li>
-          {id} ({dayjs.duration(experience).humanize()})
-        </li>
-      ))
+      techList.map(async ({ title, experience }) => {
+        const techItem = `${title}${await t(" ")}${await t("(")}${uncapitalize(experience!)}${await t(")")}`;
+
+        return <li class="pr-7 my-0.5">{techItem}</li>;
+      })
     }
   </ul>
-  <ul>
-    <li>
-      I made games for desktop, mobile, and online and local multiplayer. My
-      work spans the fields of {workFieldsSentence}.
-    </li>
-    <li>
-      I am fluent in English, German, and Italian. I'm at Japanese limited
-      professional (N3) level. I also understand French and Spanish at a basic
-      level.
-    </li>
+  <ul class="-mt-3">
+    <Text tag="li"
+      >Made games for desktop, mobile, and online and local multiplayer. {
+        workFieldsSentence
+      }</Text
+    >
+    <Text tag="li"
+      >{
+        Object.entries(languages).map(
+          async ([level, languages]) =>
+            `${await t(capitalize(level))}${await t(" ")}${await t("in")}${await t(" ")}${await t(toTextList(languages.map(({ id }) => id)))}${await t(".")}${await t(" ")}`
+        )
+      }</Text
+    >
   </ul>
   <Text tag="h3">Extra</Text>
   <ul>
-    <li>I keep up to date with the latest technology and research.</li>
-    <li>
-      I am very passionate about cinema and arts, especially cyberpunk and
-      cosmic horror.
-    </li>
-    <li>
-      I create electronic music and worked as mixing and mastering engineer.
-    </li>
+    <Text tag="li"
+      >Keeping up to date with the latest technology and research.</Text
+    >
+    <Text tag="li"
+      >Passionate about cinema and arts, especially cyberpunk and cosmic horror.</Text
+    >
+    <Text tag="li"
+      >Creating electronic music and worked as mixing and mastering engineer.</Text
+    >
   </ul>
 </DocumentPage>

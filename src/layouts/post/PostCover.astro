@@ -1,32 +1,26 @@
 ---
-import {
-  getTitle,
-  type getPostCover,
-  type PostCollectionKey,
-} from "@integrations/content";
+import { getTitle, type PostCollectionKey } from "@integrations/content";
 import type { CollectionEntry } from "astro:content";
 import PostMedia from "@post/PostMedia.astro";
 import type { ComponentProps } from "astro/types";
 
-interface Props extends Omit<ComponentProps<typeof PostMedia>, "src" | "alt"> {
-  cover: NonNullable<ReturnType<typeof getPostCover>>;
+interface Props extends Omit<ComponentProps<typeof PostMedia>, "alt"> {
   entry: CollectionEntry<PostCollectionKey>;
 }
 
-const { cover, entry, ...props } = Astro.props;
+const { entry, ...props } = Astro.props;
 
 export function getCoverAlt(post: CollectionEntry<PostCollectionKey>) {
   const title = getTitle(post)!;
 
   return post.collection === "projects"
-    ? `${title} gameplay.`
-    : `Graphic explanation of "${title}".`;
+    ? `${title} gameplay`
+    : `Graphic explanation of "${title}"`;
 }
 ---
 
 <PostMedia
   noMargin
-  src={cover}
   alt={`HIDDEN ${getCoverAlt(entry)}`}
   loading="eager"
   {...props}

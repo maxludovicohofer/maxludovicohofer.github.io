@@ -1,0 +1,24 @@
+---
+import DocumentMedia from "@document/DocumentMedia.astro";
+import Photo from "@pictures/profile-picture-straight.jpg";
+import FormalPhoto from "@pictures/resume-picture-formal.jpg";
+import { getMyName } from "@integrations/docs";
+import { getCurrentLocale } from "@integrations/i18n-special";
+import type { ComponentProps } from "astro/types";
+
+interface Props
+  extends Omit<ComponentProps<typeof DocumentMedia>, "src" | "alt"> {}
+
+const { ...props } = Astro.props;
+
+const myName = await getMyName(Astro);
+---
+
+<DocumentMedia
+  src={getCurrentLocale(Astro) === "ja" ? FormalPhoto : Photo}
+  alt={`HIDDEN Portrait of ${myName.rawButOrdered}`}
+  class="!h-32"
+  top
+  aspect="1/1"
+  {...props}
+/>

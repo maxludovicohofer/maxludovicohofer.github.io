@@ -4,37 +4,44 @@ import type { CollectionEntry } from "astro:content";
 import { render } from "astro:content";
 import Card from "@layouts/Card.astro";
 import type { ComponentProps, HTMLAttributes } from "astro/types";
-import CoverMedia from "@post/CoverMedia.astro";
+import PostCover from "@post/PostCover.astro";
 import Link from "@ui/Link.astro";
 import Button from "@ui/Button.astro";
 import Document from "@document/Document.astro";
-import { getLinkName } from "@integrations/text";
+import { getLinkName } from "@integrations/astro-server";
 import {
   getTitle,
   getPublishingDate,
-  getPostCover,
+  getCover,
   getCategory,
   getDownloadLinks,
   type PostCollectionKey,
 } from "@integrations/content";
+import { i18n } from "@integrations/i18n-server";
+import { isLocalizedEntry } from "@integrations/astro-server";
+import { capitalize } from "@integrations/text";
 
 interface Props extends HTMLAttributes<"div"> {
   entry?: CollectionEntry<PostCollectionKey>;
-  tag?: ComponentProps<typeof Document>["tag"];
   fullWidth?: boolean | undefined;
   fullWidthAfter?: boolean | undefined;
   inline?: boolean | undefined;
   container?: boolean;
+  contentProps?: ComponentProps<typeof Text>;
+  afterProps?: ComponentProps<typeof Text>;
+  titleProps?: ComponentProps<typeof Text>;
 }
 
 const {
   entry,
-  tag,
   fullWidth,
   fullWidthAfter,
   inline,
   container,
   class: className = "",
+  contentProps,
+  afterProps,
+  titleProps,
   ...props
 } = Astro.props;
 
@@ -44,22 +51,25 @@ const title = getTitle(entry);
 const publishingDate = getPublishingDate(
   entry,
   remarkPluginFrontmatter
-)?.format("D MMMM YYYY");
-const cover = getPostCover(entry);
+)?.format("LL");
+const cover = getCover(entry);
 const downloadLinks = getDownloadLinks(entry);
 const category = getCategory(entry);
-const action = category === "Published tool" ? "Try" : "Play";
+const t = i18n(Astro);
+const action = await t(category === "published tool" ? "try" : "play");
 
 const fullWidthClass = `w-full ${inline ? "" : "pb-24 lg:pb-10"}`;
 
 const widthClass = `${fullWidthClass} px-6 ${fullWidth ? "lg:px-24" : "max-w-[40rem] 2xl:max-w-[70rem]"}`;
 const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
+
+const noTranslation = isLocalizedEntry(entry);
 ---
 
 {
   cover && (
     <div class="lg:hidden fixed left-0 right-0 mx-auto">
-      <CoverMedia cover={cover} entry={entry!} class="h-[55vh] -mt-[39vh]" />
+      <PostCover src={cover} entry={entry!} class="h-[55vh] -mt-[39vh]" />
     </div>
   )
 }
@@ -78,7 +88,7 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
         {
           cover && (
             <div class="hidden lg:inline">
-              <CoverMedia cover={cover} entry={entry!} class="h-[40vh] mb-6" />
+              <PostCover src={cover} entry={entry!} class="h-[40vh] mb-6" />
             </div>
           )
         }
@@ -93,36 +103,50 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
             </Text>
           )
         }
-        <Text tag={container ? "h2" : "h1"}
-          ><slot name="title">{title}</slot></Text
+        <Text
+          tag={container ? "h2" : "h1"}
+          {...(noTranslation && !container
+            ? { translateProps: { disable: noTranslation } }
+            : {}) satisfies Partial<ComponentProps<typeof Text>>}
+          {...titleProps}><slot name="title">{title}</slot></Text
         >
-        {category && <Text subtitle>{category}</Text>}
+        {category && <Text subtitle>{capitalize(category)}</Text>}
         <Document
           inline
           entry={entry}
-          tag={tag}
+          tag={Content || container ? "div" : undefined}
           class={`${Content ? "is-entry" : ""} ${publishingDate ? "mt-4" : "mt-6"}`}
-          ><slot /></Document
+          {...(noTranslation
+            ? { entryProps: { noTranslation } }
+            : {}) satisfies Partial<ComponentProps<typeof Document>>}
+          {...contentProps}><slot /></Document
         >
         {
           downloadLinks && (
             <div class="flex flex-col items-center mt-8 mb-7">
               <Button
                 href={downloadLinks[0]}
-                importance="p"
                 linkClass={buttonWidthClass}
+                translateProps={{ disable: true }}
               >
-                <div class="group-hover:animate-pulse">{action}</div>
+                <div class="group-hover:animate-pulse">
+                  {capitalize(action)}
+                </div>
               </Button>
               {downloadLinks.length > 1 && (
                 <Text subtitle class={`-mb-4 w-full ${buttonWidthClass}`}>
                   Or
-                  {downloadLinks.slice(1).map((link, index, { length }) => (
-                    <>
-                      <Link href={link}>{getLinkName(link)}</Link>
-                      {index !== length - 1 ? ", " : ""}
-                    </>
-                  ))}
+                  {downloadLinks
+                    .slice(1)
+                    .map(async (link, index, { length }) => {
+                      const linkName = await getLinkName(Astro, link);
+                      return (
+                        <>
+                          <Link href={link}>{linkName}</Link>
+                          {index !== length - 1 ? ", " : ""}
+                        </>
+                      );
+                    })}
                 </Text>
               )}
             </div>
@@ -137,7 +161,11 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
         }
         {
           publishingDate && (
-            <Text subtitle class="mt-0.5 2xl:mt-3">
+            <Text
+              subtitle
+              class="mt-0.5 2xl:mt-3"
+              translateProps={{ disable: true }}
+            >
               {publishingDate}
             </Text>
           )
@@ -150,6 +178,7 @@ const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
           subtitle
           tag="div"
           class={fullWidthAfter ? fullWidthClass : widthClass}
+          {...afterProps}
         >
           <slot name="after" />
         </Text>

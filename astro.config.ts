@@ -1,10 +1,7 @@
 import { defineConfig, envField } from "astro/config";
 import { loadEnv } from "vite";
 import remarkMath from "remark-math";
-import {
-  remarkCreated,
-  remarkMinutesRead,
-} from "./src/integrations/remark.mts";
+import { remarkCreated, remarkMinutesRead } from "./src/integrations/remark";
 import rehypeKatex, { type Options as KatexOptions } from "rehype-katex";
 
 import tailwind from "@astrojs/tailwind";
@@ -13,16 +10,30 @@ import partytown from "@astrojs/partytown";
 
 import sentry from "@sentry/astro";
 import pdf from "astro-pdf";
-import { getPrintOptions } from "./src/integrations/pdf.mts";
-import { locales } from "./src/integrations/astro-config.mts";
+import { getPrintOptions } from "./src/integrations/pdf";
+import { locales } from "./src/integrations/astro-config";
+import node from "@astrojs/node";
 //! Removed spotlight because of slow performance/memory leak
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://maxludovicohofer.github.io",
+
   env: {
     schema: {
       SENTRY_AUTH_TOKEN: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      DEEPL_API_KEY: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      GOOGLE_CLIENT_SECRET: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      GOOGLE_BASE_CREDENTIALS: envField.string({
         context: "server",
         access: "secret",
       }),
@@ -31,13 +42,20 @@ export default defineConfig({
         access: "secret",
         optional: true,
       }),
-      ADDRESS: envField.string({
+      FULL_ADDRESS: envField.string({
         context: "server",
         access: "secret",
         optional: true,
       }),
+      BUILD_MODE: envField.enum({
+        context: "server",
+        access: "secret",
+        values: ["public", "local"],
+        default: "local",
+      }),
     },
   },
+
   integrations: [
     tailwind(),
     mdx(),
@@ -65,6 +83,7 @@ export default defineConfig({
       },
     }),
   ],
+
   markdown: {
     remarkPlugins: [remarkMinutesRead, remarkCreated, remarkMath],
     rehypePlugins: [
@@ -74,8 +93,16 @@ export default defineConfig({
       ],
     ],
   },
+
   i18n: {
     locales,
     defaultLocale: locales[0],
+  },
+
+  adapter: node({
+    mode: "standalone",
+  }),
+  build: {
+    client: "./",
   },
 });

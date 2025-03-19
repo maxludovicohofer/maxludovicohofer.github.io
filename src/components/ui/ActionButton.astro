@@ -11,6 +11,7 @@ interface Props
   cardButton?: boolean;
   inline?: boolean;
   importance?: Parameters<typeof getTextClass>[0] | undefined;
+  format?: Parameters<typeof getTextClass>[1] | undefined;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   inline,
   importance,
   "data-umami-event": umamiEvent,
+  format,
   ...props
 } = Astro.props;
 
@@ -26,9 +28,9 @@ const buttonProps:
   | ComponentProps<typeof CardButton>
   | ComponentProps<typeof SolidButton> = {
   type: "button",
-  class: `${className} cursor-pointer font-semibold duration-150 hover:shadow-lg active:shadow ${inline ? "" : "w-full"} ${getTextClass(importance ?? "button", "none")}`,
+  class: `${className} cursor-pointer font-semibold duration-150 hover:shadow-lg active:shadow ${inline ? "" : "w-full"} ${getTextClass(importance ?? "button", format ?? "none")}`,
   ...(umamiEvent
-    ? { "data-umami-event": formatUmamiEvent(Astro, umamiEvent) }
+    ? { "data-umami-event": await formatUmamiEvent(Astro, umamiEvent) }
     : {}),
   ...props,
 };

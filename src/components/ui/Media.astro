@@ -1,13 +1,23 @@
 ---
-import { Image, type ImgAttributes } from "astro:assets";
+import {
+  Image,
+  type ImgAttributes,
+  type LocalImageProps,
+  type RemoteImageProps,
+} from "astro:assets";
 import type { ComponentProps } from "astro/types";
 import Video from "./Video.astro";
 import { getAspectClass } from "@integrations/tailwind";
-import type { getPostCover } from "@integrations/content";
+import { i18n } from "@integrations/i18n-server";
+import { endDot } from "@integrations/text";
 
 interface Props
   extends Omit<ComponentProps<typeof Video>, "src" | "youTubeInfo"> {
-  src: NonNullable<ReturnType<typeof getPostCover>> | ImageMetadata | string;
+  src:
+    | string
+    | LocalImageProps["src"]
+    | RemoteImageProps["src"]
+    | ComponentProps<typeof Video>["youTubeInfo"];
   alt: string;
   aspect?: ComponentProps<typeof Video>["youTubeInfo"]["aspect"];
   loading?: ImgAttributes["loading"];
@@ -23,6 +33,8 @@ const {
   smoothLoading,
   ...props
 } = Astro.props;
+
+const t = i18n(Astro);
 
 export function isEmbed(video: typeof src): video is string {
   return (
@@ -59,8 +71,8 @@ const mediaClass = `${className} size-full ${asMarkdownImage?.format === "svg" ?
     />
   ) : (
     <Image
-      src={isMarkdownImage(src) ? src : typeof src === "string" ? src : src()}
-      alt={alt}
+      src={src}
+      alt={await t(endDot(alt))}
       class={`${mediaClass} ${aspect ? getAspectClass(aspect) : ""}`}
       loading={loading}
       {...(props as any)}

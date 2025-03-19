@@ -3,40 +3,66 @@ import Page from "@layouts/Page.astro";
 import Bento from "@layouts/Bento.astro";
 import Profile from "@components/Profile.astro";
 import TechPreview from "@components/TechPreview.astro";
-import Video from "@ui/Video.astro";
 import PostListPreview from "@post/PostListPreview.astro";
 import { getCollection } from "astro:content";
 import { makePath } from "@integrations/text";
-import { locales } from "@integrations/astro-config.mts";
+import { defaultLocale, locales } from "@integrations/astro-config";
+import { BUILD_MODE } from "astro:env/server";
+import Showreel from "@components/Showreel.astro";
 
-export const getStaticPaths = async () =>
-  (
-    await Promise.all(
-      [undefined, ...locales.slice(1)].map(async (locale) =>
-        [undefined, ...(await getCollection("roles")).slice(1)].map((role) => ({
-          params: {
-            path:
-              [locale, role && makePath(role.id)]
-                .filter((param) => !!param)
-                .join("/") || undefined,
-          },
-          props: {},
-        }))
-      )
+export const getStaticPaths = async (options?: {
+  allowedLocales?: (typeof locales)[number][];
+  excludedLocales?: (typeof locales)[number][];
+  allowedRoles?: string[];
+  excludedRoles?: string[];
+  localOnly?: boolean;
+}) => {
+  if (options?.localOnly && BUILD_MODE !== "local") return [];
+
+  let localePaths = [undefined, ...locales.slice(1)];
+  const roles = (await getCollection("roles")).map(({ id }) => makePath(id));
+  let rolePaths = [undefined, ...roles.slice(1)];
+
+  if (options?.allowedLocales || options?.excludedLocales) {
+    localePaths = localePaths.filter(
+      (locale) =>
+        (!options.allowedLocales ||
+          options.allowedLocales.includes(locale ?? defaultLocale)) &&
+        (!options.excludedLocales ||
+          !options.excludedLocales.includes(locale ?? defaultLocale))
+    );
+  }
+
+  if (options?.allowedRoles || options?.excludedRoles) {
+    rolePaths = rolePaths.filter(
+      (role) =>
+        (!options.allowedRoles ||
+          options.allowedRoles.includes(role ?? roles[0]!)) &&
+        (!options.excludedRoles ||
+          !options.excludedRoles.includes(role ?? roles[0]!))
+    );
+  }
+
+  return localePaths
+    .map((locale) =>
+      rolePaths.map((role) => ({
+        params: {
+          path:
+            [locale, role].filter((param) => !!param).join("/") || undefined,
+        },
+        props: {},
+      }))
     )
-  ).flat();
+    .flat();
+};
 
-// TODO PHASE 2 ADD LANG SELECTION ON TOP OF PAGE (TWO UNDERLINED LINKS WITH LANG ICONS). ADD i18n TO CONTENT, DAYJS, AND UPPERCASE, LOWERCASE, LOCALECOMPARISONS ECC...
 // TODO PHASE 2 UPDATE TAILWIND (ISSUES WITH OPACITY AND OBJECT COVER)
 ---
 
-<Page description="Max Hofer's portfolio and blog." homepage>
+<Page description="My portfolio and blog" homepage>
   <Bento>
     <Profile slot="1-small" />
-    <Video
-      slot="2-medium"
-      youTubeInfo={{ id: "m0KhK_J0LiQ", aspect: "16/10" }}
-    />
+    <Showreel slot="2-medium" />
     <PostListPreview
       slot="3-large"
       collection="projects"

@@ -3,41 +3,59 @@ import { ClientRouter } from "astro:transitions";
 import BackButton from "@ui/BackButton.astro";
 import ModalSlot from "./ModalSlot.astro";
 import { capitalize, getHumanPathSection } from "@integrations/text";
-import { getPrintOptions } from "@integrations/pdf.mts";
 import { getRole } from "@integrations/astro-server";
+import { endDotLocalized, i18n } from "@integrations/i18n-server";
+import LanguageSelection from "@components/ui/LanguageSelection.astro";
+import { getCurrentLocale } from "@integrations/i18n-special";
+import { getMyName } from "@integrations/docs";
 
 interface Props {
   title?: string | undefined;
   description?: string | undefined;
   backHref?: string;
   homepage?: boolean;
+  noTranslation?: boolean;
 }
 
-const { title, description, backHref, homepage } = Astro.props;
+const { title, description, backHref, homepage, noTranslation } = Astro.props;
+
+const t = i18n(Astro);
 
 const { role } = await getRole(Astro);
 
-const formattedTitle =
-  title ??
-  (homepage
-    ? (role.data.workFields?.[0] ?? role.id)
-    : getHumanPathSection(Astro.url.pathname));
+const myName = await getMyName(Astro);
 
-const completeTitle = `Max Hofer \\ ${capitalize(formattedTitle)}`;
+const formattedTitle = capitalize(
+  title ??
+    (homepage
+      ? (role.data.workFields?.[0] ?? role.id)
+      : getHumanPathSection(Astro.originPathname))
+);
+const completeTitle = `${myName.translatedShort} \\ ${noTranslation ? formattedTitle : await t(formattedTitle)}`;
+
+const formattedDescription = description
+  ? capitalize(description)
+  : formattedTitle;
+const completeDescription = await endDotLocalized(
+  noTranslation ? formattedDescription : await t(formattedDescription),
+  Astro
+);
+
+const hasBack = !homepage;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={getCurrentLocale(Astro)}>
   <head>
+    <slot name="head" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
     <title>{completeTitle}</title>
     <meta name="title" content={completeTitle} />
-    <meta
-      name="description"
-      content={description ? capitalize(description) : `${title}.`}
-    />
+    <meta name="description" content={completeDescription} />
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -52,9 +70,9 @@ const completeTitle = `Max Hofer \\ ${capitalize(formattedTitle)}`;
       data-website-id="4cbde35d-908e-44ec-b45c-9face0570614"></script>
   </head>
   <body class="bg-zinc-200 dark:bg-zinc-950"
-    ><slot />{
-      !homepage && !getPrintOptions(Astro.url.pathname) && (
-        <BackButton href={backHref} prefetch="load" />
+    ><slot /><LanguageSelection hasBack={hasBack} class="print:hidden" />{
+      hasBack && (
+        <BackButton href={backHref} prefetch="load" class="print:hidden" />
       )
     }
     <ModalSlot />

@@ -12,9 +12,10 @@ const { class: className = "", noAnimation, ...buttonProps } = Astro.props;
 
 <Button
   noRounding
-  fullHeight
+  fullSize
   class={`can-fullscreen ${className} flex items-center justify-center overflow-hidden !bg-transparent`}
   {...noAnimation ? { "data-no-animation": "" } : {}}
+  translateProps={{ disable: true }}
   {...buttonProps}><slot /></Button
 >
 <script>

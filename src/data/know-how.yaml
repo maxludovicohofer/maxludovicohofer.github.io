@@ -1,0 +1,222 @@
+- id: self study
+  start: 2024-03-01
+  school: true
+  translateId: true
+  projects:
+    - hexelied
+    - madreterra
+    - lolita
+  tech:
+    - Houdini
+    - Maya
+    - ZBrush
+    - Marvelous designer
+    - Substance designer
+    - Photoshop
+    - Illustrator
+    - Krita
+    - FL Studio
+  skills:
+    - job: game designer
+      tasks:
+        - designing and developing prototypes
+        - writing collaboration and marketing documents
+      achievements:
+        - designed prototypes to challenge my skills in core mechanics, while developing systems and prototype tooling
+        - studied rendering and performance optimization in depth
+
+    - job: game programmer
+      tasks:
+        - coding game features
+        - creating tools and systems
+      achievements:
+        - developing physics-based mechanics, systems and prototype tooling
+        - studied rendering and performance optimization in depth
+
+    - job: AI programmer
+      tasks:
+        - coding intuitive AI
+      achievements:
+        - developing AI systems and prototype tooling
+
+- id: INattivo Soc. Cons. a.r.l
+  start: 2021-05-01
+  end: 2022-03-01
+  team:
+    internal: 10
+    external: 2
+  reasonForLeaving: left company to pursue career change
+  tech:
+    - Python
+    - agile
+    - TDD
+    - SQL
+    - NoSQL
+    - AWS
+    - CI \ CD
+    - mobile
+    - full stack
+    - Excel
+    - Photoshop
+    - Illustrator
+  skills:
+    - job: project manager
+      tasks:
+        - managing budget and resources of technological projects
+        - communicating with the board to envision new projects
+      achievements:
+        - envisioned and lead development of innovative B2C and B2B solutions in the credit brokerage sector
+        - managed cross-functional team of 4 to replace old systems
+
+    - job: user experience designer
+      tasks:
+        - designing and developing UX for sales team and end clients
+        - adapting the UX to the workflow of the company
+        - showcasing the UI to the board
+        - iterating on the design with user feedback
+      achievements:
+        - iteratively designed UI/UX and customer journey with clients to maximize conversions
+        - worked with a mobile first approach to maximize intuitiveness
+
+    - job: full stack programmer
+      tasks:
+        - programming a realtime data-heavy web app
+        - managing servers and CI/CD
+      achievements:
+        - programmed a progressive web app using scrum and TDD
+        - developed an efficient optimization algorithm for salesmen scheduling, running on mobile phones
+
+- id: Zulu Medical
+  start: 2019-11-01
+  end: 2021-04-30
+  team:
+    internal: 6
+    external: 15
+  tech:
+    - C++
+    - C#
+    - Python
+    - agile
+    - SQL
+    - AWS
+    - CI \ CD
+    - mobile
+    - full stack
+    - Photoshop
+    - Illustrator
+  skills:
+    - job: technical lead
+      tasks:
+        - planning the company's technological development
+      achievements:
+        - developed technological strategy with business partners
+        - worked as desktop and full stack programmer
+
+    - job: scrum master
+      tasks:
+        - solving collaboration challenges
+        - fostering communication and meetings
+      achievements:
+        - contributed to the company's cultural shift from waterfall to agile
+        - scrum master for a team of 4 programmers
+
+    - job: programmer
+      tasks:
+        - developing realtime web apps
+        - developing desktop apps that communicate with medical devices
+        - managing servers and CI/CD
+      achievements:
+        - developed technological strategy with business partners
+        - worked as desktop and full stack programmer
+
+- id: BigRock Institute of Magic Technologies
+  start: 2023-09-01
+  end: 2024-02-28
+  school: true
+  projects:
+    - steelsilk-championship
+    - duchessas-world
+    - inversion
+    - act-by-belief
+    - ambulance
+  tech:
+    - HLSL
+    - AWS
+    - Excel
+    - Houdini
+    - Maya
+    - ZBrush
+    - Substance painter
+    - Photoshop
+    - Illustrator
+    - After effects
+    - Premiere
+    - Gaea
+    - FL Studio
+  skills:
+    - job: lead game designer
+      countAsWork: true
+      tasks:
+        - writing documents to communicate game specifications
+        - brainstorming and prototyping game ideas
+        - bringing colleagues together to solve problems
+      achievements:
+        - designed and directed a published indie game, completed in 3 months by a team of 20
+        - designed multiple prototypes for clients and game jams, following provided requirements
+
+    - job: game programmer
+      countAsWork: true
+      tasks:
+        - programming gameplay and core systems
+        - extending engine tools to better fit the project's use cases
+      achievements:
+        - programmed gameplay and systems for an award-winning published indie game
+        - programmed multiple prototypes, developing custom systems and tooling
+
+    - job: technical art
+      tasks:
+        - studied the game development and CG pipeline, using the latest industry standards
+      achievements:
+        - worked on several prototypes and one published game
+        - specialized in design and technical aspects
+
+- id: University of Padua
+  start: 2016-09-01
+  end: 2019-09-01
+  school: true
+  dropOut: true
+  translateId: true
+  tech:
+    - C++
+    - Python
+    - Java
+    - SQL
+  skills:
+    - job: software engineering
+      tasks:
+        - studied physics, math for games, electronics, and advanced computer science
+      achievements:
+        - greatly improved my fundamental math and engineering skills
+
+- id: high school
+  start: 2011-09-01
+  end: 2016-06-09
+  school: true
+  translateId: true
+  tech:
+    - Unreal Engine
+    - C++
+    - C
+    - C#
+    - Assembly x86
+    - Java
+    - SQL
+    - Excel
+  skills:
+    - job: computer science
+      tasks:
+        - studied base knowledge of computer science theory
+        - programmed platformer, fighting, and board games
+      achievements:
+        - won school programming competition and top 25% placement at national team programming competition
+        - developed videogames and desktop apps in most major languages

@@ -4,35 +4,51 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PostPage from "@post/PostPage.astro";
 import { makeDocumentPaths } from "@document/DocumentPage.astro";
-import { getDevelopmentTime } from "@integrations/content";
+import { getDevelopmentTime, getTeam } from "@integrations/content";
+import { setDayjsLocale } from "@integrations/i18n-server";
+import { applyMatch, matchRoles } from "@integrations/astro-server";
 
 export const getStaticPaths = makeDocumentPaths("projects");
 
-const { roles, tech, awards, team } = Astro.props.entry.data;
+const { roles, tech, awards } = Astro.props.entry.data;
 
-const soloDeveloped = !team || team === 1;
+const team = getTeam(Astro.props.entry);
+const soloDeveloped = !team || (team.internal === 1 && !team.external);
+const roleThreshold = 2;
+const displayedRoles = applyMatch(
+  await matchRoles(
+    Astro,
+    roles.map(({ role }) => ({ data: role, roles: [role] }))
+  ),
+  roleThreshold
+);
 
+await setDayjsLocale(Astro);
 dayjs.extend(relativeTime);
 const developmentDuration = getDevelopmentTime(Astro.props.entry)!.humanize();
 
 // TODO PHASE 2 USE HREF ON PAGE BACK, BUT GET HREF DINAMICALLY
 ---
 
-<PostPage {...Astro.props}
+<PostPage titleProps={{ translateProps: { disable: true } }} {...Astro.props}
   ><Fragment slot="footer"
     ><PostFooter
       value={soloDeveloped
         ? `Solo developed in ${developmentDuration}`
-        : `Made in ${developmentDuration} by an average team of ${team}`}
+        : `Made in ${developmentDuration} by a team of ${(team.internal ?? 0) + (team.external ?? 0)}`}
       >Development</PostFooter
     >{
       !soloDeveloped && (
         <>
           <br />
-          <PostFooter value={roles.map(({ id }) => id)}>Roles</PostFooter>
+          <PostFooter value={displayedRoles.map(({ id }) => id)}>
+            Roles
+          </PostFooter>
         </>
       )
-    }<br /><PostFooter value={tech.map(({ id }) => id)}>Tech</PostFooter>{
+    }
+    <br />
+    <PostFooter value={tech.map(({ id }) => id)}>Tech</PostFooter>{
       awards && awards.length !== 0 && (
         <>
           <br />

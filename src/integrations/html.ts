@@ -197,3 +197,20 @@ export const getPagePosition = (element?: HTMLElement) => {
 
   return { left: Math.max(left, 0), top: Math.max(top, 0) };
 };
+
+export const debounce = <F extends (...args: any) => any>(
+  func: F,
+  timeout = 300
+) => {
+  let timer: NodeJS.Timeout;
+
+  return (...args: Parameters<typeof func>) => {
+    clearTimeout(timer);
+
+    return new Promise<Awaited<ReturnType<F>>>((resolve) => {
+      timer = setTimeout(async () => {
+        resolve(await func.apply(this, args));
+      }, timeout);
+    });
+  };
+};

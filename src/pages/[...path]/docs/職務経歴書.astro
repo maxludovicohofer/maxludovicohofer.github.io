@@ -1,0 +1,251 @@
+---
+import DocumentPage from "@layouts/document/DocumentPage.astro";
+import { i18n, setDayjsLocale } from "@integrations/i18n-server";
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+import { getSummary, getSelfPRSentence, getMyName } from "@integrations/docs";
+import {
+  getCategory,
+  getKnowHow,
+  getDevelopmentTime,
+  getTeam,
+  getTechList,
+  compactTechList,
+} from "@integrations/content";
+import Link from "@components/ui/Link.astro";
+import {
+  getMatchedPosts,
+  getSiteLink,
+  matchRoles,
+} from "@integrations/astro-server";
+import { applyMatch } from "@integrations/astro-server";
+import { getEntryId } from "@layouts/document/Document.astro";
+import ShokumuEntry from "@components/docs/ShokumuEntry.astro";
+import { getStaticPaths as getBasePaths } from "./履歴書.astro";
+import { capitalize } from "@integrations/text";
+
+export const getStaticPaths = getBasePaths;
+
+interface Props {
+  company?: string;
+  full?: boolean;
+}
+
+const { company, full } = Astro.props;
+
+await setDayjsLocale(Astro);
+dayjs.extend(duration);
+
+const today = dayjs();
+
+const t = i18n(Astro);
+
+const myName = await getMyName(Astro);
+const summary = await getSummary(Astro);
+
+const { experience } = await getKnowHow(Astro, { allProjects: full });
+
+const portfolioSentence = await t("Portfolio");
+const portfolioLink = await getSiteLink(Astro);
+
+// Number from 0-10 that filters out weak matches
+const projectMatchThreshold = 1;
+const durationThreshold = dayjs.duration({ days: 4 });
+
+const experienceTechThreshold = 1;
+const techList = await getTechList(Astro);
+
+const selfPRSentence = await getSelfPRSentence(Astro, company);
+
+// TODO PHASE 2 SHOULD ALSO GET ALL SKILLS OF EXPERIENCES, AND REMOVE EXPERIENCES IF IRRELEVANT
+// TODO PHASE 2 SHOULD HAVE A MAX NUMBER OF ENTRIES AND SELECT BASED ON THAT MAX NUMBER
+// TODO PHASE 2 SPECIFY TIME GAPS AS "SELF STUDY FOR CAREER CHANGE"
+---
+
+<DocumentPage
+  class="print:prose-headings:text-inherit"
+  pageProps={{ noTranslation: true }}
+>
+  <h1 class="!text-2xl text-center">職務経歴書</h1>
+  <div class="text-right mt-6">
+    {today.format("ll")}
+    <br />
+    {myName.translated}（氏名）
+  </div>
+  <h2>■職務要約</h2>
+  <p>
+    {summary}
+    <br />
+    <br />
+    {portfolioSentence} 🡢 <Link href={portfolioLink} />
+  </p>
+  <h2>■職務経歴詳細</h2>
+  {
+    experience &&
+      Object.values(experience).map(
+        async ({
+          id,
+          translateId,
+          school,
+          countAsExperience,
+          start,
+          end,
+          skill: { job, tasks, achievements },
+          projects,
+          tech,
+          team,
+        }) => {
+          const organization = `${translateId ? await t(capitalize(id)) : capitalize(id)}${id.startsWith("self ") ? "" : `${await t("(")}${countAsExperience && school ? await t("school") : "正社員として勤務"}${await t(")")}`}`;
+
+          const experienceTech =
+            tech &&
+            compactTechList(
+              await getTechList(Astro, experienceTechThreshold, {
+                entries: tech,
+              })
+            );
+
+          const matchedProjects =
+            projects &&
+            (await getMatchedPosts(Astro, "projects", {
+              entries: projects.map(({ id, ...project }) => ({
+                // Fixes project IDs
+                id: `${id}/${id}`,
+                ...project,
+              })),
+              noDrafts: true,
+            }));
+
+          const relevantProjects =
+            matchedProjects &&
+            applyMatch(matchedProjects, projectMatchThreshold)
+              .filter((project) =>
+                full ? true : getDevelopmentTime(project)! > durationThreshold
+              )
+              .slice(0, full ? undefined : 2)
+              .sort((a, b) =>
+                b.publishingDate.isAfter(a.publishingDate) ? 1 : -1
+              );
+
+          return (
+            <>
+              <h3>{organization}</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th class="text-center w-56">範囲</th>
+                    <th class="text-center min-w-80">業務内容</th>
+                    <th class="text-center w-56">環境</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {relevantProjects?.length ? (
+                    relevantProjects.map(async (project) => {
+                      const {
+                        collection,
+                        id,
+                        publishingDate,
+                        data: { roles, tech, awards },
+                      } = project;
+
+                      const matchedRoles = applyMatch(
+                        await matchRoles(
+                          Astro,
+                          roles.map((roleInfo) => ({
+                            data: roleInfo,
+                            roles: [roleInfo.role],
+                          }))
+                        )
+                      );
+
+                      const projectTech = compactTechList(
+                        await getTechList(Astro, undefined, {
+                          entries: tech,
+                        })
+                      );
+
+                      return (
+                        <ShokumuEntry
+                          start={publishingDate.subtract(
+                            //! Dayjs has issue with weeks at the moment, so must transform in ms
+                            getDevelopmentTime(project)!.asMilliseconds()
+                          )}
+                          end={publishingDate}
+                          roles={matchedRoles.map(({ role }) => role)}
+                          responsibilities={matchedRoles.flatMap(
+                            ({ tasks }) => tasks
+                          )}
+                          points={[
+                            ...(awards?.map((award) => `Won ${award}`) ?? []),
+                            ...matchedRoles.flatMap(
+                              ({ achievements }) => achievements
+                            ),
+                          ]}
+                          link={await getSiteLink(
+                            Astro,
+                            `${collection}/${getEntryId(id)}`
+                          )}
+                          tech={projectTech}
+                          projectType={getCategory(project)}
+                          team={getTeam(project)!}
+                          full={full}
+                        />
+                      );
+                    })
+                  ) : (
+                    <ShokumuEntry
+                      start={start}
+                      end={end}
+                      roles={[job]}
+                      responsibilities={tasks}
+                      points={achievements}
+                      tech={experienceTech!}
+                      team={team!}
+                    />
+                  )}
+                </tbody>
+              </table>
+            </>
+          );
+        }
+      )
+  }
+  <h2>■テクニカルスキル</h2>
+  <table>
+    <thead>
+      <tr>
+        <th class="text-center w-0 min-w-36">種類</th>
+        <th class="text-center w-0 text-nowrap">使用期間</th>
+        <th class="text-center">機能</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        techList.map(({ title, experience, items }) => (
+          <tr>
+            <td>{title}</td>
+            <td class="text-right">
+              {experience || (
+                <ol class="list-none ps-0 my-0">
+                  {items.map(({ experience }) => (
+                    <li class="ps-0 my-0">{experience}</li>
+                  ))}
+                </ol>
+              )}
+            </td>
+            <td>
+              <ol class="list-none ps-0 my-0">
+                {items.map(({ title }) => (
+                  <li class="ps-0 my-0">{title}</li>
+                ))}
+              </ol>
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+  <h2>■自己PR</h2>
+  <p>{selfPRSentence}</p>
+  <p class="text-right">以上</p>
+</DocumentPage>

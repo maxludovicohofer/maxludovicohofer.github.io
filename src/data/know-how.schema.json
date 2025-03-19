@@ -1,0 +1,11 @@
+{
+  "$ref": "#/definitions/know-how",
+  "definitions": {
+    "know-how": {
+      "type": "array",
+      "items": {
+        "$ref": "../../.astro/collections/know-how.schema.json"
+      }
+    }
+  }
+}

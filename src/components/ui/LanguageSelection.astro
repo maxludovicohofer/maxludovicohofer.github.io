@@ -1,0 +1,85 @@
+---
+import { locales } from "@integrations/astro-config";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Button from "./Button.astro";
+import type { HTMLAttributes } from "astro/types";
+import LanguageButton from "./LanguageButton.astro";
+import { getPathWithoutLocale } from "@integrations/i18n";
+import { getCurrentLocale, localeInfo } from "@integrations/i18n-special";
+
+interface Props extends HTMLAttributes<"div"> {
+  hasBack?: boolean;
+}
+
+const { class: className = "", hasBack, ...props } = Astro.props;
+
+const currentLocale = getCurrentLocale(Astro);
+const translateLocales = locales.filter((locale) => locale !== currentLocale);
+const multipleChoice = translateLocales.length > 1;
+---
+
+<div
+  class={`${className} absolute ${hasBack ? "top-6 lg:top-12 right-6" : "top-4 right-4"} size-full flex flex-col items-end pointer-events-none`}
+  {...props}
+>
+  <div class="locale-select-surface grid gap-4 pointer-events-auto">
+    {multipleChoice && <LanguageButton />}
+    {
+      translateLocales.map((locale) => (
+        <Button
+          outline
+          rounded
+          linkClass="locale-anchor"
+          class={`locale-link ${multipleChoice ? "hidden" : ""} !text-xs`}
+          href={getRelativeLocaleUrl(
+            locale,
+            getPathWithoutLocale(Astro.url.pathname)
+          )}
+          noBase
+          translateProps={{
+            disable: true,
+          }}
+          prefetch="hover"
+        >
+          {localeInfo[locale].languageName}
+        </Button>
+      ))
+    }
+  </div>
+</div>
+<script>
+  import { getLocaleFromPath, getPathWithoutLocale } from "@integrations/i18n";
+  import { getPreferredLocale, addLocaleToLink } from "@integrations/i18n";
+  import { getPrintOptions } from "@integrations/pdf";
+  import { standardizePath } from "@integrations/text";
+
+  document.addEventListener("astro:page-load", () => {
+    const path = window.location.pathname;
+
+    // Printable documents should keep their language
+    if (!getPrintOptions(path)) {
+      const preferredLocale = getPreferredLocale();
+      if (preferredLocale !== getLocaleFromPath(path)) {
+        window.location.replace(
+          standardizePath(
+            addLocaleToLink(getPathWithoutLocale(path), preferredLocale)
+          )
+        );
+      }
+    }
+
+    document
+      .querySelectorAll<HTMLAnchorElement>(".locale-anchor")
+      .forEach((link) =>
+        link.addEventListener("click", (e) => {
+          localStorage.setItem(
+            "language",
+            getLocaleFromPath(new URL(link.href).pathname)
+          );
+
+          e.preventDefault();
+          window.location.replace(link.href);
+        })
+      );
+  });
+</script>

@@ -1,23 +1,21 @@
 ---
-import type { CollectionEntry } from "astro:content";
-import { render } from "astro:content";
-import DocumentContent from "@document/DocumentContent.astro";
-import Text from "@components/ui/Text.astro";
 import type { ComponentProps } from "astro/types";
-import type { DocumentCollectionKey } from "@document/Document.astro";
+import MarkdownHidden from "@markdown/MarkdownHidden.astro";
+import MarkdownMedia from "@markdown/MarkdownMedia.astro";
+import DocumentText from "@layouts/document/DocumentText.astro";
 
-interface Props extends ComponentProps<typeof Text> {
-  entry?: CollectionEntry<DocumentCollectionKey> | undefined;
-  contentProps?: Omit<ComponentProps<typeof DocumentContent>, "Content">;
+interface Props extends ComponentProps<typeof DocumentText> {
+  preview?: boolean;
 }
 
-const { entry, contentProps, ...props } = Astro.props;
-
-const { Content } = entry ? await render(entry) : {};
+const { class: className = "", preview, entryProps, ...props } = Astro.props;
 ---
 
-<Text tag="div" markdown={!!Content} {...props}
-  >{
-    Content ? <DocumentContent Content={Content} {...contentProps} /> : <slot />
-  }</Text
+<DocumentText
+  class={`${className} ${props.entry ? "prose-li:list-[kannada]" : ""}`}
+  entryProps={{
+    components: { img: preview ? MarkdownHidden : MarkdownMedia },
+    ...entryProps,
+  }}
+  {...props}><slot /></DocumentText
 >

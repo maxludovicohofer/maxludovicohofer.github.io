@@ -1,0 +1,121 @@
+---
+import Link from "@components/ui/Link.astro";
+import Text from "@components/ui/Text.astro";
+import { capitalize, toTextList, endDot } from "@integrations/text";
+import type dayjs from "dayjs";
+import { getFormattedDates } from "./ResumeKnowHow.astro";
+import { i18n } from "@integrations/i18n-server";
+import type { ReferenceDataEntry } from "astro:content";
+import type { ComponentProps } from "astro/types";
+import type { compactTechList } from "@integrations/content";
+
+interface Props {
+  start: dayjs.Dayjs;
+  end?: dayjs.Dayjs | undefined;
+  roles: ReferenceDataEntry<"roles">[];
+  responsibilities: string[];
+  points: string[];
+  link?: ComponentProps<typeof Link>["href"] | undefined;
+  tech: ReturnType<typeof compactTechList>;
+  projectType?: string | undefined;
+  team: { internal: number; external: number };
+  full?: boolean | undefined;
+}
+
+const {
+  start,
+  end,
+  roles,
+  responsibilities,
+  points,
+  link,
+  tech,
+  projectType,
+  team,
+  full,
+} = Astro.props;
+
+const t = i18n(Astro);
+
+const dates = await getFormattedDates(Astro, start, end);
+const type = projectType && (await t(capitalize(projectType)));
+const soloDeveloped = !team || (team.internal === 1 && !team.external);
+const scaleText = soloDeveloped
+  ? await t("Solo")
+  : `${team.internal + team.external}名${team.external ? `（うち外注スタッフ${team.external}名）` : ""}`;
+
+const rolesSentence = `${await t(endDot(capitalize(toTextList(roles.slice(0, 2).map(({ id }) => id)))))}`;
+const responsibilitiesSentence = full
+  ? undefined
+  : `${await t(endDot(capitalize(toTextList(responsibilities.slice(0, full ? undefined : 2)))))}`;
+const displayedPoints = full ? points : points.slice(0, 2);
+const linkText = await t("Read development");
+---
+
+<tr
+  class={displayedPoints.length + (full ? responsibilities.length : 0) > 13
+    ? "print:!break-inside-auto"
+    : ""}
+>
+  <td>
+    <h5>[期間]</h5>
+    {dates.join("～")}
+    <br />
+    <br />
+    <h5>[規模]</h5>
+    {scaleText}
+    {
+      type && (
+        <>
+          <br />
+          <br />
+          <h5>[プロジェクト]</h5>
+          {type}
+        </>
+      )
+    }
+  </td>
+  <td>
+    <h5 class="inline">[役職]</h5>
+    {rolesSentence}
+    <br />
+    <h5 class={full ? "" : "inline"}>[職責]</h5>
+    {
+      full ? (
+        <ul class="mt-0">
+          {responsibilities.map((responsibility) => (
+            <Text tag="li">{endDot(capitalize(responsibility))}</Text>
+          ))}
+        </ul>
+      ) : (
+        <>
+          {responsibilitiesSentence}
+          <br />
+          <br />
+        </>
+      )
+    }
+    <h5>[ポイント]</h5>
+    <ul class="mt-0 last:-mb-2">
+      {
+        displayedPoints.map((point) => (
+          <Text tag="li">{endDot(capitalize(point))}</Text>
+        ))
+      }
+    </ul>
+    {
+      link && (
+        <div class="-mt-4 text-right">
+          <Link class="!text-wrap" href={link}>
+            {linkText}
+          </Link>
+        </div>
+      )
+    }
+  </td>
+  <td>
+    <ul class="list-none ps-0 my-0">
+      {tech.map(({ title }) => <li class="my-0 ps-0">{title}</li>)}
+    </ul>
+  </td>
+</tr>

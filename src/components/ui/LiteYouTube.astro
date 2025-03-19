@@ -1,4 +1,5 @@
 ---
+import { getCurrentLocale } from "@integrations/i18n-special";
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"iframe"> {
@@ -7,6 +8,7 @@ interface Props extends HTMLAttributes<"iframe"> {
   autoplay?: boolean;
   mute?: boolean;
   loop?: boolean;
+  showSubtitles?: boolean;
 }
 
 const {
@@ -15,6 +17,7 @@ const {
   autoplay = true,
   mute = true,
   loop = true,
+  showSubtitles = false,
   ...props
 } = Astro.props;
 
@@ -23,12 +26,14 @@ const noControls = Astro.props.class?.includes("pointer-events-none");
 const boolToInt = (value?: boolean) => (value ? 1 : 0);
 
 import "node_modules/lite-youtube-embed/src/lite-yt-embed.css";
+
+const locale = getCurrentLocale(Astro);
 ---
 
 <lite-youtube
   js-api
   videoid={id}
-  params={`playlist=${id}&color=${color}&autoplay=${boolToInt(autoplay)}&mute=${boolToInt(mute)}&loop=${boolToInt(loop)}&controls=${boolToInt(!noControls)}&disablekb=${boolToInt(noControls)}`}
+  params={`playlist=${id}&color=${color}&autoplay=${boolToInt(autoplay)}&mute=${boolToInt(mute)}&loop=${boolToInt(loop)}&controls=${boolToInt(!noControls)}&disablekb=${boolToInt(noControls)}&hl=${locale}&cc_lang_pref=${locale}&cc_load_policy=${boolToInt(showSubtitles)}`}
   {...props}></lite-youtube>
 <style>
   /* Fix default styles */

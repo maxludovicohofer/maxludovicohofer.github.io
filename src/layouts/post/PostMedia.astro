@@ -5,6 +5,7 @@ import Dissolving from "@ui/Dissolving.astro";
 import Media from "@ui/Media.astro";
 import Text from "@ui/Text.astro";
 import Link from "@ui/Link.astro";
+import { endDot } from "@integrations/text";
 
 interface Props extends ComponentProps<typeof Media> {
   noMargin?: boolean;
@@ -26,7 +27,7 @@ const [descriptiveAlt, hiddenAlt] = alt.split("HIDDEN ");
 const realAlt = (hiddenAlt || descriptiveAlt!).trim();
 
 // Check for links in alt
-const textAlt = [realAlt];
+const textAlt = [endDot(realAlt)];
 const links: ComponentProps<typeof Link>[] = [];
 
 const altLinks = textAlt
@@ -66,7 +67,9 @@ const stringAlt = textAlt.reduce(
 );
 ---
 
-<Dissolving class={`${marginClass} ${noMargin ? "" : "mt-12 mb-11"}`}
+<Dissolving
+  class={`${marginClass} ${noMargin ? "" : "mt-12 mb-11"}`}
+  translate="no"
   ><Fullscreenable
     class={`${className} rounded-3xl ${descriptiveAlt ? "-mb-2" : ""}`}
     data-umami-event={umamiEvent ?? stringAlt}
@@ -76,16 +79,16 @@ const stringAlt = textAlt.reduce(
       <Text subtitle class="not-prose mt-4 -mb-4">
         {textAlt.length === 1
           ? textAlt[0]
-          : textAlt.map((text, index) => (
-              <>
-                {index !== 0 && (
-                  <Link {...links[index - 1]}>{links[index - 1]!.slot}</Link>
-                )}
-                <Text subtitle tag="span">
+          : textAlt.map((text, index) => {
+              const { slot, ...props } = index !== 0 ? links[index - 1]! : {};
+
+              return (
+                <>
+                  {slot && <Link {...props}>{slot}</Link>}
                   {text}
-                </Text>
-              </>
-            ))}
+                </>
+              );
+            })}
       </Text>
     )
   }</Dissolving

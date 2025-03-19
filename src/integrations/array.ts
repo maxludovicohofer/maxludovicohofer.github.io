@@ -42,18 +42,21 @@ export const getCombinations = <T>(array: T[]) => {
 export const swap = <T>(array: T[], indexA: number, indexB: number) =>
   ([array[indexA], array[indexB]] = [array[indexB]!, array[indexA]!]);
 
-export const indexOfMax = <T>(array: T[]) => {
-  const length = array.length;
+export const indexOfMax = (array: number[]) =>
+  array.length
+    ? array.reduce(
+        (maxIndex, item, index) => (item > array[maxIndex]! ? index : maxIndex),
+        0
+      )
+    : undefined;
 
-  if (!length) return;
-
-  let maxIndex = 0;
-
-  for (let index = 1; index < length; index++)
-    if (array[index]! > array[maxIndex]!) maxIndex = index;
-
-  return maxIndex;
-};
+export const indexOfMin = (array: number[]) =>
+  array.length
+    ? array.reduce(
+        (minIndex, item, index) => (item < array[minIndex]! ? index : minIndex),
+        0
+      )
+    : undefined;
 
 export const renameObjectKeys = <O extends Record<string | number, any>>(
   obj: O,

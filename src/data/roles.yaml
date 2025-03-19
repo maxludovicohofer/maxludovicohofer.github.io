@@ -1,7 +1,14 @@
 # Format id as written in middle of a sentence
 - id: technical game designer
   matches:
+    - technical gameplay designer
     - game director
+    - level designer
+    - combat designer
+    - mechanics
+    - programmer
+    - lead
+    - AI
   notMatches:
     - sound designer
   workFields:
@@ -13,9 +20,21 @@
     - combat
     - AI
     - systems
+
 - id: AI programmer
   matches:
     - AI tool programmer
+    - AI lead
+    - technical team lead
   workFields:
     - AI programming
     - decision trees
+
+- id: system programmer
+  matches:
+    - systems programmer
+    - tool programmer
+    - engine programmer
+    - tech lead
+  workFields:
+    - engine programming
