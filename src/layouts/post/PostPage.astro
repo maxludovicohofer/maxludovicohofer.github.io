@@ -11,16 +11,21 @@ interface Props extends Omit<ComponentProps<typeof Post>, "entry"> {
   entry: NonNullable<ComponentProps<typeof Post>["entry"]>;
 }
 
-const { entry } = Astro.props;
+const { entry, contentProps } = Astro.props;
 
-const noTranslation = isLocalizedEntry(entry);
+const noTranslation = contentProps?.isLocalized ?? isLocalizedEntry(entry);
 ---
 
 <Page
   title={getTitle(entry)}
   description={getDescription(entry, 2)}
-  noTranslation={noTranslation}
-  ><Post fullWidthAfter {...Astro.props}
+  noTitleTranslation={Astro.props.titleProps?.translateProps?.disable ??
+    noTranslation}
+  noDescriptionTranslation={noTranslation}
+  ><Post
+    fullWidthAfter
+    contentProps={{ isLocalized: noTranslation, ...contentProps }}
+    {...Astro.props}
     ><slot name="footer" slot="footer" />
     <PostList
       slot="after"

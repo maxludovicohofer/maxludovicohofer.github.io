@@ -33,6 +33,7 @@ interface Props extends HTMLAttributes<"div"> {
   hideDate?: boolean;
   container?: boolean;
   contentProps?: ComponentProps<typeof Text>;
+  isLocalized?: boolean;
 }
 
 const {
@@ -48,6 +49,7 @@ const {
   readMoreClass = "",
   hideDate,
   contentProps,
+  isLocalized,
   ...props
 } = Astro.props;
 
@@ -96,7 +98,7 @@ const subtitle = [
   publishingDate,
 ].filter((part) => !!part);
 
-const noTranslation = isLocalizedEntry(entry);
+const noTranslation = isLocalized ?? isLocalizedEntry(entry);
 
 const finalReadMoreText = await t(
   readMoreText ??

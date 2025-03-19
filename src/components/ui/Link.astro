@@ -12,6 +12,7 @@ import { addBaseToLink, getLinkName } from "@integrations/astro-server";
 import type { AstroGlobal } from "astro";
 import type { HTMLAttributes } from "astro/types";
 import { i18n } from "@integrations/i18n-server";
+import { defaultLocale } from "@integrations/astro-config";
 
 interface Props extends HTMLAttributes<"a"> {
   noStyle?: boolean;
@@ -127,7 +128,9 @@ const isExternal =
   ><slot
     >{
       hrefString
-        ? (await getLinkName(Astro, hrefString, true)).toLocaleLowerCase()
+        ? (await getLinkName(Astro, hrefString, true)).toLocaleLowerCase(
+            defaultLocale
+          )
         : await t("Link")
     }</slot
   ></a

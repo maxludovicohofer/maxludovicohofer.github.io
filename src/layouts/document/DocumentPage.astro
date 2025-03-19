@@ -73,13 +73,14 @@ export const makeDocumentPaths =
 
 const { entry, pageProps, class: className = "", ...props } = Astro.props;
 
-const noTranslation = isLocalizedEntry(entry);
+const noTranslation = Astro.props.isLocalized ?? isLocalizedEntry(entry);
 ---
 
 <Page
   title={getTitle(entry)}
   description={getDescription(entry, 2)}
-  noTranslation={noTranslation}
+  noTitleTranslation={noTranslation}
+  noDescriptionTranslation={noTranslation}
   {...pageProps}
   ><Document
     markdown

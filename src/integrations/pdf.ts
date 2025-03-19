@@ -1,6 +1,6 @@
 import type { PagesFunction } from "astro-pdf";
 import { getPathSections } from "./text";
-import { getShortName, myName } from "./astro-config";
+import { defaultLocale, getShortName, myName } from "./astro-config";
 
 export const getPrintOptions: PagesFunction = (pathname) => {
   const sections = getPathSections(pathname);
@@ -10,7 +10,7 @@ export const getPrintOptions: PagesFunction = (pathname) => {
     const [docs] = sections.splice(indexOfDocs, 1);
     const fileName = `${getShortName([myName.surname, myName.name])
       .join("-")
-      .toLocaleLowerCase()}-${sections.pop()}`;
+      .toLocaleLowerCase(defaultLocale)}-${sections.pop()}`;
 
     // Order folders by specific-first
     sections.reverse();

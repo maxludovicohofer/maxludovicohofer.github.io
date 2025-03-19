@@ -76,10 +76,7 @@ const relocateSentence = `${await t("Open to relocate")}`;
 const myName = await getMyName(Astro);
 ---
 
-<DocumentPage
-  class="print:prose-headings:text-inherit"
-  pageProps={{ noTranslation: true }}
->
+<DocumentPage class="print:prose-headings:text-inherit" isLocalized>
   <div class="grid grid-flow-col grid-cols-3 gap-4">
     <div class="col-span-2">
       <div class="flex items-baseline justify-between">

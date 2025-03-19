@@ -4,24 +4,39 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import PostPage from "@post/PostPage.astro";
 import { makeDocumentPaths } from "@document/DocumentPage.astro";
-import { getDevelopmentTime, getTeam } from "@integrations/content";
-import { setDayjsLocale } from "@integrations/i18n-server";
+import {
+  compactTechList,
+  getDevelopmentTime,
+  getTeam,
+  getTechList,
+} from "@integrations/content";
+import { i18n, setDayjsLocale } from "@integrations/i18n-server";
 import { applyMatch, matchRoles } from "@integrations/astro-server";
 
 export const getStaticPaths = makeDocumentPaths("projects");
 
 const { roles, tech, awards } = Astro.props.entry.data;
 
+const t = i18n(Astro);
+
 const team = getTeam(Astro.props.entry);
 const soloDeveloped = !team || (team.internal === 1 && !team.external);
 const roleThreshold = 2;
-const displayedRoles = applyMatch(
-  await matchRoles(
-    Astro,
-    roles.map(({ role }) => ({ data: role, roles: [role] }))
-  ),
-  roleThreshold
+const roleList = await Promise.all(
+  applyMatch(
+    await matchRoles(
+      Astro,
+      roles.map(({ role }) => ({ data: role, roles: [role] }))
+    ),
+    roleThreshold
+  ).map(async ({ id }) => await t(id))
 );
+
+const techList = compactTechList(
+  await getTechList(Astro, undefined, {
+    entries: tech,
+  })
+).map(({ title }) => title);
 
 await setDayjsLocale(Astro);
 dayjs.extend(relativeTime);
@@ -41,14 +56,16 @@ const developmentDuration = getDevelopmentTime(Astro.props.entry)!.humanize();
       !soloDeveloped && (
         <>
           <br />
-          <PostFooter value={displayedRoles.map(({ id }) => id)}>
+          <PostFooter value={roleList} translateProps={{ disable: true }}>
             Roles
           </PostFooter>
         </>
       )
     }
     <br />
-    <PostFooter value={tech.map(({ id }) => id)}>Tech</PostFooter>{
+    <PostFooter value={techList} translateProps={{ disable: true }}
+      >Tech</PostFooter
+    >{
       awards && awards.length !== 0 && (
         <>
           <br />

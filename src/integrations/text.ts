@@ -1,17 +1,34 @@
+import type { AstroGlobal } from "astro";
 import { defaultLocale } from "./astro-config";
-import { localeInfo } from "./i18n-special";
+import { getCurrentLocale, localeInfo } from "./i18n-special";
 
-export const toSentenceCase = (text: string) =>
-  text.charAt(0).toLocaleUpperCase() + text.slice(1).toLocaleLowerCase();
+export const toSentenceCase = (text: string, astro?: AstroGlobal) => {
+  const locale = astro ? getCurrentLocale(astro) : defaultLocale;
 
-export const toTitleCase = (text: string) =>
-  text.split(" ").map(capitalize).join(" ");
+  return `${text.charAt(0).toLocaleUpperCase(locale)}${text
+    .slice(1)
+    .toLocaleLowerCase(locale)}`;
+};
 
-export const capitalize = (text: string) =>
-  text.charAt(0).toLocaleUpperCase() + text.slice(1);
+export const toTitleCase = (text: string, astro?: AstroGlobal) =>
+  text
+    .split(" ")
+    .map((text) => capitalize(text, astro))
+    .join(" ");
 
-export const uncapitalize = (text: string) =>
-  text.charAt(0).toLocaleLowerCase() + text.slice(1);
+export const capitalize = (text: string, astro?: AstroGlobal) =>
+  `${text
+    .charAt(0)
+    .toLocaleUpperCase(
+      astro ? getCurrentLocale(astro) : defaultLocale
+    )}${text.slice(1)}`;
+
+export const uncapitalize = (text: string, astro?: AstroGlobal) =>
+  `${text
+    .charAt(0)
+    .toLocaleLowerCase(
+      astro ? getCurrentLocale(astro) : defaultLocale
+    )}${text.slice(1)}`;
 
 export const endDelimiter = (text: string, delimiter = ".") =>
   new RegExp(`[${localeInfo[defaultLocale].delimiters}]$`).test(text)
@@ -78,7 +95,7 @@ export const getHumanPathSection = (
     .split(".")[0]!;
 
 export const makePath = (humanName: string) =>
-  humanName.toLocaleLowerCase().replaceAll(" ", "-");
+  humanName.toLocaleLowerCase(defaultLocale).replaceAll(" ", "-");
 
 export const toTextList = (text: string[]) => {
   const length = text.length;

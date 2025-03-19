@@ -15,9 +15,10 @@ interface Props
   extends ComponentProps<typeof DocumentText>,
     ComponentProps<typeof PostText> {
   inline?: boolean;
+  isLocalized?: boolean;
 }
 
-const { inline, entryProps, ...props } = Astro.props;
+const { inline, isLocalized, entryProps, ...props } = Astro.props;
 
 // prettier-ignore
 export type DocumentCollectionKey = Extract<CollectionKey, "docs" | PostCollectionKey>;
@@ -75,7 +76,7 @@ export const getDescription = <C extends CollectionKey>(
   return description;
 };
 
-const noTranslation = isLocalizedEntry(props.entry);
+const noTranslation = isLocalized ?? isLocalizedEntry(props.entry);
 
 const textProps: Props = {
   ...props,

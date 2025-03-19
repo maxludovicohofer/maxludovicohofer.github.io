@@ -14,10 +14,18 @@ interface Props {
   description?: string | undefined;
   backHref?: string;
   homepage?: boolean;
-  noTranslation?: boolean;
+  noTitleTranslation?: boolean;
+  noDescriptionTranslation?: boolean;
 }
 
-const { title, description, backHref, homepage, noTranslation } = Astro.props;
+const {
+  title,
+  description,
+  backHref,
+  homepage,
+  noTitleTranslation,
+  noDescriptionTranslation,
+} = Astro.props;
 
 const t = i18n(Astro);
 
@@ -31,13 +39,15 @@ const formattedTitle = capitalize(
       ? (role.data.workFields?.[0] ?? role.id)
       : getHumanPathSection(Astro.originPathname))
 );
-const completeTitle = `${myName.translatedShort} \\ ${noTranslation ? formattedTitle : await t(formattedTitle)}`;
+const completeTitle = `${myName.translatedShort} \\ ${noTitleTranslation ? formattedTitle : await t(formattedTitle)}`;
 
 const formattedDescription = description
   ? capitalize(description)
   : formattedTitle;
 const completeDescription = await endDelimiterLocalized(
-  noTranslation ? formattedDescription : await t(formattedDescription),
+  noDescriptionTranslation
+    ? formattedDescription
+    : await t(formattedDescription),
   Astro
 );
 

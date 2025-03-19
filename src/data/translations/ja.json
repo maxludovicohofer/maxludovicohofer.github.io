@@ -7,60 +7,8 @@
     "translation": "（移転を前提とした募集）",
     "api": "deepl"
   },
-  "Unreal Engine": {
-    "translation": "アンリアル・エンジン",
-    "api": "deepl"
-  },
   ",": {
     "translation": "、",
-    "api": "deepl"
-  },
-  "Substance designer": {
-    "translation": "Substanceデザイナー",
-    "api": "deepl"
-  },
-  "Unity": {
-    "translation": "Unity",
-    "api": "deepl"
-  },
-  "Maya": {
-    "translation": "マヤ",
-    "api": "deepl"
-  },
-  "Photoshop": {
-    "translation": "フォトショップ",
-    "api": "deepl"
-  },
-  "Illustrator": {
-    "translation": "イラストレーター",
-    "api": "deepl"
-  },
-  "Gaea": {
-    "translation": "ガイア",
-    "api": "deepl"
-  },
-  "FL Studio": {
-    "translation": "FLスタジオ",
-    "api": "deepl"
-  },
-  "Blueprints": {
-    "translation": "設計図",
-    "api": "deepl"
-  },
-  "C#": {
-    "translation": "C#",
-    "api": "deepl"
-  },
-  "C++": {
-    "translation": "C++",
-    "api": "deepl"
-  },
-  "HLSL": {
-    "translation": "HLSL",
-    "api": "deepl"
-  },
-  "Houdini": {
-    "translation": "フーディニー",
     "api": "deepl"
   },
   "Self study": {
@@ -119,46 +67,6 @@
     "translation": "履歴書",
     "api": "deepl"
   },
-  "Agile": {
-    "translation": "アジャイル",
-    "api": "deepl"
-  },
-  "TDD": {
-    "translation": "時差駆動",
-    "api": "deepl"
-  },
-  "ECS": {
-    "translation": "ECS",
-    "api": "deepl"
-  },
-  "SQL": {
-    "translation": "SQL",
-    "api": "deepl"
-  },
-  "Python": {
-    "translation": "Python",
-    "api": "deepl"
-  },
-  "Java": {
-    "translation": "ジャワ",
-    "api": "deepl"
-  },
-  "AWS": {
-    "translation": "AWS",
-    "api": "deepl"
-  },
-  "CI \\ CD": {
-    "translation": "CIとCD",
-    "api": "deepl"
-  },
-  "Mobile": {
-    "translation": "モバイル",
-    "api": "deepl"
-  },
-  "Full stack": {
-    "translation": "フルスタック",
-    "api": "deepl"
-  },
   "Game programmer (school)": {
     "translation": "ゲームプログラマー（学校）",
     "api": "deepl"
@@ -211,30 +119,6 @@
     "translation": "試作品",
     "api": "deepl"
   },
-  "Steelsilk Championship": {
-    "translation": "スチールシルク選手権",
-    "api": "deepl"
-  },
-  "Madreterra": {
-    "translation": "大地の母",
-    "api": "deepl"
-  },
-  "Inversion": {
-    "translation": "反転",
-    "api": "deepl"
-  },
-  "Lolita": {
-    "translation": "ロリータ",
-    "api": "deepl"
-  },
-  "Duchessa&#39;s World": {
-    "translation": "公爵夫人の世界",
-    "api": "deepl"
-  },
-  "Ambulance": {
-    "translation": "救急車",
-    "api": "deepl"
-  },
   "Design": {
     "translation": "デザイン",
     "api": "deepl"
@@ -249,10 +133,6 @@
   },
   "Roles": {
     "translation": "役割",
-    "api": "deepl"
-  },
-  "Duchessa's World": {
-    "translation": "公爵夫人の世界",
     "api": "deepl"
   },
   "Awards": {
@@ -741,14 +621,6 @@
   },
   "Showreel": {
     "translation": "ショーリール",
-    "api": "deepl"
-  },
-  "AI programmer showreel": {
-    "translation": "AIプログラマーのショーリール",
-    "api": "deepl"
-  },
-  "System programmer showreel": {
-    "translation": "システムプログラマーのショーリール",
     "api": "deepl"
   },
   "Paese 31038 near Venice, Italy": {
@@ -1391,16 +1263,8 @@
     "translation": "ゲームAIは、特定の動作を定めるチェックリストであることが多いです。デバッグは簡単かもしれませんが、これは流動的な思考プロセスに従うものではなく、ロボットのような動作になりがちです。これらの命令型決定ツリーを再利用することは、AIとゲームプレイを結びつけるため、困難を伴う可能性があります。Act By Beliefでは、<a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150 break-all\" href=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Maslow hierarchy (Act by)\" data-umami-event-url=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\">マズローの欲求階層説に着想を得た</a>宣言型メソッドにより、これらの問題に対処することを目指しています。このメソッドは、パフォーマンスに優れ、使いやすく、デバッグも簡単です。",
     "api": "deepl"
   },
-  "Game designer, team lead, gameplay programmer, UI designer, technical artist": {
-    "translation": "ゲームデザイナー、チームリーダー、ゲームプレイプログラマー、UIデザイナー、テクニカルアーティスト",
-    "api": "deepl"
-  },
   "Made in 3日 by a team of 5": {
     "translation": "5人のチームで3日で作成",
-    "api": "deepl"
-  },
-  "Unity, Maya, Illustrator, Photoshop, FL Studio": {
-    "translation": "Unity、Maya、Illustrator、Photoshop、FL Studio",
     "api": "deepl"
   },
   "The task is clear: take patients to the hospital before their situation becomes critical. Simple enough, if not for your unruly vehicle": {
@@ -1435,16 +1299,8 @@
     "translation": "このプロトタイプの最大の課題は、プレイヤーが車両をちょうどよい程度にコントロールできるようにすることでした。私はこの取り組みを過小評価しており、コアとなるゲームプレイに集中するために、いくつかの機能を削除しなければなりませんでした。",
     "api": "deepl"
   },
-  "Game designer, team lead, gameplay programmer, technical artist": {
-    "translation": "ゲームデザイナー、チームリーダー、ゲームプレイプログラマー、テクニカルアーティスト",
-    "api": "deepl"
-  },
   "Made in 5日 by a team of 5": {
     "translation": "5人のチームで5日間で作成",
-    "api": "deepl"
-  },
-  "Unreal Engine, Maya, Illustrator, Photoshop, FL Studio, mobile": {
-    "translation": "Unreal Engine、Maya、Illustrator、Photoshop、FL Studio、モバイル",
     "api": "deepl"
   },
   "Duchessa is an easily scared humanoid cat, and when she hears a loud noise, her instincts tell her to run away as fast as she can. Her eyes, one yellow and one blue, allow her to access another dimension: the cat realm": {
@@ -1475,10 +1331,6 @@
     "translation": "限られた時間とシンプルなデザインという制約から、私はGDDを、チームが確認できるように各プラットフォームの動作を黒板に描くことに置き換え、ブレインストーミングとデザインを組み合わせました。また、デバイスの互換性を最大限に高めるために、グラフィックの忠実度は最小限に抑えました。",
     "api": "deepl"
   },
-  "Unreal Engine, Illustrator, Photoshop, C++": {
-    "translation": "Unreal Engine、Illustrator、Photoshop、C++",
-    "api": "deepl"
-  },
   "In the galactic empire of Madreterra, humanity evolved to avoid conflict. Instead, political discussion is resolved through covert planetary wars waged by the richest, marketed as land reclamation efforts": {
     "translation": "マッドレテラ銀河帝国では、人類は争いを避けるために進化しました。その代わり、政治的な議論は、富裕層による秘密裏の惑星戦争によって解決され、それは土地の再生努力として売り出されています。",
     "api": "deepl"
@@ -1507,16 +1359,8 @@
     "translation": "Unreal Engineとそのマーケットプレイスパッケージは重力の切り替えをサポートしていなかったため、私は動的な重力を一からコーディングする必要がありました。最終的には、プレイヤーの入力に基づいてプレイヤーが望む目的地を推測し、軌道と重力を動的に調整してスムーズで直感的なジャンプを実行するように進化しました。また、コードベースとアセットを再利用可能なドラッグ＆ドロップコンポーネントに整理したことで、プロトタイプの作成速度が10倍に向上し、現在もその状態が続いています。",
     "api": "deepl"
   },
-  "Game designer, gameplay programmer, AI programmer, tool programmer, UI designer": {
-    "translation": "ゲームデザイナー、ゲームプレイプログラマー、AIプログラマー、ツールプログラマー、UIデザイナー",
-    "api": "deepl"
-  },
   "Made in 7日 by a team of 2": {
     "translation": "2人のチームで7日間で作りました。",
-    "api": "deepl"
-  },
-  "Unreal Engine, Illustrator, Photoshop, FL Studio": {
-    "translation": "Unreal Engine、Illustrator、Photoshop、FL Studio",
     "api": "deepl"
   },
   "A little girl living in a village is unjustly punished by her patriarchal community and runs away into the nearby woods. As she wanders through the never ending trees, she will be protected by a dark mysterious entity, that grants her the power to turn into the fantastical animals she encounters along the way": {
@@ -1547,20 +1391,12 @@
     "translation": "AIへの対処をできるだけ直感的に行うために、人間の知覚を模倣する動作をプログラミングしました。これは、コード内の数値が直感的に動作するかどうかを確認するために多くのやり取りが必要だったため、最大の開発課題となりました。そのため、コードを簡単に微調整できるようにするのに労力を費やし、反復を大幅にスピードアップしました。",
     "api": "deepl"
   },
-  "Lead game designer, technical team lead, sound lead, camera programmer, UI/UX lead, technical animation lead, gameplay programmer": {
-    "translation": "リードゲームデザイナー、テクニカルチームリード、サウンドリード、カメラプログラマー、UI/UXリード、テクニカルアニメーションリード、ゲームプレイプログラマー",
-    "api": "deepl"
-  },
   "Rookie awards 2024 &quot;Game of the year - People&#39;s choice&quot;": {
     "translation": "新人賞 2024年「年間ゲーム大賞 - ユーザー投票部門」",
     "api": "deepl"
   },
   "Made in 3ヶ月 by a team of 24": {
     "translation": "24人のチームで3ヶ月で制作",
-    "api": "deepl"
-  },
-  "Unreal Engine, Maya, ZBrush, FL Studio, Excel": {
-    "translation": "Unreal Engine、Maya、ZBrush、FL Studio、Excel",
     "api": "deepl"
   },
   "In the year 2980, a much anticipated robotics competition takes place: a team of miniature remote-control arachnoids fend off the creepy crawlies of three different biomes. Before each round, enemies receive a random bonus, and each spider has to choose a bonus for itself": {
@@ -1611,14 +1447,6 @@
     "translation": "素晴らしい<a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150 break-all\" href=\"https://www.artstation.com/wdys\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Francesco Chiari (Steelsilk)\" data-umami-event-url=\"https://www.artstation.com/wdys\">フランチェスコ・キアリ</a>によるコンセプトアート",
     "api": "deepl"
   },
-  "Lead game designer, team lead, gameplay programmer": {
-    "translation": "リードゲームデザイナー、チームリーダー、ゲームプレイプログラマー",
-    "api": "deepl"
-  },
-  "Unreal Engine, Maya, Photoshop, FL Studio": {
-    "translation": "Unreal Engine、Maya、Photoshop、FL Studio",
-    "api": "deepl"
-  },
   "A spaceship robot's job is to ensure the vessel's integrity. When a critical failure occurs near a black hole, you and a colleague in the opposite part of the ship are woken up to fix the issue": {
     "translation": "宇宙船ロボットの仕事は、船の完全性を確保することです。ブラックホールの近くで重大な故障が発生すると、あなたと船の反対側にいる同僚は、その問題を修正するために起こされます。",
     "api": "deepl"
@@ -1645,30 +1473,6 @@
   },
   "Since the inversion action occurs after both robots settle on a selection, only the last character’s effect is shown. In hindsight, both effects should have been visible, ideally transitioning the game to co-op": {
     "translation": "反転動作は両方のロボットが選択肢に落ち着いた後に発生するため、最後の文字の効果のみが表示されます。後から考えると、両方の効果が表示されるべきであり、理想的にはゲームが協力プレイに移行するはずです。",
-    "api": "deepl"
-  },
-  "Team lead, gameplay programmer, technical artist": {
-    "translation": "チームリーダー、ゲームプレイプログラマー、テクニカルアーティスト",
-    "api": "deepl"
-  },
-  "AI programmer, tool programmer, gameplay programmer": {
-    "translation": "AIプログラマー、ツールプログラマー、ゲームプレイプログラマー",
-    "api": "deepl"
-  },
-  "Technical team lead, lead game designer, sound lead, camera programmer, UI/UX lead, technical animation lead, gameplay programmer": {
-    "translation": "テクニカルチームリーダー、リードゲームデザイナー、サウンドリーダー、カメラプログラマー、UI/UXリーダー、テクニカルアニメーションリーダー、ゲームプレイプログラマー",
-    "api": "deepl"
-  },
-  "Team lead, lead game designer, gameplay programmer": {
-    "translation": "チームリーダー、リードゲームデザイナー、ゲームプレイプログラマー",
-    "api": "deepl"
-  },
-  "Team lead, gameplay programmer": {
-    "translation": "チームリーダー、ゲームプレイプログラマー",
-    "api": "deepl"
-  },
-  "Tool programmer, gameplay programmer, AI programmer": {
-    "translation": "ツールプログラマー、ゲームプレイプログラマー、AIプログラマー",
     "api": "deepl"
   },
   "*\"What is fun?\"* is probably the most important question for a game designer. Many incredible designers have elaborated their own answers, which now define their style": {
@@ -1789,6 +1593,66 @@
   },
   "See all thoughts": {
     "translation": "すべての考えを見る",
+    "api": "deepl"
+  },
+  "tool programmer": {
+    "translation": "ツールプログラマー",
+    "api": "deepl"
+  },
+  "game designer": {
+    "translation": "ゲームデザイナー",
+    "api": "deepl"
+  },
+  "team lead": {
+    "translation": "チームリーダー",
+    "api": "deepl"
+  },
+  "gameplay programmer": {
+    "translation": "ゲームプログラマー",
+    "api": "deepl"
+  },
+  "UI designer": {
+    "translation": "ユーザーインターフェースデザイナー",
+    "api": "deepl"
+  },
+  "technical artist": {
+    "translation": "テクニカルアーティスト",
+    "api": "deepl"
+  },
+  "lead game designer": {
+    "translation": "リードゲームデザイナー",
+    "api": "deepl"
+  },
+  "technical team lead": {
+    "translation": "ぎじゅつぶたいちょう",
+    "api": "deepl"
+  },
+  "sound lead": {
+    "translation": "健全なリード",
+    "api": "deepl"
+  },
+  "camera programmer": {
+    "translation": "カメラプログラマー",
+    "api": "deepl"
+  },
+  "UI/UX lead": {
+    "translation": "UI/UX リーダー",
+    "api": "deepl"
+  },
+  "technical animation lead": {
+    "translation": "テクニカルアニメーションリーダー",
+    "api": "deepl"
+  },
+  "Agile": {
+    "translation": "アジャイル",
+    "api": "deepl"
+  },
+  "Mobile": {
+    "translation": "モバイル",
+    "api": "deepl"
+  },
+  "Full stack": {
+    "translation": "フルスタック",
     "api": "deepl"
   }
 }
