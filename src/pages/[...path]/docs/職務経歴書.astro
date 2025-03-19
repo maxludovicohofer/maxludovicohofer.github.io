@@ -63,7 +63,7 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
 ---
 
 <DocumentPage
-  class="prose-headings:print:text-inherit"
+  class={`print:prose-headings:text-inherit ${full ? "first:print:prose-tr:break-inside-auto print:prose-tr:first:break-inside-auto" : ""}`}
   pageProps={{ noTranslation: true }}
 >
   <h1 class="!text-2xl text-center">職務経歴書</h1>
