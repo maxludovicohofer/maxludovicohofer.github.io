@@ -40,9 +40,9 @@ if (showreel.role.id !== role.id) {
   const videoId = await setYouTubeVideo(
     Astro,
     "src/assets/videos/Showreel.mp4",
+    showreel.categoryId,
     videoTitle,
-    videoDescription,
-    showreel.categoryId
+    videoDescription
   );
 
   if (videoId) {

@@ -2302,5 +2302,9 @@
   "Team lead and gameplay programmer.": {
     "translation": "チームリーダー兼ゲームプレイプログラマー。",
     "api": "deepl"
+  },
+  "System programmer": {
+    "translation": "システムプログラマー",
+    "api": "deepl"
   }
 }

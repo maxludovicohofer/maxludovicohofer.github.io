@@ -171,12 +171,12 @@ const fitAndQuantizeSubtitles = <V extends VideoData>(
           0.5
         );
 
-        if (!addedDuration) {
+        if (import.meta.env.PROD) {
           console.warn(
-            `Only ${captionCount} captions (${availableTimeFromEnd}s) for "${videoEntry.toString()}" (${entryDuration}s). Artificially increasing each caption by ${durationIncrease}s.`
+            addedDuration
+              ? `+ ${durationIncrease}s.`
+              : `Only ${captionCount} captions (${availableTimeFromEnd}s) for "${videoEntry.toString()}" (${entryDuration}s). Artificially increasing each caption by ${durationIncrease}s.`
           );
-        } else {
-          console.warn(`+ ${durationIncrease}s.`);
         }
 
         return fitAndQuantizeSubtitles(
@@ -324,8 +324,8 @@ export const getARandomShowreel = async (astro: AstroGlobal) => {
 export const setYouTubeVideo = async (
   astro: AstroGlobal,
   videoPath: string,
-  title: string,
   categoryId: string,
+  title: string,
   description: string,
   videoId?: string
 ) => {
@@ -343,8 +343,8 @@ export const setYouTubeVideo = async (
           part: ["snippet", "status"],
           requestBody: {
             snippet: {
-              title,
               categoryId,
+              title,
               description,
               defaultLanguage: defaultLocale,
             },

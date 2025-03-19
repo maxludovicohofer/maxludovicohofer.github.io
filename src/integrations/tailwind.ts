@@ -138,7 +138,7 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
       .filter((text) => !!text)
       .join(" ")} ${
       formats.base
-    } prose-pre:rounded-3xl prose-pre:whitespace-pre-wrap prose-pre:text-xs sm:prose-pre:text-base 2xl:prose-pre:text-2xl print:prose-ul:break-inside-avoid-page has-[li:nth-child(6)]:print:prose-ul:break-inside-auto print:prose-ol:break-inside-avoid-page has-[li:nth-child(6)]:print:prose-ol:break-inside-auto prose-th:border-2 prose-th:py-2 prose-th:px-4 prose-td:border-2 prose-td:px-4 print:prose-tr:break-inside-avoid-page first:page:print:prose-tr:break-inside-auto`;
+    } prose-pre:rounded-3xl prose-pre:whitespace-pre-wrap prose-pre:text-xs sm:prose-pre:text-base 2xl:prose-pre:text-2xl print:prose-ul:break-inside-avoid-page has-[li:nth-child(6)]:print:prose-ul:break-inside-auto print:prose-ol:break-inside-avoid-page has-[li:nth-child(6)]:print:prose-ol:break-inside-auto prose-th:border-2 prose-th:py-2 prose-th:px-4 prose-td:border-2 prose-td:px-4 [&:not(:first)]:page:print:prose-tr:break-inside-avoid-page`;
   }
 
   return `${elements[size].classes ?? ""} ${
