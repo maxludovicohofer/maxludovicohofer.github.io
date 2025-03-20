@@ -143,24 +143,29 @@ export const matchRoles = async <D>(
 
   const makeMatcher = (text: string) => new RegExp(`\\b${text}\\b`, "i");
 
-  const matchedRoles = [role, ...(role.data.matches ?? [])].map(({ id }) => {
-    const words = id.split(" ");
-    const wordsNum = words.length;
+  const matchedRoles = [role, ...(role.data.matches ?? [])].map(
+    ({ id }, index) => {
+      const words = id.split(" ");
+      const wordsNum = words.length;
 
-    const matchers = getCombinations(words).flatMap((combination) => ({
-      matcher: makeMatcher(combination.join(" ")),
-      //? More specific match (more words) is better
-      weight: Math.sqrt(combination.length),
-    }));
+      const matchers = getCombinations(words).flatMap((combination) => ({
+        matcher: makeMatcher(combination.join(" ")),
+        //? More specific match (more words) is better
+        weight: Math.sqrt(combination.length),
+      }));
 
-    if (wordsNum > 1) {
-      //? If has specialization, prioritize specialization over profession (ex: game designer, game over designer)
-      const firstWordIndex = matchers.length - wordsNum;
-      swap(matchers, firstWordIndex, firstWordIndex + 1);
-    }
+      // Perfect match trumps all
+      if (!index) matchers[0]!.weight = words.length;
 
-    return matchers;
-  });
+      if (wordsNum > 1) {
+        //? If has specialization, prioritize specialization over profession (ex: game designer, game over designer)
+        const firstWordIndex = matchers.length - wordsNum;
+        swap(matchers, firstWordIndex, firstWordIndex + 1);
+      }
+
+      return matchers;
+    },
+  );
 
   const notMatchers = role.data.notMatches?.map(({ id }) => makeMatcher(id));
 

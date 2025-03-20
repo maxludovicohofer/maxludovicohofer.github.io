@@ -174,9 +174,13 @@ export const callApi = async <R>(
       ).data;
     } catch (e) {
       const error = e as GoogleError;
-      if (error.errors?.[0].reason === "quotaExceeded") {
-        console.info("Google: quota exceeded");
-        return null;
+      switch (error.errors?.[0].reason) {
+        case "quotaExceeded":
+          console.error("Google: quota exceeded");
+          return null;
+        case "uploadLimitExceeded":
+          console.error("Google: upload limit exceeded");
+          return null;
       }
 
       throw new Error(`Google: the API returned an error: ${error.message}`);

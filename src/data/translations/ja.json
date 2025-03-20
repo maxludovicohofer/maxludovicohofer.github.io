@@ -1758,5 +1758,41 @@
   "System programming": {
     "translation": "システムプログラミング",
     "api": "deepl"
+  },
+  "I am deeply inspired by {}'s innovative quest design and would be honored to contribute to your team": {
+    "translation": "私は、{}の革新的なクエストデザインに深く感銘を受け、貴チームに貢献できることを光栄に思います。",
+    "api": "deepl"
+  },
+  "I am deeply inspired by {}'s innovative level design and would be honored to contribute to your team": {
+    "translation": "私は、{}の革新的なレベルデザインに深く感銘を受け、貴チームに貢献できることを光栄に思います。",
+    "api": "deepl"
+  },
+  "I am deeply inspired by {}'s innovative game programming and would be honored to contribute to your team": {
+    "translation": "私は、{}の革新的なゲームプログラミングに深く感銘を受けており、貴チームに貢献できることを光栄に思います。",
+    "api": "deepl"
+  },
+  "I am deeply inspired by {}'s innovative system programming and would be honored to contribute to your team": {
+    "translation": "私は、貴社の革新的なシステムプログラミングに深く感銘を受け、貴社のチームに貢献できることを光栄に思います。",
+    "api": "deepl"
+  },
+  "Sound-reacting visuals": {
+    "translation": "音に反応する視覚効果",
+    "api": "deepl"
+  },
+  "Scripting": {
+    "translation": "スクリプト",
+    "api": "deepl"
+  },
+  "Gameplay programmer and team lead": {
+    "translation": "ゲームプレイプログラマー兼チームリーダー",
+    "api": "deepl"
+  },
+  "Programming the game's mechanics and procedural systems and managing communication and tasks of the team": {
+    "translation": "ゲームのメカニクスと手続き型システムのプログラミング、およびチームのコミュニケーションとタスクの管理",
+    "api": "deepl"
+  },
+  "Designing and developing AI agents following a custom model and creating a performant AI tool": {
+    "translation": "カスタムモデルに従ってAIエージェントを設計・開発し、高性能なAIツールを作成する",
+    "api": "deepl"
   }
 }
