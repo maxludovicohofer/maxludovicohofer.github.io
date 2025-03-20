@@ -1,33 +1,33 @@
 ---
-import DocumentPage from "@layouts/document/DocumentPage.astro";
-import { i18n, setDayjsLocale } from "@integrations/i18n-server";
-import dayjs from "dayjs";
-import duration from "dayjs/plugin/duration";
-import { getSummary, getSelfPRSentence, getMyName } from "@integrations/docs";
-import {
-  getCategory,
-  getKnowHow,
-  getDevelopmentTime,
-  getTeam,
-  getTechList,
-  compactTechList,
-} from "@integrations/content";
+import ShokumuEntry from "@components/docs/ShokumuEntry.astro";
 import Link from "@components/ui/Link.astro";
 import {
+  applyMatch,
   getMatchedPosts,
   getSiteLink,
   matchRoles,
 } from "@integrations/astro-server";
-import { applyMatch } from "@integrations/astro-server";
-import { getEntryId } from "@layouts/document/Document.astro";
-import ShokumuEntry from "@components/docs/ShokumuEntry.astro";
-import { getStaticPaths as getBasePaths } from "./履歴書.astro";
+import {
+  compactTechList,
+  getCategory,
+  getDevelopmentTime,
+  getKnowHow,
+  getTeam,
+  getTechList,
+} from "@integrations/content";
+import { getMyName, getSelfPRSentence, getSummary } from "@integrations/docs";
+import { i18n, setDayjsLocale } from "@integrations/i18n-server";
 import { capitalize } from "@integrations/text";
+import { getEntryId } from "@layouts/document/Document.astro";
+import DocumentPage from "@layouts/document/DocumentPage.astro";
+import type { ComponentProps } from "astro/types";
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+import Rirekisho, { getStaticPaths as getBasePaths } from "./履歴書.astro";
 
 export const getStaticPaths = getBasePaths;
 
-interface Props {
-  company?: string;
+interface Props extends ComponentProps<typeof Rirekisho> {
   full?: boolean;
 }
 
@@ -99,7 +99,7 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
             compactTechList(
               await getTechList(Astro, experienceTechThreshold, {
                 entries: tech,
-              }),
+              })
             );
 
           const matchedProjects =
@@ -117,11 +117,11 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
             matchedProjects &&
             applyMatch(matchedProjects, projectMatchThreshold)
               .filter((project) =>
-                full ? true : getDevelopmentTime(project)! > durationThreshold,
+                full ? true : getDevelopmentTime(project)! > durationThreshold
               )
               .slice(0, full ? undefined : 2)
               .sort((a, b) =>
-                b.publishingDate.isAfter(a.publishingDate) ? 1 : -1,
+                b.publishingDate.isAfter(a.publishingDate) ? 1 : -1
               );
 
           return (
@@ -151,36 +151,36 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
                           roles.map((roleInfo) => ({
                             data: roleInfo,
                             roles: [roleInfo.role],
-                          })),
-                        ),
+                          }))
+                        )
                       );
 
                       const projectTech = compactTechList(
                         await getTechList(Astro, undefined, {
                           entries: tech,
-                        }),
+                        })
                       );
 
                       return (
                         <ShokumuEntry
                           start={publishingDate.subtract(
                             //! Dayjs has issue with weeks at the moment, so must transform in ms
-                            getDevelopmentTime(project)!.asMilliseconds(),
+                            getDevelopmentTime(project)!.asMilliseconds()
                           )}
                           end={publishingDate}
                           roles={matchedRoles.map(({ role }) => role)}
                           responsibilities={matchedRoles.flatMap(
-                            ({ tasks }) => tasks,
+                            ({ tasks }) => tasks
                           )}
                           points={[
                             ...(awards?.map((award) => `Won ${award}`) ?? []),
                             ...matchedRoles.flatMap(
-                              ({ achievements }) => achievements,
+                              ({ achievements }) => achievements
                             ),
                           ]}
                           link={await getSiteLink(
                             Astro,
-                            `${collection}/${getEntryId(id)}`,
+                            `${collection}/${getEntryId(id)}`
                           )}
                           tech={projectTech}
                           projectType={getCategory(project)}
@@ -204,7 +204,7 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
               </table>
             </>
           );
-        },
+        }
       )
   }
   <h2>■テクニカルスキル</h2>

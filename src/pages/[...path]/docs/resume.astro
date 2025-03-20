@@ -1,33 +1,38 @@
 ---
-import Text from "@components/ui/Text.astro";
-import DocumentPage from "@layouts/document/DocumentPage.astro";
+import ResumeKnowHow from "@components/docs/ResumeKnowHow.astro";
+import ResumePicture from "@components/docs/ResumePicture.astro";
+import { mail } from "@components/Profile.astro";
 import Link from "@components/ui/Link.astro";
-import { PHONE_NUMBER } from "astro:env/server";
-import { capitalize, toTextList, uncapitalize } from "@integrations/text";
-import { getStaticPaths as getBasePaths } from "@pages/index.astro";
+import Text from "@components/ui/Text.astro";
+import { groupBy } from "@integrations/array";
 import { getSiteLink } from "@integrations/astro-server";
+import {
+  compactTechList,
+  getLanguages,
+  getTechList,
+} from "@integrations/content";
 import {
   getAddress,
   getMyName,
   getSummary,
   getWorkFieldsSentence,
 } from "@integrations/docs";
+import { i18n, setDayjsLocale } from "@integrations/i18n-server";
+import { capitalize, toTextList, uncapitalize } from "@integrations/text";
+import DocumentPage from "@layouts/document/DocumentPage.astro";
+import { getStaticPaths as getBasePaths } from "@pages/index.astro";
+import { PHONE_NUMBER } from "astro:env/server";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { i18n, setDayjsLocale } from "@integrations/i18n-server";
-import ResumeKnowHow from "@components/docs/ResumeKnowHow.astro";
-import ResumePicture from "@components/docs/ResumePicture.astro";
-import { mail } from "@components/Profile.astro";
-import {
-  compactTechList,
-  getLanguages,
-  getTechList,
-} from "@integrations/content";
-import { groupBy } from "@integrations/array";
 
 export const getStaticPaths = (...params: Parameters<typeof getBasePaths>) =>
   getBasePaths({ excludedLocales: ["ja"], ...params[0] });
+
+interface Props {
+  keywords?: string[];
+  company?: string;
+}
 
 const portfolioLink = await getSiteLink(Astro);
 
@@ -108,7 +113,7 @@ const myName = await getMyName(Astro);
       >{
         Object.entries(languages).map(
           async ([level, languages]) =>
-            `${await t(capitalize(level))}${await t(" ")}${await t("in")}${await t(" ")}${await t(toTextList(languages.map(({ id }) => id)))}${await t(".")}${await t(" ")}`,
+            `${await t(capitalize(level))}${await t(" ")}${await t("in")}${await t(" ")}${await t(toTextList(languages.map(({ id }) => id)))}${await t(".")}${await t(" ")}`
         )
       }</Text
     >

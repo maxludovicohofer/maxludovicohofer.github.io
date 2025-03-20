@@ -1,30 +1,30 @@
 ---
-import { getStaticPaths as getBasePaths } from "@pages/index.astro";
-import DocumentPage from "@layouts/document/DocumentPage.astro";
 import ResumePicture from "@components/docs/ResumePicture.astro";
-import dayjs from "dayjs";
-import { i18n, setDayjsLocale } from "@integrations/i18n-server";
-import { PHONE_NUMBER } from "astro:env/server";
-import Link from "@components/ui/Link.astro";
 import { mail } from "@components/Profile.astro";
+import Link from "@components/ui/Link.astro";
 import {
-  getKnowHow,
   getCertifications,
+  getKnowHow,
   getLanguages,
 } from "@integrations/content";
-import { capitalize } from "@integrations/text";
 import {
   getAddress,
   getMotivationSentence,
   getMyName,
 } from "@integrations/docs";
+import { i18n, setDayjsLocale } from "@integrations/i18n-server";
+import { capitalize } from "@integrations/text";
+import DocumentPage from "@layouts/document/DocumentPage.astro";
+import { getStaticPaths as getBasePaths } from "@pages/index.astro";
+import type { ComponentProps } from "astro/types";
+import { PHONE_NUMBER } from "astro:env/server";
+import dayjs from "dayjs";
+import type Resume from "./resume.astro";
 
 export const getStaticPaths = (...params: Parameters<typeof getBasePaths>) =>
   getBasePaths({ allowedLocales: ["ja"], ...params[0] });
 
-interface Props {
-  company?: string;
-}
+interface Props extends ComponentProps<typeof Resume> {}
 
 const { company } = Astro.props;
 
@@ -46,7 +46,7 @@ const history = Object.fromEntries(
       experiences
         .filter(
           ({ id, school, countAsExperience }) =>
-            !id.startsWith("self ") && !(school && countAsExperience),
+            !id.startsWith("self ") && !(school && countAsExperience)
         )
         .flatMap((experience) => [
           { ...experience, end: undefined },
@@ -57,13 +57,13 @@ const history = Object.fromEntries(
           const bDate = b.end ?? b.start;
           return !bDate || (aDate && bDate.isAfter(aDate)) ? -1 : 1;
         }),
-    ]),
+    ])
 );
 
 const current = await t("Current");
 
 const qualifications = (await getCertifications()).filter(
-  ({ type }) => type !== "award",
+  ({ type }) => type !== "award"
 );
 
 const languages = await getLanguages(Astro);
@@ -204,7 +204,7 @@ const myName = await getMyName(Astro);
                       <td>{sentence}</td>
                     </tr>
                   );
-                },
+                }
               )}
             </>
           );
@@ -241,7 +241,7 @@ const myName = await getMyName(Astro);
                 {await t(")")}
               </td>
             </tr>
-          ),
+          )
         )
       }
     </tbody>
