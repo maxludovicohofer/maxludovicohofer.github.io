@@ -1662,5 +1662,101 @@
   "The best videogames can be approached in two ways: as _activities_ and as _entertainment_. ![[Breath of the Wild(https://wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild)] is a masterclass at balancing both approaches.](https://youtube.com/watch?v=Q9sAzTOjl6s)\n\nAs activities, games impart a rhythm to a player's thought process and physical actions": {
     "translation": "最高のビデオゲームには、2つのアプローチがあります。それは、_「活動」として、そして_「娯楽」としてです。『ブレス オブ ザ ワイルド』（https://wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild）は、この2つのアプローチのバランスを絶妙にとった傑作です。https://youtube.com/watch?v=Q9sAzTOjl6s）\n\nゲームという活動は、プレイヤーの思考プロセスと身体的な行動にリズムを与えます。",
     "api": "deepl"
+  },
+  "Currently transitioning from software engineering to videogame quest design, which is my lifelong passion": {
+    "translation": "現在、ソフトウェアエンジニアリングからビデオゲームのクエストデザインへと転向中。これは私の生涯の情熱です。",
+    "api": "deepl"
+  },
+  "Currently transitioning from software engineering to videogame level design, which is my lifelong passion": {
+    "translation": "現在、ソフトウェアエンジニアリングからビデオゲームのレベルデザインに転向中。これは私の生涯の情熱です。",
+    "api": "deepl"
+  },
+  "Currently transitioning from software engineering to game programming, which is my lifelong passion": {
+    "translation": "現在、ソフトウェアエンジニアリングからゲームプログラミングへの転向中。ゲームプログラミングは、私の生涯の情熱です。",
+    "api": "deepl"
+  },
+  "Currently transitioning from software engineering to videogame system programming, which is my lifelong passion": {
+    "translation": "現在、ソフトウェアエンジニアリングからビデオゲームシステムプログラミングへの転向中。これは私の生涯の情熱です。",
+    "api": "deepl"
+  },
+  "Technical quest designer experienced in leadership and software, specialized in screenplay, cinematography, and programming": {
+    "translation": "リーダーシップとソフトウェアに精通したテクニカルクエストデザイナーで、脚本、撮影、プログラミングを専門としています。",
+    "api": "deepl"
+  },
+  "While new to the professional world of videogames, I have been involved in quest design on academic and personal projects my whole life": {
+    "translation": "ビデオゲーム業界では新参者ですが、学術的および個人的なプロジェクトでは、生涯を通じてクエストデザインに携わってきました。",
+    "api": "deepl"
+  },
+  "Technical level designer experienced in leadership and software, specialized in AI, combat, and programming": {
+    "translation": "リーダーシップとソフトウェアに精通したテクニカルレベルデザイナー、AI、戦闘、プログラミングを専門としています。",
+    "api": "deepl"
+  },
+  "While new to the professional world of videogames, I have been involved in level design on academic and personal projects my whole life": {
+    "translation": "ビデオゲーム業界では新参者ですが、学術的および個人的なプロジェクトでは、ずっとレベルデザインに携わってきました。",
+    "api": "deepl"
+  },
+  "Game programmer experienced in leadership and software, specialized in mechanics, combat, AI, and systems": {
+    "translation": "リーダーシップとソフトウェアに精通したゲームプログラマーで、メカニック、戦闘、AI、システムに専門特化しています。",
+    "api": "deepl"
+  },
+  "While new to the professional world of videogames, I have been involved in game programming on academic and personal projects my whole life": {
+    "translation": "ビデオゲーム業界では新参者ですが、学術的および個人的なプロジェクトでゲームプログラミングにずっと携わってきました。",
+    "api": "deepl"
+  },
+  "Technical team lead and gameplay programmer": {
+    "translation": "テクニカルチームリーダー兼ゲームプレイプログラマー",
+    "api": "deepl"
+  },
+  "Managing communication and tasks of the team and handling priorities and scope": {
+    "translation": "チームのコミュニケーションとタスクの管理、優先順位とスコープの処理",
+    "api": "deepl"
+  },
+  "While new to the professional world of videogames, I have been involved in system programming on academic and personal projects my whole life": {
+    "translation": "ビデオゲーム業界では新参者ですが、学術的および個人的なプロジェクトでは、ずっとシステムプログラミングに携わってきました。",
+    "api": "deepl"
+  },
+  "sound designer": {
+    "translation": "サウンドデザイナー",
+    "api": "deepl"
+  },
+  "writer": {
+    "translation": "作家",
+    "api": "deepl"
+  },
+  "I'm a technical quest designer specialized in screenplay, cinematography, and programming": {
+    "translation": "私は、脚本、撮影、プログラミングを専門とするテクニカルクエストデザイナーです。",
+    "api": "deepl"
+  },
+  "Technical quest designer": {
+    "translation": "テクニカルクエストデザイナー",
+    "api": "deepl"
+  },
+  "Quest design": {
+    "translation": "クエストデザイン",
+    "api": "deepl"
+  },
+  "I'm a technical level designer specialized in AI, combat, and programming": {
+    "translation": "私はAI、戦闘、プログラミングを専門とするテクニカルレベルデザイナーです。",
+    "api": "deepl"
+  },
+  "Technical level designer": {
+    "translation": "テクニカルレベルデザイナー",
+    "api": "deepl"
+  },
+  "Level design": {
+    "translation": "レベルデザイン",
+    "api": "deepl"
+  },
+  "I'm a game programmer specialized in mechanics, combat, AI, and systems": {
+    "translation": "私は、メカニック、戦闘、AI、システムに特化したゲームプログラマーです。",
+    "api": "deepl"
+  },
+  "Game programming": {
+    "translation": "ゲームプログラミング",
+    "api": "deepl"
+  },
+  "System programming": {
+    "translation": "システムプログラミング",
+    "api": "deepl"
   }
 }
