@@ -16,30 +16,24 @@ const roles = defineCollection({
   }),
 });
 
-const roleContent = z.object({
-  roles: z.array(reference("roles")),
-});
-
 const tech = defineCollection({
   loader: file("src/data/tech.yaml"),
-  schema: fileSchema
-    .extend({
-      experience: z.string().duration(),
-      group: z.string().optional(),
-      functionalities: z
-        .array(
-          z.string().or(
-            fileSchema
-              .extend({
-                dontTranslateId: z.boolean().optional(),
-              })
-              .merge(roleContent)
-          )
+  schema: fileSchema.extend({
+    experience: z.string().duration(),
+    roles: z.array(reference("roles")),
+    group: z.string().optional(),
+    functionalities: z
+      .array(
+        z.string().or(
+          fileSchema.extend({
+            roles: z.array(reference("roles")),
+            dontTranslateId: z.boolean().optional(),
+          })
         )
-        .optional(),
-      translateId: z.boolean().optional(),
-    })
-    .merge(roleContent),
+      )
+      .optional(),
+    translateId: z.boolean().optional(),
+  }),
 });
 
 const maxDate = new Date();
@@ -140,7 +134,7 @@ const projects = defineCollection({
 
 const thoughts = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "src/data/thoughts" }),
-  schema: posts.merge(roleContent),
+  schema: posts.extend({ forRoles: z.array(reference("roles")).optional() }),
 });
 
 export const translationsPath = "src/data/translations";

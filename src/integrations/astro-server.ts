@@ -288,7 +288,7 @@ export const getMatchedPosts = async <C extends PostCollectionKey>(
       roles:
         document.collection === "projects"
           ? document.data.roles.map(({ role }) => role)
-          : document.data.roles,
+          : document.data.forRoles ?? [],
     }))
   );
 
