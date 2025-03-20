@@ -1,25 +1,25 @@
 ---
 developmentTime: P2W
 roles:
-- role: game designer
-  tasks:
-  - designing a fast-paced multiplayer game
-  achievements:
-  - designed a complex gravity switch mechanic, that allows players to jump to any point in space
-  - designed realtime online procedural map generation
+  - role: game designer
+    tasks:
+      - designing a fast-paced multiplayer game
+    achievements:
+      - designed a complex gravity switch mechanic, that allows players to jump to any point in space
+      - designed realtime online procedural map generation
 
-- role: gameplay programmer
-  tasks:
-  - programmed online mechanics and game gravity
-  achievements:
-  - changed engine movement component to include dynamic gravity
-  - organized code in reusable drag and drop components to speed up prototyping
+  - role: gameplay programmer
+    tasks:
+      - programmed online mechanics and game gravity
+    achievements:
+      - changed engine movement component to include dynamic gravity
+      - organized code in reusable drag and drop components to speed up prototyping
 
 tech:
-- Unreal Engine
-- Illustrator
-- Photoshop
-- C++
+  - Unreal Engine
+  - Illustrator
+  - Photoshop
+  - C++
 youTubeID: BRUzX8aHcfs
 youTubeAspectRatio: 16/10
 publishingDate: 2024-05-12
@@ -39,6 +39,6 @@ This prototype is an online deathmatch third-person shooter based on bullets tha
 
 {/* First point: character, second point: world, third point: development challenges. Split in max 4 points if too long */}
 
-* Before each game, players choose a bullet type and special skill type, while jumping always gravitates the character towards their predicted destination. Bullets grow plants on impact, that players can use for defense or terrain. Players are defeated if hit 3 times, and possess auto-reloading magazines. At the same time, special skills are tactical tools that keep the game dynamic, for example a teleport.
-* The 4v4 free-for-all matches take place on arid asteroids. During the game, bullets transform the flat landscape into an intricate vertical jungle, increasing the skill required to win. I also experimented with diegetic UI affected by visibility issues, possibly solved by a separate render pass.
-* Since Unreal Engine and its marketplace packages did not support gravity switching, I had to code dynamic gravity from the ground up. This eventually evolved into inferring the player's desired destination based on their inputs, and dynamically adjusting the trajectory and gravity to execute a smooth and intuitive jump. Also, I organized my codebase and assets into reusable drag and drop components that 10x my prototyping speed to this day.
+- Before each game, players choose a bullet type and special skill type, while jumping always gravitates the character towards their predicted destination. Bullets grow plants on impact, that players can use for defense or terrain. Players are defeated if hit 3 times, and possess auto-reloading magazines. At the same time, special skills are tactical tools that keep the game dynamic, for example a teleport.
+- The 4v4 free-for-all matches take place on arid asteroids. During the game, bullets transform the flat landscape into an intricate vertical jungle, increasing the skill required to win. I also experimented with diegetic UI affected by visibility issues, possibly solved by a separate render pass.
+- Since Unreal Engine and its marketplace packages did not support gravity switching, I had to code dynamic gravity from the ground up. This eventually evolved into inferring the player's desired destination based on their inputs, and dynamically adjusting the trajectory and gravity to execute a smooth and intuitive jump. Also, I organized my codebase and assets into reusable drag and drop components that 10x my prototyping speed to this day.

@@ -14,7 +14,7 @@ const { class: className = "", ...props } = Astro.props;
     const scrollPercent = Math.min(
       Math.max(scrollY - getPagePosition(container).top, 0) /
         container.offsetHeight,
-      1
+      1,
     );
 
     const parallaxSpeed = 6;
@@ -25,7 +25,7 @@ const { class: className = "", ...props } = Astro.props;
 
     container.style.setProperty(
       "--tw-translate-y",
-      `-${scrollPercent * parallaxSpeed}rem`
+      `-${scrollPercent * parallaxSpeed}rem`,
     );
     container.style.transform = `translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))`;
   };
@@ -39,7 +39,7 @@ const { class: className = "", ...props } = Astro.props;
     if (!containers.length) return;
 
     const observer = new ResizeObserver((entries) =>
-      entries.forEach(({ target }) => updateContainer(target as HTMLElement))
+      entries.forEach(({ target }) => updateContainer(target as HTMLElement)),
     );
     containers.forEach((container) => observer.observe(container));
 
@@ -47,6 +47,6 @@ const { class: className = "", ...props } = Astro.props;
   });
 
   document.addEventListener("astro:before-swap", () =>
-    removeEventListener("scroll", updateContainers)
+    removeEventListener("scroll", updateContainers),
   );
 </script>

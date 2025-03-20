@@ -21,7 +21,7 @@ const values = Array.isArray(value) ? value : [value];
     props.translateProps?.disable
       ? endDelimiterLocalized(
           capitalize(values.join(`${await t(",")}${await t(" ")}`)),
-          Astro
+          Astro,
         )
       : endDelimiter(capitalize(values.join(", ")))
   }</Text

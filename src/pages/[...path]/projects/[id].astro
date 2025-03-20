@@ -26,16 +26,16 @@ const roleList = await Promise.all(
   applyMatch(
     await matchRoles(
       Astro,
-      roles.map(({ role }) => ({ data: role, roles: [role] }))
+      roles.map(({ role }) => ({ data: role, roles: [role] })),
     ),
-    roleThreshold
-  ).map(async ({ id }) => await t(id))
+    roleThreshold,
+  ).map(async ({ id }) => await t(id)),
 );
 
 const techList = compactTechList(
   await getTechList(Astro, undefined, {
     entries: tech,
-  })
+  }),
 ).map(({ title }) => title);
 
 await setDayjsLocale(Astro);

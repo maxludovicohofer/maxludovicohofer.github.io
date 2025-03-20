@@ -1,6 +1,6 @@
 import type { PagesFunction } from "astro-pdf";
-import { getPathSections } from "./text";
 import { defaultLocale, getShortName, myName } from "./astro-config";
+import { getPathSections } from "./text";
 
 export const getPrintOptions: PagesFunction = (pathname) => {
   const sections = getPathSections(pathname);

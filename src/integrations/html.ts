@@ -1,10 +1,10 @@
 import Quaternion from "quaternion";
-import { getTailwindClassValue } from "./tailwind";
 import { clamp, toDegrees, toRadians } from "./math";
+import { getTailwindClassValue } from "./tailwind";
 
 //? HTML
 export const rotate3D = async (
-  element: HTMLElement
+  element: HTMLElement,
 ): Promise<{
   [K in Extract<
     keyof (WindowEventMap & DocumentEventMap),
@@ -13,8 +13,8 @@ export const rotate3D = async (
     e: K extends keyof WindowEventMap
       ? WindowEventMap[K]
       : K extends keyof DocumentEventMap
-      ? DocumentEventMap[K]
-      : never
+        ? DocumentEventMap[K]
+        : never,
   ) => void;
 }> => {
   const maxAngle = 40;
@@ -29,7 +29,7 @@ export const rotate3D = async (
     ) {
       firstRotationTimeout = setTimeout(
         () => element.classList.remove(firstRotationDuration),
-        Number(getTailwindClassValue(firstRotationDuration)) + 200
+        Number(getTailwindClassValue(firstRotationDuration)) + 200,
       );
     }
 
@@ -45,8 +45,8 @@ export const rotate3D = async (
         ({ gamma, beta }) => resolve(gamma !== null || beta !== null),
         {
           once: true,
-        }
-      )
+        },
+      ),
     );
 
     if (await workingGyroscope) {
@@ -55,7 +55,7 @@ export const rotate3D = async (
       }
 
       function isSafariGyroscope(
-        device: DeviceOrientationEvent | SafariDeviceOrientationEvent
+        device: DeviceOrientationEvent | SafariDeviceOrientationEvent,
       ): device is SafariDeviceOrientationEvent {
         return !!(device as SafariDeviceOrientationEvent).requestPermission;
       }
@@ -71,7 +71,7 @@ export const rotate3D = async (
         // Angle at which the device is normally held
         const normalDeviceRotation = Quaternion.fromAxisAngle(
           [0, -1, 0],
-          toRadians(50)
+          toRadians(50),
         );
 
         return {
@@ -80,14 +80,14 @@ export const rotate3D = async (
               toRadians(screen.orientation.angle),
               toRadians(gamma ?? 0),
               toRadians(beta ?? 0),
-              "ZXY"
+              "ZXY",
             )
               .mul(normalDeviceRotation)
               .toEuler();
 
             setRotation(
               clamp(toDegrees(sideRotation) / maxAngle),
-              clamp(toDegrees(frontRotation) / maxAngle)
+              clamp(toDegrees(frontRotation) / maxAngle),
             );
           },
         };
@@ -105,7 +105,7 @@ let modalMoveFunction: Awaited<ReturnType<typeof rotate3D>>;
 
 export const activateModal = async (
   content: HTMLElement,
-  noAnimation?: boolean
+  noAnimation?: boolean,
 ) => {
   const modalSlot = document.querySelector<HTMLDivElement>("div.modal-slot")!;
   modalSlot.classList.add("!pointer-events-auto");
@@ -122,7 +122,7 @@ export const activateModal = async (
 
   content.className = content.className.replace(
     /(^|\s)(\S*-)*(pointer-events-)\S*/g,
-    ""
+    "",
   );
   content.classList.add("pointer-events-auto");
 
@@ -132,7 +132,7 @@ export const activateModal = async (
     if (modalMoveFunction.deviceorientation) {
       addEventListener(
         "deviceorientation",
-        modalMoveFunction.deviceorientation
+        modalMoveFunction.deviceorientation,
       );
     }
 
@@ -160,14 +160,14 @@ export const deactivateModal = () => {
     if (modalMoveFunction.deviceorientation) {
       removeEventListener(
         "deviceorientation",
-        modalMoveFunction.deviceorientation
+        modalMoveFunction.deviceorientation,
       );
     }
 
     if (modalMoveFunction.pointermove) {
       document.removeEventListener(
         "pointermove",
-        modalMoveFunction.pointermove
+        modalMoveFunction.pointermove,
       );
     }
 
@@ -200,7 +200,7 @@ export const getPagePosition = (element?: HTMLElement) => {
 
 export const debounce = <F extends (...args: any) => any>(
   func: F,
-  timeout = 300
+  timeout = 300,
 ) => {
   let timer: NodeJS.Timeout;
 

@@ -25,8 +25,8 @@ export default {
             textShadow: value,
           }),
         },
-        { values: theme("textShadow")! }
-      )
+        { values: theme("textShadow")! },
+      ),
     ),
   ],
 } satisfies Config;

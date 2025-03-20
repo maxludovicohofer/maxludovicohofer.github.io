@@ -12,6 +12,6 @@ export const saveScrollPosition = () => {
     JSON.stringify({
       left: state.scrollX,
       top: state.scrollY,
-    } satisfies ScrollToOptions)
+    } satisfies ScrollToOptions),
   );
 };

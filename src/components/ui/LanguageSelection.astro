@@ -22,7 +22,7 @@ const multipleChoice = translateLocales.length > 1;
   class={`${className} absolute ${hasBack ? "top-6 lg:top-12 right-6" : "top-4 right-4"} size-full flex flex-col items-end pointer-events-none`}
   {...props}
 >
-  <div class="locale-select-surface grid gap-4 pointer-events-auto">
+  <div class="locale-select-surface pointer-events-auto grid gap-4">
     {multipleChoice && <LanguageButton />}
     {
       translateLocales.map((locale) => (
@@ -33,7 +33,7 @@ const multipleChoice = translateLocales.length > 1;
           class={`locale-link ${multipleChoice ? "hidden" : ""} !text-xs`}
           href={getRelativeLocaleUrl(
             locale,
-            getPathWithoutLocale(Astro.url.pathname)
+            getPathWithoutLocale(Astro.url.pathname),
           )}
           noBase
           translateProps={{
@@ -62,8 +62,8 @@ const multipleChoice = translateLocales.length > 1;
       if (preferredLocale !== getLocaleFromPath(path)) {
         window.location.replace(
           standardizePath(
-            addLocaleToLink(getPathWithoutLocale(path), preferredLocale)
-          )
+            addLocaleToLink(getPathWithoutLocale(path), preferredLocale),
+          ),
         );
       }
     }
@@ -74,12 +74,12 @@ const multipleChoice = translateLocales.length > 1;
         link.addEventListener("click", (e) => {
           localStorage.setItem(
             "language",
-            getLocaleFromPath(new URL(link.href).pathname)
+            getLocaleFromPath(new URL(link.href).pathname),
           );
 
           e.preventDefault();
           window.location.replace(link.href);
-        })
+        }),
       );
   });
 </script>

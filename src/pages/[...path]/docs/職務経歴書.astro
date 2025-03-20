@@ -63,8 +63,8 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
 ---
 
 <DocumentPage class="print:prose-headings:text-inherit" isLocalized>
-  <h1 class="!text-2xl text-center">職務経歴書</h1>
-  <div class="text-right mt-6">
+  <h1 class="text-center !text-2xl">職務経歴書</h1>
+  <div class="mt-6 text-right">
     {today.format("ll")}
     <br />
     {myName.translated}（氏名）
@@ -99,7 +99,7 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
             compactTechList(
               await getTechList(Astro, experienceTechThreshold, {
                 entries: tech,
-              })
+              }),
             );
 
           const matchedProjects =
@@ -117,11 +117,11 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
             matchedProjects &&
             applyMatch(matchedProjects, projectMatchThreshold)
               .filter((project) =>
-                full ? true : getDevelopmentTime(project)! > durationThreshold
+                full ? true : getDevelopmentTime(project)! > durationThreshold,
               )
               .slice(0, full ? undefined : 2)
               .sort((a, b) =>
-                b.publishingDate.isAfter(a.publishingDate) ? 1 : -1
+                b.publishingDate.isAfter(a.publishingDate) ? 1 : -1,
               );
 
           return (
@@ -130,9 +130,9 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
               <table>
                 <thead>
                   <tr>
-                    <th class="text-center w-56">範囲</th>
-                    <th class="text-center min-w-80">業務内容</th>
-                    <th class="text-center w-56">環境</th>
+                    <th class="w-56 text-center">範囲</th>
+                    <th class="min-w-80 text-center">業務内容</th>
+                    <th class="w-56 text-center">環境</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -151,36 +151,36 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
                           roles.map((roleInfo) => ({
                             data: roleInfo,
                             roles: [roleInfo.role],
-                          }))
-                        )
+                          })),
+                        ),
                       );
 
                       const projectTech = compactTechList(
                         await getTechList(Astro, undefined, {
                           entries: tech,
-                        })
+                        }),
                       );
 
                       return (
                         <ShokumuEntry
                           start={publishingDate.subtract(
                             //! Dayjs has issue with weeks at the moment, so must transform in ms
-                            getDevelopmentTime(project)!.asMilliseconds()
+                            getDevelopmentTime(project)!.asMilliseconds(),
                           )}
                           end={publishingDate}
                           roles={matchedRoles.map(({ role }) => role)}
                           responsibilities={matchedRoles.flatMap(
-                            ({ tasks }) => tasks
+                            ({ tasks }) => tasks,
                           )}
                           points={[
                             ...(awards?.map((award) => `Won ${award}`) ?? []),
                             ...matchedRoles.flatMap(
-                              ({ achievements }) => achievements
+                              ({ achievements }) => achievements,
                             ),
                           ]}
                           link={await getSiteLink(
                             Astro,
-                            `${collection}/${getEntryId(id)}`
+                            `${collection}/${getEntryId(id)}`,
                           )}
                           tech={projectTech}
                           projectType={getCategory(project)}
@@ -204,15 +204,15 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
               </table>
             </>
           );
-        }
+        },
       )
   }
   <h2>■テクニカルスキル</h2>
   <table>
     <thead>
       <tr>
-        <th class="text-center w-0 min-w-36">種類</th>
-        <th class="text-center w-0 text-nowrap">使用期間</th>
+        <th class="w-0 min-w-36 text-center">種類</th>
+        <th class="w-0 text-nowrap text-center">使用期間</th>
         <th class="text-center">機能</th>
       </tr>
     </thead>
@@ -223,17 +223,17 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
             <td>{title}</td>
             <td class="text-right">
               {experience || (
-                <ol class="list-none ps-0 my-0">
+                <ol class="my-0 list-none ps-0">
                   {items.map(({ experience }) => (
-                    <li class="ps-0 my-0">{experience}</li>
+                    <li class="my-0 ps-0">{experience}</li>
                   ))}
                 </ol>
               )}
             </td>
             <td>
-              <ol class="list-none ps-0 my-0">
+              <ol class="my-0 list-none ps-0">
                 {items.map(({ title }) => (
-                  <li class="ps-0 my-0">{title}</li>
+                  <li class="my-0 ps-0">{title}</li>
                 ))}
               </ol>
             </td>

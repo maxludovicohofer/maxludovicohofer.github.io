@@ -32,7 +32,7 @@ const links: ComponentProps<typeof Link>[] = [];
 
 const altLinks =
   /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g.exec(
-    textAlt.at(-1)!
+    textAlt.at(-1)!,
   );
 const linkTextBeforeRegex = /\[.*\($/;
 const linkTextAfterRegex = /^\)]/;
@@ -54,14 +54,14 @@ altLinks?.forEach((altLink) => {
   textAlt.pop();
   textAlt.push(
     altBeforeLink!.replace(linkTextBeforeRegex, ""),
-    altAfterLink!.replace(linkTextAfterRegex, "")
+    altAfterLink!.replace(linkTextAfterRegex, ""),
   );
 });
 
 const stringAlt = textAlt.reduce(
   (joined, toJoin, index) =>
     `${joined}${index !== 0 ? links[index - 1]!.slot : ""}${toJoin}`,
-  ""
+  "",
 );
 
 const { class: dissolvingClass, ...dissolvingProps } = outerProps ?? {};
@@ -76,7 +76,7 @@ const { class: dissolvingClass, ...dissolvingProps } = outerProps ?? {};
     ><Media alt={stringAlt} {...props} /></Fullscreenable
   >{
     descriptiveAlt && (
-      <Text subtitle class="not-prose mt-4 -mb-4">
+      <Text subtitle class="not-prose -mb-4 mt-4">
         {textAlt.length === 1
           ? textAlt[0]
           : textAlt.map((text, index) => {

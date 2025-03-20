@@ -38,19 +38,19 @@ const t = i18n(Astro);
 
 export const formatUmamiEvent = async (
   astro: AstroGlobal,
-  eventName: string
+  eventName: string,
 ) => {
   // Max characters - formatting characters
   const usableCharacters = 50 - 3;
 
   const pageName = getMaximumWordsInLimit(
     await getLinkName(astro, astro.originPathname),
-    usableCharacters * 0.2
+    usableCharacters * 0.2,
   );
 
   return `${getMaximumWordsInLimit(
     eventName,
-    usableCharacters - pageName.length
+    usableCharacters - pageName.length,
   )} (${pageName})`;
 };
 
@@ -61,7 +61,7 @@ export interface UmamiLinkEvent {
 
 export const getUmamiLinkEvent = async (
   astro: AstroGlobal,
-  href?: Props["href"]
+  href?: Props["href"],
 ): Promise<UmamiLinkEvent> => {
   const getAnchorName = async () => {
     const content = astro.slots.has("default")
@@ -92,7 +92,7 @@ const umamiEventInfo = noEvent ? {} : await getUmamiLinkEvent(Astro, href);
 if (umamiEventInfo["data-umami-event"] !== undefined) {
   umamiEventInfo["data-umami-event"] = await formatUmamiEvent(
     Astro,
-    umamiEventInfo["data-umami-event"]
+    umamiEventInfo["data-umami-event"],
   );
 }
 
@@ -129,7 +129,7 @@ const isExternal =
     >{
       hrefString
         ? (await getLinkName(Astro, hrefString, true)).toLocaleLowerCase(
-            defaultLocale
+            defaultLocale,
           )
         : await t("Link")
     }</slot

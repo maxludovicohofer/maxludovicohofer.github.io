@@ -73,7 +73,7 @@ const minutesToRead = isMarkdown
         : // Description time
           getReadingTime(renderedContent ?? "").minutes,
       // Maximum time assumed to be already spent reading before clicking read more
-      0.2
+      0.2,
     )
   : undefined;
 
@@ -104,12 +104,12 @@ const finalReadMoreText = await t(
   readMoreText ??
     (isMarkdown
       ? `Read in ${dayjs.duration({ minutes: Math.ceil(minutesToRead!) }).get("minutes")} min`
-      : "Read more")
+      : "Read more"),
 );
 ---
 
 <div class=`${className} post-preview h-full` {...props}>
-  <div class="flex flex-col size-full justify-between">
+  <div class="flex size-full flex-col justify-between">
     <div>
       {
         (Astro.slots.has("header") || entry?.data.draft) && (
@@ -180,7 +180,7 @@ const finalReadMoreText = await t(
   </div>{
     cover && (
       <div
-        class={`post-preview-cover absolute inset-0 pointer-events-none opacity-0 duration-700 ${container ? "group-hover/container-card:opacity-15" : "group-hover/card:opacity-15"}`}
+        class={`post-preview-cover pointer-events-none absolute inset-0 opacity-0 duration-700 ${container ? "group-hover/container-card:opacity-15" : "group-hover/card:opacity-15"}`}
       >
         <Media src={cover} alt={getCoverAlt(entry!)} smoothLoading />
       </div>
@@ -208,9 +208,9 @@ const finalReadMoreText = await t(
     const coverObserver = new IntersectionObserver(
       (entries) =>
         entries.forEach(({ isIntersecting, target }) =>
-          switchClasses(target, isIntersecting, ["opacity-15"], ["opacity-0"])
+          switchClasses(target, isIntersecting, ["opacity-15"], ["opacity-0"]),
         ),
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     const containerToReadMore = new Map<Element, Element>();
@@ -223,10 +223,10 @@ const finalReadMoreText = await t(
             containerToReadMore.get(target)!,
             isIntersecting,
             ["animate-pulse", "lg:animate-none"],
-            []
-          )
+            [],
+          ),
         ),
-      { threshold: 0.9 }
+      { threshold: 0.9 },
     );
 
     document.querySelectorAll("div.post-preview").forEach((element) => {
@@ -235,12 +235,12 @@ const finalReadMoreText = await t(
       if (cover) coverObserver.observe(cover);
 
       const readMoreText = element.querySelector(
-        "button.post-preview-read-more"
+        "button.post-preview-read-more",
       )?.firstElementChild;
 
       if (readMoreText) {
         const container = element.parentElement?.classList.contains(
-          "content-list-card"
+          "content-list-card",
         )
           ? element.parentElement
           : element;

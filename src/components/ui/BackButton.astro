@@ -24,7 +24,7 @@ const { class: className = "", buttonName, href, ...buttonProps } = Astro.props;
 >
   <Text
     importance="button-icon"
-    class="mt-[-0.2rem] ml-[-0.1rem] lg:ml-[-0.2rem]"
+    class="ml-[-0.1rem] mt-[-0.2rem] lg:ml-[-0.2rem]"
     translateProps={{ disable: true }}>◂</Text
   >
 </Button>
@@ -42,7 +42,7 @@ const { class: className = "", buttonName, href, ...buttonProps } = Astro.props;
     history.replaceState(
       { scrollX: 0, scrollY: 0 },
       "",
-      backButton.dataset.base
+      backButton.dataset.base,
     );
 
     history.pushState(startState, "", startLocation);
@@ -57,12 +57,12 @@ const { class: className = "", buttonName, href, ...buttonProps } = Astro.props;
   document.addEventListener("astro:page-load", () =>
     document
       .querySelectorAll<HTMLButtonElement>("button.back-button")
-      .forEach((button) => button.addEventListener("click", back))
+      .forEach((button) => button.addEventListener("click", back)),
   );
 
   document.addEventListener("astro:before-preparation", () =>
     document
       .querySelectorAll<HTMLButtonElement>("button.back-button")
-      .forEach((button) => button.removeEventListener("click", back))
+      .forEach((button) => button.removeEventListener("click", back)),
   );
 </script>

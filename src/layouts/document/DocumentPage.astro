@@ -52,7 +52,7 @@ export const makeDocumentPaths =
       getUniqueEntries(allDocuments).map((entry) => ({
         params: { id: getEntryId(entry) },
         props: { entry },
-      }))
+      })),
     ).map((pathInfo) => {
       const locale =
         pathInfo.params.path !== undefined

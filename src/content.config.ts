@@ -1,6 +1,6 @@
-import { defineCollection, reference, z } from "astro:content";
-import { file, glob } from "astro/loaders";
 import { locales } from "@integrations/astro-config";
+import { file, glob } from "astro/loaders";
+import { defineCollection, reference, z } from "astro:content";
 
 const fileSchema = z.object({
   id: z.string(),
@@ -28,8 +28,8 @@ const tech = defineCollection({
           fileSchema.extend({
             roles: z.array(reference("roles")),
             dontTranslateId: z.boolean().optional(),
-          })
-        )
+          }),
+        ),
       )
       .optional(),
     translateId: z.boolean().optional(),
@@ -48,7 +48,7 @@ const teamContent = z.object({
       z.object({
         internal: z.number().int().positive(),
         external: z.number().int().positive(),
-      })
+      }),
     )
     .optional(),
 });
@@ -70,7 +70,7 @@ const knowHow = defineCollection({
           tasks: z.string().array(),
           achievements: z.string().array(),
           countAsWork: z.boolean().optional(),
-        })
+        }),
       ),
       translateId: z.boolean().optional(),
     })
@@ -126,7 +126,7 @@ const projects = defineCollection({
           role: reference("roles"),
           tasks: z.string().array(),
           achievements: z.array(z.string()),
-        })
+        }),
       ),
     })
     .merge(teamContent),
@@ -145,7 +145,7 @@ const translations = defineCollection({
     z.object({
       translation: z.string(),
       api: z.enum(["deepl"]).optional(),
-    })
+    }),
   ),
 });
 
@@ -161,9 +161,9 @@ const videos = defineCollection({
           locale: z.enum(locales),
           youTubeId: z.string(),
           text: z.string(),
-        })
+        }),
       ),
-    })
+    }),
   ),
 });
 

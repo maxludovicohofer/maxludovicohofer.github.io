@@ -1,12 +1,12 @@
 import type { AstroGlobal } from "astro";
-import { getRole } from "./astro-server";
-import { endDelimiter, capitalize, toTextList } from "./text";
 import { getCollection } from "astro:content";
-import { i18n, type I18nOptions } from "./i18n-server";
-import { removeWatashiWa } from "./l10n";
 import { FULL_ADDRESS } from "astro:env/server";
-import { getLocaleInfo, localeInfo } from "./i18n-special";
 import { defaultLocale, getShortName, myName } from "./astro-config";
+import { getRole } from "./astro-server";
+import { i18n, type I18nOptions } from "./i18n-server";
+import { getLocaleInfo, localeInfo } from "./i18n-special";
+import { removeWatashiWa } from "./l10n";
+import { capitalize, endDelimiter, toTextList } from "./text";
 
 export const getWorkFieldsSentence = async (astro: AstroGlobal) => {
   const {
@@ -25,7 +25,7 @@ export const getWorkFieldsSentence = async (astro: AstroGlobal) => {
 
 export const getMotivationSentence = async (
   astro: AstroGlobal,
-  company?: string
+  company?: string,
 ) => {
   const {
     role: {
@@ -45,16 +45,16 @@ export const getMotivationSentence = async (
       company
         ? `${await t(
             `I am deeply inspired by {}'s innovative ${mainWorkField} and would be honored to contribute to your team.`,
-            { interpolate: company }
+            { interpolate: company },
           )}${await t(" ")}`
         : ""
     }${await t(
-      "I value attention to detail, embrace cutting-edge technologies, and enjoy fostering collaboration to achieve excellent results."
+      "I value attention to detail, embrace cutting-edge technologies, and enjoy fostering collaboration to achieve excellent results.",
     )}${`${await t(" ")}${await t(
       `Currently transitioning from software engineering to ${
         mainWorkField.includes("game") ? "" : "videogame "
-      }${mainWorkField}, which is my lifelong passion.`
-    )}`}`
+      }${mainWorkField}, which is my lifelong passion.`,
+    )}`}`,
   );
 };
 
@@ -77,9 +77,9 @@ export const getSummary = async (astro: AstroGlobal, short?: boolean) => {
                 specialization.endsWith("s")
                   ? `${specialization}*`
                   : specialization
-              }\\b`
-            ).test(id)
-        )
+              }\\b`,
+            ).test(id),
+        ),
       )}`
     : "";
 
@@ -96,15 +96,15 @@ export const getSummary = async (astro: AstroGlobal, short?: boolean) => {
           specializationSentence
             ? `${short ? "" : ","} ${specializationSentence}`
             : ""
-        }`
-      )
-    )
+        }`,
+      ),
+    ),
   );
 };
 
 export const getSelfPRSentence = async (
   astro: AstroGlobal,
-  company?: string
+  company?: string,
 ) => {
   const {
     role: {
@@ -121,19 +121,19 @@ export const getSelfPRSentence = async (
 
   return removeWatashiWa(
     `${await t(
-      "My background in software development and leadership has allowed me to develop hard and soft skills that I wish to contribute to the game industry."
+      "My background in software development and leadership has allowed me to develop hard and soft skills that I wish to contribute to the game industry.",
     )}${`${await t(" ")}${await t(
-      `While new to the professional world of videogames, I have been involved in ${mainWorkField} on academic and personal projects my whole life.`
+      `While new to the professional world of videogames, I have been involved in ${mainWorkField} on academic and personal projects my whole life.`,
     )}`}${`${await t(" ")}${await t(
-      "I value self-teaching, teamwork, and sharing knowledge with colleagues."
+      "I value self-teaching, teamwork, and sharing knowledge with colleagues.",
     )}`}${
       company
         ? `${await t(" ")}${await t(
             `I aspire to grow my skills further while learning from a forward-thinking company like {}.}`,
-            { interpolate: company }
+            { interpolate: company },
           )}${await t(" ")}`
         : ""
-    }`
+    }`,
   );
 };
 
@@ -163,7 +163,7 @@ export const getMyName = async (astro: AstroGlobal) => {
 
   return {
     rawButOrdered: nameParts.join(
-      localeInfo[defaultLocale].nameSeparator ?? " "
+      localeInfo[defaultLocale].nameSeparator ?? " ",
     ),
     translated: await t(nameParts.join(separator)),
     translatedShort: await t(shortNameParts.join(separator)),

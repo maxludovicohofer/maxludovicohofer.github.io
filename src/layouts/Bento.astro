@@ -4,10 +4,10 @@ import { listPreviewContainerClass } from "./post/PostListPreview.astro";
 ---
 
 <div
-  class="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-4 gap-4 p-4 min-h-screen"
+  class="grid min-h-screen grid-cols-1 gap-4 p-4 lg:grid-cols-3 2xl:grid-cols-4"
 >
   <Card><slot name="1-small" /></Card>
-  <Card class="!p-0 lg:col-span-2 2xl:row-span-2 max-h-[80dvh]"
+  <Card class="max-h-[80dvh] !p-0 lg:col-span-2 2xl:row-span-2"
     ><slot name="2-medium" /></Card
   >
   <Card
@@ -16,7 +16,7 @@ import { listPreviewContainerClass } from "./post/PostListPreview.astro";
     ><slot name="3-large" /></Card
   >
   <Card
-    class="lg:row-start-2 lg:col-start-3 2xl:row-start-3 2xl:col-start-2 2xl:col-span-2"
+    class="lg:col-start-3 lg:row-start-2 2xl:col-span-2 2xl:col-start-2 2xl:row-start-3"
     ><slot name="4-small" /></Card
   >
   <Card container class={`lg:row-span-2 ${listPreviewContainerClass}`}

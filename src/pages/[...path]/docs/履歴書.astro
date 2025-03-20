@@ -46,7 +46,7 @@ const history = Object.fromEntries(
       experiences
         .filter(
           ({ id, school, countAsExperience }) =>
-            !id.startsWith("self ") && !(school && countAsExperience)
+            !id.startsWith("self ") && !(school && countAsExperience),
         )
         .flatMap((experience) => [
           { ...experience, end: undefined },
@@ -57,13 +57,13 @@ const history = Object.fromEntries(
           const bDate = b.end ?? b.start;
           return !bDate || (aDate && bDate.isAfter(aDate)) ? -1 : 1;
         }),
-    ])
+    ]),
 );
 
 const current = await t("Current");
 
 const qualifications = (await getCertifications()).filter(
-  ({ type }) => type !== "award"
+  ({ type }) => type !== "award",
 );
 
 const languages = await getLanguages(Astro);
@@ -83,7 +83,7 @@ const myName = await getMyName(Astro);
         <h1 class="tracking-[1.5rem]">履歴書</h1>
         {today.format("ll")}現在
       </div>
-      <table class="mt-4 mb-0">
+      <table class="mb-0 mt-4">
         <tbody>
           <tr>
             <td colspan="100%">
@@ -104,7 +104,7 @@ const myName = await getMyName(Astro);
               }歳）</td
             >
             <td class="relative w-0">
-              <b class="absolute top-0 left-1 text-xs">性別</b>
+              <b class="absolute left-1 top-0 text-xs">性別</b>
               男
             </td>
           </tr>
@@ -155,8 +155,8 @@ const myName = await getMyName(Astro);
   <table>
     <thead>
       <tr>
-        <th class="text-center w-0">年</th>
-        <th class="text-center w-0">月</th>
+        <th class="w-0 text-center">年</th>
+        <th class="w-0 text-center">月</th>
         <th class="text-center">学歴・職歴</th>
       </tr>
     </thead>
@@ -204,7 +204,7 @@ const myName = await getMyName(Astro);
                       <td>{sentence}</td>
                     </tr>
                   );
-                }
+                },
               )}
             </>
           );
@@ -220,8 +220,8 @@ const myName = await getMyName(Astro);
   <table>
     <thead>
       <tr>
-        <th class="text-center w-0">年</th>
-        <th class="text-center w-0">月</th>
+        <th class="w-0 text-center">年</th>
+        <th class="w-0 text-center">月</th>
         <th class="text-center">免許・資格</th>
       </tr>
     </thead>
@@ -241,7 +241,7 @@ const myName = await getMyName(Astro);
                 {await t(")")}
               </td>
             </tr>
-          )
+          ),
         )
       }
     </tbody>
@@ -256,7 +256,7 @@ const myName = await getMyName(Astro);
         </td>
         <td class="relative" colspan="100%">
           <b>通勤時間</b>
-          <div class="flex flex-col items-center my-2 gap-2">
+          <div class="my-2 flex flex-col items-center gap-2">
             <div class="h-6"></div>
             <div class="flex gap-12">
               <span>約</span><span>時間</span><span>分</span>

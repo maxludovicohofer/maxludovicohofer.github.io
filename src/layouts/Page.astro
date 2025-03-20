@@ -37,7 +37,7 @@ const formattedTitle = capitalize(
   title ??
     (homepage
       ? (role.data.workFields?.[0] ?? role.id)
-      : getHumanPathSection(Astro.originPathname))
+      : getHumanPathSection(Astro.originPathname)),
 );
 const completeTitle = `${myName.translatedShort} \\ ${noTitleTranslation ? formattedTitle : await t(formattedTitle)}`;
 
@@ -48,7 +48,7 @@ const completeDescription = await endDelimiterLocalized(
   noDescriptionTranslation
     ? formattedDescription
     : await t(formattedDescription),
-  Astro
+  Astro,
 );
 
 const hasBack = !homepage;

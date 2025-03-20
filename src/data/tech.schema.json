@@ -2,10 +2,10 @@
   "$ref": "#/definitions/tech",
   "definitions": {
     "tech": {
-        "type": "array",
-        "items": {
-            "$ref": "../../.astro/collections/tech.schema.json"
-        }
+      "type": "array",
+      "items": {
+        "$ref": "../../.astro/collections/tech.schema.json"
+      }
     }
   }
 }

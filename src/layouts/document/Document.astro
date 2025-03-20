@@ -24,7 +24,7 @@ const { inline, isLocalized, entryProps, ...props } = Astro.props;
 export type DocumentCollectionKey = Extract<CollectionKey, "docs" | PostCollectionKey>;
 
 export const getEntryId = <C extends CollectionKey>(
-  entry: CollectionEntry<C> | string
+  entry: CollectionEntry<C> | string,
 ) => {
   const id = typeof entry === "string" ? entry : entry.id;
 
@@ -35,7 +35,7 @@ export const getDescription = <C extends CollectionKey>(
   entry?: CollectionEntry<C>,
   sentences?: number,
   shortenStart?: boolean,
-  startHeading?: string
+  startHeading?: string,
 ) => {
   let description: string | undefined;
 
@@ -45,7 +45,7 @@ export const getDescription = <C extends CollectionKey>(
 
   if (startHeading || cleanBody.startsWith("#") || cleanBody.startsWith("![")) {
     description = cleanBody.split(
-      startHeading ? new RegExp(`# ${startHeading}\\s+`) : /#.*/
+      startHeading ? new RegExp(`# ${startHeading}\\s+`) : /#.*/,
     )[1];
   }
 
@@ -54,12 +54,12 @@ export const getDescription = <C extends CollectionKey>(
   if (sentences) {
     const splitSentences = (description ?? cleanMarkdown(cleanBody)).split(
       new RegExp(
-        `[${localeInfo[isLocalizedEntry(entry) ? getEntryLocale(entry) : defaultLocale].delimiters}]\\s+`
-      )
+        `[${localeInfo[isLocalizedEntry(entry) ? getEntryLocale(entry) : defaultLocale].delimiters}]\\s+`,
+      ),
     );
 
     description = endDelimiter(
-      `${splitSentences.slice(0, sentences).join(". ")}`
+      `${splitSentences.slice(0, sentences).join(". ")}`,
     );
   }
 
@@ -67,7 +67,7 @@ export const getDescription = <C extends CollectionKey>(
     //! Try to shorten sentence, could lead to errors
     //! Also, uses lookbehind, which could not be supported
     const shortenedStart = (description ?? cleanMarkdown(cleanBody)).split(
-      /(?<!,.*)( is an | is a | is | was an | was a | was )/
+      /(?<!,.*)( is an | is a | is | was an | was a | was )/,
     )[2];
 
     if (shortenedStart) description = capitalize(shortenedStart);

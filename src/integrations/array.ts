@@ -1,6 +1,6 @@
 export const partition = <T>(
   array: T[],
-  filter: (element: T) => any
+  filter: (element: T) => any,
 ): [filtered: typeof array, filteredOut: typeof array] => {
   const filtered: typeof array = [];
   const filteredOut: typeof array = [];
@@ -12,14 +12,17 @@ export const partition = <T>(
 
 export const groupBy = <T, K extends number | string>(
   array: T[],
-  predicate: (item: T) => K
+  predicate: (item: T) => K,
 ) =>
-  array.reduce((groups, item) => {
-    const group = predicate(item);
-    groups[group] ??= [];
-    groups[group].push(item);
-    return groups;
-  }, {} as Partial<Record<K, T[]>>);
+  array.reduce(
+    (groups, item) => {
+      const group = predicate(item);
+      groups[group] ??= [];
+      groups[group].push(item);
+      return groups;
+    },
+    {} as Partial<Record<K, T[]>>,
+  );
 
 export const getCombinations = <T>(array: T[]) => {
   const combinations = [[]] as T[][];
@@ -46,7 +49,7 @@ export const indexOfMax = (array: number[]) =>
   array.length
     ? array.reduce(
         (maxIndex, item, index) => (item > array[maxIndex]! ? index : maxIndex),
-        0
+        0,
       )
     : undefined;
 
@@ -54,13 +57,13 @@ export const indexOfMin = (array: number[]) =>
   array.length
     ? array.reduce(
         (minIndex, item, index) => (item < array[minIndex]! ? index : minIndex),
-        0
+        0,
       )
     : undefined;
 
 export const renameObjectKeys = <O extends Record<string | number, any>>(
   obj: O,
-  predicate: (oldKey: string) => keyof typeof obj
+  predicate: (oldKey: string) => keyof typeof obj,
 ) =>
   Object.keys(obj)
     .reverse()

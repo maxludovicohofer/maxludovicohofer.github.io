@@ -57,9 +57,9 @@ const aspectRatio = aspect ?? "16/9";
           lyt,
           containerIsWider,
           ["h-[300dvw]", "w-full"],
-          ["h-full", "w-[300dvh]"]
+          ["h-full", "w-[300dvh]"],
         );
-      })
+      }),
     );
 
     // Handle smooth loading and play/pause
@@ -86,7 +86,7 @@ const aspectRatio = aspect ?? "16/9";
 
               (player as typeof player | undefined)?.removeEventListener(
                 "onStateChange",
-                showPlayer
+                showPlayer,
               );
 
               clearTimeout(loadingTimeout);
@@ -96,7 +96,7 @@ const aspectRatio = aspect ?? "16/9";
               loadingTimeout = setTimeout(
                 () => showPlayer({ data: YT.PlayerState.PLAYING } as any),
                 // Maximum time to wait for player to show
-                4000
+                4000,
               );
             }
 
@@ -119,14 +119,14 @@ const aspectRatio = aspect ?? "16/9";
         } else {
           player?.pauseVideo();
         }
-      })
+      }),
     );
 
     getVideos().forEach((lyt) => {
       // Set start time
       lyt.setAttribute(
         "params",
-        `${lyt.getAttribute("params")}&start=${Number(sessionStorage.getItem(`video/${lyt.getAttribute("videoid")!}`) ?? 0)}`
+        `${lyt.getAttribute("params")}&start=${Number(sessionStorage.getItem(`video/${lyt.getAttribute("videoid")!}`) ?? 0)}`,
       );
 
       lytObserver.observe(lyt);
@@ -137,13 +137,13 @@ const aspectRatio = aspect ?? "16/9";
   const savePlayerTimes = () => {
     const videoData = Object.groupBy(
       getVideos(),
-      (video) => video.getAttribute("videoid")!
+      (video) => video.getAttribute("videoid")!,
     );
 
     // Save longest time watched for each video ID
     for (const videoId in videoData) {
       const sortedPlayers = videoData[videoId]!.map((lyt) =>
-        players.get(lyt)?.getCurrentTime()
+        players.get(lyt)?.getCurrentTime(),
       ).filter((time) => time !== undefined);
 
       if (!sortedPlayers.length) continue;
@@ -152,7 +152,7 @@ const aspectRatio = aspect ?? "16/9";
 
       sessionStorage.setItem(
         `video/${videoId}`,
-        sortedPlayers.at(-1)!.toFixed()
+        sortedPlayers.at(-1)!.toFixed(),
       );
     }
 

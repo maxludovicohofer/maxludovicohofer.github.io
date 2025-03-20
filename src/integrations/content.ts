@@ -1,8 +1,10 @@
+import type Video from "@components/ui/Video.astro";
 import {
   getEntryId,
   type DocumentCollectionKey,
 } from "@layouts/document/Document.astro";
-import { capitalize, getHumanPathSection, toTitleCase } from "./text";
+import type { AstroGlobal } from "astro";
+import type { ComponentProps } from "astro/types";
 import {
   getCollection,
   type CollectionEntry,
@@ -12,8 +14,6 @@ import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import utc from "dayjs/plugin/utc";
-import type Video from "@components/ui/Video.astro";
-import type { ComponentProps } from "astro/types";
 import { VALID_INPUT_FORMATS } from "node_modules/astro/dist/assets/consts";
 import { groupBy } from "./array";
 import {
@@ -22,14 +22,14 @@ import {
   matchRoles,
   type GetCollectionOptions,
 } from "./astro-server";
-import type { AstroGlobal } from "astro";
-import { getCurrentLocale } from "./i18n-special";
 import { i18n, setDayjsLocale } from "./i18n-server";
+import { getCurrentLocale } from "./i18n-special";
+import { capitalize, getHumanPathSection, toTitleCase } from "./text";
 
 export type PostCollectionKey = Extract<CollectionKey, "projects" | "thoughts">;
 
 export const getTitle = (
-  entry: CollectionEntry<DocumentCollectionKey> | undefined
+  entry: CollectionEntry<DocumentCollectionKey> | undefined,
 ) => {
   if (!entry) return;
 
@@ -43,7 +43,7 @@ export const getTitle = (
 
 export const getPublishingDate = (
   entry: CollectionEntry<DocumentCollectionKey> | undefined,
-  frontmatter?: Record<string, any>
+  frontmatter?: Record<string, any>,
 ) => {
   if (entry?.data.publishingDate) return dayjs(entry.data.publishingDate);
 
@@ -55,7 +55,7 @@ export const getPublishingDate = (
 };
 
 export const getCover = (
-  entry: CollectionEntry<PostCollectionKey> | undefined
+  entry: CollectionEntry<PostCollectionKey> | undefined,
 ) => {
   if (!entry) return;
 
@@ -68,13 +68,13 @@ export const getCover = (
 
   const imageFolder = `/src/data/${entry.collection}/`;
   const images = import.meta.glob<{ default: ImageMetadata }>(
-    "/src/data/**/*.{png,jpg,jpeg,gif,webp,svg}"
+    "/src/data/**/*.{png,jpg,jpeg,gif,webp,svg}",
   );
   const imagePath = `${imageFolder}${entry.id}`;
   const image =
     images[
       `${imagePath}.${VALID_INPUT_FORMATS.find(
-        (extension) => images[`${imagePath}.${extension}`]
+        (extension) => images[`${imagePath}.${extension}`],
       )}`
     ]?.();
 
@@ -82,8 +82,8 @@ export const getCover = (
     // Projects require image
     throw new Error(
       `An image for "${imagePath}" does not exist in pattern: "${imageFolder}*.{${VALID_INPUT_FORMATS.join(
-        ","
-      )}}". Import an image, or preferably a video.`
+        ",",
+      )}}". Import an image, or preferably a video.`,
     );
   }
 
@@ -92,7 +92,7 @@ export const getCover = (
 
 export const getDownloadLinks = (entry: { data: object } | undefined) => {
   function isDownloadableEntry(
-    test: typeof entry
+    test: typeof entry,
   ): test is { data: { downloadLinks: string[] } } {
     return !!(test && Object.hasOwn(test.data, "downloadLinks"));
   }
@@ -104,7 +104,7 @@ export const getDownloadLinks = (entry: { data: object } | undefined) => {
 
 export const getDevelopmentTime = (entry: { data: object } | undefined) => {
   function isDevelopmentTimeEntry(
-    test: typeof entry
+    test: typeof entry,
   ): test is { data: { developmentTime: string } } {
     return !!(test && Object.hasOwn(test.data, "developmentTime"));
   }
@@ -120,7 +120,7 @@ type Category = NonNullable<CollectionEntry<"projects">["data"]["category"]>;
 
 export function getCategory<F extends boolean>(
   entry: { data: object } | undefined,
-  noFormat?: F
+  noFormat?: F,
 ):
   | (F extends true ? Category : `published ${Category}` | Category)
   | undefined {
@@ -181,23 +181,23 @@ export const getKnowHow = async (
   astro: AstroGlobal,
   options?: {
     allProjects?: boolean | undefined;
-  }
+  },
 ) => {
   const knowHow = await Promise.all(
-    (
-      await getCollection("know-how")
-    ).map(async ({ data: { start, end, team, skills, ...data } }) => ({
-      start: dayjs(start),
-      end: end && dayjs(end),
-      team: getTeam({ data: { team } }),
-      skills: applyMatch(
-        await matchRoles(
-          astro,
-          skills.map((skill) => ({ data: skill, roles: [skill.job] }))
-        )
-      ),
-      ...data,
-    }))
+    (await getCollection("know-how")).map(
+      async ({ data: { start, end, team, skills, ...data } }) => ({
+        start: dayjs(start),
+        end: end && dayjs(end),
+        team: getTeam({ data: { team } }),
+        skills: applyMatch(
+          await matchRoles(
+            astro,
+            skills.map((skill) => ({ data: skill, roles: [skill.job] })),
+          ),
+        ),
+        ...data,
+      }),
+    ),
   );
 
   const displayedKnowHow = knowHow.map(({ skills, ...data }) => ({
@@ -212,13 +212,13 @@ export const getKnowHow = async (
     // Handle school experience
     const workSkills = skills.filter(
       ({ countAsWork }) =>
-        countAsWork || (options?.allProjects && data.projects?.length)
+        countAsWork || (options?.allProjects && data.projects?.length),
     );
     if (!workSkills.length) return;
 
     // Move skill to experience
     displayedKnowHow[index]!.skill = skills.filter(
-      (skill) => !workSkills.includes(skill)
+      (skill) => !workSkills.includes(skill),
     )[0]!;
     displayedKnowHow.push({
       ...data,
@@ -229,12 +229,12 @@ export const getKnowHow = async (
 
   // Sort by end date
   displayedKnowHow.sort((a, b) =>
-    !b.end || (a.end && b.end.isAfter(a.end)) ? 1 : -1
+    !b.end || (a.end && b.end.isAfter(a.end)) ? 1 : -1,
   );
 
   const { experience, education } = groupBy(
     displayedKnowHow,
-    ({ countAsExperience }) => (countAsExperience ? "experience" : "education")
+    ({ countAsExperience }) => (countAsExperience ? "experience" : "education"),
   );
 
   return {
@@ -245,7 +245,7 @@ export const getKnowHow = async (
 
 export const getCertifications = async () => {
   const certifications = (await getCollection("certifications")).map(
-    ({ data: { date, ...data } }) => ({ date: dayjs(date), ...data })
+    ({ data: { date, ...data } }) => ({ date: dayjs(date), ...data }),
   );
 
   // Sort by date
@@ -261,7 +261,7 @@ export const getLanguages = async (astro: AstroGlobal) => {
 
   // Sort by currentLocale
   languages.sort((a) =>
-    a.code.startsWith(locale) || locale.startsWith(a.code) ? -1 : 1
+    a.code.startsWith(locale) || locale.startsWith(a.code) ? -1 : 1,
   );
 
   return languages;
@@ -270,23 +270,21 @@ export const getLanguages = async (astro: AstroGlobal) => {
 export const getTech = async (
   astro: AstroGlobal,
   threshold = 5,
-  options?: GetCollectionOptions<"tech">
+  options?: GetCollectionOptions<"tech">,
 ) =>
   await Promise.all(
     applyMatch(
       await matchRoles(
         astro,
-        (
-          await getCollectionAdvanced("tech", options)
-        ).map((tech) => ({
+        (await getCollectionAdvanced("tech", options)).map((tech) => ({
           data: tech,
           roles: tech.data.roles,
-        }))
+        })),
       ),
-      threshold
+      threshold,
     ).map(async (tech) => {
       const roleFunctionalities = tech.data.functionalities?.filter(
-        (functionality) => typeof functionality !== "string"
+        (functionality) => typeof functionality !== "string",
       );
 
       if (roleFunctionalities?.length) {
@@ -296,9 +294,9 @@ export const getTech = async (
             roleFunctionalities.map((functionality) => ({
               data: functionality,
               roles: functionality.roles,
-            }))
+            })),
           ),
-          threshold
+          threshold,
         );
 
         // Filter and map functionalities
@@ -309,12 +307,12 @@ export const getTech = async (
             return matchedFunctionalities.includes(functionality)
               ? [functionality.id]
               : [];
-          }
+          },
         );
       }
 
       return tech;
-    })
+    }),
   );
 
 export const getTechList = async (...params: Parameters<typeof getTech>) => {
@@ -327,7 +325,7 @@ export const getTechList = async (...params: Parameters<typeof getTech>) => {
     dayjs.extend(relativeTime);
 
     return capitalize(
-      dayjs.duration(experience).humanize().replace("a ", "1 ")
+      dayjs.duration(experience).humanize().replace("a ", "1 "),
     );
   };
 
@@ -335,9 +333,7 @@ export const getTechList = async (...params: Parameters<typeof getTech>) => {
 
   return (
     await Promise.all(
-      (
-        await getTech(...params)
-      ).map(
+      (await getTech(...params)).map(
         async ({
           data: { id, experience, group, functionalities, translateId },
         }) => {
@@ -348,9 +344,9 @@ export const getTechList = async (...params: Parameters<typeof getTech>) => {
 
           const content = group
             ? tech.filter(
-                ({ data: { group: groupToCheck } }) => groupToCheck === group
+                ({ data: { group: groupToCheck } }) => groupToCheck === group,
               )
-            : functionalities?.map((functionality) => ({
+            : (functionalities?.map((functionality) => ({
                 id:
                   typeof functionality === "string"
                     ? functionality
@@ -361,7 +357,7 @@ export const getTechList = async (...params: Parameters<typeof getTech>) => {
                     typeof functionality === "string" ||
                     !functionality.dontTranslateId,
                 },
-              })) ?? [];
+              })) ?? []);
 
           const title = capitalize(group ?? id);
 
@@ -375,22 +371,22 @@ export const getTechList = async (...params: Parameters<typeof getTech>) => {
                   : capitalize(id),
                 experience:
                   data.experience && (await formatExperience(data.experience)),
-              }))
+              })),
             ),
             isGroup: !!group,
           };
-        }
-      )
+        },
+      ),
     )
   ).filter((tech) => !!tech);
 };
 
 export const compactTechList = (
-  techListResult: Awaited<ReturnType<typeof getTechList>>
+  techListResult: Awaited<ReturnType<typeof getTechList>>,
 ) =>
   techListResult.flatMap((tech) =>
     tech.isGroup
       ? (tech.items as ((typeof tech.items)[number] &
           Partial<Omit<typeof tech, keyof (typeof tech.items)[number]>>)[])
-      : tech
+      : tech,
   );

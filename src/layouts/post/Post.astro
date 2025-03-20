@@ -50,7 +50,7 @@ const { Content, remarkPluginFrontmatter } = entry ? await render(entry) : {};
 const title = getTitle(entry);
 const publishingDate = getPublishingDate(
   entry,
-  remarkPluginFrontmatter
+  remarkPluginFrontmatter,
 )?.format("LL");
 const cover = getCover(entry);
 const downloadLinks = getDownloadLinks(entry);
@@ -68,8 +68,8 @@ const noTranslation = contentProps?.isLocalized ?? isLocalizedEntry(entry);
 
 {
   cover && (
-    <div class="lg:hidden fixed left-0 right-0 mx-auto">
-      <PostCover src={cover} entry={entry!} class="h-[55vh] -mt-[39vh]" />
+    <div class="fixed left-0 right-0 mx-auto lg:hidden">
+      <PostCover src={cover} entry={entry!} class="-mt-[39vh] h-[55vh]" />
     </div>
   )
 }
@@ -88,7 +88,7 @@ const noTranslation = contentProps?.isLocalized ?? isLocalizedEntry(entry);
         {
           cover && (
             <div class="hidden lg:inline">
-              <PostCover src={cover} entry={entry!} class="h-[40vh] mb-6" />
+              <PostCover src={cover} entry={entry!} class="mb-6 h-[40vh]" />
             </div>
           )
         }
@@ -123,7 +123,7 @@ const noTranslation = contentProps?.isLocalized ?? isLocalizedEntry(entry);
         >
         {
           downloadLinks && (
-            <div class="flex flex-col items-center mt-8 mb-7">
+            <div class="mb-7 mt-8 flex flex-col items-center">
               <Button
                 href={downloadLinks[0]}
                 linkClass={buttonWidthClass}
@@ -154,7 +154,7 @@ const noTranslation = contentProps?.isLocalized ?? isLocalizedEntry(entry);
         }
         {
           Astro.slots.has("footer") && (
-            <Text subtitle tag="div" class="mt-2 mb-1.5 2xl:-mb-1">
+            <Text subtitle tag="div" class="mb-1.5 mt-2 2xl:-mb-1">
               <slot name="footer" />
             </Text>
           )
@@ -214,7 +214,7 @@ const noTranslation = contentProps?.isLocalized ?? isLocalizedEntry(entry);
       JSON.stringify({
         ...readEntries,
         [collection]: [slug, ...(readEntries[collection] ?? [])],
-      })
+      }),
     );
   });
 </script>

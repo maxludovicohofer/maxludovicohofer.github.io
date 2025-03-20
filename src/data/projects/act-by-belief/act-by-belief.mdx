@@ -2,23 +2,23 @@
 category: tool
 developmentTime: P2W
 roles:
-- role: tool programmer
-  tasks:
-  - creating a performant AI tool
-  achievements:
-  - created a complex AI structure with less than 1ms tree traversal time per agent
-  - created an easy to use debug UI
+  - role: tool programmer
+    tasks:
+      - creating a performant AI tool
+    achievements:
+      - created a complex AI structure with less than 1ms tree traversal time per agent
+      - created an easy to use debug UI
 
-- role: AI programmer
-  tasks:
-  - designing and developing AI agents following a custom model
-  achievements:
-  - developed a flexible AI system that follows a natural thought process
+  - role: AI programmer
+    tasks:
+      - designing and developing AI agents following a custom model
+    achievements:
+      - developed a flexible AI system that follows a natural thought process
 
 tech:
-- Unity
+  - Unity
 downloadLinks:
-- https://github.com/maxludovicohofer/act-by-belief
+  - https://github.com/maxludovicohofer/act-by-belief
 youTubeID: wYkGjcrDOOs
 publishingDate: 2024-02-05
 ---
@@ -111,6 +111,6 @@ else
 
 {/* First point: ux, second point: code, third point: development challenges. Split in max 4 points if too long */}
 
-* The system comes with a fully documented API and in-game debugger targeted at Unity programmers. The debugger displays a text overlay with the quasi-realtime beliefs of every brain, and brain IDs on top of their bodies. A simple code demonstration of basic functionality is also provided.
-* The codebase amounts to around 1500 lines including documentation. The API was designed for a smooth developer experience and ease of extension. Also, the Act By Belief workflow can be achieved in existing decision tree systems without relying on this API.
-* The biggest development challenge was C#'s type system, forcing me to introduce some slow reflection. To save on performance, I plan to migrate this system to a C++ library in the near future.
+- The system comes with a fully documented API and in-game debugger targeted at Unity programmers. The debugger displays a text overlay with the quasi-realtime beliefs of every brain, and brain IDs on top of their bodies. A simple code demonstration of basic functionality is also provided.
+- The codebase amounts to around 1500 lines including documentation. The API was designed for a smooth developer experience and ease of extension. Also, the Act By Belief workflow can be achieved in existing decision tree systems without relying on this API.
+- The biggest development challenge was C#'s type system, forcing me to introduce some slow reflection. To save on performance, I plan to migrate this system to a C++ library in the near future.

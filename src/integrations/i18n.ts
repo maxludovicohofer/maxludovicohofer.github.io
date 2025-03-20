@@ -22,7 +22,7 @@ export const getPreferredLocale = () => {
 
   for (const language of navigator.languages) {
     const matchingLocale = locales.find((locale) =>
-      language.startsWith(locale)
+      language.startsWith(locale),
     );
 
     if (matchingLocale) return matchingLocale;

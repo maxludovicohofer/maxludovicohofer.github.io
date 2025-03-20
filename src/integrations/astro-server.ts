@@ -1,3 +1,13 @@
+import {
+  getCategory,
+  getGroup,
+  getPublishingDate,
+  type PostCollectionKey,
+} from "@integrations/content";
+import {
+  getEntryId,
+  type DocumentCollectionKey,
+} from "@layouts/document/Document.astro";
 import type { AstroGlobal } from "astro";
 import {
   getCollection,
@@ -8,6 +18,22 @@ import {
   type DataEntryMap,
   type ReferenceDataEntry,
 } from "astro:content";
+import addArticle from "indefinite";
+import {
+  getCombinations,
+  groupBy,
+  indexOfMax,
+  renameObjectKeys,
+  swap,
+} from "./array";
+import { defaultLocale, locales } from "./astro-config";
+import {
+  addLocaleToLink,
+  getPathWithoutLocale,
+  type PossibleTranslations,
+} from "./i18n";
+import { getCurrentLocale } from "./i18n-special";
+import { remap } from "./math";
 import {
   capitalize,
   getHumanPathSection,
@@ -20,32 +46,6 @@ import {
   makePath,
   standardizePath,
 } from "./text";
-import addArticle from "indefinite";
-import {
-  getCategory,
-  getGroup,
-  getPublishingDate,
-  type PostCollectionKey,
-} from "@integrations/content";
-import {
-  getCombinations,
-  groupBy,
-  indexOfMax,
-  renameObjectKeys,
-  swap,
-} from "./array";
-import { remap } from "./math";
-import {
-  getEntryId,
-  type DocumentCollectionKey,
-} from "@layouts/document/Document.astro";
-import { defaultLocale, locales } from "./astro-config";
-import {
-  addLocaleToLink,
-  getPathWithoutLocale,
-  type PossibleTranslations,
-} from "./i18n";
-import { getCurrentLocale } from "./i18n-special";
 
 type ExceptFirst<T extends unknown[]> = T extends [any, ...infer U] ? U : never;
 
@@ -53,7 +53,7 @@ export const getRole = async (astro: AstroGlobal) => {
   const roles = await getCollection("roles");
   // Look for role in path sections
   const pathSections = getPathSections(astro.originPathname, 0, 2).filter(
-    (section) => !!section
+    (section) => !!section,
   );
 
   let role = roles[0]!;
@@ -76,7 +76,7 @@ export const getRole = async (astro: AstroGlobal) => {
 export const addBaseToLink = async (
   astro: AstroGlobal,
   link = "",
-  noLocale?: boolean
+  noLocale?: boolean,
 ) => {
   const { role, isDefault } = await getRole(astro);
 
@@ -85,8 +85,8 @@ export const addBaseToLink = async (
   return standardizePath(
     addLocaleToLink(
       linkWithRole,
-      noLocale ? undefined : getCurrentLocale(astro)
-    )
+      noLocale ? undefined : getCurrentLocale(astro),
+    ),
   );
 };
 
@@ -116,9 +116,9 @@ export const getPathWithoutBase = async (astro: AstroGlobal, path: string) => {
 
 export const getEntriesSafe = async <
   C extends CollectionKey,
-  E extends keyof DataEntryMap[C] = string
+  E extends keyof DataEntryMap[C] = string,
 >(
-  entries: ReferenceDataEntry<C, E>[]
+  entries: ReferenceDataEntry<C, E>[],
 ) => {
   const unsafeEntries = await getEntries(entries);
 
@@ -128,7 +128,7 @@ export const getEntriesSafe = async <
     throw new Error(
       `Missing ${errors[0]!.collection}: ${errors
         .map(({ id }) => `"${id.toString()}"`)
-        .join(", ")}.`
+        .join(", ")}.`,
     );
   }
 
@@ -137,7 +137,7 @@ export const getEntriesSafe = async <
 
 export const matchRoles = async <D>(
   astro: AstroGlobal,
-  entries: { data?: D; roles?: ReferenceDataEntry<"roles", string>[] }[]
+  entries: { data?: D; roles?: ReferenceDataEntry<"roles", string>[] }[],
 ) => {
   const role = (await getRole(astro)).role;
 
@@ -181,7 +181,7 @@ export const matchRoles = async <D>(
       if (Array.isArray(testValue)) {
         // Exclude values that cannot match
         testValue = testValue.filter(
-          (singleTest) => !isNotMatching(singleTest)
+          (singleTest) => !isNotMatching(singleTest),
         );
       } else if (isNotMatching(testValue)) {
         // Cannot match
@@ -216,7 +216,7 @@ export const matchRoles = async <D>(
     let matchScore = 0;
 
     const topic = isEntry(data)
-      ? getCategory(data) ?? getGroup(data)
+      ? (getCategory(data) ?? getGroup(data))
       : undefined;
     if (topic) {
       const score = match(topic);
@@ -239,7 +239,7 @@ export const matchRoles = async <D>(
   const maxScore = Number(Object.keys(scoredEntities).at(-1));
   if (maxScore) {
     renameObjectKeys(scoredEntities, (oldKey) =>
-      Math.round(remap(Number(oldKey), maxScore, 10))
+      Math.round(remap(Number(oldKey), maxScore, 10)),
     );
   }
 
@@ -247,23 +247,23 @@ export const matchRoles = async <D>(
     Object.entries(scoredEntities).map(([priority, entries]) => [
       priority,
       entries!.map(({ data }) => data!),
-    ])
+    ]),
   );
 };
 
 export const applyMatch = <T extends Partial<Record<any, any[]>>>(
   matchResult: T,
   // Number from 0-10 that filters out weak matches
-  threshold = 0
+  threshold = 0,
 ) =>
   Object.values(
     (threshold
       ? Object.fromEntries(
           Object.entries(matchResult).filter(
-            ([matchScore]) => Number(matchScore) > threshold
-          )
+            ([matchScore]) => Number(matchScore) > threshold,
+          ),
         )
-      : matchResult) as unknown as Record<any, NonNullable<T[keyof T]>>
+      : matchResult) as unknown as Record<any, NonNullable<T[keyof T]>>,
   )
     .reverse()
     .flat();
@@ -281,21 +281,21 @@ export const getMatchedPosts = async <C extends PostCollectionKey>(
 ) => {
   const groupedEntries = await matchRoles(
     astro,
-    (
-      await getSortedDocuments(astro, collection, ...params)
-    ).map((document) => ({
-      data: document,
-      roles:
-        document.collection === "projects"
-          ? document.data.roles.map(({ role }) => role)
-          : document.data.forRoles ?? [],
-    }))
+    (await getSortedDocuments(astro, collection, ...params)).map(
+      (document) => ({
+        data: document,
+        roles:
+          document.collection === "projects"
+            ? document.data.roles.map(({ role }) => role)
+            : (document.data.forRoles ?? []),
+      }),
+    ),
   );
 
   // Sort individual categories by latest first
   Object.values(groupedEntries).forEach((entries) => {
     entries.sort((a, b) =>
-      b.publishingDate.isAfter(a.publishingDate) ? 1 : -1
+      b.publishingDate.isAfter(a.publishingDate) ? 1 : -1,
     );
   });
 
@@ -316,7 +316,7 @@ export const getSortedDocuments = async <C extends DocumentCollectionKey>(
   const uniqueEntries = getUniqueEntries(allDocuments);
   const entries = translateLocale
     ? uniqueEntries.map((entry) =>
-        getLocalizedEntry(entry, allDocuments, translateLocale)
+        getLocalizedEntry(entry, allDocuments, translateLocale),
       )
     : uniqueEntries;
 
@@ -327,21 +327,19 @@ export const getSortedDocuments = async <C extends DocumentCollectionKey>(
         ...entry,
         publishingDate: getPublishingDate(
           entry,
-          (
-            await render(entry)
-          ).remarkPluginFrontmatter
+          (await render(entry)).remarkPluginFrontmatter,
         )!,
-      }))
+      })),
     )
   ).sort((a, b) => (b.publishingDate.isAfter(a.publishingDate) ? 1 : -1));
 };
 
 export const getAllDocuments = async <
   C extends DocumentCollectionKey,
-  E extends keyof DataEntryMap[DocumentCollectionKey] = string
+  E extends keyof DataEntryMap[DocumentCollectionKey] = string,
 >(
   collection: C,
-  options?: GetCollectionOptions<C, E> & { noDrafts?: boolean }
+  options?: GetCollectionOptions<C, E> & { noDrafts?: boolean },
 ) =>
   await getCollectionAdvanced(collection, {
     filter: ({ data: { draft } }) =>
@@ -351,7 +349,7 @@ export const getAllDocuments = async <
 
 export interface GetCollectionOptions<
   C extends CollectionKey,
-  E extends keyof DataEntryMap[CollectionKey] = string
+  E extends keyof DataEntryMap[CollectionKey] = string,
 > {
   excluded?: string[];
   entries?: ReferenceDataEntry<CollectionKey, E>[];
@@ -360,15 +358,15 @@ export interface GetCollectionOptions<
 
 export const getCollectionAdvanced = async <
   C extends CollectionKey,
-  E extends keyof DataEntryMap[CollectionKey] = string
+  E extends keyof DataEntryMap[CollectionKey] = string,
 >(
   collection: C,
-  options?: GetCollectionOptions<C, E>
+  options?: GetCollectionOptions<C, E>,
 ) => {
   const excluded = options?.excluded?.map((entry) => getEntryId(entry)) ?? [];
   const filter = options?.filter;
   const queryFilter: NonNullable<NonNullable<typeof options>["filter"]> = (
-    entry
+    entry,
   ) => {
     if (filter && !filter(entry)) return;
 
@@ -385,34 +383,34 @@ export const getCollectionAdvanced = async <
 };
 
 export const getUniqueEntries = <C extends CollectionKey>(
-  entries: CollectionEntry<C>[]
+  entries: CollectionEntry<C>[],
 ) => entries.filter((entry) => !isLocalizedEntry(entry));
 
 export const isLocalizedEntry = <C extends CollectionKey>(
-  entry: CollectionEntry<C> | undefined
+  entry: CollectionEntry<C> | undefined,
 ) => !!entry && locales.includes(getEntryLocale(entry));
 
 export const getEntryLocale = <C extends CollectionKey>(
-  entry: CollectionEntry<C>
+  entry: CollectionEntry<C>,
 ) => getPathSection(entry.id, -2) as PossibleTranslations;
 
 export const getLocalizedEntry = <C extends CollectionKey>(
   entry: CollectionEntry<C>,
   allEntries: CollectionEntry<C>[],
-  locale?: (typeof locales)[number]
+  locale?: (typeof locales)[number],
 ) => {
   const localizedId =
     locale && locale !== defaultLocale && `${locale}/${getEntryId(entry)}`;
 
   return localizedId
-    ? allEntries.find(({ id }) => id.endsWith(localizedId)) ?? entry
+    ? (allEntries.find(({ id }) => id.endsWith(localizedId)) ?? entry)
     : entry;
 };
 
 export const getLinkName = async (
   astro: AstroGlobal,
   link: string,
-  forDisplay?: boolean
+  forDisplay?: boolean,
 ) => {
   let linkName: string;
 
@@ -437,7 +435,7 @@ export const getLocalLinkName = async (astro: AstroGlobal, link: string) =>
 export const getRemoteLinkName = async (
   astro: AstroGlobal,
   link: string,
-  forDisplay?: boolean
+  forDisplay?: boolean,
 ) => {
   const url = new URL(link);
 

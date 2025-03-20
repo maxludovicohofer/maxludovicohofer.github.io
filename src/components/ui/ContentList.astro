@@ -47,7 +47,7 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
       return (
         <Card
           tag="li"
-          class={`content-list-card snap-center w-[80dvw] lg:w-full aspect-[16/10] min-h-[min(17rem,80dvh)] max-h-[min(18rem,80dvh)] animate-pulse ${highlightClass ?? ""}`}
+          class={`content-list-card aspect-[16/10] max-h-[min(18rem,80dvh)] min-h-[min(17rem,80dvh)] w-[80dvw] animate-pulse snap-center lg:w-full ${highlightClass ?? ""}`}
           data-slug={getEntryId(entry)}
         >
           <PostPreview
@@ -88,7 +88,7 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
   const carouselEvents: {
     [K in keyof HTMLElementEventMap]?: (
       this: HTMLElement,
-      e: HTMLElementEventMap[K]
+      e: HTMLElementEventMap[K],
     ) => any;
   } = {
     mouseenter: function () {
@@ -136,18 +136,18 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
         for (const event in carouselEvents) {
           list[actionToExecute](
             event,
-            carouselEvents[event as keyof typeof carouselEvents] as any
+            carouselEvents[event as keyof typeof carouselEvents] as any,
           );
         }
 
         if (actionToExecute === "removeEventListener")
           list.style.cursor = "unset";
-      })
+      }),
     );
 
     const replaceTitleClass = (
       container: Element,
-      importance: ReturnType<typeof makeHighlight>["importance"]
+      importance: ReturnType<typeof makeHighlight>["importance"],
     ) => {
       const containerTitle = container.querySelector(".post-preview-title")!;
 
@@ -156,7 +156,7 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
         containerTitle,
         importance === "content-list-highlight",
         getTextClass("content-list-highlight").split(" "),
-        getTextClass("h1").split(" ")
+        getTextClass("h1").split(" "),
       );
     };
 
@@ -174,7 +174,7 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
 
         if (readEntrySlugs) {
           const { highlightClass, importance } = makeHighlight(
-            list.dataset.discrete !== undefined
+            list.dataset.discrete !== undefined,
           );
           const highlightClasses = highlightClass
             .split(" ")

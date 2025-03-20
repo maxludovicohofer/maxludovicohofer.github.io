@@ -154,9 +154,9 @@ export const removeFromClasses = (className: string, remove: string[]) =>
   className.replace(
     new RegExp(
       `(^|\\s)(\\S*[:-])*(${remove.map((part) => `${part}-`).join("|")})\\S*`,
-      "g"
+      "g",
     ),
-    ""
+    "",
   );
 
 export const getTailwindValue = (element: Element, key: string) =>
@@ -164,15 +164,15 @@ export const getTailwindValue = (element: Element, key: string) =>
 
 export const getTailwindValueFromClass = (
   className: string | null,
-  key: string
+  key: string,
 ) => getTailwindValueFromClassList(className?.split(" ") ?? [], key);
 
 export const getTailwindValueFromClassList = (
   classList: string[],
-  key: string
+  key: string,
 ) => {
   const tailwindClass = classList.find((part) =>
-    part.replace("!", "").startsWith(key)
+    part.replace("!", "").startsWith(key),
   );
 
   return tailwindClass && getTailwindClassValue(tailwindClass);
@@ -191,14 +191,14 @@ export const switchClasses = (
   element: Element,
   condition: boolean,
   trueClasses: string[],
-  falseClasses: string[]
+  falseClasses: string[],
 ) => {
   element.classList.remove(...trueClasses, ...falseClasses);
   element.classList.add(...(condition ? trueClasses : falseClasses));
 };
 
 export const getAspectClass = (
-  aspect: NonNullable<ComponentProps<typeof Video>["youTubeInfo"]["aspect"]>
+  aspect: NonNullable<ComponentProps<typeof Video>["youTubeInfo"]["aspect"]>,
 ) => {
   switch (aspect) {
     case "16/9":

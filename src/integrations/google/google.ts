@@ -1,11 +1,11 @@
-import type { Credentials, OAuth2Client } from "google-auth-library";
 import { auth, youtube } from "@googleapis/youtube";
-import type { GaxiosError, GaxiosPromise } from "gaxios";
 import type { APIContext, AstroGlobal } from "astro";
 import {
-  GOOGLE_CLIENT_SECRET,
   GOOGLE_BASE_CREDENTIALS,
+  GOOGLE_CLIENT_SECRET,
 } from "astro:env/server";
+import type { GaxiosError, GaxiosPromise } from "gaxios";
+import type { Credentials, OAuth2Client } from "google-auth-library";
 
 const credentialsPath = "src/integrations/google/credentials.json";
 
@@ -35,7 +35,7 @@ let authorization: OAuth2Client | undefined;
 
 export const getAuth = async (
   astro: AstroGlobal,
-  scope: typeof scopes | (typeof scopes)[number]
+  scope: typeof scopes | (typeof scopes)[number],
 ) => {
   if (authorization) return authorization;
 
@@ -57,7 +57,7 @@ export const getAuth = async (
   } catch {
     if (import.meta.env.DEV) {
       throw new Error(
-        `Google: authorize at ${oAuthClient.generateAuthUrl(tokenSettings)}`
+        `Google: authorize at ${oAuthClient.generateAuthUrl(tokenSettings)}`,
       );
     }
 
@@ -72,7 +72,7 @@ export const getAuth = async (
       `Google: refresh at ${oAuthClient.generateAuthUrl({
         ...tokenSettings,
         prompt: "consent",
-      })}`
+      })}`,
     );
   }
 
@@ -92,13 +92,13 @@ export const completeAuthorization = async (astro: APIContext) => {
     } catch (e) {
       const error = e as GoogleError;
       throw new Error(
-        `Google: error while trying to retrieve access token: ${error.message}`
+        `Google: error while trying to retrieve access token: ${error.message}`,
       );
     }
 
     // Store credentials
     import("fs/promises").then(({ writeFile }) =>
-      writeFile(credentialsPath, JSON.stringify(credentials))
+      writeFile(credentialsPath, JSON.stringify(credentials)),
     );
   }
 
@@ -120,14 +120,14 @@ const getOAuthClient = async (astro: APIContext) => {
 
   if (!web) {
     throw new Error(
-      'Google: wrong client_secret file. Expected "web" property.'
+      'Google: wrong client_secret file. Expected "web" property.',
     );
   }
 
   const oauthClient = new auth.OAuth2(
     web.client_id,
     web.client_secret,
-    `${astro.url.origin}/oauthcallback`
+    `${astro.url.origin}/oauthcallback`,
   );
 
   return oauthClient;
@@ -146,7 +146,7 @@ export const callApi = async <R>(
       fields: string;
       pageToken?: string;
       maxResults: number;
-    }
+    },
   ) => GaxiosPromise<R>,
   ...params: Parameters<typeof getAuth>
 ) => {
@@ -194,7 +194,7 @@ export const callApi = async <R>(
           ...currentPage,
           items: [...response.items, ...currentPage.items],
         }),
-        responses[0] as PaginatedResponse
+        responses[0] as PaginatedResponse,
       )
     : responses[0]!;
 };

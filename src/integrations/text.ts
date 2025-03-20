@@ -20,14 +20,14 @@ export const capitalize = (text: string, astro?: AstroGlobal) =>
   `${text
     .charAt(0)
     .toLocaleUpperCase(
-      astro ? getCurrentLocale(astro) : defaultLocale
+      astro ? getCurrentLocale(astro) : defaultLocale,
     )}${text.slice(1)}`;
 
 export const uncapitalize = (text: string, astro?: AstroGlobal) =>
   `${text
     .charAt(0)
     .toLocaleLowerCase(
-      astro ? getCurrentLocale(astro) : defaultLocale
+      astro ? getCurrentLocale(astro) : defaultLocale,
     )}${text.slice(1)}`;
 
 export const endDelimiter = (text: string, delimiter = ".") =>
@@ -136,11 +136,11 @@ export const diff = (str1: string, str2: string) => {
 export const highlightCharacter = (
   text: string,
   index: number,
-  charactersAfter = 0
+  charactersAfter = 0,
 ) =>
   `${text.slice(0, index)}➡️${text[index] ?? ""}⬅️${text.slice(
     index + 1,
-    charactersAfter ? index + charactersAfter : undefined
+    charactersAfter ? index + charactersAfter : undefined,
   )}`;
 
 export const fixNewLines = (text: string) => text.replaceAll("\r\n", "\n");

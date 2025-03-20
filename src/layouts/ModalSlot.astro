@@ -4,16 +4,16 @@ import BackButton from "@ui/BackButton.astro";
 // TODO PHASE 2 USE DIALOG INSTEAD OF DIV (SHOULD FIX IOS SAFARI GYROSCOPE WITH POINTEREVENTS)
 ---
 
-<div class="modal-slot fixed inset-0 pointer-events-none">
+<div class="modal-slot pointer-events-none fixed inset-0">
   <div
-    class="modal-back size-full bg-white/85 dark:bg-black/85 opacity-0 duration-700"
+    class="modal-back size-full bg-white/85 opacity-0 duration-700 dark:bg-black/85"
   >
   </div>
   <div
-    class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
+    class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center"
   >
     <div
-      class="modal max-h-[90dvh] lg:max-h-[80dvh] max-w-[90dvw] lg:max-w-[80dvw] rounded-3xl overflow-hidden flex flex-col items-center justify-center"
+      class="modal flex max-h-[90dvh] max-w-[90dvw] flex-col items-center justify-center overflow-hidden rounded-3xl lg:max-h-[80dvh] lg:max-w-[80dvw]"
     >
     </div>
     <style>
@@ -35,7 +35,7 @@ import BackButton from "@ui/BackButton.astro";
 
     // Restart paused video
     const originalMedia = document.querySelector<LiteYTEmbed>(
-      "lite-youtube[data-modal-original]"
+      "lite-youtube[data-modal-original]",
     );
 
     if (!originalMedia) return;
@@ -48,12 +48,12 @@ import BackButton from "@ui/BackButton.astro";
   document.addEventListener("astro:page-load", () =>
     document
       .querySelectorAll<HTMLElement>(".modal-back")
-      .forEach((element) => element.addEventListener("click", closeModal))
+      .forEach((element) => element.addEventListener("click", closeModal)),
   );
 
   document.addEventListener("astro:before-swap", () =>
     document
       .querySelectorAll<HTMLElement>(".modal-back")
-      .forEach((element) => element.removeEventListener("click", closeModal))
+      .forEach((element) => element.removeEventListener("click", closeModal)),
   );
 </script>

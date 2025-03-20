@@ -16,7 +16,7 @@ dayjs.extend(duration);
 export const getFormattedDates = async (
   astro: AstroGlobal,
   start: dayjs.Dayjs,
-  end?: dayjs.Dayjs
+  end?: dayjs.Dayjs,
 ) => {
   await setDayjsLocale(astro);
   dayjs.extend(duration);
@@ -25,14 +25,14 @@ export const getFormattedDates = async (
   const dates = [start, end ?? today] as const;
 
   const dropDayDate = today.subtract(
-    dayjs.duration({ months: 1 }).asMilliseconds()
+    dayjs.duration({ months: 1 }).asMilliseconds(),
   );
   const showDay =
     dates[1].diff(dates[0], "month") < 1 ||
     dates.some((date) => date > dropDayDate);
 
   const dropMonthDate = today.subtract(
-    dayjs.duration({ years: 5 }).asMilliseconds()
+    dayjs.duration({ years: 5 }).asMilliseconds(),
   );
   const showMonth =
     dates[1].diff(dates[0], "year") < 1 ||
@@ -97,7 +97,7 @@ const t = i18n(Astro);
                 </ol>
               </li>
             );
-          }
+          },
         )}
       </ol>
     </>

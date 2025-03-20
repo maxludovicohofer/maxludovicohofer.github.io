@@ -1,14 +1,14 @@
 ---
-import Page from "@layouts/Page.astro";
-import Bento from "@layouts/Bento.astro";
 import Profile from "@components/Profile.astro";
+import Showreel from "@components/Showreel.astro";
 import TechPreview from "@components/TechPreview.astro";
+import { defaultLocale, locales } from "@integrations/astro-config";
+import { makePath } from "@integrations/text";
+import Bento from "@layouts/Bento.astro";
+import Page from "@layouts/Page.astro";
 import PostListPreview from "@post/PostListPreview.astro";
 import { getCollection } from "astro:content";
-import { makePath } from "@integrations/text";
-import { defaultLocale, locales } from "@integrations/astro-config";
 import { BUILD_MODE } from "astro:env/server";
-import Showreel from "@components/Showreel.astro";
 
 export const getStaticPaths = async (options?: {
   allowedLocales?: (typeof locales)[number][];

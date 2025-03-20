@@ -1,15 +1,15 @@
+import { getEntryId } from "@layouts/document/Document.astro";
+import type { AstroGlobal } from "astro";
 import dayjs from "dayjs";
 import duration, { type Duration } from "dayjs/plugin/duration";
-import { applyMatch, getSortedPosts, matchRoles } from "./astro-server";
-import type { AstroGlobal } from "astro";
-import { getEntryId } from "@layouts/document/Document.astro";
-import { capitalize, endDelimiter } from "./text";
-import { i18n } from "./i18n-server";
-import { callApi } from "./google/google";
-import { getCurrentLocale } from "./i18n-special";
-import { defaultLocale } from "./astro-config";
 import getReadingTime from "reading-time";
+import { defaultLocale } from "./astro-config";
+import { applyMatch, getSortedPosts, matchRoles } from "./astro-server";
+import { callApi } from "./google/google";
+import { i18n } from "./i18n-server";
+import { getCurrentLocale } from "./i18n-special";
 import { roundTo } from "./math";
+import { capitalize, endDelimiter } from "./text";
 
 interface VideoData {
   [entry: string]: {
@@ -50,7 +50,7 @@ export const generateShowreelCaptions = async (astro: AstroGlobal) => {
   ).sort(
     (a, b) =>
       showreelProjects.indexOf(getEntryId(a)) -
-      showreelProjects.indexOf(getEntryId(b))
+      showreelProjects.indexOf(getEntryId(b)),
   );
 
   const captionsByProject = await Promise.all(
@@ -60,12 +60,12 @@ export const generateShowreelCaptions = async (astro: AstroGlobal) => {
         roles.map((roleInfo) => ({
           data: roleInfo,
           roles: [roleInfo.role],
-        }))
+        })),
       );
 
       const getAchievements = (threshold?: number) =>
         applyMatch(matchedRoleData, threshold).flatMap(
-          ({ achievements }) => achievements
+          ({ achievements }) => achievements,
         );
 
       const matchedAchievements = getAchievements(1);
@@ -74,9 +74,9 @@ export const generateShowreelCaptions = async (astro: AstroGlobal) => {
         showreelData,
         getEntryId(id) as keyof typeof showreelData,
         matchedAchievements.length ? matchedAchievements : getAchievements(),
-        awards?.map((award) => `Awarded ${award}`).slice(0, 1)
+        awards?.map((award) => `Awarded ${award}`).slice(0, 1),
       );
-    })
+    }),
   );
 
   const captions = captionsByProject.flatMap((captions, index) => {
@@ -99,9 +99,9 @@ export const generateShowreelCaptions = async (astro: AstroGlobal) => {
       captions.map(
         async ({ start, end, text }, index) =>
           `${index}\n${start.format("HH:mm:ss,SSS")} --> ${end.format(
-            "HH:mm:ss,SSS"
-          )}\n${await t(endDelimiter(capitalize(text)))}`
-      )
+            "HH:mm:ss,SSS",
+          )}\n${await t(endDelimiter(capitalize(text)))}`,
+      ),
     )
   ).join("\n\n");
 };
@@ -114,7 +114,7 @@ const fitAndQuantizeSubtitles = <V extends VideoData>(
   videoEntry: keyof V,
   fromStart: string[],
   fromEnd?: string[],
-  addedDuration = 0
+  addedDuration = 0,
 ) => {
   const { duration: entryDuration, cuts } = videoData[videoEntry]!;
 
@@ -123,7 +123,7 @@ const fitAndQuantizeSubtitles = <V extends VideoData>(
   const getDuration = (...params: Parameters<typeof getCaptionDuration>) =>
     Math.max(
       Math.round((getCaptionDuration(...params) + addedDuration) / 1000),
-      4
+      4,
     ) * 1000;
 
   let captions: { start: Duration; end: Duration; text: string }[] = [];
@@ -166,16 +166,16 @@ const fitAndQuantizeSubtitles = <V extends VideoData>(
               (1 - possibilityOfCutShift)) /
               captionCount,
             0.5,
-            Math.ceil
+            Math.ceil,
           ),
-          0.5
+          0.5,
         );
 
         if (import.meta.env.PROD) {
           console.warn(
             addedDuration
               ? `+ ${durationIncrease}s.`
-              : `Only ${captionCount} captions (${availableTimeFromEnd}s) for "${videoEntry.toString()}" (${entryDuration}s). Artificially increasing each caption by ${durationIncrease}s.`
+              : `Only ${captionCount} captions (${availableTimeFromEnd}s) for "${videoEntry.toString()}" (${entryDuration}s). Artificially increasing each caption by ${durationIncrease}s.`,
           );
         }
 
@@ -184,7 +184,7 @@ const fitAndQuantizeSubtitles = <V extends VideoData>(
           videoEntry,
           fromStart,
           fromEnd,
-          addedDuration + 1000 * durationIncrease
+          addedDuration + 1000 * durationIncrease,
         );
       }
 
@@ -275,13 +275,13 @@ export const getARandomShowreel = async (astro: AstroGlobal) => {
         ].join(),
       }),
     astro,
-    "https://www.googleapis.com/auth/youtube.readonly"
+    "https://www.googleapis.com/auth/youtube.readonly",
   );
 
   if (playlists === null) return;
 
   const uploadPlaylist = playlists?.items?.map(
-    ({ contentDetails }) => contentDetails?.relatedPlaylists?.uploads
+    ({ contentDetails }) => contentDetails?.relatedPlaylists?.uploads,
   )[0];
 
   if (!uploadPlaylist) throw new Error("Google: no uploads playlist found.");
@@ -299,7 +299,7 @@ export const getARandomShowreel = async (astro: AstroGlobal) => {
           ].join(),
         }),
       astro,
-      "https://www.googleapis.com/auth/youtube.readonly"
+      "https://www.googleapis.com/auth/youtube.readonly",
     )
   )?.items?.find(({ snippet }) => snippet?.title?.startsWith("Showreel"))
     ?.contentDetails?.videoId;
@@ -316,7 +316,7 @@ export const getARandomShowreel = async (astro: AstroGlobal) => {
           fields: [fields, "items(snippet/categoryId)"].join(),
         }),
       astro,
-      "https://www.googleapis.com/auth/youtube.readonly"
+      "https://www.googleapis.com/auth/youtube.readonly",
     )
   )?.items?.[0]?.snippet?.categoryId;
 };
@@ -327,7 +327,7 @@ export const setYouTubeVideo = async (
   categoryId: string,
   title: string,
   description: string,
-  videoId?: string
+  videoId?: string,
 ) => {
   // TODO PHASE 2 UPDATE (DELETE AND RECREATE) IF VIDEOID PRESENT
   if (videoId) return;
@@ -354,7 +354,7 @@ export const setYouTubeVideo = async (
           },
         }),
       astro,
-      "https://www.googleapis.com/auth/youtube.upload"
+      "https://www.googleapis.com/auth/youtube.upload",
     )
   )?.id;
 };
@@ -363,7 +363,7 @@ export const setYouTubeCaptions = async (
   astro: AstroGlobal,
   newCaptions: string,
   videoId: string,
-  captionId?: string
+  captionId?: string,
 ) =>
   (
     await callApi(
@@ -388,7 +388,7 @@ export const setYouTubeCaptions = async (
               },
             }),
       astro,
-      "https://www.googleapis.com/auth/youtube.force-ssl"
+      "https://www.googleapis.com/auth/youtube.force-ssl",
     )
   )?.id;
 
@@ -396,7 +396,7 @@ export const updateYouTubeVideoLocalization = async (
   astro: AstroGlobal,
   videoId: string,
   title: string,
-  description: string
+  description: string,
 ) => {
   const localizations = (
     await callApi(
@@ -408,7 +408,7 @@ export const updateYouTubeVideoLocalization = async (
           fields: [fields, "items(localizations)"].join(),
         }),
       astro,
-      "https://www.googleapis.com/auth/youtube.readonly"
+      "https://www.googleapis.com/auth/youtube.readonly",
     )
   )?.items?.[0];
 
@@ -436,7 +436,7 @@ export const updateYouTubeVideoLocalization = async (
           },
         }),
       astro,
-      "https://www.googleapis.com/auth/youtube.upload"
+      "https://www.googleapis.com/auth/youtube.upload",
     )
   )?.id;
 };

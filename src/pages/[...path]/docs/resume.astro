@@ -94,7 +94,7 @@ const myName = await getMyName(Astro);
       techList.map(async ({ title, experience }) => {
         const techItem = `${title}${await t(" ")}${await t("(")}${uncapitalize(experience!)}${await t(")")}`;
 
-        return <li class="pr-7 my-0.5">{techItem}</li>;
+        return <li class="my-0.5 pr-7">{techItem}</li>;
       })
     }
   </ul>
@@ -108,7 +108,7 @@ const myName = await getMyName(Astro);
       >{
         Object.entries(languages).map(
           async ([level, languages]) =>
-            `${await t(capitalize(level))}${await t(" ")}${await t("in")}${await t(" ")}${await t(toTextList(languages.map(({ id }) => id)))}${await t(".")}${await t(" ")}`
+            `${await t(capitalize(level))}${await t(" ")}${await t("in")}${await t(" ")}${await t(toTextList(languages.map(({ id }) => id)))}${await t(".")}${await t(" ")}`,
         )
       }</Text
     >
