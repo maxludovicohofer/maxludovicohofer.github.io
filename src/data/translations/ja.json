@@ -1654,5 +1654,13 @@
   "Full stack": {
     "translation": "フルスタック",
     "api": "deepl"
+  },
+  "_\"What is fun?\"_ is probably the most important question for a game designer. Many incredible designers have elaborated their own answers, which now define their style": {
+    "translation": "「何が楽しいのか？」は、ゲームデザイナーにとって最も重要な質問でしょう。多くの素晴らしいデザイナーたちが独自の答えを導き出し、それが彼らのスタイルを定義しています。",
+    "api": "deepl"
+  },
+  "The best videogames can be approached in two ways: as _activities_ and as _entertainment_. ![[Breath of the Wild(https://wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild)] is a masterclass at balancing both approaches.](https://youtube.com/watch?v=Q9sAzTOjl6s)\n\nAs activities, games impart a rhythm to a player's thought process and physical actions": {
+    "translation": "最高のビデオゲームには、2つのアプローチがあります。それは、_「活動」として、そして_「娯楽」としてです。『ブレス オブ ザ ワイルド』（https://wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild）は、この2つのアプローチのバランスを絶妙にとった傑作です。https://youtube.com/watch?v=Q9sAzTOjl6s）\n\nゲームという活動は、プレイヤーの思考プロセスと身体的な行動にリズムを与えます。",
+    "api": "deepl"
   }
 }
