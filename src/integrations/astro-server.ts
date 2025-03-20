@@ -148,14 +148,12 @@ export const matchRoles = async <D>(
       const words = id.split(" ");
       const wordsNum = words.length;
 
+      const isMainRole = !index;
       const matchers = getCombinations(words).flatMap((combination) => ({
         matcher: makeMatcher(combination.join(" ")),
         //? More specific match (more words) is better
-        weight: Math.sqrt(combination.length),
+        weight: Math.sqrt(combination.length) * (isMainRole ? 1.5 : 1),
       }));
-
-      // Perfect match trumps all
-      if (!index) matchers[0]!.weight = words.length;
 
       if (wordsNum > 1) {
         //? If has specialization, prioritize specialization over profession (ex: game designer, game over designer)
