@@ -9,8 +9,6 @@
     - programmer
     - lead
     - AI
-  notMatches:
-    - sound designer
   workFields:
     - game design
     - level design
@@ -21,6 +19,55 @@
     - AI
     - systems
 
+- id: technical quest designer
+  matches:
+    - level designer
+    - writer
+    - game director
+    - technical game designer
+    - technical gameplay designer
+    - programmer
+    - lead
+    - AI
+  workFields:
+    - quest design
+    - level design
+    - screenplays
+  specializations:
+    - screenplay
+    - cinematography
+    - programming
+
+- id: technical level designer
+  matches:
+    - technical game designer
+    - technical gameplay designer
+    - game director
+    - combat designer
+    - encounter designer
+    - quest designer
+    - mechanics
+    - programmer
+    - lead
+    - AI
+  workFields:
+    - level design
+    - encounter design
+    - open world
+  specializations:
+    - AI
+    - combat
+    - programming
+
+- id: game programmer
+  matches:
+    - gameplay programmer
+    - technical team lead
+  workFields:
+    - game programming
+    - combat systems
+    - physics systems
+
 - id: AI programmer
   matches:
     - AI tool programmer
@@ -29,6 +76,7 @@
   workFields:
     - AI programming
     - decision trees
+    - enemy AI
 
 - id: system programmer
   matches:
@@ -37,4 +85,5 @@
     - engine programmer
     - tech lead
   workFields:
+    - system programming
     - engine programming
