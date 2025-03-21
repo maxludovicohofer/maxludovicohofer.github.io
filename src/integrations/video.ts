@@ -171,11 +171,9 @@ const fitAndQuantizeSubtitles = <V extends VideoData>(
           0.5,
         );
 
-        if (import.meta.env.PROD) {
+        if (!addedDuration && import.meta.env.PROD) {
           console.warn(
-            addedDuration
-              ? `+ ${durationIncrease}s.`
-              : `Only ${captionCount} captions (${availableTimeFromEnd}s) for "${videoEntry.toString()}" (${entryDuration}s). Artificially increasing each caption by ${durationIncrease}s.`,
+            `Only ${captionCount} captions generated (${availableTimeFromEnd}s) for "${videoEntry.toString()}" (${entryDuration}s). Add more/longer achievements.`,
           );
         }
 

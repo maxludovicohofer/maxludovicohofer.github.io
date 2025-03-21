@@ -69,6 +69,7 @@
         - technical artist
   roles:
     - game designer
+    - level designer
     - programmer
     - technical artist
 
@@ -85,6 +86,7 @@
         - 3D artist
   roles:
     - game designer
+    - level designer
     - programmer
     - technical artist
 
@@ -207,21 +209,32 @@
 - id: Maya
   experience: P1Y
   functionalities:
-    - modeling
-    - animation
+    - id: modeling
+      roles:
+        - game designer
+        - level designer
+        - 3D artist
+    - id: animation
+      roles:
+        - game designer
+        - 3D artist
     - id: UV
       roles:
         - 3D artist
+        - technical artist
     - id: retopology
       roles:
         - 3D artist
-    - rigging
+    - id: rigging
+      roles:
+        - 3D artist
     - id: grooming with cards
       roles:
         - 3D artist
     - id: blend shapes
       roles:
         - 3D artist
+        - technical artist
   roles:
     - game designer
     - 3D artist
@@ -320,7 +333,7 @@
   functionalities:
     - landscape generation
   roles:
-    - game designer
+    - level designer
     - 3D artist
     - technical artist
 
@@ -346,6 +359,5 @@
       roles:
         - sound
   roles:
-    - game designer
-    - music
-    - sound
+    - sound designer
+    - music composer

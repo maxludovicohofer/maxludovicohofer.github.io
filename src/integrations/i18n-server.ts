@@ -93,10 +93,11 @@ const queueTranslation = async (
     if (import.meta.env.DEV && !options?.force) return `${cleanText} (t)`;
   }
 
-  const endDelimiter =
-    new RegExp(`[^.][${localeInfo[defaultLocale].delimiters}]$`).exec(
-      cleanText,
-    ) && cleanText.at(-1)!;
+  const endDelimiter = new RegExp(
+    `[^.][${localeInfo[defaultLocale].delimiters}]$`,
+  ).test(cleanText)
+    ? cleanText.at(-1)
+    : undefined;
   const textToTranslate = endDelimiter ? cleanText.slice(0, -1) : cleanText;
 
   const formatTranslation = async (translation: string) =>

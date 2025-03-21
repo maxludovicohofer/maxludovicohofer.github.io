@@ -32,10 +32,10 @@
   workFields:
     - quest design
     - level design
-    - screenplays
+    - open world
   specializations:
-    - screenplay
-    - cinematography
+    - encounters
+    - screenplays
     - programming
 
 - id: technical level designer

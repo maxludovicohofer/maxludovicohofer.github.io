@@ -61,7 +61,9 @@ export const indexOfMin = (array: number[]) =>
       )
     : undefined;
 
-export const renameObjectKeys = <O extends Record<string | number, any>>(
+export const renameObjectKeys = <
+  O extends Record<string | number, any[] | undefined>,
+>(
   obj: O,
   predicate: (oldKey: string) => keyof typeof obj,
 ) =>
@@ -73,6 +75,6 @@ export const renameObjectKeys = <O extends Record<string | number, any>>(
       if (newKey == oldKey) return;
 
       delete Object.assign(obj, {
-        [newKey]: obj[oldKey],
+        [newKey]: [...(obj[newKey] ?? []), ...(obj[oldKey] ?? [])],
       })[oldKey];
     });

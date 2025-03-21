@@ -33,7 +33,7 @@ import {
   type PossibleTranslations,
 } from "./i18n";
 import { getCurrentLocale } from "./i18n-special";
-import { remap } from "./math";
+import { lerp, remap } from "./math";
 import {
   capitalize,
   getHumanPathSection,
@@ -138,6 +138,7 @@ export const getEntriesSafe = async <
 export const matchRoles = async <D>(
   astro: AstroGlobal,
   entries: { data?: D; roles?: ReferenceDataEntry<"roles", string>[] }[],
+  debug?: boolean | ((data: D) => boolean),
 ) => {
   const role = (await getRole(astro)).role;
 
@@ -148,18 +149,36 @@ export const matchRoles = async <D>(
       const words = id.split(" ");
       const wordsNum = words.length;
 
-      const isMainRole = !index;
-      const matchers = getCombinations(words).flatMap((combination) => ({
-        matcher: makeMatcher(combination.join(" ")),
-        //? More specific match (more words) is better
-        weight: Math.sqrt(combination.length) * (isMainRole ? 1.5 : 1),
-      }));
+      const combinationsByWordCount = Object.values(
+        groupBy(getCombinations(words), ({ length }) => length),
+      ).reverse();
 
       if (wordsNum > 1) {
         //? If has specialization, prioritize specialization over profession (ex: game designer, game over designer)
-        const firstWordIndex = matchers.length - wordsNum;
-        swap(matchers, firstWordIndex, firstWordIndex + 1);
+        const oneWordCombinations = combinationsByWordCount.at(-1)!;
+        const firstWordIndex = oneWordCombinations.length - wordsNum;
+        swap(oneWordCombinations, firstWordIndex, firstWordIndex + 1);
       }
+
+      const isMainRole = !index;
+      const matchers = combinationsByWordCount.flatMap(
+        (combinations, wordCountIndex) => {
+          const wordCount = combinationsByWordCount.length - wordCountIndex;
+          //? More specific match (more words) is better
+          const weight = Math.sqrt(wordCount);
+          const nextWeight = Math.sqrt(wordCount + 1);
+
+          return combinations!.map((combination, index) => {
+            const priority = 1 - (index + 1) / combinations!.length;
+
+            return {
+              matcher: makeMatcher(combination.join(" ")),
+              weight:
+                lerp(weight, nextWeight, priority) * (isMainRole ? 1.25 : 1),
+            };
+          });
+        },
+      );
 
       return matchers;
     },
@@ -171,7 +190,7 @@ export const matchRoles = async <D>(
     return !!entry && typeof entry.data === "object";
   }
 
-  const match = (test: string | string[]) => {
+  const match = (test: string | string[], debug?: boolean) => {
     let testValue = test;
 
     const testMatch = (singleTest: string, matcher: RegExp) =>
@@ -204,14 +223,21 @@ export const matchRoles = async <D>(
     const scores = matchedRoles.map((matchers) => {
       const bestMatchIndex = matchers.findIndex(findBestMatch);
 
-      return bestMatchIndex === -1
-        ? 0
-        : matchers[bestMatchIndex]!.weight *
-            (1 - bestMatchIndex / matchers.length);
+      return bestMatchIndex === -1 ? 0 : matchers[bestMatchIndex]!.weight;
     });
     const bestScoreIndex = indexOfMax(scores)!;
+    const bestScore = scores[bestScoreIndex]!;
 
-    return Math.ceil(scores[bestScoreIndex]!);
+    if (debug && import.meta.env.DEV && bestScore) {
+      const bestMatch = matchedRoles[bestScoreIndex]!;
+      const matcherIndex =
+        matchedRoles[bestScoreIndex]!.findIndex(findBestMatch);
+      console.info(
+        `[${testValue}] matches "${bestMatch[matcherIndex]!.matcher}" with weight: ${bestMatch[matcherIndex]!.weight}`,
+      );
+    }
+
+    return bestScore;
   };
 
   // Group by match score
@@ -228,7 +254,10 @@ export const matchRoles = async <D>(
 
     const roleNames = roles?.map(({ id }) => id);
     if (roleNames) {
-      const score = match(roleNames);
+      const score = match(
+        roleNames,
+        typeof debug === "function" ? debug(data!) : debug,
+      );
       matchScore += score;
     } else {
       // If roles are undefined, distinguish from no match
@@ -238,8 +267,20 @@ export const matchRoles = async <D>(
     return matchScore;
   });
 
+  if (debug === true && import.meta.env.DEV) {
+    console.info(
+      Object.fromEntries(
+        Object.entries(scoredEntities).map(([key, value]) => [
+          key,
+          value?.map(({ data }) => data),
+        ]),
+      ),
+    );
+  }
+
   // Standardize keys from 0-10
-  const maxScore = Number(Object.keys(scoredEntities).at(-1));
+  const maxScore = Math.max(...Object.keys(scoredEntities).map(Number));
+
   if (maxScore) {
     renameObjectKeys(scoredEntities, (oldKey) =>
       Math.round(remap(Number(oldKey), maxScore, 10)),
@@ -457,7 +498,7 @@ export const getTelLinkName = (link: string, forDisplay?: boolean) => {
   const linkWithoutPrefix = link.slice(4);
 
   if (forDisplay) {
-    const sections = /.{1,3}/g.exec(linkWithoutPrefix)!;
+    const sections = linkWithoutPrefix.match(/.{1,3}/g)!;
 
     if (sections.at(-1)!.length < 3)
       sections[sections.length - 2] = `${sections.at(-2)}${sections.pop()}`;

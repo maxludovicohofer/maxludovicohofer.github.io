@@ -22,3 +22,5 @@ export const roundTo = (
   const inverse = 1 / step;
   return (roundFunction ?? Math.round)(value * inverse) / inverse;
 };
+
+export const lerp = (from = 0, to = 0, blend = 0) => from + blend * (to - from);

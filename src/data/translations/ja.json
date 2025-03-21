@@ -1794,5 +1794,37 @@
   "Designing and developing AI agents following a custom model and creating a performant AI tool": {
     "translation": "カスタムモデルに従ってAIエージェントを設計・開発し、高性能なAIツールを作成する",
     "api": "deepl"
+  },
+  "Game designer and technical artist": {
+    "translation": "ゲームデザイナー兼テクニカルアーティスト",
+    "api": "deepl"
+  },
+  "Technical quest designer experienced in leadership and software, specialized in encounters, screenplays, and programming": {
+    "translation": "技術的なクエストデザイナーで、リーダーシップとソフトウェアに精通しており、出会い、脚本、プログラミングを専門としています。",
+    "api": "deepl"
+  },
+  "Programmer": {
+    "translation": "プログラマー",
+    "api": "deepl"
+  },
+  "Camera programmer and gameplay programmer": {
+    "translation": "カメラプログラマーおよびゲームプレイプログラマー",
+    "api": "deepl"
+  },
+  "Developing realtime web apps and developing desktop apps that communicate with medical devices": {
+    "translation": "医療機器と通信するデスクトップアプリケーションの開発とリアルタイムウェブアプリケーションの開発",
+    "api": "deepl"
+  },
+  "Gameplay programmer and lead game designer": {
+    "translation": "ゲームプレイプログラマー兼リードゲームデザイナー",
+    "api": "deepl"
+  },
+  "Directing and programming the camera for cutscenes and gameplay, optimizing visibility and accessibility and programming characters, game systems and infrastructure, a rougelike card system, and tooling for the team": {
+    "translation": "カットシーンとゲームプレイにおけるカメラの演出とプログラミング、視認性とアクセス性の最適化、キャラクター、ゲームシステム、インフラストラクチャ、ルーグライクカードシステム、チーム用ツールのプログラミング",
+    "api": "deepl"
+  },
+  "I'm a technical quest designer specialized in encounters, screenplays, and programming": {
+    "translation": "私は、エンカウンター、シナリオ、プログラミングを専門とするテクニカルクエストデザイナーです。",
+    "api": "deepl"
   }
 }

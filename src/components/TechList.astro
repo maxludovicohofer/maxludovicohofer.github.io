@@ -1,9 +1,9 @@
 ---
+import { compactTechList, getTechList } from "@integrations/content";
 import { i18n } from "@integrations/i18n-server";
 import { capitalize } from "@integrations/text";
 import Text from "@ui/Text.astro";
 import type { HTMLAttributes } from "astro/types";
-import { getTechList, compactTechList } from "@integrations/content";
 
 interface Props extends HTMLAttributes<"ol"> {
   compact?: boolean;
@@ -76,7 +76,7 @@ const toExperienceText = async (experience: string) => {
             )}
           </li>
         );
-      },
+      }
     )
   }
 </ol>
