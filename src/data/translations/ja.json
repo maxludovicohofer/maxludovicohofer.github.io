@@ -1826,5 +1826,13 @@
   "I'm a technical quest designer specialized in encounters, screenplays, and programming": {
     "translation": "私は、エンカウンター、シナリオ、プログラミングを専門とするテクニカルクエストデザイナーです。",
     "api": "deepl"
+  },
+  "Lead game designer and gameplay programmer": {
+    "translation": "リードゲームデザイナー兼ゲームプレイプログラマー",
+    "api": "deepl"
+  },
+  "Technical team lead and camera programmer": {
+    "translation": "テクニカルチームのリーダー兼カメラプログラマー",
+    "api": "deepl"
   }
 }
