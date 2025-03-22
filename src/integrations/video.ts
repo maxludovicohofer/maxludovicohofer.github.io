@@ -5,7 +5,7 @@ import duration, { type Duration } from "dayjs/plugin/duration";
 import getReadingTime from "reading-time";
 import { defaultLocale } from "./astro-config";
 import { applyMatch, getSortedPosts, matchRoles } from "./astro-server";
-import { callApi } from "./google/google";
+import { callApi, isUploadsExceeded } from "./google/google";
 import { i18n } from "./i18n-server";
 import { getCurrentLocale } from "./i18n-special";
 import { roundTo } from "./math";
@@ -329,6 +329,8 @@ export const setYouTubeVideo = async (
 ) => {
   // TODO PHASE 2 UPDATE (DELETE AND RECREATE) IF VIDEOID PRESENT
   if (videoId) return;
+
+  if (isUploadsExceeded()) return;
 
   const { createReadStream } = await import("fs");
 

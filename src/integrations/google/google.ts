@@ -135,6 +135,11 @@ const getOAuthClient = async (astro: APIContext) => {
 
 const service = youtube("v3");
 
+let quotaExceeded: boolean;
+let uploadsExceeded: boolean;
+
+export const isUploadsExceeded = () => uploadsExceeded;
+
 /**
  * Returns null if quota exceeded.
  */
@@ -150,6 +155,8 @@ export const callApi = async <R>(
   ) => GaxiosPromise<R>,
   ...params: Parameters<typeof getAuth>
 ) => {
+  if (quotaExceeded) return null;
+
   type PaginatedResponse = R & { nextPageToken: string; items: any[] };
 
   function hasNextPage(test?: R): test is PaginatedResponse {
@@ -176,9 +183,12 @@ export const callApi = async <R>(
       const error = e as GoogleError;
       switch (error.errors?.[0].reason) {
         case "quotaExceeded":
+          quotaExceeded = true;
           console.error("Google: quota exceeded");
           return null;
+
         case "uploadLimitExceeded":
+          uploadsExceeded = true;
           console.error("Google: upload limit exceeded");
           return null;
       }

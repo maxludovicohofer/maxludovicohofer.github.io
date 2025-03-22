@@ -1834,5 +1834,9 @@
   "Technical team lead and camera programmer": {
     "translation": "テクニカルチームのリーダー兼カメラプログラマー",
     "api": "deepl"
+  },
+  "Game designer and UI designer": {
+    "translation": "ゲームデザイナーとUIデザイナー",
+    "api": "deepl"
   }
 }
