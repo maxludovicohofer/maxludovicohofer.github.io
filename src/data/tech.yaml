@@ -141,6 +141,8 @@
   group: programming
   roles:
     - programmer
+    - scrum master
+    - project manager
 
 - id: TDD
   experience: P3Y
@@ -184,7 +186,7 @@
   experience: P5Y
   group: programming
   roles:
-    - programmer
+    - full stack programmer
 
 - id: Excel
   experience: P5Y
