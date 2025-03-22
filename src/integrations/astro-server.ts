@@ -144,8 +144,10 @@ export const matchRoles = async <D>(
 
   const makeMatcher = (text: string) => new RegExp(`\\b${text}\\b`, "i");
 
+  const rolePriorityWeight = 0.2;
+
   const matchedRoles = [role, ...(role.data.matches ?? [])].map(
-    ({ id }, index) => {
+    ({ id }, index, { length }) => {
       const words = id.split(" ");
       const wordsNum = words.length;
 
@@ -160,7 +162,8 @@ export const matchRoles = async <D>(
         swap(oneWordCombinations, firstWordIndex, firstWordIndex + 1);
       }
 
-      const isMainRole = !index;
+      const rolePriority = (length - index - 1) * rolePriorityWeight;
+
       const matchers = combinationsByWordCount.flatMap(
         (combinations, wordCountIndex) => {
           const wordCount = combinationsByWordCount.length - wordCountIndex;
@@ -173,8 +176,7 @@ export const matchRoles = async <D>(
 
             return {
               matcher: makeMatcher(combination.join(" ")),
-              weight:
-                lerp(weight, nextWeight, priority) * (isMainRole ? 1.25 : 1),
+              weight: lerp(weight, nextWeight, priority) + rolePriority,
             };
           });
         },
@@ -190,7 +192,7 @@ export const matchRoles = async <D>(
     return !!entry && typeof entry.data === "object";
   }
 
-  const match = (test: string | string[], debug?: boolean) => {
+  const match = (test: string | string[], data: D) => {
     let testValue = test;
 
     const testMatch = (singleTest: string, matcher: RegExp) =>
@@ -228,12 +230,16 @@ export const matchRoles = async <D>(
     const bestScoreIndex = indexOfMax(scores)!;
     const bestScore = scores[bestScoreIndex]!;
 
-    if (debug && import.meta.env.DEV && bestScore) {
+    if (
+      bestScore &&
+      import.meta.env.DEV &&
+      (typeof debug === "function" ? debug(data) : debug)
+    ) {
       const bestMatch = matchedRoles[bestScoreIndex]!;
       const matcherIndex =
         matchedRoles[bestScoreIndex]!.findIndex(findBestMatch);
       console.info(
-        `[${testValue}] matches "${bestMatch[matcherIndex]!.matcher}" with weight: ${bestMatch[matcherIndex]!.weight}`,
+        `${typeof data === "object" ? ((data as any).id ?? JSON.stringify(data)) : data}: [${testValue}] matches "${bestMatch[matcherIndex]!.matcher}" with score: ${bestScore}`,
       );
     }
 
@@ -248,16 +254,13 @@ export const matchRoles = async <D>(
       ? (getCategory(data) ?? getGroup(data))
       : undefined;
     if (topic) {
-      const score = match(topic);
+      const score = match(topic, data!);
       matchScore += score;
     }
 
     const roleNames = roles?.map(({ id }) => id);
     if (roleNames) {
-      const score = match(
-        roleNames,
-        typeof debug === "function" ? debug(data!) : debug,
-      );
+      const score = match(roleNames, data!);
       matchScore += score;
     } else {
       // If roles are undefined, distinguish from no match
@@ -266,17 +269,6 @@ export const matchRoles = async <D>(
 
     return matchScore;
   });
-
-  if (debug === true && import.meta.env.DEV) {
-    console.info(
-      Object.fromEntries(
-        Object.entries(scoredEntities).map(([key, value]) => [
-          key,
-          value?.map(({ data }) => data),
-        ]),
-      ),
-    );
-  }
 
   // Standardize keys from 0-10
   const maxScore = Math.max(...Object.keys(scoredEntities).map(Number));

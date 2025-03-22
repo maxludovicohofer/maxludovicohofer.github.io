@@ -1838,5 +1838,13 @@
   "Game designer and UI designer": {
     "translation": "ゲームデザイナーとUIデザイナー",
     "api": "deepl"
+  },
+  "Lead game designer and writer": {
+    "translation": "リードゲームデザイナー兼ライター",
+    "api": "deepl"
+  },
+  "Wrote a hero's journey story that matched the evolution from a stealth to an action game": {
+    "translation": "ステルスゲームからアクションゲームへの進化にマッチしたヒーローの旅の物語を書きました。",
+    "api": "deepl"
   }
 }
