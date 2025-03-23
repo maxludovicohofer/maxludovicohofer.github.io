@@ -107,7 +107,7 @@ export const generateShowreelCaptions = async (astro: AstroGlobal) => {
 };
 
 const getCaptionDuration = (text: string) =>
-  getReadingTime(text, { wordsPerMinute: 150 }).time;
+  Math.max(getReadingTime(text, { wordsPerMinute: 150 }).time, 4000);
 
 const fitAndQuantizeSubtitles = <V extends VideoData>(
   videoData: V,
@@ -121,10 +121,7 @@ const fitAndQuantizeSubtitles = <V extends VideoData>(
   dayjs.extend(duration);
 
   const getDuration = (...params: Parameters<typeof getCaptionDuration>) =>
-    Math.max(
-      Math.round((getCaptionDuration(...params) + addedDuration) / 1000),
-      4,
-    ) * 1000;
+    getCaptionDuration(...params) + addedDuration;
 
   let captions: { start: Duration; end: Duration; text: string }[] = [];
 
@@ -159,16 +156,17 @@ const fitAndQuantizeSubtitles = <V extends VideoData>(
       const text = fromStart[fromStartIndex];
       if (!text) {
         // This value represents caution. Lower values are more imprecise but converge faster
-        const possibilityOfCutShift = 0.5;
+        const possibilityOfCutShift = 0.7;
+        const minDurationIncrease = 0.5;
         const durationIncrease = Math.max(
           roundTo(
             ((availableTimeFromStart - captions.at(-1)!.end.asSeconds()) *
               (1 - possibilityOfCutShift)) /
               captionCount,
-            0.5,
+            minDurationIncrease,
             Math.ceil,
           ),
-          0.5,
+          minDurationIncrease,
         );
 
         if (!addedDuration && import.meta.env.PROD) {
@@ -330,7 +328,10 @@ export const setYouTubeVideo = async (
   // TODO PHASE 2 UPDATE (DELETE AND RECREATE) IF VIDEOID PRESENT
   if (videoId) return;
 
-  if (isUploadsExceeded()) return;
+  if (isUploadsExceeded()) {
+    console.error("Google: uploads or quota exceeded");
+    return;
+  }
 
   const { createReadStream } = await import("fs");
 

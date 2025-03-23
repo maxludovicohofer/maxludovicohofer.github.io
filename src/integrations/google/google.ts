@@ -155,7 +155,10 @@ export const callApi = async <R>(
   ) => GaxiosPromise<R>,
   ...params: Parameters<typeof getAuth>
 ) => {
-  if (quotaExceeded) return null;
+  if (quotaExceeded) {
+    console.error("Google: quota exceeded");
+    return null;
+  }
 
   type PaginatedResponse = R & { nextPageToken: string; items: any[] };
 
