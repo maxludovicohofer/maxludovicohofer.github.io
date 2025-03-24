@@ -1,7 +1,7 @@
 import { getEntryId } from "@layouts/document/Document.astro";
 import type { AstroGlobal } from "astro";
 import dayjs from "dayjs";
-import duration, { type Duration } from "dayjs/plugin/duration";
+import duration from "dayjs/plugin/duration";
 import getReadingTime from "reading-time";
 import { defaultLocale } from "./astro-config";
 import { applyMatch, getSortedPosts, matchRoles } from "./astro-server";
@@ -70,11 +70,18 @@ export const generateShowreelCaptions = async (astro: AstroGlobal) => {
 
       const matchedAchievements = getAchievements(1);
 
-      return fitAndQuantizeSubtitles(
+      return fitCaptions(
         showreelData,
         getEntryId(id) as keyof typeof showreelData,
-        matchedAchievements.length ? matchedAchievements : getAchievements(),
-        awards?.map((award) => `Awarded ${award}`).slice(0, 1),
+        [
+          ...(matchedAchievements.length
+            ? matchedAchievements
+            : getAchievements()),
+          ...(awards
+            ?.slice(0, 1)
+            .map((award) => ({ required: true, text: `Awarded ${award}` })) ??
+            []),
+        ],
       );
     }),
   );
@@ -82,7 +89,7 @@ export const generateShowreelCaptions = async (astro: AstroGlobal) => {
   const captions = captionsByProject.flatMap((captions, index) => {
     const projectStart = captionsByProject
       .slice(0, index)
-      .map((subtitles) => subtitles.at(-1)!)
+      .map((projectCaptions) => projectCaptions.at(-1)!)
       .reduce((a, { end }) => a + end.asMilliseconds(), 0);
 
     return captions.map(({ start, end, ...caption }) => ({
@@ -106,156 +113,227 @@ export const generateShowreelCaptions = async (astro: AstroGlobal) => {
   ).join("\n\n");
 };
 
-const getCaptionDuration = (text: string) =>
-  Math.max(getReadingTime(text, { wordsPerMinute: 150 }).time, 4000);
+type CaptionData = string | { required: boolean; text: string };
 
-const fitAndQuantizeSubtitles = <V extends VideoData>(
+type Caption = Exclude<CaptionData, string> & {
+  start: number;
+  end: number;
+};
+
+const fitCaptions = <V extends VideoData>(
   videoData: V,
   videoEntry: keyof V,
-  fromStart: string[],
-  fromEnd?: string[],
+  captions: CaptionData[],
   addedDuration = 0,
+  debug?: boolean | ((entry: keyof V) => boolean),
 ) => {
-  const { duration: entryDuration, cuts } = videoData[videoEntry]!;
+  const isDebug =
+    import.meta.env.DEV &&
+    (typeof debug === "boolean" ? debug : debug?.(videoEntry));
 
-  dayjs.extend(duration);
+  const { duration: entrySeconds, cuts } = videoData[videoEntry]!;
+  const entryDuration = entrySeconds * 1000;
 
-  const getDuration = (...params: Parameters<typeof getCaptionDuration>) =>
-    getCaptionDuration(...params) + addedDuration;
-
-  let captions: { start: Duration; end: Duration; text: string }[] = [];
-
-  const captionCount = fromStart.length + (fromEnd?.length ?? 0);
-
-  // Add from end to start of project
-  let availableTimeFromStart = entryDuration;
-  let captionsFromEndCount = 0;
-  if (fromEnd?.length) {
-    const text = fromEnd[0]!;
-
-    const readingTime = getDuration(text);
-    const end = dayjs.duration({ seconds: entryDuration });
-    const start = end.subtract(readingTime);
-
-    captions.push({
-      end,
-      start,
-      text,
-    });
-
-    availableTimeFromStart = start.asSeconds();
-    captionsFromEndCount++;
-  }
+  const addedCaptions: Caption[] = [];
 
   let currentCutIndex = 0;
+  for (let index = 0; index < captions.length; index++) {
+    const [caption, newCutIndex] = timeCaption(
+      captions[index]!,
+      addedCaptions,
+      cuts,
+      currentCutIndex,
+      addedDuration,
+    );
+    currentCutIndex = newCutIndex;
 
-  if (fromStart.length) {
-    // Add from start to end
-    let availableTimeFromEnd = 0;
-    for (let fromStartIndex = 0; ; fromStartIndex++) {
-      const text = fromStart[fromStartIndex];
-      if (!text) {
-        // This value represents caution. Lower values are more imprecise but converge faster
-        const possibilityOfCutShift = 0.7;
-        const minDurationIncrease = 0.5;
-        const durationIncrease = Math.max(
-          roundTo(
-            ((availableTimeFromStart - captions.at(-1)!.end.asSeconds()) *
-              (1 - possibilityOfCutShift)) /
-              captionCount,
-            minDurationIncrease,
-            Math.ceil,
-          ),
-          minDurationIncrease,
-        );
+    if (caption.end <= entryDuration) {
+      addedCaptions.push(caption);
 
-        if (!addedDuration && import.meta.env.PROD) {
-          console.warn(
-            `Only ${captionCount} captions generated (${availableTimeFromEnd}s) for "${videoEntry.toString()}" (${entryDuration}s). Add more/longer achievements.`,
+      // Evaluate perfect end
+      if (caption.end === entryDuration) {
+        if (someFollowingCaptionIsRequired(captions, index)) {
+          // Missing required captions, retry
+          return fitCaptions(
+            videoData,
+            videoEntry,
+            removeLastAddedNonRequiredCaption(captions, addedCaptions),
+            addedDuration,
+            isDebug,
           );
         }
 
-        return fitAndQuantizeSubtitles(
-          videoData,
-          videoEntry,
-          fromStart,
-          fromEnd,
-          addedDuration + 1000 * durationIncrease,
-        );
-      }
-
-      const readingTime = getDuration(text);
-      let start = dayjs.duration({ seconds: availableTimeFromEnd });
-      let end = start.add(readingTime);
-
-      // Handle cuts (quantize)
-      let currentCut = cuts[currentCutIndex];
-      if (currentCut !== undefined && end.asSeconds() > currentCut) {
-        if (fromStartIndex) {
-          // Move to next cut
-          start = dayjs.duration({ seconds: currentCut });
-          end = start.add(readingTime);
-          captions.at(-1)!.end = start;
-        }
-
-        // Could span whole cuts
-        while (
-          cuts[currentCutIndex] &&
-          end.asSeconds() > cuts[currentCutIndex]!
-        ) {
-          currentCutIndex++;
-        }
-
-        currentCut = cuts[currentCutIndex];
-      }
-
-      // Handle ending
-      if (end.asSeconds() >= availableTimeFromStart) {
-        if (captionsFromEndCount) {
-          // Match end and start
-          const captionsFromEnd = captions.splice(0, captionsFromEndCount);
-
-          if (
-            currentCut !== undefined &&
-            captionsFromEnd[0]!.start.asSeconds() > currentCut
-          ) {
-            // Match to cut
-            captionsFromEnd[0]!.start = dayjs.duration({
-              seconds: currentCut,
-            });
-          }
-
-          captions.at(-1)!.end = captionsFromEnd[0]!.start;
-          captions.push(...captionsFromEnd);
-        } else {
-          // If only one caption, this is triggered
-          if (!captions.at(-1)) {
-            captions.push({
-              start,
-              end,
-              text,
-            });
-          }
-
-          captions.at(-1)!.end = dayjs.duration({
-            seconds: availableTimeFromStart,
-          });
-        }
-
+        // Perfect end
         break;
       }
 
-      captions.push({
-        start,
-        end,
-        text,
-      });
+      // Added caption, continue
+      continue;
+    }
 
-      availableTimeFromEnd = end.asSeconds();
+    // If first iteration, try to fix imperfect end
+    if (!addedDuration) {
+      if (caption.required) {
+        // Cannot miss required caption, retry
+        return fitCaptions(
+          videoData,
+          videoEntry,
+          removeLastAddedNonRequiredCaption(captions, addedCaptions),
+          addedDuration,
+          isDebug,
+        );
+      }
+
+      // Try ending with next caption
+      continue;
+    }
+
+    // Evaluate imperfect end
+    if (caption.required || someFollowingCaptionIsRequired(captions, index)) {
+      // Missing required captions, retry
+      return fitCaptions(
+        videoData,
+        videoEntry,
+        removeLastAddedNonRequiredCaption(captions, addedCaptions),
+        addedDuration,
+        isDebug,
+      );
+    }
+
+    // Imperfect end (shortened end caption)
+    addedCaptions.at(-1)!.end = entryDuration;
+  }
+
+  const captionsDuration = addedCaptions.at(-1)?.end;
+
+  if (isDebug) {
+    console.log(
+      `end: ${(captionsDuration ?? 0) / 1000} (+${addedDuration / 1000})`,
+      addedCaptions.map(
+        ({ start, end, text }) => `${start / 1000} - ${end / 1000}: ${text}`,
+      ),
+    );
+  }
+
+  if (captionsDuration !== undefined && captionsDuration < entryDuration) {
+    // Captions insufficient: make added captions longer and retry
+    return fitCaptions(
+      videoData,
+      videoEntry,
+      addedCaptions,
+      addedDuration +
+        evaluateDurationIncrease(
+          entryDuration,
+          captionsDuration,
+          addedCaptions.length,
+        ),
+      isDebug,
+    );
+  }
+
+  dayjs.extend(duration);
+
+  return addedCaptions.map(({ start, end, ...caption }) => ({
+    ...caption,
+    start: dayjs.duration(start),
+    end: dayjs.duration(end),
+  }));
+};
+
+const getCaptionDuration = (text: string) =>
+  Math.max(getReadingTime(text, { wordsPerMinute: 120 }).time, 3000);
+
+const timeCaption = (
+  captionData: CaptionData,
+  addedCaptions: Caption[],
+  cuts: number[],
+  currentCutIndex: number,
+  addedDuration: number,
+) => {
+  const parsedCaption: Omit<Caption, "start" | "end"> =
+    typeof captionData === "string"
+      ? { text: captionData, required: false }
+      : captionData;
+
+  const readingDuration =
+    getCaptionDuration(parsedCaption.text) + addedDuration;
+  const start = addedCaptions.at(-1)?.end ?? 0;
+  const caption: Caption = {
+    ...parsedCaption,
+    start,
+    end: start + readingDuration,
+  };
+
+  // Align to cuts (quantize)
+  let cutSeconds = cuts[currentCutIndex];
+  if (cutSeconds !== undefined) {
+    const cutTime = cutSeconds * 1000;
+    if (caption.end > cutTime) {
+      if (addedCaptions.length) {
+        // Move to next cut
+        caption.start = cutTime;
+        caption.end = caption.start + readingDuration;
+        addedCaptions.at(-1)!.end = caption.start;
+      }
+
+      // Could span whole cuts
+      while (
+        cuts[currentCutIndex] !== undefined &&
+        caption.end > cuts[currentCutIndex]! * 1000
+      ) {
+        currentCutIndex++;
+      }
     }
   }
 
-  return captions;
+  return [caption, currentCutIndex] as const;
+};
+
+const someFollowingCaptionIsRequired = (
+  captions: CaptionData[],
+  index: number,
+) =>
+  captions
+    .slice(index + 1)
+    .some(
+      (captionData) => typeof captionData !== "string" && captionData.required,
+    );
+
+const removeLastAddedNonRequiredCaption = (
+  captions: CaptionData[],
+  addedCaptions: Caption[],
+) => {
+  const lastAddedNonRequired = addedCaptions.findLast(
+    ({ required }) => !required,
+  )?.text;
+
+  if (!lastAddedNonRequired) throw new Error("Cannot fit required captions.");
+
+  return captions.filter((caption) =>
+    typeof caption === "string"
+      ? caption !== lastAddedNonRequired
+      : caption.text !== lastAddedNonRequired,
+  );
+};
+
+const evaluateDurationIncrease = (
+  entryDuration: number,
+  captionsDuration: number,
+  captionsCount: number,
+) => {
+  // This value represents caution. Lower values are more imprecise but converge faster
+  const possibilityOfCutShift = 0.7;
+  const minDurationIncrease = 100;
+
+  return Math.max(
+    roundTo(
+      ((entryDuration - captionsDuration) * (1 - possibilityOfCutShift)) /
+        captionsCount,
+      minDurationIncrease,
+      Math.ceil,
+    ),
+    minDurationIncrease,
+  );
 };
 
 export const getARandomShowreel = async (astro: AstroGlobal) => {

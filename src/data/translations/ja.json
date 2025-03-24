@@ -1846,5 +1846,13 @@
   "Wrote a hero's journey story that matched the evolution from a stealth to an action game": {
     "translation": "ステルスゲームからアクションゲームへの進化にマッチしたヒーローの旅の物語を書きました。",
     "api": "deepl"
+  },
+  "Gameplay programmer and technical team lead": {
+    "translation": "ゲームプレイプログラマーおよび技術チームリーダー",
+    "api": "deepl"
+  },
+  "Programming characters, game systems and infrastructure, a rougelike card system, and tooling for the team and handling IT and source control": {
+    "translation": "キャラクター、ゲームシステム、インフラストラクチャのプログラミング、ローグライクなカードシステム、チーム用ツールおよびITとソース管理の処理",
+    "api": "deepl"
   }
 }

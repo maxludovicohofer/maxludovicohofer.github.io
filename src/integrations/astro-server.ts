@@ -144,7 +144,7 @@ export const matchRoles = async <D>(
 
   const makeMatcher = (text: string) => new RegExp(`\\b${text}\\b`, "i");
 
-  const rolePriorityWeight = 0.1;
+  const rolePriorityWeight = 0.2;
 
   const matchedRoles = [role, ...(role.data.matches ?? [])].map(
     ({ id }, index, { length }) => {
