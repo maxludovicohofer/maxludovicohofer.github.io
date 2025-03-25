@@ -3,6 +3,7 @@ import ShokumuEntry from "@components/docs/ShokumuEntry.astro";
 import Link from "@components/ui/Link.astro";
 import {
   applyMatch,
+  getCompany,
   getMatchedPosts,
   getSiteLink,
   matchRoles,
@@ -27,11 +28,7 @@ import Rirekisho, { getStaticPaths as getBasePaths } from "./履歴書.astro";
 
 export const getStaticPaths = getBasePaths;
 
-interface Props extends ComponentProps<typeof Rirekisho> {
-  full?: boolean;
-}
-
-const { company, full } = Astro.props;
+interface Props extends ComponentProps<typeof Rirekisho> {}
 
 await setDayjsLocale(Astro);
 dayjs.extend(duration);
@@ -43,7 +40,11 @@ const t = i18n(Astro);
 const myName = await getMyName(Astro);
 const summary = await getSummary(Astro);
 
-const { experience } = await getKnowHow(Astro, { allProjects: full });
+const resumeInfo = (await getCompany(Astro))?.data.resumeInfo?.ja;
+
+const { experience } = await getKnowHow(Astro, {
+  allProjects: resumeInfo?.full,
+});
 
 const portfolioSentence = await t("Portfolio");
 const portfolioLink = await getSiteLink(Astro);
@@ -55,7 +56,7 @@ const durationThreshold = dayjs.duration({ days: 4 });
 const experienceTechThreshold = 1;
 const techList = await getTechList(Astro);
 
-const selfPRSentence = await getSelfPRSentence(Astro, company);
+const selfPRSentence = await getSelfPRSentence(Astro);
 
 // TODO PHASE 2 SHOULD ALSO GET ALL SKILLS OF EXPERIENCES, AND REMOVE EXPERIENCES IF IRRELEVANT
 // TODO PHASE 2 SHOULD HAVE A MAX NUMBER OF ENTRIES AND SELECT BASED ON THAT MAX NUMBER
@@ -117,9 +118,11 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
             matchedProjects &&
             applyMatch(matchedProjects, projectMatchThreshold)
               .filter((project) =>
-                full ? true : getDevelopmentTime(project)! > durationThreshold
+                resumeInfo?.full
+                  ? true
+                  : getDevelopmentTime(project)! > durationThreshold
               )
-              .slice(0, full ? undefined : 2)
+              .slice(0, resumeInfo?.full ? undefined : 2)
               .sort((a, b) =>
                 b.publishingDate.isAfter(a.publishingDate) ? 1 : -1
               );
@@ -185,7 +188,7 @@ const selfPRSentence = await getSelfPRSentence(Astro, company);
                           tech={projectTech}
                           projectType={getCategory(project)}
                           team={getTeam(project)!}
-                          full={full}
+                          full={resumeInfo?.full}
                         />
                       );
                     })

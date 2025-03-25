@@ -19,6 +19,7 @@ import { groupBy } from "./array";
 import {
   applyMatch,
   getCollectionAdvanced,
+  getCompany,
   matchRoles,
   type GetCollectionOptions,
 } from "./astro-server";
@@ -390,3 +391,15 @@ export const compactTechList = (
           Partial<Omit<typeof tech, keyof (typeof tech.items)[number]>>)[])
       : tech,
   );
+
+export const getCompanyName = async (
+  astro: AstroGlobal,
+  company?: CollectionEntry<"companies">,
+) => {
+  const currentCompany = company ?? (await getCompany(astro));
+
+  return currentCompany
+    ? (currentCompany.data.localizedIds?.[getCurrentLocale(astro)] ??
+        currentCompany.id)
+    : undefined;
+};

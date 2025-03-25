@@ -73,6 +73,27 @@ export const getRole = async (astro: AstroGlobal) => {
   };
 };
 
+export const getCompany = async (astro: AstroGlobal) => {
+  const companies = await getCollection("companies");
+  // Look for company in path sections
+  const pathSections = getPathSections(astro.originPathname, 0, 3).filter(
+    (section) => !!section,
+  );
+
+  let company: (typeof companies)[number] | undefined;
+
+  for (const section of pathSections) {
+    const sectionRole = companies.find(({ id }) => makePath(id) === section);
+
+    if (sectionRole) {
+      company = sectionRole;
+      break;
+    }
+  }
+
+  return company;
+};
+
 export const addBaseToLink = async (
   astro: AstroGlobal,
   link = "",

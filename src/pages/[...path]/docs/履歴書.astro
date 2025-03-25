@@ -17,16 +17,23 @@ import { capitalize } from "@integrations/text";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
 import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 import type { ComponentProps } from "astro/types";
+import { getCollection } from "astro:content";
 import { PHONE_NUMBER } from "astro:env/server";
 import dayjs from "dayjs";
 import type Resume from "./resume.astro";
 
-export const getStaticPaths = (...params: Parameters<typeof getBasePaths>) =>
-  getBasePaths({ allowedLocales: ["ja"], ...params[0] });
+export const getStaticPaths = async (
+  ...params: Parameters<typeof getBasePaths>
+) =>
+  getBasePaths({
+    allowedLocales: ["ja"],
+    allowedCompanies: (await getCollection("companies"))
+      .filter(({ data: { resumeInfo } }) => resumeInfo?.ja)
+      .map(({ id }) => id),
+    ...params[0],
+  });
 
 interface Props extends ComponentProps<typeof Resume> {}
-
-const { company } = Astro.props;
 
 await setDayjsLocale(Astro);
 
@@ -70,7 +77,7 @@ const languages = await getLanguages(Astro);
 
 const complySentence = await t("I will comply with company regulations");
 
-const motivationSentence = await getMotivationSentence(Astro, company);
+const motivationSentence = await getMotivationSentence(Astro);
 const relocateSentence = `${await t("Open to relocate")}`;
 
 const myName = await getMyName(Astro);

@@ -16,6 +16,22 @@ const roles = defineCollection({
   }),
 });
 
+const companies = defineCollection({
+  loader: file("src/data/companies.yaml"),
+  schema: fileSchema.extend({
+    build: z.boolean().optional(),
+    localizedIds: z.record(z.enum(locales), z.string()).optional(),
+    resumeInfo: z
+      .record(
+        z.enum(locales),
+        z.object({
+          full: z.boolean(),
+        }),
+      )
+      .optional(),
+  }),
+});
+
 const tech = defineCollection({
   loader: file("src/data/tech.yaml"),
   schema: fileSchema.extend({
@@ -170,6 +186,7 @@ const videos = defineCollection({
 // Export a single `collections` object to register your collection(s)
 export const collections = {
   roles,
+  companies,
   tech,
   ["know-how"]: knowHow,
   certifications,

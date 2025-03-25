@@ -1,0 +1,7 @@
+# Format id as written in middle of a sentence
+- id: Kojima Productions
+  localizedIds:
+    ja: コジマプロダクション
+  resumeInfo:
+    ja:
+      full: true

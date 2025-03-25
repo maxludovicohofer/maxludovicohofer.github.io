@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import { FULL_ADDRESS } from "astro:env/server";
 import { defaultLocale, getShortName, myName } from "./astro-config";
 import { getRole } from "./astro-server";
+import { getCompanyName } from "./content";
 import { i18n, type I18nOptions } from "./i18n-server";
 import { getLocaleInfo, localeInfo } from "./i18n-special";
 import { removeWatashiWa } from "./l10n";
@@ -23,10 +24,7 @@ export const getWorkFieldsSentence = async (astro: AstroGlobal) => {
   return `Especially involved in ${toTextList(resolvedWorkFields)}.`;
 };
 
-export const getMotivationSentence = async (
-  astro: AstroGlobal,
-  company?: string,
-) => {
+export const getMotivationSentence = async (astro: AstroGlobal) => {
   const {
     role: {
       data: { workFields },
@@ -39,6 +37,8 @@ export const getMotivationSentence = async (
   if (!mainWorkField) return "";
 
   const t = i18n(astro);
+
+  const company = await getCompanyName(astro);
 
   return removeWatashiWa(
     `${
@@ -102,10 +102,7 @@ export const getSummary = async (astro: AstroGlobal, short?: boolean) => {
   );
 };
 
-export const getSelfPRSentence = async (
-  astro: AstroGlobal,
-  company?: string,
-) => {
+export const getSelfPRSentence = async (astro: AstroGlobal) => {
   const {
     role: {
       data: { workFields },
@@ -118,6 +115,8 @@ export const getSelfPRSentence = async (
   if (!mainWorkField) return "";
 
   const t = i18n(astro);
+
+  const company = await getCompanyName(astro);
 
   return removeWatashiWa(
     `${await t(

@@ -1,0 +1,11 @@
+{
+  "$ref": "#/definitions/companies",
+  "definitions": {
+    "companies": {
+      "type": "array",
+      "items": {
+        "$ref": "../../.astro/collections/companies.schema.json"
+      }
+    }
+  }
+}

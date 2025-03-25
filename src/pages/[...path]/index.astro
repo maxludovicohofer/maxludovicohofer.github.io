@@ -15,14 +15,15 @@ export const getStaticPaths = async (options?: {
   excludedLocales?: (typeof locales)[number][];
   allowedRoles?: string[];
   excludedRoles?: string[];
+  allowedCompanies?: (string | undefined)[];
+  excludedCompanies?: (string | undefined)[];
   localOnly?: boolean;
+  dontBuild?: boolean;
 }) => {
+  if (options?.dontBuild && !import.meta.env.DEV) return [];
   if (options?.localOnly && BUILD_MODE !== "local") return [];
 
   let localePaths = [undefined, ...locales.slice(1)];
-  const roles = (await getCollection("roles")).map(({ id }) => makePath(id));
-  let rolePaths = [undefined, ...roles.slice(1)];
-
   if (options?.allowedLocales || options?.excludedLocales) {
     localePaths = localePaths.filter(
       (locale) =>
@@ -33,8 +34,10 @@ export const getStaticPaths = async (options?: {
     );
   }
 
+  const roles = (await getCollection("roles")).map(({ id }) => id);
+  let defaultedRoles = [undefined, ...roles.slice(1)];
   if (options?.allowedRoles || options?.excludedRoles) {
-    rolePaths = rolePaths.filter(
+    defaultedRoles = defaultedRoles.filter(
       (role) =>
         (!options.allowedRoles ||
           options.allowedRoles.includes(role ?? roles[0]!)) &&
@@ -42,18 +45,28 @@ export const getStaticPaths = async (options?: {
           !options.excludedRoles.includes(role ?? roles[0]!))
     );
   }
+  const rolePaths = defaultedRoles.map((role) => role && makePath(role));
 
-  return localePaths
-    .map((locale) =>
-      rolePaths.map((role) => ({
+  const companies = (await getCollection("companies")).filter(
+    ({ id, data: { build } }) =>
+      (build || import.meta.env.DEV) &&
+      options?.allowedCompanies?.includes(id) &&
+      (!options.excludedCompanies || !options.excludedCompanies.includes(id))
+  );
+  const companyPaths = [undefined, ...companies.map(({ id }) => makePath(id))];
+
+  return localePaths.flatMap((locale) =>
+    rolePaths.flatMap((role) =>
+      companyPaths.flatMap((company) => ({
         params: {
           path:
-            [locale, role].filter((param) => !!param).join("/") || undefined,
+            [locale, role, company].filter((param) => !!param).join("/") ||
+            undefined,
         },
         props: {},
       }))
     )
-    .flat();
+  );
 };
 
 // TODO PHASE 2 UPDATE TAILWIND (ISSUES WITH OPACITY AND OBJECT COVER)

@@ -2,8 +2,9 @@
   "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": false,
   "cSpell.words": ["deepl", "Diegetic", "Umami"],
   "yaml.schemas": {
-    "src/data/tech.schema.json": "src/data/tech.yaml",
     "src/data/roles.schema.json": "src/data/roles.yaml",
+    "src/data/companies.schema.json": "src/data/companies.yaml",
+    "src/data/tech.schema.json": "src/data/tech.yaml",
     "src/data/know-how.schema.json": "src/data/know-how.yaml",
     "src/data/certifications.schema.json": "src/data/certifications.yaml",
     "src/data/languages.schema.json": "src/data/languages.yaml",
