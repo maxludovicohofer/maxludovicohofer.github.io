@@ -207,7 +207,7 @@ const fitCaptions = <V extends VideoData>(
   const captionsDuration = addedCaptions.at(-1)?.end;
 
   if (isDebug) {
-    console.log(
+    console.debug(
       `end: ${(captionsDuration ?? 0) / 1000} (+${addedDuration / 1000})`,
       addedCaptions.map(
         ({ start, end, text }) => `${start / 1000} - ${end / 1000}: ${text}`,

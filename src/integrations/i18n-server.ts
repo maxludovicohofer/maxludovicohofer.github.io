@@ -194,7 +194,7 @@ const translate = async (translateOptions?: TranslateOptions) => {
       // Translated
       translationCount += texts.length;
       if (translateOptions?.debug)
-        console.info(`i18n: translated ${texts.length} texts`);
+        console.debug(`i18n: translated ${texts.length} texts`);
 
       if (options?.noCache) uncachedTexts.push(...texts);
     }

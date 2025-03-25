@@ -238,7 +238,7 @@ export const matchRoles = async <D>(
       const bestMatch = matchedRoles[bestScoreIndex]!;
       const matcherIndex =
         matchedRoles[bestScoreIndex]!.findIndex(findBestMatch);
-      console.info(
+      console.debug(
         `${typeof data === "object" ? ((data as any).id ?? JSON.stringify(data)) : data}: [${testValue}] matches "${bestMatch[matcherIndex]!.matcher}" with score: ${bestScore}`,
       );
     }
