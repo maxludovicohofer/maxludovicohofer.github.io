@@ -1,26 +1,29 @@
+# https://wikipedia.org/wiki/List_of_video_game_developers
 # Format id as written in middle of a sentence
 - id: Kojima Productions
   localizedIds:
     ja: コジマプロダクション
-  resumeInfo:
-    ja:
-      full: true
+  resumeJa:
+    full: true
+
+- id: Techland
 - id: Thatgamecompany
 - id: Naughy Dog
 - id: Rockstar Games
 - id: Square Enix
 - id: Nintendo
-- id: Platinum Games
-- id: Santa Monica Studios
+- id: PlatinumGames
+- id: Santa Monica Studio
 - id: Annapurna
 - id: Moon Studios
 - id: Larian Studios
 - id: CD Projekt Red
-- id: Sucker Punch
+- id: Sucker Punch Productions
 - id: Ninja Theory
 - id: 343 Industries
 - id: Epic Games
 - id: 4A Games
+- id: Giant Sparrow
 - id: Acquire
 - id: Activision Blizzard
 - id: NCSoft
@@ -40,6 +43,24 @@
 - id: Creative Assembly
 - id: Valve
 - id: Crytek
-- id: Don’t nod
+- id: Don't nod
 - id: EA DICE
 - id: EA
+- id: Facepunch Studios
+- id: Frictional Games
+- id: Gearbox Software
+- id: Mobius Digital
+- id: Hello Games
+- id: id Software
+- id: Guerrilla Games
+- id: Hazelight Studios
+- id: Koei Tecmo Games
+- id: Level-5
+- id: MachineGames
+- id: Obsidian Entertainment
+- id: Quantic Dream
+- id: Remedy Entertainment
+- id: Respawn Entertainment
+- id: Team Asobi
+- id: Tarsier Studios
+- id: genDESIGN

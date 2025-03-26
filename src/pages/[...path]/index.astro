@@ -48,8 +48,7 @@ export const getStaticPaths = async (options?: {
   const rolePaths = defaultedRoles.map((role) => role && makePath(role));
 
   const companies = (await getCollection("companies")).filter(
-    ({ id, data: { build } }) =>
-      (build || import.meta.env.DEV) &&
+    ({ id }) =>
       options?.allowedCompanies?.includes(id) &&
       (!options.excludedCompanies || !options.excludedCompanies.includes(id))
   );

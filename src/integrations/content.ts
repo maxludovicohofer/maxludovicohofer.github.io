@@ -403,3 +403,25 @@ export const getCompanyName = async (
         currentCompany.id)
     : undefined;
 };
+
+export const getResumeProps = async (
+  resume: Extract<
+    keyof CollectionEntry<"companies">["data"],
+    `${string}resume${string}`
+  >,
+  astro: AstroGlobal,
+  company?: CollectionEntry<"companies">,
+) => {
+  const resumeData = (company ?? (await getCompany(astro)))?.data[resume];
+
+  return !resumeData ||
+    Array.isArray(resumeData) ||
+    typeof resumeData === "boolean"
+    ? ({} as Partial<
+        Exclude<
+          CollectionEntry<"companies">["data"][typeof resume],
+          typeof resumeData
+        >
+      >)
+    : resumeData;
+};

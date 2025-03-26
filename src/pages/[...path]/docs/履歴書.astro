@@ -17,19 +17,17 @@ import { capitalize } from "@integrations/text";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
 import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 import type { ComponentProps } from "astro/types";
-import { getCollection } from "astro:content";
 import { PHONE_NUMBER } from "astro:env/server";
 import dayjs from "dayjs";
 import type Resume from "./resume.astro";
+import { getAllowedResumes } from "./resume.astro";
 
 export const getStaticPaths = async (
   ...params: Parameters<typeof getBasePaths>
 ) =>
   getBasePaths({
     allowedLocales: ["ja"],
-    allowedCompanies: (await getCollection("companies"))
-      .filter(({ data: { resumeInfo } }) => resumeInfo?.ja)
-      .map(({ id }) => id),
+    ...(await getAllowedResumes("resumeJa")),
     ...params[0],
   });
 

@@ -16,19 +16,23 @@ const roles = defineCollection({
   }),
 });
 
+const resumeProps = z
+  .boolean()
+  .or(reference("roles").array())
+  .or(
+    z.object({
+      build: z.boolean().or(reference("roles").array()).optional(),
+      full: z.boolean().optional(),
+    }),
+  )
+  .optional();
+
 const companies = defineCollection({
   loader: file("src/data/companies.yaml"),
   schema: fileSchema.extend({
-    build: z.boolean().optional(),
     localizedIds: z.record(z.enum(locales), z.string()).optional(),
-    resumeInfo: z
-      .record(
-        z.enum(locales),
-        z.object({
-          full: z.boolean(),
-        }),
-      )
-      .optional(),
+    resume: resumeProps,
+    resumeJa: resumeProps,
   }),
 });
 

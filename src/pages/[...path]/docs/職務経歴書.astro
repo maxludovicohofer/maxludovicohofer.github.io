@@ -3,7 +3,6 @@ import ShokumuEntry from "@components/docs/ShokumuEntry.astro";
 import Link from "@components/ui/Link.astro";
 import {
   applyMatch,
-  getCompany,
   getMatchedPosts,
   getSiteLink,
   matchRoles,
@@ -13,6 +12,7 @@ import {
   getCategory,
   getDevelopmentTime,
   getKnowHow,
+  getResumeProps,
   getTeam,
   getTechList,
 } from "@integrations/content";
@@ -40,10 +40,10 @@ const t = i18n(Astro);
 const myName = await getMyName(Astro);
 const summary = await getSummary(Astro);
 
-const resumeInfo = (await getCompany(Astro))?.data.resumeInfo?.ja;
+const { full } = await getResumeProps("resumeJa", Astro);
 
 const { experience } = await getKnowHow(Astro, {
-  allProjects: resumeInfo?.full,
+  allProjects: full,
 });
 
 const portfolioSentence = await t("Portfolio");
@@ -118,11 +118,9 @@ const selfPRSentence = await getSelfPRSentence(Astro);
             matchedProjects &&
             applyMatch(matchedProjects, projectMatchThreshold)
               .filter((project) =>
-                resumeInfo?.full
-                  ? true
-                  : getDevelopmentTime(project)! > durationThreshold
+                full ? true : getDevelopmentTime(project)! > durationThreshold
               )
-              .slice(0, resumeInfo?.full ? undefined : 2)
+              .slice(0, full ? undefined : 2)
               .sort((a, b) =>
                 b.publishingDate.isAfter(a.publishingDate) ? 1 : -1
               );
@@ -188,7 +186,7 @@ const selfPRSentence = await getSelfPRSentence(Astro);
                           tech={projectTech}
                           projectType={getCategory(project)}
                           team={getTeam(project)!}
-                          full={resumeInfo?.full}
+                          full={full}
                         />
                       );
                     })
