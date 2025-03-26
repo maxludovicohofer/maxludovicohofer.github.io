@@ -7,60 +7,57 @@
     full: true
 
 - id: Techland
-- id: Thatgamecompany
-- id: Naughy Dog
-- id: Rockstar Games
-- id: Square Enix
-- id: Nintendo
+- id: genDESIGN
 - id: PlatinumGames
-- id: Santa Monica Studio
-- id: Annapurna
-- id: Moon Studios
-- id: Larian Studios
-- id: CD Projekt Red
-- id: Sucker Punch Productions
-- id: Ninja Theory
-- id: 343 Industries
-- id: Epic Games
-- id: 4A Games
 - id: Giant Sparrow
-- id: Acquire
-- id: Activision Blizzard
-- id: NCSoft
+- id: Team Asobi
 - id: FromSoftware
-- id: Pearl Abyss
-- id: ArenaNet
-- id: Arkane Studios
-- id: Arrowhead Game Studios
-- id: Asobo Studio
-- id: Atlus
-- id: Bandai Namco
-- id: Bethesda Game Studios
-- id: BioWare
-- id: Bungie
+- id: Nintendo
 - id: Capcom
-- id: Certain Affinity
-- id: Creative Assembly
-- id: Valve
-- id: Crytek
-- id: Don't nod
-- id: EA DICE
-- id: EA
-- id: Facepunch Studios
-- id: Frictional Games
-- id: Gearbox Software
-- id: Mobius Digital
-- id: Hello Games
-- id: id Software
-- id: Guerrilla Games
-- id: Hazelight Studios
-- id: Koei Tecmo Games
+- id: Square Enix
 - id: Level-5
+- id: Bandai Namco Studios
+- id: Atlus
+- id: Koei Tecmo Games
+- id: Sucker Punch Productions
+- id: Santa Monica Studio
+- id: Guerrilla Games
+- id: Moon Studios
+- id: Ninja Theory
+- id: Pearl Abyss
+- id: id Software
+- id: Valve
+- id: Naughty Dog
+- id: Respawn Entertainment
+- id: Hello Games
+- id: Hazelight Studios
+- id: Thatgamecompany
+- id: Mobius Digital
+- id: Rockstar Games
+- id: Remedy Entertainment
+- id: Frictional Games
+- id: Larian Studios
 - id: MachineGames
 - id: Obsidian Entertainment
-- id: Quantic Dream
-- id: Remedy Entertainment
-- id: Respawn Entertainment
-- id: Team Asobi
+- id: ArenaNet
+- id: BioWare
+- id: Bethesda Game Studios
+- id: Epic Games
 - id: Tarsier Studios
-- id: genDESIGN
+- id: Quantic Dream
+- id: Crytek
+- id: Arrowhead Game Studios
+- id: Bungie
+- id: EA
+- id: CD Projekt Red
+- id: Activision Blizzard
+- id: Don't nod
+- id: 4A Games
+- id: Gearbox Software
+- id: Arkane Studios
+- id: NCSoft
+- id: Asobo Studio
+- id: DICE
+- id: Facepunch Studios
+- id: Certain Affinity
+- id: Creative Assembly
