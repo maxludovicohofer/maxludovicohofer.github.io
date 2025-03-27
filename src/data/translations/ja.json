@@ -1772,7 +1772,7 @@
     "api": "deepl"
   },
   "I am deeply inspired by {}'s innovative system programming and would be honored to contribute to your team": {
-    "translation": "私は、貴社の革新的なシステムプログラミングに深く感銘を受け、貴社のチームに貢献できることを光栄に思います。",
+    "translation": "私は、{}の革新的なシステムプログラミングに深く感銘を受け、貴社のチームに貢献できることを光栄に思います。",
     "api": "deepl"
   },
   "Sound-reacting visuals": {
@@ -1853,6 +1853,98 @@
   },
   "Programming characters, game systems and infrastructure, a rougelike card system, and tooling for the team and handling IT and source control": {
     "translation": "キャラクター、ゲームシステム、インフラストラクチャのプログラミング、ローグライクなカードシステム、チーム用ツールおよびITとソース管理の処理",
+    "api": "deepl"
+  },
+  "Currently transitioning from software engineering to videogame project management, which is my lifelong passion": {
+    "translation": "現在、ソフトウェア・エンジニアリングから、生涯の情熱であるビデオゲームのプロジェクト・マネジメントに移行中。",
+    "api": "deepl"
+  },
+  "scrum master": {
+    "translation": "スクラムマスター",
+    "api": "deepl"
+  },
+  "project manager": {
+    "translation": "プロマネ",
+    "api": "deepl"
+  },
+  "Macros": {
+    "translation": "マクロ",
+    "api": "deepl"
+  },
+  "Tables": {
+    "translation": "テーブル",
+    "api": "deepl"
+  },
+  "Automation": {
+    "translation": "オートメーション",
+    "api": "deepl"
+  },
+  "Presentations": {
+    "translation": "プレゼンテーション",
+    "api": "deepl"
+  },
+  "Information design": {
+    "translation": "情報デザイン",
+    "api": "deepl"
+  },
+  "Animations": {
+    "translation": "アニメーション",
+    "api": "deepl"
+  },
+  "Project manager experienced in leadership and software, specialized in scrum, effective communication, and software development": {
+    "translation": "スクラム、効果的なコミュニケーション、ソフトウェア開発を専門とし、リーダーシップとソフトウェアに精通したプロジェクトマネージャー。",
+    "api": "deepl"
+  },
+  "While new to the professional world of videogames, I have been involved in project management on academic and personal projects my whole life": {
+    "translation": "ビデオゲームのプロの世界では新参者ですが、私はずっと学術的なプロジェクトや個人的なプロジェクトでプロジェクトマネジメントに携わってきました。",
+    "api": "deepl"
+  },
+  "Project manager": {
+    "translation": "プロジェクトマネージャー",
+    "api": "deepl"
+  },
+  "Scrum master": {
+    "translation": "スクラムマスター",
+    "api": "deepl"
+  },
+  "Team lead and game designer": {
+    "translation": "チームリーダー兼ゲームデザイナー",
+    "api": "deepl"
+  },
+  "Managing budget and resources of technological projects and communicating with the board to envision new projects": {
+    "translation": "技術プロジェクトの予算とリソースを管理し、新しいプロジェクトを構想するために理事会とコミュニケーション。",
+    "api": "deepl"
+  },
+  "Solving collaboration challenges and fostering communication and meetings": {
+    "translation": "コラボレーションの課題を解決し、コミュニケーションとミーティングを促進",
+    "api": "deepl"
+  },
+  "Contributed to the company&#39;s cultural shift from waterfall to agile": {
+    "translation": "ウォーターフォールからアジャイルへの企業文化の転換に貢献",
+    "api": "deepl"
+  },
+  "Envisioned and lead development of innovative B2C and B2B solutions in the credit brokerage sector": {
+    "translation": "クレジット・ブローカー部門における革新的なB2CおよびB2Bソリューションの構想および開発を主導。",
+    "api": "deepl"
+  },
+  "Managed cross-functional team of 4 to replace old systems": {
+    "translation": "古いシステムをリプレースするため、4人の部門横断チームを管理。",
+    "api": "deepl"
+  },
+  "Scrum master for a team of 4 programmers": {
+    "translation": "4人のプログラマーチームのスクラムマスター",
+    "api": "deepl"
+  },
+  "I'm a project manager specialized in scrum, effective communication, and software development": {
+    "translation": "スクラム、効果的なコミュニケーション、ソフトウェア開発を専門とするプロジェクトマネージャーです。",
+    "api": "deepl"
+  },
+  "Project management": {
+    "translation": "プロジェクト管理",
+    "api": "deepl"
+  },
+  "I am deeply inspired by {}'s innovative project management and would be honored to contribute to your team": {
+    "translation": "私は{}の革新的なプロジェクト・マネジメントに深く感銘を受けており、貴社のチームに貢献できることを光栄に思います。",
     "api": "deepl"
   }
 }

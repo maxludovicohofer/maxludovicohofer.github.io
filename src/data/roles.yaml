@@ -87,3 +87,17 @@
   workFields:
     - system programming
     - engine programming
+
+- id: project manager
+  matches:
+    - game director
+    - team lead
+    - scrum master
+  workFields:
+    - project management
+    - agile methodologies
+    - flat hierarchy
+  specializations:
+    - scrum
+    - effective communication
+    - software development

@@ -48,10 +48,17 @@ export const i18n = (
           ? [options.interpolate]
           : options.interpolate;
 
-      return replacerText.reduce(
-        (interpolated, replacer) => interpolated.replace("{}", replacer),
-        translation,
-      );
+      const interpolation = "{}";
+
+      return replacerText.reduce((interpolating, replacer) => {
+        if (!interpolating.includes(interpolation)) {
+          throw new Error(
+            `i18n: could not interpolate ${replacer} in ${interpolating}.`,
+          );
+        }
+
+        return interpolating.replace(interpolation, replacer);
+      }, translation);
     }
 
     return translation;
@@ -183,7 +190,10 @@ const translate = async (translateOptions?: TranslateOptions) => {
             })
           ).map(({ text: translation }, index) => [
             texts[index]!,
-            { translation, api: "deepl" },
+            {
+              translation: translation.replaceAll("｛｝", "{}"),
+              api: "deepl",
+            } as const,
           ]) satisfies [
             string,
             CollectionEntry<"translations">["data"][keyof CollectionEntry<"translations">["data"]],

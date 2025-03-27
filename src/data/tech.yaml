@@ -72,6 +72,8 @@
     - level designer
     - programmer
     - technical artist
+    - team lead
+    - game director
 
 - id: Unity
   experience: P1Y
@@ -89,6 +91,8 @@
     - level designer
     - programmer
     - technical artist
+    - team lead
+    - game director
 
 - id: C++
   experience: P5Y
@@ -127,6 +131,7 @@
   experience: P3Y
   group: programming
   roles:
+    - game designer
     - programmer
 
 - id: Java
@@ -149,6 +154,7 @@
   group: programming
   roles:
     - programmer
+    - scrum master
 
 - id: SQL
   experience: P5Y
@@ -173,12 +179,14 @@
   group: programming
   roles:
     - programmer
+    - scrum master
 
 - id: mobile
   translateId: true
   experience: P2Y
   group: programming
   roles:
+    - game director
     - programmer
 
 - id: full stack
@@ -188,15 +196,20 @@
   roles:
     - full stack programmer
 
-- id: Excel
-  experience: P5Y
-  functionalities:
-    - macros
-    - tables
-    - automation
+- id: Jira
+  experience: P3Y
+  group: programming
   roles:
+    - programmer
     - project manager
-    - balance
+    - scrum master
+
+- id: Version control
+  experience: P3Y
+  group: programming
+  roles:
+    - programmer
+    - scrum master
 
 - id: Houdini
   experience: P6M
@@ -274,6 +287,27 @@
     - baking
   roles:
     - 3D artist
+
+- id: Excel
+  experience: P5Y
+  functionalities:
+    - macros
+    - tables
+    - automation
+  roles:
+    - project manager
+    - game designer
+    - balance designer
+
+- id: PowerPoint
+  experience: P2Y
+  functionalities:
+    - presentations
+    - information design
+    - animations
+  roles:
+    - game designer
+    - project manager
 
 - id: Photoshop
   experience: P3Y

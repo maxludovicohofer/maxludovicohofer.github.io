@@ -5,20 +5,44 @@
     ja: コジマプロダクション
   resumeJa:
     full: true
+
 - id: Techland
 
 - id: genDESIGN
+  resumeJa: true
+
 - id: PlatinumGames
+  resumeJa: false
+
 - id: Giant Sparrow
+
 - id: Team Asobi
+  resumeJa: false
+
 - id: FromSoftware
+  resumeJa: false
+
 - id: Nintendo
+  resumeJa: false
+
 - id: Capcom
+  resumeJa: false
+
 - id: Square Enix
+  resumeJa: false
+
 - id: Level-5
+  resumeJa: false
+
 - id: Bandai Namco Studios
+  resumeJa: false
+
 - id: Atlus
+  resumeJa: false
+
 - id: Koei Tecmo Games
+  resumeJa: false
+
 - id: Sucker Punch Productions
 - id: Santa Monica Studio
 - id: Guerrilla Games
