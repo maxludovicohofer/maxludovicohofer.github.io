@@ -23,6 +23,7 @@ const resumeProps = z
     z.object({
       build: z.boolean().or(reference("roles").array()).optional(),
       full: z.boolean().optional(),
+      singleApplication: z.boolean().optional(),
     }),
   )
   .optional();

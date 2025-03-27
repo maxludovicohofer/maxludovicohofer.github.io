@@ -5,7 +5,7 @@ import { defaultLocale, getShortName, myName } from "./astro-config";
 import { getRole } from "./astro-server";
 import { getCompanyName } from "./content";
 import { i18n, type I18nOptions } from "./i18n-server";
-import { getLocaleInfo, localeInfo } from "./i18n-special";
+import { getCurrentLocale, getLocaleInfo, localeInfo } from "./i18n-special";
 import { removeWatashiWa } from "./l10n";
 import { capitalize, endDelimiter, toTextList } from "./text";
 
@@ -168,3 +168,6 @@ export const getMyName = async (astro: AstroGlobal) => {
     translatedShort: await t(shortNameParts.join(separator)),
   };
 };
+
+export const getResumeDocuments = (astro: AstroGlobal) =>
+  getCurrentLocale(astro) === "ja" ? ["履歴書", "職務経歴書"] : ["resume"];

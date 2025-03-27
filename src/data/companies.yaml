@@ -9,7 +9,14 @@
 - id: Techland
 
 - id: genDESIGN
-  resumeJa: true
+  resumeJa:
+    build:
+      - game designer
+      - game programmer
+      - technical artist
+      - engineer
+      - project manager
+    singleApplication: true
 
 - id: PlatinumGames
   resumeJa: false

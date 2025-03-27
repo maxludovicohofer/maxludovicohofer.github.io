@@ -1946,5 +1946,33 @@
   "I am deeply inspired by {}'s innovative project management and would be honored to contribute to your team": {
     "translation": "私は{}の革新的なプロジェクト・マネジメントに深く感銘を受けており、貴社のチームに貢献できることを光栄に思います。",
     "api": "deepl"
+  },
+  "Thank you very much for considering my application": {
+    "translation": "私の応募を検討していただき、ありがとうございました。",
+    "api": "deepl"
+  },
+  "I look forward to the possibility of contributing to {}": {
+    "translation": "{}に貢献できることを楽しみにしています。",
+    "api": "deepl"
+  },
+  "Dear {} team,": {
+    "translation": "{}のチームの皆さん、",
+    "api": "deepl"
+  },
+  "Email": {
+    "translation": "電子メール",
+    "api": "deepl"
+  },
+  "application for game designer, game programmer, technical artist, engineer, and project manager": {
+    "translation": "ゲームデザイナー、ゲームプログラマー、テクニカルアーティスト、エンジニア、プロジェクトマネージャー向けアプリケーション",
+    "api": "deepl"
+  },
+  "I hope this message finds you well. I have attached my 履歴書 and 職務経歴書 for your review. You may also view my portfolio at": {
+    "translation": "お元気でお過ごしでしょうか。私の 履歴書と 職務経歴書を添付しましたので、ご覧ください。また、私のポートフォリオをご覧ください：",
+    "api": "deepl"
+  },
+  "Best regards,": {
+    "translation": "よろしくお願いします、",
+    "api": "deepl"
   }
 }

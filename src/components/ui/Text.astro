@@ -1,9 +1,9 @@
 ---
 import {
   getTextClass,
-  type TextTag,
-  type TextSize,
   type TextFormat,
+  type TextSize,
+  type TextTag,
 } from "@integrations/tailwind";
 import type { ComponentProps, HTMLAttributes } from "astro/types";
 import Translate from "./Translate.astro";
@@ -15,7 +15,7 @@ interface Props extends Omit<HTMLAttributes<TextTag>, "title"> {
   tag?: TextTag | undefined;
   importance?: TextSize | undefined;
   format?: TextFormat | undefined;
-  translateProps?: ComponentProps<typeof Translate>;
+  translateProps?: ComponentProps<typeof Translate> | undefined;
 }
 
 const {

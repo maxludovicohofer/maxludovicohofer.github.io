@@ -35,12 +35,13 @@ export const i18n = (
     const toLocale =
       typeof astro === "string" ? astro : getCurrentLocale(astro);
 
-    if (toLocale === defaultLocale) return text;
-
-    const translation = await queueTranslation(text, toLocale, {
-      ...globalOptions,
-      ...options,
-    });
+    const translation =
+      toLocale !== defaultLocale
+        ? await queueTranslation(text, toLocale, {
+            ...globalOptions,
+            ...options,
+          })
+        : text;
 
     if (options?.interpolate) {
       const replacerText =

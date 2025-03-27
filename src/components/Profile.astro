@@ -1,19 +1,17 @@
 ---
+import LinkedIn from "@icons/linkedin.svg?raw";
+import { addBaseToLink, getLinkName } from "@integrations/astro-server";
+import { getMyName, getResumeDocuments, getSummary } from "@integrations/docs";
+import { i18n } from "@integrations/i18n-server";
+import { getPrintPath } from "@integrations/pdf";
 import ProfilePicture from "@pictures/profile-picture.jpg";
+import PostPreview from "@post/PostPreview.astro";
+import Button from "@ui/Button.astro";
+import Fullscreenable from "@ui/Fullscreenable.astro";
 import Link from "@ui/Link.astro";
 import Text from "@ui/Text.astro";
-import Button from "@ui/Button.astro";
-import LinkedIn from "@icons/linkedin.svg?raw";
-import PostPreview from "@post/PostPreview.astro";
 import type { ComponentProps } from "astro/types";
-import Fullscreenable from "@ui/Fullscreenable.astro";
-import { getLinkName } from "@integrations/astro-server";
-import { addBaseToLink } from "@integrations/astro-server";
-import { getPrintPath } from "@integrations/pdf";
-import { getMyName, getSummary } from "@integrations/docs";
 import Media from "./ui/Media.astro";
-import { i18n } from "@integrations/i18n-server";
-import { getCurrentLocale } from "@integrations/i18n-special";
 
 interface Props extends ComponentProps<typeof PostPreview> {}
 
@@ -25,16 +23,13 @@ const viewResumeSentence = await t("View my resume");
 const viewWorkHistorySentence = await t("View my work history");
 
 const documentPageLinks = await Promise.all(
-  (getCurrentLocale(Astro) === "ja"
-    ? [
-        { path: "docs/履歴書", button: viewResumeSentence },
-        { path: "docs/職務経歴書", button: viewWorkHistorySentence },
-      ]
-    : [{ path: "docs/resume", button: viewResumeSentence }]
-  ).map(async ({ path, ...link }) => ({
-    path: await addBaseToLink(Astro, path),
-    ...link,
-  })),
+  getResumeDocuments(Astro).map(async (documentName) => ({
+    path: await addBaseToLink(Astro, `docs/${documentName}`),
+    button:
+      documentName === "職務経歴書"
+        ? viewWorkHistorySentence
+        : viewResumeSentence,
+  }))
 );
 const documentLinks = documentPageLinks.map(({ path, ...link }) => ({
   path: `/${getPrintPath(path)}`,
@@ -90,7 +85,7 @@ const myName = await getMyName(Astro);
           >
             <div class="group-hover:animate-pulse">{button}</div>
           </Button>
-        ),
+        )
       )
     }
   </div>

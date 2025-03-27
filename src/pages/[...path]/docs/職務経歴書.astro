@@ -40,7 +40,7 @@ const t = i18n(Astro);
 const myName = await getMyName(Astro);
 const summary = await getSummary(Astro);
 
-const { full } = await getResumeProps("resumeJa", Astro);
+const { full } = await getResumeProps(Astro);
 
 const { experience } = await getKnowHow(Astro, {
   allProjects: full,

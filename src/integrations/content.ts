@@ -404,24 +404,46 @@ export const getCompanyName = async (
     : undefined;
 };
 
+type ResumeKey = Extract<
+  keyof CollectionEntry<"companies">["data"],
+  `${string}resume${string}`
+>;
+
 export const getResumeProps = async (
-  resume: Extract<
-    keyof CollectionEntry<"companies">["data"],
-    `${string}resume${string}`
-  >,
   astro: AstroGlobal,
+  resume?: ResumeKey,
   company?: CollectionEntry<"companies">,
 ) => {
-  const resumeData = (company ?? (await getCompany(astro)))?.data[resume];
+  const resumeData = (company ?? (await getCompany(astro)))?.data[
+    resume ?? (getCurrentLocale(astro) === "ja" ? "resumeJa" : "resume")
+  ];
 
   return !resumeData ||
     Array.isArray(resumeData) ||
     typeof resumeData === "boolean"
     ? ({} as Partial<
         Exclude<
-          CollectionEntry<"companies">["data"][typeof resume],
+          CollectionEntry<"companies">["data"][ResumeKey],
           typeof resumeData
         >
       >)
     : resumeData;
 };
+
+export const getBuiltCompanies = async (
+  resume: Extract<
+    keyof CollectionEntry<"companies">["data"],
+    `${string}resume${string}`
+  >,
+) =>
+  (await getCollection("companies"))
+    .filter(({ data }) => {
+      if (import.meta.env.DEV) return true;
+
+      const resumeProps = data[resume];
+
+      return Array.isArray(resumeProps) || typeof resumeProps === "boolean"
+        ? resumeProps
+        : resumeProps?.build;
+    })
+    .map(({ id }) => id);

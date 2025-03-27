@@ -8,6 +8,7 @@ import { groupBy } from "@integrations/array";
 import { getSiteLink } from "@integrations/astro-server";
 import {
   compactTechList,
+  getBuiltCompanies,
   getLanguages,
   getTechList,
 } from "@integrations/content";
@@ -21,39 +22,17 @@ import { i18n, setDayjsLocale } from "@integrations/i18n-server";
 import { capitalize, toTextList, uncapitalize } from "@integrations/text";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
 import { getStaticPaths as getBasePaths } from "@pages/index.astro";
-import type { CollectionEntry } from "astro:content";
-import { getCollection } from "astro:content";
 import { PHONE_NUMBER } from "astro:env/server";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
-
-export const getAllowedResumes = async (
-  resume: Extract<
-    keyof CollectionEntry<"companies">["data"],
-    `${string}resume${string}`
-  >
-) =>
-  ({
-    allowedCompanies: (await getCollection("companies"))
-      .filter(({ data }) => {
-        if (import.meta.env.DEV) return true;
-
-        const resumeProps = data[resume];
-
-        return Array.isArray(resumeProps) || typeof resumeProps === "boolean"
-          ? resumeProps
-          : resumeProps?.build;
-      })
-      .map(({ id }) => id),
-  }) satisfies Parameters<typeof getBasePaths>[0];
 
 export const getStaticPaths = async (
   ...params: Parameters<typeof getBasePaths>
 ) =>
   getBasePaths({
     excludedLocales: ["ja"],
-    ...(await getAllowedResumes("resume")),
+    allowedCompanies: await getBuiltCompanies("resume"),
     ...params[0],
   });
 

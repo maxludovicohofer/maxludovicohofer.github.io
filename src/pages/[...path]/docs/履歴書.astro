@@ -3,6 +3,7 @@ import ResumePicture from "@components/docs/ResumePicture.astro";
 import { mail } from "@components/Profile.astro";
 import Link from "@components/ui/Link.astro";
 import {
+  getBuiltCompanies,
   getCertifications,
   getKnowHow,
   getLanguages,
@@ -20,14 +21,13 @@ import type { ComponentProps } from "astro/types";
 import { PHONE_NUMBER } from "astro:env/server";
 import dayjs from "dayjs";
 import type Resume from "./resume.astro";
-import { getAllowedResumes } from "./resume.astro";
 
 export const getStaticPaths = async (
   ...params: Parameters<typeof getBasePaths>
 ) =>
   getBasePaths({
     allowedLocales: ["ja"],
-    ...(await getAllowedResumes("resumeJa")),
+    allowedCompanies: await getBuiltCompanies("resumeJa"),
     ...params[0],
   });
 

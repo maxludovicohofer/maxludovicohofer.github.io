@@ -1,0 +1,82 @@
+---
+import Link from "@components/ui/Link.astro";
+import Text from "@components/ui/Text.astro";
+import { getRole, getSiteLink } from "@integrations/astro-server";
+import {
+  getBuiltCompanies,
+  getCompanyName,
+  getResumeProps,
+} from "@integrations/content";
+import { getMyName, getResumeDocuments } from "@integrations/docs";
+import { i18n } from "@integrations/i18n-server";
+import { toTextList } from "@integrations/text";
+import DocumentPage from "@layouts/document/DocumentPage.astro";
+import { getStaticPaths as getBasePaths } from "@pages/index.astro";
+
+export const getStaticPaths = async (
+  ...params: Parameters<typeof getBasePaths>
+) =>
+  getBasePaths({
+    requireCompany: true,
+    allowedCompanies: [
+      ...(await getBuiltCompanies("resume")),
+      ...(await getBuiltCompanies("resumeJa")),
+    ],
+    ...params[0],
+  });
+
+interface Props {}
+
+const portfolioLink = await getSiteLink(Astro);
+const myName = await getMyName(Astro);
+const company = await getCompanyName(Astro);
+const { build, singleApplication } = await getResumeProps(Astro);
+const { role } = await getRole(Astro);
+const t = i18n(Astro);
+
+const thanksSentence = `${await t("Thank you very much for considering my application.")}${
+  company
+    ? `${await t(" ")}${await t("I look forward to the possibility of contributing to {}.", { interpolate: company })}`
+    : ""
+}`;
+
+// TODO REMOVE WATASHI NO
+---
+
+<DocumentPage>
+  <h1>Subject</h1>
+  <p>
+    <span>{myName.translatedShort}{await t(",")}{await t(" ")}</span>
+    <Text tag="span"
+      >application for {
+        singleApplication && Array.isArray(build)
+          ? toTextList(build.map(({ id }) => id))
+          : role.id
+      }</Text
+    >
+  </p>
+  <h1>Content</h1>
+  <p>
+    {
+      company && (
+        <>
+          <Text tag="span" translateProps={{ interpolate: company }}>
+            Dear {"{}"} team,
+          </Text>
+          <br />
+        </>
+      )
+    }
+    <Text tag="span"
+      >I hope this message finds you well. I have attached my {
+        toTextList(getResumeDocuments(Astro))
+      } for your review. You may also view my portfolio at</Text
+    >{await t(" ")}<Link href={portfolioLink} />{await t(".")}
+  </p>
+  <p>{thanksSentence}</p>
+  <p>
+    <Text tag="span">Best regards,</Text>
+    <br />
+    {myName.translatedShort}
+  </p>
+</DocumentPage>
