@@ -10,12 +10,6 @@
 
 - id: genDESIGN
   resumeJa:
-    build:
-      - game designer
-      - game programmer
-      - technical artist
-      - engineer
-      - project manager
     singleApplication: true
 
 - id: PlatinumGames

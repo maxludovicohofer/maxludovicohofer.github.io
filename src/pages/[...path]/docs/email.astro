@@ -9,6 +9,7 @@ import {
 } from "@integrations/content";
 import { getMyName, getResumeDocuments } from "@integrations/docs";
 import { i18n } from "@integrations/i18n-server";
+import { removeWatashiNo } from "@integrations/l10n";
 import { toTextList } from "@integrations/text";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
 import { getStaticPaths as getBasePaths } from "@pages/index.astro";
@@ -34,13 +35,19 @@ const { build, singleApplication } = await getResumeProps(Astro);
 const { role } = await getRole(Astro);
 const t = i18n(Astro);
 
-const thanksSentence = `${await t("Thank you very much for considering my application.")}${
-  company
-    ? `${await t(" ")}${await t("I look forward to the possibility of contributing to {}.", { interpolate: company })}`
-    : ""
-}`;
+const thanksSentence = removeWatashiNo(
+  `${await t("Thank you very much for considering my application.")}${
+    company
+      ? `${await t(" ")}${await t("I look forward to the possibility of contributing to {}.", { interpolate: company })}`
+      : ""
+  }`
+);
 
-// TODO REMOVE WATASHI NO
+const documentsSentence = removeWatashiNo(
+  await t(
+    `I hope this message finds you well. I have attached my ${toTextList(getResumeDocuments(Astro))} for your review. You may also view my portfolio at`
+  )
+);
 ---
 
 <DocumentPage>
@@ -67,11 +74,9 @@ const thanksSentence = `${await t("Thank you very much for considering my applic
         </>
       )
     }
-    <Text tag="span"
-      >I hope this message finds you well. I have attached my {
-        toTextList(getResumeDocuments(Astro))
-      } for your review. You may also view my portfolio at</Text
-    >{await t(" ")}<Link href={portfolioLink} />{await t(".")}
+    <span>{documentsSentence}</span>{await t(" ")}<Link href={portfolioLink} />{
+      await t(".")
+    }
   </p>
   <p>{thanksSentence}</p>
   <p>
