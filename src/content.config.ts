@@ -24,6 +24,12 @@ const resumeProps = z
       build: z.boolean().or(reference("roles").array()).optional(),
       full: z.boolean().optional(),
       singleApplication: z.boolean().optional(),
+      interests: z
+        .object({
+          passions: z.string().array(),
+          focuses: z.string().array(),
+        })
+        .optional(),
     }),
   )
   .optional();

@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import { FULL_ADDRESS } from "astro:env/server";
 import { defaultLocale, getShortName, myName } from "./astro-config";
 import { getRole } from "./astro-server";
-import { getCompanyName } from "./content";
+import { getCompanyName, getResumeProps } from "./content";
 import { i18n, type I18nOptions } from "./i18n-server";
 import { getCurrentLocale, getLocaleInfo, localeInfo } from "./i18n-special";
 import { removeWatashiWa } from "./l10n";
@@ -171,3 +171,21 @@ export const getMyName = async (astro: AstroGlobal) => {
 
 export const getResumeDocuments = (astro: AstroGlobal) =>
   getCurrentLocale(astro) === "ja" ? ["履歴書", "職務経歴書"] : ["resume"];
+
+export const getExtraItems = async (astro: AstroGlobal) => {
+  const t = i18n(astro);
+
+  const { interests } = await getResumeProps(astro);
+  const { passions, focuses } = interests ?? {
+    passions: ["cinema", "arts"],
+    focuses: ["cyberpunk", "cosmic horror"],
+  };
+
+  return await Promise.all(
+    [
+      `passionate about ${toTextList(passions)}, especially ${toTextList(focuses)}`,
+      "keeping up to date with the latest technology and research",
+      "creating electronic music and worked as mixing and mastering engineer",
+    ].map(async (extra) => await t(endDelimiter(capitalize(extra)))),
+  );
+};

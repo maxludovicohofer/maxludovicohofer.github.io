@@ -22,7 +22,7 @@
         - designing and developing prototypes
         - writing collaboration and marketing documents
       achievements:
-        - designed prototypes to challenge my skills in core mechanics, while developing systems and prototype tooling
+        - designed prototypes (stealth, action, narrative, TPS, horror) and mechanics, while developing tools and systems
         - studied rendering and performance optimization in depth
 
     - job: game programmer
@@ -30,7 +30,7 @@
         - coding game features
         - creating tools and systems
       achievements:
-        - developed physics-based mechanics, systems and prototype tooling
+        - developed physics-based mechanics, AI tools, and game systems
         - studied rendering and performance optimization in depth
 
     - job: AI programmer
@@ -163,8 +163,8 @@
         - brainstorming and prototyping game ideas
         - bringing colleagues together to solve problems
       achievements:
-        - designed and directed a published indie game, completed in 3 months by a team of 20
-        - designed multiple prototypes for clients and game jams, following provided requirements
+        - designed and directed a published co-op rougelike shoot 'em up game, completed in 3 months by a team of 20
+        - designed prototypes (puzzle game, funny driving game, mobile platformer) for clients and game jams, following provided requirements
 
     - job: game programmer
       countAsWork: true

@@ -21,14 +21,11 @@ import { i18n, setDayjsLocale } from "@integrations/i18n-server";
 import { capitalize } from "@integrations/text";
 import { getEntryId } from "@layouts/document/Document.astro";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
-import type { ComponentProps } from "astro/types";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
-import Rirekisho, { getStaticPaths as getBasePaths } from "./履歴書.astro";
+import { getStaticPaths as getBasePaths } from "./履歴書.astro";
 
 export const getStaticPaths = getBasePaths;
-
-interface Props extends ComponentProps<typeof Rirekisho> {}
 
 await setDayjsLocale(Astro);
 dayjs.extend(duration);

@@ -12,10 +12,23 @@
   resumeJa:
     singleApplication: true
 
+# TODO Requires 3 game proposals
 - id: PlatinumGames
   resumeJa: false
 
+# TODO
 - id: Giant Sparrow
+  resume:
+    build:
+      - technical game designer
+      - game programmer
+    interests:
+      passions:
+        - science
+        - animals
+      focuses:
+        - instinctive behavior
+        - natural decision making
 
 - id: Team Asobi
   resumeJa: false

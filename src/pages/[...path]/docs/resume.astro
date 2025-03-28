@@ -14,6 +14,7 @@ import {
 } from "@integrations/content";
 import {
   getAddress,
+  getExtraItems,
   getMyName,
   getSummary,
   getWorkFieldsSentence,
@@ -36,8 +37,6 @@ export const getStaticPaths = async (
     ...params[0],
   });
 
-interface Props {}
-
 const portfolioLink = await getSiteLink(Astro);
 
 const workFieldsSentence = await getWorkFieldsSentence(Astro);
@@ -57,8 +56,8 @@ const relocateSentence = `${await t(" ")}${await t("(")}${await t("open to reloc
 const languages = groupBy(await getLanguages(Astro), ({ level }) => level);
 
 const summary = await getSummary(Astro);
-
 const myName = await getMyName(Astro);
+const extras = await getExtraItems(Astro);
 
 // TODO PHASE 2 UPDATE LINKEDIN AUTOMATICALLY
 ---
@@ -122,16 +121,16 @@ const myName = await getMyName(Astro);
       }</Text
     >
   </ul>
-  <Text tag="h3">Extra</Text>
-  <ul>
-    <Text tag="li"
-      >Keeping up to date with the latest technology and research.</Text
-    >
-    <Text tag="li"
-      >Passionate about cinema and arts, especially cyberpunk and cosmic horror.</Text
-    >
-    <Text tag="li"
-      >Creating electronic music and worked as mixing and mastering engineer.</Text
-    >
-  </ul>
+  {
+    !!extras.length && (
+      <>
+        <Text tag="h3">Extra</Text>
+        <ul>
+          {extras.map((extra) => (
+            <li>{extra}</li>
+          ))}
+        </ul>
+      </>
+    )
+  }
 </DocumentPage>
