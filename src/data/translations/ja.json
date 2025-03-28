@@ -1974,5 +1974,33 @@
   "Best regards,": {
     "translation": "よろしくお願いします、",
     "api": "deepl"
+  },
+  "application for technical game designer": {
+    "translation": "テクニカルゲームデザイナー募集",
+    "api": "deepl"
+  },
+  "application for technical quest designer": {
+    "translation": "テクニカル・クエスト・デザイナー募集",
+    "api": "deepl"
+  },
+  "application for technical level designer": {
+    "translation": "テクニカルレベルデザイナー募集",
+    "api": "deepl"
+  },
+  "application for game programmer": {
+    "translation": "ゲームプログラマー募集",
+    "api": "deepl"
+  },
+  "application for AI programmer": {
+    "translation": "AIプログラマー募集",
+    "api": "deepl"
+  },
+  "application for system programmer": {
+    "translation": "システムプログラマー募集",
+    "api": "deepl"
+  },
+  "application for project manager": {
+    "translation": "プロジェクトマネージャー募集",
+    "api": "deepl"
   }
 }
