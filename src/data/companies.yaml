@@ -16,12 +16,8 @@
 - id: PlatinumGames
   resumeJa: false
 
-# TODO
 - id: Giant Sparrow
   resume:
-    build:
-      - technical game designer
-      - game programmer
     interests:
       passions:
         - science
@@ -30,6 +26,7 @@
         - instinctive behavior
         - natural decision making
 
+# TODO
 - id: Team Asobi
   resumeJa: false
 
