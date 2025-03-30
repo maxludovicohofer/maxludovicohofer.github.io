@@ -23,6 +23,8 @@ const resumeProps = z
     z.object({
       build: z.boolean().or(reference("roles").array()).optional(),
       full: z.boolean().optional(),
+      email: z.boolean().optional(),
+      coverLetter: z.boolean().optional(),
       singleApplication: z.boolean().optional(),
       interests: z
         .object({
@@ -119,7 +121,7 @@ const languages = defineCollection({
   loader: file("src/data/languages.yaml"),
   schema: fileSchema.extend({
     code: z.string(),
-    level: z.enum(["native", "fluent", "business", "everyday"]),
+    level: z.enum(["native", "fluent", "business", "conversational", "basic"]),
   }),
 });
 

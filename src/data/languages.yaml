@@ -12,12 +12,12 @@
 
 - id: Japanese
   code: ja
-  level: everyday
+  level: conversational
 
 - id: French
   code: fr
-  level: everyday
+  level: basic
 
 - id: Spanish
   code: es
-  level: everyday
+  level: basic

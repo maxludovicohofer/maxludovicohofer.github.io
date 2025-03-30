@@ -17,7 +17,6 @@ export const getStaticPaths = async (options?: {
   excludedRoles?: string[];
   allowedCompanies?: (string | undefined)[];
   excludedCompanies?: (string | undefined)[];
-  requireCompany?: boolean;
   localOnly?: boolean;
   dontBuild?: boolean;
 }) => {
@@ -53,10 +52,7 @@ export const getStaticPaths = async (options?: {
       options?.allowedCompanies?.includes(id) &&
       (!options.excludedCompanies || !options.excludedCompanies.includes(id))
   );
-  const companyPaths = [
-    ...(options?.requireCompany ? [] : [undefined]),
-    ...companies.map(({ id }) => makePath(id)),
-  ];
+  const companyPaths = [undefined, ...companies.map(({ id }) => makePath(id))];
 
   return localePaths.flatMap((locale) =>
     rolePaths.flatMap((role) =>

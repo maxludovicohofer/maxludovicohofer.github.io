@@ -2002,5 +2002,17 @@
   "application for project manager": {
     "translation": "プロジェクトマネージャー募集",
     "api": "deepl"
+  },
+  "conversational": {
+    "translation": "会話",
+    "api": "deepl"
+  },
+  "basic": {
+    "translation": "基礎",
+    "api": "deepl"
+  },
+  "Cover letter": {
+    "translation": "カバーレター",
+    "api": "deepl"
   }
 }

@@ -33,7 +33,7 @@ export const getStaticPaths = async (
 ) =>
   getBasePaths({
     excludedLocales: ["ja"],
-    allowedCompanies: await getBuiltCompanies("resume"),
+    allowedCompanies: (await getBuiltCompanies("resume")).map(({ id }) => id),
     ...params[0],
   });
 

@@ -404,30 +404,41 @@ export const getCompanyName = async (
     : undefined;
 };
 
+export const getResumeProps = async (astro: AstroGlobal) => {
+  const company = await getCompany(astro);
+  if (!company) return {} as ReturnType<typeof getCompanyResumeProps>;
+
+  return getCompanyResumeProps(
+    company,
+    getCurrentLocale(astro) === "ja" ? "resumeJa" : "resume",
+  );
+};
+
 type ResumeKey = Extract<
   keyof CollectionEntry<"companies">["data"],
   `${string}resume${string}`
 >;
 
-export const getResumeProps = async (
-  astro: AstroGlobal,
-  resume?: ResumeKey,
-  company?: CollectionEntry<"companies">,
+export const getCompanyResumeProps = (
+  company: CollectionEntry<"companies">,
+  resume: ResumeKey,
 ) => {
-  const resumeData = (company ?? (await getCompany(astro)))?.data[
-    resume ?? (getCurrentLocale(astro) === "ja" ? "resumeJa" : "resume")
-  ];
+  const resumeData = company.data[resume];
 
-  return !resumeData ||
+  if (
+    !resumeData ||
     Array.isArray(resumeData) ||
     typeof resumeData === "boolean"
-    ? ({} as Partial<
-        Exclude<
-          CollectionEntry<"companies">["data"][ResumeKey],
-          typeof resumeData
-        >
-      >)
-    : resumeData;
+  ) {
+    return {} as Partial<
+      Exclude<
+        CollectionEntry<"companies">["data"][ResumeKey],
+        typeof resumeData
+      >
+    >;
+  }
+
+  return resumeData;
 };
 
 export const getBuiltCompanies = async (
@@ -436,14 +447,12 @@ export const getBuiltCompanies = async (
     `${string}resume${string}`
   >,
 ) =>
-  (await getCollection("companies"))
-    .filter(({ data }) => {
-      if (import.meta.env.DEV) return true;
+  (await getCollection("companies")).filter(({ data }) => {
+    if (import.meta.env.DEV) return true;
 
-      const resumeProps = data[resume];
+    const resumeProps = data[resume];
 
-      return Array.isArray(resumeProps) || typeof resumeProps === "boolean"
-        ? resumeProps
-        : resumeProps?.build;
-    })
-    .map(({ id }) => id);
+    return Array.isArray(resumeProps) || typeof resumeProps === "boolean"
+      ? resumeProps
+      : resumeProps?.build;
+  });

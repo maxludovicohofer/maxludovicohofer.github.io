@@ -25,7 +25,7 @@ export const getStaticPaths = async (
 ) =>
   getBasePaths({
     allowedLocales: ["ja"],
-    allowedCompanies: await getBuiltCompanies("resumeJa"),
+    allowedCompanies: (await getBuiltCompanies("resumeJa")).map(({ id }) => id),
     ...params[0],
   });
 

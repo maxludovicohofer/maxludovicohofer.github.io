@@ -10,6 +10,7 @@
 
 - id: genDESIGN
   resumeJa:
+    email: true
     singleApplication: true
 
 # TODO Requires 3 game proposals
@@ -26,10 +27,13 @@
         - instinctive behavior
         - natural decision making
 
-# TODO
 - id: Team Asobi
-  resumeJa: false
+  localizedIds:
+    ja: TEAMアソビ
+  resumeJa:
+    coverLetter: true
 
+# TODO
 - id: FromSoftware
   resumeJa: false
 
