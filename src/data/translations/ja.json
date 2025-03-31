@@ -2014,5 +2014,9 @@
   "Cover letter": {
     "translation": "カバーレター",
     "api": "deepl"
+  },
+  "Programmed skills, camera, and movement, that change based on character transformation": {
+    "translation": "プログラムされたスキル、カメラ、動きは、キャラクターの変身に応じて変化します。",
+    "api": "deepl"
   }
 }

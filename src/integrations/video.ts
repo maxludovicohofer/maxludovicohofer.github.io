@@ -79,7 +79,7 @@ export const generateShowreelCaptions = async (astro: AstroGlobal) => {
             : getAchievements()),
           ...(awards
             ?.slice(0, 1)
-            .map((award) => ({ required: true, text: `Awarded ${award}` })) ??
+            .map((award) => ({ required: true, text: `awarded ${award}` })) ??
             []),
         ],
       );
@@ -138,12 +138,18 @@ const fitCaptions = <V extends VideoData>(
 
   let currentCutIndex = 0;
   for (let index = 0; index < captions.length; index++) {
-    const [caption, newCutIndex] = timeCaption(
+    const {
+      caption,
+      currentCutIndex: newCutIndex,
+      tolerance,
+    } = timeCaption(
       captions[index]!,
       addedCaptions,
       cuts,
+      entryDuration,
       currentCutIndex,
       addedDuration,
+      0.2,
     );
     currentCutIndex = newCutIndex;
 
@@ -151,7 +157,7 @@ const fitCaptions = <V extends VideoData>(
       addedCaptions.push(caption);
 
       // Evaluate perfect end
-      if (caption.end === entryDuration) {
+      if (caption.end >= entryDuration - tolerance) {
         if (someFollowingCaptionIsRequired(captions, index)) {
           // Missing required captions, retry
           return fitCaptions(
@@ -163,7 +169,8 @@ const fitCaptions = <V extends VideoData>(
           );
         }
 
-        // Perfect end
+        // Perfect end (adjust end caption)
+        addedCaptions.at(-1)!.end = entryDuration;
         break;
       }
 
@@ -247,8 +254,10 @@ const timeCaption = (
   captionData: CaptionData,
   addedCaptions: Caption[],
   cuts: number[],
+  entryDuration: number,
   currentCutIndex: number,
   addedDuration: number,
+  percentageTolerance: number,
 ) => {
   const parsedCaption: Omit<Caption, "start" | "end"> =
     typeof captionData === "string"
@@ -263,12 +272,12 @@ const timeCaption = (
     start,
     end: start + readingDuration,
   };
+  const tolerance = readingDuration * percentageTolerance;
 
   // Align to cuts (quantize)
-  let cutSeconds = cuts[currentCutIndex];
-  if (cutSeconds !== undefined) {
-    const cutTime = cutSeconds * 1000;
-    if (caption.end > cutTime) {
+  let cutTime = (cuts[currentCutIndex] ?? 0) * 1000;
+  if (cutTime) {
+    if (caption.end > cutTime + tolerance) {
       if (addedCaptions.length) {
         // Move to next cut
         caption.start = cutTime;
@@ -277,16 +286,17 @@ const timeCaption = (
       }
 
       // Could span whole cuts
-      while (
-        cuts[currentCutIndex] !== undefined &&
-        caption.end > cuts[currentCutIndex]! * 1000
-      ) {
-        currentCutIndex++;
+      while (cutTime && caption.end > cutTime)
+        cutTime = (cuts[++currentCutIndex] ?? 0) * 1000;
+
+      // Align to cut or end
+      if (caption.end <= (cutTime ?? entryDuration) + tolerance) {
+        caption.end = cutTime;
       }
     }
   }
 
-  return [caption, currentCutIndex] as const;
+  return { caption, currentCutIndex, tolerance };
 };
 
 const someFollowingCaptionIsRequired = (

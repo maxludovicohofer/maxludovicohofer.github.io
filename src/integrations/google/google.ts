@@ -34,21 +34,14 @@ interface GoogleError extends GaxiosError {
 let authorization: OAuth2Client | undefined;
 
 export const getAuth = async (
-  astro: AstroGlobal,
-  scope: typeof scopes | (typeof scopes)[number],
+  ...params: Parameters<typeof getTokenSettings>
 ) => {
   if (authorization) return authorization;
 
-  const oAuthClient = await getOAuthClient(astro);
+  const oAuthClient = await getOAuthClient(params[0]);
+  const tokenSettings = getTokenSettings(...params);
 
   const { readFile } = await import("fs/promises");
-
-  const tokenSettings: Parameters<typeof oAuthClient.generateAuthUrl>[0] = {
-    access_type: "offline",
-    state: astro.url.pathname,
-    scope: scope as string | string[],
-    include_granted_scopes: true,
-  };
 
   // Check if existing credentials.
   let credentials: string;
@@ -68,12 +61,7 @@ export const getAuth = async (
   oAuthClient.credentials = JSON.parse(credentials);
 
   if (!oAuthClient.credentials.refresh_token) {
-    throw new Error(
-      `Google: refresh at ${oAuthClient.generateAuthUrl({
-        ...tokenSettings,
-        prompt: "consent",
-      })}`,
-    );
+    await refreshToken(oAuthClient, tokenSettings, ...params);
   }
 
   authorization = oAuthClient;
@@ -115,6 +103,17 @@ interface ClientSecret {
   };
 }
 
+const getTokenSettings = (
+  astro: AstroGlobal,
+  scope: typeof scopes | (typeof scopes)[number],
+) =>
+  ({
+    access_type: "offline",
+    state: astro.url.pathname,
+    scope: scope as string | string[],
+    include_granted_scopes: true,
+  }) satisfies Parameters<OAuth2Client["generateAuthUrl"]>[0];
+
 const getOAuthClient = async (astro: APIContext) => {
   const { web } = JSON.parse(GOOGLE_CLIENT_SECRET) as ClientSecret;
 
@@ -147,7 +146,7 @@ export const callApi = async <R>(
   call: (
     api: typeof service,
     params: {
-      auth: Awaited<ReturnType<typeof getAuth>>;
+      auth: OAuth2Client;
       fields: string;
       pageToken?: string;
       maxResults: number;
@@ -170,13 +169,15 @@ export const callApi = async <R>(
   const responses: R[] = [];
   let nextPage: string | undefined;
 
+  const auth = await getAuth(...params);
+
   do {
     let lastResponse: R;
 
     try {
       lastResponse = (
         await call(service, {
-          auth: await getAuth(...params),
+          auth,
           fields: "nextPageToken",
           ...(nextPage ? { pageToken: nextPage } : {}),
           maxResults: 50, // Max
@@ -196,7 +197,12 @@ export const callApi = async <R>(
           return null;
       }
 
-      throw new Error(`Google: the API returned an error: ${error.message}`);
+      if (error.message === "invalid_grant")
+        await refreshToken(auth, undefined, ...params);
+
+      throw new Error(
+        `Google: API error: ${error.response?.data.error_description ?? error.message}`,
+      );
     }
 
     responses.push(lastResponse);
@@ -214,4 +220,17 @@ export const callApi = async <R>(
         responses[0] as PaginatedResponse,
       )
     : responses[0]!;
+};
+
+const refreshToken = async (
+  auth?: OAuth2Client,
+  tokenSettings?: ReturnType<typeof getTokenSettings>,
+  ...params: Parameters<typeof getTokenSettings>
+) => {
+  throw new Error(
+    `Google: refresh at ${(auth ?? (await getAuth(...params))).generateAuthUrl({
+      ...(tokenSettings ?? getTokenSettings(...params)),
+      prompt: "consent",
+    })}`,
+  );
 };
