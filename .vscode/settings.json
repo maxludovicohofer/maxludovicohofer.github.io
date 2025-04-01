@@ -8,6 +8,7 @@
     "src/data/know-how.schema.json": "src/data/know-how.yaml",
     "src/data/certifications.schema.json": "src/data/certifications.yaml",
     "src/data/languages.schema.json": "src/data/languages.yaml",
+    "src/data/played-games.schema.json": "src/data/played-games.yaml",
     ".astro/collections/videos.schema.json": "src/data/videos/*.yaml"
   },
   "json.schemas": [

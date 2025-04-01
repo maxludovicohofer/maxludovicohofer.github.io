@@ -22,6 +22,7 @@ const resumeProps = z
   .or(
     z.object({
       build: z.boolean().or(reference("roles").array()).optional(),
+      specifyRole: z.boolean().optional(),
       full: z.boolean().optional(),
       email: z.boolean().optional(),
       coverLetter: z.boolean().optional(),
@@ -30,6 +31,11 @@ const resumeProps = z
         .object({
           passions: z.string().array(),
           focuses: z.string().array(),
+        })
+        .optional(),
+      playedGames: z
+        .object({
+          limit: z.number().int().positive(),
         })
         .optional(),
     }),
@@ -125,6 +131,11 @@ const languages = defineCollection({
   }),
 });
 
+const playedGames = defineCollection({
+  loader: file("src/data/played-games.yaml"),
+  schema: fileSchema,
+});
+
 const documents = z.object({
   title: z.string().optional(),
   draft: z.boolean().optional(),
@@ -204,6 +215,7 @@ export const collections = {
   ["know-how"]: knowHow,
   certifications,
   languages,
+  playedGames,
   docs,
   projects,
   thoughts,

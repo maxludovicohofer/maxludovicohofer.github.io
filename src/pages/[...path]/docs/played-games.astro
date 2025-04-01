@@ -1,0 +1,28 @@
+---
+import Text from "@components/ui/Text.astro";
+import { getResumeProps } from "@integrations/content";
+import { getPathsIf } from "@integrations/docs";
+import DocumentPage from "@layouts/document/DocumentPage.astro";
+import { getStaticPaths as getBasePaths } from "@pages/index.astro";
+import { getCollection } from "astro:content";
+
+export const getStaticPaths = async (
+  ...params: Parameters<typeof getBasePaths>
+) => {
+  return getPathsIf("playedGames", ...params);
+};
+
+const { playedGames } = await getResumeProps(Astro);
+
+let games = await getCollection("playedGames");
+if (typeof playedGames !== "boolean" && playedGames?.limit) {
+  games = games.slice(0, 50);
+}
+---
+
+<DocumentPage>
+  <Text title>Played games</Text>
+  <ol class="grid grid-cols-2">
+    {games.map(({ id }) => <li class="my-1 pr-7">{id}</li>)}
+  </ol>
+</DocumentPage>

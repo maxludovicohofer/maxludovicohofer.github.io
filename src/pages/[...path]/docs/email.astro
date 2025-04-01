@@ -2,13 +2,8 @@
 import Link from "@components/ui/Link.astro";
 import Text from "@components/ui/Text.astro";
 import { getRole, getSiteLink } from "@integrations/astro-server";
-import {
-  getBuiltCompanies,
-  getCompanyName,
-  getCompanyResumeProps,
-  getResumeProps,
-} from "@integrations/content";
-import { getMyName, getResumeDocuments } from "@integrations/docs";
+import { getCompanyName, getResumeProps } from "@integrations/content";
+import { getMyName, getPathsIf, getResumeDocuments } from "@integrations/docs";
 import { i18n } from "@integrations/i18n-server";
 import { removeWatashiNo } from "@integrations/l10n";
 import { toTextList } from "@integrations/text";
@@ -18,36 +13,8 @@ import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 export const getStaticPaths = async (
   ...params: Parameters<typeof getBasePaths>
 ) => {
-  const jaCompanies = await getBuiltCompanies("resumeJa");
-
-  const companiesWithDuplicates = [
-    ...(await getBuiltCompanies("resume")),
-    ...jaCompanies,
-  ];
-  const companies = [
-    ...new Set(companiesWithDuplicates.map(({ id }) => id)),
-  ].map((findId) => companiesWithDuplicates.find(({ id }) => id === findId)!);
-
-  const buildEmail = companies.some(
-    (company) =>
-      getCompanyResumeProps(company, "resume").email ||
-      getCompanyResumeProps(company, "resumeJa").email
-  );
-
-  return getBasePaths({
-    ...(buildEmail && companies.length
-      ? { allowedCompanies: companies.map(({ id }) => id) }
-      : { dontBuild: true }),
-    ...(jaCompanies.length
-      ? companies.length === jaCompanies.length
-        ? { allowedLocales: ["ja"] }
-        : {}
-      : { excludedLocales: ["ja"] }),
-    ...params[0],
-  });
+  return getPathsIf("email", ...params);
 };
-
-interface Props {}
 
 const portfolioLink = await getSiteLink(Astro);
 const myName = await getMyName(Astro);

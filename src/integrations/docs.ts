@@ -1,9 +1,15 @@
+import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 import type { AstroGlobal } from "astro";
 import { getCollection } from "astro:content";
 import { FULL_ADDRESS } from "astro:env/server";
 import { defaultLocale, getShortName, myName } from "./astro-config";
 import { getRole } from "./astro-server";
-import { getCompanyName, getResumeProps } from "./content";
+import {
+  getBuiltCompanies,
+  getCompanyName,
+  getCompanyResumeProps,
+  getResumeProps,
+} from "./content";
 import { i18n, type I18nOptions } from "./i18n-server";
 import { getCurrentLocale, getLocaleInfo, localeInfo } from "./i18n-special";
 import { removeWatashiWa } from "./l10n";
@@ -27,6 +33,7 @@ export const getWorkFieldsSentence = async (astro: AstroGlobal) => {
 export const getMotivationSentence = async (astro: AstroGlobal) => {
   const {
     role: {
+      id,
       data: { workFields },
     },
   } = await getRole(astro);
@@ -39,13 +46,22 @@ export const getMotivationSentence = async (astro: AstroGlobal) => {
   const t = i18n(astro);
 
   const company = await getCompanyName(astro);
+  const { build, specifyRole } = await getResumeProps(astro);
+
+  const specifiedRole = (Array.isArray(build) && build?.[0]?.id) || id;
 
   return removeWatashiWa(
     `${
       company
         ? `${await t(
-            `I am deeply inspired by {}'s innovative ${mainWorkField} and would be honored to contribute to your team.`,
-            { interpolate: company },
+            `I am deeply inspired by {}'s innovative {} and would be honored to contribute to your team${specifyRole ? " as a {}" : ""}.`,
+            {
+              interpolate: [
+                company,
+                await t(mainWorkField),
+                await t(specifiedRole),
+              ],
+            },
           )}${await t(" ")}`
         : ""
     }${await t(
@@ -188,4 +204,37 @@ export const getExtraItems = async (astro: AstroGlobal) => {
       "creating electronic music and worked as mixing and mastering engineer",
     ].map(async (extra) => await t(endDelimiter(capitalize(extra)))),
   );
+};
+
+export const getPathsIf = async (
+  key: keyof ReturnType<typeof getCompanyResumeProps>,
+  ...params: Parameters<typeof getBasePaths>
+) => {
+  const jaCompanies = await getBuiltCompanies("resumeJa");
+
+  const companiesWithDuplicates = [
+    ...(await getBuiltCompanies("resume")),
+    ...jaCompanies,
+  ];
+  const companies = [
+    ...new Set(companiesWithDuplicates.map(({ id }) => id)),
+  ].map((findId) => companiesWithDuplicates.find(({ id }) => id === findId)!);
+
+  const buildEmail = companies.some(
+    (company) =>
+      getCompanyResumeProps(company, "resume")[key] ||
+      getCompanyResumeProps(company, "resumeJa")[key],
+  );
+
+  return getBasePaths({
+    ...(buildEmail && companies.length
+      ? { allowedCompanies: companies.map(({ id }) => id) }
+      : { dontBuild: true }),
+    ...(jaCompanies.length
+      ? companies.length === jaCompanies.length
+        ? { allowedLocales: ["ja"] }
+        : {}
+      : { excludedLocales: ["ja"] }),
+    ...params[0],
+  });
 };

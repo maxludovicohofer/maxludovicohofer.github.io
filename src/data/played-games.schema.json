@@ -1,0 +1,11 @@
+{
+  "$ref": "#/definitions/played-games",
+  "definitions": {
+    "played-games": {
+      "type": "array",
+      "items": {
+        "$ref": "../../.astro/collections/playedGames.schema.json"
+      }
+    }
+  }
+}

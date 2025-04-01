@@ -1,43 +1,13 @@
 ---
 import Text from "@components/ui/Text.astro";
-import {
-  getBuiltCompanies,
-  getCompanyResumeProps,
-} from "@integrations/content";
-import { getSelfPRSentence } from "@integrations/docs";
+import { getPathsIf, getSelfPRSentence } from "@integrations/docs";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
 import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 
 export const getStaticPaths = async (
   ...params: Parameters<typeof getBasePaths>
 ) => {
-  const jaCompanies = await getBuiltCompanies("resumeJa");
-
-  const companiesWithDuplicates = [
-    ...(await getBuiltCompanies("resume")),
-    ...jaCompanies,
-  ];
-  const companies = [
-    ...new Set(companiesWithDuplicates.map(({ id }) => id)),
-  ].map((findId) => companiesWithDuplicates.find(({ id }) => id === findId)!);
-
-  const buildCoverLetter = companies.some(
-    (company) =>
-      getCompanyResumeProps(company, "resume").coverLetter ||
-      getCompanyResumeProps(company, "resumeJa").coverLetter
-  );
-
-  return getBasePaths({
-    ...(buildCoverLetter && companies.length
-      ? { allowedCompanies: companies.map(({ id }) => id) }
-      : { dontBuild: true }),
-    ...(jaCompanies.length
-      ? companies.length === jaCompanies.length
-        ? { allowedLocales: ["ja"] }
-        : {}
-      : { excludedLocales: ["ja"] }),
-    ...params[0],
-  });
+  return getPathsIf("coverLetter", ...params);
 };
 
 const selfPRSentence = await getSelfPRSentence(Astro);

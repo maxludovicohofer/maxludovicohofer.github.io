@@ -35,7 +35,13 @@
 
 # TODO
 - id: FromSoftware
-  resumeJa: false
+  resumeJa:
+    build:
+      - game planner
+    specifyRole: true
+    coverLetter: true
+    playedGames:
+      limit: 50
 
 - id: Nintendo
   resumeJa: false

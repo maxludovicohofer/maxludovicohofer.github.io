@@ -430,12 +430,16 @@ export const getCompanyResumeProps = (
     Array.isArray(resumeData) ||
     typeof resumeData === "boolean"
   ) {
-    return {} as Partial<
+    type ResumeProps = Partial<
       Exclude<
         CollectionEntry<"companies">["data"][ResumeKey],
         typeof resumeData
       >
     >;
+
+    if (Array.isArray(resumeData)) return { build: resumeData } as ResumeProps;
+
+    return {} as ResumeProps;
   }
 
   return resumeData;
