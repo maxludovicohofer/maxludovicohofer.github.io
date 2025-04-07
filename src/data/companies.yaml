@@ -33,13 +33,11 @@
   resumeJa:
     coverLetter: true
 
-# TODO
 - id: FromSoftware
   resumeJa:
-    build:
-      - game planner
     specifyRole: true
     coverLetter: true
+    singleResumeFile: true
     playedGames:
       limit: 50
 

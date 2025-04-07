@@ -26,6 +26,7 @@ const resumeProps = z
       full: z.boolean().optional(),
       email: z.boolean().optional(),
       coverLetter: z.boolean().optional(),
+      singleResumeFile: z.boolean().optional(),
       singleApplication: z.boolean().optional(),
       interests: z
         .object({
