@@ -663,10 +663,6 @@
     "translation": "ソフトウェア開発とリーダーシップにおける私の経験は、ゲーム業界に貢献したいと願う私にハードスキルとソフトスキルの両方を開発することを可能にしました。",
     "api": "deepl"
   },
-  "While new to the professional world of videogames, I have been involved in game design on academic and personal projects my whole life": {
-    "translation": "ビデオゲーム業界では新参者ですが、学術的および個人的なプロジェクトでは、ずっとゲームデザインに携わってきました。",
-    "api": "deepl"
-  },
   "I value self-teaching, teamwork, and sharing knowledge with colleagues": {
     "translation": "私は、自己学習、チームワーク、同僚との知識の共有を大切にしています。",
     "api": "deepl"
@@ -1103,10 +1099,6 @@
     "translation": "リーダーシップとソフトウェアに精通したAIプログラマーで、メカニック、戦闘、システムに特化しています。",
     "api": "deepl"
   },
-  "While new to the professional world of videogames, I have been involved in AI programming on academic and personal projects my whole life": {
-    "translation": "ビデオゲーム業界での仕事は初めてですが、学術研究や個人的なプロジェクトでAIプログラミングにずっと携わってきました。",
-    "api": "deepl"
-  },
   "Programming a realtime data-heavy web app and managing servers and CI/CD": {
     "translation": "リアルタイムで大量のデータを処理するウェブアプリのプログラミングと、サーバーおよび CI/CD の管理",
     "api": "deepl"
@@ -1141,10 +1133,6 @@
   },
   "System programmer experienced in leadership and software, specialized in mechanics, combat, and AI": {
     "translation": "リーダーシップとソフトウェアに精通したシステムプログラマーで、メカニック、戦闘、AIに特化しています。",
-    "api": "deepl"
-  },
-  "While new to the professional world of videogames, I have been involved in engine programming on academic and personal projects my whole life": {
-    "translation": "ビデオゲーム業界でのキャリアは浅いですが、学術的および個人的なプロジェクトでエンジンプログラミングにずっと携わってきました。",
     "api": "deepl"
   },
   "Tool programmer and gameplay programmer": {
@@ -1675,24 +1663,12 @@
     "translation": "リーダーシップとソフトウェアに精通したテクニカルクエストデザイナーで、脚本、撮影、プログラミングを専門としています。",
     "api": "deepl"
   },
-  "While new to the professional world of videogames, I have been involved in quest design on academic and personal projects my whole life": {
-    "translation": "ビデオゲーム業界では新参者ですが、学術的および個人的なプロジェクトでは、生涯を通じてクエストデザインに携わってきました。",
-    "api": "deepl"
-  },
   "Technical level designer experienced in leadership and software, specialized in AI, combat, and programming": {
     "translation": "リーダーシップとソフトウェアに精通したテクニカルレベルデザイナー、AI、戦闘、プログラミングを専門としています。",
     "api": "deepl"
   },
-  "While new to the professional world of videogames, I have been involved in level design on academic and personal projects my whole life": {
-    "translation": "ビデオゲーム業界では新参者ですが、学術的および個人的なプロジェクトでは、ずっとレベルデザインに携わってきました。",
-    "api": "deepl"
-  },
   "Game programmer experienced in leadership and software, specialized in mechanics, combat, AI, and systems": {
     "translation": "リーダーシップとソフトウェアに精通したゲームプログラマーで、メカニック、戦闘、AI、システムに専門特化しています。",
-    "api": "deepl"
-  },
-  "While new to the professional world of videogames, I have been involved in game programming on academic and personal projects my whole life": {
-    "translation": "ビデオゲーム業界では新参者ですが、学術的および個人的なプロジェクトでゲームプログラミングにずっと携わってきました。",
     "api": "deepl"
   },
   "Technical team lead and gameplay programmer": {
@@ -1701,10 +1677,6 @@
   },
   "Managing communication and tasks of the team and handling priorities and scope": {
     "translation": "チームのコミュニケーションとタスクの管理、優先順位とスコープの処理",
-    "api": "deepl"
-  },
-  "While new to the professional world of videogames, I have been involved in system programming on academic and personal projects my whole life": {
-    "translation": "ビデオゲーム業界では新参者ですが、学術的および個人的なプロジェクトでは、ずっとシステムプログラミングに携わってきました。",
     "api": "deepl"
   },
   "sound designer": {
@@ -1871,10 +1843,6 @@
     "translation": "スクラム、効果的なコミュニケーション、ソフトウェア開発を専門とし、リーダーシップとソフトウェアに精通したプロジェクトマネージャー。",
     "api": "deepl"
   },
-  "While new to the professional world of videogames, I have been involved in project management on academic and personal projects my whole life": {
-    "translation": "ビデオゲームのプロの世界では新参者ですが、私はずっと学術的なプロジェクトや個人的なプロジェクトでプロジェクトマネジメントに携わってきました。",
-    "api": "deepl"
-  },
   "Project manager": {
     "translation": "プロジェクトマネージャー",
     "api": "deepl"
@@ -2025,6 +1993,14 @@
   },
   "Played games": {
     "translation": "プレーした試合",
+    "api": "deepl"
+  },
+  "While new to the professional world of videogames, I have been involved in {} on academic and personal projects my whole life": {
+    "translation": "ビデオゲームのプロの世界では新参者ですが、私はずっと学術的なプロジェクトや個人的なプロジェクトで{}に携わってきました",
+    "api": "deepl"
+  },
+  "I aspire to grow my skills further while learning from your forward-thinking company": {
+    "translation": "先進的な貴社で学びながら、自分のスキルをさらに高めていきたいと考えています。",
     "api": "deepl"
   }
 }

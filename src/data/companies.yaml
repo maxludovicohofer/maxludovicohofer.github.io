@@ -7,6 +7,7 @@
     full: true
 
 - id: Techland
+  resume: false
 
 - id: genDESIGN
   resumeJa:
@@ -41,6 +42,7 @@
     playedGames:
       limit: 50
 
+# TODO REST OF JAPANESE
 - id: Nintendo
   resumeJa: false
 
@@ -63,44 +65,129 @@
   resumeJa: false
 
 - id: Sucker Punch Productions
+  resume: false
+
 - id: Santa Monica Studio
+  resume:
+    coverLetter: true
+
+# TODO
 - id: Guerrilla Games
+  resume: false
+
 - id: Moon Studios
+  resume: false
+
 - id: Ninja Theory
+  resume: false
+
 - id: Pearl Abyss
+  resume: false
+
 - id: id Software
+  resume: false
+
 - id: Valve
+  resume: false
+
 - id: Naughty Dog
+  resume: false
+
 - id: Respawn Entertainment
+  resume: false
+
 - id: Hello Games
+  resume: false
+
 - id: Hazelight Studios
+  resume: false
+
 - id: Thatgamecompany
+  resume: false
+
 - id: Mobius Digital
+  resume: false
+
 - id: Rockstar Games
+  resume: false
+
 - id: Remedy Entertainment
+  resume: false
+
 - id: Frictional Games
+  resume: false
+
 - id: Larian Studios
+  resume: false
+
 - id: MachineGames
+  resume: false
+
 - id: Obsidian Entertainment
+  resume: false
+
 - id: ArenaNet
+  resume: false
+
 - id: BioWare
+  resume: false
+
 - id: Bethesda Game Studios
+  resume: false
+
 - id: Epic Games
+  resume: false
+
 - id: Tarsier Studios
+  resume: false
+
 - id: Quantic Dream
+  resume: false
+
 - id: Crytek
+  resume: false
+
 - id: Arrowhead Game Studios
+  resume: false
+
 - id: Bungie
+  resume: false
+
 - id: EA
+  resume: false
+
 - id: CD Projekt Red
+  resume: false
+
 - id: Activision Blizzard
+  resume: false
+
 - id: Don't nod
+  resume: false
+
 - id: 4A Games
+  resume: false
+
 - id: Gearbox Software
+  resume: false
+
 - id: Arkane Studios
+  resume: false
+
 - id: NCSoft
+  resume: false
+
 - id: Asobo Studio
+  resume: false
+
 - id: DICE
+  resume: false
+
 - id: Facepunch Studios
+  resume: false
+
 - id: Certain Affinity
+  resume: false
+
 - id: Creative Assembly
+  resume: false

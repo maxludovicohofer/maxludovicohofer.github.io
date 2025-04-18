@@ -135,20 +135,21 @@ export const getSelfPRSentence = async (astro: AstroGlobal) => {
   const company = await getCompanyName(astro);
 
   return removeWatashiWa(
-    `${await t(
-      "My background in software development and leadership has allowed me to develop hard and soft skills that I wish to contribute to the game industry.",
-    )}${`${await t(" ")}${await t(
-      `While new to the professional world of videogames, I have been involved in ${mainWorkField} on academic and personal projects my whole life.`,
-    )}`}${`${await t(" ")}${await t(
-      "I value self-teaching, teamwork, and sharing knowledge with colleagues.",
-    )}`}${
+    `${
       company
-        ? `${await t(" ")}${await t(
-            `I aspire to grow my skills further while learning from a forward-thinking company like {}.}`,
+        ? `${await t(
+            "My background in software development and leadership has allowed me to develop hard and soft skills that I wish to contribute to {}.",
             { interpolate: company },
           )}${await t(" ")}`
         : ""
-    }`,
+    }${await t(
+      "While new to the professional world of videogames, I have been involved in {} on academic and personal projects my whole life.",
+      { interpolate: await t(mainWorkField) },
+    )}${`${await t(" ")}${await t(
+      "I value self-teaching, teamwork, and sharing knowledge with colleagues.",
+    )}`}${await t(" ")}${await t(
+      "I aspire to grow my skills further while learning from your forward-thinking company.",
+    )}${await t(" ")}`,
   );
 };
 
