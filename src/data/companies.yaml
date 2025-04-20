@@ -73,7 +73,10 @@
 
 # TODO
 - id: Guerrilla Games
-  resume: false
+  resume:
+    build:
+      - tools programmer
+    coverLetter: true
 
 - id: Moon Studios
   resume: false

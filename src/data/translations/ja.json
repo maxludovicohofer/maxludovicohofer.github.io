@@ -2002,5 +2002,21 @@
   "I aspire to grow my skills further while learning from your forward-thinking company": {
     "translation": "先進的な貴社で学びながら、自分のスキルをさらに高めていきたいと考えています。",
     "api": "deepl"
+  },
+  "Tools programmer experienced in leadership and software, specialized in mechanics, combat, AI, and systems": {
+    "translation": "メカニック、戦闘、AI、システムを専門とし、リーダーシップとソフトウェアに精通したツールプログラマー。",
+    "api": "deepl"
+  },
+  "engine programming": {
+    "translation": "エンジンプログラミング",
+    "api": "deepl"
+  },
+  "I'm a tools programmer specialized in mechanics, combat, AI, and systems": {
+    "translation": "メカニック、戦闘、AI、システムを専門とするツールプログラマーです。",
+    "api": "deepl"
+  },
+  "Tools programmer": {
+    "translation": "ツールプログラマー",
+    "api": "deepl"
   }
 }

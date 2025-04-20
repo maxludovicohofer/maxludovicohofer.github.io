@@ -88,6 +88,17 @@
     - system programming
     - engine programming
 
+- id: tools programmer
+  matches:
+    - engine programmer
+    - systems programmer
+    - tech lead
+    - user experience designer
+    - UI
+  workFields:
+    - engine programming
+    - system programming
+
 - id: project manager
   matches:
     - game director

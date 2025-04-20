@@ -84,6 +84,9 @@ export const completeAuthorization = async (astro: APIContext) => {
       );
     }
 
+    // Reset auth
+    authorization = undefined;
+
     // Store credentials
     import("fs/promises").then(({ writeFile }) =>
       writeFile(credentialsPath, JSON.stringify(credentials)),
@@ -195,6 +198,9 @@ export const callApi = async <R>(
           uploadsExceeded = true;
           console.error("Google: upload limit exceeded");
           return null;
+
+        case "insufficientPermissions":
+          await refreshToken(auth, undefined, ...params);
       }
 
       if (error.message === "invalid_grant")
