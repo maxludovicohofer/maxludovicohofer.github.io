@@ -71,25 +71,26 @@
   resume:
     coverLetter: true
 
-# TODO
 - id: Guerrilla Games
   resume:
-    build:
-      - tools programmer
     coverLetter: true
 
 - id: Moon Studios
   resume: false
 
 - id: Ninja Theory
-  resume: false
+  resume:
+    coverLetter: true
+    email: true
 
 - id: Pearl Abyss
-  resume: false
+  resume:
+    coverLetter: true
 
 - id: id Software
   resume: false
 
+# TODO
 - id: Valve
   resume: false
 
