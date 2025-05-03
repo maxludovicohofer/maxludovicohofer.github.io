@@ -21,7 +21,7 @@
     "@fontsource/noto-sans-symbols-2": "^5.1.2",
     "@googleapis/youtube": "^22.0.0",
     "@sentry/astro": "^8.49.0",
-    "astro": "^5.2.1",
+    "astro": "^5.7.6",
     "astro-pdf": "^1.7.2",
     "dayjs": "^1.11.13",
     "deepl-node": "^1.16.0",

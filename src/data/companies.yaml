@@ -90,13 +90,13 @@
 - id: id Software
   resume: false
 
-# TODO
 - id: Valve
   resume: false
 
 - id: Naughty Dog
   resume: false
 
+# TODO
 - id: Respawn Entertainment
   resume: false
 
@@ -194,4 +194,7 @@
   resume: false
 
 - id: Creative Assembly
+  resume: false
+
+- id: Sledgehammer Games
   resume: false

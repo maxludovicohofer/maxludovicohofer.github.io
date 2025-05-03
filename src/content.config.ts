@@ -192,8 +192,8 @@ const translations = defineCollection({
 
 const videos = defineCollection({
   loader: glob({ pattern: "**/[^_]*.yaml", base: "src/data/videos" }),
-  schema: z.array(
-    z.object({
+  schema: z
+    .object({
       role: reference("roles"),
       youTubeId: z.string(),
       categoryId: z.string(),
@@ -204,8 +204,8 @@ const videos = defineCollection({
           text: z.string(),
         }),
       ),
-    }),
-  ),
+    })
+    .array(),
 });
 
 // Export a single `collections` object to register your collection(s)
