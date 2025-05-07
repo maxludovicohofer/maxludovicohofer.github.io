@@ -35,6 +35,7 @@ jobs:
           # SENTRY_URL: https://sentry.io/
         with:
           environment: production
+        continue-on-error: true
 
       - name: Disable AppArmor
         # Fixes astro-pdf error with Ubuntu, see https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md

@@ -107,8 +107,21 @@
   workFields:
     - project management
     - agile methodologies
-    - flat hierarchy
   specializations:
     - scrum
-    - effective communication
     - software development
+    - pipeline efficiency
+
+- id: technical team lead
+  matches:
+    - scrum master
+    - game director
+    - project manager
+  workFields:
+    - team leading
+    - project management
+    - agile methodologies
+  specializations:
+    - scrum
+    - software development
+    - pipeline efficiency

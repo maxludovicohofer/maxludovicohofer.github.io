@@ -63,6 +63,7 @@
 
 - id: Koei Tecmo Games
   resumeJa: false
+# TODO Until here
 
 - id: Sucker Punch Productions
   resume: false
@@ -96,12 +97,12 @@
 - id: Naughty Dog
   resume: false
 
-# TODO
 - id: Respawn Entertainment
-  resume: false
+  resume: true
 
 - id: Hello Games
-  resume: false
+  resume:
+    email: true
 
 - id: Hazelight Studios
   resume: false
@@ -112,8 +113,9 @@
 - id: Mobius Digital
   resume: false
 
+# TODO
 - id: Rockstar Games
-  resume: false
+  resume: true
 
 - id: Remedy Entertainment
   resume: false
@@ -197,4 +199,7 @@
   resume: false
 
 - id: Sledgehammer Games
+  resume: false
+
+- id: Sandfall Interactive
   resume: false

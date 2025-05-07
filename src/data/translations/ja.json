@@ -2018,5 +2018,49 @@
   "Tools programmer": {
     "translation": "ツールプログラマー",
     "api": "deepl"
+  },
+  "Currently transitioning from software engineering to videogame agile methodologies, which is my lifelong passion": {
+    "translation": "現在、ソフトウェアエンジニアリングからビデオゲームのアジャイル方法論に移行中。",
+    "api": "deepl"
+  },
+  "Project manager experienced in leadership and software, specialized in scrum, software development, and pipeline efficiency": {
+    "translation": "スクラム、ソフトウェア開発、パイプラインの効率化を専門とし、リーダーシップとソフトウェアに精通したプロジェクトマネージャー。",
+    "api": "deepl"
+  },
+  "Technical team lead experienced in leadership and software, specialized in scrum, software development, and pipeline efficiency": {
+    "translation": "スクラム、ソフトウェア開発、パイプラインの効率化に特化した、リーダーシップとソフトウェアの経験を持つ技術チームリーダー",
+    "api": "deepl"
+  },
+  "agile methodologies": {
+    "translation": "アジャイル方法論",
+    "api": "deepl"
+  },
+  "Team lead and technical artist": {
+    "translation": "チームリーダー、テクニカルアーティスト",
+    "api": "deepl"
+  },
+  "Technical team lead": {
+    "translation": "テクニカルチームリーダー",
+    "api": "deepl"
+  },
+  "Currently transitioning from software engineering to videogame team leading, which is my lifelong passion": {
+    "translation": "現在、ソフトウェア・エンジニアリングから、生涯の情熱であるビデオゲーム・チームのリーダーへと移行中。",
+    "api": "deepl"
+  },
+  "team leading": {
+    "translation": "チームリーディング",
+    "api": "deepl"
+  },
+  "I'm a project manager specialized in scrum, software development, and pipeline efficiency": {
+    "translation": "私はスクラム、ソフトウェア開発、パイプラインの効率化を専門とするプロジェクトマネージャーです。",
+    "api": "deepl"
+  },
+  "I'm a technical team lead specialized in scrum, software development, and pipeline efficiency": {
+    "translation": "私はスクラム、ソフトウェア開発、パイプラインの効率化を専門とする技術チームのリーダーです。",
+    "api": "deepl"
+  },
+  "Team leading": {
+    "translation": "チームリーダー",
+    "api": "deepl"
   }
 }
