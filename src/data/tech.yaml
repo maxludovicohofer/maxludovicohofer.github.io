@@ -204,7 +204,8 @@
     - project manager
     - scrum master
 
-- id: Version control
+- id: version control
+  translateId: true
   experience: P3Y
   group: programming
   roles:
