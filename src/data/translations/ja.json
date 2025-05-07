@@ -2062,5 +2062,9 @@
   "Team leading": {
     "translation": "チームリーダー",
     "api": "deepl"
+  },
+  "Version control": {
+    "translation": "バージョン管理",
+    "api": "deepl"
   }
 }
