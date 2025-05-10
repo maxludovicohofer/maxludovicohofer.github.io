@@ -50,7 +50,7 @@ const { Content, remarkPluginFrontmatter } = entry ? await render(entry) : {};
 const title = getTitle(entry);
 const publishingDate = getPublishingDate(
   entry,
-  remarkPluginFrontmatter,
+  remarkPluginFrontmatter
 )?.format("LL");
 const cover = getCover(entry);
 const downloadLinks = getDownloadLinks(entry);
@@ -134,8 +134,12 @@ const noTranslation = contentProps?.isLocalized ?? isLocalizedEntry(entry);
                 </div>
               </Button>
               {downloadLinks.length > 1 && (
-                <Text subtitle class={`-mb-4 w-full ${buttonWidthClass}`}>
-                  Or
+                <Text
+                  subtitle
+                  class={`-mb-4 w-full ${buttonWidthClass}`}
+                  translateProps={{ disable: true }}
+                >
+                  {`${await t("Or")}${await t(" ")}`}
                   {downloadLinks
                     .slice(1)
                     .map(async (link, index, { length }) => {
@@ -214,7 +218,7 @@ const noTranslation = contentProps?.isLocalized ?? isLocalizedEntry(entry);
       JSON.stringify({
         ...readEntries,
         [collection]: [slug, ...(readEntries[collection] ?? [])],
-      }),
+      })
     );
   });
 </script>

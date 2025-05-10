@@ -608,11 +608,11 @@
     "api": "deepl"
   },
   "try": {
-    "translation": "試みる",
+    "translation": "試してみてください",
     "api": "deepl"
   },
   "play": {
-    "translation": "演じる",
+    "translation": "プレイ",
     "api": "deepl"
   },
   "Engine programming": {
@@ -2067,8 +2067,8 @@
     "translation": "バージョン管理",
     "api": "deepl"
   },
-  "Or\n<a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150 break-all\" href=\"https://0ry0.itch.io/steelsilk\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Itch (Steelsilk)\" data-umami-event-url=\"https://0ry0.itch.io/steelsilk\">Itch</a>": {
-    "translation": "または<a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150 break-all\" href=\"https://0ry0.itch.io/steelsilk\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Itch (Steelsilk)\" data-umami-event-url=\"https://0ry0.itch.io/steelsilk\">かゆみ</a>",
+  "Or": {
+    "translation": "または",
     "api": "deepl"
   }
 }
