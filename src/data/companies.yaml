@@ -98,7 +98,7 @@
   resume: false
 
 - id: Respawn Entertainment
-  resume: true
+  resume: false
 
 - id: Hello Games
   resume:
@@ -113,9 +113,9 @@
 - id: Mobius Digital
   resume: false
 
-# TODO
 - id: Rockstar Games
-  resume: true
+  resume:
+    coverLetter: true
 
 - id: Remedy Entertainment
   resume: false
@@ -123,6 +123,7 @@
 - id: Frictional Games
   resume: false
 
+# TODO
 - id: Larian Studios
   resume: false
 
