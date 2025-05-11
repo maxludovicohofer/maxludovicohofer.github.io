@@ -123,9 +123,9 @@
 - id: Frictional Games
   resume: false
 
-# TODO
 - id: Larian Studios
-  resume: false
+  resume:
+    coverLetter: true
 
 - id: MachineGames
   resume: false
@@ -139,6 +139,7 @@
 - id: BioWare
   resume: false
 
+# TODO
 - id: Bethesda Game Studios
   resume: false
 
