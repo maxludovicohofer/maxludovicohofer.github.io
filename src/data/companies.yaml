@@ -139,7 +139,6 @@
 - id: BioWare
   resume: false
 
-# TODO
 - id: Bethesda Game Studios
   resume: false
 
@@ -161,6 +160,7 @@
 - id: Bungie
   resume: false
 
+# TODO
 - id: EA
   resume: false
 
@@ -204,4 +204,8 @@
   resume: false
 
 - id: Sandfall Interactive
+  resume: false
+
+# ALREADY DID, JUST DELETE THIS COMMENT
+- id: Sperasoft
   resume: false
