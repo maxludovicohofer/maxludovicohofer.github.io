@@ -19,25 +19,6 @@
     - AI
     - systems
 
-- id: technical quest designer
-  matches:
-    - level designer
-    - writer
-    - game director
-    - technical game designer
-    - technical gameplay designer
-    - programmer
-    - lead
-    - AI
-  workFields:
-    - quest design
-    - level design
-    - open world
-  specializations:
-    - encounters
-    - screenplays
-    - programming
-
 - id: technical level designer
   matches:
     - technical game designer
@@ -62,7 +43,8 @@
 - id: game programmer
   matches:
     - gameplay programmer
-    - technical team lead
+    - technical lead
+    - tech lead
   workFields:
     - game programming
     - combat systems
@@ -72,7 +54,8 @@
   matches:
     - AI tool programmer
     - AI lead
-    - technical team lead
+    - technical lead
+    - tech lead
   workFields:
     - AI programming
     - decision trees
@@ -83,6 +66,7 @@
     - systems programmer
     - tool programmer
     - engine programmer
+    - technical lead
     - tech lead
   workFields:
     - system programming
@@ -92,8 +76,10 @@
   matches:
     - engine programmer
     - systems programmer
+    - technical lead
     - tech lead
-    - user experience designer
+    - user experience
+    - UX
     - UI
   workFields:
     - engine programming
@@ -101,9 +87,9 @@
 
 - id: project manager
   matches:
-    - game director
-    - team lead
     - scrum master
+    - game director
+    - lead
   workFields:
     - project management
     - agile methodologies
@@ -114,9 +100,10 @@
 
 - id: technical team lead
   matches:
-    - scrum master
-    - game director
     - project manager
+    - lead
+    - director
+    - scrum master
   workFields:
     - team leading
     - project management
@@ -125,3 +112,15 @@
     - scrum
     - software development
     - pipeline efficiency
+
+- id: UI programmer
+  matches:
+    - UI
+    - user experience
+    - UX
+    - technical lead
+    - tech lead
+  workFields:
+    - UI/UX
+    - UX planning
+    - UI frameworks

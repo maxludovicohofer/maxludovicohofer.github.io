@@ -2070,5 +2070,45 @@
   "Or": {
     "translation": "または",
     "api": "deepl"
+  },
+  "Currently transitioning from software engineering to videogame UI programming, which is my lifelong passion": {
+    "translation": "現在、ソフトウェアエンジニアリングから、生涯の情熱であるビデオゲームのUIプログラミングに移行中。",
+    "api": "deepl"
+  },
+  "Programming the game's mechanics and procedural systems and designing a low-end procedural mobile platformer following client specifications": {
+    "translation": "ゲームのメカニックとプロシージャルシステムのプログラミングと、クライアントの仕様に従ったローエンドのプロシージャルモバイルプラットフォーマーのデザイン。",
+    "api": "deepl"
+  },
+  "UI programmer experienced in leadership and software, specialized in mechanics, combat, AI, and systems": {
+    "translation": "メカニクス、戦闘、AI、システムに特化した、リーダーシップとソフトウェアに経験豊富なUIプログラマー",
+    "api": "deepl"
+  },
+  "UI programming": {
+    "translation": "UIプログラミング",
+    "api": "deepl"
+  },
+  "UI/UX lead and camera programmer": {
+    "translation": "UI/UXリード兼カメラプログラマー",
+    "api": "deepl"
+  },
+  "Managing UI/UX of the game to align with the game vision and programming UI systems to simplify development": {
+    "translation": "ゲームのビジョンに沿ったUI/UXの管理、および開発を簡素化するためのUIシステムのプログラミング。",
+    "api": "deepl"
+  },
+  "I'm a UI programmer specialized in mechanics, combat, AI, and systems": {
+    "translation": "メカニック、戦闘、AI、システムを専門とするUIプログラマーです。",
+    "api": "deepl"
+  },
+  "UI programmer": {
+    "translation": "UIプログラマー",
+    "api": "deepl"
+  },
+  "Currently transitioning from software engineering to videogame UI/UX, which is my lifelong passion": {
+    "translation": "現在、ソフトウェアエンジニアリングから、生涯の情熱であるビデオゲームのUI/UXに移行中。",
+    "api": "deepl"
+  },
+  "UI/UX": {
+    "translation": "UI/UX",
+    "api": "deepl"
   }
 }

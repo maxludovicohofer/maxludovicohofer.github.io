@@ -160,12 +160,12 @@
 - id: Bungie
   resume: false
 
-# TODO
 - id: EA
   resume: false
 
+# TODO
 - id: CD Projekt Red
-  resume: false
+  resume: true
 
 - id: Activision Blizzard
   resume: false
