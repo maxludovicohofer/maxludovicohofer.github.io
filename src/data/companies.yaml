@@ -172,10 +172,11 @@
 - id: Don't nod
   resume: false
 
-# TODO
 - id: 4A Games
-  resume: false
+  resume:
+    email: true
 
+# TODO
 - id: Gearbox Software
   resume: false
 
