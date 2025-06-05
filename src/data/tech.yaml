@@ -219,6 +219,8 @@
   roles:
     - programmer
     - scrum master
+    - artist
+    - designer
 
 - id: Houdini
   experience: P6M

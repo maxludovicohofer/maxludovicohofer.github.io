@@ -39,6 +39,13 @@
       achievements:
         - developed AI systems and prototype tooling
 
+    - job: technical artist
+      tasks:
+        - programming procedural content
+      achievements:
+        - developed asset scattering through Unreal's PCG
+        - studied rendering and performance optimization in depth
+
 - id: INattivo Soc. Cons. a.r.l
   start: 2021-05-01
   end: 2022-03-01
@@ -181,6 +188,15 @@
       achievements:
         - worked on several prototypes and one published game
         - specialized in design and technical aspects
+
+    - job: technical artist
+      countAsWork: true
+      tasks:
+        - supervising asset authoring pipeline
+        - developing procedural systems
+      achievements:
+        - developed procedural animation system for multi-legged characters
+        - programmed level streaming system for a rougelike game
 
 - id: University of Padua
   start: 2016-09-01

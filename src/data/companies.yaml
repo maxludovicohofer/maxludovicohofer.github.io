@@ -179,10 +179,10 @@
 - id: Gearbox Software
   resume: false
 
-# TODO
 - id: Hangar 13
-  resume: true
+  resume: false
 
+# TODO
 - id: Arkane Studios
   resume: false
 
