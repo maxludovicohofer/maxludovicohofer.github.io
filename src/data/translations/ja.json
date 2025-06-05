@@ -2110,5 +2110,89 @@
   "UI/UX": {
     "translation": "UI/UX",
     "api": "deepl"
+  },
+  "Currently transitioning from software engineering to videogame technical art, which is my lifelong passion": {
+    "translation": "現在、ソフトウェアエンジニアリングから、私の生涯の情熱であるビデオゲームのテクニカルアートへの転職を進めています。",
+    "api": "deepl"
+  },
+  "PCG": {
+    "translation": "PCG",
+    "api": "deepl"
+  },
+  "Technical artist experienced in leadership and software, specialized in procedural content, rendering, and programming": {
+    "translation": "リーダーシップとソフトウェアの経験豊富なテクニカルアーティストで、プロシージャルコンテンツ、レンダリング、プログラミングを専門としています。",
+    "api": "deepl"
+  },
+  "Texturing": {
+    "translation": "テクスチャリング",
+    "api": "deepl"
+  },
+  "Sculpting": {
+    "translation": "彫刻",
+    "api": "deepl"
+  },
+  "Baking": {
+    "translation": "焼く",
+    "api": "deepl"
+  },
+  "Compositing": {
+    "translation": "合成",
+    "api": "deepl"
+  },
+  "Video effects": {
+    "translation": "ビデオエフェクト",
+    "api": "deepl"
+  },
+  "2D animation": {
+    "translation": "2Dアニメーション",
+    "api": "deepl"
+  },
+  "Montage": {
+    "translation": "モンタージュ",
+    "api": "deepl"
+  },
+  "Video and audio editing": {
+    "translation": "ビデオおよびオーディオの編集",
+    "api": "deepl"
+  },
+  "Technical team lead and technical animation lead": {
+    "translation": "テクニカルチームリーダーおよびテクニカルアニメーションリーダー",
+    "api": "deepl"
+  },
+  "Technical artist and sound artist": {
+    "translation": "テクニカルアーティストおよびサウンドアーティスト",
+    "api": "deepl"
+  },
+  "Coming up and communicating a procedural content pipeline with artists and programmers and handling low-end mobile performance": {
+    "translation": "アーティストやプログラマーと手順のコンテンツパイプラインについて話し合い、調整し、ローエンドのモバイルパフォーマンスに対応します。",
+    "api": "deepl"
+  },
+  "sound artist": {
+    "translation": "サウンドアーティスト",
+    "api": "deepl"
+  },
+  "shader artist": {
+    "translation": "シェーダーアーティスト",
+    "api": "deepl"
+  },
+  "lighting artist": {
+    "translation": "照明アーティスト",
+    "api": "deepl"
+  },
+  "I'm a technical artist specialized in procedural content, rendering, and programming": {
+    "translation": "私は、プロシージャルコンテンツ、レンダリング、プログラミングを専門とするテクニカルアーティストです。",
+    "api": "deepl"
+  },
+  "Technical artist": {
+    "translation": "テクニカルアーティスト",
+    "api": "deepl"
+  },
+  "Currently transitioning from software engineering to videogame UI \\ UX, which is my lifelong passion": {
+    "translation": "現在、ソフトウェアエンジニアリングから、私の生涯の情熱であるビデオゲームのUI/UXへの転職を進めております。",
+    "api": "deepl"
+  },
+  "UI \\ UX": {
+    "translation": "UI \\ UX",
+    "api": "deepl"
   }
 }

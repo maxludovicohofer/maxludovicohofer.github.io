@@ -1741,3 +1741,147 @@
         15
         00:01:52,500 --> 00:02:00,000
         スコープの拡大をうまく管理し、プロジェクトを期限内に完了させる。
+- role: technical artist
+  youTubeId: XiT7D4v-SP4
+  categoryId: '22'
+  captions:
+    - locale: en
+      youTubeId: AUieDaYWu5qppSgN1tXiOss6d8D2B3S2-C2h_7EcZA-N
+      text: >-
+        0
+
+        00:00:00,000 --> 00:00:18,000
+
+        Led a technical team of 14 programmers, designers, animators, and shader
+        artists to our first published game.
+
+
+        1
+
+        00:00:18,000 --> 00:00:30,000
+
+        Awarded Rookie awards 2024 "Game of the year - People's choice".
+
+
+        2
+
+        00:00:30,000 --> 00:00:35,000
+
+        Designed a stealth-action hybrid with character transformations and
+        multiuse skills.
+
+
+        3
+
+        00:00:35,000 --> 00:00:42,000
+
+        Programmed skills, camera, and movement, that change based on character
+        transformation.
+
+
+        4
+
+        00:00:42,000 --> 00:00:47,500
+
+        Programmed AI that reacts intuitively to weather conditions and
+        visibility issues.
+
+
+        5
+
+        00:00:47,500 --> 00:00:53,000
+
+        Developed tools to easily place AI agents and control patrol paths.
+
+
+        6
+
+        00:00:53,000 --> 00:01:00,000
+
+        Programmed level design tools that helped to control enemies and story
+        events.
+
+
+        7
+
+        00:01:00,000 --> 00:01:06,000
+
+        Developed a realistic black hole shader.
+
+
+        8
+
+        00:01:06,000 --> 00:01:30,000
+
+        Engineered robotic voiceovers, and composed slow eerie music.
+
+
+        9
+
+        00:01:30,000 --> 00:01:39,800
+
+        Developed an easy to work on level design pipeline.
+
+
+        10
+
+        00:01:39,800 --> 00:01:48,100
+
+        Achieved low-end mobile device compatibility.
+
+
+        11
+
+        00:01:48,100 --> 00:02:00,000
+
+        Mixed, mastered, and programmed sound and music for the game.
+    - locale: ja
+      youTubeId: AUieDaaTZlPFOqLt9p2FfnOqNJD6bgSSrs_wbTzvbB-g
+      text: |-
+        0
+        00:00:00,000 --> 00:00:18,000
+        14人のプログラマー、デザイナー、アニメーター、シェーダーアーティストからなる技術チームを率いて、当社初のゲームをリリースしました。
+
+        1
+        00:00:18,000 --> 00:00:30,000
+        2024年「ゲーム・オブ・ザ・イヤー - ピープルズ・チョイス」新人賞受賞。
+
+        2
+        00:00:30,000 --> 00:00:35,000
+        キャラクターの変身とマルチスキルを搭載したステルスアクションのハイブリッドを設計しました。
+
+        3
+        00:00:35,000 --> 00:00:42,000
+        プログラムされたスキル、カメラ、動きは、キャラクターの変身に応じて変化します。
+
+        4
+        00:00:42,000 --> 00:00:47,500
+        天候や視界の問題に直感的に反応するようプログラムされたAI。
+
+        5
+        00:00:47,500 --> 00:00:53,000
+        AIエージェントを簡単に配置し、巡回経路を制御できるツールを開発しました。
+
+        6
+        00:00:53,000 --> 00:01:00,000
+        敵やストーリーイベントを制御するのに役立った、プログラムされたレベルデザインツール。
+
+        7
+        00:01:00,000 --> 00:01:06,000
+        リアルなブラックホールシェーダーを開発しました。
+
+        8
+        00:01:06,000 --> 00:01:30,000
+        ロボット音声と不気味なスローミュージックを合成しました。
+
+        9
+        00:01:30,000 --> 00:01:39,800
+        作業しやすいレベルデザインのパイプラインを開発しました。
+
+        10
+        00:01:39,800 --> 00:01:48,100
+        ローエンドのモバイルデバイスとの互換性を実現しました。
+
+        11
+        00:01:48,100 --> 00:02:00,000
+        ゲーム用のサウンドと音楽のミックス、マスタリング、プログラミング。

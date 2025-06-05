@@ -67,6 +67,11 @@
     - id: runtime virtual textures
       roles:
         - technical artist
+    - id: PCG
+      dontTranslateId: true
+      roles:
+        - technical artist
+        - programmer
   roles:
     - game designer
     - level designer
@@ -100,6 +105,7 @@
   roles:
     - game designer
     - programmer
+    - technical artist
 
 - id: C#
   experience: P5Y
@@ -119,6 +125,7 @@
   group: programming
   roles:
     - game designer
+    - technical artist
 
 - id: HLSL
   experience: P1Y
@@ -133,6 +140,7 @@
   roles:
     - game designer
     - programmer
+    - technical artist
 
 - id: Java
   experience: P2Y

@@ -121,6 +121,19 @@
     - technical lead
     - tech lead
   workFields:
-    - UI/UX
+    - UI \ UX
     - UX planning
     - UI frameworks
+
+- id: technical artist
+  matches:
+    - procedural
+    - art
+  workFields:
+    - technical art
+    - procedural content generation
+    - procedural texturing
+  specializations:
+    - procedural content
+    - rendering
+    - programming

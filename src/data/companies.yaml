@@ -176,9 +176,12 @@
   resume:
     email: true
 
-# TODO
 - id: Gearbox Software
   resume: false
+
+# TODO
+- id: Hangar 13
+  resume: true
 
 - id: Arkane Studios
   resume: false
