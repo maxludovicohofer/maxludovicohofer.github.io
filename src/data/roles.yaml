@@ -40,13 +40,13 @@
     - combat
     - programming
 
-- id: game programmer
+- id: gameplay programmer
   matches:
-    - gameplay programmer
+    - game programmer
     - technical lead
     - tech lead
   workFields:
-    - game programming
+    - gameplay programming
     - combat systems
     - physics systems
 
@@ -84,6 +84,28 @@
   workFields:
     - engine programming
     - system programming
+  specializations:
+    - performance optimization
+    - rendering
+    - user experience
+
+- id: engine programmer
+  matches:
+    - tools programmer
+    - tool programmer
+    - systems programmer
+    - technical lead
+    - tech lead
+    - user experience
+    - UX
+    - UI
+  workFields:
+    - engine programming
+    - system programming
+  specializations:
+    - performance optimization
+    - rendering
+    - user experience
 
 - id: project manager
   matches:
@@ -137,3 +159,14 @@
     - procedural content
     - rendering
     - programming
+
+# TODO DELETE IN FUTURE
+- id: game programmer
+  matches:
+    - gameplay programmer
+    - technical lead
+    - tech lead
+  workFields:
+    - gameplay programming
+    - combat systems
+    - physics systems

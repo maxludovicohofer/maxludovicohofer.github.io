@@ -25,7 +25,7 @@
         - designed prototypes (stealth, action, narrative, TPS, horror) and mechanics, while developing tools and systems
         - studied rendering and performance optimization in depth
 
-    - job: game programmer
+    - job: gameplay programmer
       tasks:
         - coding game features
         - creating tools and systems
@@ -173,7 +173,7 @@
         - designed and directed a published co-op rougelike shoot 'em up game, completed in 3 months by a team of 20
         - designed prototypes (puzzle game, funny driving game, mobile platformer) for clients and game jams, following provided requirements
 
-    - job: game programmer
+    - job: gameplay programmer
       countAsWork: true
       tasks:
         - programming gameplay and core systems

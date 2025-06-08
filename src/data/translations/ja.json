@@ -1711,10 +1711,6 @@
     "translation": "レベルデザイン",
     "api": "deepl"
   },
-  "I'm a game programmer specialized in mechanics, combat, AI, and systems": {
-    "translation": "私は、メカニック、戦闘、AI、システムに特化したゲームプログラマーです。",
-    "api": "deepl"
-  },
   "Game programming": {
     "translation": "ゲームプログラミング",
     "api": "deepl"
@@ -1903,10 +1899,6 @@
     "translation": "電子メール",
     "api": "deepl"
   },
-  "application for game designer, game programmer, technical artist, engineer, and project manager": {
-    "translation": "ゲームデザイナー、ゲームプログラマー、テクニカルアーティスト、エンジニア、プロジェクトマネージャー向けアプリケーション",
-    "api": "deepl"
-  },
   "I hope this message finds you well. I have attached my 履歴書 and 職務経歴書 for your review. You may also view my portfolio at": {
     "translation": "お元気でお過ごしでしょうか。私の 履歴書と 職務経歴書を添付しましたので、ご覧ください。また、私のポートフォリオをご覧ください：",
     "api": "deepl"
@@ -1925,10 +1917,6 @@
   },
   "application for technical level designer": {
     "translation": "テクニカルレベルデザイナー募集",
-    "api": "deepl"
-  },
-  "application for game programmer": {
-    "translation": "ゲームプログラマー募集",
     "api": "deepl"
   },
   "application for AI programmer": {
@@ -2193,6 +2181,58 @@
   },
   "UI \\ UX": {
     "translation": "UI \\ UX",
+    "api": "deepl"
+  },
+  "Currently transitioning from software engineering to gameplay programming, which is my lifelong passion": {
+    "translation": "現在、ソフトウェアエンジニアリングから、私の生涯の情熱であるゲームプレイプログラミングへの転職を進めております。",
+    "api": "deepl"
+  },
+  "Gameplay programmer experienced in leadership and software, specialized in mechanics, combat, AI, and systems": {
+    "translation": "ゲームプレイプログラマー。リーダーシップとソフトウェアの経験が豊富で、メカニクス、戦闘、AI、システムに特化しています。",
+    "api": "deepl"
+  },
+  "gameplay programming": {
+    "translation": "ゲームプレイプログラミング",
+    "api": "deepl"
+  },
+  "Gameplay programmer and camera programmer": {
+    "translation": "ゲームプレイプログラマーおよびカメラプログラマー",
+    "api": "deepl"
+  },
+  "Engine programmer experienced in leadership and software, specialized in mechanics, combat, AI, and systems": {
+    "translation": "リーダーシップとソフトウェアの経験豊富なエンジンプログラマーで、メカニクス、戦闘、AI、システムに特化しています。",
+    "api": "deepl"
+  },
+  "I'm a gameplay programmer specialized in mechanics, combat, AI, and systems": {
+    "translation": "私は、メカニズム、戦闘、AI、システムに特化したゲームプレイプログラマーです。",
+    "api": "deepl"
+  },
+  "Gameplay programming": {
+    "translation": "ゲームプレイプログラミング",
+    "api": "deepl"
+  },
+  "I'm an engine programmer specialized in mechanics, combat, AI, and systems": {
+    "translation": "私は、メカニクス、戦闘、AI、システムに特化したエンジンプログラマーです。",
+    "api": "deepl"
+  },
+  "Engine programmer": {
+    "translation": "エンジンプログラマー",
+    "api": "deepl"
+  },
+  "Tools programmer experienced in leadership and software, specialized in performance optimization, rendering, and user experience": {
+    "translation": "リーダーシップとソフトウェアに精通したツールプログラマーで、パフォーマンス最適化、レンダリング、ユーザーエクスペリエンスを専門としています。",
+    "api": "deepl"
+  },
+  "Engine programmer experienced in leadership and software, specialized in performance optimization, rendering, and user experience": {
+    "translation": "リーダーシップとソフトウェアの経験豊富なエンジンプログラマーで、パフォーマンスの最適化、レンダリング、ユーザーエクスペリエンスを専門としています。",
+    "api": "deepl"
+  },
+  "I'm a tools programmer specialized in performance optimization, rendering, and user experience": {
+    "translation": "私は、パフォーマンスの最適化、レンダリング、ユーザーエクスペリエンスを専門とするツールプログラマーです。",
+    "api": "deepl"
+  },
+  "I'm an engine programmer specialized in performance optimization, rendering, and user experience": {
+    "translation": "私は、パフォーマンスの最適化、レンダリング、ユーザーエクスペリエンスを専門とするエンジンプログラマーです。",
     "api": "deepl"
   }
 }

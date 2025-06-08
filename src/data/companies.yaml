@@ -182,7 +182,6 @@
 - id: Hangar 13
   resume: false
 
-# TODO
 - id: Arkane Studios
   resume: false
 
@@ -195,6 +194,7 @@
 - id: DICE
   resume: false
 
+# TODO
 - id: Facepunch Studios
   resume: false
 
