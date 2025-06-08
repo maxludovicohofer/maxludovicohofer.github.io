@@ -2234,5 +2234,9 @@
   "I'm an engine programmer specialized in performance optimization, rendering, and user experience": {
     "translation": "私は、パフォーマンスの最適化、レンダリング、ユーザーエクスペリエンスを専門とするエンジンプログラマーです。",
     "api": "deepl"
+  },
+  "I'm a game programmer specialized in mechanics, combat, AI, and systems": {
+    "translation": "私は、メカニズム、戦闘、AI、システムに特化したゲームプログラマーです。",
+    "api": "deepl"
   }
 }
