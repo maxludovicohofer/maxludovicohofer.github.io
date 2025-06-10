@@ -194,7 +194,6 @@
 - id: DICE
   resume: false
 
-# TODO
 - id: Facepunch Studios
   resume: false
 
@@ -210,6 +209,5 @@
 - id: Sandfall Interactive
   resume: false
 
-# ALREADY DID, JUST DELETE THIS COMMENT
 - id: Sperasoft
   resume: false
