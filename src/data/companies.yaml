@@ -14,7 +14,6 @@
     email: true
     singleApplication: true
 
-# TODO Requires 3 game proposals
 - id: PlatinumGames
   resumeJa: false
 
@@ -42,7 +41,6 @@
     playedGames:
       limit: 50
 
-# TODO REST OF JAPANESE
 - id: Nintendo
   resumeJa: false
 
@@ -63,7 +61,6 @@
 
 - id: Koei Tecmo Games
   resumeJa: false
-# TODO Until here
 
 - id: Sucker Punch Productions
   resume: false

@@ -1,0 +1,13 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"code"> {}
+
+const { ...props } = Astro.props;
+---
+
+<code
+  class="bg-[#24292e] rounded-3xl before:hidden after:hidden font-normal px-1.5 2xl:px-2.5 py-0.5"
+  translate="no"
+  {...props}><slot /></code
+>

@@ -1195,10 +1195,6 @@
     "translation": "マズローの欲求階層説を簡略化すると、",
     "api": "deepl"
   },
-  "But most importantly, a brain has needs that it wants to fulfill. Need beliefs are special beliefs that estimate the urgency of a need from 0 to 1, given the current signal. Also, the <code>Need</code> static class contains estimate functions": {
-    "translation": "しかし、最も重要なのは、脳には満たしたいニーズがあるということです。ニーズ信念とは、現在のシグナルを考慮した上で、ニーズの緊急性を0から1で評価する特別な信念です。また、<code>ニーズ静的クラス</code>には、評価関数が含まれています。",
-    "api": "deepl"
-  },
   "Act By Belief is a decision tree-based workflow for natural thought. It’s useful for agents that require a personality and follow reactive thought processes. For robotic or immutable behavior, traditional methods would be preferable. In this system, agents are split into brain and body": {
     "translation": "Act By Beliefは、自然な思考のための決定ツリーベースのワークフローです。個性が必要とされ、反応的な思考プロセスに従うエージェントに有用です。ロボットのような、あるいは不変の行動には、従来の方法が適しています。このシステムでは、エージェントは脳と体に分かれます。",
     "api": "deepl"
@@ -2237,6 +2233,10 @@
   },
   "I'm a game programmer specialized in mechanics, combat, AI, and systems": {
     "translation": "私は、メカニズム、戦闘、AI、システムに特化したゲームプログラマーです。",
+    "api": "deepl"
+  },
+  "But most importantly, a brain has needs that it wants to fulfill. Need beliefs are special beliefs that estimate the urgency of a need from 0 to 1, given the current signal. Also, the <code class=\"bg-[#24292e] rounded-3xl before:hidden after:hidden font-normal px-1.5 2xl:px-2.5 py-0.5\" translate=\"no\">Need</code> static class contains estimate functions": {
+    "translation": "しかし、最も重要なことは、脳には満たしたいニーズがあるということです。ニーズ信念とは、現在の信号から、ニーズの緊急度を 0 から 1 まで評価する特別な信念のことです。また、<code class=\"bg-[#24292e] rounded-3xl before:hidden after:hidden font-normal px-1.5 2xl:px-2.5 py-0.5\" translate=\"no\">Need</code> スタティッククラスには、評価関数が含まれています。",
     "api": "deepl"
   }
 }
