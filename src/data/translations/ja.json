@@ -2235,8 +2235,8 @@
     "translation": "私は、メカニズム、戦闘、AI、システムに特化したゲームプログラマーです。",
     "api": "deepl"
   },
-  "But most importantly, a brain has needs that it wants to fulfill. Need beliefs are special beliefs that estimate the urgency of a need from 0 to 1, given the current signal. Also, the <code class=\"bg-[#24292e] rounded-3xl before:hidden after:hidden font-normal px-1.5 2xl:px-2.5 py-0.5\" translate=\"no\">Need</code> static class contains estimate functions": {
-    "translation": "しかし、最も重要なことは、脳には満たしたいニーズがあるということです。ニーズ信念とは、現在の信号から、ニーズの緊急度を 0 から 1 まで評価する特別な信念のことです。また、<code class=\"bg-[#24292e] rounded-3xl before:hidden after:hidden font-normal px-1.5 2xl:px-2.5 py-0.5\" translate=\"no\">Need</code> スタティッククラスには、評価関数が含まれています。",
+  "But most importantly, a brain has needs that it wants to fulfill. Need beliefs are special beliefs that estimate the urgency of a need from 0 to 1, given the current signal. Also, the <code translate=\"no\">Need</code> static class contains estimate functions": {
+    "translation": "しかし、最も重要なことは、脳には満たしたいニーズがあるということです。ニーズ信念とは、現在の信号から、ニーズの緊急度を 0 から 1 まで評価する特別な信念のことです。また、<code translate=\"no\">Need</code> スタティッククラスには、評価関数が含まれています。",
     "api": "deepl"
   }
 }
