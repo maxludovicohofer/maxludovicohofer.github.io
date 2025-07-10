@@ -10,9 +10,6 @@ import duration from "dayjs/plugin/duration";
 
 const knowHow = await getKnowHow(Astro);
 
-await setDayjsLocale(Astro);
-dayjs.extend(duration);
-
 export const getFormattedDates = async (
   astro: AstroGlobal,
   start: dayjs.Dayjs,

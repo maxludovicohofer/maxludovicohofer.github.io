@@ -51,7 +51,6 @@ export const getPublishingDate = (
   if (!frontmatter) return;
 
   dayjs.extend(utc);
-
   return dayjs.utc(frontmatter.created || undefined);
 };
 

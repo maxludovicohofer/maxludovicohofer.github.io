@@ -17,7 +17,7 @@ import {
   getDownloadLinks,
   type PostCollectionKey,
 } from "@integrations/content";
-import { i18n } from "@integrations/i18n-server";
+import { i18n, setDayjsLocale } from "@integrations/i18n-server";
 import { isLocalizedEntry } from "@integrations/astro-server";
 import { capitalize } from "@integrations/text";
 
@@ -48,6 +48,7 @@ const {
 const { Content, remarkPluginFrontmatter } = entry ? await render(entry) : {};
 
 const title = getTitle(entry);
+await setDayjsLocale(Astro);
 const publishingDate = getPublishingDate(
   entry,
   remarkPluginFrontmatter
