@@ -266,6 +266,19 @@
     - 3D artist
     - technical artist
 
+- id: Blender
+  experience: P1M
+  functionalities:
+    - id: modeling
+      roles:
+        - game designer
+        - level designer
+        - 3D artist
+  roles:
+    - game designer
+    - 3D artist
+    - technical artist
+
 - id: ZBrush
   experience: P1Y
   functionalities:
