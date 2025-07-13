@@ -2342,5 +2342,13 @@
   "I'm a game programmer with 3 years of professional experience in programming and leadership. I specialize in mechanics and level design": {
     "translation": "私は、プログラミングとリーダーシップの分野で3年の実務経験を持つゲームプログラマーです。メカニクスとレベルデザインを専門としています。",
     "api": "deepl"
+  },
+  "Game designer and technical team lead": {
+    "translation": "ゲームデザイナーおよび技術チームリーダー",
+    "api": "deepl"
+  },
+  "Technical team lead and sound lead": {
+    "translation": "テクニカルチームリーダーおよびサウンドリーダー",
+    "api": "deepl"
   }
 }
