@@ -33,9 +33,15 @@ export default defineConfig({
         context: "server",
         access: "secret",
       }),
-      GOOGLE_BASE_CREDENTIALS: envField.string({
+      GOOGLE_CREDENTIALS: envField.string({
         context: "server",
         access: "secret",
+        optional: true,
+      }),
+      GITHUB_TOKEN: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
       }),
       PHONE_NUMBER: envField.string({
         context: "server",

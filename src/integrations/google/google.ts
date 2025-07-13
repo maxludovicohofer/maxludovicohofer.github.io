@@ -1,9 +1,7 @@
 import { auth, youtube } from "@googleapis/youtube";
+import { updateGithubSecret } from "@integrations/github";
 import type { APIContext, AstroGlobal } from "astro";
-import {
-  GOOGLE_BASE_CREDENTIALS,
-  GOOGLE_CLIENT_SECRET,
-} from "astro:env/server";
+import { GOOGLE_CLIENT_SECRET, GOOGLE_CREDENTIALS } from "astro:env/server";
 import type { GaxiosError, GaxiosPromise } from "gaxios";
 import type { Credentials, OAuth2Client } from "google-auth-library";
 
@@ -44,7 +42,7 @@ export const getAuth = async (
   const { readFile } = await import("fs/promises");
 
   // Check if existing credentials.
-  let credentials: string;
+  let credentials: string | undefined;
   try {
     credentials = await readFile(credentialsPath, "utf-8");
   } catch {
@@ -55,16 +53,19 @@ export const getAuth = async (
     }
 
     console.warn("Using base credentials.");
-    credentials = GOOGLE_BASE_CREDENTIALS;
+    credentials = GOOGLE_CREDENTIALS;
   }
 
-  oAuthClient.credentials = JSON.parse(credentials);
+  if (credentials) {
+    oAuthClient.credentials = JSON.parse(credentials);
 
-  if (!oAuthClient.credentials.refresh_token) {
-    await refreshToken(oAuthClient, tokenSettings, ...params);
+    if (!oAuthClient.credentials.refresh_token) {
+      await refreshToken(oAuthClient, tokenSettings, ...params);
+    }
   }
 
   authorization = oAuthClient;
+
   return authorization;
 };
 
@@ -87,10 +88,15 @@ export const completeAuthorization = async (astro: APIContext) => {
     // Reset auth
     authorization = undefined;
 
+    const credentialsText = JSON.stringify(credentials);
+
     // Store credentials
     import("fs/promises").then(({ writeFile }) =>
-      writeFile(credentialsPath, JSON.stringify(credentials)),
+      writeFile(credentialsPath, credentialsText),
     );
+
+    // Update github secret for automation
+    await updateGithubSecret("GOOGLE_CREDENTIALS", credentialsText);
   }
 
   return astro.redirect(astro.url.searchParams.get("state") ?? "/");
@@ -234,7 +240,9 @@ const refreshToken = async (
   ...params: Parameters<typeof getTokenSettings>
 ) => {
   throw new Error(
-    `Google: refresh at ${(auth ?? (await getAuth(...params))).generateAuthUrl({
+    `Google: refresh or extend permissions at ${(
+      auth ?? (await getAuth(...params))
+    ).generateAuthUrl({
       ...(tokenSettings ?? getTokenSettings(...params)),
       prompt: "consent",
     })}`,
