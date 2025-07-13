@@ -15,9 +15,7 @@
     - physics systems
   specializations:
     - mechanics
-    - combat
-    - AI
-    - systems
+    - level design
 
 - id: technical level designer
   matches:
@@ -36,8 +34,7 @@
     - encounter design
     - open world
   specializations:
-    - AI
-    - combat
+    - competitive multiplayer
     - programming
 
 - id: gameplay programmer
@@ -49,6 +46,9 @@
     - gameplay programming
     - combat systems
     - physics systems
+  specializations:
+    - mechanics
+    - AI
 
 - id: AI programmer
   matches:
@@ -60,6 +60,9 @@
     - AI programming
     - decision trees
     - enemy AI
+  specializations:
+    - decision making
+    - perception systems
 
 - id: system programmer
   matches:
@@ -71,6 +74,9 @@
   workFields:
     - system programming
     - engine programming
+  specializations:
+    - rendering
+    - programming architectures
 
 - id: tools programmer
   matches:
@@ -85,9 +91,9 @@
     - engine programming
     - system programming
   specializations:
-    - performance optimization
-    - rendering
-    - user experience
+    - UI \ UX
+    - level design tools
+    - CI \ CD
 
 - id: engine programmer
   matches:
@@ -103,9 +109,9 @@
     - engine programming
     - system programming
   specializations:
-    - performance optimization
+    - UI \ UX
     - rendering
-    - user experience
+    - programming architectures
 
 - id: project manager
   matches:
@@ -143,9 +149,7 @@
     - technical lead
     - tech lead
   workFields:
-    - UI \ UX
     - UX planning
-    - UI frameworks
 
 - id: technical artist
   matches:
@@ -156,9 +160,8 @@
     - procedural content generation
     - procedural texturing
   specializations:
-    - procedural content
     - rendering
-    - programming
+    - procedural content
 
 # TODO DELETE IN AUGUST 2025
 - id: game programmer

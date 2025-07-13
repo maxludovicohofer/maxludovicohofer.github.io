@@ -85,7 +85,7 @@ export const getSummary = async (astro: AstroGlobal, short?: boolean) => {
     specializations ?? (await getCollection("roles"))[0]?.data.specializations;
 
   const specializationSentence = resolvedSpecializations
-    ? `specialized in ${toTextList(
+    ? `I specialize in ${toTextList(
         resolvedSpecializations.filter(
           (specialization) =>
             !new RegExp(
@@ -101,13 +101,16 @@ export const getSummary = async (astro: AstroGlobal, short?: boolean) => {
 
   const t = i18n(astro);
 
+  const professionalSummarySentence =
+    "with 3 years of professional experience in programming and leadership";
+
   return removeWatashiWa(
     await t(
       endDelimiter(
         `${
           short
-            ? `I'm ${withArticle}`
-            : `${capitalize(id)} experienced in leadership and software`
+            ? `I'm ${withArticle} ${professionalSummarySentence}.`
+            : `${capitalize(id)} ${professionalSummarySentence}.`
         }${
           specializationSentence
             ? `${short ? "" : ","} ${specializationSentence}`

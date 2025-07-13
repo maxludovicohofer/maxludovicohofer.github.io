@@ -6,9 +6,6 @@
   resumeJa:
     full: true
 
-- id: Techland
-  resume: false
-
 - id: genDESIGN
   resumeJa:
     email: true
@@ -164,6 +161,9 @@
   resume: false
 
 - id: Activision Blizzard
+  resume: false
+
+- id: Techland
   resume: false
 
 - id: Don't nod
