@@ -2238,5 +2238,109 @@
   "But most importantly, a brain has needs that it wants to fulfill. Need beliefs are special beliefs that estimate the urgency of a need from 0 to 1, given the current signal. Also, the <code translate=\"no\">Need</code> static class contains estimate functions": {
     "translation": "しかし、最も重要なことは、脳には満たしたいニーズがあるということです。ニーズ信念とは、現在の信号から、ニーズの緊急度を 0 から 1 まで評価する特別な信念のことです。また、<code translate=\"no\">Need</code> スタティッククラスには、評価関数が含まれています。",
     "api": "deepl"
+  },
+  "Currently transitioning from software engineering to videogame UX planning, which is my lifelong passion": {
+    "translation": "現在、ソフトウェアエンジニアリングから、私の生涯の情熱であるビデオゲームのUXプランニングへと転職中です。",
+    "api": "deepl"
+  },
+  "Technical game designer with 3 years of professional experience in programming and leadership., I specialize in mechanics and level design": {
+    "translation": "プログラミングとリーダーシップの分野で3年の専門的経験を持つテクニカルゲームデザイナーです。メカニクスとレベルデザインを専門としています。",
+    "api": "deepl"
+  },
+  "Technical level designer with 3 years of professional experience in programming and leadership., I specialize in competitive multiplayer and programming": {
+    "translation": "プログラミングとリーダーシップの分野で3年の専門的経験を持つテクニカルレベルデザイナーです。競争力のあるマルチプレイヤーゲームとプログラミングを専門としています。",
+    "api": "deepl"
+  },
+  "Gameplay programmer with 3 years of professional experience in programming and leadership., I specialize in mechanics and AI": {
+    "translation": "3年間のプログラミングおよびリーダーシップの経験を持つゲームプレイプログラマーです。メカニズムとAIを専門としています。",
+    "api": "deepl"
+  },
+  "AI programmer with 3 years of professional experience in programming and leadership., I specialize in decision making and perception systems": {
+    "translation": "3年間のプログラミングおよびリーダーシップの経験を持つAIプログラマーです。意思決定および知覚システムに特化しています。",
+    "api": "deepl"
+  },
+  "System programmer with 3 years of professional experience in programming and leadership., I specialize in rendering and programming architectures": {
+    "translation": "プログラミングとリーダーシップにおいて3年の専門的経験を持つシステムプログラマーです。レンダリングとプログラミングアーキテクチャを専門としています。",
+    "api": "deepl"
+  },
+  "Tools programmer with 3 years of professional experience in programming and leadership., I specialize in UI \\ UX, level design tools, and CI \\ CD": {
+    "translation": "3年間のプログラムおよびリーダーシップの専門経験を持つツールプログラマーです。UI/UX、レベルデザインツール、CI/CDを専門としています。",
+    "api": "deepl"
+  },
+  "Engine programmer with 3 years of professional experience in programming and leadership., I specialize in UI \\ UX, rendering, and programming architectures": {
+    "translation": "3年間のプログラミングおよびリーダーシップの専門経験を持つエンジンプログラマーです。UI/UX、レンダリング、プログラミングアーキテクチャを専門としています。",
+    "api": "deepl"
+  },
+  "Project manager with 3 years of professional experience in programming and leadership., I specialize in scrum, software development, and pipeline efficiency": {
+    "translation": "プログラミングとリーダーシップの分野で3年の実務経験を有するプロジェクトマネージャーです。スクラム、ソフトウェア開発、パイプラインの効率化に精通しています。",
+    "api": "deepl"
+  },
+  "Technical team lead with 3 years of professional experience in programming and leadership., I specialize in scrum, software development, and pipeline efficiency": {
+    "translation": "プログラミングとリーダーシップの分野で3年の専門経験を持つ技術チームリーダーです。スクラム、ソフトウェア開発、パイプラインの効率化に精通しています。",
+    "api": "deepl"
+  },
+  "UI programmer with 3 years of professional experience in programming and leadership., I specialize in mechanics and level design": {
+    "translation": "プログラミングとリーダーシップにおいて3年の専門的経験を持つUIプログラマーです。メカニクスとレベルデザインを専門としています。",
+    "api": "deepl"
+  },
+  "UX planning": {
+    "translation": "UX プランニング",
+    "api": "deepl"
+  },
+  "Technical artist with 3 years of professional experience in programming and leadership., I specialize in rendering and procedural content": {
+    "translation": "プログラミングとリーダーシップの分野で3年の専門経験を持つテクニカルアーティストです。レンダリングとプロシージャルコンテンツを専門としています。",
+    "api": "deepl"
+  },
+  "Game programmer with 3 years of professional experience in programming and leadership., I specialize in mechanics and level design": {
+    "translation": "3年間のプログラミングおよびリーダーシップの経験を持つゲームプログラマーです。メカニズムとレベルデザインを専門としています。",
+    "api": "deepl"
+  },
+  "I'm a technical game designer with 3 years of professional experience in programming and leadership. I specialize in mechanics and level design": {
+    "translation": "私は、プログラミングとリーダーシップの分野で3年のプロフェッショナル経験を持つテクニカルゲームデザイナーです。メカニクスとレベルデザインを専門としています。",
+    "api": "deepl"
+  },
+  "I'm a technical level designer with 3 years of professional experience in programming and leadership. I specialize in competitive multiplayer and programming": {
+    "translation": "私は、プログラミングとリーダーシップの分野で3年の実務経験を持つテクニカルレベルデザイナーです。競争力のあるマルチプレイヤーゲームとプログラミングを専門としています。",
+    "api": "deepl"
+  },
+  "I'm a gameplay programmer with 3 years of professional experience in programming and leadership. I specialize in mechanics and AI": {
+    "translation": "私は、プログラミングとリーダーシップにおいて 3 年間のプロフェッショナルな経験を持つゲームプレイプログラマーです。メカニズムと AI を専門としています。",
+    "api": "deepl"
+  },
+  "I'm an AI programmer with 3 years of professional experience in programming and leadership. I specialize in decision making and perception systems": {
+    "translation": "私は、プログラミングとリーダーシップの分野で3年の専門的経験を持つAIプログラマーです。意思決定および知覚システムに特化しています。",
+    "api": "deepl"
+  },
+  "I'm a system programmer with 3 years of professional experience in programming and leadership. I specialize in rendering and programming architectures": {
+    "translation": "私は、プログラミングとリーダーシップにおいて 3 年間の実務経験を持つシステムプログラマーです。レンダリングとプログラミングアーキテクチャを専門としています。",
+    "api": "deepl"
+  },
+  "I'm a tools programmer with 3 years of professional experience in programming and leadership. I specialize in UI \\ UX, level design tools, and CI \\ CD": {
+    "translation": "私は、プログラミングとリーダーシップにおいて 3 年間のプロフェッショナル経験を持つツールプログラマーです。UI/UX、レベルデザインツール、CI/CD を専門としています。",
+    "api": "deepl"
+  },
+  "I'm an engine programmer with 3 years of professional experience in programming and leadership. I specialize in UI \\ UX, rendering, and programming architectures": {
+    "translation": "私は、プログラミングとリーダーシップにおいて 3 年間の専門的経験を持つエンジンプログラマーです。UI/UX、レンダリング、プログラミングアーキテクチャを専門としています。",
+    "api": "deepl"
+  },
+  "I'm a project manager with 3 years of professional experience in programming and leadership. I specialize in scrum, software development, and pipeline efficiency": {
+    "translation": "私は、プログラミングとリーダーシップの分野で3年の実務経験を持つプロジェクトマネージャーです。スクラム、ソフトウェア開発、パイプラインの効率化に特化しています。",
+    "api": "deepl"
+  },
+  "I'm a technical team lead with 3 years of professional experience in programming and leadership. I specialize in scrum, software development, and pipeline efficiency": {
+    "translation": "私は、プログラミングとリーダーシップの分野で3年の実務経験を持つテクニカルチームリーダーです。スクラム、ソフトウェア開発、パイプラインの効率化に精通しています。",
+    "api": "deepl"
+  },
+  "I'm a UI programmer with 3 years of professional experience in programming and leadership. I specialize in mechanics and level design": {
+    "translation": "私は、プログラミングとリーダーシップにおいて 3 年間の実務経験を持つ UI プログラマーです。メカニズムとレベルデザインを専門としています。",
+    "api": "deepl"
+  },
+  "I'm a technical artist with 3 years of professional experience in programming and leadership. I specialize in rendering and procedural content": {
+    "translation": "私は、プログラミングとリーダーシップの分野で3年の専門的経験を持つテクニカルアーティストです。レンダリングとプロシージャルコンテンツを専門としています。",
+    "api": "deepl"
+  },
+  "I'm a game programmer with 3 years of professional experience in programming and leadership. I specialize in mechanics and level design": {
+    "translation": "私は、プログラミングとリーダーシップの分野で3年の実務経験を持つゲームプログラマーです。メカニクスとレベルデザインを専門としています。",
+    "api": "deepl"
   }
 }
