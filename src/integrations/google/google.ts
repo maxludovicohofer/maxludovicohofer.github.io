@@ -52,7 +52,7 @@ export const getAuth = async (
       );
     }
 
-    console.warn("Using base credentials.");
+    console.warn("Using GitHub secrets credentials.");
     credentials = GOOGLE_CREDENTIALS;
   }
 
