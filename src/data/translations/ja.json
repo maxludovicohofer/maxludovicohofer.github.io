@@ -2350,5 +2350,13 @@
   "Technical team lead and sound lead": {
     "translation": "テクニカルチームリーダーおよびサウンドリーダー",
     "api": "deepl"
+  },
+  "_\"What is fun?\"_ is probably the most important question for a game designer. Many incredible designers developed their own answers, which now define their style": {
+    "translation": "「何が楽しいのか」は、ゲームデザイナーにとっておそらく最も重要な質問です。多くの素晴らしいデザイナーたちが、それぞれ独自の答えを見出し、それが彼らのスタイルを形作っています。",
+    "api": "deepl"
+  },
+  "<em>“What is fun?”</em> is probably the most important question for a game designer. Many incredible designers developed their own answers, which now define their style": {
+    "translation": "<em>「何が楽しいのか」は</em>、ゲームデザイナーにとっておそらく最も重要な質問です。多くの素晴らしいデザイナーたちが、それぞれ独自の答えを見出し、それが彼らのスタイルを形作っています。",
+    "api": "deepl"
   }
 }
