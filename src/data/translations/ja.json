@@ -2358,5 +2358,25 @@
   "<em>“What is fun?”</em> is probably the most important question for a game designer. Many incredible designers developed their own answers, which now define their style": {
     "translation": "<em>「何が楽しいのか」は</em>、ゲームデザイナーにとっておそらく最も重要な質問です。多くの素晴らしいデザイナーたちが、それぞれ独自の答えを見出し、それが彼らのスタイルを形作っています。",
     "api": "deepl"
+  },
+  "AI programmer and tools programmer": {
+    "translation": "AIプログラマーおよびツールプログラマー",
+    "api": "deepl"
+  },
+  "Tools programmer and AI programmer": {
+    "translation": "ツールプログラマーおよびAIプログラマー",
+    "api": "deepl"
+  },
+  "Decision tree-based workflow for AI natural thought": {
+    "translation": "AI の自然な思考のための決定木ベースのワークフロー",
+    "api": "deepl"
+  },
+  "tools programmer": {
+    "translation": "ツールプログラマー",
+    "api": "deepl"
+  },
+  "Act By Belief is a decision tree-based workflow for AI natural thought. It’s useful for agents that require a personality and follow reactive thought processes. For robotic or immutable behavior, traditional methods would be preferable. In this system, agents are split into brain and body": {
+    "translation": "Act By Belief は、AI の自然な思考のための決定木ベースのワークフローです。これは、人格を必要とし、反応的な思考プロセスに従うエージェントに有用です。ロボットや不変の行動には、従来の方法が適しています。このシステムでは、エージェントは脳と体に分割されます。",
+    "api": "deepl"
   }
 }

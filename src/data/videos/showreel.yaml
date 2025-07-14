@@ -239,23 +239,23 @@
 
         00:00:30,000 --> 00:00:42,000
 
-        Programmed level design tools that helped to control enemies and story
-        events.
-
-
-        5
-
-        00:00:42,000 --> 00:00:48,600
-
         Programmed AI that reacts intuitively to weather conditions and
         visibility issues.
 
 
-        6
+        5
 
-        00:00:48,600 --> 00:01:00,000
+        00:00:42,000 --> 00:00:48,900
 
         Developed tools to easily place AI agents and control patrol paths.
+
+
+        6
+
+        00:00:48,900 --> 00:01:00,000
+
+        Programmed skills, camera, and movement, that change based on character
+        transformation.
 
 
         7
@@ -320,15 +320,15 @@
 
         4
         00:00:30,000 --> 00:00:42,000
-        敵やストーリーイベントを制御するのに役立った、プログラムされたレベルデザインツール。
-
-        5
-        00:00:42,000 --> 00:00:48,600
         天候や視界の問題に直感的に反応するようプログラムされたAI。
 
-        6
-        00:00:48,600 --> 00:01:00,000
+        5
+        00:00:42,000 --> 00:00:48,900
         AIエージェントを簡単に配置し、巡回経路を制御できるツールを開発しました。
+
+        6
+        00:00:48,900 --> 00:01:00,000
+        プログラムされたスキル、カメラ、動きは、キャラクターの変身に応じて変化します。
 
         7
         00:01:00,000 --> 00:01:30,000
@@ -394,24 +394,23 @@
 
         00:00:30,000 --> 00:00:42,000
 
-        Programmed level design tools that helped to control enemies and story
-        events.
-
-
-        5
-
-        00:00:42,000 --> 00:00:48,600
-
         Programmed skills, camera, and movement, that change based on character
         transformation.
 
 
-        6
+        5
 
-        00:00:48,600 --> 00:01:00,000
+        00:00:42,000 --> 00:00:48,900
 
         Programmed AI that reacts intuitively to weather conditions and
         visibility issues.
+
+
+        6
+
+        00:00:48,900 --> 00:01:00,000
+
+        Developed tools to easily place AI agents and control patrol paths.
 
 
         7
@@ -476,15 +475,15 @@
 
         4
         00:00:30,000 --> 00:00:42,000
-        敵やストーリーイベントを制御するのに役立った、プログラムされたレベルデザインツール。
-
-        5
-        00:00:42,000 --> 00:00:48,600
         プログラムされたスキル、カメラ、動きは、キャラクターの変身に応じて変化します。
 
-        6
-        00:00:48,600 --> 00:01:00,000
+        5
+        00:00:42,000 --> 00:00:48,900
         天候や視界の問題に直感的に反応するようプログラムされたAI。
+
+        6
+        00:00:48,900 --> 00:01:00,000
+        AIエージェントを簡単に配置し、巡回経路を制御できるツールを開発しました。
 
         7
         00:01:00,000 --> 00:01:30,000
@@ -1436,38 +1435,38 @@
 
         4
 
-        00:00:30,000 --> 00:00:35,900
-
-        Programmed skills, camera, and movement, that change based on character
-        transformation.
-
-
-        5
-
-        00:00:35,900 --> 00:00:42,000
-
-        Programmed AI that reacts intuitively to weather conditions and
-        visibility issues.
-
-
-        6
-
-        00:00:42,000 --> 00:00:47,900
-
-        Developed tools to easily place AI agents and control patrol paths.
-
-
-        7
-
-        00:00:47,900 --> 00:00:54,300
+        00:00:30,000 --> 00:00:36,500
 
         Programmed level design tools that helped to control enemies and story
         events.
 
 
+        5
+
+        00:00:36,500 --> 00:00:42,000
+
+        Programmed skills, camera, and movement, that change based on character
+        transformation.
+
+
+        6
+
+        00:00:42,000 --> 00:00:48,000
+
+        Programmed AI that reacts intuitively to weather conditions and
+        visibility issues.
+
+
+        7
+
+        00:00:48,000 --> 00:00:54,000
+
+        Developed tools to easily place AI agents and control patrol paths.
+
+
         8
 
-        00:00:54,300 --> 00:01:00,000
+        00:00:54,000 --> 00:01:00,000
 
         Authored diegetic UI using VFXs to immerse the player.
 
@@ -1533,23 +1532,23 @@
         2024年「ゲーム・オブ・ザ・イヤー - ピープルズ・チョイス」新人賞受賞。
 
         4
-        00:00:30,000 --> 00:00:35,900
-        プログラムされたスキル、カメラ、動きは、キャラクターの変身に応じて変化します。
-
-        5
-        00:00:35,900 --> 00:00:42,000
-        天候や視界の問題に直感的に反応するようプログラムされたAI。
-
-        6
-        00:00:42,000 --> 00:00:47,900
-        AIエージェントを簡単に配置し、巡回経路を制御できるツールを開発しました。
-
-        7
-        00:00:47,900 --> 00:00:54,300
+        00:00:30,000 --> 00:00:36,500
         敵やストーリーイベントを制御するのに役立った、プログラムされたレベルデザインツール。
 
+        5
+        00:00:36,500 --> 00:00:42,000
+        プログラムされたスキル、カメラ、動きは、キャラクターの変身に応じて変化します。
+
+        6
+        00:00:42,000 --> 00:00:48,000
+        天候や視界の問題に直感的に反応するようプログラムされたAI。
+
+        7
+        00:00:48,000 --> 00:00:54,000
+        AIエージェントを簡単に配置し、巡回経路を制御できるツールを開発しました。
+
         8
-        00:00:54,300 --> 00:01:00,000
+        00:00:54,000 --> 00:01:00,000
         VFXを使用したダイアログ型UIを制作し、プレイヤーを没入させる。
 
         9
