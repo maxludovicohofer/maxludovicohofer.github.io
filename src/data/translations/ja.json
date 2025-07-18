@@ -2454,5 +2454,25 @@
   "The recommender system can follow both objective and opinionated or artistic parameters. It can be used generically where more art-driven reccommendations are desired, e.g. AI. This differs from <a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150 break-all\" href=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"content-based filtering (Marinetti)\" data-umami-event-url=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\">content-based filtering</a> systems, where reccommendations are user-driven": {
     "translation": "レコメンダーシステムは、客観的なパラメータと主観的または芸術的なパラメータの両方を追跡することができます。より芸術的なレコメンデーションが望まれる場合、例えば AI など、汎用的に使用することができます。これは、レコメンデーションがユーザー主導である<a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150 break-all\" href=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"content-based filtering (Marinetti)\" data-umami-event-url=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\">コンテンツベースのフィルタリング</a>システムとは異なります。",
     "api": "deepl"
+  },
+  "I developed the system for Python and Typescript. It is composed of a matcher engine and candidate evaluators. It’s fully declarative, able to read parameters from files and to override any optimal or candidate parameter dynamically in time": {
+    "translation": "私は Python および Typescript 用のシステムを開発しました。このシステムは、マッチャーエンジンと候補評価器で構成されています。完全に宣言型であり、ファイルからパラメータを読み込み、最適または候補のパラメータを動的にオーバーライドすることができます。",
+    "api": "deepl"
+  },
+  "MARINETTI.&#39;s UI ranks songs based on the currently playing video and song moods": {
+    "translation": "MARINETTIのUIは、現在再生中の動画と曲のムードに基づいて曲をランク付けします。",
+    "api": "deepl"
+  },
+  "MARINETTI is an art-directable reccommender system for branching audiovisual narratives. The narrative is divided into sections tagged with their respective moods and attributes. The system recommends songs based on the currently active audiovisual attributes, also handling transitions if the selected candidate is too different": {
+    "translation": "MARINETTI は、分岐するオーディオビジュアル物語のためのアートディレクション可能なレコメンダーシステムです。物語は、それぞれのムードや属性でタグ付けされたセクションに分割されています。システムは、現在アクティブなオーディオビジュアル属性に基づいて楽曲をレコメンドし、選択した候補が過度に異なる場合はトランジションも処理します。",
+    "api": "deepl"
+  },
+  "MARINETTI.'s UI ranks songs based on the currently playing video and song moods": {
+    "translation": "MARINETTIのUIは、現在再生中の動画と曲のムードに基づいて曲をランク付けします。",
+    "api": "deepl"
+  },
+  "The recommender system can follow both objective and opinionated or artistic parameters. It can be used generically where more art-driven reccommendations are desired, e.g. AI. This differs from <a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150 break-all\" href=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"content-based filtering (Marinetti)\" data-umami-event-url=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\">content-based filtering</a>, where reccommendations are user-driven": {
+    "translation": "レコメンダーシステムは、客観的なパラメータと主観的または芸術的なパラメータの両方を追跡することができます。より芸術的なレコメンデーションが望まれる場合、例えば AI など、汎用的に使用することができます。これは、レコメンデーションがユーザー主導である<a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150 break-all\" href=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"content-based filtering (Marinetti)\" data-umami-event-url=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\">コンテンツベースのフィルタリング</a>とは異なります。",
+    "api": "deepl"
   }
 }
