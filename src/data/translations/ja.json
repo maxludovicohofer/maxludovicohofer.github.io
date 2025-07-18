@@ -2378,5 +2378,57 @@
   "Act By Belief is a decision tree-based workflow for AI natural thought. It’s useful for agents that require a personality and follow reactive thought processes. For robotic or immutable behavior, traditional methods would be preferable. In this system, agents are split into brain and body": {
     "translation": "Act By Belief は、AI の自然な思考のための決定木ベースのワークフローです。これは、人格を必要とし、反応的な思考プロセスに従うエージェントに有用です。ロボットや不変の行動には、従来の方法が適しています。このシステムでは、エージェントは脳と体に分割されます。",
     "api": "deepl"
+  },
+  "Tool": {
+    "translation": "ツール",
+    "api": "deepl"
+  },
+  "Art-directable reccommender system for branching audiovisual narratives": {
+    "translation": "分岐型オーディオビジュアル物語のためのアートディレクション可能なレコメンダーシステム",
+    "api": "deepl"
+  },
+  "Solo developed in 3ヶ月": {
+    "translation": "3ヶ月で単独開発しました",
+    "api": "deepl"
+  },
+  "While working on a scheduler for sales appointments, I came up with a recommender system driven by both objective and subjective parameters. Since I make electronic music, I figured I could use the same algorithm to drive my videogamey audiovisual live performances": {
+    "translation": "営業アポイントメントのスケジューラーを開発している最中に、客観的パラメータと主観的パラメータの両方を基にしたレコメンデーションシステムを思いつきました。私は電子音楽を作っているので、同じアルゴリズムをビデオゲームのようなオーディオビジュアルのライブパフォーマンスにも応用できると考えました。",
+    "api": "deepl"
+  },
+  "MARINETTI.&#39;s UI ranks songs based on the playing video and song moods": {
+    "translation": "MARINETTIのUIは、再生中の動画と曲のムードに基づいて曲をランキングします。",
+    "api": "deepl"
+  },
+  "Candidates are ranked based on the weighted n-dimensional euclidean distance to the optimal": {
+    "translation": "候補は、最適解に対する加重 n 次元ユークリッド距離に基づいてランク付けされます。",
+    "api": "deepl"
+  },
+  "Attributes, possible values, distance evaluators, and weights are defined in an easily editable table": {
+    "translation": "属性、可能な値、距離評価子、および重みは、編集しやすい表で定義されます。",
+    "api": "deepl"
+  },
+  "MARINETTI is an art-directable reccommender system for branching audiovisual narratives. The narrative is divided into sections tagged with their respective moods and attributes. The system recommends songs based on the playing audiovisual attributes, also handling transitions if the selected candidate is too different": {
+    "translation": "MARINETTI は、分岐するオーディオビジュアル物語のためのアートディレクション可能なレコメンダーシステムです。物語は、それぞれのムードや属性でタグ付けされたセクションに分割されています。システムは、再生中のオーディオビジュアルの属性に基づいて楽曲をレコメンドし、選択された候補が過度に異なる場合はトランジションも処理します。",
+    "api": "deepl"
+  },
+  "Attributes are customizable, and can be both objective and subjective. This means the recommender system can follow artistic or opinionated parameters. It can be used generically where one desires more art-driven reccommendations, e.g. AI. This differs from content-based filtering systems, where reccommendations are user driven": {
+    "translation": "属性はカスタマイズ可能で、客観的および主観的の両方であることができます。つまり、レコメンダーシステムは芸術的または主観的なパラメータに従うことができます。これは、より芸術的なレコメンデーションを望む場合、例えば AI などで汎用的に使用できます。これは、レコメンデーションがユーザー主導であるコンテンツベースのフィルタリングシステムとは異なります。",
+    "api": "deepl"
+  },
+  "The system is easily customizable with standardized parameter evaluation and a dedicated TouchDesigner integration": {
+    "translation": "このシステムは、標準化されたパラメータ評価と専用の TouchDesigner 統合により、簡単にカスタマイズできます。",
+    "api": "deepl"
+  },
+  "I developed the code for the system in Python and Typescript. It is composed of a matching engine and candidate evaluators. It’s fully declarative, able to read parameters from files and to override any optimal or candidate parameter dynamically in time": {
+    "translation": "私は、Python と Typescript を使用してシステムのコードを開発しました。このシステムは、マッチングエンジンと候補評価器で構成されています。完全に宣言型であり、ファイルからパラメータを読み込み、最適なパラメータや候補パラメータを動的に上書きすることができます。",
+    "api": "deepl"
+  },
+  "In these kind of systems, the biggest challenge is always to get the weights right, which heavily depend on defining the right parameters in the first place. Within some hours of testing, I managed to get the system to offer the best options as first or second option in the worst case, also handling transitions when optimal and best candidate differ too much": {
+    "translation": "このようなシステムでは、最大の課題は常に重みを正しく設定することであり、これはそもそも適切なパラメータを定義することに大きく依存します。数時間のテストの結果、最悪の場合でも、システムが最良の選択肢を 1 番目または 2 番目に提示し、最適と最良の候補が大幅に異なる場合の移行も適切に処理できるようになりました。",
+    "api": "deepl"
+  },
+  "MARINETTI.'s UI ranks songs based on the playing video and song moods": {
+    "translation": "MARINETTI.のUIは、再生ビデオと曲のムードに基づいて曲をランク付けします。",
+    "api": "deepl"
   }
 }
