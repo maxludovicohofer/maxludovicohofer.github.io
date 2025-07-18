@@ -1,5 +1,4 @@
 ---
-draft: true
 title: MARINETTI.
 category: tool
 developmentTime: P3M
@@ -8,12 +7,13 @@ roles:
     tasks:
       - creating an audiovisual recommender system
     achievements:
-      - created a recommender system guided by subjective parameters
+      - created a recommender system guided by subjective parameters where the best option is always among the first two
 
 tech:
   - Python
   - TouchDesigner
   - full stack
+  - FontLab
 youTubeID: hKV5a0P0kPk
 publishingDate: 2023-06-01
 ---
@@ -22,91 +22,22 @@ publishingDate: 2023-06-01
 
 While working on a scheduler for sales appointments, I came up with a recommender system driven by both objective and subjective parameters. Since I make electronic music, I figured I could use the same algorithm to drive my videogamey audiovisual live performances.
 
-{/* ![EAGER Maslow's hierarchy of needs, simplified.](./act-by-belief-maslow.svg) */}
+![EAGER MARINETTI.'s UI ranks songs based on the playing video and song moods.](./marinetti-ui.png)
 
 ## Design
 
 {/* Description, target and explanation of the design. Split in max 2 sections if too long, divided by a media */}
 
-MARINETTI is an art-directable reccommender system for branching audiovisual narratives. The narrative is divided into sections with their respective moods. The system recommends songs based on the desired mood, also handling mood transitions.
-Act By Belief is a decision tree-based workflow for natural thought. It's useful for agents that require a personality and follow reactive thought processes. For robotic or immutable behavior, traditional methods would be preferable. In this system, agents are split into brain and body.
+MARINETTI is an art-directable reccommender system for branching audiovisual narratives. The narrative is divided into sections tagged with their respective moods and attributes. The system recommends songs based on the playing audiovisual attributes, also handling transitions if the selected candidate is too different.
 
-### Brain
+![Candidates are ranked based on the weighted n-dimensional euclidean distance to the optimal.](./marinetti-parameters.png)
 
-The brain is the belief and personality processor.
-
-```csharp
-Brain brain = new(body);
-```
-
-A brain has input beliefs that sense data.
-
-```csharp
-Belief<Vector3> Position = new();
-
-// Update belief
-Position.Sense(transform.position);
-```
-
-Beliefs can also interpret signals from sensors or existing beliefs. Signals contain the data of the brain and a dependency graph, assuring only beliefs that need to be updated are.
-
-```csharp
-// Senses a transform, holds a vector
-Belief<Transform, Vector3> PlayerPosition = new(signal => signal.sensed.position);
-
-PlayerPosition.Sense(player.transform);
-```
-
-But most importantly, a brain has needs that it wants to fulfill. Need beliefs are special beliefs that estimate the urgency of a need from 0 to 1, given the current signal. Also, the `Need` static class contains estimate functions.
-
-```csharp
-// The AI needs to kiss the player more and more as the player gets near
-var kissPlayer = brain.Need(
-    new(signal => Need.Near(signal.Get(Position), signal.Get(PlayerPosition))),
-    // Needs to kiss out of love
-    Motive.Love
-);
-```
-
-The motive of a need can be survival, love, or achievement, in order of importance following Maslow's pyramid. It's used as a weight to compare needs. Finally, needs are used in output beliefs, read by the body to execute actions.
-
-```csharp
-// If needs to kiss, target is player
-// Else stand still
-Belief<Vector3> TargetPosition = new(
-    signal =>
-        signal.Get(kissPlayer) > Need.ABSENT
-            ? signal.Get(PlayerPosition)
-            : signal.Get(Position)
-);
-```
-
-### Body
-
-Beliefs that always represent reality can be moved to the body.
-
-```csharp
-// Can be moved from brain to body
-Belief<Vector3> Position = new();
-
-// Add brain reference
-AI brain = new(this);
-```
-
-At last, a body acts upon the output beliefs of the brain.
-
-```csharp
-var targetPath = brain.TargetPosition.Value - Position.Value;
-
-// Kiss if in range, else move toward target
-if(targetPath.magnitude < 1)
-    Kiss();
-else
-    controller.Move(movementSpeed * targetPath.normalized);
-```
+Attributes are customizable, and can be both objective and subjective. This means the recommender system can follow artistic or opinionated parameters. It can be used generically where one desires more art-driven reccommendations, e.g. AI. This differs from content-based filtering systems, where reccommendations are user driven.
 
 {/* First point: ux, second point: code, third point: development challenges. Split in max 4 points if too long */}
 
-- The system comes with a fully documented API and in-game debugger targeted at Unity programmers. The debugger displays a text overlay with the quasi-realtime beliefs of every brain, and brain IDs on top of their bodies. A simple code demonstration of basic functionality is also provided.
-- The codebase amounts to around 1500 lines including documentation. The API was designed for a smooth developer experience and ease of extension. Also, the Act By Belief workflow can be achieved in existing decision tree systems without relying on this API.
-- The biggest development challenge was C#'s type system, forcing me to introduce some slow reflection. To save on performance, I plan to migrate this system to a C++ library in the near future.
+![Attributes, possible values, distance evaluators, and weights are defined in an easily editable table.](./marinetti-weights.png)
+
+- The system is easily customizable with standardized parameter evaluation and a dedicated TouchDesigner integration.
+- I developed the code for the system in Python and Typescript. It is composed of a matching engine and candidate evaluators. It's fully declarative, able to read parameters from files and to override any optimal or candidate parameter dynamically in time.
+- In these kind of systems, the biggest challenge is always to get the weights right, which heavily depend on defining the right parameters in the first place. Within some hours of testing, I managed to get the system to offer the best options as first or second option in the worst case, also handling transitions when optimal and best candidate differ too much.
