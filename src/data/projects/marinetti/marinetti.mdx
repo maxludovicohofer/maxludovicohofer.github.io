@@ -32,12 +32,12 @@ MARINETTI is an art-directable reccommender system for branching audiovisual nar
 
 ![Candidates are ranked based on the weighted n-dimensional euclidean distance to the optimal.](./marinetti-parameters.png)
 
-Attributes are customizable, and can be both objective and subjective. This means the recommender system can follow artistic or opinionated parameters. It can be used generically where one desires more art-driven reccommendations, e.g. AI. This differs from content-based filtering systems, where reccommendations are user driven.
+The recommender system can follow both objective and opinionated or artistic parameters. It can be used generically where more art-driven reccommendations are desired, e.g. AI. This differs from content-based filtering systems, where reccommendations are user driven.
 
 {/* First point: ux, second point: code, third point: development challenges. Split in max 4 points if too long */}
 
 ![Attributes, possible values, distance evaluators, and weights are defined in an easily editable table.](./marinetti-weights.png)
 
-- The system is easily customizable with standardized parameter evaluation and a dedicated TouchDesigner integration.
+- The system is easily customizable with standardized data types and modifiers. It also integrates tightly with TouchDesigner.
 - I developed the code for the system in Python and Typescript. It is composed of a matching engine and candidate evaluators. It's fully declarative, able to read parameters from files and to override any optimal or candidate parameter dynamically in time.
-- In these kind of systems, the biggest challenge is always to get the weights right, which heavily depend on defining the right parameters in the first place. Within some hours of testing, I managed to get the system to offer the best options as first or second option in the worst case, also handling transitions when optimal and best candidate differ too much.
+- In these kind of systems, the biggest challenge is always to get the weights right, which heavily depend on defining the right parameters in the first place. Within some hours of testing, I managed to get the system to offer the best human-picked options as first or second option in the worst case, also handling transitions when optimal and best candidate differ too much.

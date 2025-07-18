@@ -76,7 +76,7 @@
     - engine programming
   specializations:
     - rendering
-    - programming architectures
+    - software architecture design
 
 - id: tools programmer
   matches:
