@@ -2430,5 +2430,25 @@
   "MARINETTI.'s UI ranks songs based on the playing video and song moods": {
     "translation": "MARINETTI.のUIは、再生ビデオと曲のムードに基づいて曲をランク付けします。",
     "api": "deepl"
+  },
+  "System programmer with 3 years of professional experience in programming and leadership., I specialize in rendering and software architecture design": {
+    "translation": "プログラミングとリーダーシップにおいて3年の専門的経験を持つシステムプログラマーです。レンダリングとソフトウェアアーキテクチャの設計を専門としています。",
+    "api": "deepl"
+  },
+  "The recommender system can follow both objective and opinionated or artistic parameters. It can be used generically where more art-driven reccommendations are desired, e.g. AI. This differs from content-based filtering systems, where reccommendations are user driven": {
+    "translation": "レコメンダーシステムは、客観的なパラメータと主観的または芸術的なパラメータの両方を追跡することができます。より芸術的なレコメンデーションが望まれる場合、例えば AI など、汎用的に使用することができます。これは、レコメンデーションがユーザー主導であるコンテンツベースのフィルタリングシステムとは異なります。",
+    "api": "deepl"
+  },
+  "The system is easily customizable with standardized data types and modifiers. It also integrates tightly with TouchDesigner": {
+    "translation": "このシステムは、標準化されたデータタイプと修飾子により、簡単にカスタマイズできます。また、TouchDesigner と緊密に統合されています。",
+    "api": "deepl"
+  },
+  "In these kind of systems, the biggest challenge is always to get the weights right, which heavily depend on defining the right parameters in the first place. Within some hours of testing, I managed to get the system to offer the best human-picked options as first or second option in the worst case, also handling transitions when optimal and best candidate differ too much": {
+    "translation": "このようなシステムでは、最大の課題は常に重みを正しく設定することであり、これはそもそも適切なパラメータを定義することに大きく依存します。数時間のテストの結果、最悪の場合でも、人間が選んだ最良の選択肢を 1 番目または 2 番目に提示するシステムを実現することができました。また、最適と最良の候補が大幅に異なる場合の移行も適切に処理できます。",
+    "api": "deepl"
+  },
+  "I'm a system programmer with 3 years of professional experience in programming and leadership. I specialize in rendering and software architecture design": {
+    "translation": "私は、プログラミングとリーダーシップにおいて 3 年間の実務経験を持つシステムプログラマーです。レンダリングとソフトウェアアーキテクチャの設計を専門としています。",
+    "api": "deepl"
   }
 }
