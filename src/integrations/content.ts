@@ -39,7 +39,7 @@ export const getTitle = (
   const rawTitle = getHumanPathSection(getEntryId(entry));
   return entry.collection === "projects"
     ? toTitleCase(rawTitle)
-    : capitalize(rawTitle);
+    : capitalize(rawTitle).replace(/\bi\b/g, "I");
 };
 
 export const getPublishingDate = (
