@@ -2474,5 +2474,53 @@
   "The recommender system can follow both objective and opinionated or artistic parameters. It can be used generically where more art-driven reccommendations are desired, e.g. AI. This differs from <a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150 break-all\" href=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"content-based filtering (Marinetti)\" data-umami-event-url=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\">content-based filtering</a>, where reccommendations are user-driven": {
     "translation": "レコメンダーシステムは、客観的なパラメータと主観的または芸術的なパラメータの両方を追跡することができます。より芸術的なレコメンデーションが望まれる場合、例えば AI など、汎用的に使用することができます。これは、レコメンデーションがユーザー主導である<a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150 break-all\" href=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"content-based filtering (Marinetti)\" data-umami-event-url=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\">コンテンツベースのフィルタリング</a>とは異なります。",
     "api": "deepl"
+  },
+  "Iris gameplay": {
+    "translation": "アイリス ゲームプレイ",
+    "api": "deepl"
+  },
+  "Competitive horror game inspired by black metal where players hunt each other while collecting powers for their monstrous characters": {
+    "translation": "ブラックメタルをモチーフにした競争型ホラーゲームで、プレイヤーは互いに狩り合いながら、自身のモンスターキャラクターの力を強化していきます。",
+    "api": "deepl"
+  },
+  "Made in 2ヶ月 by a team of 2": {
+    "translation": "2ヶ月間で2人のチームによって製作されました。",
+    "api": "deepl"
+  },
+  "In a gothic industrial earth, people believe that detachment from reality brings their soul closer to an iris-like god. Every 111 years believers corrupt their bodies, claim three powerful soul-bound artifacts, and face a bloody ritual for a fourth one": {
+    "translation": "ゴシック調の工業都市で、人々は現実から離れることで魂が虹彩のような神に近づくと信じています。111年ごとに信者たちは自分の体を汚し、3つの強力な魂が宿るアーティファクトを手に入れ、4つ目のアーティファクトを手に入れるために血なまぐさい儀式に臨みます。",
+    "api": "deepl"
+  },
+  "Characters have a complex movement system made for intuitive platforming. Their goal is to win online 1v1 matches by hunting and grabbing other players, in order to collect artifacts and their relative powers (jumping on walls, invisibility, …)": {
+    "translation": "キャラクターは、直感的なプラットフォームアクションのために設計された複雑な移動システムを備えています。彼らの目標は、他のプレイヤーを狩り、捕まえてアーティファクトとその関連能力（壁跳び、透明化など）を集め、オンラインの1対1の対戦で勝利することです。",
+    "api": "deepl"
+  },
+  "Maps are made up of three points of interest where characters can claim collected artifacts to aid their goal, and a central altar where they can obtain a brand new artifact for their collection. Individual maps are conjoined to form a bigger game world where the lore and story of the game takes place": {
+    "translation": "マップは、キャラクターが収集したアーティファクトを自分の目標のために獲得できる3つのポイントと、コレクションに新しいアーティファクトを追加できる中央の祭壇で構成されています。個々のマップは連結して、ゲームのストーリーと世界観が展開されるより大きなゲーム世界を形成しています。",
+    "api": "deepl"
+  },
+  "We dedicated a long time to designing and prototyping the platforming, given the unique challenges we were facing when balancing stealth and movement. Also, we took extra care to analyze how to create the perfect map system that would fit our scope and not bore players": {
+    "translation": "ステルスと移動のバランスを取る上で直面した独自の課題を踏まえ、プラットフォームの設計とプロトタイピングに長い時間を費やしました。また、当社のスコープにぴったりで、プレイヤーを飽きさせない完璧なマップシステムを構築するために、細心の注意を払って分析を行いました。",
+    "api": "deepl"
+  },
+  "Primordial Serpent&#39;s album cover illustrates the game&#39;s reference mood": {
+    "translation": "Primordial Serpent のアルバムカバーは、ゲームの雰囲気を表現しています。",
+    "api": "deepl"
+  },
+  "Iris&#39;s map system divides an open world map into sections and selects three to create a playable map": {
+    "translation": "アイリスのマップシステムは、オープンワールドのマップをセクションに分割し、その中から3つを選択してプレイ可能なマップを作成します。",
+    "api": "deepl"
+  },
+  "Iris is a competitive horror game inspired by black metal where players hunt each other while collecting powers for their monstrous characters. It’s a game aimed toward horror fans and competitive players alike with e-sports ambitions. The goal of the game is to scare players with the unpredictability of human enemies and keep the game balanced and skill based enough for flow to flourish": {
+    "translation": "アイリスはブラックメタルからインスパイアされた競争型ホラーゲームで、プレイヤーはモンスターキャラクターにパワーを収集しながら互いに狩り合います。ホラーファンと競争型プレイヤーの両方を対象とした、eスポーツ志向のゲームです。ゲームの目的は、人間の敵の予測不能さでプレイヤーを恐怖に陥れつつ、ゲームバランスとスキル要素を適切に保ち、プレイの流動性を高めることです。",
+    "api": "deepl"
+  },
+  "Primordial Serpent's album cover illustrates the game's reference mood": {
+    "translation": "Primordial Serpent のアルバムカバーは、ゲームの雰囲気を表現しています。",
+    "api": "deepl"
+  },
+  "Iris's map system divides an open world map into sections and selects three to create a playable map": {
+    "translation": "アイリスのマップシステムは、オープンワールドのマップをセクションに分割し、その中から3つを選択してプレイ可能なマップを作成します。",
+    "api": "deepl"
   }
 }
