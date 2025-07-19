@@ -316,12 +316,17 @@ export const getTech = async (
   );
 
 export const getTechList = async (...params: Parameters<typeof getTech>) => {
-  const tech = await getTech(...params);
+  dayjs.extend(duration);
+
+  const tech = await getTech(params[0], params[1], {
+    filter: ({ data: { experience } }) =>
+      dayjs.duration(experience).asMonths() >= 6,
+    ...params[2],
+  });
   const renderedGroups: string[] = [];
 
   const formatExperience = async (experience: string) => {
     await setDayjsLocale(params[0]);
-    dayjs.extend(duration);
     dayjs.extend(relativeTime);
 
     return capitalize(
@@ -333,7 +338,7 @@ export const getTechList = async (...params: Parameters<typeof getTech>) => {
 
   return (
     await Promise.all(
-      (await getTech(...params)).map(
+      tech.map(
         async ({
           data: { id, experience, group, functionalities, translateId },
         }) => {

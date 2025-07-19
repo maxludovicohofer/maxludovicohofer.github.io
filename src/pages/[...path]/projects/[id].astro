@@ -1,9 +1,6 @@
 ---
-import PostFooter from "@post/PostFooter.astro";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import PostPage from "@post/PostPage.astro";
 import { makeDocumentPaths } from "@document/DocumentPage.astro";
+import { applyMatch, matchRoles } from "@integrations/astro-server";
 import {
   compactTechList,
   getDevelopmentTime,
@@ -11,7 +8,10 @@ import {
   getTechList,
 } from "@integrations/content";
 import { i18n, setDayjsLocale } from "@integrations/i18n-server";
-import { applyMatch, matchRoles } from "@integrations/astro-server";
+import PostFooter from "@post/PostFooter.astro";
+import PostPage from "@post/PostPage.astro";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 
 export const getStaticPaths = makeDocumentPaths("projects");
 
@@ -26,16 +26,18 @@ const roleList = await Promise.all(
   applyMatch(
     await matchRoles(
       Astro,
-      roles.map(({ role }) => ({ data: role, roles: [role] })),
+      roles.map(({ role }) => ({ data: role, roles: [role] }))
     ),
-    roleThreshold,
-  ).map(async ({ id }) => await t(id)),
+    roleThreshold
+  ).map(async ({ id }) => await t(id))
 );
 
 const techList = compactTechList(
   await getTechList(Astro, undefined, {
     entries: tech,
-  }),
+    //? Include all used tech
+    filter: undefined,
+  })
 ).map(({ title }) => title);
 
 await setDayjsLocale(Astro);

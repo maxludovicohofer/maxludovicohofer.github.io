@@ -410,7 +410,7 @@ export interface GetCollectionOptions<
 > {
   excluded?: string[];
   entries?: ReferenceDataEntry<CollectionKey, E>[];
-  filter?: (entry: CollectionEntry<C>) => boolean | undefined;
+  filter?: ((entry: CollectionEntry<C>) => boolean | undefined) | undefined;
 }
 
 export const getCollectionAdvanced = async <
