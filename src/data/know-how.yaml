@@ -83,6 +83,7 @@
         - iterating on the design with user feedback
       achievements:
         - iteratively designed UI/UX and customer journey with clients to maximize conversions
+        - developed an opinionated recommender system driven by company values
         - worked with a mobile first approach to maximize intuitiveness
 
     - job: full stack programmer
@@ -91,7 +92,7 @@
         - managing servers and CI/CD
       achievements:
         - programmed a progressive web app using scrum and TDD
-        - developed an efficient optimization algorithm for salesmen scheduling, running on mobile phones
+        - developed an efficient recommender system for calendar scheduling, running on mobile phones
 
 - id: Zulu Medical
   start: 2019-11-01
