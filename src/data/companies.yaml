@@ -212,3 +212,8 @@
 - id: Milestone
   resume:
     coverLetter: true
+
+- id: Nacon Studio
+  resume:
+    email: true
+    coverLetter: true

@@ -19,7 +19,7 @@ export const getStaticPaths = async (
 const portfolioLink = await getSiteLink(Astro);
 const myName = await getMyName(Astro);
 const company = await getCompanyName(Astro);
-const { build, singleApplication } = await getResumeProps(Astro);
+const { build, singleApplication, coverLetter } = await getResumeProps(Astro);
 const { role } = await getRole(Astro);
 const t = i18n(Astro);
 
@@ -33,7 +33,7 @@ const thanksSentence = removeWatashiNo(
 
 const documentsSentence = removeWatashiNo(
   await t(
-    `I hope this message finds you well. I have attached my ${toTextList(getResumeDocuments(Astro))} for your review. You may also view my portfolio at`
+    `I hope this message finds you well. I have attached my ${toTextList([...getResumeDocuments(Astro), ...(coverLetter ? ["cover letter"] : [])])} for your review. You may also view my portfolio at`
   )
 );
 ---
