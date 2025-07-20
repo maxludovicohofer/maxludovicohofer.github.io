@@ -12,8 +12,9 @@
   workFields:
     - game design
     - level design
-    - physics systems
+    - combat systems
   specializations:
+    - combat
     - mechanics
     - level design
 

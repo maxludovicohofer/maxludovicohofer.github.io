@@ -111,11 +111,7 @@ export const getSummary = async (astro: AstroGlobal, short?: boolean) => {
           short
             ? `I'm ${withArticle} ${professionalSummarySentence}.`
             : `${capitalize(id)} ${professionalSummarySentence}.`
-        }${
-          specializationSentence
-            ? `${short ? "" : ","} ${specializationSentence}`
-            : ""
-        }`,
+        }${specializationSentence ? ` ${specializationSentence}` : ""}`,
       ),
     ),
   );

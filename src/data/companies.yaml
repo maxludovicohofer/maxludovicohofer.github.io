@@ -208,3 +208,7 @@
 
 - id: Sperasoft
   resume: false
+
+- id: Milestone
+  resume:
+    coverLetter: true
