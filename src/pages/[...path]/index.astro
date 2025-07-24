@@ -3,6 +3,7 @@ import Profile from "@components/Profile.astro";
 import Showreel from "@components/Showreel.astro";
 import TechPreview from "@components/TechPreview.astro";
 import { defaultLocale, locales } from "@integrations/astro-config";
+import { getRole } from "@integrations/astro-server";
 import { makePath } from "@integrations/text";
 import Bento from "@layouts/Bento.astro";
 import Page from "@layouts/Page.astro";
@@ -68,19 +69,30 @@ export const getStaticPaths = async (options?: {
   );
 };
 
+const {
+  role: {
+    data: { removeSections },
+  },
+} = await getRole(Astro);
+
 // TODO PHASE 2 UPDATE TAILWIND (ISSUES WITH OPACITY AND OBJECT COVER)
+
+const showreelSlot = !removeSections?.includes("showreel")
+  ? "2-medium"
+  : undefined;
+const techSlot = !removeSections?.includes("tech") ? "4-small" : undefined;
 ---
 
 <Page description="My portfolio and blog" homepage>
   <Bento>
     <Profile slot="1-small" />
-    <Showreel slot="2-medium" />
+    {showreelSlot && <Showreel slot={showreelSlot} />}
     <PostListPreview
       slot="3-large"
       collection="projects"
       contentClass="lg:grid-cols-2 2xl:grid-cols-1"
     />
-    <TechPreview slot="4-small" titleProps={{ tag: "h2" }} />
+    {techSlot && <TechPreview slot={techSlot} titleProps={{ tag: "h2" }} />}
     <PostListPreview
       slot="5-medium"
       collection="thoughts"

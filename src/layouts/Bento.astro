@@ -4,15 +4,42 @@ import { listPreviewContainerClass } from "./post/PostListPreview.astro";
 ---
 
 <div class="grid min-h-screen grid-cols-1 gap-4 p-4 lg:grid-cols-3">
-  <Card><slot name="1-small" /></Card>
-  <Card class="max-h-[80dvh] !p-0 lg:col-span-2"><slot name="2-medium" /></Card>
-  <Card
-    container
-    class={`lg:row-span-3 lg:col-span-2 ${listPreviewContainerClass}`}
-    ><slot name="3-large" /></Card
-  >
-  <Card class="lg:col-start-3 lg:row-start-2"><slot name="4-small" /></Card>
-  <Card container class={`lg:row-span-2 ${listPreviewContainerClass}`}
-    ><slot name="5-medium" /></Card
-  >
+  {
+    Astro.slots.has("1-small") && (
+      <Card class={Astro.slots.has("2-medium") ? "" : "col-span-full"}>
+        <slot name="1-small" />
+      </Card>
+    )
+  }
+  {
+    Astro.slots.has("2-medium") && (
+      <Card class="max-h-[80dvh] !p-0 lg:col-span-2">
+        <slot name="2-medium" />
+      </Card>
+    )
+  }
+  {
+    Astro.slots.has("3-large") && (
+      <Card
+        container
+        class={`lg:row-span-3 lg:col-span-2 ${listPreviewContainerClass}`}
+      >
+        <slot name="3-large" />
+      </Card>
+    )
+  }
+  {
+    Astro.slots.has("4-small") && (
+      <Card class="lg:col-start-3 lg:row-start-2">
+        <slot name="4-small" />
+      </Card>
+    )
+  }
+  {
+    Astro.slots.has("5-medium") && (
+      <Card container class={`lg:row-span-2 ${listPreviewContainerClass}`}>
+        <slot name="5-medium" />
+      </Card>
+    )
+  }
 </div>

@@ -50,6 +50,8 @@
   specializations:
     - mechanics
     - AI
+  removeSections:
+    - showreel
 
 - id: AI programmer
   matches:
@@ -64,6 +66,8 @@
   specializations:
     - decision making
     - perception systems
+  removeSections:
+    - showreel
 
 - id: system programmer
   matches:
@@ -78,6 +82,8 @@
   specializations:
     - rendering
     - software architecture design
+  removeSections:
+    - showreel
 
 - id: tools programmer
   matches:
@@ -95,6 +101,8 @@
     - UI \ UX
     - level design tools
     - CI \ CD
+  removeSections:
+    - showreel
 
 - id: engine programmer
   matches:
@@ -113,6 +121,8 @@
     - UI \ UX
     - rendering
     - programming architectures
+  removeSections:
+    - showreel
 
 - id: project manager
   matches:
@@ -126,6 +136,9 @@
     - scrum
     - software development
     - pipeline efficiency
+  removeSections:
+    - showreel
+    - tech
 
 - id: technical team lead
   matches:
@@ -141,6 +154,8 @@
     - scrum
     - software development
     - pipeline efficiency
+  removeSections:
+    - showreel
 
 - id: UI programmer
   matches:
@@ -152,6 +167,8 @@
   workFields:
     - UI programming
     - UX planning
+  removeSections:
+    - showreel
 
 - id: technical artist
   matches:
@@ -164,14 +181,3 @@
   specializations:
     - rendering
     - procedural content
-
-# TODO DELETE IN AUGUST 2025
-- id: game programmer
-  matches:
-    - gameplay programmer
-    - technical lead
-    - tech lead
-  workFields:
-    - gameplay programming
-    - combat systems
-    - physics systems
