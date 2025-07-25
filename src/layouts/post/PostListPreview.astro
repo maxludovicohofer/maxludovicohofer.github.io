@@ -1,19 +1,33 @@
 ---
-import ContentList from "@ui/ContentList.astro";
-import PostPreview from "@post/PostPreview.astro";
-import type { ComponentProps } from "astro/types";
+import {
+  getPostListThreshold,
+  getSortedPosts,
+} from "@integrations/astro-server";
 import type { PostCollectionKey } from "@integrations/content";
 import { capitalize } from "@integrations/text";
+import PostPreview from "@post/PostPreview.astro";
+import ContentList from "@ui/ContentList.astro";
+import type { ComponentProps } from "astro/types";
 
 interface Props extends ComponentProps<typeof PostPreview> {
   collection: PostCollectionKey;
-  contentClass?: string;
+  previewEntries: number;
+  contentListProps?: Omit<ComponentProps<typeof ContentList>, "collection">;
 }
 
-const { collection, contentClass, ...props } = Astro.props;
+const { collection, previewEntries, contentListProps, ...props } = Astro.props;
 
 export const listPreviewContainerClass =
   "-mx-4 lg:mx-0 !shadow-none lg:!shadow-[0_6px_4px_-4px_rgb(0_0_0/0.1)] !rounded-none lg:!rounded-b-3xl";
+
+const { class: className, ...listProps } = contentListProps ?? {};
+
+const displayReadMore =
+  (
+    await getSortedPosts(Astro, collection, getPostListThreshold(collection), {
+      excluded: listProps.exclude,
+    })
+  ).length > previewEntries;
 ---
 
 <PostPreview
@@ -21,10 +35,11 @@ export const listPreviewContainerClass =
   class="mx-4 lg:mx-0"
   readMore={collection}
   readMoreText={`See all ${collection}`}
-  readMoreClass="hidden lg:inline"
+  readMoreClass={`hidden ${displayReadMore ? "lg:inline" : ""}`}
   {...props}
   ><Fragment slot="title">{capitalize(collection)}</Fragment><ContentList
     collection={collection}
-    class={`${contentClass} -mx-4 lg:mx-0 px-4 lg:px-0`}
+    class={`${className ?? ""} -mx-4 lg:mx-0 px-4 lg:px-0`}
+    {...listProps}
   /></PostPreview
 >

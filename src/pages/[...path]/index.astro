@@ -3,7 +3,11 @@ import Profile from "@components/Profile.astro";
 import Showreel from "@components/Showreel.astro";
 import TechPreview from "@components/TechPreview.astro";
 import { defaultLocale, locales } from "@integrations/astro-config";
-import { getRole } from "@integrations/astro-server";
+import {
+  getPostListThreshold,
+  getRole,
+  getSortedPosts,
+} from "@integrations/astro-server";
 import { makePath } from "@integrations/text";
 import Bento from "@layouts/Bento.astro";
 import Page from "@layouts/Page.astro";
@@ -80,7 +84,14 @@ const {
 const showreelSlot = !removeSections?.includes("showreel")
   ? "2-medium"
   : undefined;
+
 const techSlot = !removeSections?.includes("tech") ? "4-small" : undefined;
+
+const thoughtsSlot =
+  (await getSortedPosts(Astro, "thoughts", getPostListThreshold("thoughts")))
+    .length > 0
+    ? "5-medium"
+    : undefined;
 ---
 
 <Page description="My portfolio and blog" homepage>
@@ -90,13 +101,23 @@ const techSlot = !removeSections?.includes("tech") ? "4-small" : undefined;
     <PostListPreview
       slot="3-large"
       collection="projects"
-      contentClass="lg:grid-cols-2 2xl:grid-cols-1"
+      previewEntries={3}
+      contentListProps={{
+        class: "lg:grid-cols-2",
+      }}
     />
     {techSlot && <TechPreview slot={techSlot} titleProps={{ tag: "h2" }} />}
-    <PostListPreview
-      slot="5-medium"
-      collection="thoughts"
-      contentClass="lg:grid-cols-1"
-    />
+    {
+      thoughtsSlot && (
+        <PostListPreview
+          slot={thoughtsSlot}
+          collection="thoughts"
+          previewEntries={1}
+          contentListProps={{
+            class: "lg:grid-cols-1",
+          }}
+        />
+      )
+    }
   </Bento>
 </Page>

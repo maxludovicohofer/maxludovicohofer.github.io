@@ -6,7 +6,7 @@ import type { HTMLAttributes } from "astro/types";
 import type { CollectionEntry } from "astro:content";
 import { getEntryId } from "@layouts/document/Document.astro";
 import { makeHighlight } from "@integrations/tailwind";
-import { getSortedPosts } from "@integrations/astro-server";
+import { getSortedPosts, getPostListThreshold } from "@integrations/astro-server";
 
 interface Props extends HTMLAttributes<"ol"> {
   collection: PostCollectionKey;
@@ -26,11 +26,19 @@ const {
   ...props
 } = Astro.props;
 
+
 const sortedEntries: CollectionEntry<PostCollectionKey>[] =
-  await getSortedPosts(Astro, collection, { excluded: exclude });
+  await getSortedPosts(
+    Astro,
+    collection,
+    getPostListThreshold(collection),
+    {
+      excluded: exclude,
+    }
+  );
 ---
 
-<ol
+{sortedEntries.length > 0 && <ol
   class={`${className} content-list grid grid-flow-col lg:grid-flow-row gap-4 overflow-x-scroll scrollbar-hide snap-mandatory pb-4 -mb-2`}
   data-collection={collection}
   data-eager-items={numberOfItemsToLoadEager}
@@ -78,17 +86,17 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
 </ol>
 <script>
   import {
-    getTextClass,
-    makeHighlight,
-    switchClasses,
-  } from "@integrations/tailwind";
-  import type { CollectionKey } from "astro:content";
+  getTextClass,
+  makeHighlight,
+  switchClasses,
+} from "@integrations/tailwind";
+import type { CollectionKey } from "astro:content";
 
   // TODO PHASE 2 USE POINTER EVENTS, AND MAKE THEM WORK ON IOS SAFARI
   const carouselEvents: {
     [K in keyof HTMLElementEventMap]?: (
       this: HTMLElement,
-      e: HTMLElementEventMap[K],
+      e: HTMLElementEventMap[K]
     ) => any;
   } = {
     mouseenter: function () {
@@ -136,18 +144,18 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
         for (const event in carouselEvents) {
           list[actionToExecute](
             event,
-            carouselEvents[event as keyof typeof carouselEvents] as any,
+            carouselEvents[event as keyof typeof carouselEvents] as any
           );
         }
 
         if (actionToExecute === "removeEventListener")
           list.style.cursor = "unset";
-      }),
+      })
     );
 
     const replaceTitleClass = (
       container: Element,
-      importance: ReturnType<typeof makeHighlight>["importance"],
+      importance: ReturnType<typeof makeHighlight>["importance"]
     ) => {
       const containerTitle = container.querySelector(".post-preview-title")!;
 
@@ -156,7 +164,7 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
         containerTitle,
         importance === "content-list-highlight",
         getTextClass("content-list-highlight").split(" "),
-        getTextClass("h1").split(" "),
+        getTextClass("h1").split(" ")
       );
     };
 
@@ -174,7 +182,7 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
 
         if (readEntrySlugs) {
           const { highlightClass, importance } = makeHighlight(
-            list.dataset.discrete !== undefined,
+            list.dataset.discrete !== undefined
           );
           const highlightClasses = highlightClass
             .split(" ")
@@ -231,4 +239,4 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
         });
       });
   });
-</script>
+</script>}

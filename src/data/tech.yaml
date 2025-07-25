@@ -320,7 +320,6 @@
     - automation
   roles:
     - project manager
-    - game designer
     - balance designer
 
 - id: PowerPoint
@@ -330,7 +329,6 @@
     - information design
     - animations
   roles:
-    - game designer
     - project manager
 
 - id: Photoshop

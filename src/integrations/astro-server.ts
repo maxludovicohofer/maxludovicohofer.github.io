@@ -325,11 +325,16 @@ export const applyMatch = <T extends Partial<Record<any, any[]>>>(
     .reverse()
     .flat();
 
+export const getPostListThreshold = <C extends PostCollectionKey>(
+  collection: C,
+) => (collection === "thoughts" ? 0.5 : undefined);
+
 export const getSortedPosts = async <C extends PostCollectionKey>(
   astro: AstroGlobal,
   collection: C,
+  threshold?: number,
   ...params: ExceptFirst<ExceptFirst<Parameters<typeof getMatchedPosts>>>
-) => applyMatch(await getMatchedPosts(astro, collection, ...params));
+) => applyMatch(await getMatchedPosts(astro, collection, ...params), threshold);
 
 export const getMatchedPosts = async <C extends PostCollectionKey>(
   astro: AstroGlobal,
@@ -408,7 +413,7 @@ export interface GetCollectionOptions<
   C extends CollectionKey,
   E extends keyof DataEntryMap[CollectionKey] = string,
 > {
-  excluded?: string[];
+  excluded?: string[] | undefined;
   entries?: ReferenceDataEntry<CollectionKey, E>[];
   filter?: ((entry: CollectionEntry<C>) => boolean | undefined) | undefined;
 }

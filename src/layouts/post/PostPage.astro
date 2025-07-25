@@ -1,5 +1,9 @@
 ---
-import { isLocalizedEntry } from "@integrations/astro-server";
+import {
+  getPostListThreshold,
+  getSortedPosts,
+  isLocalizedEntry,
+} from "@integrations/astro-server";
 import { getTitle } from "@integrations/content";
 import { getDescription } from "@layouts/document/Document.astro";
 import Page from "@layouts/Page.astro";
@@ -14,6 +18,20 @@ interface Props extends Omit<ComponentProps<typeof Post>, "entry"> {
 const { entry, contentProps } = Astro.props;
 
 const noTranslation = contentProps?.isLocalized ?? isLocalizedEntry(entry);
+
+const otherSlot =
+  (
+    await getSortedPosts(
+      Astro,
+      entry.collection,
+      getPostListThreshold(entry.collection),
+      {
+        excluded: [entry.id],
+      }
+    )
+  ).length > 0
+    ? "after"
+    : undefined;
 ---
 
 <Page
@@ -27,12 +45,16 @@ const noTranslation = contentProps?.isLocalized ?? isLocalizedEntry(entry);
     contentProps={{ isLocalized: noTranslation, ...contentProps }}
     {...Astro.props}
     ><slot name="footer" slot="footer" />
-    <PostList
-      slot="after"
-      class="scroll-reset"
-      collection={entry.collection}
-      partOfPost
-      exclude={[entry.id]}
-    /></Post
+    {
+      otherSlot && (
+        <PostList
+          slot={otherSlot}
+          class="scroll-reset"
+          collection={entry.collection}
+          partOfPost
+          exclude={[entry.id]}
+        />
+      )
+    }</Post
   ></Page
 >

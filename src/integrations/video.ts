@@ -41,7 +41,7 @@ export const generateShowreelCaptions = async (astro: AstroGlobal) => {
   const showreelProjects = Object.keys(showreelData);
 
   const projects = (
-    await getSortedPosts(astro, "projects", {
+    await getSortedPosts(astro, "projects", undefined, {
       entries: showreelProjects.map((project) => ({
         id: `${project}/${project}`,
         collection: "projects",

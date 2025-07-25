@@ -22,7 +22,7 @@ import { listPreviewContainerClass } from "./post/PostListPreview.astro";
     Astro.slots.has("3-large") && (
       <Card
         container
-        class={`lg:row-span-3 lg:col-span-2 ${listPreviewContainerClass}`}
+        class={`lg:min-h-[56rem] ${listPreviewContainerClass} lg:row-span-3 ${Astro.slots.has("4-small") || Astro.slots.has("5-medium") ? "lg:col-span-2" : "lg:col-span-full"}`}
       >
         <slot name="3-large" />
       </Card>
@@ -30,7 +30,9 @@ import { listPreviewContainerClass } from "./post/PostListPreview.astro";
   }
   {
     Astro.slots.has("4-small") && (
-      <Card class="lg:col-start-3 lg:row-start-2">
+      <Card
+        class={`lg:col-start-3 lg:row-start-2 ${Astro.slots.has("5-medium") ? "" : "lg:row-span-3"}`}
+      >
         <slot name="4-small" />
       </Card>
     )
