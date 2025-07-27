@@ -11,9 +11,10 @@ import duration from "dayjs/plugin/duration";
 
 interface Props extends HTMLAttributes<"div"> {
   section?: keyof Awaited<ReturnType<typeof getKnowHow>>;
+  maxAchievements?: number;
 }
 
-const { section, ...props } = Astro.props;
+const { section, maxAchievements, ...props } = Astro.props;
 
 export const getFormattedDates = async (
   astro: AstroGlobal,
@@ -99,11 +100,13 @@ const knowHow = await getKnowHow(Astro);
                     </Text>
                     {!experience?.[getResumeKey(Astro)]?.short && (
                       <ol class="list-disc">
-                        {achievements.map((achievement) => (
-                          <Text tag="li">
-                            {capitalize(endDelimiter(achievement))}
-                          </Text>
-                        ))}
+                        {achievements
+                          .slice(0, maxAchievements ?? undefined)
+                          .map((achievement) => (
+                            <Text tag="li">
+                              {capitalize(endDelimiter(achievement))}
+                            </Text>
+                          ))}
                       </ol>
                     )}
                   </li>

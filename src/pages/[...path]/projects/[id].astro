@@ -15,7 +15,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 export const getStaticPaths = makeDocumentPaths("projects");
 
-const { roles, tech, awards } = Astro.props.entry.data;
+const { roles, tech, awards, creditedAs } = Astro.props.entry.data;
 
 const t = i18n(Astro);
 
@@ -31,6 +31,12 @@ const roleList = await Promise.all(
     roleThreshold
   ).map(async ({ id }) => await t(id))
 );
+
+if (creditedAs) {
+  roleList[0] = await t(
+    `credited as ${creditedAs.role}${creditedAs.reason ? ` (due to ${creditedAs.reason})` : ""}. Worked as ${roleList[0]}`
+  );
+}
 
 const techList = compactTechList(
   await getTechList(Astro, undefined, {

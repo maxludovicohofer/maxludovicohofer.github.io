@@ -180,6 +180,9 @@ const projects = defineCollection({
           achievements: z.array(z.string()),
         }),
       ),
+      creditedAs: z
+        .object({ role: z.string(), reason: z.string().optional() })
+        .optional(),
     })
     .merge(teamContent),
 });
