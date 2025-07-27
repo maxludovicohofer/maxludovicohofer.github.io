@@ -1,14 +1,19 @@
 ---
 import Text from "@components/ui/Text.astro";
-import { getKnowHow } from "@integrations/content";
+import { getKnowHow, getResumeKey } from "@integrations/content";
 import { i18n, setDayjsLocale } from "@integrations/i18n-server";
 import { getLocaleInfo } from "@integrations/i18n-special";
 import { capitalize, endDelimiter } from "@integrations/text";
 import type { AstroGlobal } from "astro";
+import type { HTMLAttributes } from "astro/types";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 
-const knowHow = await getKnowHow(Astro);
+interface Props extends HTMLAttributes<"div"> {
+  section?: keyof Awaited<ReturnType<typeof getKnowHow>>;
+}
+
+const { section, ...props } = Astro.props;
 
 export const getFormattedDates = async (
   astro: AstroGlobal,
@@ -49,54 +54,63 @@ export const getFormattedDates = async (
 };
 
 const t = i18n(Astro);
+
+const knowHow = await getKnowHow(Astro);
 ---
 
 {
-  Object.entries(knowHow).map(([title, experiences]) => (
-    <>
-      <Text tag="h2">{capitalize(title)}</Text>
-      <ol class="list-none ps-0">
-        {experiences.map(
-          async ({
-            skill: { job, achievements },
-            id,
-            school,
-            countAsExperience,
-            start,
-            end,
-            translateId,
-            dropOut,
-          }) => {
-            const translatedId = translateId
-              ? await t(capitalize(id))
-              : capitalize(id);
-            const comma = `${await t(",")} `;
-            const dates = await getFormattedDates(Astro, start, end);
+  Object.entries(knowHow)
+    .filter(([title]) => !section || title === section)
+    .map(([title, experiences]) => (
+      <div {...props}>
+        <Text tag="h2">{capitalize(title)}</Text>
+        <ol class="list-none ps-0">
+          {experiences
+            .filter((experience) => !experience?.[getResumeKey(Astro)]?.omit)
+            .map(
+              async ({
+                skill: { job, achievements },
+                id,
+                school,
+                countAsExperience,
+                start,
+                end,
+                translateId,
+                dropOut,
+                ...experience
+              }) => {
+                const translatedId = translateId
+                  ? await t(capitalize(id))
+                  : capitalize(id);
+                const comma = `${await t(",")} `;
+                const dates = await getFormattedDates(Astro, start, end);
 
-            return (
-              <li class="ps-0">
-                <Text tag="h3">
-                  {capitalize(job.id)}
-                  {countAsExperience && school ? " (school)" : ""}
-                  {dropOut ? " (not graduated)" : ""}
-                </Text>
-                <Text tag="h4" subtitle translateProps={{ disable: true }}>
-                  {translatedId}
-                  {comma}
-                  {dates.join(" - ")}
-                </Text>
-                <ol class="list-disc">
-                  {achievements.map((achievement) => (
-                    <Text tag="li">
-                      {capitalize(endDelimiter(achievement))}
+                return (
+                  <li class="ps-0">
+                    <Text tag="h3">
+                      {capitalize(job.id)}
+                      {countAsExperience && school ? " (school)" : ""}
+                      {dropOut ? " (not graduated)" : ""}
                     </Text>
-                  ))}
-                </ol>
-              </li>
-            );
-          }
-        )}
-      </ol>
-    </>
-  ))
+                    <Text tag="h4" subtitle translateProps={{ disable: true }}>
+                      {translatedId}
+                      {comma}
+                      {dates.join(" - ")}
+                    </Text>
+                    {!experience?.[getResumeKey(Astro)]?.short && (
+                      <ol class="list-disc">
+                        {achievements.map((achievement) => (
+                          <Text tag="li">
+                            {capitalize(endDelimiter(achievement))}
+                          </Text>
+                        ))}
+                      </ol>
+                    )}
+                  </li>
+                );
+              }
+            )}
+        </ol>
+      </div>
+    ))
 }

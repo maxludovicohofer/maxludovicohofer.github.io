@@ -1,0 +1,60 @@
+---
+import Text from "@components/ui/Text.astro";
+import {
+  getPostListThreshold,
+  getSortedPosts,
+} from "@integrations/astro-server";
+import {
+  getCategory,
+  getDevelopmentTime,
+  getTitle,
+} from "@integrations/content";
+import { i18n } from "@integrations/i18n-server";
+import { capitalize } from "@integrations/text";
+import { getDescription } from "@layouts/document/Document.astro";
+import type { HTMLAttributes } from "astro/types";
+import { getFormattedDates } from "./ResumeKnowHow.astro";
+
+interface Props extends HTMLAttributes<"div"> {
+  numberOfProjects?: number;
+}
+
+const { numberOfProjects, ...props } = Astro.props;
+
+const projects = (
+  await getSortedPosts(Astro, "projects", getPostListThreshold("projects"))
+).slice(0, numberOfProjects);
+
+const t = i18n(Astro);
+---
+
+<div {...props}>
+  <Text tag="h2">{capitalize("selected personal projects")}</Text>
+  <ol class="list-none ps-0">
+    {
+      projects.map(async (project) => {
+        const dates = await getFormattedDates(
+          Astro,
+          project.publishingDate.subtract(getDevelopmentTime(project)!),
+          project.data.inDevelopment ? undefined : project.publishingDate
+        );
+
+        const category = await t(capitalize(getCategory(project)!));
+
+        const comma = `${await t(",")} `;
+
+        return (
+          <li class="ps-0">
+            <Text tag="h3">{getTitle(project)}</Text>
+            <Text tag="h4" subtitle translateProps={{ disable: true }}>
+              {category}
+              {comma}
+              {dates.join(" - ")}
+            </Text>
+            <Text>{getDescription(project, 1, true, "Design")}</Text>
+          </li>
+        );
+      })
+    }
+  </ol>
+</div>

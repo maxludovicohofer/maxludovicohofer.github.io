@@ -1,51 +1,3 @@
-- id: self study
-  start: 2024-03-01
-  school: true
-  translateId: true
-  projects:
-    - hexelied
-    - madreterra
-    - lolita
-  tech:
-    - Houdini
-    - Maya
-    - ZBrush
-    - Marvelous designer
-    - Substance designer
-    - Photoshop
-    - Illustrator
-    - Krita
-    - FL Studio
-  skills:
-    - job: game designer
-      tasks:
-        - designing and developing prototypes
-        - writing collaboration and marketing documents
-      achievements:
-        - designed prototypes (stealth, action, narrative, TPS, horror) and mechanics, while developing tools and systems
-        - studied rendering and performance optimization in depth
-
-    - job: gameplay programmer
-      tasks:
-        - coding game features
-        - creating tools and systems
-      achievements:
-        - developed physics-based mechanics, AI tools, and game systems
-        - studied rendering and performance optimization in depth
-
-    - job: AI programmer
-      tasks:
-        - coding intuitive AI
-      achievements:
-        - developed AI systems and prototype tooling
-
-    - job: technical artist
-      tasks:
-        - programming procedural content
-      achievements:
-        - developed asset scattering through Unreal's PCG
-        - studied rendering and performance optimization in depth
-
 - id: INattivo Soc. Cons. a.r.l
   start: 2021-05-01
   end: 2022-03-01
@@ -164,25 +116,6 @@
     - Gaea
     - FL Studio
   skills:
-    - job: game designer
-      countAsWork: true
-      tasks:
-        - writing documents to communicate game specifications
-        - brainstorming and prototyping game ideas
-        - bringing colleagues together to solve problems
-      achievements:
-        - designed and directed an award-winning co-op rougelike shoot 'em up game, completed in 3 months by a team of 20
-        - designed prototypes (puzzle game, funny driving game, mobile platformer) for clients and game jams, following provided requirements
-
-    - job: gameplay programmer
-      countAsWork: true
-      tasks:
-        - programming gameplay and core systems
-        - extending engine tools to better fit the project's use cases
-      achievements:
-        - programmed gameplay and systems for an award-winning published indie game
-        - programmed multiple prototypes, developing custom systems and tooling
-
     - job: technical art
       tasks:
         - studied the game development and CG pipeline, using the latest industry standards
@@ -190,21 +123,14 @@
         - worked on several prototypes and one award-winning game
         - specialized in game design and technical art
 
-    - job: technical artist
-      countAsWork: true
-      tasks:
-        - supervising asset authoring pipeline
-        - developing procedural systems
-      achievements:
-        - developed procedural animation system for multi-legged characters
-        - programmed level streaming system for a rougelike game
-
 - id: University of Padua
   start: 2016-09-01
   end: 2019-09-01
   school: true
   dropOut: true
   translateId: true
+  resume:
+    short: true
   tech:
     - C++
     - Python
@@ -222,6 +148,8 @@
   end: 2016-06-09
   school: true
   translateId: true
+  resume:
+    omit: true
   tech:
     - Unreal Engine
     - C++

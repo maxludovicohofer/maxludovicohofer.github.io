@@ -1,10 +1,9 @@
 ---
 import ResumeKnowHow from "@components/docs/ResumeKnowHow.astro";
-import ResumePicture from "@components/docs/ResumePicture.astro";
+import ResumeProjects from "@components/docs/ResumeProjects.astro";
 import { mail } from "@components/Profile.astro";
 import Link from "@components/ui/Link.astro";
 import Text from "@components/ui/Text.astro";
-import { groupBy } from "@integrations/array";
 import { getSiteLink } from "@integrations/astro-server";
 import {
   compactTechList,
@@ -17,10 +16,8 @@ import {
   getExtraItems,
   getMyName,
   getSummary,
-  getWorkFieldsSentence,
 } from "@integrations/docs";
 import { i18n, setDayjsLocale } from "@integrations/i18n-server";
-import { capitalize, toTextList, uncapitalize } from "@integrations/text";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
 import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 import { PHONE_NUMBER } from "astro:env/server";
@@ -39,8 +36,6 @@ export const getStaticPaths = async (
 
 const portfolioLink = await getSiteLink(Astro);
 
-const workFieldsSentence = await getWorkFieldsSentence(Astro);
-
 const techList = compactTechList(await getTechList(Astro));
 
 await setDayjsLocale(Astro);
@@ -53,7 +48,7 @@ const address = await getAddress(Astro);
 const portfolioSentence = await t("Portfolio");
 const relocateSentence = `${await t(" ")}${await t("(")}${await t("open to relocate")}${await t(")")}`;
 
-const languages = groupBy(await getLanguages(Astro), ({ level }) => level);
+const languages = await getLanguages(Astro);
 
 const summary = await getSummary(Astro);
 const myName = await getMyName(Astro);
@@ -63,7 +58,7 @@ const extras = await getExtraItems(Astro);
 ---
 
 <DocumentPage>
-  <ResumePicture />
+  <!-- <ResumePicture /> -->
   <h1>{myName.translated}</h1>
   <p>{summary}</p>
   <span>
@@ -95,32 +90,33 @@ const extras = await getExtraItems(Astro);
   <Link href={`https://maps.google.com/?q=${address.raw}`}
     >{address.translated}</Link
   >{relocateSentence}
-  <ResumeKnowHow />
-  <Text tag="h2">Skills</Text>
-  <ul class="grid grid-cols-3">
-    {
-      techList.map(async ({ title, experience }) => {
-        const techItem = `${title}${await t(" ")}${await t("(")}${uncapitalize(experience!)}${await t(")")}`;
-
-        return <li class="my-0.5 pr-7">{techItem}</li>;
-      })
-    }
-  </ul>
-  <ul class="-mt-3">
-    <Text tag="li"
-      >Made games for desktop, mobile, and online and local multiplayer. {
-        workFieldsSentence
-      }</Text
-    >
-    <Text tag="li"
-      >{
-        Object.entries(languages).map(
-          async ([level, languages]) =>
-            `${await t(capitalize(level))}${await t(" ")}${await t("in")}${await t(" ")}${await t(toTextList(languages.map(({ id }) => id)))}${await t(".")}${await t(" ")}`
-        )
-      }</Text
-    >
-  </ul>
+  <div class="grid grid-cols-2 gap-x-4">
+    <div>
+      <ResumeKnowHow section="experience" />
+      <ResumeProjects numberOfProjects={2} />
+    </div>
+    <div>
+      <ResumeKnowHow section="education" />
+      <Text tag="h2">Skills</Text>
+      <ul>
+        {
+          techList.map(async ({ title }) => (
+            <li class="my-0.5 pr-7">{title}</li>
+          ))
+        }
+      </ul>
+      <Text tag="h2">Languages</Text>
+      <ul>
+        {
+          languages.map(({ id, level }) => (
+            <li>
+              {id}, {level}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
   {
     !!extras.length && (
       <>

@@ -408,14 +408,14 @@ export const getCompanyName = async (
     : undefined;
 };
 
+export const getResumeKey = (astro: AstroGlobal) =>
+  getCurrentLocale(astro) === "ja" ? "resumeJa" : "resume";
+
 export const getResumeProps = async (astro: AstroGlobal) => {
   const company = await getCompany(astro);
   if (!company) return {} as ReturnType<typeof getCompanyResumeProps>;
 
-  return getCompanyResumeProps(
-    company,
-    getCurrentLocale(astro) === "ja" ? "resumeJa" : "resume",
-  );
+  return getCompanyResumeProps(company, getResumeKey(astro));
 };
 
 type ResumeKey = Extract<

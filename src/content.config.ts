@@ -90,6 +90,13 @@ const teamContent = z.object({
     .optional(),
 });
 
+const knowHowResumeProps = z
+  .object({
+    omit: z.boolean().optional(),
+    short: z.boolean().optional(),
+  })
+  .optional();
+
 const knowHow = defineCollection({
   loader: file("src/data/know-how.yaml"),
   schema: fileSchema
@@ -110,6 +117,8 @@ const knowHow = defineCollection({
         }),
       ),
       translateId: z.boolean().optional(),
+      resume: knowHowResumeProps,
+      resumeJa: knowHowResumeProps,
     })
     .merge(teamContent),
 });
@@ -160,6 +169,7 @@ const projects = defineCollection({
     .extend({
       category: z.enum(["game", "prototype", "tool"]).optional(),
       developmentTime: z.string().duration(),
+      inDevelopment: z.boolean().optional(),
       tech: z.array(reference("tech")),
       downloadLinks: z.array(z.string().url()).optional(),
       awards: z.array(z.string()).optional(),
