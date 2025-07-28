@@ -55,39 +55,57 @@ const myName = await getMyName(Astro);
   <!-- <ResumePicture /> -->
   <h1>{myName.translated}</h1>
   <p>{summary}</p>
-  <span>
-    <Text tag="span" format="branded" translateProps={{ disable: true }}
-      >👜</Text
-    >
-    {portfolioSentence} 🡢 <Link href={portfolioLink} />
-    <br />
-    <Text tag="span" format="branded" translateProps={{ disable: true }}
-      >📬</Text
-    >
-    <Link href={`mailto:${mail}`} />
-  </span>
-  {
-    PHONE_NUMBER && (
-      <>
-        <br />
-        <Text tag="span" format="branded" translateProps={{ disable: true }}>
-          📞
-        </Text>
-        <Link href={`tel:${PHONE_NUMBER}`} />
-      </>
-    )
-  }
-  <br />
-  <Text tag="span" format="branded" translateProps={{ disable: true }}>
-    📍
-  </Text>
-  <Link href={`https://maps.google.com/?q=${address.raw}`}
-    >{address.translated}</Link
-  >{relocateSentence}
+  <div class="grid grid-cols-1 gap-x-4">
+    <div>
+      <Text tag="span" format="branded" translateProps={{ disable: true }}
+        >👜</Text
+      >
+      {portfolioSentence} 🡢 <Link href={portfolioLink} />
+    </div>
+    <div>
+      <Text tag="span" format="branded" translateProps={{ disable: true }}>
+        📍
+      </Text>
+      <Link href={`https://maps.google.com/?q=${address.raw}`}
+        >{address.translated}</Link
+      >{relocateSentence}
+    </div>
+    <div class="grid grid-cols-2">
+      <div>
+        <Text tag="span" format="branded" translateProps={{ disable: true }}
+          >📬</Text
+        >
+        <Link href={`mailto:${mail}`} />
+      </div>
+      {
+        PHONE_NUMBER && (
+          <div>
+            <Text
+              tag="span"
+              format="branded"
+              translateProps={{ disable: true }}
+            >
+              📞
+            </Text>
+            <Link href={`tel:${PHONE_NUMBER}`} />
+          </div>
+        )
+      }
+    </div>
+  </div>
   <div class="grid grid-cols-2 gap-x-4">
     <div>
       <ResumeKnowHow section="experience" maxAchievements={1} />
       <ResumeProjects numberOfProjects={2} />
+      <Text tag="h2">Additional info</Text>
+      <!-- TODO Add relevant certifications -->
+      <ul>
+        {
+          techList.map(async ({ title }) => (
+            <li class="my-0.5 pr-7">{title}</li>
+          ))
+        }
+      </ul>
     </div>
     <div>
       <ResumeKnowHow section="education" maxAchievements={1} />

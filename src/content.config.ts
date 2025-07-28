@@ -114,6 +114,8 @@ const knowHow = defineCollection({
           tasks: z.string().array(),
           achievements: z.string().array(),
           countAsWork: z.boolean().optional(),
+          // Start can be used to account for multiple skills
+          start: z.date().max(maxDate).min(minDate).optional(),
         }),
       ),
       translateId: z.boolean().optional(),
