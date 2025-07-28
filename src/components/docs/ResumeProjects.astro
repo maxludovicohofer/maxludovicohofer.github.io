@@ -4,11 +4,7 @@ import {
   getPostListThreshold,
   getSortedPosts,
 } from "@integrations/astro-server";
-import {
-  getCategory,
-  getDevelopmentTime,
-  getTitle,
-} from "@integrations/content";
+import { getCategory, getDevelopmentTime } from "@integrations/content";
 import { i18n } from "@integrations/i18n-server";
 import { capitalize } from "@integrations/text";
 import { getDescription } from "@layouts/document/Document.astro";
@@ -30,7 +26,7 @@ const t = i18n(Astro);
 
 <div {...props}>
   <Text tag="h2">{capitalize("selected personal projects")}</Text>
-  <ol class="list-none ps-0">
+  <ul>
     {
       projects.map(async (project) => {
         const dates = await getFormattedDates(
@@ -44,17 +40,18 @@ const t = i18n(Astro);
         const comma = `${await t(",")} `;
 
         return (
-          <li class="ps-0">
-            <Text tag="h3">{getTitle(project)}</Text>
-            <Text tag="h4" subtitle translateProps={{ disable: true }}>
+          <li>
+            <Text class="my-0">
+              {getDescription(project, 1, true, "Design")}
+            </Text>
+            <Text tag="em" subtitle translateProps={{ disable: true }}>
               {category}
               {comma}
               {dates.join(" - ")}
             </Text>
-            <Text>{getDescription(project, 1, true, "Design")}</Text>
           </li>
         );
       })
     }
-  </ol>
+  </ul>
 </div>
