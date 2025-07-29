@@ -86,16 +86,24 @@ const knowHow = await getKnowHow(Astro);
                 const comma = `${await t(",")} `;
                 const dates = await getFormattedDates(Astro, start, end);
 
+                const multipleJobs = job.id === "technical lead";
+
                 return (
                   <li class="ps-0">
-                    <Text tag="h3">
+                    <Text
+                      tag="h4"
+                      subtitle
+                      translateProps={{ disable: true }}
+                      class="mb-0"
+                    >
+                      {translatedId}
+                    </Text>
+                    <Text tag="h3" class="!-mb-1">
                       {capitalize(job.id)}
                       {countAsExperience && school ? " (school)" : ""}
                       {dropOut ? " (not graduated)" : ""}
                     </Text>
-                    <Text tag="h4" subtitle translateProps={{ disable: true }}>
-                      {translatedId}
-                      {comma}
+                    <Text tag="em" subtitle translateProps={{ disable: true }}>
                       {dates.join(" - ")}
                     </Text>
                     {!experience?.[getResumeKey(Astro)]?.short && (
