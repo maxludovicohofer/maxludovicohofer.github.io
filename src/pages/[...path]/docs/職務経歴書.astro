@@ -82,7 +82,6 @@ const selfPRSentence = await getSelfPRSentence(Astro);
           id,
           translateId,
           school,
-          countAsExperience,
           start,
           end,
           skill: { job, tasks, achievements },
@@ -90,7 +89,7 @@ const selfPRSentence = await getSelfPRSentence(Astro);
           tech,
           team,
         }) => {
-          const organization = `${translateId ? await t(capitalize(id)) : capitalize(id)}${id.startsWith("self ") ? "" : `${await t("(")}${countAsExperience && school ? await t("school") : "正社員として勤務"}${await t(")")}`}`;
+          const organization = `${translateId ? await t(capitalize(id)) : capitalize(id)}${id.startsWith("self ") ? "" : `${await t("(")}${school ? await t("school") : "正社員として勤務"}${await t(")")}`}`;
 
           const experienceTech =
             tech &&

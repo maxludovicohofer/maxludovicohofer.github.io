@@ -72,7 +72,6 @@
         - planning the company's technological development
       achievements:
         - developed technological strategy with business partners
-        - worked as desktop and full stack programmer
 
     - job: scrum master
       # TODO This should be scrum master or programmer (start is used like an ID), and add also worked as programmer/scrum master in job description (maybe? If relevant)
@@ -89,8 +88,8 @@
         - developing desktop apps that communicate with medical devices
         - managing servers and CI/CD
       achievements:
-        - developed technological strategy with business partners
         - worked as desktop and full stack programmer
+        - scrum master for a team of 4 programmers
 
 - id: BigRock Institute of Magic Technologies
   start: 2023-09-01

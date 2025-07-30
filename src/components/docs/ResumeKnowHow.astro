@@ -70,10 +70,9 @@ const knowHow = await getKnowHow(Astro);
             .filter((experience) => !experience?.[getResumeKey(Astro)]?.omit)
             .map(
               async ({
-                skill: { job, achievements },
+                skills,
                 id,
                 school,
-                countAsExperience,
                 start,
                 end,
                 translateId,
@@ -83,10 +82,6 @@ const knowHow = await getKnowHow(Astro);
                 const translatedId = translateId
                   ? await t(capitalize(id))
                   : capitalize(id);
-                const comma = `${await t(",")} `;
-                const dates = await getFormattedDates(Astro, start, end);
-
-                const multipleJobs = job.id === "technical lead";
 
                 return (
                   <li class="ps-0">
@@ -98,25 +93,43 @@ const knowHow = await getKnowHow(Astro);
                     >
                       {translatedId}
                     </Text>
-                    <Text tag="h3" class="!-mb-1">
-                      {capitalize(job.id)}
-                      {countAsExperience && school ? " (school)" : ""}
-                      {dropOut ? " (not graduated)" : ""}
-                    </Text>
-                    <Text tag="em" subtitle translateProps={{ disable: true }}>
-                      {dates.join(" - ")}
-                    </Text>
-                    {!experience?.[getResumeKey(Astro)]?.short && (
-                      <ol class="list-disc">
-                        {achievements
-                          .slice(0, maxAchievements ?? undefined)
-                          .map((achievement) => (
-                            <Text tag="li">
-                              {capitalize(endDelimiter(achievement))}
+                    <ol class="list-none ps-0">
+                      {skills.map(async ({ job, start: skillStart }, index) => {
+                        const dates = await getFormattedDates(
+                          Astro,
+                          skillStart ?? start,
+                          skills?.[index - 1]?.start ?? end
+                        );
+
+                        return (
+                          <li class="ps-0">
+                            <Text tag="h3" class="!-mb-1">
+                              {capitalize(job.id)}
+                              {dropOut ? " (not graduated)" : ""}
                             </Text>
-                          ))}
-                      </ol>
-                    )}
+                            <Text
+                              tag="em"
+                              subtitle
+                              translateProps={{ disable: true }}
+                            >
+                              {dates.join(" - ")}
+                            </Text>
+                          </li>
+                        );
+                      })}
+                    </ol>
+                    <ol class="list-disc">
+                      {!experience?.[getResumeKey(Astro)]?.short &&
+                        skills.map(({ achievements }) =>
+                          achievements
+                            .slice(0, maxAchievements ?? undefined)
+                            .map((achievement) => (
+                              <Text tag="li">
+                                {capitalize(endDelimiter(achievement))}
+                              </Text>
+                            ))
+                        )}
+                    </ol>
                   </li>
                 );
               }

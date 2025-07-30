@@ -183,58 +183,66 @@ export const getKnowHow = async (
     allProjects?: boolean | undefined;
   },
 ) => {
+  async function mapObject<T extends Record<string, any>, U>(
+    objectToMap: T,
+    mapFunction: (value: T[keyof T], key: keyof T) => U,
+  ) {
+    const result = {} as { [K in keyof T]: Awaited<U> };
+
+    for (const key of Object.keys(objectToMap) as Array<keyof T>) {
+      result[key] = await mapFunction(objectToMap[key], key);
+    }
+
+    return result;
+  }
+
   const knowHow = await Promise.all(
     (await getCollection("know-how")).map(
-      async ({ data: { start, end, team, skills, ...data } }) => ({
-        start: dayjs(start),
-        end: end && dayjs(end),
-        team: getTeam({ data: { team } }),
-        skills: applyMatch(
-          await matchRoles(
-            astro,
-            skills.map((skill) => ({ data: skill, roles: [skill.job] })),
+      async ({ data: { start, end, team, skills, ...data } }) => {
+        const groupedSkills = groupBy(skills, ({ start: skillStart }) =>
+          (skillStart ?? start).toISOString(),
+        );
+
+        return {
+          start: dayjs(start),
+          end: end && dayjs(end),
+          team: getTeam({ data: { team } }),
+          // Order skills by role relevance, but grouped by start date to show full history
+          skills: Object.values(
+            await mapObject(groupedSkills, async (skills) =>
+              applyMatch(
+                await matchRoles(
+                  astro,
+                  skills!.map((skill) => ({
+                    data: skill,
+                    roles: [skill.job],
+                  })),
+                ),
+              ),
+            ),
           ),
-        ),
-        ...data,
-      }),
+          ...data,
+        };
+      },
     ),
   );
 
   const displayedKnowHow = knowHow.map(({ skills, ...data }) => ({
-    skill: skills[0]!,
-    countAsExperience: !data.school,
+    skills: skills.map((matchedSkills) => {
+      const { start, ...matchedSkill } = matchedSkills[0]!;
+
+      return { ...matchedSkill, start: start && dayjs(start) };
+    }),
     ...data,
   }));
-
-  knowHow.forEach(({ skills, ...data }, index) => {
-    if (!data.school) return;
-
-    // Handle school experience
-    const workSkills = skills.filter(
-      ({ countAsWork }) =>
-        countAsWork || (options?.allProjects && data.projects?.length),
-    );
-    if (!workSkills.length) return;
-
-    // Move skill to experience
-    displayedKnowHow[index]!.skill = skills.filter(
-      (skill) => !workSkills.includes(skill),
-    )[0]!;
-    displayedKnowHow.push({
-      ...data,
-      countAsExperience: true,
-      skill: workSkills[0]!,
-    });
-  });
 
   // Sort by end date
   displayedKnowHow.sort((a, b) =>
     !b.end || (a.end && b.end.isAfter(a.end)) ? 1 : -1,
   );
 
-  const { experience, education } = groupBy(
-    displayedKnowHow,
-    ({ countAsExperience }) => (countAsExperience ? "experience" : "education"),
+  const { experience, education } = groupBy(displayedKnowHow, ({ school }) =>
+    school ? "education" : "experience",
   );
 
   return {
