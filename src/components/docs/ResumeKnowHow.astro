@@ -64,7 +64,9 @@ const knowHow = await getKnowHow(Astro);
     .filter(([title]) => !section || title === section)
     .map(([title, experiences]) => (
       <div {...props}>
-        <Text tag="h2">{capitalize(title)}</Text>
+        <Text tag="h2" class="!mt-4">
+          {capitalize(title)}
+        </Text>
         <ol class="list-none ps-0">
           {experiences
             .filter((experience) => !experience?.[getResumeKey(Astro)]?.omit)
@@ -84,16 +86,16 @@ const knowHow = await getKnowHow(Astro);
                   : capitalize(id);
 
                 return (
-                  <li class="ps-0">
+                  <li class="ps-0 mt-3">
                     <Text
                       tag="h4"
                       subtitle
                       translateProps={{ disable: true }}
-                      class="mb-0"
+                      class="-mb-1"
                     >
                       {translatedId}
                     </Text>
-                    <ol class="list-none ps-0">
+                    <ol class="list-none ps-0 my-0">
                       {skills.map(async ({ job, start: skillStart }, index) => {
                         const dates = await getFormattedDates(
                           Astro,
@@ -102,7 +104,7 @@ const knowHow = await getKnowHow(Astro);
                         );
 
                         return (
-                          <li class="ps-0">
+                          <li class="ps-0 my-0">
                             <Text tag="h3" class="!-mb-1">
                               {capitalize(job.id)}
                               {dropOut ? " (not graduated)" : ""}
@@ -118,9 +120,9 @@ const knowHow = await getKnowHow(Astro);
                         );
                       })}
                     </ol>
-                    <ol class="list-disc">
+                    <ul class="list-none ps-0 mt-0 mb-6">
                       {!experience?.[getResumeKey(Astro)]?.short && (
-                        <Text tag="li">
+                        <Text tag="li" class="ps-0 my-0">
                           {capitalize(
                             endDelimiter(
                               toTextList(
@@ -135,7 +137,7 @@ const knowHow = await getKnowHow(Astro);
                           )}
                         </Text>
                       )}
-                    </ol>
+                    </ul>
                   </li>
                 );
               }

@@ -49,13 +49,15 @@ const languages = await getLanguages(Astro);
 const summary = await getSummary(Astro);
 const myName = await getMyName(Astro);
 
+const maxSkills = 18;
+
 // TODO PHASE 2 UPDATE LINKEDIN AUTOMATICALLY
 ---
 
 <DocumentPage>
   <!-- <ResumePicture /> -->
   <h1>{myName.translated}</h1>
-  <p>{summary}</p>
+  <p class="mb-2">{summary}</p>
   <div class="grid grid-cols-1 gap-x-4">
     <div>
       <Text tag="span" format="branded" translateProps={{ disable: true }}
@@ -102,15 +104,19 @@ const myName = await getMyName(Astro);
     </div>
     <div>
       <ResumeKnowHow section="education" maxAchievements={1} />
-      <Text tag="h2">Skills</Text>
+      <Text tag="h2" class="!-mt-2">Skills</Text>
       <ul class="grid grid-cols-2 gap-x-2">
-        {techList.map(async ({ title }) => <li class="my-0">{title}</li>)}
+        {
+          techList
+            .slice(0, maxSkills)
+            .map(async ({ title }) => <li class="my-0">{title}</li>)
+        }
       </ul>
-      <Text tag="h2">Languages</Text>
-      <ul>
+      <Text tag="h2" class="!-mt-2">Languages</Text>
+      <ul class="grid grid-cols-1 gap-x-2">
         {
           languages.map(({ id, level }) => (
-            <li>
+            <li class="my-0">
               {id}, {level}
             </li>
           ))

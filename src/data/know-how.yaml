@@ -1,4 +1,4 @@
-- id: INattivo Soc. Cons. a.r.l
+- id: INattivo Soc. Cons. a.r.l.
   start: 2021-05-01
   end: 2022-03-01
   team:
@@ -34,7 +34,7 @@
         - showcasing the UI to the board
         - iterating on the design with user feedback
       achievements:
-        - iteratively designed UI/UX and customer journey with clients to maximize conversions
+        - developed user journey and UI/UX to maximize conversions
         - developed an opinionated recommender system driven by company values
         - worked with a mobile first approach to maximize intuitiveness
 
@@ -66,12 +66,11 @@
     - Illustrator
   skills:
     - job: technical lead
-      # TODO This should be always present as tech lead (start is used like an ID)
       start: 2020-11-01
       tasks:
         - planning the company's technological development
       achievements:
-        - developed technological strategy with business partners
+        - developed technological product and infrastructure strategy
 
     - job: scrum master
       tasks:
@@ -88,7 +87,6 @@
         - managing servers and CI/CD
       achievements:
         - worked as desktop and full stack programmer
-        - scrum master for a team of 4 programmers
 
 - id: BigRock Institute of Magic Technologies
   start: 2023-09-01
@@ -121,8 +119,8 @@
       tasks:
         - studied the game development and CG pipeline, using the latest industry standards
       achievements:
+        - specialized in game design and programming
         - worked on several prototypes and one award-winning game
-        - specialized in game design and technical art
 
 - id: University of Padua
   start: 2016-09-01

@@ -212,16 +212,6 @@
     - project manager
     - scrum master
 
-- id: version control
-  translateId: true
-  experience: P3Y
-  group: programming
-  roles:
-    - programmer
-    - scrum master
-    - artist
-    - designer
-
 - id: Houdini
   experience: P6M
   functionalities:

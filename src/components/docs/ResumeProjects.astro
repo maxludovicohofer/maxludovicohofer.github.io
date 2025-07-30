@@ -25,7 +25,8 @@ const t = i18n(Astro);
 ---
 
 <div {...props}>
-  <Text tag="h2">{capitalize("selected personal projects")}</Text>
+  <Text tag="h2" class="!-mt-2">{capitalize("selected personal projects")}</Text
+  >
   <ul>
     {
       projects.map(async (project) => {

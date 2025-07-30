@@ -1,6 +1,7 @@
 ---
 import Text from "@components/ui/Text.astro";
 import { getCertifications } from "@integrations/content";
+import { endDelimiter } from "@integrations/text";
 import { getFormattedDates } from "./ResumeKnowHow.astro";
 
 interface Props {
@@ -14,15 +15,15 @@ const certifications = (await getCertifications())
   .slice(0, maxCertifications);
 ---
 
-<Text tag="h2">Additional info</Text>
-<ul>
+<Text tag="h2" class="!-mt-2">Extra</Text>
+<ul class="list-none ps-0 mb-0">
   {
     certifications.map(async ({ id, date }) => {
       const [formattedDate] = await getFormattedDates(Astro, date);
 
       return (
-        <li>
-          <Text class="my-0">{id}</Text>
+        <li class="ps-0">
+          <Text class="my-0">{endDelimiter(id)}</Text>
           <Text tag="em" subtitle translateProps={{ disable: true }}>
             {formattedDate}
           </Text>
