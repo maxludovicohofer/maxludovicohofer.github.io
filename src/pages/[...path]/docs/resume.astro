@@ -1,5 +1,5 @@
 ---
-import ResumeCertifications from "@components/docs/ResumeCertifications.astro";
+import ResumeExtra from "@components/docs/ResumeExtra.astro";
 import ResumeKnowHow from "@components/docs/ResumeKnowHow.astro";
 import ResumeProjects from "@components/docs/ResumeProjects.astro";
 import { mail } from "@components/Profile.astro";
@@ -100,7 +100,7 @@ const maxSkills = 18;
     <div>
       <ResumeKnowHow section="experience" maxAchievements={1} />
       <ResumeProjects numberOfProjects={2} />
-      <ResumeCertifications maxCertifications={1} />
+      <ResumeExtra maxCertifications={1} />
     </div>
     <div>
       <ResumeKnowHow section="education" maxAchievements={1} />
