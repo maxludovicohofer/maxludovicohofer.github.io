@@ -1,4 +1,5 @@
 ---
+import ResumeCertifications from "@components/docs/ResumeCertifications.astro";
 import ResumeKnowHow from "@components/docs/ResumeKnowHow.astro";
 import ResumeProjects from "@components/docs/ResumeProjects.astro";
 import { mail } from "@components/Profile.astro";
@@ -97,25 +98,13 @@ const myName = await getMyName(Astro);
     <div>
       <ResumeKnowHow section="experience" maxAchievements={1} />
       <ResumeProjects numberOfProjects={2} />
-      <Text tag="h2">Additional info</Text>
-      <!-- TODO Add relevant certifications -->
-      <ul>
-        {
-          techList.map(async ({ title }) => (
-            <li class="my-0.5 pr-7">{title}</li>
-          ))
-        }
-      </ul>
+      <ResumeCertifications maxCertifications={1} />
     </div>
     <div>
       <ResumeKnowHow section="education" maxAchievements={1} />
       <Text tag="h2">Skills</Text>
-      <ul>
-        {
-          techList.map(async ({ title }) => (
-            <li class="my-0.5 pr-7">{title}</li>
-          ))
-        }
+      <ul class="grid grid-cols-2 gap-x-2">
+        {techList.map(async ({ title }) => <li class="my-0">{title}</li>)}
       </ul>
       <Text tag="h2">Languages</Text>
       <ul>

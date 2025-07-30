@@ -3,7 +3,7 @@ import Text from "@components/ui/Text.astro";
 import { getKnowHow, getResumeKey } from "@integrations/content";
 import { i18n, setDayjsLocale } from "@integrations/i18n-server";
 import { getLocaleInfo } from "@integrations/i18n-special";
-import { capitalize, endDelimiter } from "@integrations/text";
+import { capitalize, endDelimiter, toTextList } from "@integrations/text";
 import type { AstroGlobal } from "astro";
 import type { HTMLAttributes } from "astro/types";
 import dayjs from "dayjs";
@@ -32,14 +32,14 @@ export const getFormattedDates = async (
   );
   const showDay =
     dates[1].diff(dates[0], "month") < 1 ||
-    dates.some((date) => date > dropDayDate);
+    dates.some((date) => date !== today && date > dropDayDate);
 
   const dropMonthDate = today.subtract(
     dayjs.duration({ years: 5 }).asMilliseconds()
   );
   const showMonth =
     dates[1].diff(dates[0], "year") < 1 ||
-    dates.some((date) => date > dropMonthDate);
+    dates.some((date) => date !== today && date > dropMonthDate);
 
   const { getYear, getYearMonth } = getLocaleInfo(astro);
 
@@ -119,16 +119,22 @@ const knowHow = await getKnowHow(Astro);
                       })}
                     </ol>
                     <ol class="list-disc">
-                      {!experience?.[getResumeKey(Astro)]?.short &&
-                        skills.map(({ achievements }) =>
-                          achievements
-                            .slice(0, maxAchievements ?? undefined)
-                            .map((achievement) => (
-                              <Text tag="li">
-                                {capitalize(endDelimiter(achievement))}
-                              </Text>
-                            ))
-                        )}
+                      {!experience?.[getResumeKey(Astro)]?.short && (
+                        <Text tag="li">
+                          {capitalize(
+                            endDelimiter(
+                              toTextList(
+                                skills.flatMap(({ achievements }) =>
+                                  achievements.slice(
+                                    0,
+                                    maxAchievements ?? undefined
+                                  )
+                                )
+                              )
+                            )
+                          )}
+                        </Text>
+                      )}
                     </ol>
                   </li>
                 );

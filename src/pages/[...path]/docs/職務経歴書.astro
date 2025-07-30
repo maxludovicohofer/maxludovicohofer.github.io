@@ -55,6 +55,7 @@ const techList = await getTechList(Astro);
 
 const selfPRSentence = await getSelfPRSentence(Astro);
 
+// TODO ADD PERSONAL PROJECTS
 // TODO PHASE 2 SHOULD ALSO GET ALL SKILLS OF EXPERIENCES, AND REMOVE EXPERIENCES IF IRRELEVANT
 // TODO PHASE 2 SHOULD HAVE A MAX NUMBER OF ENTRIES AND SELECT BASED ON THAT MAX NUMBER
 // TODO PHASE 2 SPECIFY TIME GAPS AS "SELF STUDY FOR CAREER CHANGE"
@@ -84,7 +85,7 @@ const selfPRSentence = await getSelfPRSentence(Astro);
           school,
           start,
           end,
-          skill: { job, tasks, achievements },
+          skills,
           projects,
           tech,
           team,
@@ -120,6 +121,8 @@ const selfPRSentence = await getSelfPRSentence(Astro);
               .sort((a, b) =>
                 b.publishingDate.isAfter(a.publishingDate) ? 1 : -1
               );
+
+          const { job, tasks, achievements } = skills[0]!;
 
           return (
             <>

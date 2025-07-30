@@ -45,7 +45,7 @@ const history = Object.fromEntries(
     .map(([category, experiences]) => [
       category,
       experiences
-        .filter(({ id, school }) => !id.startsWith("self ") && !school)
+        .filter(({ id }) => !id.startsWith("self "))
         .flatMap((experience) => [
           { ...experience, end: undefined },
           { ...experience, start: undefined },
@@ -175,14 +175,14 @@ const myName = await getMyName(Astro);
                   start,
                   end,
                   id,
-                  skill,
+                  skills,
                   school,
                   translateId,
                   dropOut,
                   reasonForLeaving,
                 }) => {
                   const date = start ?? end;
-                  const baseSentence = `${translateId ? await t(capitalize(id)) : capitalize(id)} ${await t(skill.job.id)}`;
+                  const baseSentence = `${translateId ? await t(capitalize(id)) : capitalize(id)} ${await t(skills[0]!.job.id)}`;
                   const sentence = start
                     ? `${baseSentence} ${school ? "入学" : "入社"}`
                     : school

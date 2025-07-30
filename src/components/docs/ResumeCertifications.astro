@@ -1,0 +1,33 @@
+---
+import Text from "@components/ui/Text.astro";
+import { getCertifications } from "@integrations/content";
+import { getFormattedDates } from "./ResumeKnowHow.astro";
+
+interface Props {
+  maxCertifications?: number;
+}
+
+const { maxCertifications } = Astro.props;
+
+const certifications = (await getCertifications())
+  .filter(({ type, content }) => type === "award" && !content)
+  .slice(0, maxCertifications);
+---
+
+<Text tag="h2">Additional info</Text>
+<ul>
+  {
+    certifications.map(async ({ id, date }) => {
+      const [formattedDate] = await getFormattedDates(Astro, date);
+
+      return (
+        <li>
+          <Text class="my-0">{id}</Text>
+          <Text tag="em" subtitle translateProps={{ disable: true }}>
+            {formattedDate}
+          </Text>
+        </li>
+      );
+    })
+  }
+</ul>

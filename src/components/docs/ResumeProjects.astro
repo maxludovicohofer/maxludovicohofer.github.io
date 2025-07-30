@@ -6,7 +6,7 @@ import {
 } from "@integrations/astro-server";
 import { getCategory, getDevelopmentTime } from "@integrations/content";
 import { i18n } from "@integrations/i18n-server";
-import { capitalize } from "@integrations/text";
+import { capitalize, endDelimiter } from "@integrations/text";
 import { getDescription } from "@layouts/document/Document.astro";
 import type { HTMLAttributes } from "astro/types";
 import { getFormattedDates } from "./ResumeKnowHow.astro";
@@ -39,10 +39,17 @@ const t = i18n(Astro);
 
         const comma = `${await t(",")} `;
 
+        const awards = project.data.awards ?? [];
+
         return (
           <li>
             <Text class="my-0">
               {getDescription(project, 1, true, "Design")}
+              {awards.length
+                ? endDelimiter(
+                    ` Won ${awards.length === 1 ? awards[0] : "multiple awards"}`
+                  )
+                : ""}
             </Text>
             <Text tag="em" subtitle translateProps={{ disable: true }}>
               {category}
