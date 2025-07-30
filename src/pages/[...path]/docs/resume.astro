@@ -32,7 +32,8 @@ export const getStaticPaths = async (
 
 const portfolioLink = await getSiteLink(Astro);
 
-const techList = compactTechList(await getTechList(Astro));
+const maxTech = 20;
+const techList = compactTechList(await getTechList(Astro)).slice(0, maxTech);
 
 await setDayjsLocale(Astro);
 dayjs.extend(duration);
@@ -48,8 +49,6 @@ const languages = await getLanguages(Astro);
 
 const summary = await getSummary(Astro);
 const myName = await getMyName(Astro);
-
-const maxSkills = 18;
 
 // TODO PHASE 2 UPDATE LINKEDIN AUTOMATICALLY
 ---
@@ -100,16 +99,13 @@ const maxSkills = 18;
     <div>
       <ResumeKnowHow section="experience" maxAchievements={1} />
       <ResumeProjects numberOfProjects={2} />
+      {techList.length >= 15 && <ResumeExtra maxCertifications={1} />}
     </div>
     <div>
       <ResumeKnowHow section="education" maxAchievements={1} />
       <Text tag="h2" class="!-mt-4 !mb-0">Skills</Text>
       <ul class="grid grid-cols-2 gap-x-2">
-        {
-          techList
-            .slice(0, maxSkills)
-            .map(async ({ title }) => <li class="my-0">{title}</li>)
-        }
+        {techList.map(async ({ title }) => <li class="my-0">{title}</li>)}
       </ul>
       <Text tag="h2" class="!-mt-4 !mb-0">Languages</Text>
       <ul class="grid grid-cols-1 gap-x-2">
@@ -121,7 +117,7 @@ const maxSkills = 18;
           ))
         }
       </ul>
-      <ResumeExtra maxCertifications={1} />
+      {techList.length < 15 && <ResumeExtra maxCertifications={1} />}
     </div>
   </div>
 </DocumentPage>
