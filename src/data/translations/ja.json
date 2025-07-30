@@ -2618,5 +2618,29 @@
   "2D sprites": {
     "translation": "2Dスプライト",
     "api": "deepl"
+  },
+  "Developed user journey and UI/UX to maximize conversions": {
+    "translation": "コンバージョンを最大化するためのユーザージャーニーとUI/UXを開発しました",
+    "api": "deepl"
+  },
+  "Developed technological product and infrastructure strategy": {
+    "translation": "技術製品およびインフラストラクチャ戦略の開発",
+    "api": "deepl"
+  },
+  "Competitive horror game where players hunt each other while collecting powers for their monstrous characters": {
+    "translation": "プレイヤーが互いに狩り合いながら、自分のモンスターキャラクターのパワーを集める競争型ホラーゲームです。",
+    "api": "deepl"
+  },
+  "credited as {} (due to school policy). Worked as {}": {
+    "translation": "{} と記載されています（学校の方針による）。{} として働きました。",
+    "api": "deepl"
+  },
+  "In a black-metal inspired industrial earth, people believe that detachment from reality brings their soul closer to an iris-like god. Every 111 years believers corrupt their bodies, claim three powerful soul-bound artifacts, and face a bloody ritual for a fourth one": {
+    "translation": "ブラックメタルをモチーフにした工業的な世界では、人々は現実から離れることで魂が虹彩のような神に近づくと信じています。111年ごとに信者たちは自らの肉体を穢し、3つの強力な魂に縛られたアーティファクトを手に入れ、4つ目のアーティファクトを得るための血塗られた儀式に挑みます。",
+    "api": "deepl"
+  },
+  "Iris is a competitive horror game where players hunt each other while collecting powers for their monstrous characters. It’s a game aimed toward horror fans and competitive players alike with e-sports ambitions. The goal of the game is to scare players with the unpredictability of human enemies and keep the game balanced and skill based enough for flow to flourish": {
+    "translation": "アイリスは、プレイヤーが互いに狩り合いながら、モンスターキャラクターのパワーを集める競争型ホラーゲームです。ホラーファンと競争型プレイヤーの両方を対象とし、eスポーツ化も目指しています。ゲームの目的は、人間の敵の予測不可能性でプレイヤーを恐怖に陥れ、ゲームバランスを保ちながらスキルを重視したプレイを可能にし、ゲームの流れをスムーズにすることです。",
+    "api": "deepl"
   }
 }

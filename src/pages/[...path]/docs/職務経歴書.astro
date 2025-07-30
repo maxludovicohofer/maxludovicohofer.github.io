@@ -39,9 +39,7 @@ const summary = await getSummary(Astro);
 
 const { full } = await getResumeProps(Astro);
 
-const { experience } = await getKnowHow(Astro, {
-  allProjects: full,
-});
+const { experience } = await getKnowHow(Astro);
 
 const portfolioSentence = await t("Portfolio");
 const portfolioLink = await getSiteLink(Astro);

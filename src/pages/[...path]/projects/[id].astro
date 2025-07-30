@@ -34,7 +34,8 @@ const roleList = await Promise.all(
 
 if (creditedAs) {
   roleList[0] = await t(
-    `credited as ${creditedAs.role}${creditedAs.reason ? ` (due to ${creditedAs.reason})` : ""}. Worked as ${roleList[0]}`
+    `credited as {}${creditedAs.reason ? ` (due to ${creditedAs.reason})` : ""}. Worked as {}`,
+    { interpolate: [await t(creditedAs.role), roleList[0]!] }
   );
 }
 

@@ -177,12 +177,7 @@ export const getTeam = (entry: { data: object } | undefined) => {
   >;
 };
 
-export const getKnowHow = async (
-  astro: AstroGlobal,
-  options?: {
-    allProjects?: boolean | undefined;
-  },
-) => {
+export const getKnowHow = async (astro: AstroGlobal) => {
   async function mapObject<T extends Record<string, any>, U>(
     objectToMap: T,
     mapFunction: (value: T[keyof T], key: keyof T) => U,
