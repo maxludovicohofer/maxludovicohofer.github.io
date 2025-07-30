@@ -2642,5 +2642,9 @@
   "Iris is a competitive horror game where players hunt each other while collecting powers for their monstrous characters. It’s a game aimed toward horror fans and competitive players alike with e-sports ambitions. The goal of the game is to scare players with the unpredictability of human enemies and keep the game balanced and skill based enough for flow to flourish": {
     "translation": "アイリスは、プレイヤーが互いに狩り合いながら、モンスターキャラクターのパワーを集める競争型ホラーゲームです。ホラーファンと競争型プレイヤーの両方を対象とし、eスポーツ化も目指しています。ゲームの目的は、人間の敵の予測不可能性でプレイヤーを恐怖に陥れ、ゲームバランスを保ちながらスキルを重視したプレイを可能にし、ゲームの流れをスムーズにすることです。",
     "api": "deepl"
+  },
+  "Developed user journey and UI/UX from the ground up to maximize conversions": {
+    "translation": "コンバージョンを最大化するために、ユーザージャーニーと UI/UX を一から開発しました。",
+    "api": "deepl"
   }
 }
