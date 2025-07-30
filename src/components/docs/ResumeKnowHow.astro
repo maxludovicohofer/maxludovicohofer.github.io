@@ -64,7 +64,7 @@ const knowHow = await getKnowHow(Astro);
     .filter(([title]) => !section || title === section)
     .map(([title, experiences]) => (
       <div {...props}>
-        <Text tag="h2" class="!mt-4">
+        <Text tag="h2" class="!mt-2 !mb-2">
           {capitalize(title)}
         </Text>
         <ol class="list-none ps-0">
@@ -86,7 +86,7 @@ const knowHow = await getKnowHow(Astro);
                   : capitalize(id);
 
                 return (
-                  <li class="ps-0 mt-3">
+                  <li class="ps-0 -mt-2">
                     <Text
                       tag="h4"
                       subtitle

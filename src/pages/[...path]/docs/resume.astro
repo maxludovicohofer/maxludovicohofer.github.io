@@ -100,10 +100,11 @@ const maxSkills = 18;
     <div>
       <ResumeKnowHow section="experience" maxAchievements={1} />
       <ResumeProjects numberOfProjects={2} />
+      <ResumeCertifications maxCertifications={1} />
     </div>
     <div>
       <ResumeKnowHow section="education" maxAchievements={1} />
-      <Text tag="h2" class="!-mt-2">Skills</Text>
+      <Text tag="h2" class="!-mt-4 !mb-0">Skills</Text>
       <ul class="grid grid-cols-2 gap-x-2">
         {
           techList
@@ -111,7 +112,7 @@ const maxSkills = 18;
             .map(async ({ title }) => <li class="my-0">{title}</li>)
         }
       </ul>
-      <Text tag="h2" class="!-mt-2">Languages</Text>
+      <Text tag="h2" class="!-mt-4 !mb-0">Languages</Text>
       <ul class="grid grid-cols-1 gap-x-2">
         {
           languages.map(({ id, level }) => (
@@ -121,7 +122,6 @@ const maxSkills = 18;
           ))
         }
       </ul>
-      <ResumeCertifications maxCertifications={1} />
     </div>
   </div>
 </DocumentPage>
