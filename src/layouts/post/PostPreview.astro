@@ -100,7 +100,9 @@ const publishingDate =
 const t = i18n(Astro);
 
 const roles =
-  entry?.collection === "projects" ? await getRoles(Astro, entry) : undefined;
+  entry?.collection === "projects"
+    ? await getRoles(Astro, entry, { avoidCreditedAs: true })
+    : undefined;
 
 const team = getTeam(entry);
 

@@ -482,6 +482,7 @@ export const getRoles = async (
   entry: CollectionEntry<"projects">,
   options?: {
     numberOfRoles?: number;
+    avoidCreditedAs?: boolean;
   },
 ) => {
   const t = i18n(astro);
@@ -495,7 +496,7 @@ export const getRoles = async (
     ).map(async ({ id }) => await t(id)),
   );
 
-  if (entry.data.creditedAs) {
+  if (entry.data.creditedAs && !options?.avoidCreditedAs) {
     roleList[0] = await t(
       `credited as {}${entry.data.creditedAs.reason ? ` (due to ${entry.data.creditedAs.reason})` : ""}. Worked as {}`,
       {
