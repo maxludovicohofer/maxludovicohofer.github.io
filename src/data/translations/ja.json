@@ -2646,5 +2646,9 @@
   "Developed user journey and UI/UX from the ground up to maximize conversions": {
     "translation": "コンバージョンを最大化するために、ユーザージャーニーと UI/UX を一から開発しました。",
     "api": "deepl"
+  },
+  "solo developed": {
+    "translation": "単独で開発しました",
+    "api": "deepl"
   }
 }
