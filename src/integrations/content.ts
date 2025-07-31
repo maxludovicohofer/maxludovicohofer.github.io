@@ -480,17 +480,18 @@ export const getBuiltCompanies = async (
 export const getRoles = async (
   astro: AstroGlobal,
   entry: CollectionEntry<"projects">,
+  options?: {
+    numberOfRoles?: number;
+  },
 ) => {
   const t = i18n(astro);
 
-  const roleThreshold = 2;
   const roleList = await Promise.all(
     applyMatch(
       await matchRoles(
         astro,
         entry.data.roles.map(({ role }) => ({ data: role, roles: [role] })),
       ),
-      roleThreshold,
     ).map(async ({ id }) => await t(id)),
   );
 
@@ -503,5 +504,7 @@ export const getRoles = async (
     );
   }
 
-  return roleList;
+  const defaultNumberOfRoles = 3;
+
+  return roleList.slice(0, options?.numberOfRoles ?? defaultNumberOfRoles);
 };

@@ -127,7 +127,7 @@
 - id: project manager
   matches:
     - scrum master
-    - game director
+    - director
     - lead
   workFields:
     - project management

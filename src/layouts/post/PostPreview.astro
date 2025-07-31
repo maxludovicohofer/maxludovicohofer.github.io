@@ -100,18 +100,18 @@ const publishingDate =
 const t = i18n(Astro);
 
 const roles =
-  entry?.collection === "projects" ? await getRoles(Astro, entry) : [];
+  entry?.collection === "projects" ? await getRoles(Astro, entry) : undefined;
 
 const team = getTeam(entry);
 
 const subtitle = [
   category && (await t(capitalize(category))),
   publishingDate,
-  roles.length !== 0
+  roles
     ? await endDelimiterLocalized(
         capitalize(
           !team.soloDeveloped
-            ? roles.slice(0, 3).join(`${await t(",")}${await t(" ")}`)
+            ? roles.join(`${await t(",")}${await t(" ")}`)
             : await t("solo developed")
         ),
         Astro
