@@ -58,7 +58,7 @@ const order = collection !== "projects";
       return (
         <Card
           tag="li"
-          class={`content-list-card aspect-[16/10] max-h-[min(19rem,80dvh)] min-h-[min(19rem,80dvh)] w-[80dvw] ${order ? "animate-pulse" : ""} snap-center lg:w-full ${sortedEntries.length === 2 ? "lg:last:col-span-full" : ""} ${highlightClass ?? ""}`}
+          class={`content-list-card aspect-[16/10] max-h-[min(20rem,80dvh)] min-h-[min(20rem,80dvh)] w-[80dvw] ${order ? "animate-pulse" : ""} snap-center lg:w-full ${sortedEntries.length === 2 ? "lg:last:col-span-full" : ""} ${highlightClass ?? ""}`}
           data-slug={getEntryId(entry)}
         >
           <PostPreview
