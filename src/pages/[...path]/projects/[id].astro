@@ -1,13 +1,13 @@
 ---
 import { makeDocumentPaths } from "@document/DocumentPage.astro";
-import { applyMatch, matchRoles } from "@integrations/astro-server";
 import {
   compactTechList,
   getDevelopmentTime,
+  getRoles,
   getTeam,
   getTechList,
 } from "@integrations/content";
-import { i18n, setDayjsLocale } from "@integrations/i18n-server";
+import { setDayjsLocale } from "@integrations/i18n-server";
 import PostFooter from "@post/PostFooter.astro";
 import PostPage from "@post/PostPage.astro";
 import dayjs from "dayjs";
@@ -15,29 +15,11 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 export const getStaticPaths = makeDocumentPaths("projects");
 
-const { roles, tech, awards, creditedAs } = Astro.props.entry.data;
-
-const t = i18n(Astro);
+const { tech, awards } = Astro.props.entry.data;
 
 const team = getTeam(Astro.props.entry);
-const soloDeveloped = !team || (team.internal === 1 && !team.external);
-const roleThreshold = 2;
-const roleList = await Promise.all(
-  applyMatch(
-    await matchRoles(
-      Astro,
-      roles.map(({ role }) => ({ data: role, roles: [role] }))
-    ),
-    roleThreshold
-  ).map(async ({ id }) => await t(id))
-);
 
-if (creditedAs) {
-  roleList[0] = await t(
-    `credited as {}${creditedAs.reason ? ` (due to ${creditedAs.reason})` : ""}. Worked as {}`,
-    { interpolate: [await t(creditedAs.role), roleList[0]!] }
-  );
-}
+const roleList = await getRoles(Astro, Astro.props.entry);
 
 const techList = compactTechList(
   await getTechList(Astro, undefined, {
@@ -57,12 +39,12 @@ const developmentDuration = getDevelopmentTime(Astro.props.entry)!.humanize();
 <PostPage titleProps={{ translateProps: { disable: true } }} {...Astro.props}
   ><Fragment slot="footer"
     ><PostFooter
-      value={soloDeveloped
+      value={team.soloDeveloped
         ? `Solo developed in ${developmentDuration}`
         : `Made in ${developmentDuration} by a team of ${(team.internal ?? 0) + (team.external ?? 0)}`}
       >Development</PostFooter
     >{
-      !soloDeveloped && (
+      !team.soloDeveloped && (
         <>
           <br />
           <PostFooter value={roleList} translateProps={{ disable: true }}>

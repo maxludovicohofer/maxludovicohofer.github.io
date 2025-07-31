@@ -8,6 +8,8 @@ import {
   getCover,
   type PostCollectionKey,
   getTitle,
+  getRoles,
+  getTeam,
 } from "@integrations/content";
 import type { ComponentProps, HTMLAttributes } from "astro/types";
 import Media from "@ui/Media.astro";
@@ -17,7 +19,11 @@ import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import { getDescription, getEntryId } from "@layouts/document/Document.astro";
 import { isLocalizedEntry } from "@integrations/astro-server";
-import { i18n, setDayjsLocale } from "@integrations/i18n-server";
+import {
+  endDelimiterLocalized,
+  i18n,
+  setDayjsLocale,
+} from "@integrations/i18n-server";
 import PostText from "./PostText.astro";
 import { capitalize } from "@integrations/text";
 
@@ -73,7 +79,7 @@ const minutesToRead = isMarkdown
         : // Description time
           getReadingTime(renderedContent ?? "").minutes,
       // Maximum time assumed to be already spent reading before clicking read more
-      0.2,
+      0.2
     )
   : undefined;
 
@@ -93,9 +99,24 @@ const publishingDate =
 
 const t = i18n(Astro);
 
+const roles =
+  entry?.collection === "projects" ? await getRoles(Astro, entry) : [];
+
+const team = getTeam(entry);
+
 const subtitle = [
   category && (await t(capitalize(category))),
   publishingDate,
+  roles.length !== 0
+    ? await endDelimiterLocalized(
+        capitalize(
+          !team.soloDeveloped
+            ? roles.slice(0, 3).join(`${await t(",")}${await t(" ")}`)
+            : await t("solo developed")
+        ),
+        Astro
+      )
+    : "",
 ].filter((part) => !!part);
 
 const noTranslation = isLocalized ?? isLocalizedEntry(entry);
@@ -104,7 +125,7 @@ const finalReadMoreText = await t(
   readMoreText ??
     (isMarkdown
       ? `Read in ${dayjs.duration({ minutes: Math.ceil(minutesToRead!) }).get("minutes")} min`
-      : "Read more"),
+      : "Read more")
 );
 ---
 
@@ -145,7 +166,7 @@ const finalReadMoreText = await t(
         )
       }
       <Text
-        class={`${subtitle.length !== 0 || renderedContent || Astro.slots.has("title") ? (container ? "mt-6" : "mt-4") : ""} ${container ? "max-h-[32rem]" : readMoreLink ? "max-h-64" : ""}`}
+        class={`${subtitle.length !== 0 || renderedContent || Astro.slots.has("title") ? (container ? "mt-6" : "mt-3") : ""} ${container ? "max-h-[32rem]" : readMoreLink ? "max-h-64" : ""}`}
         markdown={isMarkdownContent}
         tag={isMarkdownContent || container ? "div" : undefined}
         {...(noTranslation
@@ -208,9 +229,9 @@ const finalReadMoreText = await t(
     const coverObserver = new IntersectionObserver(
       (entries) =>
         entries.forEach(({ isIntersecting, target }) =>
-          switchClasses(target, isIntersecting, ["opacity-15"], ["opacity-0"]),
+          switchClasses(target, isIntersecting, ["opacity-15"], ["opacity-0"])
         ),
-      { threshold: 0.5 },
+      { threshold: 0.5 }
     );
 
     const containerToReadMore = new Map<Element, Element>();
@@ -223,10 +244,10 @@ const finalReadMoreText = await t(
             containerToReadMore.get(target)!,
             isIntersecting,
             ["animate-pulse", "lg:animate-none"],
-            [],
-          ),
+            []
+          )
         ),
-      { threshold: 0.9 },
+      { threshold: 0.9 }
     );
 
     document.querySelectorAll("div.post-preview").forEach((element) => {
@@ -235,12 +256,12 @@ const finalReadMoreText = await t(
       if (cover) coverObserver.observe(cover);
 
       const readMoreText = element.querySelector(
-        "button.post-preview-read-more",
+        "button.post-preview-read-more"
       )?.firstElementChild;
 
       if (readMoreText) {
         const container = element.parentElement?.classList.contains(
-          "content-list-card",
+          "content-list-card"
         )
           ? element.parentElement
           : element;

@@ -36,12 +36,15 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
       excluded: exclude,
     }
   );
+
+const order = collection !== "projects";
 ---
 
 {sortedEntries.length > 0 && <ol
   class={`${className} content-list grid grid-flow-col lg:grid-flow-row gap-4 overflow-x-scroll scrollbar-hide snap-mandatory pb-4 -mb-2`}
   data-collection={collection}
   data-eager-items={numberOfItemsToLoadEager}
+  {...order ? { "data-order": "" } : {}}
   {...discreteHighlight ? { "data-discrete": "" } : {}}
   {...props}
 >
@@ -55,24 +58,24 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
       return (
         <Card
           tag="li"
-          class={`content-list-card aspect-[16/10] max-h-[min(18rem,80dvh)] min-h-[min(17rem,80dvh)] w-[80dvw] animate-pulse snap-center lg:w-full ${highlightClass ?? ""}`}
+          class={`content-list-card aspect-[16/10] max-h-[min(18rem,80dvh)] min-h-[min(17rem,80dvh)] w-[80dvw] ${order ? "animate-pulse" : ""} snap-center lg:w-full ${sortedEntries.length === 2 ? "lg:last:col-span-full" : ""} ${highlightClass ?? ""}`}
           data-slug={getEntryId(entry)}
         >
           <PostPreview
-            class="content-list-item invisible"
+            class={`content-list-item ${order ? "invisible" : ""}`}
             titleProps={{
               importance:
                 importance === "content-list-highlight"
                   ? importance
                   : undefined,
-              ...(entry.collection === "projects"
+              ...(collection === "projects"
                 ? {
                     translateProps: { disable: true },
                   }
                 : {}),
             }}
             entry={entry}
-            {...(entry.collection === "projects"
+            {...(collection === "projects"
               ? {
                   startHeading: "Design",
                   short: true,
@@ -175,6 +178,8 @@ import type { CollectionKey } from "astro:content";
         list.classList.add("snap-x");
 
         observer.observe(list);
+
+        if(!("order" in list.dataset)) return;
 
         // Order entries
         const readEntrySlugs =

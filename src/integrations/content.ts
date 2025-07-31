@@ -167,14 +167,23 @@ export const getTeam = (entry: { data: object } | undefined) => {
     return !!(test && Object.hasOwn(test.data, "team"));
   }
 
-  if (!isTeamEntry(entry)) return;
+  if (!isTeamEntry(entry))
+    return { internal: 1, external: 0, soloDeveloped: true };
 
-  if (typeof entry.data.team !== "number") return entry.data.team;
+  if (typeof entry.data.team !== "number") {
+    return {
+      ...entry.data.team,
+      soloDeveloped:
+        !entry.data.team ||
+        (entry.data.team.internal === 1 && !entry.data.team.external),
+    };
+  }
 
-  return { internal: entry.data.team, external: 0 } satisfies Exclude<
-    NonNullable<CollectionEntry<"projects">["data"]["team"]>,
-    number
-  >;
+  return {
+    internal: entry.data.team,
+    external: 0,
+    soloDeveloped: entry.data.team === 1,
+  };
 };
 
 export const getKnowHow = async (astro: AstroGlobal) => {
@@ -467,3 +476,32 @@ export const getBuiltCompanies = async (
       ? resumeProps
       : resumeProps?.build;
   });
+
+export const getRoles = async (
+  astro: AstroGlobal,
+  entry: CollectionEntry<"projects">,
+) => {
+  const t = i18n(astro);
+
+  const roleThreshold = 2;
+  const roleList = await Promise.all(
+    applyMatch(
+      await matchRoles(
+        astro,
+        entry.data.roles.map(({ role }) => ({ data: role, roles: [role] })),
+      ),
+      roleThreshold,
+    ).map(async ({ id }) => await t(id)),
+  );
+
+  if (entry.data.creditedAs) {
+    roleList[0] = await t(
+      `credited as {}${entry.data.creditedAs.reason ? ` (due to ${entry.data.creditedAs.reason})` : ""}. Worked as {}`,
+      {
+        interpolate: [await t(entry.data.creditedAs.role), roleList[0]!],
+      },
+    );
+  }
+
+  return roleList;
+};
