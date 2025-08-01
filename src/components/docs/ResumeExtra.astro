@@ -1,7 +1,7 @@
 ---
 import Text from "@components/ui/Text.astro";
 import { getCertifications } from "@integrations/content";
-import { endDelimiter } from "@integrations/text";
+import { capitalize, endDelimiter } from "@integrations/text";
 import { getFormattedDates } from "./ResumeKnowHow.astro";
 
 interface Props {
@@ -23,7 +23,7 @@ const certifications = (await getCertifications())
 
       return (
         <li class="ps-0">
-          <Text class="my-0">{endDelimiter(id)}</Text>
+          <Text class="my-0">{endDelimiter(capitalize(id))}</Text>
           <Text tag="em" subtitle translateProps={{ disable: true }}>
             {formattedDate}
           </Text>
