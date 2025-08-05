@@ -4,7 +4,7 @@ import type { ComponentProps } from "astro/types";
 export const makeHighlight = (discrete?: boolean) => {
   return {
     highlightClass: `col-span-full ${
-      discrete ? "" : "lg:h-[22.6rem] lg:max-h-none"
+      discrete ? "" : "lg:h-[23.4rem] 2xl:h-[33.6rem] lg:max-h-none"
     }`,
     importance: (discrete
       ? ("h1" as const)

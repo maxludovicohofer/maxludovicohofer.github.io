@@ -19,11 +19,7 @@ import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import { getDescription, getEntryId } from "@layouts/document/Document.astro";
 import { isLocalizedEntry } from "@integrations/astro-server";
-import {
-  endDelimiterLocalized,
-  i18n,
-  setDayjsLocale,
-} from "@integrations/i18n-server";
+import { i18n, setDayjsLocale } from "@integrations/i18n-server";
 import PostText from "./PostText.astro";
 import { capitalize } from "@integrations/text";
 
@@ -110,13 +106,10 @@ const subtitle = [
   category && (await t(capitalize(category))),
   publishingDate,
   roles
-    ? await endDelimiterLocalized(
-        capitalize(
-          !team.soloDeveloped
-            ? roles.join(`${await t(",")}${await t(" ")}`)
-            : await t("solo developed")
-        ),
-        Astro
+    ? capitalize(
+        !team.soloDeveloped
+          ? roles.join(`${await t(",")}${await t(" ")}`)
+          : await t("solo developed")
       )
     : "",
 ].filter((part) => !!part);
