@@ -57,7 +57,11 @@ const cover = getCover(entry);
 const downloadLinks = getDownloadLinks(entry);
 const category = getCategory(entry);
 const t = i18n(Astro);
-const action = await t(category === "published tool" ? "try" : "play");
+const action = downloadLinks
+  ? await t(category === "published tool" ? "try on {}" : "play on {}", {
+      interpolate: [await getLinkName(Astro, downloadLinks[0]!)],
+    })
+  : "";
 
 const fullWidthClass = `w-full ${inline ? "" : "pb-24 lg:pb-10"}`;
 

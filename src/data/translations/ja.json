@@ -336,7 +336,7 @@
     "api": "deepl"
   },
   "View my resume": {
-    "translation": "履歴書をご覧",
+    "translation": "履歴書",
     "api": "deepl"
   },
   "Game design": {
@@ -464,7 +464,7 @@
     "api": "deepl"
   },
   "View my work history": {
-    "translation": "職務経歴書をご覧",
+    "translation": "職務経歴書",
     "api": "deepl"
   },
   "open to relocate": {
@@ -1560,7 +1560,7 @@
     "api": "deepl"
   },
   "Read more": {
-    "translation": "もっと読む",
+    "translation": "続きを読む",
     "api": "deepl"
   },
   "See all projects": {
@@ -2649,6 +2649,14 @@
   },
   "solo developed": {
     "translation": "単独で開発しました",
+    "api": "deepl"
+  },
+  "try on {}": {
+    "translation": "{}でお試しください",
+    "api": "deepl"
+  },
+  "play on {}": {
+    "translation": "{}でプレイしてください",
     "api": "deepl"
   }
 }

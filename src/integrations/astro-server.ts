@@ -499,17 +499,27 @@ export const getRemoteLinkName = async (
   link: string,
   forDisplay?: boolean,
 ) => {
-  const url = new URL(link);
+  const { hostname, pathname, searchParams } = new URL(link);
 
   if (forDisplay) {
-    return url.hostname === "maps.google.com"
-      ? url.searchParams.get("q")!
-      : link;
+    switch (hostname) {
+      case "maps.google.com":
+        return searchParams.get("q")!;
+    }
+
+    return link;
   }
 
-  return url.hostname === astro.site?.hostname
-    ? await getLocalLinkName(astro, url.pathname)
-    : url.host.split(".").at(-2)!;
+  if (hostname === astro.site?.hostname)
+    return await getLocalLinkName(astro, pathname);
+
+  // Special cases
+  switch (hostname) {
+    case "store.steampowered.com":
+      return "steam";
+  }
+
+  return hostname.split(".").at(-2)!;
 };
 
 export const getTelLinkName = (link: string, forDisplay?: boolean) => {
