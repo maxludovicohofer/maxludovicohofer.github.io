@@ -179,5 +179,5 @@
     - procedural content generation
     - procedural texturing
   specializations:
-    - rendering
+    - rendering optimization
     - procedural content
