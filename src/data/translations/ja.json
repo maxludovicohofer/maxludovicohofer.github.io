@@ -2658,5 +2658,21 @@
   "play on {}": {
     "translation": "{}でプレイしてください",
     "api": "deepl"
+  },
+  "Technical artist with 3 years of professional experience in programming and leadership. I specialize in rendering optimization and procedural content": {
+    "translation": "プログラミングとリーダーシップにおいて3年の専門的経験を持つテクニカルアーティストです。レンダリングの最適化とプロシージャルコンテンツを専門としています。",
+    "api": "deepl"
+  },
+  "Brought the game's vision to life with all departments by managing deadlines and teams": {
+    "translation": "すべての部門と協力し、納期とチームを管理して、ゲームのビジョンを実現しました。",
+    "api": "deepl"
+  },
+  "Programmed character skills with responsiveness and consistency as priorities": {
+    "translation": "応答性と一貫性を優先したプログラム化されたキャラクターのスキル",
+    "api": "deepl"
+  },
+  "I'm a technical artist with 3 years of professional experience in programming and leadership. I specialize in rendering optimization and procedural content": {
+    "translation": "私は、プログラミングとリーダーシップの分野で3年のプロフェッショナル経験を持つテクニカルアーティストです。レンダリングの最適化とプロシージャルコンテンツを専門としています。",
+    "api": "deepl"
   }
 }
