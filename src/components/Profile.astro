@@ -1,5 +1,6 @@
 ---
-import LinkedIn from "@icons/linkedin.svg?raw";
+import LinkedInIcon from "@icons/linkedin.svg?raw";
+import MailIcon from "@icons/mail.svg?raw";
 import { addBaseToLink, getLinkName } from "@integrations/astro-server";
 import { getMyName, getResumeDocuments, getSummary } from "@integrations/docs";
 import { i18n } from "@integrations/i18n-server";
@@ -41,6 +42,9 @@ const summary = await getSummary(Astro, true);
 const profilePictureEventName = await getLinkName(Astro, ProfilePicture.src);
 
 const myName = await getMyName(Astro);
+
+const iconClass =
+  "!size-6 drop-shadow-md hover:drop-shadow-lg active:drop-shadow 2xl:!size-8";
 ---
 
 <PostPreview
@@ -64,10 +68,10 @@ const myName = await getMyName(Astro);
         >{myName.translated}</Text
       >
       <div class="-ml-0.5 flex items-center gap-0.5 2xl:-ml-1">
-        <Link
-          href="https://linkedin.com/in/maxludovicohofer"
-          class="!size-6 drop-shadow-md hover:drop-shadow-lg active:drop-shadow 2xl:!size-8"
-          ><Fragment set:html={LinkedIn} /></Link
+        <Link href="https://linkedin.com/in/maxludovicohofer" class={iconClass}
+          ><Fragment set:html={LinkedInIcon} /></Link
+        ><Link href={`mailto:${mail}`} class={iconClass}
+          ><Fragment set:html={MailIcon} /></Link
         >
       </div>
     </div>
