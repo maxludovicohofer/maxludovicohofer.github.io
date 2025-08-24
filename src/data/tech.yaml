@@ -176,6 +176,12 @@
   roles:
     - programmer
 
+- id: Edgegap
+  experience: P6M
+  group: programming
+  roles:
+    - programmer
+
 - id: AWS
   experience: P5Y
   group: programming
