@@ -2678,5 +2678,17 @@
   "Programmed skills with responsive lazy loading and consistency as priorities": {
     "translation": "レスポンシブな遅延読み込みと一貫性を優先した、プログラム化されたスキル",
     "api": "deepl"
+  },
+  "While working on a scheduler for sales appointments, I came up with a recommender system driven by both objective and subjective parameters. Since I produce electronic music, I figured I could use the same algorithm to drive my videogamey audiovisual live performances": {
+    "translation": "営業アポイントメントのスケジューラーを開発しているうちに、客観的パラメータと主観的パラメータの両方を基にしたレコメンダーシステムを思いつきました。私は電子音楽を制作しているため、同じアルゴリズムをビデオゲームのようなオーディオビジュアルのライブパフォーマンスにも活用できると考えました。",
+    "api": "deepl"
+  },
+  "I developed the system for Python and Typescript. It is composed of a matcher engine and candidate evaluators. It’s fully data-driven, able to read parameters from files and to override any optimal or candidate parameter dynamically in time": {
+    "translation": "私は Python および Typescript 用のシステムを開発しました。このシステムは、マッチャーエンジンと候補評価器で構成されています。完全にデータ駆動型であり、ファイルからパラメータを読み込み、最適なパラメータや候補パラメータを動的に上書きすることができます。",
+    "api": "deepl"
+  },
+  "The recommender system can follow both objective and opinionated or artistic parameters. It can be used generically where more art-driven recommendations are desired, e.g. game AI. This differs from <a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150 break-all\" href=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"content-based filtering (Marinetti)\" data-umami-event-url=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\">content-based filtering</a>, where recommendations are user-driven": {
+    "translation": "レコメンダーシステムは、客観的なパラメータと主観的または芸術的なパラメータの両方を追跡することができます。より芸術的なレコメンデーションが望まれる場合、例えばゲーム AI など、汎用的に使用することができます。これは、レコメンデーションがユーザー主導である<a class=\" not-prose underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit print:text-cyan-700 hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150 break-all\" href=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"content-based filtering (Marinetti)\" data-umami-event-url=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\">コンテンツベースフィルタリング</a>とは異なります。",
+    "api": "deepl"
   }
 }
