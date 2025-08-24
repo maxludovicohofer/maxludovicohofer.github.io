@@ -2674,5 +2674,9 @@
   "I'm a technical artist with 3 years of professional experience in programming and leadership. I specialize in rendering optimization and procedural content": {
     "translation": "私は、プログラミングとリーダーシップの分野で3年のプロフェッショナル経験を持つテクニカルアーティストです。レンダリングの最適化とプロシージャルコンテンツを専門としています。",
     "api": "deepl"
+  },
+  "Programmed skills with responsive lazy loading and consistency as priorities": {
+    "translation": "レスポンシブな遅延読み込みと一貫性を優先した、プログラム化されたスキル",
+    "api": "deepl"
   }
 }
