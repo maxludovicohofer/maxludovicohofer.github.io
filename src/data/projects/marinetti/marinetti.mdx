@@ -20,7 +20,7 @@ publishingDate: 2023-06-01
 
 {/* Reason to exist, as short as possible. Max 1 section */}
 
-While working on a scheduler for sales appointments, I came up with a recommender system driven by both objective and subjective parameters. Since I make electronic music, I figured I could use the same algorithm to drive my videogamey audiovisual live performances.
+While working on a scheduler for sales appointments, I came up with a recommender system driven by both objective and subjective parameters. Since I produce electronic music, I figured I could use the same algorithm to drive my videogamey audiovisual live performances.
 
 ![EAGER MARINETTI.'s UI ranks songs based on the currently playing video and song moods.](./marinetti-ui.png)
 
@@ -32,12 +32,12 @@ MARINETTI is an art-directable recommender system for branching audiovisual narr
 
 ![Candidates are ranked based on the weighted n-dimensional euclidean distance to the optimal.](./marinetti-parameters.png)
 
-The recommender system can follow both objective and opinionated or artistic parameters. It can be used generically where more art-driven recommendations are desired, e.g. AI. This differs from [content-based filtering](https://wikipedia.org/wiki/Recommender_system#Content-based_filtering), where recommendations are user-driven.
+The recommender system can follow both objective and opinionated or artistic parameters. It can be used generically where more art-driven recommendations are desired, e.g. game AI. This differs from [content-based filtering](https://wikipedia.org/wiki/Recommender_system#Content-based_filtering), where recommendations are user-driven.
 
 {/* First point: ux, second point: code, third point: development challenges. Split in max 4 points if too long */}
 
 ![Attributes, possible values, distance evaluators, and weights are defined in an easily editable table.](./marinetti-weights.png)
 
 - The system is easily customizable with standardized data types and modifiers. It also integrates tightly with TouchDesigner.
-- I developed the system for Python and Typescript. It is composed of a matcher engine and candidate evaluators. It's fully declarative, able to read parameters from files and to override any optimal or candidate parameter dynamically in time.
+- I developed the system for Python and Typescript. It is composed of a matcher engine and candidate evaluators. It's fully data-driven, able to read parameters from files and to override any optimal or candidate parameter dynamically in time.
 - In these kind of systems, the biggest challenge is always to get the weights right, which heavily depend on defining the right parameters in the first place. Within some hours of testing, I managed to get the system to offer the best human-picked options as first or second option in the worst case, also handling transitions when optimal and best candidate differ too much.
