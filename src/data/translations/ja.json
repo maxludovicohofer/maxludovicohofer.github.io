@@ -2698,5 +2698,13 @@
   "Decision tree-based workflow for motivation-driven AI, mimicking natural thought": {
     "translation": "動機に基づく AI のための決定木ベースのワークフロー、自然な思考を模倣",
     "api": "deepl"
+  },
+  "Act By Belief is a decision tree-based workflow for motivation-driven AI. It’s useful for agents that require a personality and follow reactive and natural thought processes. For robotic or immutable behavior, traditional methods would be preferable. In this system, agents are split into brain and body": {
+    "translation": "Act By Belief は、動機付け主導の AI 向けの決定木ベースのワークフローです。これは、人格を必要とし、反応的で自然な思考プロセスに従うエージェントに有用です。ロボットや不変の行動には、従来の方法が適しています。このシステムでは、エージェントは脳と体に分けられます。",
+    "api": "deepl"
+  },
+  "Decision tree-based workflow for motivation-driven AI": {
+    "translation": "動機に基づく AI のための決定木ベースのワークフロー",
+    "api": "deepl"
   }
 }
