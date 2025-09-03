@@ -24,3 +24,26 @@ export const roundTo = (
 };
 
 export const lerp = (from = 0, to = 0, blend = 0) => from + blend * (to - from);
+
+export const findBestDivisor = (
+  toDivide: number,
+  minDivisor = 2,
+  maxDivisor = 4,
+) => {
+  if (minDivisor > maxDivisor) {
+    throw new Error("minDivisor must be less than or equal to maxDivisor");
+  }
+
+  let best = minDivisor;
+
+  for (let current = minDivisor; current <= maxDivisor; current++) {
+    const bestMod = toDivide % best;
+    const currentMod = toDivide % current;
+
+    if (currentMod < bestMod || (currentMod === bestMod && current > best)) {
+      best = current;
+    }
+  }
+
+  return best;
+};

@@ -14,6 +14,7 @@ import {
 } from "@integrations/content";
 import { getAddress, getMyName, getSummary } from "@integrations/docs";
 import { i18n, setDayjsLocale } from "@integrations/i18n-server";
+import { findBestDivisor } from "@integrations/math";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
 import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 import { PHONE_NUMBER } from "astro:env/server";
@@ -50,51 +51,46 @@ const languages = await getLanguages(Astro);
 const summary = await getSummary(Astro);
 const myName = await getMyName(Astro);
 
+const sectionTitleClass =
+  "not-prose mb-1 text-sm font-bold uppercase tracking-wider";
+
+const skillsColumns = findBestDivisor(techList.length);
+
 // TODO PHASE 2 UPDATE LINKEDIN AUTOMATICALLY
 ---
 
-<DocumentPage>
+<DocumentPage
+  class="prose-h1:mb-2 prose-p:text-xs prose-li:text-xs prose-hr:my-4 print:prose-hr:border-zinc-950"
+>
   <!-- <ResumePicture /> -->
   <h1>{myName.translated}</h1>
-  <p class="mb-2">{summary}</p>
-  <div class="grid grid-cols-1 gap-x-4">
+  <div class="text-xs">
+    <Link href={`mailto:${mail}`} />{
+      PHONE_NUMBER && (
+        <>
+          · <Link href={`tel:${PHONE_NUMBER}`} />
+        </>
+      )
+    } · <Link href={`https://maps.google.com/?q=${address.raw}`}
+      >{address.translated}</Link
+    >{relocateSentence}
     <div>
-      <Text tag="span" format="branded" translateProps={{ disable: true }}
-        >👜</Text
-      >
-      {portfolioSentence} 🡢 <Link href={portfolioLink} />
-    </div>
-    <div>
-      <Text tag="span" format="branded" translateProps={{ disable: true }}>
-        📍
-      </Text>
-      <Link href={`https://maps.google.com/?q=${address.raw}`}
-        >{address.translated}</Link
-      >{relocateSentence}
-    </div>
-    <div class="grid grid-cols-2">
-      <div>
-        <Text tag="span" format="branded" translateProps={{ disable: true }}
-          >📬</Text
-        >
-        <Link href={`mailto:${mail}`} />
-      </div>
-      {
-        PHONE_NUMBER && (
-          <div>
-            <Text
-              tag="span"
-              format="branded"
-              translateProps={{ disable: true }}
-            >
-              📞
-            </Text>
-            <Link href={`tel:${PHONE_NUMBER}`} />
-          </div>
-        )
-      }
+      {portfolioSentence}: <Link href={portfolioLink} />
     </div>
   </div>
+  <hr />
+  <h2 class={sectionTitleClass}>
+    {await t("profile")}
+  </h2>
+  <p class="mb-2">{summary}</p>
+  <hr />
+  <h2 class={sectionTitleClass}>{await t("key skills")}</h2>
+  <ul
+    class={`grid gap-x-2 list-none ps-0 ${skillsColumns === 2 ? "grid-cols-2" : skillsColumns === 3 ? "grid-cols-3" : "grid-cols-4"}`}
+  >
+    {techList.map(async ({ title }) => <li class="my-0 ps-0">{title}</li>)}
+  </ul>
+  <hr />
   <div class="grid grid-cols-2 gap-x-4">
     <div>
       <ResumeKnowHow section="experience" maxAchievements={1} />
@@ -103,10 +99,6 @@ const myName = await getMyName(Astro);
     </div>
     <div>
       <ResumeKnowHow section="education" maxAchievements={1} />
-      <Text tag="h2" class="!-mt-4 !mb-0">Skills</Text>
-      <ul class="grid grid-cols-2 gap-x-2">
-        {techList.map(async ({ title }) => <li class="my-0">{title}</li>)}
-      </ul>
       <Text tag="h2" class="!-mt-4 !mb-0">Languages</Text>
       <ul class="grid grid-cols-1 gap-x-2">
         {

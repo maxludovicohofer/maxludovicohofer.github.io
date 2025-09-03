@@ -72,7 +72,7 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
     p: {
       classes: `${blockClasses} print:break-inside-avoid-page`,
       prose:
-        "prose-p:text-xl 2xl:prose-p:text-3xl print:prose-p:text-base empty:prose-p:hidden print:prose-p:break-inside-avoid-page",
+        "prose-p:text-xl 2xl:prose-p:text-3xl print:prose-p:text-xs empty:prose-p:hidden print:prose-p:break-inside-avoid-page",
     },
     div: { classes: blockClasses },
     markdown: {
