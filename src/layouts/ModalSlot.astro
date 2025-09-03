@@ -1,4 +1,5 @@
 ---
+import ThreeDRotatable from "@components/ui/ThreeDRotatable.astro";
 import BackButton from "@ui/BackButton.astro";
 
 // TODO PHASE 2 USE DIALOG INSTEAD OF DIV (SHOULD FIX IOS SAFARI GYROSCOPE WITH POINTEREVENTS)
@@ -12,17 +13,12 @@ import BackButton from "@ui/BackButton.astro";
   <div
     class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center"
   >
-    <div
-      class="modal flex max-h-[90dvh] max-w-[90dvw] flex-col items-center justify-center overflow-hidden rounded-3xl lg:max-h-[80dvh] lg:max-w-[80dvw]"
-    >
-    </div>
-    <style>
-      .modal {
-        /* Used for 3D perspective */
-        transform: perspective(5000px) rotateY(var(--rotateX))
-          rotateX(var(--rotateY));
-      }
-    </style>
+    <ThreeDRotatable manual>
+      <div
+        class="modal flex max-h-[90dvh] max-w-[90dvw] flex-col items-center justify-center overflow-hidden rounded-3xl lg:max-h-[80dvh] lg:max-w-[80dvw]"
+      >
+      </div>
+    </ThreeDRotatable>
   </div>
   <BackButton buttonName="modal-back" class="opacity-0" />
 </div>
@@ -35,7 +31,7 @@ import BackButton from "@ui/BackButton.astro";
 
     // Restart paused video
     const originalMedia = document.querySelector<LiteYTEmbed>(
-      "lite-youtube[data-modal-original]",
+      "lite-youtube[data-modal-original]"
     );
 
     if (!originalMedia) return;
@@ -48,12 +44,12 @@ import BackButton from "@ui/BackButton.astro";
   document.addEventListener("astro:page-load", () =>
     document
       .querySelectorAll<HTMLElement>(".modal-back")
-      .forEach((element) => element.addEventListener("click", closeModal)),
+      .forEach((element) => element.addEventListener("click", closeModal))
   );
 
   document.addEventListener("astro:before-swap", () =>
     document
       .querySelectorAll<HTMLElement>(".modal-back")
-      .forEach((element) => element.removeEventListener("click", closeModal)),
+      .forEach((element) => element.removeEventListener("click", closeModal))
   );
 </script>

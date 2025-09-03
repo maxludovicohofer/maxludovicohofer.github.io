@@ -4,7 +4,7 @@
     "languages": {
       "type": "array",
       "items": {
-        "$ref": "../../.astro/collections/languages.schema.json"
+        "$ref": "../../.astro/collections/languages.schema.json#/definitions/languages/additionalProperties"
       }
     }
   }

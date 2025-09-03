@@ -4,7 +4,7 @@
     "companies": {
       "type": "array",
       "items": {
-        "$ref": "../../.astro/collections/companies.schema.json"
+        "$ref": "../../.astro/collections/companies.schema.json#/definitions/companies/additionalProperties"
       }
     }
   }

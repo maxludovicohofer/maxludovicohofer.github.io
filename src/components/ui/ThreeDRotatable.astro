@@ -1,0 +1,38 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+  manual?: boolean;
+}
+
+const { manual, class: className, ...divProps } = Astro.props;
+---
+
+<div
+  class={`${className} rotate-3d ${manual ? "rotate-3d-manual" : ""}`}
+  {...divProps}
+>
+  <slot />
+</div>
+<style>
+  .rotate-3d {
+    /* Used for 3D perspective */
+    transform: perspective(5000px) rotateY(var(--rotateX))
+      rotateX(var(--rotateY));
+  }
+</style>
+<script>
+  import { rotate3D, stopRotate3D } from "@integrations/html";
+
+  document.addEventListener("astro:page-load", () => {
+    document
+      .querySelectorAll(".rotate-3d:not(.rotate-3d-manual)")
+      .forEach(async (element) => {
+        const cardElement = element as HTMLElement;
+        cardElement.addEventListener("mouseenter", () => rotate3D(cardElement));
+        cardElement.addEventListener("mouseleave", () =>
+          stopRotate3D(cardElement)
+        );
+      });
+  });
+</script>

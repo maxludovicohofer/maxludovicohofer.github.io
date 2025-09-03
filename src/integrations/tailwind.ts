@@ -47,12 +47,12 @@ export type TextFormat =
 
 export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
   const headingsBase = [
-    "text-zinc-950 dark:text-zinc-100 print:text-cyan-700 print:break-after-avoid",
-    "prose-headings:text-zinc-950 prose-headings:dark:text-zinc-100 print:prose-headings:text-cyan-700 print:prose-headings:break-after-avoid",
+    "text-zinc-950 dark:text-zinc-100 print:break-after-avoid",
+    "prose-headings:text-zinc-950 prose-headings:dark:text-zinc-100 print:prose-headings:break-after-avoid",
   ] as const;
 
   const formats: Record<NonNullable<typeof format>, string> = {
-    heading: `${headingsBase[0]} font-semibold print:font-normal text-balance`,
+    heading: `${headingsBase[0]} font-semibold text-balance`,
     subheading: `${headingsBase[0]} font-normal italic`,
     detail: "text-zinc-400 leading-6",
     base: "text-zinc-500 dark:text-zinc-300",
@@ -89,16 +89,16 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
     h1: {
       classes: "text-3xl 2xl:text-4xl",
       prose:
-        "prose-h1:text-3xl prose-h1:2xl:text-4xl prose-h1:-mb-2 prose-h1:font-semibold print:prose-h1:font-normal prose-h1:text-balance",
+        "prose-h1:text-3xl prose-h1:2xl:text-4xl prose-h1:-mb-2 prose-h1:font-semibold prose-h1:text-balance",
     },
     h2: {
       classes: "text-2xl 2xl:text-3xl",
       prose:
-        "prose-h2:text-2xl prose-h2:2xl:text-3xl prose-h2:mt-10 prose-h2:mb-2 prose-h2:font-semibold print:prose-h2:font-normal prose-h2:text-balance",
+        "prose-h2:text-2xl prose-h2:2xl:text-3xl prose-h2:mt-10 prose-h2:mb-2 prose-h2:font-semibold prose-h2:text-balance",
     },
     h3: {
       prose:
-        "prose-h3:text-xl prose-h3:2xl:text-2xl prose-h3:mt-0 prose-h3:mb-2 prose-h3:font-semibold print:prose-h3:font-normal prose-h3:text-balance",
+        "prose-h3:text-xl prose-h3:2xl:text-2xl prose-h3:mt-0 prose-h3:mb-2 prose-h3:font-medium prose-h3:text-balance",
     },
     h4: {
       classes: "-mt-2",
@@ -106,8 +106,7 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
       format: "subheading",
     },
     h5: {
-      prose:
-        "prose-h5:font-semibold print:prose-h5:font-normal prose-h5:text-balance",
+      prose: "prose-h5:font-semibold prose-h5:text-balance",
     },
     container: {
       classes: "text-2xl lg:text-3xl 2xl:text-4xl",

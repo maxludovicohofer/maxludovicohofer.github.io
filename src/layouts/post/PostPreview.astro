@@ -229,7 +229,7 @@ const finalReadMoreText = await t(
       { threshold: 0.5 }
     );
 
-    const containerToReadMore = new Map<Element, Element>();
+    const containerToReadMore = new WeakMap<Element, Element>();
 
     // TODO PHASE 2 maybe looking for some seconds could also scale text on mobile
     const readMoreObserver = new IntersectionObserver(

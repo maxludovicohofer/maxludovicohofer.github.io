@@ -4,7 +4,7 @@
     "tech": {
       "type": "array",
       "items": {
-        "$ref": "../../.astro/collections/tech.schema.json"
+        "$ref": "../../.astro/collections/tech.schema.json#/definitions/tech/additionalProperties"
       }
     }
   }

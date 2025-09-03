@@ -4,7 +4,7 @@
     "played-games": {
       "type": "array",
       "items": {
-        "$ref": "../../.astro/collections/playedGames.schema.json"
+        "$ref": "../../.astro/collections/playedGames.schema.json#/definitions/playedGames/additionalProperties"
       }
     }
   }
