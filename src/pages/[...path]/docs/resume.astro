@@ -4,7 +4,6 @@ import ResumeKnowHow from "@components/docs/ResumeKnowHow.astro";
 import ResumeProjects from "@components/docs/ResumeProjects.astro";
 import { mail } from "@components/Profile.astro";
 import Link from "@components/ui/Link.astro";
-import Text from "@components/ui/Text.astro";
 import { getSiteLink } from "@integrations/astro-server";
 import {
   compactTechList,
@@ -91,15 +90,22 @@ const skillsColumns = findBestDivisor(techList.length);
     {techList.map(async ({ title }) => <li class="my-0 ps-0">{title}</li>)}
   </ul>
   <hr />
-  <div class="grid grid-cols-2 gap-x-4">
-    <div>
-      <ResumeKnowHow section="experience" maxAchievements={1} />
-      <ResumeProjects numberOfProjects={2} />
-      {techList.length >= 15 && <ResumeExtra maxCertifications={1} />}
-    </div>
-    <div>
+  <h2 class={sectionTitleClass}>{await t("professional experience")}</h2>
+  <ResumeKnowHow section="experience" maxAchievements={1} />
+  <hr />
+  <div
+    class="grid grid-cols-2 divide-x divide-[var(--tw-prose-hr)] print:divide-zinc-950"
+  >
+    <div class="pr-4">
+      <h2 class={sectionTitleClass}>{await t("education")}</h2>
       <ResumeKnowHow section="education" maxAchievements={1} />
-      <Text tag="h2" class="!-mt-4 !mb-0">Languages</Text>
+      <h2 class={sectionTitleClass}>{await t("certifications")}</h2>
+      <ResumeExtra maxCertifications={1} />
+    </div>
+    <div class="pl-4">
+      <h2 class={sectionTitleClass}>
+        {await t("languages")}
+      </h2>
       <ul class="grid grid-cols-1 gap-x-2">
         {
           languages.map(({ id, level }) => (
@@ -109,7 +115,10 @@ const skillsColumns = findBestDivisor(techList.length);
           ))
         }
       </ul>
-      {techList.length < 15 && <ResumeExtra maxCertifications={1} />}
+      <h2 class={sectionTitleClass}>
+        {await t("selected personal projects")}
+      </h2>
+      <ResumeProjects numberOfProjects={2} />
     </div>
   </div>
 </DocumentPage>

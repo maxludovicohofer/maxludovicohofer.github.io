@@ -62,11 +62,8 @@ const knowHow = await getKnowHow(Astro);
 {
   Object.entries(knowHow)
     .filter(([title]) => !section || title === section)
-    .map(([title, experiences]) => (
+    .map(([_, experiences]) => (
       <div {...props}>
-        <Text tag="h2" class="!mt-2 !mb-4">
-          {capitalize(title)}
-        </Text>
         <ol class="list-none ps-0">
           {experiences
             .filter((experience) => !experience?.[getResumeKey(Astro)]?.omit)
