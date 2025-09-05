@@ -40,7 +40,9 @@ const t = i18n(Astro);
     projects.map(async (project) => {
       const dates = await getFormattedDates(
         Astro,
-        project.publishingDate.subtract(getDevelopmentTime(project)!),
+        project.publishingDate.subtract(
+          getDevelopmentTime(project)!.asMilliseconds()
+        ),
         project.data.inDevelopment ? undefined : project.publishingDate
       );
 
