@@ -4,7 +4,7 @@
     "certifications": {
       "type": "array",
       "items": {
-        "$ref": "../../.astro/collections/certifications.schema.json#/definitions/companies/additionalProperties"
+        "$ref": "../../.astro/collections/certifications.schema.json#/definitions/certifications/additionalProperties"
       }
     }
   }

@@ -12,9 +12,10 @@ import duration from "dayjs/plugin/duration";
 interface Props extends HTMLAttributes<"div"> {
   section?: keyof Awaited<ReturnType<typeof getKnowHow>>;
   maxAchievements?: number;
+  hideDates?: boolean;
 }
 
-const { section, maxAchievements, ...props } = Astro.props;
+const { section, maxAchievements, hideDates, ...props } = Astro.props;
 
 export const getFormattedDates = async (
   astro: AstroGlobal,
@@ -64,7 +65,7 @@ const knowHow = await getKnowHow(Astro);
     .filter(([title]) => !section || title === section)
     .map(([_, experiences]) => (
       <div {...props}>
-        <ol class="list-none ps-0">
+        <ol class="list-none ps-0 mt-0">
           {experiences
             .filter((experience) => !experience?.[getResumeKey(Astro)]?.omit)
             .map(
@@ -84,14 +85,6 @@ const knowHow = await getKnowHow(Astro);
 
                 return (
                   <li class="ps-0">
-                    <Text
-                      tag="h4"
-                      subtitle
-                      translateProps={{ disable: true }}
-                      class="!-mt-4 -mb-1"
-                    >
-                      {translatedId}
-                    </Text>
                     <ol class="list-none ps-0 my-0">
                       {skills.map(async ({ job, start: skillStart }, index) => {
                         const dates = await getFormattedDates(
@@ -102,39 +95,46 @@ const knowHow = await getKnowHow(Astro);
 
                         return (
                           <li class="ps-0 my-0">
-                            <Text tag="h3" class="!-mb-1">
+                            <div class="flex">
+                              <Text tag="h5" translateProps={{ disable: true }}>
+                                {translatedId}
+                              </Text>
+                              {!hideDates && (
+                                <Text
+                                  tag="h5"
+                                  translateProps={{ disable: true }}
+                                  class="ms-auto"
+                                >
+                                  {dates.join(" - ")}
+                                </Text>
+                              )}
+                            </div>
+                            <Text tag="h5">
                               {capitalize(job.id)}
                               {dropOut ? " (not graduated)" : ""}
                             </Text>
-                            <Text
-                              tag="em"
-                              subtitle
-                              translateProps={{ disable: true }}
-                            >
-                              {dates.join(" - ")}
-                            </Text>
+                            <ul class="list-none ps-0 mt-0 mb-6">
+                              {!experience?.[getResumeKey(Astro)]?.short && (
+                                <Text tag="li" class="ps-0 my-0">
+                                  {capitalize(
+                                    endDelimiter(
+                                      toTextList(
+                                        skills.flatMap(({ achievements }) =>
+                                          achievements.slice(
+                                            0,
+                                            maxAchievements ?? undefined
+                                          )
+                                        )
+                                      )
+                                    )
+                                  )}
+                                </Text>
+                              )}
+                            </ul>
                           </li>
                         );
                       })}
                     </ol>
-                    <ul class="list-none ps-0 mt-0 mb-6">
-                      {!experience?.[getResumeKey(Astro)]?.short && (
-                        <Text tag="li" class="ps-0 my-0">
-                          {capitalize(
-                            endDelimiter(
-                              toTextList(
-                                skills.flatMap(({ achievements }) =>
-                                  achievements.slice(
-                                    0,
-                                    maxAchievements ?? undefined
-                                  )
-                                )
-                              )
-                            )
-                          )}
-                        </Text>
-                      )}
-                    </ul>
                   </li>
                 );
               }
