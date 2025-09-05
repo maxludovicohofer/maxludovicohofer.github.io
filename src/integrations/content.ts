@@ -481,7 +481,7 @@ export const getRoles = async (
   astro: AstroGlobal,
   entry: CollectionEntry<"projects">,
   options?: {
-    numberOfRoles?: number;
+    numberOfRoles?: number | undefined;
     avoidCreditedAs?: boolean;
   },
 ) => {

@@ -65,7 +65,7 @@ const knowHow = await getKnowHow(Astro);
     .filter(([title]) => !section || title === section)
     .map(([_, experiences]) => (
       <div {...props}>
-        <ol class="list-none ps-0 mt-0">
+        <ol class="list-none ps-0 mt-0 space-y-4">
           {experiences
             .filter((experience) => !experience?.[getResumeKey(Astro)]?.omit)
             .map(
@@ -85,55 +85,60 @@ const knowHow = await getKnowHow(Astro);
 
                 return (
                   <li class="ps-0">
-                    <ol class="list-none ps-0 my-0">
-                      {skills.map(async ({ job, start: skillStart }, index) => {
-                        const dates = await getFormattedDates(
-                          Astro,
-                          skillStart ?? start,
-                          skills?.[index - 1]?.start ?? end
-                        );
+                    <ol class="list-none ps-0 my-0 space-y-4">
+                      {skills.map(
+                        async (
+                          { job, start: skillStart, achievements },
+                          index
+                        ) => {
+                          const dates = await getFormattedDates(
+                            Astro,
+                            skillStart ?? start,
+                            skills?.[index - 1]?.start ?? end
+                          );
 
-                        return (
-                          <li class="ps-0 my-0">
-                            <div class="flex">
-                              <Text tag="h5" translateProps={{ disable: true }}>
-                                {translatedId}
-                              </Text>
-                              {!hideDates && (
+                          return (
+                            <li class="ps-0 my-0">
+                              <div class="flex justify-between">
                                 <Text
-                                  tag="h5"
                                   translateProps={{ disable: true }}
-                                  class="ms-auto"
+                                  class="my-0"
                                 >
-                                  {dates.join(" - ")}
+                                  {translatedId}
                                 </Text>
-                              )}
-                            </div>
-                            <Text tag="h5">
-                              {capitalize(job.id)}
-                              {dropOut ? " (not graduated)" : ""}
-                            </Text>
-                            <ul class="list-none ps-0 mt-0 mb-6">
-                              {!experience?.[getResumeKey(Astro)]?.short && (
-                                <Text tag="li" class="ps-0 my-0">
-                                  {capitalize(
-                                    endDelimiter(
-                                      toTextList(
-                                        skills.flatMap(({ achievements }) =>
+                                {!hideDates && (
+                                  <Text
+                                    translateProps={{ disable: true }}
+                                    class="my-0 text-right"
+                                  >
+                                    {dates.join(" - ")}
+                                  </Text>
+                                )}
+                              </div>
+                              <Text tag="h5">
+                                {capitalize(job.id)}
+                                {dropOut ? " (not graduated)" : ""}
+                              </Text>
+                              <ul class="list-none ps-0 my-0">
+                                {!experience?.[getResumeKey(Astro)]?.short && (
+                                  <Text tag="li" class="ps-0 my-0">
+                                    {capitalize(
+                                      endDelimiter(
+                                        toTextList(
                                           achievements.slice(
                                             0,
                                             maxAchievements ?? undefined
                                           )
                                         )
                                       )
-                                    )
-                                  )}
-                                </Text>
-                              )}
-                            </ul>
-                          </li>
-                        );
-                      })}
+                                    )}
+                                  </Text>
+                                )}
+                              </ul>
+                            </li>
+                          );
+                        }
+                      )}
                     </ol>
                   </li>
                 );

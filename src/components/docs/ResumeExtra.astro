@@ -6,26 +6,29 @@ import { getFormattedDates } from "./ResumeKnowHow.astro";
 
 interface Props {
   maxCertifications?: number;
+  hideDates?: boolean;
 }
 
-const { maxCertifications } = Astro.props;
+const { maxCertifications, hideDates } = Astro.props;
 
 const certifications = (await getCertifications())
   .filter(({ type, content }) => type === "award" && !content)
   .slice(0, maxCertifications);
 ---
 
-<ul class="list-none ps-0 mb-0">
+<ul class="list-none ps-0 my-0 space-y-4">
   {
     certifications.map(async ({ id, date }) => {
       const [formattedDate] = await getFormattedDates(Astro, date);
 
       return (
-        <li class="ps-0">
+        <li class="ps-0 flex justify-between">
           <Text class="my-0">{endDelimiter(capitalize(id))}</Text>
-          <Text tag="em" subtitle translateProps={{ disable: true }}>
-            {formattedDate}
-          </Text>
+          {!hideDates && (
+            <Text translateProps={{ disable: true }} class="my-0 text-right">
+              {formattedDate}
+            </Text>
+          )}
         </li>
       );
     })

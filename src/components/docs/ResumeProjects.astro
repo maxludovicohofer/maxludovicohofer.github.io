@@ -4,18 +4,29 @@ import {
   getPostListThreshold,
   getSortedPosts,
 } from "@integrations/astro-server";
-import { getCategory, getDevelopmentTime } from "@integrations/content";
+import {
+  getCategory,
+  getDevelopmentTime,
+  getRoles,
+  getTeam,
+} from "@integrations/content";
 import { i18n } from "@integrations/i18n-server";
 import { capitalize, endDelimiter } from "@integrations/text";
 import { getDescription } from "@layouts/document/Document.astro";
 import type { HTMLAttributes } from "astro/types";
 import { getFormattedDates } from "./ResumeKnowHow.astro";
 
-interface Props extends HTMLAttributes<"div"> {
+interface Props extends HTMLAttributes<"ul"> {
   numberOfProjects?: number;
+  numberOfRoles?: number;
 }
 
-const { numberOfProjects, ...props } = Astro.props;
+const {
+  numberOfProjects,
+  numberOfRoles,
+  class: className,
+  ...props
+} = Astro.props;
 
 const projects = (
   await getSortedPosts(Astro, "projects", getPostListThreshold("projects"))
@@ -24,40 +35,50 @@ const projects = (
 const t = i18n(Astro);
 ---
 
-<div {...props}>
-  <ul>
-    {
-      projects.map(async (project) => {
-        const dates = await getFormattedDates(
-          Astro,
-          project.publishingDate.subtract(getDevelopmentTime(project)!),
-          project.data.inDevelopment ? undefined : project.publishingDate
-        );
+<ul class={`${className} list-none ps-0 my-0 space-y-4`} {...props}>
+  {
+    projects.map(async (project) => {
+      const dates = await getFormattedDates(
+        Astro,
+        project.publishingDate.subtract(getDevelopmentTime(project)!),
+        project.data.inDevelopment ? undefined : project.publishingDate
+      );
 
-        const category = await t(capitalize(getCategory(project)!));
+      const category = getCategory(project)!;
+      const awards = project.data.awards ?? [];
 
-        const comma = `${await t(",")} `;
+      const team = getTeam(project);
+      const roles = await getRoles(Astro, project, {
+        numberOfRoles,
+        avoidCreditedAs: true,
+      });
+      const rolesSentence = capitalize(
+        !team.soloDeveloped
+          ? roles.join(`${await t(",")}${await t(" ")}`)
+          : await t("solo developed")
+      );
 
-        const awards = project.data.awards ?? [];
-
-        return (
-          <li>
-            <Text class="my-0">
-              {getDescription(project, 1, true, "Design")}
-              {awards.length
-                ? endDelimiter(
-                    ` Won ${awards.length === 1 ? awards[0] : "multiple awards"}`
-                  )
-                : ""}
-            </Text>
-            <Text tag="em" subtitle translateProps={{ disable: true }}>
-              {category}
-              {comma}
+      return (
+        <li class="ps-0">
+          <div class="flex justify-between">
+            <Text class="my-0">{capitalize(category)}</Text>
+            <Text translateProps={{ disable: true }} class="my-0 text-right">
               {dates.join(" - ")}
             </Text>
-          </li>
-        );
-      })
-    }
-  </ul>
-</div>
+          </div>
+          <Text tag="h5" translateProps={{ disable: true }}>
+            {rolesSentence}
+          </Text>
+          <Text class="my-0">
+            {getDescription(project, 1, true, "Design")}
+            {awards.length
+              ? endDelimiter(
+                  ` Won ${awards.length === 1 ? awards[0] : "multiple awards"}`
+                )
+              : ""}
+          </Text>
+        </li>
+      );
+    })
+  }
+</ul>

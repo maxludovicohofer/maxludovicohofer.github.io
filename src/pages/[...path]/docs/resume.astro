@@ -91,34 +91,34 @@ const skillsColumns = findBestDivisor(techList.length);
   </ul>
   <hr />
   <h2 class={sectionTitleClass}>{await t("professional experience")}</h2>
-  <ResumeKnowHow section="experience" maxAchievements={1} />
+  <ResumeKnowHow section="experience" />
   <hr />
   <div
     class="grid grid-cols-2 divide-x divide-[var(--tw-prose-hr)] print:divide-zinc-950"
   >
     <div class="pr-4">
       <h2 class={sectionTitleClass}>{await t("education")}</h2>
-      <ResumeKnowHow section="education" maxAchievements={1} hideDates />
+      <ResumeKnowHow section="education" maxAchievements={1} />
       <h2 class={sectionTitleClass}>{await t("certifications")}</h2>
-      <ResumeExtra maxCertifications={1} />
+      <ResumeExtra maxCertifications={3} />
     </div>
     <div class="pl-4">
       <h2 class={sectionTitleClass}>
         {await t("languages")}
       </h2>
-      <ul class="grid grid-cols-1 gap-x-2">
+      <ul class="grid grid-cols-1 gap-x-2 list-none ps-0">
         {
           languages.map(({ id, level }) => (
-            <li class="my-0">
+            <li class="ps-0 my-0">
               {id}, {level}
             </li>
           ))
         }
       </ul>
       <h2 class={sectionTitleClass}>
-        {await t("selected personal projects")}
+        {await t("selected portfolio")}
       </h2>
-      <ResumeProjects numberOfProjects={2} />
+      <ResumeProjects numberOfProjects={2} numberOfRoles={2} />
     </div>
   </div>
 </DocumentPage>
