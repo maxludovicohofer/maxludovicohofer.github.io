@@ -172,7 +172,13 @@
 
 - id: technical artist
   matches:
+    - tech artist
     - procedural
+    - graphics programmer
+    - rendering programmer
+    - render programmer
+    - engine programmer
+    - artist
     - art
   workFields:
     - technical art

@@ -1908,7 +1908,7 @@
       text: >-
         0
 
-        00:00:00,000 --> 00:00:18,000
+        00:00:00,000 --> 00:00:12,000
 
         Led a technical team of 14 programmers, designers, animators, and shader
         artists to our first published game.
@@ -1916,48 +1916,48 @@
 
         1
 
-        00:00:18,000 --> 00:00:30,000
+        00:00:12,000 --> 00:00:18,000
 
-        Awarded Rookie awards 2024 "Game of the year - People's choice".
+        Developed a deterministic procedural animation system to simplify
+        development of insect legs.
 
 
         2
 
-        00:00:30,000 --> 00:00:35,000
+        00:00:18,000 --> 00:00:24,000
 
-        Designed a stealth-action hybrid with character transformations and
-        multiuse skills.
+        Programmed skills with responsive lazy loading and consistency as
+        priorities.
 
 
         3
 
-        00:00:35,000 --> 00:00:42,000
+        00:00:24,000 --> 00:00:30,000
+
+        Awarded Rookie awards 2024 "Game of the year - People's choice".
+
+
+        4
+
+        00:00:30,000 --> 00:00:42,000
 
         Programmed skills, camera, and movement, that change based on character
         transformation.
 
 
-        4
+        5
 
-        00:00:42,000 --> 00:00:47,500
+        00:00:42,000 --> 00:00:48,900
 
         Programmed AI that reacts intuitively to weather conditions and
         visibility issues.
 
 
-        5
-
-        00:00:47,500 --> 00:00:53,000
-
-        Developed tools to easily place AI agents and control patrol paths.
-
-
         6
 
-        00:00:53,000 --> 00:01:00,000
+        00:00:48,900 --> 00:01:00,000
 
-        Programmed level design tools that helped to control enemies and story
-        events.
+        Developed tools to easily place AI agents and control patrol paths.
 
 
         7
@@ -1969,30 +1969,59 @@
 
         8
 
-        00:01:06,000 --> 00:01:30,000
+        00:01:06,000 --> 00:01:12,000
 
         Engineered robotic voiceovers, and composed slow eerie music.
 
 
         9
 
-        00:01:30,000 --> 00:01:39,800
+        00:01:12,000 --> 00:01:24,000
 
-        Developed an easy to work on level design pipeline.
+        Worked on interior and exterior lighting for a space station setting.
 
 
         10
 
-        00:01:39,800 --> 00:01:48,100
+        00:01:24,000 --> 00:01:30,000
 
-        Achieved low-end mobile device compatibility.
+        Programmed systemic physics changes and story events.
 
 
         11
 
-        00:01:48,100 --> 00:02:00,000
+        00:01:30,000 --> 00:01:36,000
+
+        Developed an easy to work on level design pipeline.
+
+
+        12
+
+        00:01:36,000 --> 00:01:40,500
+
+        Achieved low-end mobile device compatibility.
+
+
+        13
+
+        00:01:40,500 --> 00:01:47,000
 
         Mixed, mastered, and programmed sound and music for the game.
+
+
+        14
+
+        00:01:47,000 --> 00:01:53,000
+
+        Programmed a dynamic difficulty system that significantly increased
+        repeatability.
+
+
+        15
+
+        00:01:53,000 --> 00:02:00,000
+
+        Added an infinite procedural map that followed dynamic difficulty.
     - locale: ja
       youTubeId: AUieDaaTZlPFOqLt9p2FfnOqNJD6bgSSrs_wbTzvbB-g
       text: |-
