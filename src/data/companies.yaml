@@ -111,7 +111,6 @@
   resume:
     coverLetter: true
 
-# TODO
 - id: Remedy Entertainment
   resume: false
 
@@ -207,9 +206,6 @@
 - id: Sandfall Interactive
   resume: false
 
-- id: Sperasoft
-  resume: false
-
 - id: Milestone
   resume:
     coverLetter: true
@@ -218,3 +214,49 @@
   resume:
     email: true
     coverLetter: true
+
+# Outsourcing
+- id: Keywords Studios
+  resume: false
+
+- id: Virtuos
+  resume: false
+
+- id: Sumo Digital
+  resume: false
+
+- id: Sperasoft
+  resume: false
+
+- id: Pole To Win
+  resume: false
+
+- id: Lakshya Digital
+  resume: false
+
+- id: Room 8 Group
+  resume: false
+
+- id: Amber Studio
+  resume: false
+
+- id: Quantic Lab
+  resume: false
+
+- id: Anshar Studios
+  resume: false
+
+- id: Elite3D
+  resume: false
+
+- id: Tose Co., Ltd.
+  resume: false
+
+- id: Digital Hearts
+  resume: false
+
+- id: Skywind Group
+  resume: false
+
+- id: Black Tower Studios
+  resume: false
