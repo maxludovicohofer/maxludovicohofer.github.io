@@ -37,7 +37,7 @@ const formattedTitle = capitalize(
   title ??
     (homepage
       ? (role.data.workFields?.[0] ?? role.id)
-      : getHumanPathSection(Astro.originPathname)),
+      : getHumanPathSection(Astro.originPathname))
 );
 const completeTitle = `${myName.translatedShort} \\ ${noTitleTranslation ? formattedTitle : await t(formattedTitle)}`;
 
@@ -48,7 +48,7 @@ const completeDescription = await endDelimiterLocalized(
   noDescriptionTranslation
     ? formattedDescription
     : await t(formattedDescription),
-  Astro,
+  Astro
 );
 
 const hasBack = !homepage;
@@ -68,6 +68,8 @@ const hasBack = !homepage;
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <ClientRouter />
 

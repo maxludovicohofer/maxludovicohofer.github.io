@@ -9,6 +9,7 @@ import partytown from "@astrojs/partytown";
 import tailwind from "@astrojs/tailwind";
 
 import node from "@astrojs/node";
+import sitemap from "@astrojs/sitemap";
 import sentry from "@sentry/astro";
 import pdf from "astro-pdf";
 import { locales } from "./src/integrations/astro-config";
@@ -88,6 +89,7 @@ export default defineConfig({
         },
       },
     }),
+    sitemap(),
   ],
 
   markdown: {
