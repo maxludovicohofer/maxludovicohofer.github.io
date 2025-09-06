@@ -22,7 +22,7 @@ const certifications = (await getCertifications())
       const [formattedDate] = await getFormattedDates(Astro, date);
 
       return (
-        <li class="ps-0 flex justify-between">
+        <li class="ps-0 flex justify-between text-balance">
           <Text class="my-0">{endDelimiter(capitalize(id))}</Text>
           {!hideDates && (
             <Text translateProps={{ disable: true }} class="my-0 text-right">
