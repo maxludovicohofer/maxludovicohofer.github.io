@@ -1,5 +1,8 @@
 # https://wikipedia.org/wiki/List_of_video_game_developers
 # Format id as written in middle of a sentence
+
+# Big studios
+
 - id: Kojima Productions
   localizedIds:
     ja: コジマプロダクション
@@ -215,7 +218,8 @@
     email: true
     coverLetter: true
 
-# Outsourcing
+# Outsourcing studios
+
 - id: Keywords Studios
   resume: false
 
@@ -260,3 +264,4 @@
 
 - id: Black Tower Studios
   resume: false
+# Indie studios
