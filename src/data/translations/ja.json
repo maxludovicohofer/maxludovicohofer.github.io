@@ -2754,5 +2754,21 @@
   "Developed a deterministic procedural animation system to simplify development of insect legs": {
     "translation": "昆虫の脚の開発を簡素化するため、決定論的手続き型アニメーションシステムを開発いたしました。",
     "api": "deepl"
+  },
+  "Worked with a mobile-first approach to maximize product effectiveness": {
+    "translation": "モバイルファーストのアプローチで取り組み、製品の効果を最大限に高めました。",
+    "api": "deepl"
+  },
+  "Programmed a mobile-first rich-offline progressive web app using AWS Amplify, React, scrum, and TDD": {
+    "translation": "AWS Amplify、React、スクラム、およびTDDを活用し、モバイルファーストのオフライン対応リッチプログレッシブウェブアプリを開発いたしました。",
+    "api": "deepl"
+  },
+  "Created a fully-frontend performant recommender system for appointment scheduling": {
+    "translation": "完全フロントエンドの高性能レコメンダーシステムを構築し、予約スケジューリングを実現いたしました。",
+    "api": "deepl"
+  },
+  "Managed cross-functional team of 4 to replace old business processes": {
+    "translation": "4名からなる部門横断的なチームを統括し、旧来の業務プロセスを刷新いたしました。",
+    "api": "deepl"
   }
 }
