@@ -55,6 +55,7 @@
 
 - id: AI programmer
   matches:
+    - AI tools programmer
     - AI tool programmer
     - AI lead
     - technical lead
@@ -72,6 +73,7 @@
 - id: system programmer
   matches:
     - systems programmer
+    - tools programmer
     - tool programmer
     - engine programmer
     - technical lead
@@ -87,6 +89,7 @@
 
 - id: tools programmer
   matches:
+    - tool programmer
     - engine programmer
     - systems programmer
     - technical lead
@@ -167,6 +170,9 @@
   workFields:
     - UI programming
     - UX planning
+  specializations:
+    - UX flow
+    - fun-focused UI design
   removeSections:
     - showreel
 
