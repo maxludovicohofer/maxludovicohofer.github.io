@@ -46,6 +46,7 @@
       achievements:
         - programmed a mobile-first rich-offline progressive web app using AWS Amplify, React, scrum, and TDD
         - created a fully-frontend performant recommender system for appointment scheduling
+        - analyzed and developed a data analysis platform for business insights
         - developed user journey and UI/UX from the ground up to maximize conversions
 
 - id: Zulu Medical
@@ -73,16 +74,17 @@
         - planning the company's technological development
       achievements:
         - developed telemedicine product roster with board, strategic partners, and stakeholders
-        - planned IT solutions for cost efficiency and security
-        - coordinated staff training and culture to transition from desktop to web and mobile development, introducing agile methodologies
+        - planned IT solutions for cost efficiency and GDPR security
+        - coordinated technical staff training and culture to transition from desktop to web and mobile development, introducing agile methodologies
 
     - job: scrum master
       tasks:
         - solving collaboration challenges
         - fostering communication and meetings
       achievements:
-        - contributed to the company's cultural shift from waterfall to agile
         - scrum master for a team of 4 programmers
+        - contributed to the company's shift from waterfall to agile
+        - coordinated technical staff training and worked as programmer
 
     - job: programmer
       tasks:
@@ -90,7 +92,9 @@
         - developing desktop apps that communicate with medical devices
         - managing servers and CI/CD
       achievements:
-        - worked as desktop and full stack programmer
+        - worked on low-level C# + SQLite desktop software, React, Angular, Laravel, AWS Amplify full stack web apps, and C# + SQL Server backend services
+        - developed CI/CD pipelines with Python and AWS
+        - introduced internationalization in production on an app used by 80% of italian hospitals
 
 - id: BigRock Institute of Magic Technologies
   start: 2023-09-01
@@ -124,7 +128,7 @@
         - studied the game development and CG pipeline, using the latest industry standards
       achievements:
         - specialized in game design and programming
-        - worked on several prototypes and one award-winning game
+        - worked on several prototypes and a shipped award-winning game with small and medium teams
 
 - id: University of Padua
   start: 2016-09-01
