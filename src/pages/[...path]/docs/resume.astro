@@ -53,7 +53,7 @@ const myName = await getMyName(Astro);
 const sectionTitleClass =
   "not-prose mb-1 text-sm font-bold uppercase tracking-wider";
 
-const skillsColumns = findBestDivisor(techList.length);
+const skillsColumns = findBestDivisor(techList.length, 4);
 
 // TODO PHASE 2 UPDATE LINKEDIN AUTOMATICALLY
 ---
@@ -91,7 +91,7 @@ const skillsColumns = findBestDivisor(techList.length);
   </ul>
   <hr />
   <h2 class={sectionTitleClass}>{await t("professional experience")}</h2>
-  <ResumeKnowHow section="experience" />
+  <ResumeKnowHow section="experience" maxAchievements={3} />
   <hr />
   <div
     class="grid grid-cols-2 divide-x divide-[var(--tw-prose-hr)] print:divide-zinc-950"
