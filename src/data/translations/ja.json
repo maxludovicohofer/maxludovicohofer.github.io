@@ -2778,5 +2778,9 @@
   "Planned IT solutions for cost efficiency and security": {
     "translation": "コスト効率性とセキュリティを考慮した計画的なITソリューション",
     "api": "deepl"
+  },
+  "Planned IT solutions for cost efficiency and GDPR security": {
+    "translation": "コスト効率性とGDPRセキュリティを考慮した計画的なITソリューション",
+    "api": "deepl"
   }
 }
