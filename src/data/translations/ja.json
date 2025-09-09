@@ -2782,5 +2782,13 @@
   "Planned IT solutions for cost efficiency and GDPR security": {
     "translation": "コスト効率性とGDPRセキュリティを考慮した計画的なITソリューション",
     "api": "deepl"
+  },
+  "UI programmer with 3 years of professional experience in programming and leadership. I specialize in UX flow and fun-focused UI design": {
+    "translation": "プログラミングおよびリーダーシップにおいて3年の専門的な経験を有するUIプログラマーです。UXフローと楽しさを重視したUIデザインを専門としております。",
+    "api": "deepl"
+  },
+  "I'm a UI programmer with 3 years of professional experience in programming and leadership. I specialize in UX flow and fun-focused UI design": {
+    "translation": "私はUIプログラマーとして、プログラミングとリーダーシップにおいて3年の専門的な経験がございます。UXフローと楽しさを重視したUIデザインを専門としております。",
+    "api": "deepl"
   }
 }
