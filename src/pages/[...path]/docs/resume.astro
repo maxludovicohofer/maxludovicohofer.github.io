@@ -64,6 +64,8 @@ if (techList.length > 8) {
     techList.splice(-techToOmit, techToOmit);
 }
 
+const shortSkillGrid = techList.length / skillsColumns < 5;
+
 // TODO PHASE 2 UPDATE LINKEDIN AUTOMATICALLY
 ---
 
@@ -107,7 +109,10 @@ if (techList.length > 8) {
   >
     <div class="pr-4">
       <h2 class={sectionTitleClass}>{await t("education")}</h2>
-      <ResumeKnowHow section="education" maxAchievements={2} />
+      <ResumeKnowHow
+        section="education"
+        maxAchievements={shortSkillGrid ? 2 : 1}
+      />
       <h2 class={sectionTitleClass}>{await t("certifications")}</h2>
       <ResumeExtra maxCertifications={3} />
     </div>
@@ -128,7 +133,7 @@ if (techList.length > 8) {
         {await t("selected portfolio")}
       </h2>
       <ResumeProjects
-        numberOfProjects={techList.length / skillsColumns < 5 ? 2 : 1}
+        numberOfProjects={shortSkillGrid ? 2 : 1}
         numberOfRoles={2}
       />
     </div>
