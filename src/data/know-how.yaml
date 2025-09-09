@@ -94,7 +94,7 @@
       achievements:
         - worked on low-level C# + SQLite desktop software, React, Angular, Laravel, AWS Amplify full stack web apps, and C# + SQL Server backend services
         - developed CI/CD pipelines with Python and AWS
-        - introduced internationalization in production on an app used by 80% of italian hospitals
+        - introduced internationalization in production on an app used by 80+% of italian hospitals
 
 - id: BigRock Institute of Magic Technologies
   start: 2023-09-01
