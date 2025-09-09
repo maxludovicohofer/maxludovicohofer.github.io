@@ -2790,5 +2790,13 @@
   "I'm a UI programmer with 3 years of professional experience in programming and leadership. I specialize in UX flow and fun-focused UI design": {
     "translation": "私はUIプログラマーとして、プログラミングとリーダーシップにおいて3年の専門的な経験がございます。UXフローと楽しさを重視したUIデザインを専門としております。",
     "api": "deepl"
+  },
+  "UI programmer with 3 years of professional experience in programming and leadership. I specialize in user journey mapping and playful UI design": {
+    "translation": "プログラミングおよびリーダーシップにおいて3年の専門的な経験を有するUIプログラマーです。ユーザージャーニーマッピングと遊び心のあるUIデザインを専門としています。",
+    "api": "deepl"
+  },
+  "I'm a UI programmer with 3 years of professional experience in programming and leadership. I specialize in user journey mapping and playful UI design": {
+    "translation": "私はUIプログラマーとして、プログラミングとリーダーシップにおいて3年の専門的な経験がございます。ユーザージャーニーマッピングと遊び心のあるUIデザインを専門としております。",
+    "api": "deepl"
   }
 }
