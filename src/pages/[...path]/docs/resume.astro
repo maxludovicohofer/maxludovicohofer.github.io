@@ -127,7 +127,10 @@ if (techList.length > 8) {
       <h2 class={sectionTitleClass}>
         {await t("selected portfolio")}
       </h2>
-      <ResumeProjects numberOfProjects={2} numberOfRoles={2} />
+      <ResumeProjects
+        numberOfProjects={techList.length / skillsColumns < 5 ? 2 : 1}
+        numberOfRoles={2}
+      />
     </div>
   </div>
 </DocumentPage>
