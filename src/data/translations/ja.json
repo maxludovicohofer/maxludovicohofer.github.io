@@ -2770,5 +2770,13 @@
   "Managed cross-functional team of 4 to replace old business processes": {
     "translation": "4名からなる部門横断的なチームを統括し、旧来の業務プロセスを刷新いたしました。",
     "api": "deepl"
+  },
+  "Developed telemedicine product roster with board, strategic partners, and stakeholders": {
+    "translation": "取締役会、戦略的パートナー、および関係者と共同で遠隔医療製品ラインナップを開発いたしました。",
+    "api": "deepl"
+  },
+  "Planned IT solutions for cost efficiency and security": {
+    "translation": "コスト効率性とセキュリティを考慮した計画的なITソリューション",
+    "api": "deepl"
   }
 }
