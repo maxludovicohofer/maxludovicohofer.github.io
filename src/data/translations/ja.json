@@ -2798,5 +2798,9 @@
   "I'm a UI programmer with 3 years of professional experience in programming and leadership. I specialize in user journey mapping and playful UI design": {
     "translation": "私はUIプログラマーとして、プログラミングとリーダーシップにおいて3年の専門的な経験がございます。ユーザージャーニーマッピングと遊び心のあるUIデザインを専門としております。",
     "api": "deepl"
+  },
+  "Created a fully-frontend performant recommender system for staff operations scheduling": {
+    "translation": "スタッフ業務のスケジュール管理向けに、完全フロントエンドの高性能レコメンダーシステムを構築いたしました。",
+    "api": "deepl"
   }
 }
