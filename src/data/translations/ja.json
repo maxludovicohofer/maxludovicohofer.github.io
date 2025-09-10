@@ -2802,5 +2802,21 @@
   "Created a fully-frontend performant recommender system for staff operations scheduling": {
     "translation": "スタッフ業務のスケジュール管理向けに、完全フロントエンドの高性能レコメンダーシステムを構築いたしました。",
     "api": "deepl"
+  },
+  "level designer": {
+    "translation": "レベルデザイナー",
+    "api": "deepl"
+  },
+  "Designed physics-based puzzles and room themes, and fixed edge cases and difficulty after playtests": {
+    "translation": "物理ベースのパズルと部屋のテーマを設計し、プレイテスト後にエッジケースと難易度を調整いたしました。",
+    "api": "deepl"
+  },
+  "Designed procedural level design rules and sections to handle dynamic difficulty and fit into a preset game duration": {
+    "translation": "動的な難易度に対応し、あらかじめ設定されたゲームプレイ時間に収まるよう、手続き型レベルデザインのルールとセクションを設計しました。",
+    "api": "deepl"
+  },
+  "Designed free-roam maps that prioritized visibility in accordance with the camera and gameplay elements, and allowed space for enemies to spawn": {
+    "translation": "カメラとゲームプレイ要素に沿って視認性を優先し、敵がスポーンするためのスペースを確保したフリーローミングマップを設計しました。",
+    "api": "deepl"
   }
 }

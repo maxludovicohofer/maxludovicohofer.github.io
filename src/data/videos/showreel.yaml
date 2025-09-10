@@ -83,52 +83,61 @@
 
         10
 
-        00:01:06,000 --> 00:01:30,000
+        00:01:06,000 --> 00:01:12,000
 
         Programmed systemic physics changes and story events.
 
 
         11
 
-        00:01:30,000 --> 00:01:35,500
+        00:01:12,000 --> 00:01:24,000
 
-        Designed an addictive game loop for mobile with simple mechanics.
+        Designed physics-based puzzles and room themes, and fixed edge cases and
+        difficulty after playtests.
 
 
         12
 
-        00:01:35,500 --> 00:01:40,500
+        00:01:24,000 --> 00:01:30,000
+
+        Managed scope creep to deliver the project in time.
+
+
+        13
+
+        00:01:30,000 --> 00:01:35,400
+
+        Designed an addictive game loop for mobile with simple mechanics.
+
+
+        14
+
+        00:01:35,400 --> 00:01:40,300
 
         Programmed a dynamic difficulty system that significantly increased
         repeatability.
 
 
-        13
+        15
 
-        00:01:40,500 --> 00:01:45,500
+        00:01:40,300 --> 00:01:45,200
 
         Added an infinite procedural map that followed dynamic difficulty.
 
 
-        14
-
-        00:01:45,500 --> 00:01:50,500
-
-        Developed an easy to work on level design pipeline.
-
-
-        15
-
-        00:01:50,500 --> 00:01:54,000
-
-        Achieved low-end mobile device compatibility.
-
-
         16
 
-        00:01:54,000 --> 00:02:00,000
+        00:01:45,200 --> 00:01:54,600
 
-        Successfully managed scope creep to deliver the project in time.
+        Designed procedural level design rules and sections to handle dynamic
+        difficulty and fit into a preset game duration.
+
+
+        17
+
+        00:01:54,600 --> 00:02:00,000
+
+        Developed an easy to work on level design pipeline.
     - locale: ja
       youTubeId: AUieDabRCCfwHhsEvAQdzz82vhe6gNEOUwF9325i0E4f
       text: |-
@@ -173,32 +182,36 @@
         ミニマルな瞑想的なSFパズルゲームをデザインしました。
 
         10
-        00:01:06,000 --> 00:01:30,000
+        00:01:06,000 --> 00:01:12,000
         プログラムされた物理システムの変更とストーリーイベント。
 
         11
-        00:01:30,000 --> 00:01:35,500
-        シンプルな仕組みで、モバイル用の中毒性のあるゲームループを設計しました。
+        00:01:12,000 --> 00:01:24,000
+        物理ベースのパズルと部屋のテーマを設計し、プレイテスト後にエッジケースと難易度を調整いたしました。
 
         12
-        00:01:35,500 --> 00:01:40,500
-        再現性を大幅に高める動的な難易度システムをプログラムしました。
+        00:01:24,000 --> 00:01:30,000
+        スコープの拡大を管理し、プロジェクトを期限内に完了させる。
 
         13
-        00:01:40,500 --> 00:01:45,500
-        動的な難易度に従う無限の手続き型マップを追加しました。
+        00:01:30,000 --> 00:01:35,400
+        シンプルな仕組みで、モバイル用の中毒性のあるゲームループを設計しました。
 
         14
-        00:01:45,500 --> 00:01:50,500
-        作業しやすいレベルデザインのパイプラインを開発しました。
+        00:01:35,400 --> 00:01:40,300
+        再現性を大幅に高める動的な難易度システムをプログラムしました。
 
         15
-        00:01:50,500 --> 00:01:54,000
-        ローエンドのモバイルデバイスとの互換性を実現しました。
+        00:01:40,300 --> 00:01:45,200
+        動的な難易度に従う無限の手続き型マップを追加しました。
 
         16
-        00:01:54,000 --> 00:02:00,000
-        スコープの拡大をうまく管理し、プロジェクトを期限内に完了させる。
+        00:01:45,200 --> 00:01:54,600
+        動的な難易度に対応し、あらかじめ設定されたゲームプレイ時間に収まるよう、手続き型レベルデザインのルールとセクションを設計しました。
+
+        17
+        00:01:54,600 --> 00:02:00,000
+        作業しやすいレベルデザインのパイプラインを開発しました。
 - role: AI programmer
   youTubeId: ZbdX3tUbiNI
   categoryId: '22'
@@ -729,36 +742,29 @@
       text: >-
         0
 
-        00:00:00,000 --> 00:00:06,000
+        00:00:00,000 --> 00:00:12,000
+
+        Designed free-roam maps that prioritized visibility in accordance with
+        the camera and gameplay elements, and allowed space for enemies to
+        spawn.
+
+
+        1
+
+        00:00:12,000 --> 00:00:24,000
 
         Designed an arcade co-op rougelike with a top-down view, with emphasis
         on collaboration and theorycrafting.
 
 
-        1
-
-        00:00:06,000 --> 00:00:18,000
-
-        Brought the game's vision to life with all departments by managing
-        deadlines and teams.
-
-
         2
-
-        00:00:18,000 --> 00:00:24,000
-
-        Programmed skills with responsive lazy loading and consistency as
-        priorities.
-
-
-        3
 
         00:00:24,000 --> 00:00:30,000
 
         Awarded Rookie awards 2024 "Game of the year - People's choice".
 
 
-        4
+        3
 
         00:00:30,000 --> 00:00:35,300
 
@@ -766,21 +772,21 @@
         multiuse skills.
 
 
-        5
+        4
 
         00:00:35,300 --> 00:00:42,000
 
         Authored diegetic UI using VFXs to immerse the player.
 
 
-        6
+        5
 
         00:00:42,000 --> 00:00:47,300
 
         Authored magic music and diegetic birds sounds to reproduce woods.
 
 
-        7
+        6
 
         00:00:47,300 --> 00:00:53,100
 
@@ -788,7 +794,7 @@
         transformation.
 
 
-        8
+        7
 
         00:00:53,100 --> 00:01:00,000
 
@@ -796,131 +802,140 @@
         visibility issues.
 
 
-        9
+        8
 
         00:01:00,000 --> 00:01:06,000
+
+        Designed physics-based puzzles and room themes, and fixed edge cases and
+        difficulty after playtests.
+
+
+        9
+
+        00:01:06,000 --> 00:01:12,000
 
         Designed a minimalistic meditative sci-fi puzzle game.
 
 
         10
 
-        00:01:06,000 --> 00:01:30,000
+        00:01:12,000 --> 00:01:24,000
 
         Programmed systemic physics changes and story events.
 
 
         11
 
-        00:01:30,000 --> 00:01:35,500
+        00:01:24,000 --> 00:01:30,000
 
-        Designed an addictive game loop for mobile with simple mechanics.
+        Managed scope creep to deliver the project in time.
 
 
         12
 
-        00:01:35,500 --> 00:01:40,500
+        00:01:30,000 --> 00:01:39,400
+
+        Designed procedural level design rules and sections to handle dynamic
+        difficulty and fit into a preset game duration.
+
+
+        13
+
+        00:01:39,400 --> 00:01:44,800
+
+        Designed an addictive game loop for mobile with simple mechanics.
+
+
+        14
+
+        00:01:44,800 --> 00:01:49,700
 
         Programmed a dynamic difficulty system that significantly increased
         repeatability.
 
 
-        13
+        15
 
-        00:01:40,500 --> 00:01:45,500
+        00:01:49,700 --> 00:01:54,600
 
         Added an infinite procedural map that followed dynamic difficulty.
 
 
-        14
-
-        00:01:45,500 --> 00:01:50,500
-
-        Developed an easy to work on level design pipeline.
-
-
-        15
-
-        00:01:50,500 --> 00:01:54,000
-
-        Achieved low-end mobile device compatibility.
-
-
         16
 
-        00:01:54,000 --> 00:02:00,000
+        00:01:54,600 --> 00:02:00,000
 
-        Successfully managed scope creep to deliver the project in time.
+        Developed an easy to work on level design pipeline.
     - locale: ja
       youTubeId: AUieDabLWUoxFHKGNXDP5zNcX9oilKlkj5vqM9v6lEqp
       text: |-
         0
-        00:00:00,000 --> 00:00:06,000
-        トップダウンビューのアーケード型協力型ローグライクゲームを設計し、協力プレイと戦略構築に重点を置きました。
+        00:00:00,000 --> 00:00:12,000
+        カメラとゲームプレイ要素に沿って視認性を優先し、敵がスポーンするためのスペースを確保したフリーローミングマップを設計しました。
 
         1
-        00:00:06,000 --> 00:00:18,000
-        すべての部門と協力し、納期とチームを管理して、ゲームのビジョンを実現しました。
+        00:00:12,000 --> 00:00:24,000
+        トップダウンビューのアーケード型協力型ローグライクゲームを設計し、協力プレイと戦略構築に重点を置きました。
 
         2
-        00:00:18,000 --> 00:00:24,000
-        レスポンシブな遅延読み込みと一貫性を優先した、プログラム化されたスキル。
-
-        3
         00:00:24,000 --> 00:00:30,000
         2024年「ゲーム・オブ・ザ・イヤー - ピープルズ・チョイス」新人賞受賞。
 
-        4
+        3
         00:00:30,000 --> 00:00:35,300
         キャラクターの変身とマルチスキルを搭載したステルスアクションのハイブリッドを設計しました。
 
-        5
+        4
         00:00:35,300 --> 00:00:42,000
         VFXを使用したダイアログ型UIを制作し、プレイヤーを没入させる。
 
-        6
+        5
         00:00:42,000 --> 00:00:47,300
         森を再現するために、魔法のような音楽と物語の中の鳥の鳴き声を制作しました。
 
-        7
+        6
         00:00:47,300 --> 00:00:53,100
         プログラムされたスキル、カメラ、動きは、キャラクターの変身に応じて変化します。
 
-        8
+        7
         00:00:53,100 --> 00:01:00,000
         天候や視界の問題に直感的に反応するようプログラムされたAI。
 
-        9
+        8
         00:01:00,000 --> 00:01:06,000
+        物理ベースのパズルと部屋のテーマを設計し、プレイテスト後にエッジケースと難易度を調整いたしました。
+
+        9
+        00:01:06,000 --> 00:01:12,000
         ミニマルな瞑想的なSFパズルゲームをデザインしました。
 
         10
-        00:01:06,000 --> 00:01:30,000
+        00:01:12,000 --> 00:01:24,000
         プログラムされた物理システムの変更とストーリーイベント。
 
         11
-        00:01:30,000 --> 00:01:35,500
-        シンプルな仕組みで、モバイル用の中毒性のあるゲームループを設計しました。
+        00:01:24,000 --> 00:01:30,000
+        スコープの拡大を管理し、プロジェクトを期限内に完了させる。
 
         12
-        00:01:35,500 --> 00:01:40,500
-        再現性を大幅に高める動的な難易度システムをプログラムしました。
+        00:01:30,000 --> 00:01:39,400
+        動的な難易度に対応し、あらかじめ設定されたゲームプレイ時間に収まるよう、手続き型レベルデザインのルールとセクションを設計しました。
 
         13
-        00:01:40,500 --> 00:01:45,500
-        動的な難易度に従う無限の手続き型マップを追加しました。
+        00:01:39,400 --> 00:01:44,800
+        シンプルな仕組みで、モバイル用の中毒性のあるゲームループを設計しました。
 
         14
-        00:01:45,500 --> 00:01:50,500
-        作業しやすいレベルデザインのパイプラインを開発しました。
+        00:01:44,800 --> 00:01:49,700
+        再現性を大幅に高める動的な難易度システムをプログラムしました。
 
         15
-        00:01:50,500 --> 00:01:54,000
-        ローエンドのモバイルデバイスとの互換性を実現しました。
+        00:01:49,700 --> 00:01:54,600
+        動的な難易度に従う無限の手続き型マップを追加しました。
 
         16
-        00:01:54,000 --> 00:02:00,000
-        スコープの拡大をうまく管理し、プロジェクトを期限内に完了させる。
+        00:01:54,600 --> 00:02:00,000
+        作業しやすいレベルデザインのパイプラインを開発しました。
 - role: gameplay programmer
   youTubeId: hnX0Ii1CWLM
   categoryId: '22'

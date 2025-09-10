@@ -167,7 +167,7 @@
   resume: false
 
 - id: Techland
-  resume: false
+  resume: true
 
 - id: Don't nod
   resume: false
@@ -264,4 +264,11 @@
 
 - id: Black Tower Studios
   resume: false
-# Small studios
+
+# Other studios
+
+- id: Gameloft
+  resume: false
+
+- id: Playrix
+  resume: false
