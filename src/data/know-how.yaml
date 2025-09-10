@@ -37,7 +37,7 @@
       achievements:
         - developed user journey and UI/UX from the ground up to maximize conversions
         - worked with a mobile-first approach to maximize product effectiveness
-        - programmed a recommender system for appointment scheduling driven by company values
+        - programmed a recommender system for staff operations scheduling driven by company values
 
     - job: full stack programmer
       tasks:
@@ -45,7 +45,7 @@
         - managing servers and CI/CD
       achievements:
         - programmed a mobile-first rich-offline progressive web app using AWS Amplify, React, scrum, and TDD
-        - created a fully-frontend performant recommender system for appointment scheduling
+        - created a fully-frontend performant recommender system for staff operations scheduling
         - analyzed and developed a data analysis platform for business insights
         - developed user journey and UI/UX from the ground up to maximize conversions
 
