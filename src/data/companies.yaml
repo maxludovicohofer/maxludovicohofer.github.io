@@ -167,7 +167,7 @@
   resume: false
 
 - id: Techland
-  resume: true
+  resume: false
 
 - id: Don't nod
   resume: false
@@ -271,4 +271,7 @@
   resume: false
 
 - id: Playrix
+  resume: false
+
+- id: Ubisoft
   resume: false
