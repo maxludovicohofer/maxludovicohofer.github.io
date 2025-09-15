@@ -152,7 +152,7 @@ const aspectRatio = aspect ?? "16/9";
 
       sessionStorage.setItem(
         `video/${videoId}`,
-        sortedPlayers.at(-1)!.toFixed()
+        sortedPlayers[sortedPlayers.length - 1]!.toFixed()
       );
     }
 

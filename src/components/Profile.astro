@@ -6,6 +6,7 @@ import { getMyName, getResumeDocuments, getSummary } from "@integrations/docs";
 import { i18n } from "@integrations/i18n-server";
 import { getPrintPath } from "@integrations/pdf";
 import ProfilePicture from "@pictures/profile-picture.jpg";
+import { buttonWidthClass } from "@post/Post.astro";
 import PostPreview from "@post/PostPreview.astro";
 import Button from "@ui/Button.astro";
 import Fullscreenable from "@ui/Fullscreenable.astro";
@@ -77,20 +78,22 @@ const iconClass =
     </div>
   </div>
   {summary}
-  <div slot="footer" class="mt-2 flex gap-0.5">
-    {
-      (import.meta.env.DEV ? documentPageLinks : documentLinks).map(
-        ({ path, button }, index, array) => (
-          <Button
-            href={path}
-            noBase
-            class={`${index === 0 ? "" : "h-full rounded-l-none"} ${index === array.length - 1 ? "" : "h-full rounded-r-none"}`}
-            translateProps={{ disable: true }}
-          >
-            <div class="group-hover:animate-pulse">{button}</div>
-          </Button>
+  <div slot="footer" class="mt-2 w-full">
+    <div class={`mx-auto flex justify-center gap-0.5 ${buttonWidthClass}`}>
+      {
+        (import.meta.env.DEV ? documentPageLinks : documentLinks).map(
+          ({ path, button }, index, array) => (
+            <Button
+              href={path}
+              noBase
+              class={`${index === 0 ? "" : "h-full rounded-l-none"} ${index === array.length - 1 ? "" : "h-full rounded-r-none"}`}
+              translateProps={{ disable: true }}
+            >
+              <div class="group-hover:animate-pulse">{button}</div>
+            </Button>
+          )
         )
-      )
-    }
+      }
+    </div>
   </div>
 </PostPreview>

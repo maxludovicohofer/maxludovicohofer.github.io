@@ -42,7 +42,7 @@ const { class: className = "", noAnimation, ...buttonProps } = Astro.props;
     if (!originalMedia) return;
 
     const fullscreenMedia = originalMedia.cloneNode(
-      true,
+      true
     ) as typeof originalMedia;
 
     fullscreenMedia.className = removeFromClasses(fullscreenMedia.className, [
@@ -71,13 +71,13 @@ const { class: className = "", noAnimation, ...buttonProps } = Astro.props;
             fullscreenMedia,
             target.clientWidth / target.clientHeight > aspectRatio,
             ["h-screen"],
-            ["w-screen"],
-          ),
-        ),
+            ["w-screen"]
+          )
+        )
       );
 
       observer.observe(
-        document.querySelector<HTMLDivElement>("div.modal-slot")!,
+        document.querySelector<HTMLDivElement>("div.modal-slot")!
       );
 
       const iframe = fullscreenMedia.querySelector("iframe");
@@ -101,8 +101,8 @@ const { class: className = "", noAnimation, ...buttonProps } = Astro.props;
         playerState === YT.PlayerState.BUFFERING
           ? Number(
               sessionStorage.getItem(
-                `video/${fullscreenMedia.getAttribute("videoid")!}`,
-              ) ?? 0,
+                `video/${fullscreenMedia.getAttribute("videoid")!}`
+              ) ?? 0
             )
           : originalPlayer.getCurrentTime();
 
@@ -114,16 +114,17 @@ const { class: className = "", noAnimation, ...buttonProps } = Astro.props;
 
       noAnimation = true;
     } else {
+      const mediaSections = fullscreenMedia.src.split(".");
       fullscreenMedia.classList.add(
-        fullscreenMedia.src.split(".").at(-1)!.endsWith("svg")
+        mediaSections[mediaSections.length - 1]!.endsWith("svg")
           ? "size-screen"
-          : "size-auto",
+          : "size-auto"
       );
     }
 
     activateModal(
       fullscreenMedia,
-      this.dataset.noAnimation !== undefined || noAnimation,
+      this.dataset.noAnimation !== undefined || noAnimation
     );
   }
 
@@ -131,15 +132,15 @@ const { class: className = "", noAnimation, ...buttonProps } = Astro.props;
     document
       .querySelectorAll<HTMLButtonElement>("button.can-fullscreen")
       .forEach((fullImage) =>
-        fullImage.addEventListener("click", setFullscreenMedia),
-      ),
+        fullImage.addEventListener("click", setFullscreenMedia)
+      )
   );
 
   document.addEventListener("astro:before-swap", () =>
     document
       .querySelectorAll<HTMLButtonElement>("button.can-fullscreen")
       .forEach((fullImage) =>
-        fullImage.removeEventListener("click", setFullscreenMedia),
-      ),
+        fullImage.removeEventListener("click", setFullscreenMedia)
+      )
   );
 </script>

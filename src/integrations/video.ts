@@ -89,7 +89,7 @@ export const generateShowreelCaptions = async (astro: AstroGlobal) => {
   const captions = captionsByProject.flatMap((captions, index) => {
     const projectStart = captionsByProject
       .slice(0, index)
-      .map((projectCaptions) => projectCaptions.at(-1)!)
+      .map((projectCaptions) => projectCaptions[projectCaptions.length - 1]!)
       .reduce((a, { end }) => a + end.asMilliseconds(), 0);
 
     return captions.map(({ start, end, ...caption }) => ({
@@ -170,7 +170,7 @@ const fitCaptions = <V extends VideoData>(
         }
 
         // Perfect end (adjust end caption)
-        addedCaptions.at(-1)!.end = entryDuration;
+        addedCaptions[addedCaptions.length - 1]!.end = entryDuration;
         break;
       }
 
@@ -208,10 +208,10 @@ const fitCaptions = <V extends VideoData>(
     }
 
     // Imperfect end (shortened end caption)
-    addedCaptions.at(-1)!.end = entryDuration;
+    addedCaptions[addedCaptions.length - 1]!.end = entryDuration;
   }
 
-  const captionsDuration = addedCaptions.at(-1)?.end;
+  const captionsDuration = addedCaptions[addedCaptions.length - 1]?.end;
 
   if (isDebug) {
     console.debug(
@@ -266,7 +266,7 @@ const timeCaption = (
 
   const readingDuration =
     getCaptionDuration(parsedCaption.text) + addedDuration;
-  const start = addedCaptions.at(-1)?.end ?? 0;
+  const start = addedCaptions[addedCaptions.length - 1]?.end ?? 0;
   const caption: Caption = {
     ...parsedCaption,
     start,
@@ -282,7 +282,7 @@ const timeCaption = (
         // Move to next cut
         caption.start = cutTime;
         caption.end = caption.start + readingDuration;
-        addedCaptions.at(-1)!.end = caption.start;
+        addedCaptions[addedCaptions.length - 1]!.end = caption.start;
       }
 
       // Could span whole cuts

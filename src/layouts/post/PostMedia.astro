@@ -30,11 +30,9 @@ const realAlt = (hiddenAlt || descriptiveAlt!).trim();
 const textAlt = [endDelimiter(realAlt)];
 const links: ComponentProps<typeof Link>[] = [];
 
-const altLinks = textAlt
-  .at(-1)!
-  .match(
-    /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
-  );
+const altLinks = textAlt[textAlt.length - 1]!.match(
+  /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+);
 const linkTextBeforeRegex = /\[.*\($/;
 const linkTextAfterRegex = /^\)]/;
 
@@ -42,7 +40,8 @@ altLinks?.forEach((altLink) => {
   links.push({ href: altLink });
 
   // Check for link text
-  const [altBeforeLink, altAfterLink] = textAlt.at(-1)!.split(altLink);
+  const [altBeforeLink, altAfterLink] =
+    textAlt[textAlt.length - 1]!.split(altLink);
   if (!altAfterLink || !linkTextAfterRegex.test(altAfterLink)) return;
 
   const linkTextPosition = altBeforeLink!.search(linkTextBeforeRegex);

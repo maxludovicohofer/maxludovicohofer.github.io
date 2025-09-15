@@ -16,7 +16,7 @@ export const getPrintOptions: PagesFunction = (pathname) => {
     sections.reverse();
 
     return `${[docs, ...sections, fileName].join("/")}.pdf`;
-  } else if (sections.at(-1) === "pdf") {
+  } else if (sections[sections.length - 1] === "pdf") {
     return `${sections.join("/")}.pdf`;
   } else return;
 };

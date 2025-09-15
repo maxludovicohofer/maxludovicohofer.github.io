@@ -75,8 +75,10 @@ export const getMaximumWordsInLimit = (text: string, limit: number) => {
 export const standardizePath = (pathname: string) =>
   `/${pathname.replace(/(^\/+)|(\/+$)/g, "")}`;
 
-export const getPathSection = (pathname: string, position = -1) =>
-  getPathSections(pathname).at(position)!;
+export const getPathSection = (pathname: string, position = -1) => {
+  const sections = getPathSections(pathname);
+  return sections[position >= 0 ? position : sections.length + position]!;
+};
 
 export const getPathSections = (
   pathname: string,
@@ -103,7 +105,7 @@ export const toTextList = (text: string[]) => {
   if (length > 1) {
     return `${text.slice(0, -1).join(", ")}${
       length === 2 ? "" : ","
-    } and ${text.at(-1)}`;
+    } and ${text[text.length - 1]}`;
   }
 
   return text[0] ?? "";

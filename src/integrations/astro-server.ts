@@ -178,7 +178,8 @@ export const matchRoles = async <D>(
 
       if (wordsNum > 1) {
         //? If has specialization, prioritize specialization over profession (ex: game designer, game over designer)
-        const oneWordCombinations = combinationsByWordCount.at(-1)!;
+        const oneWordCombinations =
+          combinationsByWordCount[combinationsByWordCount.length - 1]!;
         const firstWordIndex = oneWordCombinations.length - wordsNum;
         swap(oneWordCombinations, firstWordIndex, firstWordIndex + 1);
       }
@@ -519,7 +520,8 @@ export const getRemoteLinkName = async (
       return "steam";
   }
 
-  return hostname.split(".").at(-2)!;
+  const hostParts = hostname.split(".");
+  return hostParts[hostParts.length - 2]!;
 };
 
 export const getTelLinkName = (link: string, forDisplay?: boolean) => {
@@ -528,8 +530,9 @@ export const getTelLinkName = (link: string, forDisplay?: boolean) => {
   if (forDisplay) {
     const sections = linkWithoutPrefix.match(/.{1,3}/g)!;
 
-    if (sections.at(-1)!.length < 3)
-      sections[sections.length - 2] = `${sections.at(-2)}${sections.pop()}`;
+    if (sections[sections.length - 1]!.length < 3)
+      sections[sections.length - 2] =
+        `${sections[sections.length - 2]}${sections.pop()}`;
 
     return sections.join(" ");
   }

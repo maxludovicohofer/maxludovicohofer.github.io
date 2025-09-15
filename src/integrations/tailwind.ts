@@ -177,11 +177,10 @@ export const getTailwindValueFromClassList = (
   return tailwindClass && getTailwindClassValue(tailwindClass);
 };
 
-export const getTailwindClassValue = (tailwindClass: string) =>
-  tailwindClass
-    .split("-")
-    .at(-1)!
-    .replace(/[[\]']+/g, "");
+export const getTailwindClassValue = (tailwindClass: string) => {
+  const classParts = tailwindClass.split("-");
+  return classParts[classParts.length - 1]!.replace(/[[\]']+/g, "");
+};
 
 export const hasClass = (property: string, className: string) =>
   className.split(" ").includes(property);

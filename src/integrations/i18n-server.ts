@@ -104,7 +104,7 @@ const queueTranslation = async (
   const endDelimiter = new RegExp(
     `[^.][${localeInfo[defaultLocale].delimiters}]$`,
   ).test(cleanText)
-    ? cleanText.at(-1)
+    ? cleanText[cleanText.length - 1]
     : undefined;
   const textToTranslate = endDelimiter ? cleanText.slice(0, -1) : cleanText;
 
