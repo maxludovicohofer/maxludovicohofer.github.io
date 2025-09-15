@@ -2818,5 +2818,17 @@
   "Designed free-roam maps that prioritized visibility in accordance with the camera and gameplay elements, and allowed space for enemies to spawn": {
     "translation": "カメラとゲームプレイ要素に沿って視認性を優先し、敵がスポーンするためのスペースを確保したフリーローミングマップを設計しました。",
     "api": "deepl"
+  },
+  "Currently transitioning from software engineering to videogame tools programming, which is my lifelong passion": {
+    "translation": "現在、ソフトウェアエンジニアリングからビデオゲームツールのプログラミングへと移行中です。これは私の生涯の情熱です。",
+    "api": "deepl"
+  },
+  "tools programming": {
+    "translation": "ツールプログラミング",
+    "api": "deepl"
+  },
+  "Tools programming": {
+    "translation": "ツールのプログラミング",
+    "api": "deepl"
   }
 }
