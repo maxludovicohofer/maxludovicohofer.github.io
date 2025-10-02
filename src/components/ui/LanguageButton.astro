@@ -64,7 +64,15 @@ interface Props extends ComponentProps<typeof Button> {}
         600
       );
 
-      setTimeout(() => hideLocales(), 5000);
+      const closeLocales = (e: PointerEvent) => {
+        if (!localeSelect.contains(e.target as Node)) {
+          hideLocales();
+
+          document.removeEventListener("pointerdown", closeLocales);
+        }
+      };
+
+      document.addEventListener("pointerdown", closeLocales);
     });
   });
 </script>
