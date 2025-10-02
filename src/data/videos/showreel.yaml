@@ -1081,9 +1081,9 @@
 
         00:00:00,000 --> 00:00:12,000
 
-        Progettazione di mappe open world che privilegiano la visibilità in base
-        alla telecamera e agli elementi di gioco, lasciando spazio alla comparsa
-        dei nemici.
+        Progettato mappe open world che privilegiano la visibilità in base alla
+        telecamera e agli elementi di gioco, lasciando spazio alla comparsa dei
+        nemici.
 
 
         1
@@ -1091,15 +1091,14 @@
         00:00:12,000 --> 00:00:24,000
 
         Progettato un roguelike cooperativo arcade con visuale dall'alto,
-        incentrato sulla collaborazione e sulla teoria.
+        incentrato sulla collaborazione e sul theorycrafting.
 
 
         2
 
         00:00:24,000 --> 00:00:30,000
 
-        Premiato con il Rookie Awards 2024 nella categoria "Gioco dell'anno -
-        Scelta del pubblico".
+        Premiato con il Rookie awards 2024 "Game of the year - People's choice".
 
 
         3
@@ -1114,23 +1113,22 @@
 
         00:00:35,300 --> 00:00:42,000
 
-        Interfaccia utente diegetica creata utilizzando effetti visivi per
-        coinvolgere il giocatore.
+        UI diegetica creata utilizzando VFX per immergere il giocatore.
 
 
         5
 
         00:00:42,000 --> 00:00:47,300
 
-        Ho composto musica magica e suoni diegetici di uccelli per ricreare
-        l'atmosfera del bosco.
+        Ho composto musica magica e suoni diegetici di uccelli per ricreare il
+        bosco.
 
 
         6
 
         00:00:47,300 --> 00:00:53,100
 
-        Abilità programmate, telecamera e movimenti che variano in base alla
+        Programmato abilità, telecamera e movimenti che variano in base alla
         trasformazione del personaggio.
 
 
@@ -1138,8 +1136,8 @@
 
         00:00:53,100 --> 00:01:00,000
 
-        Intelligenza artificiale programmata per reagire in modo intuitivo alle
-        condizioni meteorologiche e ai problemi di visibilità.
+        Programmata AI che reagisce intuitivamente alle condizioni
+        meteorologiche e ai problemi di visibilità.
 
 
         8
@@ -1154,55 +1152,51 @@
 
         00:01:06,000 --> 00:01:12,000
 
-        Progettato un puzzle game fantascientifico minimalista e meditativo.
+        Progettato un puzzle game sci-fi minimalista e meditativo.
 
 
         10
 
         00:01:12,000 --> 00:01:24,000
 
-        Modifiche sistematiche programmate alla fisica e agli eventi della
-        trama.
+        Programmato modifiche sistematiche alla fisica ed eventi della trama.
 
 
         11
 
         00:01:24,000 --> 00:01:30,000
 
-        Gestione dello scope creep per consegnare il progetto nei tempi
-        previsti.
+        Gestito scope creep per consegnare il progetto nei tempi previsti.
 
 
         12
 
         00:01:30,000 --> 00:01:39,400
 
-        Progettazione di regole procedurali per il livello di progettazione e
-        sezioni per gestire la difficoltà dinamica e adattarsi a una durata di
-        gioco prestabilita.
+        Progettato regole per il level design procedurale e sezioni per gestire
+        la difficoltà dinamica e adattarsi a una durata di gioco prestabilita.
 
 
         13
 
         00:01:39,400 --> 00:01:44,800
 
-        Progettato un ciclo di gioco coinvolgente per dispositivi mobili con
-        meccaniche semplici.
+        Progettato un game loop coinvolgente per mobile con meccaniche semplici.
 
 
         14
 
         00:01:44,800 --> 00:01:49,700
 
-        È stato implementato un sistema di difficoltà dinamico che ha
-        notevolmente aumentato la ripetibilità.
+        Programmato un sistema di difficoltà dinamico che ha notevolmente
+        aumentato la ripetibilità.
 
 
         15
 
         00:01:49,700 --> 00:01:54,600
 
-        Aggiunta una mappa procedurale infinita che segue una difficoltà
+        Aggiunta una mappa procedurale infinita che segue la difficoltà
         dinamica.
 
 
@@ -1210,8 +1204,7 @@
 
         00:01:54,600 --> 00:02:00,000
 
-        Sviluppo di una pipeline di progettazione dei livelli di facile
-        utilizzo.
+        Sviluppata una pipeline di level design di facile utilizzo.
 - role: gameplay programmer
   youTubeId: hnX0Ii1CWLM
   categoryId: '22'
@@ -2403,7 +2396,7 @@
 
         00:00:18,000 --> 00:00:24,000
 
-        Competenze programmate con caricamento lento reattivo e coerenza come
+        Programmato abilità con lazy loading performante e consistency come
         priorità.
 
 
@@ -2411,15 +2404,14 @@
 
         00:00:24,000 --> 00:00:30,000
 
-        Premiato con il Rookie Awards 2024 nella categoria "Gioco dell'anno -
-        Scelta del pubblico".
+        Premiato con il Rookie awards 2024 "Game of the year - People's choice".
 
 
         4
 
         00:00:30,000 --> 00:00:42,000
 
-        Abilità programmate, telecamera e movimenti che variano in base alla
+        Programmato abilità, telecamera e movimenti che variano in base alla
         trasformazione del personaggio.
 
 
@@ -2427,16 +2419,16 @@
 
         00:00:42,000 --> 00:00:48,900
 
-        Intelligenza artificiale programmata per reagire in modo intuitivo alle
-        condizioni meteorologiche e ai problemi di visibilità.
+        Programmata AI che reagisce intuitivamente alle condizioni
+        meteorologiche e ai problemi di visibilità.
 
 
         6
 
         00:00:48,900 --> 00:01:00,000
 
-        Sviluppo di strumenti per posizionare facilmente agenti AI e controllare
-        i percorsi di pattuglia.
+        Sviluppo di tool per posizionare facilmente agenti AI e controllare i
+        percorsi di pattuglia.
 
 
         7
@@ -2458,24 +2450,22 @@
 
         00:01:12,000 --> 00:01:24,000
 
-        Ho collaborato alla progettazione dell'illuminazione interna ed esterna
-        per l'allestimento di una stazione spaziale.
+        Ho collaborato al design dell'illuminazione interna ed esterna di una
+        stazione spaziale.
 
 
         10
 
         00:01:24,000 --> 00:01:30,000
 
-        Modifiche sistematiche programmate alla fisica e agli eventi della
-        trama.
+        Programmato modifiche sistematiche alla fisica ed eventi della trama.
 
 
         11
 
         00:01:30,000 --> 00:01:36,000
 
-        Sviluppo di una pipeline di progettazione dei livelli di facile
-        utilizzo.
+        Sviluppata una pipeline di level design di facile utilizzo.
 
 
         12
@@ -2496,15 +2486,15 @@
 
         00:01:47,000 --> 00:01:53,000
 
-        È stato implementato un sistema di difficoltà dinamico che ha
-        notevolmente aumentato la ripetibilità.
+        Programmato un sistema di difficoltà dinamico che ha notevolmente
+        aumentato la ripetibilità.
 
 
         15
 
         00:01:53,000 --> 00:02:00,000
 
-        Aggiunta una mappa procedurale infinita che segue una difficoltà
+        Aggiunta una mappa procedurale infinita che segue la difficoltà
         dinamica.
 - role: engine programmer
   youTubeId: UG289pgq9V4
