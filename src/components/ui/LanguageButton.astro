@@ -14,19 +14,9 @@ interface Props extends ComponentProps<typeof Button> {}
     disable: true,
   }}
   {...Astro.props}
-  ><Text
-    importance="button"
-    format="branded-button"
-    class="lang-button mb-0.5 shadow-zinc-400 dark:shadow-zinc-400"
-    translateProps={{ disable: true }}>🌐</Text
-  ><style>
-    .lang-button {
-      font-family:
-        "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
-      -webkit-text-fill-color: transparent; /* ensures transparency works */
-      -webkit-background-clip: text; /* clips background to text */
-    }
-  </style></Button
+  ><Text importance="button" class="mb-0.5" translateProps={{ disable: true }}
+    >🌐</Text
+  ></Button
 >
 <script>
   document.addEventListener("astro:page-load", () => {
