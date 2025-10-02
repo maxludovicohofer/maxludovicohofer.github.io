@@ -4,7 +4,7 @@ import ResumeKnowHow from "@components/docs/ResumeKnowHow.astro";
 import ResumeProjects from "@components/docs/ResumeProjects.astro";
 import { mail } from "@components/Profile.astro";
 import Link from "@components/ui/Link.astro";
-import { getSiteLink } from "@integrations/astro-server";
+import { getRole, getSiteLink } from "@integrations/astro-server";
 import {
   compactTechList,
   getBuiltCompanies,
@@ -66,6 +66,9 @@ if (techList.length > 8) {
 
 const shortSkillGrid = techList.length / skillsColumns < 5;
 
+const { role } = await getRole(Astro);
+const showPortfolio = !role.data.omit?.includes("portfolio");
+
 // TODO PHASE 2 UPDATE LINKEDIN AUTOMATICALLY
 ---
 
@@ -84,9 +87,13 @@ const shortSkillGrid = techList.length / skillsColumns < 5;
     } · <Link href={`https://maps.google.com/?q=${address.raw}`}
       >{address.translated}</Link
     >{relocateSentence}
-    <div>
-      {portfolioSentence}: <Link href={portfolioLink} />
-    </div>
+    {
+      showPortfolio && (
+        <div>
+          {portfolioSentence}: <Link href={portfolioLink} />
+        </div>
+      )
+    }
   </div>
   <hr />
   <h2 class={sectionTitleClass}>
@@ -122,20 +129,22 @@ const shortSkillGrid = techList.length / skillsColumns < 5;
       </h2>
       <ul class="grid grid-cols-1 gap-x-2 list-none ps-0">
         {
-          languages.map(({ id, level }) => (
-            <li class="ps-0 my-0">
-              {id}, {level}
-            </li>
+          languages.map(async ({ id, level }) => (
+            <li class="ps-0 my-0">{await t(`${id}, ${level}`)}</li>
           ))
         }
       </ul>
-      <h2 class={sectionTitleClass}>
-        {await t("selected portfolio")}
-      </h2>
-      <ResumeProjects
-        numberOfProjects={shortSkillGrid ? 2 : 1}
-        numberOfRoles={2}
-      />
+      {
+        showPortfolio && (
+          <>
+            <h2 class={sectionTitleClass}>{await t("selected portfolio")}</h2>
+            <ResumeProjects
+              numberOfProjects={shortSkillGrid ? 2 : 1}
+              numberOfRoles={2}
+            />
+          </>
+        )
+      }
     </div>
   </div>
 </DocumentPage>

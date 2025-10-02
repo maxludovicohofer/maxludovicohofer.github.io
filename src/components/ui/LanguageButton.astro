@@ -17,7 +17,7 @@ interface Props extends ComponentProps<typeof Button> {}
   ><Text
     importance="button"
     format="branded-button"
-    class="mb-0.5"
+    class="mb-0.5 shadow-zinc-400 dark:shadow-zinc-400"
     translateProps={{ disable: true }}>🌐</Text
   ></Button
 >
@@ -32,7 +32,7 @@ interface Props extends ComponentProps<typeof Button> {}
       localeSelect.classList.replace("inline", "hidden");
 
       localeButtons.forEach((link) =>
-        link.classList.replace("hidden", "inline"),
+        link.classList.replace("hidden", "inline")
       );
     };
 
@@ -40,7 +40,7 @@ interface Props extends ComponentProps<typeof Button> {}
       localeSelect.classList.replace("hidden", "inline");
 
       localeButtons.forEach((link) =>
-        link.classList.replace("inline", "hidden"),
+        link.classList.replace("inline", "hidden")
       );
     };
 
@@ -61,7 +61,7 @@ interface Props extends ComponentProps<typeof Button> {}
 
       setTimeout(
         () => localeButtons.forEach((link) => (link.disabled = false)),
-        600,
+        600
       );
 
       setTimeout(() => hideLocales(), 5000);

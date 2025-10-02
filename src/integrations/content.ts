@@ -24,7 +24,7 @@ import {
   type GetCollectionOptions,
 } from "./astro-server";
 import { i18n, setDayjsLocale } from "./i18n-server";
-import { getCurrentLocale } from "./i18n-special";
+import { getCurrentLocale, getLocaleInfo } from "./i18n-special";
 import { capitalize, getHumanPathSection, toTitleCase } from "./text";
 
 export type PostCollectionKey = Extract<CollectionKey, "projects" | "thoughts">;
@@ -341,9 +341,17 @@ export const getTechList = async (...params: Parameters<typeof getTech>) => {
     await setDayjsLocale(params[0]);
     dayjs.extend(relativeTime);
 
-    return capitalize(
-      dayjs.duration(experience).humanize().replace("a ", "1 "),
-    );
+    let experienceDuration = dayjs.duration(experience).humanize();
+
+    const articleForOne = getLocaleInfo(params[0]).articleForOne;
+    if (articleForOne) {
+      experienceDuration = experienceDuration.replace(
+        `${articleForOne} `,
+        "1 ",
+      );
+    }
+
+    return capitalize(experienceDuration);
   };
 
   const t = i18n(params[0]);

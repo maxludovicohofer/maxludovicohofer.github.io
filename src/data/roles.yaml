@@ -1,4 +1,7 @@
 # Format id as written in middle of a sentence
+
+#! Videogames
+
 - id: technical game designer
   matches:
     - technical gameplay designer
@@ -50,7 +53,7 @@
   specializations:
     - mechanics
     - AI
-  removeSections:
+  omit:
     - showreel
 
 - id: AI programmer
@@ -67,7 +70,7 @@
   specializations:
     - decision making
     - perception systems
-  removeSections:
+  omit:
     - showreel
 
 - id: system programmer
@@ -84,7 +87,7 @@
   specializations:
     - rendering
     - software architecture design
-  removeSections:
+  omit:
     - showreel
 
 - id: tools programmer
@@ -105,7 +108,7 @@
     - UI \ UX
     - level design tools
     - CI \ CD
-  removeSections:
+  omit:
     - showreel
 
 - id: engine programmer
@@ -125,7 +128,7 @@
     - UI \ UX
     - rendering
     - programming architectures
-  removeSections:
+  omit:
     - showreel
 
 - id: project manager
@@ -140,7 +143,7 @@
     - scrum
     - software development
     - pipeline efficiency
-  removeSections:
+  omit:
     - showreel
     - tech
 
@@ -158,7 +161,7 @@
     - scrum
     - software development
     - pipeline efficiency
-  removeSections:
+  omit:
     - showreel
 
 - id: UI programmer
@@ -174,7 +177,7 @@
   specializations:
     - user journey mapping
     - playful UI design
-  removeSections:
+  omit:
     - showreel
 
 - id: technical artist
@@ -194,3 +197,23 @@
   specializations:
     - rendering optimization
     - procedural content
+
+#! Software
+
+- id: tech lead
+  matches:
+    - technical lead
+    - project manager
+    - lead
+    - director
+    - scrum master
+  workFields:
+    - team leading
+    - project management
+    - agile methodologies
+  specializations:
+    - scrum
+    - software development
+    - pipeline efficiency
+  omit:
+    - portfolio

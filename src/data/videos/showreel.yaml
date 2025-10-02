@@ -212,6 +212,151 @@
         17
         00:01:54,600 --> 00:02:00,000
         作業しやすいレベルデザインのパイプラインを開発しました。
+    - locale: it
+      youTubeId: AUieDabpFPp0UMLBOIrkMymaS_S_EJIUryxoe8oEXZFs
+      text: >-
+        0
+
+        00:00:00,000 --> 00:00:06,000
+
+        Progettato un roguelike cooperativo arcade con visuale dall'alto,
+        incentrato sulla collaborazione e sulla teoria.
+
+
+        1
+
+        00:00:06,000 --> 00:00:18,000
+
+        Ho contribuito a realizzare la visione del gioco collaborando con tutti
+        i reparti, gestendo le scadenze e coordinando i team.
+
+
+        2
+
+        00:00:18,000 --> 00:00:24,000
+
+        Competenze programmate con caricamento lento reattivo e coerenza come
+        priorità.
+
+
+        3
+
+        00:00:24,000 --> 00:00:30,000
+
+        Premiato con il Rookie Awards 2024 nella categoria "Gioco dell'anno -
+        Scelta del pubblico".
+
+
+        4
+
+        00:00:30,000 --> 00:00:35,300
+
+        Progettato un ibrido stealth-azione con trasformazioni dei personaggi e
+        abilità multiuso.
+
+
+        5
+
+        00:00:35,300 --> 00:00:42,000
+
+        Interfaccia utente diegetica creata utilizzando effetti visivi per
+        coinvolgere il giocatore.
+
+
+        6
+
+        00:00:42,000 --> 00:00:47,300
+
+        Ho composto musica magica e suoni diegetici di uccelli per ricreare
+        l'atmosfera del bosco.
+
+
+        7
+
+        00:00:47,300 --> 00:00:53,100
+
+        Abilità programmate, telecamera e movimenti che variano in base alla
+        trasformazione del personaggio.
+
+
+        8
+
+        00:00:53,100 --> 00:01:00,000
+
+        Intelligenza artificiale programmata per reagire in modo intuitivo alle
+        condizioni meteorologiche e ai problemi di visibilità.
+
+
+        9
+
+        00:01:00,000 --> 00:01:06,000
+
+        Progettato un puzzle game fantascientifico minimalista e meditativo.
+
+
+        10
+
+        00:01:06,000 --> 00:01:12,000
+
+        Modifiche sistematiche programmate alla fisica e agli eventi della
+        trama.
+
+
+        11
+
+        00:01:12,000 --> 00:01:24,000
+
+        Progettato enigmi basati sulla fisica e temi delle stanze, risolvendo
+        casi limite e difficoltà dopo i playtest.
+
+
+        12
+
+        00:01:24,000 --> 00:01:30,000
+
+        Gestione dello scope creep per consegnare il progetto nei tempi
+        previsti.
+
+
+        13
+
+        00:01:30,000 --> 00:01:35,400
+
+        Progettato un ciclo di gioco coinvolgente per dispositivi mobili con
+        meccaniche semplici.
+
+
+        14
+
+        00:01:35,400 --> 00:01:40,300
+
+        È stato implementato un sistema di difficoltà dinamico che ha
+        notevolmente aumentato la ripetibilità.
+
+
+        15
+
+        00:01:40,300 --> 00:01:45,200
+
+        Aggiunta una mappa procedurale infinita che segue una difficoltà
+        dinamica.
+
+
+        16
+
+        00:01:45,200 --> 00:01:54,600
+
+        Progettazione di regole procedurali per il livello di progettazione e
+        sezioni per gestire la difficoltà dinamica e adattarsi a una durata di
+        gioco prestabilita.
+
+
+        17
+
+        00:01:54,600 --> 00:02:00,000
+
+        Sviluppo di una pipeline di progettazione dei livelli di facile
+        utilizzo.
 - role: AI programmer
   youTubeId: ZbdX3tUbiNI
   categoryId: '22'
@@ -936,6 +1081,144 @@
         16
         00:01:54,600 --> 00:02:00,000
         作業しやすいレベルデザインのパイプラインを開発しました。
+    - locale: it
+      youTubeId: AUieDaYkgWNR1xQx-RECfQyo80_v7eLxgYdPZ_1CLAih
+      text: >-
+        0
+
+        00:00:00,000 --> 00:00:12,000
+
+        Progettazione di mappe open world che privilegiano la visibilità in base
+        alla telecamera e agli elementi di gioco, lasciando spazio alla comparsa
+        dei nemici.
+
+
+        1
+
+        00:00:12,000 --> 00:00:24,000
+
+        Progettato un roguelike cooperativo arcade con visuale dall'alto,
+        incentrato sulla collaborazione e sulla teoria.
+
+
+        2
+
+        00:00:24,000 --> 00:00:30,000
+
+        Premiato con il Rookie Awards 2024 nella categoria "Gioco dell'anno -
+        Scelta del pubblico".
+
+
+        3
+
+        00:00:30,000 --> 00:00:35,300
+
+        Progettato un ibrido stealth-azione con trasformazioni dei personaggi e
+        abilità multiuso.
+
+
+        4
+
+        00:00:35,300 --> 00:00:42,000
+
+        Interfaccia utente diegetica creata utilizzando effetti visivi per
+        coinvolgere il giocatore.
+
+
+        5
+
+        00:00:42,000 --> 00:00:47,300
+
+        Ho composto musica magica e suoni diegetici di uccelli per ricreare
+        l'atmosfera del bosco.
+
+
+        6
+
+        00:00:47,300 --> 00:00:53,100
+
+        Abilità programmate, telecamera e movimenti che variano in base alla
+        trasformazione del personaggio.
+
+
+        7
+
+        00:00:53,100 --> 00:01:00,000
+
+        Intelligenza artificiale programmata per reagire in modo intuitivo alle
+        condizioni meteorologiche e ai problemi di visibilità.
+
+
+        8
+
+        00:01:00,000 --> 00:01:06,000
+
+        Progettato enigmi basati sulla fisica e temi delle stanze, risolvendo
+        casi limite e difficoltà dopo i playtest.
+
+
+        9
+
+        00:01:06,000 --> 00:01:12,000
+
+        Progettato un puzzle game fantascientifico minimalista e meditativo.
+
+
+        10
+
+        00:01:12,000 --> 00:01:24,000
+
+        Modifiche sistematiche programmate alla fisica e agli eventi della
+        trama.
+
+
+        11
+
+        00:01:24,000 --> 00:01:30,000
+
+        Gestione dello scope creep per consegnare il progetto nei tempi
+        previsti.
+
+
+        12
+
+        00:01:30,000 --> 00:01:39,400
+
+        Progettazione di regole procedurali per il livello di progettazione e
+        sezioni per gestire la difficoltà dinamica e adattarsi a una durata di
+        gioco prestabilita.
+
+
+        13
+
+        00:01:39,400 --> 00:01:44,800
+
+        Progettato un ciclo di gioco coinvolgente per dispositivi mobili con
+        meccaniche semplici.
+
+
+        14
+
+        00:01:44,800 --> 00:01:49,700
+
+        È stato implementato un sistema di difficoltà dinamico che ha
+        notevolmente aumentato la ripetibilità.
+
+
+        15
+
+        00:01:49,700 --> 00:01:54,600
+
+        Aggiunta una mappa procedurale infinita che segue una difficoltà
+        dinamica.
+
+
+        16
+
+        00:01:54,600 --> 00:02:00,000
+
+        Sviluppo di una pipeline di progettazione dei livelli di facile
+        utilizzo.
 - role: gameplay programmer
   youTubeId: hnX0Ii1CWLM
   categoryId: '22'
@@ -2103,6 +2386,133 @@
         15
         00:01:53,000 --> 00:02:00,000
         動的な難易度に従う無限の手続き型マップを追加しました。
+    - locale: it
+      youTubeId: AUieDaa1ZJfagtzlaItiiojsbWEaDlZyRq1XZD2rxlz-
+      text: >-
+        0
+
+        00:00:00,000 --> 00:00:12,000
+
+        Ho guidato un team tecnico composto da 14 programmatori, designer,
+        animatori e artisti shader nella realizzazione del nostro primo gioco
+        pubblicato.
+
+
+        1
+
+        00:00:12,000 --> 00:00:18,000
+
+        Sviluppo di un sistema di animazione procedurale deterministica per
+        semplificare lo sviluppo delle zampe degli insetti.
+
+
+        2
+
+        00:00:18,000 --> 00:00:24,000
+
+        Competenze programmate con caricamento lento reattivo e coerenza come
+        priorità.
+
+
+        3
+
+        00:00:24,000 --> 00:00:30,000
+
+        Premiato con il Rookie Awards 2024 nella categoria "Gioco dell'anno -
+        Scelta del pubblico".
+
+
+        4
+
+        00:00:30,000 --> 00:00:42,000
+
+        Abilità programmate, telecamera e movimenti che variano in base alla
+        trasformazione del personaggio.
+
+
+        5
+
+        00:00:42,000 --> 00:00:48,900
+
+        Intelligenza artificiale programmata per reagire in modo intuitivo alle
+        condizioni meteorologiche e ai problemi di visibilità.
+
+
+        6
+
+        00:00:48,900 --> 00:01:00,000
+
+        Sviluppo di strumenti per posizionare facilmente agenti AI e controllare
+        i percorsi di pattuglia.
+
+
+        7
+
+        00:01:00,000 --> 00:01:06,000
+
+        Sviluppato uno shader realistico per i buchi neri.
+
+
+        8
+
+        00:01:06,000 --> 00:01:12,000
+
+        Voci fuori campo robotiche elaborate e musica lenta e inquietante
+        composta appositamente.
+
+
+        9
+
+        00:01:12,000 --> 00:01:24,000
+
+        Ho collaborato alla progettazione dell'illuminazione interna ed esterna
+        per l'allestimento di una stazione spaziale.
+
+
+        10
+
+        00:01:24,000 --> 00:01:30,000
+
+        Modifiche sistematiche programmate alla fisica e agli eventi della
+        trama.
+
+
+        11
+
+        00:01:30,000 --> 00:01:36,000
+
+        Sviluppo di una pipeline di progettazione dei livelli di facile
+        utilizzo.
+
+
+        12
+
+        00:01:36,000 --> 00:01:40,500
+
+        Compatibilità con dispositivi mobili di fascia bassa raggiunta.
+
+
+        13
+
+        00:01:40,500 --> 00:01:47,000
+
+        Mischiato, masterizzato e programmato il suono e la musica per il gioco.
+
+
+        14
+
+        00:01:47,000 --> 00:01:53,000
+
+        È stato implementato un sistema di difficoltà dinamico che ha
+        notevolmente aumentato la ripetibilità.
+
+
+        15
+
+        00:01:53,000 --> 00:02:00,000
+
+        Aggiunta una mappa procedurale infinita che segue una difficoltà
+        dinamica.
 - role: engine programmer
   youTubeId: UG289pgq9V4
   categoryId: '22'

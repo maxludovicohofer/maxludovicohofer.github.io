@@ -241,6 +241,11 @@ const getTranslated = async (locale: PossibleTranslations) => ({
 });
 
 const debugCacheMiss = (text: string, cacheKeys: string[]) => {
+  if (!cacheKeys.length) {
+    console.warn(`i18n debug: no translation cache for "${text}".`);
+    return;
+  }
+
   const diffs = cacheKeys.map((key) => diff(key, text));
 
   // Closest key is the one with the least differences
@@ -270,6 +275,10 @@ export const setDayjsLocale = async (astro: AstroGlobal) => {
   switch (translateLocale) {
     case "ja":
       await import("dayjs/locale/ja");
+      break;
+
+    case "it":
+      await import("dayjs/locale/it");
       break;
   }
 

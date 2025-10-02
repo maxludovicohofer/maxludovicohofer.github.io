@@ -26,6 +26,7 @@ export const getStaticPaths = async (options?: {
   dontBuild?: boolean;
 }) => {
   if (options?.dontBuild && !import.meta.env.DEV) return [];
+
   if (options?.localOnly && BUILD_MODE !== "local") return [];
 
   let localePaths = [undefined, ...locales.slice(1)];
@@ -39,7 +40,12 @@ export const getStaticPaths = async (options?: {
     );
   }
 
-  const roles = (await getCollection("roles")).map(({ id }) => id);
+  const roles = (await getCollection("roles"))
+    .filter(
+      ({ data: { omit } }) =>
+        import.meta.env.DEV || !omit?.includes("portfolio")
+    )
+    .map(({ id }) => id);
   let defaultedRoles = [undefined, ...roles.slice(1)];
   if (options?.allowedRoles || options?.excludedRoles) {
     defaultedRoles = defaultedRoles.filter(
@@ -75,17 +81,15 @@ export const getStaticPaths = async (options?: {
 
 const {
   role: {
-    data: { removeSections },
+    data: { omit },
   },
 } = await getRole(Astro);
 
 // TODO PHASE 2 UPDATE TAILWIND (ISSUES WITH OPACITY AND OBJECT COVER)
 
-const showreelSlot = !removeSections?.includes("showreel")
-  ? "2-medium"
-  : undefined;
+const showreelSlot = !omit?.includes("showreel") ? "2-medium" : undefined;
 
-const techSlot = !removeSections?.includes("tech") ? "4-small" : undefined;
+const techSlot = !omit?.includes("tech") ? "4-small" : undefined;
 
 const thoughtsSlot =
   (await getSortedPosts(Astro, "thoughts", getPostListThreshold("thoughts")))
@@ -95,29 +99,35 @@ const thoughtsSlot =
 ---
 
 <Page description="My portfolio and blog" homepage>
-  <Bento>
-    <Profile slot="1-small" />
-    {showreelSlot && <Showreel slot={showreelSlot} />}
-    <PostListPreview
-      slot="3-large"
-      collection="projects"
-      previewEntries={5}
-      contentListProps={{
-        class: "lg:grid-cols-2",
-      }}
-    />
-    {techSlot && <TechPreview slot={techSlot} titleProps={{ tag: "h2" }} />}
-    {
-      thoughtsSlot && (
+  {
+    omit?.includes("portfolio") ? (
+      <Bento>
+        <Profile slot="1-small" />
+      </Bento>
+    ) : (
+      <Bento>
+        <Profile slot="1-small" />
+        {showreelSlot && <Showreel slot={showreelSlot} />}
         <PostListPreview
-          slot={thoughtsSlot}
-          collection="thoughts"
-          previewEntries={2}
+          slot="3-large"
+          collection="projects"
+          previewEntries={5}
           contentListProps={{
-            class: "lg:grid-cols-1",
+            class: "lg:grid-cols-2",
           }}
         />
-      )
-    }
-  </Bento>
+        {techSlot && <TechPreview slot={techSlot} titleProps={{ tag: "h2" }} />}
+        {thoughtsSlot && (
+          <PostListPreview
+            slot={thoughtsSlot}
+            collection="thoughts"
+            previewEntries={2}
+            contentListProps={{
+              class: "lg:grid-cols-1",
+            }}
+          />
+        )}
+      </Bento>
+    )
+  }
 </Page>

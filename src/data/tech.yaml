@@ -24,9 +24,6 @@
     - id: level editor
       roles:
         - game designer
-    - id: editor extensions
-      roles:
-        - programmer
     - id: modeling
       roles:
         - game designer

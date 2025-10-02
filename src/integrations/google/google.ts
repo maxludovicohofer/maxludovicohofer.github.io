@@ -17,8 +17,6 @@ const scopes = [
   "https://www.googleapis.com/auth/youtube.force-ssl",
   // View your YouTube account
   "https://www.googleapis.com/auth/youtube.readonly",
-  // Manage your YouTube videos
-  "https://www.googleapis.com/auth/youtube.upload",
   // View and manage your assets and associated content on YouTube
   "https://www.googleapis.com/auth/youtubepartner",
   // View private information of your YouTube channel relevant during the audit process with a YouTube partner
@@ -240,7 +238,7 @@ const refreshToken = async (
   ...params: Parameters<typeof getTokenSettings>
 ) => {
   throw new Error(
-    `Google: refresh or extend permissions at ${(
+    `Google: refresh or extend permissions (${getTokenSettings(...params).scope}) at ${(
       auth ?? (await getAuth(...params))
     ).generateAuthUrl({
       ...(tokenSettings ?? getTokenSettings(...params)),

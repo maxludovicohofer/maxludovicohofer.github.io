@@ -443,7 +443,7 @@ export const setYouTubeVideo = async (
           },
         }),
       astro,
-      "https://www.googleapis.com/auth/youtube.upload",
+      "https://www.googleapis.com/auth/youtube.force-ssl",
     )
   )?.id;
 };
@@ -525,7 +525,7 @@ export const updateYouTubeVideoLocalization = async (
           },
         }),
       astro,
-      "https://www.googleapis.com/auth/youtube.upload",
+      "https://www.googleapis.com/auth/youtube.force-ssl",
     )
   )?.id;
 };

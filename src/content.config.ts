@@ -13,7 +13,7 @@ const roles = defineCollection({
     notMatches: z.array(reference("roles")).optional(),
     workFields: z.string().array().optional(),
     specializations: z.string().array().optional(),
-    removeSections: z.enum(["showreel", "tech"]).array().optional(),
+    omit: z.enum(["showreel", "tech", "portfolio"]).array().optional(),
   }),
 });
 
