@@ -9,7 +9,7 @@ interface Props extends ComponentProps<typeof Button> {}
 <Button
   outline
   rounded
-  class="locale-select inline"
+  class="locale-select opacity-100"
   translateProps={{
     disable: true,
   }}
@@ -17,10 +17,16 @@ interface Props extends ComponentProps<typeof Button> {}
   ><Text
     importance="button"
     format="branded-button"
-    class="mb-0.5 shadow-zinc-400 dark:shadow-zinc-400"
-    style="WebkitBackgroundClip: text;"
+    class="lang-button mb-0.5 shadow-zinc-400 dark:shadow-zinc-400"
     translateProps={{ disable: true }}>🌐</Text
-  ></Button
+  ><style>
+    .lang-button {
+      font-family:
+        "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+      -webkit-text-fill-color: transparent; /* ensures transparency works */
+      -webkit-background-clip: text; /* clips background to text */
+    }
+  </style></Button
 >
 <script>
   document.addEventListener("astro:page-load", () => {
@@ -30,29 +36,46 @@ interface Props extends ComponentProps<typeof Button> {}
     const localeSelect = document.querySelector<HTMLElement>(".locale-select")!;
 
     const showLocales = () => {
-      localeSelect.classList.replace("inline", "hidden");
+      localeSelect.classList.replace("opacity-100", "opacity-0");
+      localeSelect.classList.add("hidden");
 
-      localeButtons.forEach((link) =>
-        link.classList.replace("hidden", "inline")
-      );
+      localeButtons.forEach((link) => {
+        link.classList.replace("opacity-0", "opacity-100");
+        link.classList.remove("hidden");
+      });
     };
 
     const hideLocales = () => {
-      localeSelect.classList.replace("hidden", "inline");
+      localeSelect.classList.replace("opacity-0", "opacity-100");
+      localeSelect.classList.remove("hidden");
 
-      localeButtons.forEach((link) =>
-        link.classList.replace("inline", "hidden")
-      );
+      localeButtons.forEach((link) => {
+        link.classList.replace("opacity-100", "opacity-0");
+        link.classList.add("hidden");
+      });
     };
 
     localeSelect.addEventListener("mouseenter", () => {
       showLocales();
 
-      document
-        .querySelector<HTMLElement>(".locale-select-surface")!
-        .addEventListener("mouseleave", hideLocales, {
-          once: true,
-        });
+      const localeSelectSurface = document.querySelector<HTMLElement>(
+        ".locale-select-surface"
+      )!;
+
+      const mouseLeaveHideLocales = () => {
+        setTimeout(() => {
+          if (!localeSelectSurface.matches(":hover")) {
+            hideLocales();
+
+            localeSelectSurface.removeEventListener(
+              "mouseleave",
+              mouseLeaveHideLocales
+            );
+          }
+        }, 500);
+      };
+
+      localeSelectSurface.addEventListener("mouseleave", mouseLeaveHideLocales);
     });
 
     localeSelect.addEventListener("pointerdown", () => {
