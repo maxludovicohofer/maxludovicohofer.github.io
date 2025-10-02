@@ -66,12 +66,24 @@ interface Props extends ComponentProps<typeof Button> {}
       );
 
       const closeLocales = (e: PointerEvent) => {
-        if (!localeSelect.contains(e.target as Node)) {
+        // Prevent closing if a locale button was clicked
+        if (
+          !localeSelect.contains(e.target as Node) &&
+          !(
+            e.target instanceof HTMLButtonElement &&
+            e.target.classList.contains("locale-link")
+          )
+        ) {
           hideLocales();
 
           document.removeEventListener("pointerdown", closeLocales);
         }
       };
+
+      // Prevent pointerdown on locale buttons from bubbling up and closing the menu
+      localeButtons.forEach((link) =>
+        link.addEventListener("pointerdown", (event) => event.stopPropagation())
+      );
 
       document.addEventListener("pointerdown", closeLocales);
     });
