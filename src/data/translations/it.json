@@ -160,7 +160,7 @@
     "api": "deepl"
   },
   "User experience designer": {
-    "translation": "Progettista dell'esperienza utente",
+    "translation": "User experience designer",
     "api": "deepl"
   },
   "game designer": {
@@ -508,11 +508,11 @@
     "api": "deepl"
   },
   "shader artist": {
-    "translation": "artista shader",
+    "translation": "shader artist",
     "api": "deepl"
   },
   "lighting artist": {
-    "translation": "artista dell'illuminazione",
+    "translation": "lighting artist",
     "api": "deepl"
   },
   "programmer": {
@@ -860,7 +860,7 @@
     "api": "deepl"
   },
   "project manager": {
-    "translation": "responsabile di progetto",
+    "translation": "project manager",
     "api": "deepl"
   },
   "credited as {} (due to school policy). Worked as {}": {
@@ -1268,7 +1268,7 @@
     "api": "deepl"
   },
   "Project management": {
-    "translation": "Gestione dei progetti",
+    "translation": "Project management",
     "api": "deepl"
   },
   "I'm a technical team lead with 3 years of professional experience in programming and leadership. I specialize in scrum, software development, and pipeline efficiency": {
