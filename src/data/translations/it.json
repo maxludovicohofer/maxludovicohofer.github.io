@@ -100,7 +100,7 @@
     "api": "deepl"
   },
   "Technical game designer with 3 years of professional experience in programming and leadership. I specialize in combat, mechanics, and level design": {
-    "translation": "Technical game designer con 3 anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato in combattimento, meccaniche e progettazione dei livelli.",
+    "translation": "Technical game designer con 3 anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato in combat, meccaniche e level design.",
     "api": "deepl"
   },
   "Max Ludovico Hofer": {
@@ -220,7 +220,7 @@
     "api": "deepl"
   },
   "Specialized in game design and programming and worked on several prototypes and a shipped award-winning game with small and medium teams": {
-    "translation": "Specializzato in progettazione e programmazione di videogiochi, ho collaborato alla realizzazione di diversi prototipi e di un videogioco premiato con team di piccole e medie dimensioni.",
+    "translation": "Specializzato in game design e programmazione, ho collaborato alla realizzazione di diversi prototipi e di un videogioco premiato con team di piccole e medie dimensioni.",
     "api": "deepl"
   },
   "tools programmer": {
@@ -336,7 +336,7 @@
     "api": "deepl"
   },
   "Gameplay programmer with 3 years of professional experience in programming and leadership. I specialize in mechanics and AI": {
-    "translation": "Gameplay programmer con 3 anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato in meccaniche e intelligenza artificiale.",
+    "translation": "Gameplay programmer con 3 anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato in meccaniche e AI.",
     "api": "deepl"
   },
   "Full stack programmer": {
@@ -348,7 +348,7 @@
     "api": "deepl"
   },
   "Specialized in game design and programming": {
-    "translation": "Esperto in progettazione e programmazione di giochi",
+    "translation": "Specializzato in game design e programmazione",
     "api": "deepl"
   },
   "AI programmer with 3 years of professional experience in programming and leadership. I specialize in decision making and perception systems": {
@@ -364,19 +364,19 @@
     "api": "deepl"
   },
   "Published tool": {
-    "translation": "Strumento pubblicato",
+    "translation": "Tool pubblicato",
     "api": "deepl"
   },
   "Decision tree-based workflow for motivation-driven AI": {
-    "translation": "Flusso di lavoro basato su alberi decisionali per un'intelligenza artificiale orientata alla motivazione",
+    "translation": "Workflow basato su alberi decisionali per AI guidata da motivazioni",
     "api": "deepl"
   },
   "System programmer with 3 years of professional experience in programming and leadership. I specialize in rendering and software architecture design": {
-    "translation": "System programmer con 3 anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato nel rendering e nella progettazione di architetture software.",
+    "translation": "System programmer con 3 anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato nel rendering e nel design di architetture software.",
     "api": "deepl"
   },
   "Tools programmer with 3 years of professional experience in programming and leadership. I specialize in UI \\ UX, level design tools, and CI \\ CD": {
-    "translation": "Tools programmer con 3 anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato in UI/UX, strumenti di progettazione dei livelli e CI/CD.",
+    "translation": "Tools programmer con 3 anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato in UI/UX, tool di level design e CI/CD.",
     "api": "deepl"
   },
   "Engine programmer with 3 years of professional experience in programming and leadership. I specialize in UI \\ UX, rendering, and programming architectures": {
@@ -400,7 +400,7 @@
     "api": "deepl"
   },
   "Information design": {
-    "translation": "Progettazione dell'informazione",
+    "translation": "Information design",
     "api": "deepl"
   },
   "Animations": {
@@ -448,7 +448,7 @@
     "api": "deepl"
   },
   "UI programmer with 3 years of professional experience in programming and leadership. I specialize in user journey mapping and playful UI design": {
-    "translation": "UI programmer con 3 anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato nella mappatura del percorso dell'utente e nella progettazione di interfacce utente intuitive.",
+    "translation": "UI programmer con 3 anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato nella mappatura del percorso dell'utente e nel design di UI giocose.",
     "api": "deepl"
   },
   "UI designer": {
@@ -528,7 +528,7 @@
     "api": "deepl"
   },
   "Tool": {
-    "translation": "Strumento",
+    "translation": "Tool",
     "api": "deepl"
   },
   "Couch co-op rougelite hero shoot &#39;em up with three arenas": {
@@ -560,7 +560,7 @@
     "api": "deepl"
   },
   "Design": {
-    "translation": "Progettazione",
+    "translation": "Design",
     "api": "deepl"
   },
   "This prototype is a silly driving game where an out of control ambulance saves lives while inadvertently running over pedestrians. It’s made for fans of ridiculous games, where wack physics allow for funny slapstick gameplay. Ambulance was made for a game jam with the theme “unfortunately, you’re the bad guy”. We wanted to create a simple experience with potential for hilarious moments": {
@@ -588,7 +588,7 @@
     "api": "deepl"
   },
   "Game AI is often a checklist that settles on specific behavior. While maybe easy to debug, this does not follow a fluid thought process, easily resulting in robotic behavior": {
-    "translation": "L'intelligenza artificiale nei videogiochi è spesso una lista di controllo che stabilisce comportamenti specifici. Sebbene possa essere semplice da correggere, questo approccio non segue un processo di pensiero fluido, risultando facilmente in comportamenti meccanici.",
+    "translation": "L'AI nei videogiochi è spesso una checklist che stabilisce comportamenti specifici. Sebbene possa essere semplice da correggere, questo approccio non segue un processo di pensiero fluido, risultando facilmente in comportamenti meccanici.",
     "api": "deepl"
   },
   "Maslow&#39;s hierarchy of needs, simplified": {
@@ -596,7 +596,7 @@
     "api": "deepl"
   },
   "Act By Belief is a decision tree-based workflow for motivation-driven AI. It’s useful for agents that require a personality and follow reactive and natural thought processes. For robotic or immutable behavior, traditional methods would be preferable. In this system, agents are split into brain and body": {
-    "translation": "Act By Belief è un flusso di lavoro basato su un albero decisionale per l'intelligenza artificiale motivazionale. È utile per gli agenti che richiedono una personalità e seguono processi di pensiero reattivi e naturali. Per comportamenti robotici o immutabili, sarebbero preferibili i metodi tradizionali. In questo sistema, gli agenti sono suddivisi in cervello e corpo.",
+    "translation": "Act By Belief è un workflow basato su alberi decisionali per AI guidata da motivazioni. È utile per gli agenti che richiedono una personalità e seguono processi di pensiero reattivi e naturali. Per comportamenti robotici o immutabili, sarebbero preferibili i metodi tradizionali. In questo sistema, gli agenti sono suddivisi in cervello e corpo.",
     "api": "deepl"
   },
   "Brain": {
@@ -636,7 +636,7 @@
     "api": "deepl"
   },
   "The codebase amounts to around 1500 lines including documentation. The API was designed for a smooth developer experience and ease of extension. Also, the Act By Belief workflow can be achieved in existing decision tree systems without relying on this API": {
-    "translation": "Il codice sorgente ammonta a circa 1500 righe, compresa la documentazione. L'API è stata progettata per garantire un'esperienza di sviluppo fluida e facilità di estensione. Inoltre, il flusso di lavoro Act By Belief può essere realizzato nei sistemi di alberi decisionali esistenti senza fare affidamento su questa API.",
+    "translation": "Il codice sorgente ammonta a circa 1500 righe, compresa la documentazione. L'API è stata progettata per garantire un'esperienza di sviluppo fluida e facilità di estensione. Inoltre, il workflow di Act By Belief può essere realizzato nei sistemi di alberi decisionali esistenti senza fare affidamento su questa API.",
     "api": "deepl"
   },
   "The biggest development challenge was C#‘s type system, forcing me to introduce some slow reflection. To save on performance, I plan to migrate this system to a C++ library in the near future": {
@@ -644,7 +644,7 @@
     "api": "deepl"
   },
   "Game AI is often a checklist that settles on specific behavior. While maybe easy to debug, this does not follow a fluid thought process, easily resulting in robotic behavior. Reusing these imperative decision trees can be daunting, as they couple AI with gameplay. With Act By Belief, I aim to address these issues through a <a class=\" not-prose underline print:no-underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit  hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150 break-all\" href=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Maslow hierarchy (Act by)\" data-umami-event-url=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\">Maslow hierarchy</a>-inspired declarative method that is performant, easy to use and debug": {
-    "translation": "L'intelligenza artificiale nei videogiochi è spesso una lista di controllo che stabilisce comportamenti specifici. Sebbene possa essere semplice da correggere, questo approccio non segue un processo di pensiero fluido, risultando facilmente in un comportamento robotico. Il riutilizzo di questi alberi decisionali imperativi può essere complesso, poiché associano l'intelligenza artificiale al gameplay. Con Act By Belief, intendo affrontare queste problematiche attraverso un metodo dichiarativo <a class=\" not-prose underline print:no-underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit  hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150 break-all\" href=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Maslow hierarchy (Act by)\" data-umami-event-url=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\">ispirato alla gerarchia di Maslow</a> che è performante, facile da utilizzare e da correggere.",
+    "translation": "L'AI nei videogiochi è spesso una checklist che stabilisce comportamenti specifici. Sebbene possa essere semplice da correggere, questo approccio non segue un processo di pensiero fluido, risultando facilmente in un comportamento robotico. Il riutilizzo di questi alberi decisionali imperativi può essere complesso, poiché associano l'AI al gameplay. Con Act By Belief, intendo affrontare queste problematiche attraverso un metodo dichiarativo <a class=\" not-prose underline print:no-underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit  hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150 break-all\" href=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"Maslow hierarchy (Act by)\" data-umami-event-url=\"https://wikipedia.org/wiki/Maslow%27s_hierarchy_of_needs\">ispirato alla gerarchia di Maslow</a> che è performante, facile da utilizzare e da correggere.",
     "api": "deepl"
   },
   "But most importantly, a brain has needs that it wants to fulfill. Need beliefs are special beliefs that estimate the urgency of a need from 0 to 1, given the current signal. Also, the <code translate=\"no\">Need</code> static class contains estimate functions": {
@@ -672,7 +672,7 @@
     "api": "deepl"
   },
   "Iris is a competitive horror game where players hunt each other while collecting powers for their monstrous characters. It’s a game aimed toward horror fans and competitive players alike with e-sports ambitions. The goal of the game is to scare players with the unpredictability of human enemies and keep the game balanced and skill based enough for flow to flourish": {
-    "translation": "Iris è un gioco horror competitivo in cui i giocatori si danno la caccia a vicenda mentre raccolgono poteri per i loro personaggi mostruosi. È un gioco rivolto sia agli appassionati dell'horror che ai giocatori competitivi con ambizioni e-sportive. L'obiettivo del gioco è spaventare i giocatori con l'imprevedibilità dei nemici umani e mantenere il gioco equilibrato e basato sulle abilità, in modo che il flusso possa prosperare.",
+    "translation": "Iris è un gioco horror competitivo in cui i giocatori si danno la caccia a vicenda mentre raccolgono poteri per i loro personaggi mostruosi. È un gioco rivolto sia agli appassionati dell'horror che ai giocatori competitivi con ambizioni e-sportive. L'obiettivo del gioco è spaventare i giocatori con l'imprevedibilità dei nemici umani e mantenere il gioco equilibrato e basato sulle abilità, in modo che il flow possa prosperare.",
     "api": "deepl"
   },
   "Characters have a complex movement system made for intuitive platforming. Their goal is to win online 1v1 matches by hunting and grabbing other players, in order to collect artifacts and their relative powers (jumping on walls, invisibility, …)": {
@@ -684,7 +684,7 @@
     "api": "deepl"
   },
   "We dedicated a long time to designing and prototyping the platforming, given the unique challenges we were facing when balancing stealth and movement. Also, we took extra care to analyze how to create the perfect map system that would fit our scope and not bore players": {
-    "translation": "Abbiamo dedicato molto tempo alla progettazione e alla prototipazione della piattaforma, date le sfide uniche che dovevamo affrontare nel bilanciare furtività e movimento. Inoltre, abbiamo prestato particolare attenzione all'analisi di come creare il sistema di mappe ideale che si adattasse al nostro scopo e non risultasse noioso per i giocatori.",
+    "translation": "Abbiamo dedicato molto tempo al design e alla prototipazione della piattaforma, date le sfide uniche che dovevamo affrontare nel bilanciare furtività e movimento. Inoltre, abbiamo prestato particolare attenzione all'analisi di come creare il sistema di mappe ideale che si adattasse al nostro scopo e non risultasse noioso per i giocatori.",
     "api": "deepl"
   },
   "Primordial Serpent's album cover illustrates the game's reference mood": {
@@ -724,7 +724,7 @@
     "api": "deepl"
   },
   "Given the limited time and simple design, I replaced the GDD with drawing each platform behavior on a blackboard for the team to see, combining brainstorming and design. Also, we kept graphic fidelity to a minimum to maximize device compatibility": {
-    "translation": "Considerando il tempo limitato e la semplicità del progetto, ho sostituito il GDD disegnando il comportamento di ciascuna piattaforma su una lavagna affinché il team potesse osservarlo, combinando brainstorming e progettazione. Inoltre, abbiamo mantenuto la fedeltà grafica al minimo per massimizzare la compatibilità dei dispositivi.",
+    "translation": "Considerando il tempo limitato e la semplicità del progetto, ho sostituito il GDD disegnando il comportamento di ciascuna piattaforma su una lavagna affinché il team potesse osservarlo, combinando brainstorming e design. Inoltre, abbiamo mantenuto la fedeltà grafica al minimo per massimizzare la compatibilità dei dispositivi.",
     "api": "deepl"
   },
   "A spaceship robot's job is to ensure the vessel's integrity. When a critical failure occurs near a black hole, you and a colleague in the opposite part of the ship are woken up to fix the issue": {
@@ -772,7 +772,7 @@
     "api": "deepl"
   },
   "Lolita is a stealth-action hybrid where the character transforms into animals. I wanted to challenge myself by designing for a target audience interested in the cinematic aspects rather than the fun of the experience. Overall, the game was an opportunity to improve my immersive design, worldbuilding, and narrative skills": {
-    "translation": "Lolita è un gioco ibrido di azione e furtività in cui il personaggio si trasforma in animali. Ho voluto mettermi alla prova progettando per un pubblico interessato agli aspetti cinematografici piuttosto che al divertimento dell'esperienza. Nel complesso, il gioco è stato un'opportunità per migliorare le mie capacità di progettazione immersiva, worldbuilding e narrativa.",
+    "translation": "Lolita è un gioco ibrido di azione e furtività in cui il personaggio si trasforma in animali. Ho voluto mettermi alla prova progettando per un pubblico interessato agli aspetti cinematografici piuttosto che al divertimento dell'esperienza. Nel complesso, il gioco è stato un'opportunità per migliorare le mie capacità di design immersivo, worldbuilding e narrativa.",
     "api": "deepl"
   },
   "The game starts out encouraging stealth gameplay, but reduces punishment for being aggressive as the character becomes more powerful, to reflect her evolution. The challenge of the design was to come up with elegant skills useful for both styles. For example, the ghost butterfly makes the character pass through objects and be invisible, but can also be used to pass through enemies and attack them from behind": {
@@ -856,7 +856,7 @@
     "api": "deepl"
   },
   "The recommender system can follow both objective and opinionated or artistic parameters. It can be used generically where more art-driven recommendations are desired, e.g. game AI. This differs from <a class=\" not-prose underline print:no-underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit  hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150 break-all\" href=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"content-based filtering (Marinetti)\" data-umami-event-url=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\">content-based filtering</a>, where recommendations are user-driven": {
-    "translation": "Il sistema di raccomandazione può seguire parametri sia oggettivi che soggettivi o artistici. Può essere utilizzato in modo generico quando si desiderano raccomandazioni più orientate all'arte, ad esempio nell'intelligenza artificiale dei giochi. Ciò differisce dal <a class=\" not-prose underline print:no-underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit  hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150 break-all\" href=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"content-based filtering (Marinetti)\" data-umami-event-url=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\">filtraggio basato sui contenuti</a>, in cui le raccomandazioni sono orientate all'utente.",
+    "translation": "Il sistema di raccomandazione può seguire parametri sia oggettivi che soggettivi o artistici. Può essere utilizzato in modo generico quando si desiderano raccomandazioni più orientate all'arte, ad esempio nell'AI dei giochi. Ciò differisce dal <a class=\" not-prose underline print:no-underline text-nowrap hover:text-yellow-400 active:text-yellow-600 dark:hover:text-yellow-200 dark:active:text-yellow-400 decoration-yellow-400 dark:decoration-yellow-200 hover:decoration-inherit print:decoration-inherit  hover:text-[1.2em] hover:scale-125 active:scale-90 active:text-[0.8em] duration-150 break-all\" href=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\" target=\"_blank\" rel=\"noopener noreferrer\" data-umami-event=\"content-based filtering (Marinetti)\" data-umami-event-url=\"https://wikipedia.org/wiki/Recommender_system#Content-based_filtering\">filtraggio basato sui contenuti</a>, in cui le raccomandazioni sono orientate all'utente.",
     "api": "deepl"
   },
   "project manager": {
@@ -956,11 +956,11 @@
     "api": "deepl"
   },
   "Debugging fun": {
-    "translation": "Il piacere del debug",
+    "translation": "Debuggare il divertimento",
     "api": "deepl"
   },
   "_\"What is fun?\"_ is probably the most important question for a game designer. Many incredible designers developed their own answers, which now define their style": {
-    "translation": "\"Che cos'è il divertimento?\" è probabilmente la domanda più importante per un game designer. Molti designer di grande talento hanno elaborato le loro risposte, che ora definiscono il loro stile.",
+    "translation": "\"Cos'è il divertimento?\" è probabilmente la domanda più importante per un game designer. Molti designer di grande talento hanno elaborato le loro risposte, che ora definiscono il loro stile.",
     "api": "deepl"
   },
   "Other thoughts": {
@@ -972,11 +972,11 @@
     "api": "deepl"
   },
   "Graphic explanation of \"Flow vs immersion\"": {
-    "translation": "Spiegazione grafica di \"Flusso contro immersione\"",
+    "translation": "Spiegazione grafica di \"Flow vs immersione\"",
     "api": "deepl"
   },
   "Flow vs immersion": {
-    "translation": "Flusso contro immersione",
+    "translation": "Flow vs immersione",
     "api": "deepl"
   },
   "Graphic explanation of \"Debugging fun\"": {
@@ -984,11 +984,11 @@
     "api": "deepl"
   },
   "As activities, games impart a rhythm to a player’s thought process and physical actions. I think this is the essence to deep flow state and peak game design. It constitutes the instinctive feeling of satisfaction truly great games provide": {
-    "translation": "Come attività, i giochi conferiscono un ritmo al processo mentale e alle azioni fisiche del giocatore. Ritengo che questa sia l'essenza dello stato di flusso profondo e della progettazione ottimale dei giochi. Costituisce la sensazione istintiva di soddisfazione che i giochi veramente eccezionali offrono.",
+    "translation": "Come attività, i giochi conferiscono un ritmo al processo mentale e alle azioni fisiche del giocatore. Ritengo che questa sia l'essenza per ottenere un flow state profondo e il massimo dal game design. Costituisce la sensazione istintiva di soddisfazione che i giochi veramente eccezionali offrono.",
     "api": "deepl"
   },
   "In my eyes, activity and entertainment are followed by flow and immersion. While flow stresses the player’s brain, immersion calls for a relaxing time. I separate the two aspects in my games, pacing the gameplay to focus on one at a time": {
-    "translation": "A mio avviso, l'attività e l'intrattenimento sono seguiti dal flusso e dall'immersione. Mentre il flusso sollecita il cervello del giocatore, l'immersione richiede un momento di relax. Nei miei giochi separo questi due aspetti, regolando il ritmo del gameplay per concentrarmi su uno alla volta.",
+    "translation": "A mio avviso, l'attività e l'intrattenimento sono seguiti dal flow e dall'immersione. Mentre il flow sollecita il cervello del giocatore, l'immersione richiede un momento di relax. Nei miei giochi separo questi due aspetti, regolando il ritmo del gameplay per concentrarmi su uno alla volta.",
     "api": "deepl"
   },
   "The best videogames can be approached in two ways: as <em>activities</em> and as <em>entertainment</em>": {
@@ -1016,7 +1016,7 @@
     "api": "deepl"
   },
   "In these equations, I multiplied some programmable parameters that should be considered when designing games. In order of importance:": {
-    "translation": "In queste equazioni, ho moltiplicato alcuni parametri programmabili che dovrebbero essere considerati nella progettazione dei giochi. In ordine di importanza:",
+    "translation": "In queste equazioni, ho moltiplicato alcuni parametri programmabili che dovrebbero essere considerati nel design dei giochi. In ordine di importanza:",
     "api": "deepl"
   },
   "Rewards (should be proportional to fun and increase other modifiers to create a loop)": {
@@ -1032,7 +1032,7 @@
     "api": "deepl"
   },
   "Intuitiveness (physics, controls, level design, logic complexity, and fairness)": {
-    "translation": "Intuitività (fisica, comandi, progettazione dei livelli, complessità logica ed equità)",
+    "translation": "Intuitività (fisica, comandi, level design, complessità logica ed equità)",
     "api": "deepl"
   },
   "Coolness (artistic appeal, wow factor)": {
@@ -1044,7 +1044,7 @@
     "api": "deepl"
   },
   "<em>“What is fun?”</em> is probably the most important question for a game designer. Many incredible designers developed their own answers, which now define their style": {
-    "translation": "<em>\"Che cosa è divertente?\"</em> è probabilmente la domanda più importante per un game designer. Molti designer di grande talento hanno elaborato le loro risposte, che ora definiscono il loro stile.",
+    "translation": "<em>\"Cos'è il divertimento?\"</em> è probabilmente la domanda più importante per un game designer. Molti designer di grande talento hanno elaborato le loro risposte, che ora definiscono il loro stile.",
     "api": "deepl"
   },
   "In my own designs, I come up with ideas by <em>“It would be cool if…”</em>, then debug them with these formulas. Even if I complete a prototype and something isn’t fun, I try to analyze the game through this lens": {
@@ -1104,7 +1104,7 @@
     "api": "deepl"
   },
   "Designed an arcade co-op rougelike with a top-down view, with emphasis on collaboration and theorycrafting": {
-    "translation": "Progettato un roguelike cooperativo arcade con visuale dall'alto, incentrato sulla collaborazione e sulla teoria.",
+    "translation": "Progettato un roguelike cooperativo arcade con visuale dall'alto, incentrato sulla collaborazione e sul theorycrafting.",
     "api": "deepl"
   },
   "Brought the game's vision to life with all departments by managing deadlines and teams": {
@@ -1112,11 +1112,11 @@
     "api": "deepl"
   },
   "Programmed skills with responsive lazy loading and consistency as priorities": {
-    "translation": "Competenze programmate con caricamento lento reattivo e coerenza come priorità",
+    "translation": "Programmato abilità con lazy loading performante e consistency come priorità",
     "api": "deepl"
   },
   "Awarded Rookie awards 2024 \"Game of the year - People's choice\"": {
-    "translation": "Premiato con il Rookie Awards 2024 nella categoria \"Gioco dell'anno - Scelta del pubblico\".",
+    "translation": "Premiato con il Rookie awards 2024 \"Game of the year - People's choice\".",
     "api": "deepl"
   },
   "Designed a stealth-action hybrid with character transformations and multiuse skills": {
@@ -1124,27 +1124,27 @@
     "api": "deepl"
   },
   "Authored diegetic UI using VFXs to immerse the player": {
-    "translation": "Interfaccia utente diegetica creata utilizzando effetti visivi per coinvolgere il giocatore",
+    "translation": "UI diegetica creata utilizzando VFX per immergere il giocatore",
     "api": "deepl"
   },
   "Authored magic music and diegetic birds sounds to reproduce woods": {
-    "translation": "Ho composto musica magica e suoni diegetici di uccelli per ricreare l'atmosfera del bosco.",
+    "translation": "Ho composto musica magica e suoni diegetici di uccelli per ricreare il bosco.",
     "api": "deepl"
   },
   "Programmed skills, camera, and movement, that change based on character transformation": {
-    "translation": "Abilità programmate, telecamera e movimenti che variano in base alla trasformazione del personaggio.",
+    "translation": "Programmato abilità, telecamera e movimenti che variano in base alla trasformazione del personaggio.",
     "api": "deepl"
   },
   "Programmed AI that reacts intuitively to weather conditions and visibility issues": {
-    "translation": "Intelligenza artificiale programmata per reagire in modo intuitivo alle condizioni meteorologiche e ai problemi di visibilità.",
+    "translation": "Programmata AI che reagisce intuitivamente alle condizioni meteorologiche e ai problemi di visibilità.",
     "api": "deepl"
   },
   "Designed a minimalistic meditative sci-fi puzzle game": {
-    "translation": "Progettato un puzzle game fantascientifico minimalista e meditativo.",
+    "translation": "Progettato un puzzle game sci-fi minimalista e meditativo.",
     "api": "deepl"
   },
   "Programmed systemic physics changes and story events": {
-    "translation": "Modifiche sistematiche programmate alla fisica e agli eventi della trama",
+    "translation": "Programmato modifiche sistematiche alla fisica ed eventi della trama",
     "api": "deepl"
   },
   "Designed physics-based puzzles and room themes, and fixed edge cases and difficulty after playtests": {
@@ -1152,27 +1152,27 @@
     "api": "deepl"
   },
   "Managed scope creep to deliver the project in time": {
-    "translation": "Gestione dello scope creep per consegnare il progetto nei tempi previsti",
+    "translation": "Gestito scope creep per consegnare il progetto nei tempi previsti",
     "api": "deepl"
   },
   "Designed an addictive game loop for mobile with simple mechanics": {
-    "translation": "Progettato un ciclo di gioco coinvolgente per dispositivi mobili con meccaniche semplici.",
+    "translation": "Progettato un game loop coinvolgente per mobile con meccaniche semplici.",
     "api": "deepl"
   },
   "Programmed a dynamic difficulty system that significantly increased repeatability": {
-    "translation": "È stato implementato un sistema di difficoltà dinamico che ha notevolmente aumentato la ripetibilità.",
+    "translation": "Programmato un sistema di difficoltà dinamico che ha notevolmente aumentato la ripetibilità.",
     "api": "deepl"
   },
   "Added an infinite procedural map that followed dynamic difficulty": {
-    "translation": "Aggiunta una mappa procedurale infinita che segue una difficoltà dinamica.",
+    "translation": "Aggiunta una mappa procedurale infinita che segue la difficoltà dinamica.",
     "api": "deepl"
   },
   "Designed procedural level design rules and sections to handle dynamic difficulty and fit into a preset game duration": {
-    "translation": "Progettazione di regole procedurali per il livello di progettazione e sezioni per gestire la difficoltà dinamica e adattarsi a una durata di gioco prestabilita.",
+    "translation": "Progettato regole per il level design procedurale e sezioni per gestire la difficoltà dinamica e adattarsi a una durata di gioco prestabilita.",
     "api": "deepl"
   },
   "Developed an easy to work on level design pipeline": {
-    "translation": "Sviluppo di una pipeline di progettazione dei livelli di facile utilizzo",
+    "translation": "Sviluppata una pipeline di level design di facile utilizzo",
     "api": "deepl"
   },
   "Showreel": {
@@ -1180,7 +1180,7 @@
     "api": "deepl"
   },
   "Game design": {
-    "translation": "Progettazione del gioco",
+    "translation": "Game design",
     "api": "deepl"
   },
   "My portfolio and blog": {
@@ -1212,7 +1212,7 @@
     "api": "deepl"
   },
   "Designed free-roam maps that prioritized visibility in accordance with the camera and gameplay elements, and allowed space for enemies to spawn": {
-    "translation": "Progettazione di mappe open world che privilegiano la visibilità in base alla telecamera e agli elementi di gioco, lasciando spazio alla comparsa dei nemici.",
+    "translation": "Progettato mappe open world che privilegiano la visibilità in base alla telecamera e agli elementi di gioco, lasciando spazio alla comparsa dei nemici.",
     "api": "deepl"
   },
   "Technical level designer": {
@@ -1220,11 +1220,11 @@
     "api": "deepl"
   },
   "Level design": {
-    "translation": "Progettazione dei livelli",
+    "translation": "Level design",
     "api": "deepl"
   },
   "I'm a gameplay programmer with 3 years of professional experience in programming and leadership. I specialize in mechanics and AI": {
-    "translation": "Sono un gameplay programmer con 3 anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato in meccaniche e intelligenza artificiale.",
+    "translation": "Sono un gameplay programmer con 3 anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato in meccaniche e AI.",
     "api": "deepl"
   },
   "Gameplay programming": {
@@ -1240,7 +1240,7 @@
     "api": "deepl"
   },
   "I'm a system programmer with 3 years of professional experience in programming and leadership. I specialize in rendering and software architecture design": {
-    "translation": "Sono un system programmer con 3 anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato nel rendering e nella progettazione di architetture software.",
+    "translation": "Sono un system programmer con 3 anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato nel rendering e nel design di architetture software.",
     "api": "deepl"
   },
   "System programming": {
@@ -1248,7 +1248,7 @@
     "api": "deepl"
   },
   "I'm a tools programmer with 3 years of professional experience in programming and leadership. I specialize in UI \\ UX, level design tools, and CI \\ CD": {
-    "translation": "Sono un tools programmer con 3 anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato in UI \\ UX, strumenti di progettazione dei livelli e CI \\ CD.",
+    "translation": "Sono un tools programmer con 3 anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato in UI \\ UX, tool di level design e CI \\ CD.",
     "api": "deepl"
   },
   "Tools programming": {
@@ -1280,7 +1280,7 @@
     "api": "deepl"
   },
   "I'm a UI programmer with 3 years of professional experience in programming and leadership. I specialize in user journey mapping and playful UI design": {
-    "translation": "Sono un UI programmer con 3 anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato nella mappatura del percorso dell'utente e nella progettazione di interfacce utente intuitive.",
+    "translation": "Sono un UI programmer con 3 anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato nell'user journey mapping e nel design di UI giocose.",
     "api": "deepl"
   },
   "UI programming": {
@@ -1300,7 +1300,7 @@
     "api": "deepl"
   },
   "Developed tools to easily place AI agents and control patrol paths": {
-    "translation": "Sviluppo di strumenti per posizionare facilmente agenti AI e controllare i percorsi di pattuglia.",
+    "translation": "Sviluppo di tool per posizionare facilmente agenti AI e controllare i percorsi di pattuglia.",
     "api": "deepl"
   },
   "Developed a realistic black hole shader": {
@@ -1312,7 +1312,7 @@
     "api": "deepl"
   },
   "Worked on interior and exterior lighting for a space station setting": {
-    "translation": "Ho collaborato alla progettazione dell'illuminazione interna ed esterna per l'allestimento di una stazione spaziale.",
+    "translation": "Ho collaborato al design dell'illuminazione interna ed esterna di una stazione spaziale.",
     "api": "deepl"
   },
   "Achieved low-end mobile device compatibility": {
@@ -1344,11 +1344,11 @@
     "api": "deepl"
   },
   "French, basic": {
-    "translation": "Francese, livello base",
+    "translation": "Francese, base",
     "api": "deepl"
   },
   "Spanish, basic": {
-    "translation": "Spagnolo, livello base",
+    "translation": "Spagnolo, base",
     "api": "deepl"
   }
 }
