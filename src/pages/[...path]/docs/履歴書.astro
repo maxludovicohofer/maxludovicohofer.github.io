@@ -10,22 +10,22 @@ import {
 } from "@integrations/content";
 import {
   getAddress,
+  getDocumentsBasePaths,
   getMotivationSentence,
   getMyName,
 } from "@integrations/docs";
 import { i18n, setDayjsLocale } from "@integrations/i18n-server";
 import { capitalize } from "@integrations/text";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
-import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 import { PHONE_NUMBER } from "astro:env/server";
 import dayjs from "dayjs";
 
 export const getStaticPaths = async (
-  ...params: Parameters<typeof getBasePaths>
+  ...params: Parameters<typeof getDocumentsBasePaths>
 ) =>
-  getBasePaths({
+  getDocumentsBasePaths({
     allowedLocales: ["ja"],
-    allowedCompanies: (await getBuiltCompanies("resumeJa")).map(({ id }) => id),
+    allowedCompanies: (await getBuiltCompanies("ja")).map(({ id }) => id),
     ...params[0],
   });
 

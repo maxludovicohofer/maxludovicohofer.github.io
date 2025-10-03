@@ -24,6 +24,7 @@ export const getStaticPaths = async (options?: {
   excludedCompanies?: (string | undefined)[];
   localOnly?: boolean;
   dontBuild?: boolean;
+  notPortfolio?: boolean;
 }) => {
   if (options?.dontBuild && !import.meta.env.DEV) return [];
 
@@ -43,7 +44,9 @@ export const getStaticPaths = async (options?: {
   const roles = (await getCollection("roles"))
     .filter(
       ({ data: { omit } }) =>
-        import.meta.env.DEV || !omit?.includes("portfolio")
+        import.meta.env.DEV ||
+        options?.notPortfolio ||
+        !omit?.includes("portfolio")
     )
     .map(({ id }) => id);
   let defaultedRoles = [undefined, ...roles.slice(1)];

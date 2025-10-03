@@ -16,6 +16,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import utc from "dayjs/plugin/utc";
 import { VALID_INPUT_FORMATS } from "node_modules/astro/dist/assets/consts";
 import { groupBy } from "./array";
+import type { locales } from "./astro-config";
 import {
   applyMatch,
   getCollectionAdvanced,
@@ -422,10 +423,13 @@ export const getCompanyName = async (
 ) => {
   const currentCompany = company ?? (await getCompany(astro));
 
-  return currentCompany
-    ? (currentCompany.data.localizedIds?.[getCurrentLocale(astro)] ??
-        currentCompany.id)
-    : undefined;
+  if (!currentCompany) return;
+
+  const localizedInfo = currentCompany.data[getCurrentLocale(astro)];
+  if (typeof localizedInfo === "object" && !Array.isArray(localizedInfo))
+    return localizedInfo.localizedCompanyName;
+
+  return currentCompany.id;
 };
 
 export const getResumeKey = (astro: AstroGlobal) =>
@@ -435,12 +439,12 @@ export const getResumeProps = async (astro: AstroGlobal) => {
   const company = await getCompany(astro);
   if (!company) return {} as ReturnType<typeof getCompanyResumeProps>;
 
-  return getCompanyResumeProps(company, getResumeKey(astro));
+  return getCompanyResumeProps(company, getCurrentLocale(astro));
 };
 
-type ResumeKey = Extract<
-  keyof CollectionEntry<"companies">["data"],
-  `${string}resume${string}`
+type ResumeKey = keyof Pick<
+  CollectionEntry<"companies">["data"],
+  (typeof locales)[number]
 >;
 
 export const getCompanyResumeProps = (
@@ -469,12 +473,7 @@ export const getCompanyResumeProps = (
   return resumeData;
 };
 
-export const getBuiltCompanies = async (
-  resume: Extract<
-    keyof CollectionEntry<"companies">["data"],
-    `${string}resume${string}`
-  >,
-) =>
+export const getBuiltCompanies = async (resume: ResumeKey) =>
   (await getCollection("companies")).filter(({ data }) => {
     if (import.meta.env.DEV) return true;
 
@@ -482,7 +481,20 @@ export const getBuiltCompanies = async (
 
     return Array.isArray(resumeProps) || typeof resumeProps === "boolean"
       ? resumeProps
-      : resumeProps?.build;
+      : resumeProps?.resume;
+  });
+
+export const getBuiltCompaniesByExclusion = async (excludedResume: ResumeKey) =>
+  (await getCollection("companies")).filter(({ data }) => {
+    if (import.meta.env.DEV) return true;
+
+    return Object.entries(data)
+      .filter(([resume]) => resume !== excludedResume)
+      .some(([, props]) =>
+        Array.isArray(props) || typeof props === "boolean"
+          ? props
+          : props?.resume,
+      );
   });
 
 export const getRoles = async (

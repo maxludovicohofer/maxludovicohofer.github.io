@@ -3,15 +3,19 @@ import Link from "@components/ui/Link.astro";
 import Text from "@components/ui/Text.astro";
 import { getRole, getSiteLink } from "@integrations/astro-server";
 import { getCompanyName, getResumeProps } from "@integrations/content";
-import { getMyName, getPathsIf, getResumeDocuments } from "@integrations/docs";
+import {
+  getDocumentsBasePaths,
+  getMyName,
+  getPathsIf,
+  getResumeDocuments,
+} from "@integrations/docs";
 import { i18n } from "@integrations/i18n-server";
 import { removeWatashiNo } from "@integrations/l10n";
 import { toTextList } from "@integrations/text";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
-import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 
 export const getStaticPaths = async (
-  ...params: Parameters<typeof getBasePaths>
+  ...params: Parameters<typeof getDocumentsBasePaths>
 ) => {
   return getPathsIf("email", ...params);
 };
@@ -19,7 +23,7 @@ export const getStaticPaths = async (
 const portfolioLink = await getSiteLink(Astro);
 const myName = await getMyName(Astro);
 const company = await getCompanyName(Astro);
-const { build, singleApplication, coverLetter } = await getResumeProps(Astro);
+const { resume, singleApplication, coverLetter } = await getResumeProps(Astro);
 const { role } = await getRole(Astro);
 const t = i18n(Astro);
 
@@ -44,8 +48,8 @@ const documentsSentence = removeWatashiNo(
     <span>{myName.translatedShort}{await t(",")}{await t(" ")}</span>
     <Text tag="span"
       >application for {
-        singleApplication && Array.isArray(build)
-          ? toTextList(build.map(({ id }) => id))
+        singleApplication && Array.isArray(resume)
+          ? toTextList(resume.map(({ id }) => id))
           : role.id
       }</Text
     >

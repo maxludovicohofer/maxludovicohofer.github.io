@@ -2830,5 +2830,9 @@
   "Tools programming": {
     "translation": "ツールのプログラミング",
     "api": "deepl"
+  },
+  "Tech lead with 3 years of professional experience in programming and leadership. I specialize in scrum, software development, and pipeline efficiency": {
+    "translation": "プログラミングおよびリーダーシップにおいて3年の専門的な経験を有する技術リーダーです。スクラム、ソフトウェア開発、およびパイプライン効率化を専門としています。",
+    "api": "deepl"
   }
 }

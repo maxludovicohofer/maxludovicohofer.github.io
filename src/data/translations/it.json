@@ -1276,7 +1276,7 @@
     "api": "deepl"
   },
   "Team leading": {
-    "translation": "Responsabile del team",
+    "translation": "Team leading",
     "api": "deepl"
   },
   "I'm a UI programmer with 3 years of professional experience in programming and leadership. I specialize in user journey mapping and playful UI design": {
@@ -1320,7 +1320,7 @@
     "api": "deepl"
   },
   "Mixed, mastered, and programmed sound and music for the game": {
-    "translation": "Mischiato, masterizzato e programmato il suono e la musica per il gioco.",
+    "translation": "Mixato, masterizzato e programmato il suono e la musica per il gioco.",
     "api": "deepl"
   },
   "Technical artist": {
@@ -1349,6 +1349,110 @@
   },
   "Spanish, basic": {
     "translation": "Spagnolo, base",
+    "api": "deepl"
+  },
+  "Tech lead with 3 years of professional experience in programming and leadership. I specialize in scrum, software development, and pipeline efficiency": {
+    "translation": "Tech lead con tre anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato in scrum, sviluppo software ed efficienza della pipeline.",
+    "api": "deepl"
+  },
+  "game design": {
+    "translation": "game design",
+    "api": "deepl"
+  },
+  "While new to the professional world of videogames, I have been involved in {} on academic and personal projects my whole life": {
+    "translation": "Sebbene sia nuovo nel mondo professionale dei videogiochi, mi sono occupato di {} in progetti accademici e personali per tutta la vita.",
+    "api": "deepl"
+  },
+  "I value self-teaching, teamwork, and sharing knowledge with colleagues": {
+    "translation": "Apprezzo l'autoapprendimento, il lavoro di squadra e la condivisione delle conoscenze con i colleghi.",
+    "api": "deepl"
+  },
+  "I aspire to grow my skills further while learning from your forward-thinking company": {
+    "translation": "Desidero migliorare ulteriormente le mie competenze mentre apprendo dalla vostra azienda all'avanguardia.",
+    "api": "deepl"
+  },
+  "Designing and developing UX for sales team and end clients and adapting the UX to the workflow of the company": {
+    "translation": "Progettazione e sviluppo dell'esperienza utente per il team di vendita e i clienti finali, nonché adattamento dell'esperienza utente al flusso di lavoro dell'azienda.",
+    "api": "deepl"
+  },
+  "Planning the company's technological development": {
+    "translation": "Pianificazione dello sviluppo tecnologico dell'azienda",
+    "api": "deepl"
+  },
+  "Read development": {
+    "translation": "Leggere lo sviluppo",
+    "api": "deepl"
+  },
+  "Developed user journey and UI/UX from the ground up to maximize conversions": {
+    "translation": "Abbiamo sviluppato da zero il percorso dell'utente e l'interfaccia utente/esperienza utente per massimizzare le conversioni.",
+    "api": "deepl"
+  },
+  "Developed telemedicine product roster with board, strategic partners, and stakeholders": {
+    "translation": "Abbiamo sviluppato un elenco di prodotti di telemedicina in collaborazione con il consiglio di amministrazione, i partner strategici e le parti interessate.",
+    "api": "deepl"
+  },
+  "Worked with a mobile-first approach to maximize product effectiveness": {
+    "translation": "Abbiamo adottato un approccio incentrato sui dispositivi mobili per massimizzare l'efficacia del prodotto.",
+    "api": "deepl"
+  },
+  "Planned IT solutions for cost efficiency and GDPR security": {
+    "translation": "Soluzioni IT pianificate per garantire efficienza dei costi e sicurezza GDPR",
+    "api": "deepl"
+  },
+  "level design": {
+    "translation": "level design",
+    "api": "deepl"
+  },
+  "gameplay programming": {
+    "translation": "gameplay programming",
+    "api": "deepl"
+  },
+  "Programming a realtime data-heavy web app and managing servers and CI/CD": {
+    "translation": "Programmazione di un'applicazione web in tempo reale con elevato volume di dati e gestione di server e CI/CD.",
+    "api": "deepl"
+  },
+  "Programmed a mobile-first rich-offline progressive web app using AWS Amplify, React, scrum, and TDD": {
+    "translation": "Ho sviluppato un'applicazione web progressiva ricca di funzionalità offline e ottimizzata per dispositivi mobili utilizzando AWS Amplify, React, Scrum e TDD.",
+    "api": "deepl"
+  },
+  "Created a fully-frontend performant recommender system for staff operations scheduling": {
+    "translation": "Ho sviluppato un sistema di raccomandazione completamente front-end e altamente performante per la pianificazione delle operazioni del personale.",
+    "api": "deepl"
+  },
+  "system programming": {
+    "translation": "system programming",
+    "api": "deepl"
+  },
+  "tools programming": {
+    "translation": "tools programming",
+    "api": "deepl"
+  },
+  "engine programming": {
+    "translation": "engine programming",
+    "api": "deepl"
+  },
+  "project management": {
+    "translation": "project management",
+    "api": "deepl"
+  },
+  "Managing budget and resources of technological projects and communicating with the board to envision new projects": {
+    "translation": "Gestione del budget e delle risorse dei progetti tecnologici e comunicazione con il consiglio di amministrazione per pianificare nuovi progetti.",
+    "api": "deepl"
+  },
+  "Envisioned and lead development of innovative B2C and B2B solutions in the credit brokerage sector": {
+    "translation": "Ideazione e direzione dello sviluppo di soluzioni innovative B2C e B2B nel settore dell'intermediazione creditizia.",
+    "api": "deepl"
+  },
+  "Managed cross-functional team of 4 to replace old business processes": {
+    "translation": "Ho gestito un team interfunzionale di quattro persone per sostituire i vecchi processi aziendali.",
+    "api": "deepl"
+  },
+  "team leading": {
+    "translation": "team leading",
+    "api": "deepl"
+  },
+  "technical art": {
+    "translation": "technical art",
     "api": "deepl"
   }
 }

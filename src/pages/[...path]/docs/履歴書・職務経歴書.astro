@@ -1,11 +1,10 @@
 ---
-import { getPathsIf } from "@integrations/docs";
-import { getStaticPaths as getBasePaths } from "@pages/index.astro";
+import { getDocumentsBasePaths, getPathsIf } from "@integrations/docs";
 import Rirekisho from "./履歴書.astro";
 import Shokumu from "./職務経歴書.astro";
 
 export const getStaticPaths = async (
-  ...params: Parameters<typeof getBasePaths>
+  ...params: Parameters<typeof getDocumentsBasePaths>
 ) => {
   return getPathsIf("singleResumeFile", ...params);
 };

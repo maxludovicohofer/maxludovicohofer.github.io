@@ -1,13 +1,12 @@
 ---
 import Text from "@components/ui/Text.astro";
 import { getResumeProps } from "@integrations/content";
-import { getPathsIf } from "@integrations/docs";
+import { getDocumentsBasePaths, getPathsIf } from "@integrations/docs";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
-import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 import { getCollection } from "astro:content";
 
 export const getStaticPaths = async (
-  ...params: Parameters<typeof getBasePaths>
+  ...params: Parameters<typeof getDocumentsBasePaths>
 ) => {
   return getPathsIf("playedGames", ...params);
 };

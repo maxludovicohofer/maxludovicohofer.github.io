@@ -46,9 +46,9 @@ export const getMotivationSentence = async (astro: AstroGlobal) => {
   const t = i18n(astro);
 
   const company = await getCompanyName(astro);
-  const { build, specifyRole } = await getResumeProps(astro);
+  const { resume, specifyRole } = await getResumeProps(astro);
 
-  const specifiedRole = (Array.isArray(build) && build?.[0]?.id) || id;
+  const specifiedRole = (Array.isArray(resume) && resume?.[0]?.id) || id;
 
   return removeWatashiWa(
     `${
@@ -208,12 +208,12 @@ export const getExtraItems = async (astro: AstroGlobal) => {
 
 export const getPathsIf = async (
   key: keyof ReturnType<typeof getCompanyResumeProps>,
-  ...params: Parameters<typeof getBasePaths>
+  ...params: Parameters<typeof getDocumentsBasePaths>
 ) => {
-  const jaCompanies = await getBuiltCompanies("resumeJa");
+  const jaCompanies = await getBuiltCompanies("ja");
 
   const companiesWithDuplicates = [
-    ...(await getBuiltCompanies("resume")),
+    ...(await getBuiltCompanies("en")),
     ...jaCompanies,
   ];
   const companies = [
@@ -222,11 +222,11 @@ export const getPathsIf = async (
 
   const buildEmail = companies.some(
     (company) =>
-      getCompanyResumeProps(company, "resume")[key] ||
-      getCompanyResumeProps(company, "resumeJa")[key],
+      getCompanyResumeProps(company, "en")[key] ||
+      getCompanyResumeProps(company, "ja")[key],
   );
 
-  return getBasePaths({
+  return getDocumentsBasePaths({
     ...(buildEmail && companies.length
       ? { allowedCompanies: companies.map(({ id }) => id) }
       : { dontBuild: true }),
@@ -238,3 +238,7 @@ export const getPathsIf = async (
     ...params[0],
   });
 };
+
+export const getDocumentsBasePaths = (
+  ...params: Parameters<typeof getBasePaths>
+) => getBasePaths({ notPortfolio: true, ...params[0] });

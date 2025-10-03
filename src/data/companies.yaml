@@ -1,24 +1,23 @@
 # https://wikipedia.org/wiki/List_of_video_game_developers
 # Format id as written in middle of a sentence
 
-# Popular studios
+#! Popular studios
 
 - id: Kojima Productions
-  localizedIds:
-    ja: コジマプロダクション
-  resumeJa:
-    full: true
+  ja:
+    localizedCompanyName: コジマプロダクション
+    fullResume: true
 
 - id: genDESIGN
-  resumeJa:
+  ja:
     email: true
     singleApplication: true
 
 - id: PlatinumGames
-  resumeJa: false
+  ja: false
 
 - id: Giant Sparrow
-  resume:
+  en:
     interests:
       passions:
         - science
@@ -28,13 +27,12 @@
         - natural decision making
 
 - id: Team Asobi
-  localizedIds:
-    ja: TEAMアソビ
-  resumeJa:
+  ja:
+    localizedCompanyName: TEAMアソビ
     coverLetter: true
 
 - id: FromSoftware
-  resumeJa:
+  ja:
     specifyRole: true
     coverLetter: true
     singleResumeFile: true
@@ -42,242 +40,243 @@
       limit: 50
 
 - id: Nintendo
-  resumeJa: false
+  ja: false
 
 - id: Capcom
-  resumeJa: false
+  ja: false
 
 - id: Square Enix
-  resumeJa: false
+  ja: false
 
 - id: Level-5
-  resumeJa: false
+  ja: false
 
 - id: Bandai Namco Studios
-  resumeJa: false
+  ja: false
 
 - id: Atlus
-  resumeJa: false
+  ja: false
 
 - id: Koei Tecmo Games
-  resumeJa: false
+  ja: false
 
 - id: Sucker Punch Productions
-  resume: false
+  en: false
 
 - id: Santa Monica Studio
-  resume:
+  en:
     coverLetter: true
 
 - id: Guerrilla Games
-  resume:
+  en:
     coverLetter: true
 
 - id: Moon Studios
-  resume: false
+  en: false
 
 - id: Ninja Theory
-  resume:
+  en:
     coverLetter: true
     email: true
 
 - id: Pearl Abyss
-  resume:
+  en:
     coverLetter: true
 
 - id: id Software
-  resume: false
+  en: false
 
 - id: Valve
-  resume: false
+  en: false
 
 - id: Naughty Dog
-  resume: false
+  en: false
 
 - id: Respawn Entertainment
-  resume: false
+  en: false
 
 - id: Hello Games
-  resume:
+  en:
     email: true
 
 - id: Hazelight Studios
-  resume: false
+  en: false
 
 - id: Thatgamecompany
-  resume: false
+  en: false
 
 - id: Mobius Digital
-  resume: false
+  en: false
 
 - id: Rockstar Games
-  resume:
+  en:
     coverLetter: true
 
 - id: Remedy Entertainment
-  resume: false
+  en: false
 
 - id: Frictional Games
-  resume: false
+  en: false
 
 - id: Larian Studios
-  resume:
+  en:
     coverLetter: true
 
 - id: MachineGames
-  resume: false
+  en: false
 
 - id: Obsidian Entertainment
-  resume: false
+  en: false
 
 - id: ArenaNet
-  resume: false
+  en: false
 
 - id: BioWare
-  resume: false
+  en: false
 
 - id: Bethesda Game Studios
-  resume: false
+  en: false
 
 - id: Epic Games
-  resume: false
+  en: false
 
 - id: Tarsier Studios
-  resume: false
+  en: false
 
 - id: Quantic Dream
-  resume: false
+  en: false
 
 - id: Crytek
-  resume: false
+  en: false
 
 - id: Arrowhead Game Studios
-  resume: false
+  en: false
 
 - id: Bungie
-  resume: false
+  en: false
 
 - id: EA
-  resume: false
+  en: false
 
 - id: CD Projekt Red
-  resume: false
+  en: false
 
 - id: Activision Blizzard
-  resume: false
+  en: false
 
 - id: Techland
-  resume: false
+  en: false
 
 - id: Don't nod
-  resume: false
+  en: false
 
 - id: 4A Games
-  resume:
+  en:
     email: true
 
 - id: Gearbox Software
-  resume: false
+  en: false
 
 - id: Hangar 13
-  resume: false
+  en: false
 
 - id: Arkane Studios
-  resume: false
+  en: false
 
 - id: NCSoft
-  resume: false
+  en: false
 
 - id: Asobo Studio
-  resume: false
+  en: false
 
 - id: DICE
-  resume: false
+  en: false
 
 - id: Facepunch Studios
-  resume: false
+  en: false
 
 - id: Certain Affinity
-  resume: false
+  en: false
 
 - id: Creative Assembly
-  resume: false
+  en: false
 
 - id: Sledgehammer Games
-  resume: false
+  en: false
 
 - id: Sandfall Interactive
-  resume: false
+  en: false
 
 - id: Milestone
-  resume:
+  en:
     coverLetter: true
 
 - id: Nacon Studio
-  resume:
+  en:
     email: true
     coverLetter: true
 
-# Outsourcing studios
+#! Outsourcing studios
 
 - id: Keywords Studios
-  resume: false
+  en: false
 
 - id: Virtuos
-  resume: false
+  en: false
 
 - id: Sumo Digital
-  resume: false
+  en: false
 
 - id: Sperasoft
-  resume: false
+  en: false
 
 - id: Pole To Win
-  resume: false
+  en: false
 
 - id: Lakshya Digital
-  resume: false
+  en: false
 
 - id: Room 8 Group
-  resume: false
+  en: false
 
 - id: Amber Studio
-  resume: false
+  en: false
 
 - id: Quantic Lab
-  resume: false
+  en: false
 
 - id: Anshar Studios
-  resume: false
+  en: false
 
 - id: Elite3D
-  resume: false
+  en: false
 
 - id: Tose Co., Ltd.
-  resume: false
+  en: false
 
 - id: Digital Hearts
-  resume: false
+  en: false
 
 - id: Skywind Group
-  resume: false
+  en: false
 
 - id: Black Tower Studios
-  resume: false
+  en: false
 
-# Other studios
+#! Other studios
 
 - id: Gameloft
-  resume: false
+  en: false
 
 - id: Playrix
-  resume: false
+  en: false
 
 - id: Ubisoft
-  resume: false
+  en: false
 
 - id: Tencent
-  resume: false
+  en: false
 
 - id: Jagex
-  resume: false
+  en: false
+#! General companies

@@ -16,16 +16,20 @@ import {
   getTeam,
   getTechList,
 } from "@integrations/content";
-import { getMyName, getSelfPRSentence, getSummary } from "@integrations/docs";
+import {
+  getDocumentsBasePaths,
+  getMyName,
+  getSelfPRSentence,
+  getSummary,
+} from "@integrations/docs";
 import { i18n, setDayjsLocale } from "@integrations/i18n-server";
 import { capitalize } from "@integrations/text";
 import { getEntryId } from "@layouts/document/Document.astro";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
-import { getStaticPaths as getBasePaths } from "./履歴書.astro";
 
-export const getStaticPaths = getBasePaths;
+export const getStaticPaths = getDocumentsBasePaths;
 
 await setDayjsLocale(Astro);
 dayjs.extend(duration);
@@ -37,7 +41,7 @@ const t = i18n(Astro);
 const myName = await getMyName(Astro);
 const summary = await getSummary(Astro);
 
-const { full } = await getResumeProps(Astro);
+const { fullResume } = await getResumeProps(Astro);
 
 const { experience } = await getKnowHow(Astro);
 
@@ -113,9 +117,11 @@ const selfPRSentence = await getSelfPRSentence(Astro);
             matchedProjects &&
             applyMatch(matchedProjects, projectMatchThreshold)
               .filter((project) =>
-                full ? true : getDevelopmentTime(project)! > durationThreshold
+                fullResume
+                  ? true
+                  : getDevelopmentTime(project)! > durationThreshold
               )
-              .slice(0, full ? undefined : 2)
+              .slice(0, fullResume ? undefined : 2)
               .sort((a, b) =>
                 b.publishingDate.isAfter(a.publishingDate) ? 1 : -1
               );
@@ -183,7 +189,7 @@ const selfPRSentence = await getSelfPRSentence(Astro);
                           tech={projectTech}
                           projectType={getCategory(project)}
                           team={getTeam(project)!}
-                          full={full}
+                          full={fullResume}
                         />
                       );
                     })

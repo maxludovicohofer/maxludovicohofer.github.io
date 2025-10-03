@@ -17,14 +17,15 @@ const roles = defineCollection({
   }),
 });
 
-const resumeProps = z
+const localizedCompanyProps = z
   .boolean()
   .or(reference("roles").array())
   .or(
     z.object({
-      build: z.boolean().or(reference("roles").array()).optional(),
+      localizedCompanyName: z.string().optional(),
+      resume: z.boolean().or(reference("roles").array()).optional(),
       specifyRole: z.boolean().optional(),
-      full: z.boolean().optional(),
+      fullResume: z.boolean().optional(),
       email: z.boolean().optional(),
       coverLetter: z.boolean().optional(),
       singleResumeFile: z.boolean().optional(),
@@ -46,11 +47,11 @@ const resumeProps = z
 
 const companies = defineCollection({
   loader: file("src/data/companies.yaml"),
-  schema: fileSchema.extend({
-    localizedIds: z.record(z.enum(locales), z.string()).optional(),
-    resume: resumeProps,
-    resumeJa: resumeProps,
-  }),
+  schema: fileSchema.extend(
+    Object.fromEntries(
+      locales.map((locale) => [locale, localizedCompanyProps]),
+    ),
+  ),
 });
 
 const tech = defineCollection({
