@@ -3,7 +3,9 @@ import { defaultLocale, type locales } from "./astro-config";
 
 export type LocaleInfo = {
   languageName: string;
+  nationName: string;
   delimiters: string;
+  cellphonePrefix: `+${number}`;
   articleForOne?: string;
   surnameFirst?: boolean;
   nameSeparator?: string;
@@ -14,14 +16,18 @@ export type LocaleInfo = {
 export const localeInfo: Record<(typeof locales)[number], LocaleInfo> = {
   en: {
     languageName: "English",
+    nationName: "United States",
     delimiters: ".?!",
+    cellphonePrefix: "+1",
     articleForOne: "a",
     getYear: (date) => date.replaceAll(/\D+/g, "").slice(-4),
     getYearMonth: (date) => date.replace(/\d+,/, ""),
   },
   ja: {
     languageName: "日本語",
+    nationName: "Japan",
     delimiters: "。？！",
+    cellphonePrefix: "+81",
     surnameFirst: true,
     nameSeparator: "・",
     getYear: (date) => date.replaceAll(/\b\d{1,2}[日月]/g, ""),
@@ -29,7 +35,9 @@ export const localeInfo: Record<(typeof locales)[number], LocaleInfo> = {
   },
   it: {
     languageName: "Italiano",
+    nationName: "Italy",
     delimiters: ".?!",
+    cellphonePrefix: "+39",
     articleForOne: "un",
     getYear: (date) => date.replaceAll(/\D+/g, "").slice(-4),
     getYearMonth: (date) => date.replace(/\d+,/, ""),

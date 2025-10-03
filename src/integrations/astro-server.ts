@@ -32,7 +32,7 @@ import {
   getPathWithoutLocale,
   type PossibleTranslations,
 } from "./i18n";
-import { getCurrentLocale } from "./i18n-special";
+import { getCurrentLocale, getLocaleInfo } from "./i18n-special";
 import { lerp, remap } from "./math";
 import {
   capitalize,
@@ -482,7 +482,7 @@ export const getLinkName = async (
   } else if (isMailLink(link)) {
     linkName = link.slice(7);
   } else if (isTelLink(link)) {
-    linkName = getTelLinkName(link, forDisplay);
+    linkName = getTelLinkName(astro, link, forDisplay);
   } else if (isGeoLink(link)) {
     linkName = link.slice(4);
   } else {
@@ -524,11 +524,20 @@ export const getRemoteLinkName = async (
   return hostParts[hostParts.length - 2]!;
 };
 
-export const getTelLinkName = (link: string, forDisplay?: boolean) => {
-  const linkWithoutPrefix = link.slice(4);
+export const getTelLinkName = (
+  astro: AstroGlobal,
+  link: string,
+  forDisplay?: boolean,
+) => {
+  const telWithoutHttpPrefix = link.slice(4);
 
   if (forDisplay) {
-    const sections = linkWithoutPrefix.match(/.{1,3}/g)!;
+    const telWithoutNationalPrefix = telWithoutHttpPrefix.replace(
+      new RegExp(`^\\${getLocaleInfo(astro).cellphonePrefix}`),
+      "",
+    );
+
+    const sections = telWithoutNationalPrefix.match(/.{1,3}/g)!;
 
     if (sections[sections.length - 1]!.length < 3)
       sections[sections.length - 2] =
@@ -537,5 +546,5 @@ export const getTelLinkName = (link: string, forDisplay?: boolean) => {
     return sections.join(" ");
   }
 
-  return linkWithoutPrefix;
+  return telWithoutHttpPrefix;
 };

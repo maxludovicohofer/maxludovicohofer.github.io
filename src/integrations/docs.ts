@@ -155,7 +155,14 @@ export const getSelfPRSentence = async (astro: AstroGlobal) => {
 export const getAddress = async (astro: AstroGlobal, options?: I18nOptions) => {
   const t = i18n(astro);
 
-  const address = FULL_ADDRESS ?? "Paese 31038 near Venice, Italy";
+  let address = FULL_ADDRESS ?? "Paese 31038 near Venice, Italy";
+
+  if (FULL_ADDRESS) {
+    const localeNation = getLocaleInfo(astro).nationName;
+    if (FULL_ADDRESS.endsWith(localeNation)) {
+      address = FULL_ADDRESS.replace(new RegExp(`${localeNation}$`), "Treviso");
+    }
+  }
 
   return {
     raw: address,
