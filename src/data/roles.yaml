@@ -203,17 +203,20 @@
 - id: tech lead
   matches:
     - technical lead
+    - programmer
     - project manager
     - lead
     - director
     - scrum master
+  notMatches:
+    - artist
   workFields:
     - team leading
     - project management
     - agile methodologies
   specializations:
+    - product management
     - scrum
     - software development
-    - pipeline efficiency
   omit:
     - portfolio

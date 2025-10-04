@@ -160,7 +160,7 @@ export const getAddress = async (astro: AstroGlobal, options?: I18nOptions) => {
   if (FULL_ADDRESS) {
     const localeNation = getLocaleInfo(astro).nationName;
     if (FULL_ADDRESS.endsWith(localeNation)) {
-      address = FULL_ADDRESS.replace(new RegExp(`${localeNation}$`), "Treviso");
+      address = FULL_ADDRESS.replace(new RegExp(`${localeNation}$`), "TV");
     }
   }
 
