@@ -1454,5 +1454,13 @@
   "technical art": {
     "translation": "technical art",
     "api": "deepl"
+  },
+  "Paese 31038 near Venice, Italy": {
+    "translation": "Paese 31038 nei pressi di Venezia, Italia",
+    "api": "deepl"
+  },
+  "Tech lead with 3 years of professional experience in programming and leadership. I specialize in product management, scrum, and software development": {
+    "translation": "Responsabile tecnico con tre anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato in gestione dei prodotti, scrum e sviluppo di software.",
+    "api": "deepl"
   }
 }
