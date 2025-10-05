@@ -1456,11 +1456,91 @@
     "api": "deepl"
   },
   "Paese 31038 near Venice, Italy": {
-    "translation": "Paese 31038 nei pressi di Venezia, Italia",
+    "translation": "Paese 31038, TV",
     "api": "deepl"
   },
   "Tech lead with 3 years of professional experience in programming and leadership. I specialize in product management, scrum, and software development": {
-    "translation": "Responsabile tecnico con tre anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato in gestione dei prodotti, scrum e sviluppo di software.",
+    "translation": "Tech lead con 3 anni di esperienza professionale in programmazione e leadership. Sono specializzato in product management, scrum e sviluppo di software.",
+    "api": "deepl"
+  },
+  "Cover letter": {
+    "translation": "Lettera di presentazione",
+    "api": "deepl"
+  },
+  "My background in software development and leadership has allowed me to develop hard and soft skills that I wish to contribute to {}": {
+    "translation": "La mia esperienza nello sviluppo di software e nella leadership mi ha consentito di acquisire competenze tecniche e trasversali che desidero mettere a disposizione di {}.",
+    "api": "deepl"
+  },
+  "Thank you very much for considering my application": {
+    "translation": "Vi ringrazio per aver preso in considerazione la mia candidatura.",
+    "api": "deepl"
+  },
+  "I hope this message finds you well. I have attached my resume for your review. You may also view my portfolio at": {
+    "translation": "Spero che questo messaggio la trovi bene. Allego il mio curriculum per sua valutazione. Può anche consultare il mio portfolio all'indirizzo",
+    "api": "deepl"
+  },
+  "Email": {
+    "translation": "E-mail",
+    "api": "deepl"
+  },
+  "application for technical game designer": {
+    "translation": "Candidatura per la posizione di progettista tecnico di giochi",
+    "api": "deepl"
+  },
+  "Best regards,": {
+    "translation": "Cordiali saluti,",
+    "api": "deepl"
+  },
+  "I look forward to the possibility of contributing to {}": {
+    "translation": "Sono lieto di poter contribuire a {}.",
+    "api": "deepl"
+  },
+  "Dear {} team,": {
+    "translation": "Gentile team {},",
+    "api": "deepl"
+  },
+  "application for technical level designer": {
+    "translation": "Candidatura per la posizione di progettista tecnico",
+    "api": "deepl"
+  },
+  "application for gameplay programmer": {
+    "translation": "Candidatura per programmatore di videogiochi",
+    "api": "deepl"
+  },
+  "application for AI programmer": {
+    "translation": "Candidatura per programmatore AI",
+    "api": "deepl"
+  },
+  "application for system programmer": {
+    "translation": "Domanda di assunzione come programmatore di sistemi",
+    "api": "deepl"
+  },
+  "application for tools programmer": {
+    "translation": "Domanda di assunzione per programmatore di strumenti",
+    "api": "deepl"
+  },
+  "application for engine programmer": {
+    "translation": "richiesta di programmatore motore",
+    "api": "deepl"
+  },
+  "application for project manager": {
+    "translation": "Candidatura per la posizione di Project Manager",
+    "api": "deepl"
+  },
+  "application for technical team lead": {
+    "translation": "Candidatura per la posizione di responsabile del team tecnico",
+    "api": "deepl"
+  },
+  "application for UI programmer": {
+    "translation": "Domanda di assunzione per programmatore UI",
+    "api": "deepl"
+  },
+  "application for technical artist": {
+    "translation": "Candidatura per la posizione di artista tecnico",
+    "api": "deepl"
+  },
+  "application for tech lead": {
+    "translation": "Candidatura per la posizione di responsabile tecnico",
     "api": "deepl"
   }
 }

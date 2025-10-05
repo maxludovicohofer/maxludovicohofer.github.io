@@ -216,6 +216,10 @@
     email: true
     coverLetter: true
 
+- id: Paradox Interactive
+  en:
+    resume: false
+
 #! Outsourcing studios
 
 - id: Keywords Studios
@@ -279,7 +283,13 @@
 
 - id: Jagex
   en: false
-#! General companies
 
-# TODO COMPETENZE DA FIXARE
-# TODO AGGIUNGI EXTRA?
+- id: League of Geeks
+  en:
+    email: true
+    coverLetter: "I recently played Clair Obscur: Expedition 33 and loved that you can equip passive skills after you master them in battle. This adds a lot of variation because using different skills is rewarding. It's also a great solution to encourage players to organically try out new abilities."
+
+- id: Dangleverse
+  en:
+    email: true
+#! General companies

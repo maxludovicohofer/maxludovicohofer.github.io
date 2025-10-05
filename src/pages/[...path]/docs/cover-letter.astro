@@ -1,5 +1,6 @@
 ---
 import Text from "@components/ui/Text.astro";
+import { getResumeProps } from "@integrations/content";
 import {
   getDocumentsBasePaths,
   getPathsIf,
@@ -14,9 +15,11 @@ export const getStaticPaths = async (
 };
 
 const selfPRSentence = await getSelfPRSentence(Astro);
+
+const { coverLetter } = await getResumeProps(Astro);
 ---
 
 <DocumentPage>
   <Text title>Cover letter</Text>
-  <p>{selfPRSentence}</p>
+  <p>{typeof coverLetter === "string" ? coverLetter : selfPRSentence}</p>
 </DocumentPage>
