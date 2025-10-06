@@ -50,7 +50,7 @@ const companies = defineCollection({
   schema: fileSchema.extend(
     Object.fromEntries(
       locales.map((locale) => [locale, localizedCompanyProps]),
-    ),
+    ) as Record<(typeof locales)[number], typeof localizedCompanyProps>,
   ),
 });
 

@@ -2,7 +2,7 @@ import { getStaticPaths as getBasePaths } from "@pages/index.astro";
 import type { AstroGlobal } from "astro";
 import { getCollection } from "astro:content";
 import { FULL_ADDRESS } from "astro:env/server";
-import { defaultLocale, getShortName, myName } from "./astro-config";
+import { defaultLocale, getShortName, locales, myName } from "./astro-config";
 import { getRole } from "./astro-server";
 import {
   getBuiltCompanies,
@@ -217,28 +217,25 @@ export const getPathsIf = async (
   key: keyof ReturnType<typeof getCompanyResumeProps>,
   ...params: Parameters<typeof getDocumentsBasePaths>
 ) => {
-  const jaCompanies = await getBuiltCompanies("ja");
+  const companies = await getBuiltCompanies();
 
-  const companiesWithDuplicates = [
-    ...(await getBuiltCompanies("en")),
-    ...jaCompanies,
-  ];
-  const companies = [
-    ...new Set(companiesWithDuplicates.map(({ id }) => id)),
-  ].map((findId) => companiesWithDuplicates.find(({ id }) => id === findId)!);
+  if (!companies.length) return getDocumentsBasePaths({ dontBuild: true });
 
-  const buildEmail = companies.some(
-    (company) =>
-      getCompanyResumeProps(company, "en")[key] ||
-      getCompanyResumeProps(company, "ja")[key],
+  const canBuild = companies.some((company) =>
+    locales.some(
+      (localeAsResumeKey) =>
+        getCompanyResumeProps(company, localeAsResumeKey)[key],
+    ),
   );
 
+  if (!canBuild) return getDocumentsBasePaths({ dontBuild: true });
+
+  const jaCompaniesCount = companies.filter(({ data }) => data.ja).length;
+
   return getDocumentsBasePaths({
-    ...(buildEmail && companies.length
-      ? { allowedCompanies: companies.map(({ id }) => id) }
-      : { dontBuild: true }),
-    ...(jaCompanies.length
-      ? companies.length === jaCompanies.length
+    allowedCompanies: companies.map(({ id }) => id),
+    ...(jaCompaniesCount
+      ? companies.length === jaCompaniesCount
         ? { allowedLocales: ["ja"] }
         : {}
       : { excludedLocales: ["ja"] }),

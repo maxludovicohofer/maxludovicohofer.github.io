@@ -344,7 +344,7 @@
     "api": "deepl"
   },
   "Programmed a mobile-first rich-offline progressive web app using AWS Amplify, React, scrum, and TDD, created a fully-frontend performant recommender system for staff operations scheduling, and analyzed and developed a data analysis platform for business insights": {
-    "translation": "sviluppato un'applicazione web progressiva ricca di funzionalità offline e ottimizzata per dispositivi mobili utilizzando AWS Amplify, React, Scrum e TDD. Inoltre, creato un sistema di raccomandazione completamente front-end per la pianificazione delle operazioni del personale e analizzato e sviluppato una piattaforma di analisi dei dati per approfondimenti aziendali.",
+    "translation": "Programmata una mobile-first rich-offline progressive web app utilizzando AWS Amplify, React, Scrum e TDD, sviluppato un recommender system completamente front-end e altamente performante per la pianificazione delle operazioni del personale, e analizzato e sviluppato una piattaforma BI.",
     "api": "deepl"
   },
   "Specialized in game design and programming": {
@@ -580,7 +580,7 @@
     "api": "deepl"
   },
   "Solo developed in 14 giorni": {
-    "translation": "Sviluppato in 14 giorni",
+    "translation": "Sviluppato autonomamente in 14 giorni",
     "api": "deepl"
   },
   "try on {}": {
@@ -816,7 +816,7 @@
     "api": "deepl"
   },
   "Solo developed in 3 mesi": {
-    "translation": "Sviluppato in soli tre mesi",
+    "translation": "Sviluppato autonomamente in 3 mesi",
     "api": "deepl"
   },
   "While working on a scheduler for sales appointments, I came up with a recommender system driven by both objective and subjective parameters. Since I produce electronic music, I figured I could use the same algorithm to drive my videogamey audiovisual live performances": {
@@ -1412,11 +1412,11 @@
     "api": "deepl"
   },
   "Programmed a mobile-first rich-offline progressive web app using AWS Amplify, React, scrum, and TDD": {
-    "translation": "Sviluppato una mobile-first rich-offline progressive web app utilizzando AWS Amplify, React, Scrum e TDD.",
+    "translation": "Programmata una mobile-first rich-offline progressive web app utilizzando AWS Amplify, React, Scrum e TDD.",
     "api": "deepl"
   },
   "Created a fully-frontend performant recommender system for staff operations scheduling": {
-    "translation": "Sviluppato un sistema di raccomandazione completamente front-end e altamente performante per la pianificazione delle operazioni del personale.",
+    "translation": "Sviluppato un recommender system completamente front-end e altamente performante per la pianificazione delle operazioni del personale.",
     "api": "deepl"
   },
   "system programming": {
@@ -1468,23 +1468,23 @@
     "api": "deepl"
   },
   "My background in software development and leadership has allowed me to develop hard and soft skills that I wish to contribute to {}": {
-    "translation": "La mia esperienza nello sviluppo di software e nella leadership mi ha consentito di acquisire competenze tecniche e trasversali che desidero mettere a disposizione di {}.",
+    "translation": "La mia esperienza nello sviluppo di software e nella leadership mi ha consentito di acquisire competenze tecniche e soft skill che desidero mettere a disposizione di {}",
     "api": "deepl"
   },
   "Thank you very much for considering my application": {
-    "translation": "Vi ringrazio per aver preso in considerazione la mia candidatura.",
+    "translation": "Vi ringrazio molto per considerare la mia candidatura",
     "api": "deepl"
   },
   "I hope this message finds you well. I have attached my resume for your review. You may also view my portfolio at": {
-    "translation": "Spero che questo messaggio la trovi bene. Allego il mio curriculum per sua valutazione. Può anche consultare il mio portfolio all'indirizzo",
+    "translation": "Spero che questo messaggio vi trovi bene. Ho allegato il mio curriculum per vostra valutazione. Inoltre, potete consultare il mio portfolio all'indirizzo",
     "api": "deepl"
   },
   "Email": {
-    "translation": "E-mail",
+    "translation": "Email",
     "api": "deepl"
   },
   "application for technical game designer": {
-    "translation": "Candidatura per la posizione di progettista tecnico di giochi",
+    "translation": "candidatura per technical game designer",
     "api": "deepl"
   },
   "Best regards,": {
@@ -1492,55 +1492,63 @@
     "api": "deepl"
   },
   "I look forward to the possibility of contributing to {}": {
-    "translation": "Sono lieto di poter contribuire a {}.",
+    "translation": "Sarei lieto di poter contribuire a {}",
     "api": "deepl"
   },
   "Dear {} team,": {
-    "translation": "Gentile team {},",
+    "translation": "Gentile team di {},",
     "api": "deepl"
   },
   "application for technical level designer": {
-    "translation": "Candidatura per la posizione di progettista tecnico",
+    "translation": "candidatura per technical level designer",
     "api": "deepl"
   },
   "application for gameplay programmer": {
-    "translation": "Candidatura per programmatore di videogiochi",
+    "translation": "candidatura per gameplay programmer",
     "api": "deepl"
   },
   "application for AI programmer": {
-    "translation": "Candidatura per programmatore AI",
+    "translation": "candidatura per AI programmer",
     "api": "deepl"
   },
   "application for system programmer": {
-    "translation": "Domanda di assunzione come programmatore di sistemi",
+    "translation": "candidatura per system programmer",
     "api": "deepl"
   },
   "application for tools programmer": {
-    "translation": "Domanda di assunzione per programmatore di strumenti",
+    "translation": "candidatura per tools programmer",
     "api": "deepl"
   },
   "application for engine programmer": {
-    "translation": "richiesta di programmatore motore",
+    "translation": "candidatura per engine programmer",
     "api": "deepl"
   },
   "application for project manager": {
-    "translation": "Candidatura per la posizione di Project Manager",
+    "translation": "candidatura per project manager",
     "api": "deepl"
   },
   "application for technical team lead": {
-    "translation": "Candidatura per la posizione di responsabile del team tecnico",
+    "translation": "candidatura per technical team lead",
     "api": "deepl"
   },
   "application for UI programmer": {
-    "translation": "Domanda di assunzione per programmatore UI",
+    "translation": "candidatura per UI programmer",
     "api": "deepl"
   },
   "application for technical artist": {
-    "translation": "Candidatura per la posizione di artista tecnico",
+    "translation": "candidatura per technical artist",
     "api": "deepl"
   },
   "application for tech lead": {
-    "translation": "Candidatura per la posizione di responsabile tecnico",
+    "translation": "candidatura per tech lead",
+    "api": "deepl"
+  },
+  "Played games": {
+    "translation": "Giochi giocati",
+    "api": "deepl"
+  },
+  "Content": {
+    "translation": "Contenuto",
     "api": "deepl"
   }
 }

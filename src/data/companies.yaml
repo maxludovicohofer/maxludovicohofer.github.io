@@ -292,4 +292,13 @@
 - id: Dangleverse
   en:
     email: true
+
+- id: WaltWW
+  en:
+    email: true
+
+- id: Singular Perception
+  it:
+    resume: false
+    # email: true
 #! General companies

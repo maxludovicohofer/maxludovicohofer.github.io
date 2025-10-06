@@ -1,6 +1,7 @@
 ---
 import ShokumuEntry from "@components/docs/ShokumuEntry.astro";
 import Link from "@components/ui/Link.astro";
+import { getStaticPaths as getBasePaths } from "@docs/履歴書.astro";
 import {
   applyMatch,
   getMatchedPosts,
@@ -16,12 +17,7 @@ import {
   getTeam,
   getTechList,
 } from "@integrations/content";
-import {
-  getDocumentsBasePaths,
-  getMyName,
-  getSelfPRSentence,
-  getSummary,
-} from "@integrations/docs";
+import { getMyName, getSelfPRSentence, getSummary } from "@integrations/docs";
 import { i18n, setDayjsLocale } from "@integrations/i18n-server";
 import { capitalize } from "@integrations/text";
 import { getEntryId } from "@layouts/document/Document.astro";
@@ -29,7 +25,7 @@ import DocumentPage from "@layouts/document/DocumentPage.astro";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 
-export const getStaticPaths = getDocumentsBasePaths;
+export const getStaticPaths = getBasePaths;
 
 await setDayjsLocale(Astro);
 dayjs.extend(duration);

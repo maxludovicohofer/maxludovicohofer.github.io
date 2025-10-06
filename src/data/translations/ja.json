@@ -2838,5 +2838,41 @@
   "Tech lead with 3 years of professional experience in programming and leadership. I specialize in product management, scrum, and software development": {
     "translation": "プログラミングとリーダーシップにおいて3年の専門的な経験を持つ技術リーダーです。プロダクトマネジメント、スクラム、ソフトウェア開発を専門としています。",
     "api": "deepl"
+  },
+  "My background in software development and leadership has allowed me to develop hard and soft skills that I wish to contribute to {}": {
+    "translation": "ソフトウェア開発とリーダーシップにおける私の経歴により、ハードスキルとソフトスキルを磨くことができました。これらのスキルを{}に活かして貢献したいと考えております。",
+    "api": "deepl"
+  },
+  "I hope this message finds you well. I have attached my 履歴書, 職務経歴書, and cover letter for your review. You may also view my portfolio at": {
+    "translation": "お元気でお過ごしでしょうか。ご確認のため、履歴書、職務経歴書、およびカバーレターを添付いたしました。また、私のポートフォリオは以下でご覧いただけます。",
+    "api": "deepl"
+  },
+  "application for gameplay programmer": {
+    "translation": "ゲームプレイプログラマーの応募書類",
+    "api": "deepl"
+  },
+  "application for tools programmer": {
+    "translation": "ツールプログラマーの応募書類",
+    "api": "deepl"
+  },
+  "application for engine programmer": {
+    "translation": "エンジンプログラマーの申請書",
+    "api": "deepl"
+  },
+  "application for technical team lead": {
+    "translation": "技術チームリーダーへの応募",
+    "api": "deepl"
+  },
+  "application for UI programmer": {
+    "translation": "UIプログラマーの応募書類",
+    "api": "deepl"
+  },
+  "application for technical artist": {
+    "translation": "テクニカルアーティストの応募書類",
+    "api": "deepl"
+  },
+  "application for tech lead": {
+    "translation": "技術リーダー職への応募",
+    "api": "deepl"
   }
 }

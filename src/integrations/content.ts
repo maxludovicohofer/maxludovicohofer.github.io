@@ -16,7 +16,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import utc from "dayjs/plugin/utc";
 import { VALID_INPUT_FORMATS } from "node_modules/astro/dist/assets/consts";
 import { groupBy } from "./array";
-import type { locales } from "./astro-config";
+import { locales } from "./astro-config";
 import {
   applyMatch,
   getCollectionAdvanced,
@@ -426,8 +426,13 @@ export const getCompanyName = async (
   if (!currentCompany) return;
 
   const localizedInfo = currentCompany.data[getCurrentLocale(astro)];
-  if (typeof localizedInfo === "object" && !Array.isArray(localizedInfo))
+  if (
+    typeof localizedInfo === "object" &&
+    !Array.isArray(localizedInfo) &&
+    localizedInfo.localizedCompanyName
+  ) {
     return localizedInfo.localizedCompanyName;
+  }
 
   return currentCompany.id;
 };
@@ -465,23 +470,33 @@ export const getCompanyResumeProps = (
       >
     >;
 
-    if (Array.isArray(resumeData)) return { build: resumeData } as ResumeProps;
+    if (Array.isArray(resumeData)) {
+      return { resume: resumeData } satisfies ResumeProps as ResumeProps;
+    }
 
-    return {} as ResumeProps;
+    return {} satisfies ResumeProps as ResumeProps;
   }
 
   return resumeData;
 };
 
-export const getBuiltCompanies = async (resume: ResumeKey) =>
+export const getBuiltCompanies = async (resume?: ResumeKey) =>
   (await getCollection("companies")).filter(({ data }) => {
     if (import.meta.env.DEV) return true;
 
-    const resumeProps = data[resume];
-
-    return Array.isArray(resumeProps) || typeof resumeProps === "boolean"
-      ? resumeProps
-      : resumeProps?.resume;
+    return Object.entries(data)
+      .filter(([resumeKey]) =>
+        resume
+          ? resumeKey === resume
+          : locales.includes(resumeKey as ResumeKey),
+      )
+      .some(([, props]) =>
+        Array.isArray(props) ||
+        typeof props === "boolean" ||
+        typeof props === "string"
+          ? props
+          : props?.resume,
+      );
   });
 
 export const getBuiltCompaniesByExclusion = async (excludedResume: ResumeKey) =>
@@ -489,9 +504,14 @@ export const getBuiltCompaniesByExclusion = async (excludedResume: ResumeKey) =>
     if (import.meta.env.DEV) return true;
 
     return Object.entries(data)
-      .filter(([resume]) => resume !== excludedResume)
+      .filter(
+        ([resume]) =>
+          resume !== excludedResume && locales.includes(resume as ResumeKey),
+      )
       .some(([, props]) =>
-        Array.isArray(props) || typeof props === "boolean"
+        Array.isArray(props) ||
+        typeof props === "boolean" ||
+        typeof props === "string"
           ? props
           : props?.resume,
       );
