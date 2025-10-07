@@ -131,6 +131,27 @@
   omit:
     - showreel
 
+- id: game backend programmer
+  matches:
+    - operations engineer
+    - server manager
+    - operations tools programmer
+    - tools programmer
+    - tool programmer
+    - systems programmer
+    - technical lead
+    - tech lead
+  workFields:
+    - server architecture
+    - backend programming
+    - database management
+  specializations:
+    - cloud services
+    - CI \ CD
+    - containerization
+  omit:
+    - showreel
+
 - id: project manager
   matches:
     - scrum master

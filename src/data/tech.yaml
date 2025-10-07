@@ -135,6 +135,7 @@
   experience: P3Y
   group: programming
   roles:
+    - backend
     - game designer
     - programmer
     - technical artist
@@ -165,32 +166,43 @@
   experience: P5Y
   group: programming
   roles:
+    - backend
     - programmer
 
 - id: NoSQL
   experience: P1Y
   group: programming
   roles:
+    - backend
     - programmer
 
 - id: Edgegap
   experience: P1Y
   group: programming
   roles:
+    - backend
     - programmer
 
 - id: AWS
   experience: P5Y
   group: programming
   roles:
+    - backend
     - programmer
 
 - id: CI \ CD
   experience: P3Y
   group: programming
   roles:
+    - backend
     - programmer
     - scrum master
+
+- id: Docker
+  experience: P2Y
+  group: programming
+  roles:
+    - backend
 
 - id: mobile
   translateId: true

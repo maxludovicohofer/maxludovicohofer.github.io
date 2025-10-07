@@ -368,7 +368,7 @@
     "api": "deepl"
   },
   "Decision tree-based workflow for motivation-driven AI": {
-    "translation": "Workflow basato su alberi decisionali per AI guidata da motivazioni",
+    "translation": "Workflow basato su alberi decisionali per AI guidate da motivazioni",
     "api": "deepl"
   },
   "System programmer with 3 years of professional experience in programming and leadership. I specialize in rendering and software architecture design": {
@@ -596,7 +596,7 @@
     "api": "deepl"
   },
   "Act By Belief is a decision tree-based workflow for motivation-driven AI. It’s useful for agents that require a personality and follow reactive and natural thought processes. For robotic or immutable behavior, traditional methods would be preferable. In this system, agents are split into brain and body": {
-    "translation": "Act By Belief è un workflow basato su alberi decisionali per AI guidata da motivazioni. È utile per gli agenti che richiedono una personalità e seguono processi di pensiero reattivi e naturali. Per comportamenti robotici o immutabili, sarebbero preferibili i metodi tradizionali. In questo sistema, gli agenti sono suddivisi in cervello e corpo.",
+    "translation": "Act By Belief è un workflow basato su alberi decisionali per AI guidate da motivazioni. È utile per gli agenti che richiedono una personalità e seguono processi di pensiero reattivi e naturali. Per comportamenti robotici o immutabili, sarebbero preferibili i metodi tradizionali. In questo sistema, gli agenti sono suddivisi in cervello e corpo.",
     "api": "deepl"
   },
   "Brain": {
@@ -1552,7 +1552,7 @@
     "api": "deepl"
   },
   "Made in 2 mesi by a team of 24": {
-    "translation": "Realizzato in due mesi da un team di ventiquattro persone.",
+    "translation": "Realizzato in 2 mesi da un team di 24",
     "api": "deepl"
   },
   "Via Pravato 35/C, Paese 31038, TV": {
@@ -1560,7 +1560,31 @@
     "api": "deepl"
   },
   "Scrum master for a team of 4 programmers, contributed to the company's shift from waterfall to agile, and coordinated technical staff training and worked as programmer": {
-    "translation": "Scrum master per un team di quattro programmatori, ha contribuito alla transizione dell'azienda dal modello waterfall a quello agile, ha coordinato la formazione del personale tecnico e ha lavorato come programmatore.",
+    "translation": "Scrum master per un team di 4 programmatori, ho contribuito alla transizione dell'azienda da waterfall ad agile, ho coordinato la formazione del personale tecnico e ho lavorato come programmatore.",
+    "api": "deepl"
+  },
+  "application for game backend programmer": {
+    "translation": "candidatura per game backend programmer",
+    "api": "deepl"
+  },
+  "operations engineer": {
+    "translation": "operations engineer",
+    "api": "deepl"
+  },
+  "Game backend programmer with 3 years of professional experience in programming and leadership. I specialize in cloud services, CI \\ CD, and containerization": {
+    "translation": "Programmatore backend di giochi con 3 anni di esperienza professionale in programmazione e leadership. Sono specializzato in servizi cloud, CI/CD e containerizzazione.",
+    "api": "deepl"
+  },
+  "operations tools programmer": {
+    "translation": "operations tools programmer",
+    "api": "deepl"
+  },
+  "I'm a game backend programmer with 3 years of professional experience in programming and leadership. I specialize in cloud services, CI \\ CD, and containerization": {
+    "translation": "Sono un programmatore backend di giochi con 3 anni di esperienza professionale in programmazione e leadership. Sono specializzato in servizi cloud, CI/CD e containerizzazione.",
+    "api": "deepl"
+  },
+  "Server architecture": {
+    "translation": "Architetture server",
     "api": "deepl"
   }
 }

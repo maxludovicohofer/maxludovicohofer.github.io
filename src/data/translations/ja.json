@@ -2878,5 +2878,33 @@
   "Made in 2ヶ月 by a team of 24": {
     "translation": "24名のチームにより2ヶ月で製造されました",
     "api": "deepl"
+  },
+  "Currently transitioning from software engineering to videogame server architecture, which is my lifelong passion": {
+    "translation": "現在、ソフトウェアエンジニアリングからビデオゲームのサーバーアーキテクチャへの移行を進めております。これは私の生涯の情熱です。",
+    "api": "deepl"
+  },
+  "Game backend programmer with 3 years of professional experience in programming and leadership. I specialize in cloud services, CI \\ CD, and containerization": {
+    "translation": "ゲームバックエンドプログラマーとして、プログラミングおよびリーダーシップにおいて3年の専門的な経験がございます。クラウドサービス、CI/CD、コンテナ化を専門としております。",
+    "api": "deepl"
+  },
+  "server architecture": {
+    "translation": "サーバーアーキテクチャ",
+    "api": "deepl"
+  },
+  "operations engineer": {
+    "translation": "オペレーションズエンジニア",
+    "api": "deepl"
+  },
+  "operations tools programmer": {
+    "translation": "運用ツールプログラマー",
+    "api": "deepl"
+  },
+  "I'm a game backend programmer with 3 years of professional experience in programming and leadership. I specialize in cloud services, CI \\ CD, and containerization": {
+    "translation": "私はゲームバックエンドプログラマーとして、プログラミングとリーダーシップにおいて3年の専門的な経験がございます。クラウドサービス、CI/CD、コンテナ化を専門としております。",
+    "api": "deepl"
+  },
+  "Server architecture": {
+    "translation": "サーバーアーキテクチャ",
+    "api": "deepl"
   }
 }
