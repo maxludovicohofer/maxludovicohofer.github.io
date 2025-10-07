@@ -300,4 +300,26 @@
 - id: Singular Perception
   it:
     email: true
+
+- id: Creator Games
+  en:
+    resume: false
+
+- id: Riyo Games
+  en:
+    resume: false
+
+- id: Doborog Games
+  en:
+    coverLetter: true
+
+- id: sunset visitor
+  en:
+    coverLetter: true
+
+- id: R16 Interactive
+  en:
+    resume: true
+    coverLetter: true
+    email: true
 #! General companies

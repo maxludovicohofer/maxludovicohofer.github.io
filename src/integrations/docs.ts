@@ -137,15 +137,14 @@ export const getSelfPRSentence = async (astro: AstroGlobal) => {
     `${
       company
         ? `${await t(
-            "My background in software development and leadership has allowed me to develop hard and soft skills that I wish to contribute to {}.",
+            "My background in software development and leadership has allowed me to develop hard and soft skills that I'd love to contribute to {}.",
             { interpolate: company },
           )}${await t(" ")}`
         : ""
     }${await t(
-      "While new to the professional world of videogames, I have been involved in {} on academic and personal projects my whole life.",
-      { interpolate: await t(mainWorkField) },
+      "While relatively new to the professional world of videogames, I have been developing games as a hobbyist my whole life.",
     )}${`${await t(" ")}${await t(
-      "I value self-teaching, teamwork, and sharing knowledge with colleagues.",
+      "I value self-teaching, creating an accepting work environment, and sharing know-how with colleagues.",
     )}`}${await t(" ")}${await t(
       "I aspire to grow my skills further while learning from your forward-thinking company.",
     )}${await t(" ")}`,

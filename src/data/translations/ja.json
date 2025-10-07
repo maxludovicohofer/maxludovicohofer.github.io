@@ -2906,5 +2906,13 @@
   "Server architecture": {
     "translation": "サーバーアーキテクチャ",
     "api": "deepl"
+  },
+  "While relatively new to the professional world of videogames, I have been developing games as a hobbyist my whole life": {
+    "translation": "プロのゲーム業界では比較的新しい存在ではありますが、趣味としてゲーム開発には生涯携わってまいりました。",
+    "api": "deepl"
+  },
+  "I value self-teaching, creating an accepting work environment, and sharing know-how with colleagues": {
+    "translation": "私は自己研鑽を大切にし、受け入れられる職場環境づくりに努め、同僚とのノウハウ共有を重視しております。",
+    "api": "deepl"
   }
 }

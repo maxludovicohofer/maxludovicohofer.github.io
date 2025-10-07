@@ -1586,5 +1586,21 @@
   "Server architecture": {
     "translation": "Architetture server",
     "api": "deepl"
+  },
+  "server architecture": {
+    "translation": "architetture server",
+    "api": "deepl"
+  },
+  "While relatively new to the professional world of videogames, I have been developing games as a hobbyist my whole life": {
+    "translation": "Sebbene sia relativamente nuovo nel mondo professionale dei videogiochi, ho sviluppato giochi come hobby per tutta la vita.",
+    "api": "deepl"
+  },
+  "I value self-teaching, creating an accepting work environment, and sharing know-how with colleagues": {
+    "translation": "Apprezzo l'autoapprendimento, creare un ambiente di lavoro inclusivo, e la condivisione del know-how con i colleghi",
+    "api": "deepl"
+  },
+  "My background in software development and leadership has allowed me to develop hard and soft skills that I'd love to contribute to {}": {
+    "translation": "La mia esperienza nello sviluppo di software e nella leadership mi ha consentito di acquisire competenze tecniche e soft skill che sarei lieto di mettere a disposizione di {}.",
+    "api": "deepl"
   }
 }
