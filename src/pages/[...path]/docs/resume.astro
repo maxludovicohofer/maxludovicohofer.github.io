@@ -73,6 +73,8 @@ if (techList.length > 8) {
 
 const shortSkillGrid = techList.length / skillsColumns < 5;
 
+// TODO IF EXPERIENCE IS TOO LONG, REDUCE EDUCATION ACHIEVEMENTS TO 1 AND PORTFOLIO PROJECTS TO 1
+
 const { role } = await getRole(Astro);
 const showPortfolio = !role.data.omit?.includes("portfolio");
 
