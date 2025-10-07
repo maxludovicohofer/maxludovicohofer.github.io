@@ -55,96 +55,127 @@ export const getFormattedDates = async (
   });
 };
 
-const t = i18n(Astro);
+export const getFormattedKnowHow = async (
+  astro: AstroGlobal,
+  props?: Props
+) => {
+  const t = i18n(astro);
 
-const knowHow = await getKnowHow(Astro);
----
+  const knowHow = await getKnowHow(astro);
 
-{
-  Object.entries(knowHow)
-    .filter(([title]) => !section || title === section)
-    .map(([_, experiences]) => (
-      <div {...props}>
-        <ol class="list-none ps-0 mt-0 space-y-4">
-          {experiences
-            .filter((experience) => !experience?.[getResumeKey(Astro)]?.omit)
-            .map(
-              async ({
-                skills,
-                id,
-                school,
-                start,
-                end,
-                translateId,
-                dropOut,
-                ...experience
-              }) => {
-                const translatedId = translateId
-                  ? await t(capitalize(id))
-                  : capitalize(id);
-
-                return (
-                  <li class="ps-0">
-                    <ol class="list-none ps-0 my-0 space-y-4">
-                      {skills.map(
+  return await Promise.all(
+    Object.entries(knowHow)
+      .filter(([title]) => !props?.section || title === props.section)
+      .map(
+        async ([_, experiences]) =>
+          await Promise.all(
+            experiences
+              .filter((experience) => !experience?.[getResumeKey(astro)]?.omit)
+              .map(
+                async ({
+                  skills,
+                  id,
+                  school,
+                  start,
+                  end,
+                  translateId,
+                  dropOut,
+                  ...experience
+                }) => {
+                  return {
+                    translatedId: translateId
+                      ? await t(capitalize(id))
+                      : capitalize(id),
+                    sections: await Promise.all(
+                      skills.map(
                         async (
                           { job, start: skillStart, achievements },
                           index
                         ) => {
                           const dates = await getFormattedDates(
-                            Astro,
+                            astro,
                             skillStart ?? start,
                             skills?.[index - 1]?.start ?? end
                           );
 
-                          return (
-                            <li class="ps-0 my-0">
-                              <div class="flex justify-between text-balance">
-                                <Text
-                                  translateProps={{ disable: true }}
-                                  class="my-0"
-                                >
-                                  {translatedId}
-                                </Text>
-                                {!hideDates && (
-                                  <Text
-                                    translateProps={{ disable: true }}
-                                    class="my-0 text-right"
-                                  >
-                                    {dates.join(" - ")}
-                                  </Text>
-                                )}
-                              </div>
-                              <Text tag="h5">
-                                {capitalize(job.id)}
-                                {dropOut ? " (not graduated)" : ""}
-                              </Text>
-                              <ul class="list-none ps-0 my-0">
-                                {!experience?.[getResumeKey(Astro)]?.short && (
-                                  <Text tag="li" class="ps-0 my-0">
-                                    {capitalize(
-                                      endDelimiter(
-                                        toTextList(
-                                          achievements.slice(
-                                            0,
-                                            maxAchievements ?? undefined
-                                          )
-                                        )
+                          return {
+                            translatedJobTitle: await t(
+                              `${capitalize(job.id)}${dropOut ? " (not graduated)" : ""}`
+                            ),
+                            dates: !props?.hideDates && dates.join(" - "),
+                            translatedDescription:
+                              !experience?.[getResumeKey(astro)]?.short &&
+                              (await t(
+                                capitalize(
+                                  endDelimiter(
+                                    toTextList(
+                                      achievements.slice(
+                                        0,
+                                        props?.maxAchievements ?? undefined
                                       )
-                                    )}
-                                  </Text>
-                                )}
-                              </ul>
-                            </li>
-                          );
+                                    )
+                                  )
+                                )
+                              )),
+                          };
                         }
+                      )
+                    ),
+                  };
+                }
+              )
+          )
+      )
+  );
+};
+
+const formattedKnowHow = await getFormattedKnowHow(Astro, Astro.props);
+---
+
+{
+  formattedKnowHow.map((experiences) => (
+    <div {...props}>
+      <ol class="list-none ps-0 mt-0 space-y-4">
+        {experiences.map(({ translatedId, sections }) => (
+          <li class="ps-0">
+            <ol class="list-none ps-0 my-0 space-y-4">
+              {sections.map(
+                ({ translatedJobTitle, translatedDescription, dates }) => (
+                  <li class="ps-0 my-0">
+                    <div class="flex justify-between text-balance">
+                      <Text translateProps={{ disable: true }} class="my-0">
+                        {translatedId}
+                      </Text>
+                      {dates && (
+                        <Text
+                          translateProps={{ disable: true }}
+                          class="my-0 text-right"
+                        >
+                          {dates}
+                        </Text>
                       )}
-                    </ol>
+                    </div>
+                    <Text tag="h5" translateProps={{ disable: true }}>
+                      {translatedJobTitle}
+                    </Text>
+                    <ul class="list-none ps-0 my-0">
+                      {translatedDescription && (
+                        <Text
+                          tag="li"
+                          class="ps-0 my-0"
+                          translateProps={{ disable: true }}
+                        >
+                          {translatedDescription}
+                        </Text>
+                      )}
+                    </ul>
                   </li>
-                );
-              }
-            )}
-        </ol>
-      </div>
-    ))
+                )
+              )}
+            </ol>
+          </li>
+        ))}
+      </ol>
+    </div>
+  ))
 }

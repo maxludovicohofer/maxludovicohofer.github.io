@@ -1554,5 +1554,13 @@
   "Made in 2 mesi by a team of 24": {
     "translation": "Realizzato in due mesi da un team di ventiquattro persone.",
     "api": "deepl"
+  },
+  "Via Pravato 35/C, Paese 31038, TV": {
+    "translation": "Via Pravato 35/C, Paese 31038, TV",
+    "api": "deepl"
+  },
+  "Scrum master for a team of 4 programmers, contributed to the company's shift from waterfall to agile, and coordinated technical staff training and worked as programmer": {
+    "translation": "Scrum master per un team di quattro programmatori, ha contribuito alla transizione dell'azienda dal modello waterfall a quello agile, ha coordinato la formazione del personale tecnico e ha lavorato come programmatore.",
+    "api": "deepl"
   }
 }

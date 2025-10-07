@@ -1,6 +1,8 @@
 ---
 import ResumeExtra from "@components/docs/ResumeExtra.astro";
-import ResumeKnowHow from "@components/docs/ResumeKnowHow.astro";
+import ResumeKnowHow, {
+  getFormattedKnowHow,
+} from "@components/docs/ResumeKnowHow.astro";
 import ResumeProjects from "@components/docs/ResumeProjects.astro";
 import { mail } from "@components/Profile.astro";
 import Link from "@components/ui/Link.astro";
@@ -73,7 +75,19 @@ if (techList.length > 8) {
 
 const shortSkillGrid = techList.length / skillsColumns < 5;
 
-// TODO IF EXPERIENCE IS TOO LONG, REDUCE EDUCATION ACHIEVEMENTS TO 1 AND PORTFOLIO PROJECTS TO 1
+const shortExperience =
+  (
+    await getFormattedKnowHow(Astro, {
+      section: "experience",
+      maxAchievements: 3,
+    })
+  )
+    .flatMap((knowHow) =>
+      knowHow.flatMap(({ sections }) =>
+        sections.map(({ translatedDescription }) => translatedDescription)
+      )
+    )
+    .join(" ").length < 900;
 
 const { role } = await getRole(Astro);
 const showPortfolio = !role.data.omit?.includes("portfolio");
@@ -127,10 +141,16 @@ const showPortfolio = !role.data.omit?.includes("portfolio");
       <h2 class={sectionTitleClass}>{await t("education")}</h2>
       <ResumeKnowHow
         section="education"
-        maxAchievements={shortSkillGrid ? 2 : 1}
+        maxAchievements={shortSkillGrid && shortExperience ? 2 : 1}
       />
       <h2 class={sectionTitleClass}>{await t("certifications")}</h2>
-      <ResumeExtra maxCertifications={3} />
+      <ResumeExtra
+        maxCertifications={shortSkillGrid && shortExperience
+          ? 3
+          : !shortSkillGrid && !shortExperience
+            ? 1
+            : 2}
+      />
     </div>
     <div class="pl-4">
       <h2 class={sectionTitleClass}>
@@ -148,7 +168,7 @@ const showPortfolio = !role.data.omit?.includes("portfolio");
           <>
             <h2 class={sectionTitleClass}>{await t("selected portfolio")}</h2>
             <ResumeProjects
-              numberOfProjects={shortSkillGrid ? 2 : 1}
+              numberOfProjects={shortSkillGrid && shortExperience ? 2 : 1}
               numberOfRoles={2}
             />
           </>

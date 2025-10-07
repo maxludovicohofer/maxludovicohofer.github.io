@@ -300,5 +300,5 @@
 - id: Singular Perception
   it:
     resume: false
-    # email: true
+    email: true
 #! General companies
