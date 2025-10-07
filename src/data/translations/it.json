@@ -1550,5 +1550,9 @@
   "Content": {
     "translation": "Contenuto",
     "api": "deepl"
+  },
+  "Made in 2 mesi by a team of 24": {
+    "translation": "Realizzato in due mesi da un team di ventiquattro persone.",
+    "api": "deepl"
   }
 }
