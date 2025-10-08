@@ -1602,5 +1602,9 @@
   "My background in software development and leadership has allowed me to develop hard and soft skills that I'd love to contribute to {}": {
     "translation": "La mia esperienza nello sviluppo di software e nella leadership mi ha consentito di acquisire competenze tecniche e soft skill che sarei lieto di mettere a disposizione di {}.",
     "api": "deepl"
+  },
+  "Game development": {
+    "translation": "Sviluppo di videogiochi",
+    "api": "deepl"
   }
 }

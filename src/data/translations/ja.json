@@ -2914,5 +2914,9 @@
   "I value self-teaching, creating an accepting work environment, and sharing know-how with colleagues": {
     "translation": "私は自己研鑽を大切にし、受け入れられる職場環境づくりに努め、同僚とのノウハウ共有を重視しております。",
     "api": "deepl"
+  },
+  "game development": {
+    "translation": "ゲーム開発",
+    "api": "deepl"
   }
 }
