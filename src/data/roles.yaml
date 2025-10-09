@@ -241,3 +241,16 @@
     - software development
   omit:
     - portfolio
+
+- id: programmer
+  matches:
+    - technical lead
+    - tech lead
+  workFields:
+    - programming
+  specializations:
+    - performance optimization
+    - full stack development
+    - cloud infrastructure
+  omit:
+    - portfolio
