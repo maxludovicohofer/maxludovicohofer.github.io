@@ -115,7 +115,7 @@
   experience: P3Y
   group: programming
   roles:
-    - programmer
+    - game programmer
 
 - id: Blueprints
   experience: P3Y
@@ -128,7 +128,7 @@
   experience: P1Y
   group: programming
   roles:
-    - programmer
+    - game programmer
     - technical artist
 
 - id: Python
@@ -181,7 +181,7 @@
   group: programming
   roles:
     - backend
-    - programmer
+    - game programmer
 
 - id: AWS
   experience: P5Y
@@ -203,6 +203,7 @@
   group: programming
   roles:
     - backend
+    - programmer
 
 - id: mobile
   translateId: true

@@ -246,6 +246,9 @@
   matches:
     - technical lead
     - tech lead
+  notMatches:
+    - game programmer
+    - technical artist
   workFields:
     - programming
   specializations:
