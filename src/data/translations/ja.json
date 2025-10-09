@@ -2918,5 +2918,13 @@
   "game development": {
     "translation": "ゲーム開発",
     "api": "deepl"
+  },
+  "Currently transitioning from software engineering to videogame programming, which is my lifelong passion": {
+    "translation": "現在、ソフトウェアエンジニアリングからビデオゲームプログラミングへの移行を進めております。これは私の生涯の情熱です。",
+    "api": "deepl"
+  },
+  "Programmer with 3 years of professional experience in programming and leadership. I specialize in performance optimization, full stack development, and cloud infrastructure": {
+    "translation": "プログラミングおよびリーダーシップにおいて3年の専門的な経験を有するプログラマーです。パフォーマンス最適化、フルスタック開発、クラウドインフラストラクチャを専門としています。",
+    "api": "deepl"
   }
 }

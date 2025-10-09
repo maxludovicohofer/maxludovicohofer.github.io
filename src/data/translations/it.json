@@ -1606,5 +1606,13 @@
   "Game development": {
     "translation": "Sviluppo di videogiochi",
     "api": "deepl"
+  },
+  "application for programmer": {
+    "translation": "richiesta per programmatore",
+    "api": "deepl"
+  },
+  "Programmer with 3 years of professional experience in programming and leadership. I specialize in performance optimization, full stack development, and cloud infrastructure": {
+    "translation": "Programmatore con tre anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato nell'ottimizzazione delle prestazioni, nello sviluppo full stack e nell'infrastruttura cloud.",
+    "api": "deepl"
   }
 }
