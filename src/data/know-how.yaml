@@ -26,7 +26,7 @@
       achievements:
         - envisioned and lead development of innovative B2C and B2B solutions in the credit brokerage sector
         - managed cross-functional team of 4 to replace old business processes
-        - coordinated strategic partnerships with external companies
+        - coordinated business processes with 2 key partner companies
 
     - job: user experience designer
       tasks:
@@ -35,19 +35,19 @@
         - showcasing the UI to the board
         - iterating on the design with user feedback
       achievements:
-        - developed user journey and UI/UX from the ground up to maximize conversions
-        - worked with a mobile-first approach to maximize product effectiveness
-        - programmed a recommender system for staff operations scheduling driven by company values
+        - developed user journey and UI/UX from the ground focusing on conversions
+        - worked with a mobile-first rich-offline approach to maximize accessibility
+        - programmed an AI recommender system for the business pipeline, reducing sales time by 50% and pipeline errors by 70%
 
     - job: full stack programmer
       tasks:
         - programming a realtime data-heavy web app
         - managing servers and CI/CD
       achievements:
-        - programmed a mobile-first rich-offline progressive web app using AWS Amplify, React, scrum, and TDD
-        - created a fully-frontend performant recommender system for staff operations scheduling
-        - analyzed and developed a data analysis platform for business insights
-        - developed user journey and UI/UX from the ground up to maximize conversions
+        - programmed a mobile-first rich-offline progressive web app using AWS Amplify + React, scrum, and TDD
+        - created a fully-frontend AI recommender system for the business pipeline, reducing sales time by 50% and pipeline errors by 70%
+        - analyzed and developed an AI-powered BI platform
+        - developed user journey and UI/UX from the ground up focusing on conversions
 
 - id: Zulu Medical
   start: 2019-11-01
@@ -73,18 +73,18 @@
       tasks:
         - planning the company's technological development
       achievements:
-        - developed telemedicine product roster with board, strategic partners, and stakeholders
-        - planned IT solutions for cost efficiency and GDPR security
-        - coordinated technical staff training and culture to transition from desktop to web and mobile development, introducing agile methodologies
+        - developed 2 IoT telemedicine products with board, key partners, and stakeholders
+        - planned IT solutions for cost efficiency, ISO 27001, and GDPR security
+        - worked as scrum master and B2B sales engineer
 
     - job: scrum master
       tasks:
         - solving collaboration challenges
         - fostering communication and meetings
       achievements:
-        - scrum master for a team of 4 programmers
-        - contributed to the company's shift from waterfall to agile
-        - coordinated technical staff training and worked as programmer
+        - coordinated cultural transition for a team of 6 to move from waterfall desktop to agile cross-platform development
+        - managed technical training for a team of 4 and worked as programmer
+        - increased scrum velocity by 30% in 6 months
 
     - job: programmer
       tasks:
@@ -93,8 +93,8 @@
         - managing servers and CI/CD
       achievements:
         - worked on low-level C# + SQLite desktop software, React, Angular, Laravel, AWS Amplify full stack web apps, and C# + SQL Server backend services
-        - developed CI/CD with Python and AWS
-        - introduced internationalization on a production app used by 80%+ of Italian emergency operations centers
+        - developed CI/CD from the ground up with Python, AWS, and Docker
+        - introduced internationalization on an 80k lines production web app used by 80% of Italian emergency operations centers
 
 - id: BigRock Institute of Magic Technologies
   start: 2023-09-01
@@ -125,7 +125,7 @@
   skills:
     - job: game development
       tasks:
-        - studied the game development and CG pipeline, using the latest industry standards with emphasis on technical art
+        - studying the game development and CG pipeline, using the latest industry standards with emphasis on technical art
       achievements:
         - specialized in game design and programming
         - worked on several prototypes and a shipped award-winning game with small and medium teams
@@ -146,7 +146,7 @@
   skills:
     - job: software engineering
       tasks:
-        - studied physics, math for games, electronics, and advanced computer science
+        - studying physics, math for games, electronics, and advanced computer science
       achievements:
         - learned calculus, linear algebra, classical physics, probability and statistics, data structures and algorithms, and software design
 
@@ -169,8 +169,8 @@
   skills:
     - job: computer science
       tasks:
-        - studied base knowledge of computer science theory
-        - programmed platformer, fighting, and board games
+        - studying base knowledge of computer science theory
+        - programming platformer, fighting, and board games
       achievements:
         - developed videogames and desktop apps in major OOP and low-level languages
         - won school programming competition and top 25% placement at national team programming competition

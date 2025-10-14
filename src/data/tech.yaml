@@ -140,6 +140,12 @@
     - programmer
     - technical artist
 
+- id: MCP
+  experience: P6M
+  group: programming
+  roles:
+    - programmer
+
 - id: Java
   experience: P2Y
   group: programming
