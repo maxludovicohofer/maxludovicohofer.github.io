@@ -1646,5 +1646,9 @@
   "Spanish, conversational": {
     "translation": "Spagnolo, colloquiale",
     "api": "deepl"
+  },
+  "I look forward to the opportunity to help shape {}'s future": {
+    "translation": "Sono lieto di avere l'opportunità di contribuire a plasmare il futuro di {}.",
+    "api": "deepl"
   }
 }

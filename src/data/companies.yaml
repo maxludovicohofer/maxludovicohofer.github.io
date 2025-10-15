@@ -147,7 +147,9 @@
   en: false
 
 - id: Crytek
-  en: false
+  en:
+    coverLetter: true
+    coverLetterGame: "Hunt: Showdown"
 
 - id: Arrowhead Game Studios
   en: false
@@ -217,8 +219,7 @@
     coverLetter: true
 
 - id: Paradox Interactive
-  en:
-    resume: false
+  en: false
 
 #! Outsourcing studios
 
@@ -302,12 +303,10 @@
     email: true
 
 - id: Creator Games
-  en:
-    resume: false
+  en: false
 
 - id: Riyo Games
-  en:
-    resume: false
+  en: false
 
 - id: Doborog Games
   en:
@@ -321,4 +320,8 @@
   en:
     coverLetter: true
     email: true
+
 #! General companies
+
+- id: Amicus
+  en: false

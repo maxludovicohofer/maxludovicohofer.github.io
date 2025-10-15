@@ -7,6 +7,7 @@ import {
   getSelfPRSentence,
 } from "@integrations/docs";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
+import { sectionTitleClass } from "./resume.astro";
 
 export const getStaticPaths = async (
   ...params: Parameters<typeof getDocumentsBasePaths>
@@ -20,6 +21,6 @@ const { coverLetter } = await getResumeProps(Astro);
 ---
 
 <DocumentPage>
-  <Text title>Cover letter</Text>
+  <Text title class={sectionTitleClass}>Cover letter</Text>
   <p>{typeof coverLetter === "string" ? coverLetter : selfPRSentence}</p>
 </DocumentPage>

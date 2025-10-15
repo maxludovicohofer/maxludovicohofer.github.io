@@ -59,7 +59,7 @@ const languages = await getLanguages(Astro);
 const summary = await getSummary(Astro);
 const myName = await getMyName(Astro);
 
-const sectionTitleClass =
+export const sectionTitleClass =
   "not-prose mb-1 text-sm font-bold uppercase tracking-wider";
 
 const skillsColumns = findBestDivisor(techList.length, 3);

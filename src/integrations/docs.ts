@@ -132,6 +132,7 @@ export const getSelfPRSentence = async (astro: AstroGlobal) => {
   const t = i18n(astro);
 
   const company = await getCompanyName(astro);
+  const { coverLetterGame } = await getResumeProps(astro);
 
   return removeWatashiWa(
     `${
@@ -145,9 +146,18 @@ export const getSelfPRSentence = async (astro: AstroGlobal) => {
       "While relatively new to the professional world of videogames, I have been developing games as a hobbyist my whole life.",
     )}${`${await t(" ")}${await t(
       "I value self-teaching, creating an accepting work environment, and sharing know-how with colleagues.",
-    )}`}${await t(" ")}${await t(
-      "I aspire to grow my skills further while learning from your forward-thinking company.",
-    )}${await t(" ")}`,
+    )}`}${await t(" ")}${
+      company
+        ? await t(
+            `${coverLetterGame ? "As a big fan of {}, " : ""}I look forward to the opportunity to help shape {}'s future.`,
+            {
+              interpolate: coverLetterGame
+                ? [coverLetterGame.id, company]
+                : company,
+            },
+          )
+        : ""
+    }${await t(" ")}`,
   );
 };
 
