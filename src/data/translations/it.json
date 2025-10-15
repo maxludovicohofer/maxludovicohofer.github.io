@@ -1638,5 +1638,13 @@
   "Coordinated cultural transition for a team of 6 to move from waterfall desktop to agile cross-platform development, managed technical training for a team of 4 and worked as programmer, and increased scrum velocity by 30% in 6 months": {
     "translation": "Coordinato la transizione culturale di un team di 6 persone per passare dallo sviluppo desktop waterfall al cross-platform agile, gestito la formazione tecnica di un team di 4 persone e lavorato come programmatore, aumentando la velocity scrum del 30% in 6 mesi",
     "api": "deepl"
+  },
+  "French, conversational": {
+    "translation": "Francese, colloquiale",
+    "api": "deepl"
+  },
+  "Spanish, conversational": {
+    "translation": "Spagnolo, colloquiale",
+    "api": "deepl"
   }
 }
