@@ -1,6 +1,10 @@
 # https://wikipedia.org/wiki/List_of_video_game_developers
 # Format id as written in middle of a sentence
 
+- id: default
+  en: true
+  it: true
+
 #! Popular studios
 
 - id: Kojima Productions

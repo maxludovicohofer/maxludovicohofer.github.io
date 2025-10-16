@@ -344,7 +344,7 @@
     "api": "deepl"
   },
   "Programmed a mobile-first rich-offline progressive web app using AWS Amplify, React, scrum, and TDD, created a fully-frontend performant recommender system for staff operations scheduling, and analyzed and developed a data analysis platform for business insights": {
-    "translation": "Programmata una mobile-first rich-offline progressive web app utilizzando AWS Amplify, React, Scrum e TDD, sviluppato un recommender system completamente front-end e altamente performante per la pianificazione delle operazioni del personale, e analizzato e sviluppato una piattaforma BI.",
+    "translation": "Programmato una mobile-first rich-offline progressive web app utilizzando AWS Amplify, React, Scrum e TDD, sviluppato un recommender system completamente front-end e altamente performante per la pianificazione delle operazioni del personale, e analizzato e sviluppato una piattaforma BI.",
     "api": "deepl"
   },
   "Specialized in game design and programming": {
@@ -1136,7 +1136,7 @@
     "api": "deepl"
   },
   "Programmed AI that reacts intuitively to weather conditions and visibility issues": {
-    "translation": "Programmata AI che reagisce intuitivamente alle condizioni meteorologiche e ai problemi di visibilità.",
+    "translation": "Programmato AI che reagisce intuitivamente alle condizioni meteorologiche e ai problemi di visibilità.",
     "api": "deepl"
   },
   "Designed a minimalistic meditative sci-fi puzzle game": {
@@ -1412,7 +1412,7 @@
     "api": "deepl"
   },
   "Programmed a mobile-first rich-offline progressive web app using AWS Amplify, React, scrum, and TDD": {
-    "translation": "Programmata una mobile-first rich-offline progressive web app utilizzando AWS Amplify, React, Scrum e TDD.",
+    "translation": "Programmato una mobile-first rich-offline progressive web app utilizzando AWS Amplify, React, Scrum e TDD.",
     "api": "deepl"
   },
   "Created a fully-frontend performant recommender system for staff operations scheduling": {
@@ -1620,7 +1620,7 @@
     "api": "deepl"
   },
   "Programmed a mobile-first rich-offline progressive web app using AWS Amplify + React, scrum, and TDD, created a fully-frontend AI recommender system for the business pipeline, reducing sales time by 50% and pipeline errors by 70%, and analyzed and developed an AI-powered BI platform": {
-    "translation": "Programmata una mobile-first rich-offline progressive web app utilizzando AWS Amplify + React, scrum e TDD, sviluppato un recommender system basato su IA completamente frontend per i processi aziendali, riducendo i tempi di vendita del 50% e gli errori di processo del 70%, e analizzato e sviluppato una piattaforma BI basata su IA",
+    "translation": "Programmato una mobile-first rich-offline progressive web app utilizzando AWS Amplify + React, scrum e TDD, sviluppato un recommender system basato su IA completamente frontend per i processi aziendali, riducendo i tempi di vendita del 50% e gli errori di processo del 70%, e analizzato e sviluppato una piattaforma BI basata su IA",
     "api": "deepl"
   },
   "Envisioned and lead development of innovative B2C and B2B solutions in the credit brokerage sector, managed cross-functional team of 4 to replace old business processes, and coordinated business processes with 2 key partner companies": {
@@ -1673,6 +1673,10 @@
   },
   "I'm a technical game designer with 3 years of professional experience in programming and leadership. I specialize in tense games, multipurpose mechanics, and readable level design": {
     "translation": "Sono un technical game designer con 3 anni di esperienza professionale in programmazione e leadership. Sono specializzato in giochi basati su tensione, meccaniche multiuso, e level design leggibile",
+    "api": "deepl"
+  },
+  "Programmer with 3 years of professional experience in programming and leadership. I specialize in full stack development, cloud infrastructure, and cost and performance optimization": {
+    "translation": "Programmatore con 3 anni di esperienza professionale in programmazione e leadership. Sono specializzato nello sviluppo full stack, nell'infrastruttura cloud e nell'ottimizzazione di costi e prestazioni",
     "api": "deepl"
   }
 }

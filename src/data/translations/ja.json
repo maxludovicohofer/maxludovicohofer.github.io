@@ -2990,5 +2990,9 @@
   "I'm a technical game designer with 3 years of professional experience in programming and leadership. I specialize in tense games, multipurpose mechanics, and readable level design": {
     "translation": "私は技術的なゲームデザイナーとして、プログラミングとリーダーシップにおいて3年の専門的な経験がございます。緊張感のあるゲーム、多目的メカニクス、そして理解しやすいレベルデザインを専門としております。",
     "api": "deepl"
+  },
+  "Programmer with 3 years of professional experience in programming and leadership. I specialize in full stack development, cloud infrastructure, and cost and performance optimization": {
+    "translation": "プログラミングおよびリーダーシップにおいて3年の専門的な経験を有するプログラマーです。フルスタック開発、クラウドインフラストラクチャ、ならびにコストとパフォーマンスの最適化を専門としております。",
+    "api": "deepl"
   }
 }
