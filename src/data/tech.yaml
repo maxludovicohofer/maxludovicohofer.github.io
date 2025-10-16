@@ -101,7 +101,7 @@
   group: programming
   roles:
     - game designer
-    - programmer
+    - game programmer
     - technical artist
 
 - id: C#
@@ -109,7 +109,7 @@
   group: programming
   roles:
     - game designer
-    - programmer
+    - game programmer
 
 - id: ECS
   experience: P3Y
@@ -128,29 +128,29 @@
   experience: P1Y
   group: programming
   roles:
-    - game programmer
+    - graphics programmer
     - technical artist
 
 - id: Python
   experience: P3Y
   group: programming
   roles:
-    - backend
+    - backend programmer
     - game designer
-    - programmer
+    - game programmer
     - technical artist
 
 - id: MCP
   experience: P6M
   group: programming
   roles:
-    - programmer
+    - AI programmer
 
 - id: Java
   experience: P2Y
   group: programming
   roles:
-    - programmer
+    - backend programmer
 
 - id: agile
   translateId: true
@@ -172,35 +172,30 @@
   experience: P5Y
   group: programming
   roles:
-    - backend
-    - programmer
+    - backend programmer
 
 - id: NoSQL
   experience: P1Y
   group: programming
   roles:
-    - backend
-    - programmer
+    - backend programmer
 
 - id: Edgegap
   experience: P1Y
   group: programming
   roles:
-    - backend
-    - game programmer
+    - game backend programmer
 
 - id: AWS
   experience: P5Y
   group: programming
   roles:
-    - backend
-    - programmer
+    - backend programmer
 
 - id: CI \ CD
   experience: P3Y
   group: programming
   roles:
-    - backend
     - programmer
     - scrum master
 
@@ -208,7 +203,6 @@
   experience: P2Y
   group: programming
   roles:
-    - backend
     - programmer
 
 - id: mobile

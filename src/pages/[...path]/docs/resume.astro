@@ -67,7 +67,7 @@ const skillsColumns = findBestDivisor(techList.length, 3);
 const maxTechToOmit = 2;
 
 // If tech list is too long and can be reduced by omitting few items, do it
-if (techList.length > 8) {
+if (techList.length > 11) {
   const techToOmit = techList.length % skillsColumns;
   if (techToOmit !== 0 && techToOmit <= maxTechToOmit)
     techList.splice(-techToOmit, techToOmit);

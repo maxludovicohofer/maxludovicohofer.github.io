@@ -116,6 +116,7 @@
     - tools programmer
     - tool programmer
     - systems programmer
+    - graphics programmer
     - technical lead
     - tech lead
     - user experience
@@ -146,9 +147,9 @@
     - backend programming
     - database management
   specializations:
-    - cloud services
-    - CI \ CD
-    - containerization
+    - cloud infrastructure
+    - database optimization
+    - DevOps
   omit:
     - showreel
 
@@ -249,6 +250,7 @@
     - tech lead
   notMatches:
     - game programmer
+    - graphics programmer
     - technical artist
   workFields:
     - programming

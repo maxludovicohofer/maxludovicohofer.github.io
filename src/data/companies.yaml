@@ -148,6 +148,7 @@
 
 - id: Crytek
   en:
+    resume: true
     coverLetter: true
     coverLetterProduct: "Hunt: Showdown"
 
