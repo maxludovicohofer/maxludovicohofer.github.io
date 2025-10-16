@@ -28,7 +28,7 @@ const localizedCompanyProps = z
       fullResume: z.boolean().optional(),
       email: z.boolean().optional(),
       coverLetter: z.boolean().or(z.string()).optional(),
-      coverLetterGame: reference("playedGames").optional(),
+      coverLetterProduct: z.string().or(reference("playedGames")).optional(),
       singleResumeFile: z.boolean().optional(),
       singleApplication: z.boolean().optional(),
       interests: z

@@ -132,7 +132,7 @@ export const getSelfPRSentence = async (astro: AstroGlobal) => {
   const t = i18n(astro);
 
   const company = await getCompanyName(astro);
-  const { coverLetterGame } = await getResumeProps(astro);
+  const { coverLetterProduct } = await getResumeProps(astro);
 
   return removeWatashiWa(
     `${
@@ -149,10 +149,15 @@ export const getSelfPRSentence = async (astro: AstroGlobal) => {
     )}`}${await t(" ")}${
       company
         ? await t(
-            `${coverLetterGame ? "As a big fan of {}, " : ""}I look forward to the opportunity to help shape {}'s future.`,
+            `${coverLetterProduct ? "As a big fan of {}, " : ""}I look forward to the opportunity to help shape {}'s future.`,
             {
-              interpolate: coverLetterGame
-                ? [coverLetterGame.id, company]
+              interpolate: coverLetterProduct
+                ? [
+                    typeof coverLetterProduct === "string"
+                      ? coverLetterProduct
+                      : coverLetterProduct.id,
+                    company,
+                  ]
                 : company,
             },
           )

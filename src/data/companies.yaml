@@ -149,7 +149,7 @@
 - id: Crytek
   en:
     coverLetter: true
-    coverLetterGame: "Hunt: Showdown"
+    coverLetterProduct: "Hunt: Showdown"
 
 - id: Arrowhead Game Studios
   en: false
