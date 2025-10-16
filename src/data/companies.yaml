@@ -275,7 +275,6 @@
 
 - id: Playrix
   en:
-    resume: true
     coverLetter: true
 
 - id: Ubisoft

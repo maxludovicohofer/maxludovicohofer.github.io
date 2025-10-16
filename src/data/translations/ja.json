@@ -2982,5 +2982,13 @@
   "I'm a technical game designer with 3 years of professional experience in programming and leadership. I specialize in multipurpose mechanics, creating tension, and readable level design": {
     "translation": "私は技術系ゲームデザイナーとして、プログラミングとリーダーシップにおいて3年の専門的な経験がございます。多目的メカニクス、緊張感の創出、そして視認性の高いレベルデザインを専門としております。",
     "api": "deepl"
+  },
+  "Technical game designer with 3 years of professional experience in programming and leadership. I specialize in tense games, multipurpose mechanics, and readable level design": {
+    "translation": "プログラミングとリーダーシップにおいて3年の専門的な経験を持つテクニカルゲームデザイナーです。緊張感のあるゲーム、多目的メカニクス、そして読みやすいレベルデザインを専門としています。",
+    "api": "deepl"
+  },
+  "I'm a technical game designer with 3 years of professional experience in programming and leadership. I specialize in tense games, multipurpose mechanics, and readable level design": {
+    "translation": "私は技術的なゲームデザイナーとして、プログラミングとリーダーシップにおいて3年の専門的な経験がございます。緊張感のあるゲーム、多目的メカニクス、そして理解しやすいレベルデザインを専門としております。",
+    "api": "deepl"
   }
 }
