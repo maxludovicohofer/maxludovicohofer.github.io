@@ -102,6 +102,7 @@
   roles:
     - game designer
     - game programmer
+    - backend programmer
     - technical artist
 
 - id: C#
@@ -110,6 +111,7 @@
   roles:
     - game designer
     - game programmer
+    - backend programmer
 
 - id: ECS
   experience: P3Y
