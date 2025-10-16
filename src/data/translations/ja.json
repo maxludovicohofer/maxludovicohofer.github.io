@@ -2950,5 +2950,13 @@
   "Created a fully-frontend AI recommender system for the business pipeline, reducing sales time by 50% and pipeline errors by 70%": {
     "translation": "ビジネスパイプライン向けに完全フロントエンドのAIレコメンダーシステムを構築し、営業時間を50％削減、パイプラインの誤りを70％削減いたしました。",
     "api": "deepl"
+  },
+  "Game backend programmer with 3 years of professional experience in programming and leadership. I specialize in cloud infrastructure, database optimization, and DevOps": {
+    "translation": "ゲームバックエンドプログラマーとして、プログラミングおよびリーダーシップにおいて3年の専門的な経験がございます。クラウドインフラストラクチャ、データベース最適化、DevOpsを専門としております。",
+    "api": "deepl"
+  },
+  "I'm a game backend programmer with 3 years of professional experience in programming and leadership. I specialize in cloud infrastructure, database optimization, and DevOps": {
+    "translation": "私はゲームバックエンドプログラマーとして、プログラミングとリーダーシップにおいて3年の専門的な経験がございます。クラウドインフラストラクチャ、データベース最適化、DevOpsを専門としております。",
+    "api": "deepl"
   }
 }

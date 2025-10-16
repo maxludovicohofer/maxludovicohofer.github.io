@@ -1650,5 +1650,13 @@
   "I look forward to the opportunity to help shape {}'s future": {
     "translation": "Sono lieto di avere l'opportunità di contribuire a plasmare il futuro di {}.",
     "api": "deepl"
+  },
+  "Game backend programmer with 3 years of professional experience in programming and leadership. I specialize in cloud infrastructure, database optimization, and DevOps": {
+    "translation": "Programmatore backend di giochi con tre anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato in infrastrutture cloud, ottimizzazione di database e DevOps.",
+    "api": "deepl"
+  },
+  "I'm a game backend programmer with 3 years of professional experience in programming and leadership. I specialize in cloud infrastructure, database optimization, and DevOps": {
+    "translation": "Sono un programmatore backend di videogiochi con tre anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato in infrastrutture cloud, ottimizzazione di database e DevOps.",
+    "api": "deepl"
   }
 }
