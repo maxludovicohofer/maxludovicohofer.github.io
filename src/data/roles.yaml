@@ -17,9 +17,9 @@
     - level design
     - combat systems
   specializations:
-    - combat
-    - mechanics
-    - level design
+    - multipurpose mechanics
+    - creating tension
+    - readable level design
 
 - id: technical level designer
   matches:
@@ -51,8 +51,9 @@
     - combat systems
     - physics systems
   specializations:
-    - mechanics
+    - combat systems
     - AI
+    - performance optimization
   omit:
     - showreel
 

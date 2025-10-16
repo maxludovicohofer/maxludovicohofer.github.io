@@ -1658,5 +1658,21 @@
   "I'm a game backend programmer with 3 years of professional experience in programming and leadership. I specialize in cloud infrastructure, database optimization, and DevOps": {
     "translation": "Sono un programmatore backend di giochi con 3 anni di esperienza professionale in programmazione e leadership. Sono specializzato in infrastrutture cloud, ottimizzazione di database e DevOps",
     "api": "deepl"
+  },
+  "Gameplay programmer with 3 years of professional experience in programming and leadership. I specialize in combat systems, AI, and performance optimization": {
+    "translation": "Gameplay programmer con 3 anni di esperienza professionale in programmazione e leadership. Sono specializzato in combat system, IA e ottimizzazione delle prestazioni",
+    "api": "deepl"
+  },
+  "I'm a gameplay programmer with 3 years of professional experience in programming and leadership. I specialize in combat systems, AI, and performance optimization": {
+    "translation": "Sono un gameplay programmer con 3 anni di esperienza professionale in programmazione e leadership. Sono specializzato in combat system, IA e ottimizzazione delle prestazioni",
+    "api": "deepl"
+  },
+  "Technical game designer with 3 years of professional experience in programming and leadership. I specialize in multipurpose mechanics, creating tension, and readable level design": {
+    "translation": "Technical game designer con 3 anni di esperienza professionale in programmazione e leadership. Sono specializzato in meccaniche multiuso, nella creazione di tensione e di level design leggibile",
+    "api": "deepl"
+  },
+  "I'm a technical game designer with 3 years of professional experience in programming and leadership. I specialize in multipurpose mechanics, creating tension, and readable level design": {
+    "translation": "Sono un technical game designer con 3 anni di esperienza professionale in programmazione e leadership. Sono specializzato in meccaniche multiuso, nella creazione di tensione e di level design leggibile",
+    "api": "deepl"
   }
 }

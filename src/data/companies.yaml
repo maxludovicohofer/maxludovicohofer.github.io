@@ -274,7 +274,9 @@
   en: false
 
 - id: Playrix
-  en: false
+  en:
+    resume: true
+    coverLetter: true
 
 - id: Ubisoft
   en: false
@@ -321,7 +323,13 @@
     coverLetter: true
     email: true
 
+- id: Mad Pumpkins
+  it: false
+
 #! General companies
 
 - id: Amicus
+  en: false
+
+- id: Algofi
   en: false
