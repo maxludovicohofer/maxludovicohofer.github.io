@@ -282,7 +282,8 @@
     coverLetter: true
 
 - id: Ubisoft
-  en: false
+  en:
+    coverLetter: true
 
 - id: Tencent
   en: false
@@ -329,6 +330,16 @@
 - id: Mad Pumpkins
   it: false
 
+- id: Initialize
+  en: false
+
+- id: Ankama
+  en:
+    coverLetter: true
+
+- id: Voodoo
+  en: false
+
 #! General companies
 
 - id: Amicus
@@ -336,3 +347,11 @@
 
 - id: Algofi
   en: false
+
+- id: Bending Spoons
+  en:
+    coverLetter: true
+
+- id: Iemlist
+  en:
+    coverLetter: true
