@@ -340,6 +340,10 @@
 - id: Voodoo
   en: false
 
+- id: Ludeo
+  en:
+    coverLetter: true
+
 #! General companies
 
 - id: Amicus
