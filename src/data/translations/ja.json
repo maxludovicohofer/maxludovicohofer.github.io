@@ -2994,5 +2994,49 @@
   "Programmer with 3 years of professional experience in programming and leadership. I specialize in full stack development, cloud infrastructure, and cost and performance optimization": {
     "translation": "プログラミングおよびリーダーシップにおいて3年の専門的な経験を有するプログラマーです。フルスタック開発、クラウドインフラストラクチャ、ならびにコストとパフォーマンスの最適化を専門としております。",
     "api": "deepl"
+  },
+  "Career break": {
+    "translation": "キャリアの中断",
+    "api": "deepl"
+  },
+  "reskill as game developer": {
+    "translation": "ゲーム開発者として再スキルアップする",
+    "api": "deepl"
+  },
+  "reskill as C++ programmer": {
+    "translation": "C++プログラマーとして再スキルアップする",
+    "api": "deepl"
+  },
+  "Reskill as game developer": {
+    "translation": "ゲーム開発者として再スキルアップする",
+    "api": "deepl"
+  },
+  "Leading development of game projects in Unreal Engine and Unity and designing and programming game systems": {
+    "translation": "Unreal EngineおよびUnityにおけるゲームプロジェクトの開発を主導し、ゲームシステムの設計およびプログラミングを担当いたします。",
+    "api": "deepl"
+  },
+  "Developed 1 published award-winning game, 6 prototypes, and 1 game AI framework tool with teams of 5-25 people": {
+    "translation": "受賞歴のあるゲームを1本開発し、プロトタイプを6本、ゲームAIフレームワークツールを1本、5名から25名規模のチームで開発いたしました。",
+    "api": "deepl"
+  },
+  "Thorougly studied the entire game development pipeline, specializing in the technical side": {
+    "translation": "ゲーム開発の全工程を徹底的に研究し、技術面を専門としています。",
+    "api": "deepl"
+  },
+  "Reskill as C++ programmer": {
+    "translation": "C++プログラマーとして再スキルアップいたします",
+    "api": "deepl"
+  },
+  "Programming low-latency systems in C++": {
+    "translation": "C++による低遅延システムのプログラミング",
+    "api": "deepl"
+  },
+  "Developed complex physics systems in C++ 20": {
+    "translation": "C++ 20を用いて複雑な物理システムを開発しました",
+    "api": "deepl"
+  },
+  "Programmed multithreaded realtime online systems using RPC over UDP": {
+    "translation": "UDP上のRPCを用いたプログラム化されたマルチスレッドリアルタイムオンラインシステム",
+    "api": "deepl"
   }
 }

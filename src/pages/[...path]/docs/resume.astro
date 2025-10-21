@@ -75,19 +75,21 @@ if (techList.length > 11) {
 
 const shortSkillGrid = techList.length / skillsColumns < 5;
 
-const shortExperience =
-  (
-    await getFormattedKnowHow(Astro, {
-      section: "experience",
-      maxAchievements: 3,
-    })
-  )
-    .flatMap((knowHow) =>
-      knowHow.flatMap(({ sections }) =>
-        sections.map(({ translatedDescription }) => translatedDescription)
-      )
+const experienceLength = (
+  await getFormattedKnowHow(Astro, {
+    section: "experience",
+    maxAchievements: 3,
+  })
+)
+  .flatMap((knowHow) =>
+    knowHow.flatMap(({ sections }) =>
+      sections.map(({ translatedDescription }) => translatedDescription)
     )
-    .join(" ").length < 900;
+  )
+  .join(" ").length;
+
+const shortExperience = experienceLength < 900;
+const mediumExperience = experienceLength < 1000;
 
 const { role } = await getRole(Astro);
 const showPortfolio = !role.data.omit?.includes("portfolio");
@@ -141,7 +143,11 @@ const showPortfolio = !role.data.omit?.includes("portfolio");
       <h2 class={sectionTitleClass}>{await t("education")}</h2>
       <ResumeKnowHow
         section="education"
-        maxAchievements={shortSkillGrid && shortExperience ? 2 : 1}
+        maxAchievements={shortSkillGrid && shortExperience
+          ? 2
+          : mediumExperience
+            ? 1
+            : 0}
       />
       <h2 class={sectionTitleClass}>{await t("certifications")}</h2>
       <ResumeExtra

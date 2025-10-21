@@ -1678,5 +1678,25 @@
   "Programmer with 3 years of professional experience in programming and leadership. I specialize in full stack development, cloud infrastructure, and cost and performance optimization": {
     "translation": "Programmatore con 3 anni di esperienza professionale in programmazione e leadership. Sono specializzato nello sviluppo full stack, nell'infrastruttura cloud e nell'ottimizzazione di costi e prestazioni",
     "api": "deepl"
+  },
+  "Career break": {
+    "translation": "Interruzione di carriera",
+    "api": "deepl"
+  },
+  "Reskill as game developer": {
+    "translation": "Reskill come game developer",
+    "api": "deepl"
+  },
+  "Developed 1 published award-winning game, 6 prototypes, and 1 game AI framework tool with teams of 5-25 people and thorougly studied the entire game development pipeline, specializing in the technical side": {
+    "translation": "Sviluppato 1 gioco pubblicato e premiato, 6 prototipi e 1 tool framework di game AI con team di 5-25 persone, e approfondito l'intera pipeline di sviluppo dei giochi, specializzandomi nel lato tecnico",
+    "api": "deepl"
+  },
+  "Reskill as C++ programmer": {
+    "translation": "Reskill come programmatore C++",
+    "api": "deepl"
+  },
+  "Developed complex physics systems in C++ 20 and programmed multithreaded realtime online systems using RPC over UDP": {
+    "translation": "Sviluppato sistemi fisici elaborati in C++ 20 e programmato sistemi online multithread realtime utilizzando RPC su UDP",
+    "api": "deepl"
   }
 }

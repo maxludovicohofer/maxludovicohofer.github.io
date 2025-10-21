@@ -1,3 +1,38 @@
+- id: Career break
+  translateId: true
+  start: 2022-03-01
+  tech:
+    - C++
+    - Unreal Engine
+    - Python
+    - agile
+    - TDD
+    - SQL
+    - NoSQL
+    - AWS
+    - Edgegap
+    - CI \ CD
+    - mobile
+    - full stack
+    - Excel
+    - Photoshop
+    - Illustrator
+  skills:
+    - job: reskill as game developer
+      tasks:
+        - leading development of game projects in Unreal Engine and Unity
+        - designing and programming game systems
+      achievements:
+        - developed 1 published award-winning game, 6 prototypes, and 1 game AI framework tool with teams of 5-25 people
+        - thorougly studied the entire game development pipeline, specializing in the technical side
+
+    - job: reskill as C++ programmer
+      tasks:
+        - programming low-latency systems in C++
+      achievements:
+        - developed complex physics systems in C++ 20
+        - programmed multithreaded realtime online systems using RPC over UDP
+
 - id: INattivo Soc. Cons. a.r.l.
   start: 2021-05-01
   end: 2022-03-01

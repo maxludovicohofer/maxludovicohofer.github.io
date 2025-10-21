@@ -98,6 +98,11 @@ export const getFormattedKnowHow = async (
                             skills?.[index - 1]?.start ?? end
                           );
 
+                          const displayedAchievements = achievements.slice(
+                            0,
+                            props?.maxAchievements ?? undefined
+                          );
+
                           return {
                             translatedJobTitle: await t(
                               `${capitalize(job.id)}${dropOut ? " (not graduated)" : ""}`
@@ -105,15 +110,11 @@ export const getFormattedKnowHow = async (
                             dates: !props?.hideDates && dates.join(" - "),
                             translatedDescription:
                               !experience?.[getResumeKey(astro)]?.short &&
+                              !!displayedAchievements.length &&
                               (await t(
                                 capitalize(
                                   endDelimiter(
-                                    toTextList(
-                                      achievements.slice(
-                                        0,
-                                        props?.maxAchievements ?? undefined
-                                      )
-                                    )
+                                    toTextList(displayedAchievements)
                                   )
                                 )
                               )),
