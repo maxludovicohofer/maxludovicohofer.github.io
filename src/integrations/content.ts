@@ -280,9 +280,11 @@ export const getLanguages = async (astro: AstroGlobal) => {
   return languages;
 };
 
+export const defaultTechThreshold = 7;
+
 export const getTech = async (
   astro: AstroGlobal,
-  threshold = 7,
+  threshold = defaultTechThreshold,
   options?: GetCollectionOptions<"tech">,
 ) =>
   await Promise.all(

@@ -9,6 +9,7 @@ import Link from "@components/ui/Link.astro";
 import { getRole, getSiteLink } from "@integrations/astro-server";
 import {
   compactTechList,
+  defaultTechThreshold,
   getBuiltCompaniesByExclusion,
   getLanguages,
   getTechList,
@@ -42,7 +43,19 @@ export const getStaticPaths = async (
 const portfolioLink = await getSiteLink(Astro);
 
 const maxTech = 20;
-const techList = compactTechList(await getTechList(Astro)).slice(0, maxTech);
+const minTech = 8;
+
+let techList = [] as ReturnType<typeof compactTechList>;
+for (
+  let threshold = defaultTechThreshold;
+  techList.length < minTech || threshold < 0;
+  threshold--
+) {
+  techList = compactTechList(await getTechList(Astro, threshold)).slice(
+    0,
+    maxTech
+  );
+}
 
 await setDayjsLocale(Astro);
 dayjs.extend(duration);
@@ -73,7 +86,9 @@ if (techList.length > 11) {
     techList.splice(-techToOmit, techToOmit);
 }
 
-const shortSkillGrid = techList.length / skillsColumns < 5;
+const skillGridRows = Math.ceil(techList.length / skillsColumns);
+const shortestSkillGrid = skillGridRows < 4;
+const shortSkillGrid = skillGridRows < 5;
 
 const experienceLength = (
   await getFormattedKnowHow(Astro, {
@@ -89,10 +104,12 @@ const experienceLength = (
   .join(" ").length;
 
 const shortExperience = experienceLength < 900;
-const mediumExperience = experienceLength < 1000;
+const mediumExperience = experienceLength < 1050;
 
 const { role } = await getRole(Astro);
 const showPortfolio = !role.data.omit?.includes("portfolio");
+
+const showExtra = shortExperience || (mediumExperience && shortSkillGrid);
 
 // TODO PHASE 2 UPDATE LINKEDIN AUTOMATICALLY
 ---
@@ -143,20 +160,24 @@ const showPortfolio = !role.data.omit?.includes("portfolio");
       <h2 class={sectionTitleClass}>{await t("education")}</h2>
       <ResumeKnowHow
         section="education"
-        maxAchievements={shortSkillGrid && shortExperience
+        maxAchievements={(shortSkillGrid && shortExperience) || !showExtra
           ? 2
-          : mediumExperience
+          : shortSkillGrid || mediumExperience
             ? 1
             : 0}
       />
-      <h2 class={sectionTitleClass}>{await t("certifications")}</h2>
-      <ResumeExtra
-        maxCertifications={shortSkillGrid && shortExperience
-          ? 3
-          : !shortSkillGrid && !shortExperience
-            ? 1
-            : 2}
-      />
+      {
+        showExtra && (
+          <>
+            <h2 class={sectionTitleClass}>{await t("certifications")}</h2>
+            <ResumeExtra
+              maxCertifications={
+                shortSkillGrid && shortExperience ? 3 : shortExperience ? 2 : 1
+              }
+            />
+          </>
+        )
+      }
     </div>
     <div class="pl-4">
       <h2 class={sectionTitleClass}>
@@ -170,15 +191,16 @@ const showPortfolio = !role.data.omit?.includes("portfolio");
         }
       </ul>
       {
-        showPortfolio && (
-          <>
-            <h2 class={sectionTitleClass}>{await t("selected portfolio")}</h2>
-            <ResumeProjects
-              numberOfProjects={shortSkillGrid && shortExperience ? 2 : 1}
-              numberOfRoles={2}
-            />
-          </>
-        )
+        showPortfolio &&
+          (shortExperience || (shortestSkillGrid && mediumExperience)) && (
+            <>
+              <h2 class={sectionTitleClass}>{await t("selected portfolio")}</h2>
+              <ResumeProjects
+                numberOfProjects={shortSkillGrid && shortExperience ? 2 : 1}
+                numberOfRoles={2}
+              />
+            </>
+          )
       }
     </div>
   </div>

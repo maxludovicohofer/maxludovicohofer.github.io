@@ -1698,5 +1698,13 @@
   "Developed complex physics systems in C++ 20 and programmed multithreaded realtime online systems using RPC over UDP": {
     "translation": "Sviluppato sistemi fisici elaborati in C++ 20 e programmato sistemi online multithread realtime utilizzando RPC su UDP",
     "api": "deepl"
+  },
+  "Specialized in the technical side of the pipeline": {
+    "translation": "Specializzato nel lato tecnico della pipeline",
+    "api": "deepl"
+  },
+  "Specialized in the technical side of the pipeline and worked on mobile, desktop, online, offline, and couch co-op games in teams of 5-25 people": {
+    "translation": "Specializzato nel lato tecnico della pipeline e sviluppato giochi mobile, desktop, online, offline e couch co-op in team di 5-25 persone",
+    "api": "deepl"
   }
 }
