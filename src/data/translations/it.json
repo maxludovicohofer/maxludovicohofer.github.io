@@ -1728,11 +1728,15 @@
     "api": "deepl"
   },
   "application for C++ programmer": {
-    "translation": "Domanda di assunzione per programmatore C++",
+    "translation": "candidatura per programmatore C++",
     "api": "deepl"
   },
   "application for full stack programmer": {
-    "translation": "Candidatura per la posizione di programmatore full stack",
+    "translation": "candidatura per programmatore full stack",
+    "api": "deepl"
+  },
+  "I hope this message finds you well. I have attached my resume for your review": {
+    "translation": "Spero che questo messaggio vi trovi bene. Ho allegato il mio curriculum per vostra valutazione",
     "api": "deepl"
   }
 }
