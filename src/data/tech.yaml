@@ -113,6 +113,12 @@
     - game programmer
     - backend programmer
 
+- id: Typescript
+  experience: P5Y
+  group: programming
+  roles:
+    - full stack programmer
+
 - id: ECS
   experience: P3Y
   group: programming
@@ -192,6 +198,7 @@
   experience: P5Y
   group: programming
   roles:
+    - full stack programmer
     - backend programmer
 
 - id: CI \ CD

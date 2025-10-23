@@ -1703,8 +1703,28 @@
     "translation": "Specializzato nel lato tecnico della pipeline",
     "api": "deepl"
   },
-  "Specialized in the technical side of the pipeline and worked on mobile, desktop, online, offline, and couch co-op games in teams of 5-25 people": {
-    "translation": "Specializzato nel lato tecnico della pipeline e sviluppato giochi mobile, desktop, online, offline e couch co-op in team di 5-25 persone",
+  "Worked on mobile, desktop, online, offline, and couch co-op games in teams of 5-25 people": {
+    "translation": "Sviluppato giochi mobile, desktop, online, offline e couch co-op in team di 5-25 persone",
+    "api": "deepl"
+  },
+  "Specialized in AI development and integration": {
+    "translation": "Specializzato nello sviluppo e nell'integrazione di IA",
+    "api": "deepl"
+  },
+  "Full stack programmer with 3 years of professional experience in programming and leadership. I specialize in progressive web apps, cloud infrastructure, and cost and performance optimization": {
+    "translation": "Programmatore full stack con 3 anni di esperienza professionale in programmazione e leadership. Sono specializzato in progressive web app, infrastruttura cloud e ottimizzazione dei costi e delle prestazioni.",
+    "api": "deepl"
+  },
+  "Upskill as full stack programmer": {
+    "translation": "Upskill come programmatore full stack",
+    "api": "deepl"
+  },
+  "Developed 2 LLM-powered web apps with Vue, Astro, Node, PostgreSQL, and AWS": {
+    "translation": "Sviluppato 2 applicazioni web basate su LLM con Vue, Astro, Node, PostgreSQL e AWS",
+    "api": "deepl"
+  },
+  "C++ programmer with 3 years of professional experience in programming and leadership. I specialize in low-latency multithreading and cost and performance optimization": {
+    "translation": "Programmatore C++ con 3 anni di esperienza professionale in programmazione e leadership. Sono specializzato in low-latency multithreading e nell'ottimizzazione dei costi e delle prestazioni.",
     "api": "deepl"
   }
 }

@@ -156,6 +156,9 @@ export const getEntriesSafe = async <
   return unsafeEntries;
 };
 
+export const escapeRegExp = (text: string) =>
+  text.replaceAll(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
 export const matchRoles = async <D>(
   astro: AstroGlobal,
   entries: { data?: D; roles?: ReferenceDataEntry<"roles", string>[] }[],
@@ -163,7 +166,8 @@ export const matchRoles = async <D>(
 ) => {
   const role = (await getRole(astro)).role;
 
-  const makeMatcher = (text: string) => new RegExp(`\\b${text}\\b`, "i");
+  const makeMatcher = (text: string) =>
+    new RegExp(`\\b${escapeRegExp(text)}\\b`, "i");
 
   const rolePriorityWeight = 0.2;
 

@@ -245,10 +245,11 @@
   omit:
     - portfolio
 
-- id: programmer
+- id: C++ programmer
   matches:
     - technical lead
     - tech lead
+    - programming
   notMatches:
     - game programmer
     - game backend programmer
@@ -257,7 +258,25 @@
   workFields:
     - programming
   specializations:
-    - full stack development
+    - low-latency multithreading
+    - cost and performance optimization
+  omit:
+    - portfolio
+
+- id: full stack programmer
+  matches:
+    - technical lead
+    - tech lead
+    - programming
+  notMatches:
+    - game programmer
+    - game backend programmer
+    - graphics programmer
+    - technical artist
+  workFields:
+    - programming
+  specializations:
+    - progressive web apps
     - cloud infrastructure
     - cost and performance optimization
   omit:

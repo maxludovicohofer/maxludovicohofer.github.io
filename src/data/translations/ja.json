@@ -3038,5 +3038,37 @@
   "Programmed multithreaded realtime online systems using RPC over UDP": {
     "translation": "UDP上のRPCを用いたプログラム化されたマルチスレッドリアルタイムオンラインシステム",
     "api": "deepl"
+  },
+  "programming": {
+    "translation": "プログラミング",
+    "api": "deepl"
+  },
+  "upskill as full stack programmer": {
+    "translation": "フルスタックプログラマーとしてスキルアップする",
+    "api": "deepl"
+  },
+  "Cpp programmer with 3 years of professional experience in programming and leadership. I specialize in low-latency multithreading and cost and performance optimization": {
+    "translation": "C++プログラマーとして、プログラミングおよびリーダーシップにおいて3年の専門的な経験がございます。低遅延マルチスレッディングならびにコストとパフォーマンスの最適化を専門としております。",
+    "api": "deepl"
+  },
+  "Full stack programmer with 3 years of professional experience in programming and leadership. I specialize in progressive web apps, cloud infrastructure, and cost and performance optimization": {
+    "translation": "プログラミングとリーダーシップにおいて3年の専門的な経験を持つフルスタックプログラマーです。プログレッシブウェブアプリ、クラウドインフラストラクチャ、コストとパフォーマンスの最適化を専門としています。",
+    "api": "deepl"
+  },
+  "Upskill as full stack programmer": {
+    "translation": "フルスタックプログラマーとしてスキルアップしましょう",
+    "api": "deepl"
+  },
+  "Programming full stack cloud-based web apps": {
+    "translation": "フルスタックのクラウドベースWebアプリケーションのプログラミング",
+    "api": "deepl"
+  },
+  "Developed 2 LLM-powered web apps with Vue, Astro, Node, PostgreSQL, and AWS": {
+    "translation": "Vue、Astro、Node、PostgreSQL、AWSを活用し、LLM技術を搭載した2つのWebアプリケーションを開発いたしました。",
+    "api": "deepl"
+  },
+  "C++ programmer with 3 years of professional experience in programming and leadership. I specialize in low-latency multithreading and cost and performance optimization": {
+    "translation": "プログラミングおよびリーダーシップにおいて3年の専門的な経験を有するC++プログラマーです。低遅延マルチスレッディングならびにコストとパフォーマンスの最適化を専門としています。",
+    "api": "deepl"
   }
 }
