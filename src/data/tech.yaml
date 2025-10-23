@@ -208,6 +208,12 @@
     - programmer
     - scrum master
 
+- id: Linux
+  experience: P5Y
+  group: programming
+  roles:
+    - backend programmer
+
 - id: Docker
   experience: P2Y
   group: programming

@@ -344,6 +344,9 @@
   en:
     coverLetter: true
 
+- id: Sandbox Interactive
+  en: false
+
 #! General companies
 
 - id: Amicus
