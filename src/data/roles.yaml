@@ -226,11 +226,12 @@
 - id: tech lead
   matches:
     - technical lead
-    - programmer
+    - full stack programmer
     - project manager
     - lead
     - director
     - scrum master
+    - programming
   notMatches:
     - game programmer
     - technical artist
