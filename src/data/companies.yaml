@@ -362,3 +362,8 @@
 - id: Iemlist
   en:
     coverLetter: true
+
+- id: European Recruitment
+  en:
+    # resume: true
+    email: true

@@ -35,9 +35,11 @@ const thanksSentence = removeWatashiNo(
   }`
 );
 
+const hasPortfolio = !role.data.omit?.includes("portfolio");
+
 const documentsSentence = removeWatashiNo(
   await t(
-    `I hope this message finds you well. I have attached my ${toTextList([...getResumeDocuments(Astro), ...(coverLetter ? ["cover letter"] : [])])} for your review. You may also view my portfolio at`
+    `I hope this message finds you well. I have attached my ${toTextList([...getResumeDocuments(Astro), ...(coverLetter ? ["cover letter"] : [])])} for your review.${hasPortfolio ? " You may also view my portfolio at" : ""}`
   )
 );
 ---
@@ -65,9 +67,17 @@ const documentsSentence = removeWatashiNo(
           <br />
         </>
       )
-    }
-    <span>{documentsSentence}</span>{await t(" ")}<Link href={portfolioLink} />{
-      await t(".")
+    }{
+      hasPortfolio ? (
+        <>
+          <span>{documentsSentence}</span>
+          {await t(" ")}
+          <Link href={portfolioLink} />
+          {await t(".")}
+        </>
+      ) : (
+        documentsSentence
+      )
     }
   </p>
   <p>{thanksSentence}</p>

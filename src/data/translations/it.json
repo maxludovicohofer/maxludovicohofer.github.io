@@ -1726,5 +1726,13 @@
   "C++ programmer with 3 years of professional experience in programming and leadership. I specialize in low-latency multithreading and cost and performance optimization": {
     "translation": "Programmatore C++ con 3 anni di esperienza professionale in programmazione e leadership. Sono specializzato in low-latency multithreading e nell'ottimizzazione dei costi e delle prestazioni.",
     "api": "deepl"
+  },
+  "application for C++ programmer": {
+    "translation": "Domanda di assunzione per programmatore C++",
+    "api": "deepl"
+  },
+  "application for full stack programmer": {
+    "translation": "Candidatura per la posizione di programmatore full stack",
+    "api": "deepl"
   }
 }
