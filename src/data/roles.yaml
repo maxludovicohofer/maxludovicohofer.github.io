@@ -46,6 +46,8 @@
     - game programmer
     - technical lead
     - tech lead
+  notMatches:
+    - C++ programmer
   workFields:
     - gameplay programming
     - combat systems
@@ -64,6 +66,8 @@
     - AI lead
     - technical lead
     - tech lead
+  notMatches:
+    - C++ programmer
   workFields:
     - AI programming
     - decision trees
@@ -82,6 +86,8 @@
     - engine programmer
     - technical lead
     - tech lead
+  notMatches:
+    - C++ programmer
   workFields:
     - system programming
     - engine programming
@@ -101,6 +107,8 @@
     - user experience
     - UX
     - UI
+  notMatches:
+    - C++ programmer
   workFields:
     - tools programming
     - engine programming
@@ -123,6 +131,8 @@
     - user experience
     - UX
     - UI
+  notMatches:
+    - C++ programmer
   workFields:
     - engine programming
     - system programming
@@ -143,6 +153,8 @@
     - systems programmer
     - technical lead
     - tech lead
+  notMatches:
+    - C++ programmer
   workFields:
     - server architecture
     - backend programming
@@ -194,6 +206,8 @@
     - UX
     - technical lead
     - tech lead
+  notMatches:
+    - C++ programmer
   workFields:
     - UI programming
     - UX planning
@@ -274,6 +288,7 @@
     - game backend programmer
     - graphics programmer
     - technical artist
+    - C++ programmer
   workFields:
     - programming
   specializations:

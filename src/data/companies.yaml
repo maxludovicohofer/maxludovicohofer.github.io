@@ -347,6 +347,9 @@
 - id: Sandbox Interactive
   en: false
 
+- id: Axiosys
+  en: false
+
 #! General companies
 
 - id: Amicus
@@ -365,4 +368,8 @@
 
 - id: European Recruitment
   en:
+    email: true
+
+- id: K4Tech
+  it:
     email: true

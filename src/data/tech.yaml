@@ -148,6 +148,12 @@
     - game programmer
     - technical artist
 
+- id: Qt
+  experience: P1Y
+  group: programming
+  roles:
+    - C++ programmer
+
 - id: MCP
   experience: P6M
   group: programming
