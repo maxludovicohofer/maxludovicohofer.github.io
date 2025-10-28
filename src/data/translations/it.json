@@ -1738,5 +1738,9 @@
   "I hope this message finds you well. I have attached my resume for your review": {
     "translation": "Spero che questo messaggio vi trovi bene. Ho allegato il mio curriculum per vostra valutazione",
     "api": "deepl"
+  },
+  "present": {
+    "translation": "presente",
+    "api": "deepl"
   }
 }
