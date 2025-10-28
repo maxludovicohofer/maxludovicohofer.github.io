@@ -145,13 +145,18 @@ const formattedKnowHow = await getFormattedKnowHow(Astro, Astro.props);
       <ol class="list-none ps-0 mt-0 space-y-4">
         {experiences.map(({ translatedId, sections }) => (
           <li class="ps-0">
-            <ol class="list-none ps-0 my-0 space-y-4">
+            <Text translateProps={{ disable: true }} class="my-0">
+              {translatedId}
+            </Text>
+            <ol
+              class={`list-none my-0 space-y-4 ${sections.length > 1 ? "ps-2" : "ps-0"}`}
+            >
               {sections.map(
                 ({ translatedJobTitle, translatedDescription, dates }) => (
                   <li class="ps-0 my-0">
                     <div class="flex justify-between text-balance">
-                      <Text translateProps={{ disable: true }} class="my-0">
-                        {translatedId}
+                      <Text tag="h5" translateProps={{ disable: true }}>
+                        {translatedJobTitle}
                       </Text>
                       {dates && (
                         <Text
@@ -162,9 +167,6 @@ const formattedKnowHow = await getFormattedKnowHow(Astro, Astro.props);
                         </Text>
                       )}
                     </div>
-                    <Text tag="h5" translateProps={{ disable: true }}>
-                      {translatedJobTitle}
-                    </Text>
                     <ul class="list-none ps-0 my-0">
                       {translatedDescription && (
                         <Text
