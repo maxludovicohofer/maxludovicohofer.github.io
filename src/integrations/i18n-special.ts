@@ -40,7 +40,7 @@ export const localeInfo: Record<(typeof locales)[number], LocaleInfo> = {
     cellphonePrefix: "+39",
     articleForOne: "un",
     getYear: (date) => date.replaceAll(/\D+/g, "").slice(-4),
-    getYearMonth: (date) => date.replace(/\d+,/, ""),
+    getYearMonth: (date) => date.replace(/\d+\s/, ""),
   },
 };
 

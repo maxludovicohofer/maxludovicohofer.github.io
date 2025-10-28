@@ -9,7 +9,9 @@ import type { HTMLAttributes } from "astro/types";
 import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 
-interface Props extends HTMLAttributes<"div"> {
+interface Props
+  extends HTMLAttributes<"div">,
+    NonNullable<Parameters<typeof getKnowHow>[1]> {
   section?: keyof Awaited<ReturnType<typeof getKnowHow>>;
   maxAchievements?: number;
   hideDates?: boolean;
@@ -44,15 +46,19 @@ export const getFormattedDates = async (
 
   const { getYear, getYearMonth } = getLocaleInfo(astro);
 
-  return dates.map((date) => {
-    if (date === today) return "Present";
+  const t = i18n(astro);
 
-    if (showDay) return date.format("ll");
+  return await Promise.all(
+    dates.map(async (date) => {
+      if (date === today) return capitalize(await t("present"));
 
-    if (showMonth) return getYearMonth(date.format("ll"));
+      if (showDay) return date.format("ll");
 
-    return getYear(date.format("LL"));
-  });
+      if (showMonth) return capitalize(getYearMonth(date.format("ll")));
+
+      return getYear(date.format("LL"));
+    })
+  );
 };
 
 export const getFormattedKnowHow = async (
@@ -61,7 +67,7 @@ export const getFormattedKnowHow = async (
 ) => {
   const t = i18n(astro);
 
-  const knowHow = await getKnowHow(astro);
+  const knowHow = await getKnowHow(astro, props);
 
   return await Promise.all(
     Object.entries(knowHow)

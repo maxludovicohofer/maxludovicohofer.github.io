@@ -14,6 +14,7 @@ const roles = defineCollection({
     workFields: z.string().array().optional(),
     specializations: z.string().array().optional(),
     omit: z.enum(["showreel", "tech", "portfolio"]).array().optional(),
+    singleSkillPerJob: z.boolean().optional(),
   }),
 });
 

@@ -187,7 +187,10 @@ export const getTeam = (entry: { data: object } | undefined) => {
   };
 };
 
-export const getKnowHow = async (astro: AstroGlobal) => {
+export const getKnowHow = async (
+  astro: AstroGlobal,
+  options?: { singleSkillPerJob?: boolean | undefined },
+) => {
   async function mapObject<T extends Record<string, any>, U>(
     objectToMap: T,
     mapFunction: (value: T[keyof T], key: keyof T) => U,
@@ -204,7 +207,12 @@ export const getKnowHow = async (astro: AstroGlobal) => {
   const knowHow = await Promise.all(
     (await getCollection("know-how")).map(
       async ({ data: { start, end, team, skills, ...data } }) => {
-        const groupedSkills = groupBy(skills, ({ start: skillStart }) =>
+        const filteredSkills = skills.map(({ start, ...skill }) => ({
+          start: options?.singleSkillPerJob ? undefined : start,
+          ...skill,
+        }));
+
+        const groupedSkills = groupBy(filteredSkills, ({ start: skillStart }) =>
           (skillStart ?? start).toISOString(),
         );
 

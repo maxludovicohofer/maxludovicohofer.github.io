@@ -262,9 +262,9 @@
 
 - id: C++ programmer
   matches:
-    - technical lead
-    - tech lead
     - programming
+    - tech lead
+    - technical lead
   notMatches:
     - game programmer
     - game backend programmer
@@ -277,12 +277,13 @@
     - cost and performance optimization
   omit:
     - portfolio
+  singleSkillPerJob: true
 
 - id: full stack programmer
   matches:
+    - programming
     - technical lead
     - tech lead
-    - programming
   notMatches:
     - game programmer
     - game backend programmer
@@ -297,3 +298,4 @@
     - cost and performance optimization
   omit:
     - portfolio
+  singleSkillPerJob: true

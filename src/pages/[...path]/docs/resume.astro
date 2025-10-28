@@ -42,7 +42,7 @@ export const getStaticPaths = async (
 
 const portfolioLink = await getSiteLink(Astro);
 
-const maxTech = 20;
+const maxTech = 12;
 const minTech = 8;
 
 let techList = [] as ReturnType<typeof compactTechList>;
@@ -151,7 +151,11 @@ const showExtra = shortExperience || (mediumExperience && shortSkillGrid);
   </ul>
   <hr />
   <h2 class={sectionTitleClass}>{await t("professional experience")}</h2>
-  <ResumeKnowHow section="experience" maxAchievements={3} />
+  <ResumeKnowHow
+    section="experience"
+    maxAchievements={3}
+    singleSkillPerJob={role.data.singleSkillPerJob}
+  />
   <hr />
   <div
     class="grid grid-cols-2 divide-x divide-[var(--tw-prose-hr)] print:divide-zinc-950"
