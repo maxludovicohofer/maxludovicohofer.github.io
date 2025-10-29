@@ -110,6 +110,7 @@ const experienceRows = (await getFormattedKnowHow(Astro, experienceProps))
     (a, b) =>
       a +
       constantLinesForEveryJob +
+      // TODO Should reduce characters per line if multiple sections, also reduce constant lines for every job
       (b ? Math.ceil(b.length / charactersPerLine) : 0),
     -1 // Start from -1 to count the first job offset
   );
@@ -175,7 +176,7 @@ const showExtra = freeRows > 9;
         section="education"
         maxAchievements={freeRows > 15 || (!showExtra && freeRows > 5)
           ? 2
-          : freeRows > 10
+          : freeRows > 9
             ? 1
             : 0}
       />
