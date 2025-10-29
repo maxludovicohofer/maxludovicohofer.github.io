@@ -207,7 +207,9 @@ export const getMyName = async (astro: AstroGlobal) => {
 };
 
 export const getResumeDocuments = (astro: AstroGlobal) =>
-  getCurrentLocale(astro) === "ja" ? ["履歴書", "職務経歴書"] : ["resume"];
+  getCurrentLocale(astro) === "ja"
+    ? ["履歴書", "職務経歴書"]
+    : [getLocaleInfo(astro).resumeIsCalledCV ? "cv" : "resume"];
 
 export const getExtraItems = async (astro: AstroGlobal) => {
   const t = i18n(astro);

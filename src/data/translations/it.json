@@ -1742,5 +1742,9 @@
   "present": {
     "translation": "presente",
     "api": "deepl"
+  },
+  "Cv": {
+    "translation": "CV",
+    "api": "deepl"
   }
 }

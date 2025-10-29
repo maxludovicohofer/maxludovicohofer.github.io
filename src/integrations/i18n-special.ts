@@ -6,6 +6,7 @@ export type LocaleInfo = {
   nationName: string;
   delimiters: string;
   cellphonePrefix: `+${number}`;
+  resumeIsCalledCV?: boolean;
   articleForOne?: string;
   surnameFirst?: boolean;
   nameSeparator?: string;
@@ -39,6 +40,7 @@ export const localeInfo: Record<(typeof locales)[number], LocaleInfo> = {
     delimiters: ".?!",
     cellphonePrefix: "+39",
     articleForOne: "un",
+    resumeIsCalledCV: true,
     getYear: (date) => date.replaceAll(/\D+/g, "").slice(-4),
     getYearMonth: (date) => date.replace(/\d+\s/, ""),
   },

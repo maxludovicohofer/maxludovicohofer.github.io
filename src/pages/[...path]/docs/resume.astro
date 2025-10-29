@@ -10,6 +10,7 @@ import { getRole, getSiteLink } from "@integrations/astro-server";
 import {
   compactTechList,
   defaultTechThreshold,
+  getBuiltCompanies,
   getBuiltCompaniesByExclusion,
   getLanguages,
   getTechList,
@@ -21,6 +22,7 @@ import {
   getSummary,
 } from "@integrations/docs";
 import { i18n, setDayjsLocale } from "@integrations/i18n-server";
+import { localeInfo } from "@integrations/i18n-special";
 import { findBestDivisor } from "@integrations/math";
 import DocumentPage from "@layouts/document/DocumentPage.astro";
 import type { ComponentProps } from "astro/types";
@@ -32,10 +34,25 @@ import relativeTime from "dayjs/plugin/relativeTime";
 export const getStaticPaths = async (
   ...params: Parameters<typeof getDocumentsBasePaths>
 ) => {
-  const builtCompanies = await getBuiltCompaniesByExclusion("ja");
+  const allowedLocales = params[0]?.allowedLocales;
+  const excludedLocales: NonNullable<
+    NonNullable<(typeof params)[0]>["excludedLocales"]
+  > = allowedLocales
+    ? []
+    : [
+        "ja",
+        ...(Object.keys(localeInfo) as (keyof typeof localeInfo)[]).filter(
+          (locale) => localeInfo[locale].resumeIsCalledCV
+        ),
+      ];
+
+  // TODO SET EXCLUDED/ALLOWED LOCALES HERE
+  const builtCompanies = await (allowedLocales
+    ? getBuiltCompanies(allowedLocales)
+    : getBuiltCompaniesByExclusion(excludedLocales));
 
   return getDocumentsBasePaths({
-    excludedLocales: ["ja"],
+    excludedLocales,
     allowedCompanies: builtCompanies.map(({ id }) => id),
     ...params[0],
   });

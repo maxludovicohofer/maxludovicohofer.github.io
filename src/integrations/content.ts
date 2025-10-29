@@ -490,14 +490,18 @@ export const getCompanyResumeProps = (
   return resumeData;
 };
 
-export const getBuiltCompanies = async (resume?: ResumeKey) =>
+export const getBuiltCompanies = async (
+  allowedResumes?: ResumeKey | ResumeKey[],
+) =>
   (await getCollection("companies")).filter(({ data }) => {
     if (import.meta.env.DEV) return true;
 
     return Object.entries(data)
       .filter(([resumeKey]) =>
-        resume
-          ? resumeKey === resume
+        allowedResumes
+          ? Array.isArray(allowedResumes)
+            ? allowedResumes.includes(resumeKey as ResumeKey)
+            : resumeKey === allowedResumes
           : locales.includes(resumeKey as ResumeKey),
       )
       .some(([, props]) =>
@@ -509,14 +513,19 @@ export const getBuiltCompanies = async (resume?: ResumeKey) =>
       );
   });
 
-export const getBuiltCompaniesByExclusion = async (excludedResume: ResumeKey) =>
+export const getBuiltCompaniesByExclusion = async (
+  excludedResumes: ResumeKey | ResumeKey[],
+) =>
   (await getCollection("companies")).filter(({ data }) => {
     if (import.meta.env.DEV) return true;
 
     return Object.entries(data)
       .filter(
-        ([resume]) =>
-          resume !== excludedResume && locales.includes(resume as ResumeKey),
+        ([resumeKey]) =>
+          locales.includes(resumeKey as ResumeKey) &&
+          (Array.isArray(excludedResumes)
+            ? !excludedResumes.includes(resumeKey as ResumeKey)
+            : resumeKey !== excludedResumes),
       )
       .some(([, props]) =>
         Array.isArray(props) ||

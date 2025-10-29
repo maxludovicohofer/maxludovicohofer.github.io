@@ -1,0 +1,14 @@
+---
+import Resume, { getStaticPaths as getBasePaths } from "@docs/resume.astro";
+import { localeInfo } from "@integrations/i18n-special";
+
+export const getStaticPaths = (...params: Parameters<typeof getBasePaths>) =>
+  getBasePaths({
+    allowedLocales: (
+      Object.keys(localeInfo) as (keyof typeof localeInfo)[]
+    ).filter((locale) => localeInfo[locale].resumeIsCalledCV),
+    ...params[0],
+  });
+---
+
+<Resume />
