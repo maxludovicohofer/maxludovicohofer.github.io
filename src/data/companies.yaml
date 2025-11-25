@@ -223,7 +223,9 @@
     coverLetter: true
 
 - id: Paradox Interactive
-  en: false
+  en:
+    resume: true
+    coverLetter: true
 
 #! Outsourcing studios
 

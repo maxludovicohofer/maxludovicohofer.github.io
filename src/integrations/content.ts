@@ -562,6 +562,11 @@ export const getRoles = async (
         interpolate: [await t(entry.data.creditedAs.role), roleList[0]!],
       },
     );
+
+    // Remove ending delimiter if present
+    if (getLocaleInfo(astro).delimiters[0]!.includes(roleList[0].at(-1)!)) {
+      roleList[0] = roleList[0].slice(0, -1);
+    }
   }
 
   const defaultNumberOfRoles = 3;
