@@ -52,7 +52,10 @@ const otherSlot =
           class="scroll-reset"
           collection={entry.collection}
           partOfPost
-          exclude={[entry.id]}
+          listProps={{
+            exclude: [entry.id],
+            showUnreadFirst: true,
+          }}
         />
       )
     }</Post

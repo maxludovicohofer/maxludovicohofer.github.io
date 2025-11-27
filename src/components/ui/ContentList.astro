@@ -14,6 +14,7 @@ interface Props extends HTMLAttributes<"ol"> {
   discreteHighlight?: boolean | undefined;
   numberOfItemsToLoadEager?: number | undefined;
   priority?: (entry: CollectionEntry<PostCollectionKey>) => number;
+  showUnreadFirst?: boolean | undefined;
 }
 
 const {
@@ -23,6 +24,7 @@ const {
   discreteHighlight,
   numberOfItemsToLoadEager = 0,
   priority,
+  showUnreadFirst,
   ...props
 } = Astro.props;
 
@@ -37,7 +39,7 @@ const sortedEntries: CollectionEntry<PostCollectionKey>[] =
     }
   );
 
-const order = collection !== "projects";
+const order = showUnreadFirst ?? (collection !== "projects");
 ---
 
 {sortedEntries.length > 0 && <ol

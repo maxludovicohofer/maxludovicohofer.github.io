@@ -1,19 +1,19 @@
 ---
-import ContentList from "@ui/ContentList.astro";
-import Post from "@post/Post.astro";
-import type { ComponentProps } from "astro/types";
-import { capitalize } from "@integrations/text";
 import type { PostCollectionKey } from "@integrations/content";
+import { capitalize } from "@integrations/text";
+import Post from "@post/Post.astro";
+import ContentList from "@ui/ContentList.astro";
+import type { ComponentProps } from "astro/types";
 
 interface Props extends ComponentProps<typeof Post> {
   collection: PostCollectionKey;
-  exclude?: ComponentProps<typeof ContentList>["exclude"];
   partOfPost?: boolean;
+  listProps?: Partial<ComponentProps<typeof ContentList>>;
 }
 
 const {
   collection,
-  exclude,
+  listProps,
   partOfPost,
   class: className = "",
   ...props
@@ -32,7 +32,7 @@ const {
     collection={collection}
     discreteHighlight={partOfPost}
     class={`${partOfPost ? "2xl:grid-cols-2" : "lg:grid-cols-2 2xl:grid-cols-3"} -mx-[calc(max(100dvw-40rem,0rem)+3rem)] lg:mx-0 px-[calc(max(100dvw-40rem,0rem)+3rem)] lg:px-0`}
-    exclude={exclude}
     numberOfItemsToLoadEager={partOfPost ? undefined : 2}
+    {...listProps}
   /></Post
 >

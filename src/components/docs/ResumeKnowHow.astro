@@ -10,8 +10,7 @@ import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 
 interface Props
-  extends HTMLAttributes<"div">,
-    NonNullable<Parameters<typeof getKnowHow>[1]> {
+  extends HTMLAttributes<"div">, NonNullable<Parameters<typeof getKnowHow>[1]> {
   section?: keyof Awaited<ReturnType<typeof getKnowHow>>;
   maxAchievements?: number;
   hideDates?: boolean;
@@ -38,7 +37,7 @@ export const getFormattedDates = async (
     dates.some((date) => date !== today && date > dropDayDate);
 
   const dropMonthDate = today.subtract(
-    dayjs.duration({ years: 5 }).asMilliseconds()
+    dayjs.duration({ years: 6 }).asMilliseconds()
   );
   const showMonth =
     dates[1].diff(dates[0], "year") < 1 ||
