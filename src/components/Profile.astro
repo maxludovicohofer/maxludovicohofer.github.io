@@ -1,6 +1,6 @@
 ---
-import LinkedInIcon from "@icons/linkedin.svg?raw";
-import MailIcon from "@icons/mail.svg?raw";
+import LinkedInIcon from "@icons/linkedin.svg";
+import MailIcon from "@icons/mail.svg";
 import { addBaseToLink, getLinkName } from "@integrations/astro-server";
 import { getMyName, getResumeDocuments, getSummary } from "@integrations/docs";
 import { i18n } from "@integrations/i18n-server";
@@ -70,10 +70,8 @@ const iconClass =
       >
       <div class="flex items-center gap-0.5 -ml-0.5 2xl:-ml-1">
         <Link href="https://linkedin.com/in/maxhofer" class={iconClass}
-          ><Fragment set:html={LinkedInIcon} /></Link
-        ><Link href={`mailto:${mail}`} class={iconClass}
-          ><Fragment set:html={MailIcon} /></Link
-        >
+          ><LinkedInIcon /></Link
+        ><Link href={`mailto:${mail}`} class={iconClass}><MailIcon /></Link>
       </div>
     </div>
   </div>
