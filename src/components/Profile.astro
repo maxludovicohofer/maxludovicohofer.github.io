@@ -45,7 +45,7 @@ const profilePictureEventName = await getLinkName(Astro, ProfilePicture.src);
 const myName = await getMyName(Astro);
 
 const iconClass =
-  "!size-6 drop-shadow-md hover:drop-shadow-lg active:drop-shadow 2xl:!size-8";
+  "size-6! drop-shadow-md hover:drop-shadow-lg active:drop-shadow-sm 2xl:size-8!";
 ---
 
 <PostPreview
@@ -54,7 +54,7 @@ const iconClass =
 >
   <div slot="header" class="mb-6 flex items-center gap-x-4">
     <Fullscreenable
-      class="!max-w-14 !rounded-full hover:scale-125 2xl:!max-w-20"
+      class="max-w-14! rounded-full! hover:scale-125 2xl:max-w-20!"
       noAnimation
       data-umami-event={profilePictureEventName}
       ><Media

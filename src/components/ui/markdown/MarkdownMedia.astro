@@ -11,10 +11,10 @@ const { class: className = "", alt, top, ...props } = Astro.props;
 const getAttribute = (
   altText: string,
   attribute: string,
-  isBoolean?: boolean,
+  isBoolean?: boolean
 ) => {
   const attributeRegex = new RegExp(
-    `(^|\\s)${attribute.toUpperCase()}${isBoolean ? "(?=($|\\s))" : "\\s\\S+"}`,
+    `(^|\\s)${attribute.toUpperCase()}${isBoolean ? "(?=($|\\s))" : "\\s\\S+"}`
   );
   const valueIndex = altText.search(attributeRegex);
 
@@ -32,7 +32,7 @@ const getAttribute = (
 const { value: eagerValue, cleanedAlt: altWithoutEager } = getAttribute(
   alt,
   "EAGER",
-  true,
+  true
 );
 
 const { value: aspectValue, cleanedAlt: altWithoutAspect } =
@@ -48,9 +48,9 @@ const { value: topValue, cleanedAlt: altWithoutTop } =
 
 <PostMedia
   alt={altWithoutTop}
-  class={`${className} h-[40vh] ${aspectValue ? "!w-auto" : ""}`}
-  outerProps={{ class: topValue ? "!mt-0 mb-6" : "", translate: "no" }}
+  class={`${className} h-[40vh] ${aspectValue ? "w-auto!" : ""}`}
+  outerProps={{ class: topValue ? "mt-0! mb-6" : "", translate: "no" }}
   loading={eagerValue ? "eager" : undefined}
-  aspect={aspectValue as ComponentProps<typeof PostMedia>["aspect"]}
+  aspect={aspectValue as Props["aspect"]}
   {...props}
 />

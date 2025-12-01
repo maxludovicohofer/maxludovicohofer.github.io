@@ -15,7 +15,6 @@
     "@astrojs/node": "^9.5.1",
     "@astrojs/partytown": "^2.1.4",
     "@astrojs/sitemap": "^3.6.0",
-    "@astrojs/tailwind": "^6.0.2",
     "@fontsource-variable/noto-emoji": "^5.1.1",
     "@fontsource-variable/noto-sans": "^5.1.1",
     "@fontsource-variable/noto-sans-jp": "^5.1.1",
@@ -23,6 +22,7 @@
     "@googleapis/youtube": "^22.0.0",
     "@octokit/rest": "^22.0.0",
     "@sentry/astro": "^8.49.0",
+    "@tailwindcss/vite": "^4.1.17",
     "astro": "^5.16.3",
     "astro-pdf": "^1.7.2",
     "dayjs": "^1.11.13",
@@ -37,12 +37,12 @@
     "reading-time": "^1.5.0",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
-    "tailwind-scrollbar-hide": "^1.1.7",
-    "tailwindcss": "^3.4.14",
+    "tailwind-scrollbar-hide": "^4.0.0",
+    "tailwindcss": "^4.1.17",
     "typescript": "^5.6.3"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.15",
+    "@tailwindcss/typography": "^0.5.19",
     "@types/indefinite": "^2.3.4",
     "@types/js-yaml": "^4.0.9",
     "@types/libsodium-wrappers": "^0.7.14",
@@ -50,6 +50,6 @@
     "@types/youtube": "^0.1.0",
     "prettier": "^3.5.3",
     "prettier-plugin-organize-imports": "^4.1.0",
-    "prettier-plugin-tailwindcss": "^0.6.11"
+    "prettier-plugin-tailwindcss": "^0.7.1"
   }
 }

@@ -53,7 +53,7 @@ const linkText = await t("Read development");
 
 <tr
   class={displayedPoints.length + (full ? responsibilities.length : 0) > 13
-    ? "print:!break-inside-auto"
+    ? "print:break-inside-auto!"
     : ""}
 >
   <td>
@@ -105,7 +105,7 @@ const linkText = await t("Read development");
     {
       link && (
         <div class="-mt-4 text-right">
-          <Link class="!text-wrap" href={link}>
+          <Link class="text-wrap!" href={link}>
             {linkText}
           </Link>
         </div>

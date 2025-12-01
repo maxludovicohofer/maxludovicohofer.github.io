@@ -35,7 +35,7 @@ const projects = (
 const t = i18n(Astro);
 ---
 
-<ul class={`${className} list-none ps-0 my-0 space-y-4`} {...props}>
+<ul class={`${className} list-none ps-0 my-0! space-y-4!`} {...props}>
   {
     projects.map(async (project) => {
       const dates = await getFormattedDates(
@@ -63,15 +63,15 @@ const t = i18n(Astro);
       return (
         <li class="ps-0">
           <div class="flex justify-between text-balance">
-            <Text class="my-0">{capitalize(category)}</Text>
-            <Text translateProps={{ disable: true }} class="my-0 text-right">
+            <Text class="my-0!">{capitalize(category)}</Text>
+            <Text translateProps={{ disable: true }} class="my-0! text-right">
               {dates.join(" - ")}
             </Text>
           </div>
           <Text tag="h5" translateProps={{ disable: true }}>
             {rolesSentence}
           </Text>
-          <Text class="my-0">
+          <Text class="my-0!">
             {getDescription(project, 1, true, "Design")}
             {awards.length
               ? endDelimiter(

@@ -141,19 +141,19 @@ const formattedKnowHow = await getFormattedKnowHow(Astro, Astro.props);
 {
   formattedKnowHow.map((experiences) => (
     <div {...props}>
-      <ol class="list-none ps-0 mt-0 space-y-4">
+      <ol class="list-none ps-0 mt-0 space-y-4!">
         {experiences.map(({ translatedId, sections }) => {
           const multipleSections = sections.length > 1;
 
           return (
             <li class="ps-0">
               {multipleSections && (
-                <Text translateProps={{ disable: true }} class="my-0">
+                <Text translateProps={{ disable: true }} class="my-0!">
                   {translatedId}
                 </Text>
               )}
               <ol
-                class={`list-none my-0 space-y-4 ${multipleSections ? "ps-4" : "ps-0"}`}
+                class={`list-none my-0! space-y-4! ${multipleSections ? "ps-4" : "ps-0"}`}
               >
                 {sections.map(
                   ({ translatedJobTitle, translatedDescription, dates }) => (
@@ -164,14 +164,17 @@ const formattedKnowHow = await getFormattedKnowHow(Astro, Astro.props);
                             {translatedJobTitle}
                           </Text>
                         ) : (
-                          <Text translateProps={{ disable: true }} class="my-0">
+                          <Text
+                            translateProps={{ disable: true }}
+                            class="my-0!"
+                          >
                             {translatedId}
                           </Text>
                         )}
                         {dates && (
                           <Text
                             translateProps={{ disable: true }}
-                            class="my-0 text-right"
+                            class="my-0! text-right"
                           >
                             {dates}
                           </Text>
@@ -182,11 +185,11 @@ const formattedKnowHow = await getFormattedKnowHow(Astro, Astro.props);
                           {translatedJobTitle}
                         </Text>
                       )}
-                      <ul class="list-none ps-0 my-0">
+                      <ul class="list-none ps-0 my-0!">
                         {translatedDescription && (
                           <Text
                             tag="li"
-                            class="ps-0 my-0"
+                            class="ps-0 my-0!"
                             translateProps={{ disable: true }}
                           >
                             {translatedDescription}

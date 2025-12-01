@@ -1,12 +1,13 @@
 ---
+import { getTextClass } from "@integrations/tailwind";
 import type { ComponentProps } from "astro/types";
 import CardButton from "./CardButton.astro";
-import SolidButton from "./SolidButton.astro";
 import { formatUmamiEvent } from "./Link.astro";
-import { getTextClass } from "@integrations/tailwind";
+import SolidButton from "./SolidButton.astro";
 
 interface Props
-  extends ComponentProps<typeof CardButton>,
+  extends
+    ComponentProps<typeof CardButton>,
     ComponentProps<typeof SolidButton> {
   cardButton?: boolean;
   inline?: boolean;
@@ -28,7 +29,7 @@ const buttonProps:
   | ComponentProps<typeof CardButton>
   | ComponentProps<typeof SolidButton> = {
   type: "button",
-  class: `${className} cursor-pointer font-semibold duration-150 hover:shadow-lg active:shadow ${inline ? "" : "w-full"} ${getTextClass(importance ?? "button", format ?? "none")}`,
+  class: `${className} cursor-pointer font-semibold duration-150 hover:shadow-lg active:shadow-sm ${inline ? "" : "w-full"} ${getTextClass(importance ?? "button", format ?? "none")}`,
   ...(umamiEvent
     ? { "data-umami-event": await formatUmamiEvent(Astro, umamiEvent) }
     : {}),

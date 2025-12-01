@@ -48,7 +48,7 @@ export type TextFormat =
 export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
   const headingsBase = [
     "text-zinc-950 dark:text-zinc-100 print:break-after-avoid",
-    "prose-headings:text-zinc-950 prose-headings:dark:text-zinc-100 print:prose-headings:break-after-avoid",
+    "prose-headings:text-zinc-950 dark:prose-headings:text-zinc-100 prose-headings:print:break-after-avoid",
   ] as const;
 
   const formats: Record<NonNullable<typeof format>, string> = {
@@ -72,7 +72,7 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
     p: {
       classes: `${blockClasses} print:break-inside-avoid-page`,
       prose:
-        "prose-p:text-xl 2xl:prose-p:text-3xl print:prose-p:text-xs empty:prose-p:hidden print:prose-p:break-inside-avoid-page",
+        "prose-p:text-xl prose-p:2xl:text-3xl prose-p:print:text-xs prose-p:empty:hidden prose-p:print:break-inside-avoid-page",
     },
     div: { classes: blockClasses },
     markdown: {
@@ -137,7 +137,7 @@ export const getTextClass = (size: TextTag | TextSize, format?: TextFormat) => {
       .filter((text) => !!text)
       .join(" ")} ${
       formats.base
-    } prose-pre:rounded-3xl prose-pre:whitespace-pre-wrap prose-pre:text-xs sm:prose-pre:text-base 2xl:prose-pre:text-2xl prose-code:has-[code]:prose-p:bg-[#24292e] prose-code:has-[code]:prose-p:text-[#e1e4e8] prose-code:has-[code]:prose-p:rounded-3xl prose-code:has-[code]:prose-p:before:hidden prose-code:has-[code]:prose-p:after:hidden prose-code:has-[code]:prose-p:font-normal prose-code:has-[code]:prose-p:px-1.5 2xl:prose-code:has-[code]:prose-p:px-2.5 prose-code:has-[code]:prose-p:py-0.5 print:prose-ul:break-inside-avoid-page has-[li:nth-child(6)]:print:prose-ul:break-inside-auto print:prose-ol:break-inside-avoid-page has-[li:nth-child(6)]:print:prose-ol:break-inside-auto prose-th:border-2 prose-th:py-2 prose-th:px-4 prose-td:border-2 prose-td:px-4 print:prose-tr:break-inside-avoid-page`;
+    } prose-pre:rounded-3xl prose-pre:whitespace-pre-wrap prose-pre:text-xs prose-pre:sm:text-base prose-pre:2xl:text-2xl prose-p:has-[code]:prose-code:bg-[#24292e] prose-p:has-[code]:prose-code:text-[#e1e4e8] prose-p:has-[code]:prose-code:rounded-3xl prose-p:has-[code]:prose-code:before:hidden prose-p:has-[code]:prose-code:after:hidden prose-p:has-[code]:prose-code:font-normal prose-p:has-[code]:prose-code:px-1.5 prose-p:has-[code]:prose-code:2xl:px-2.5 prose-p:has-[code]:prose-code:py-0.5 prose-ul:print:break-inside-avoid-page prose-ul:print:has-[li:nth-child(6)]:break-inside-auto prose-ol:print:break-inside-avoid-page prose-ol:print:has-[li:nth-child(6)]:break-inside-auto prose-th:border-2 prose-th:py-2 prose-th:px-4 prose-td:border-2 prose-td:px-4 prose-tr:print:break-inside-avoid-page`;
   }
 
   return `${elements[size].classes ?? ""} ${
@@ -171,7 +171,7 @@ export const getTailwindValueFromClassList = (
   key: string,
 ) => {
   const tailwindClass = classList.find((part) =>
-    part.replace("!", "").startsWith(key),
+    part.startsWith(key),
   );
 
   return tailwindClass && getTailwindClassValue(tailwindClass);
@@ -179,7 +179,7 @@ export const getTailwindValueFromClassList = (
 
 export const getTailwindClassValue = (tailwindClass: string) => {
   const classParts = tailwindClass.split("-");
-  return classParts[classParts.length - 1]!.replace(/[[\]']+/g, "");
+  return classParts[classParts.length - 1]!.replaceAll(/[[\]']+/g, "");
 };
 
 export const hasClass = (property: string, className: string) =>

@@ -169,14 +169,14 @@ export const activateModal = async (
   noAnimation?: boolean,
 ) => {
   const modalSlot = document.querySelector<HTMLDivElement>("div.modal-slot")!;
-  modalSlot.classList.add("!pointer-events-auto");
+  modalSlot.classList.add("pointer-events-auto!");
 
   const backdrop = modalSlot.querySelector<HTMLDivElement>("div.modal-back")!;
-  backdrop.classList.add("!opacity-100");
+  backdrop.classList.add("opacity-100!");
 
   const backButton =
     modalSlot.querySelector<HTMLButtonElement>("button.modal-back")!;
-  backButton.classList.add("!opacity-100");
+  backButton.classList.add("opacity-100!");
 
   const modal = modalSlot.querySelector<HTMLDivElement>("div.modal")!;
   modal.append(content);
@@ -199,17 +199,17 @@ export const activateModal = async (
 
 export const deactivateModal = () => {
   const modalSlot = document.querySelector<HTMLDivElement>("div.modal-slot")!;
-  modalSlot.classList.remove("!pointer-events-auto");
+  modalSlot.classList.remove("pointer-events-auto!");
 
   const backButton =
     modalSlot.querySelector<HTMLButtonElement>("button.modal-back")!;
-  backButton.classList.remove("!opacity-100");
+  backButton.classList.remove("opacity-100!");
 
   const modal = modalSlot.querySelector<HTMLDivElement>("div.modal")!;
   modal.replaceChildren();
 
   const backdrop = modalSlot.querySelector<HTMLDivElement>("div.modal-back")!;
-  backdrop.classList.remove("!opacity-100");
+  backdrop.classList.remove("opacity-100!");
 
   stopRotate3D(
     modal.classList.contains("rotate-3d")

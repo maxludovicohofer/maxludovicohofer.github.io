@@ -69,6 +69,16 @@ const widthClass = `${fullWidthClass} px-6 ${fullWidth ? "lg:px-24" : "max-w-[40
 export const buttonWidthClass = "max-w-[25rem] 2xl:max-w-[40rem]";
 
 const noTranslation = contentProps?.isLocalized ?? isLocalizedEntry(entry);
+
+const titleTranslateProps = (
+  noTranslation && !container
+    ? { translateProps: { disable: noTranslation } }
+    : {}
+) satisfies Partial<ComponentProps<typeof Text>>;
+
+const documentTranslateProps = (
+  noTranslation ? { entryProps: { noTranslation } } : {}
+) satisfies Partial<ComponentProps<typeof Document>>;
 ---
 
 {
@@ -87,7 +97,7 @@ const noTranslation = contentProps?.isLocalized ?? isLocalizedEntry(entry);
       class={`flex flex-col items-center w-full ${container ? "bg-zinc-200 dark:bg-zinc-950" : "bg-gradient-to-b from-zinc-100 dark:from-zinc-900 to-zinc-200 dark:to-zinc-950"} `}
     >
       <div
-        class={`${className} ${widthClass} ${inline ? "" : "pt-7 lg:pt-12"} ${Astro.slots.has("after") ? "!pb-0" : ""}`}
+        class={`${className} ${widthClass} ${inline ? "" : "pt-7 lg:pt-12"} ${Astro.slots.has("after") ? "pb-0!" : ""}`}
         {...props}
       >
         {
@@ -110,9 +120,7 @@ const noTranslation = contentProps?.isLocalized ?? isLocalizedEntry(entry);
         }
         <Text
           tag={container ? "h2" : "h1"}
-          {...(noTranslation && !container
-            ? { translateProps: { disable: noTranslation } }
-            : {}) satisfies Partial<ComponentProps<typeof Text>>}
+          {...titleTranslateProps}
           {...titleProps}><slot name="title">{title}</slot></Text
         >
         {category && <Text subtitle>{capitalize(category)}</Text>}
@@ -121,9 +129,7 @@ const noTranslation = contentProps?.isLocalized ?? isLocalizedEntry(entry);
           entry={entry}
           tag={Content || container ? "div" : undefined}
           class={`${Content ? "is-entry" : ""} ${publishingDate ? "mt-4" : "mt-6"}`}
-          {...(noTranslation
-            ? { entryProps: { noTranslation } }
-            : {}) satisfies Partial<ComponentProps<typeof Document>>}
+          {...documentTranslateProps}
           {...contentProps}><slot /></Document
         >
         {

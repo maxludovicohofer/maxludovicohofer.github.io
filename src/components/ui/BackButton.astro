@@ -16,7 +16,7 @@ const { class: className = "", buttonName, href, ...buttonProps } = Astro.props;
 
 <Button
   rounded
-  class={`${buttonName ?? (href ? "back-link" : "back-button")} ${className} fixed left-6 top-[calc(100dvh-5rem)] lg:top-12 !size-14 lg:!size-[2.8rem] hover:scale-110 active:scale-75`}
+  class={`${buttonName ?? (href ? "back-link" : "back-button")} ${className} fixed left-6 top-[calc(100dvh-5rem)] lg:top-12 size-14! lg:size-[2.8rem]! hover:scale-110 active:scale-75`}
   href={href}
   translateProps={{ disable: true }}
   data-base={await addBaseToLink(Astro)}
@@ -42,7 +42,7 @@ const { class: className = "", buttonName, href, ...buttonProps } = Astro.props;
     history.replaceState(
       { scrollX: 0, scrollY: 0 },
       "",
-      backButton.dataset.base,
+      backButton.dataset.base
     );
 
     history.pushState(startState, "", startLocation);
@@ -57,12 +57,12 @@ const { class: className = "", buttonName, href, ...buttonProps } = Astro.props;
   document.addEventListener("astro:page-load", () =>
     document
       .querySelectorAll<HTMLButtonElement>("button.back-button")
-      .forEach((button) => button.addEventListener("click", back)),
+      .forEach((button) => button.addEventListener("click", back))
   );
 
   document.addEventListener("astro:before-preparation", () =>
     document
       .querySelectorAll<HTMLButtonElement>("button.back-button")
-      .forEach((button) => button.removeEventListener("click", back)),
+      .forEach((button) => button.removeEventListener("click", back))
   );
 </script>

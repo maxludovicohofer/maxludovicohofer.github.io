@@ -30,7 +30,7 @@ const multipleChoice = translateLocales.length > 1;
           outline
           rounded
           linkClass="locale-anchor"
-          class={`locale-link ${multipleChoice ? "opacity-0 hidden" : ""} !text-xs`}
+          class={`locale-link ${multipleChoice ? "opacity-0 hidden" : ""} text-xs!`}
           href={getRelativeLocaleUrl(
             locale,
             getPathWithoutLocale(Astro.url.pathname)

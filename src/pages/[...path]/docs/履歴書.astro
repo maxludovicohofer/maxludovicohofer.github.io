@@ -74,7 +74,7 @@ const relocateSentence = `${await t("Open to relocate")}`;
 const myName = await getMyName(Astro);
 ---
 
-<DocumentPage class="print:prose-headings:text-inherit" isLocalized>
+<DocumentPage class="prose-headings:print:text-inherit" isLocalized>
   <div class="grid grid-flow-col grid-cols-3 gap-4">
     <div class="col-span-2">
       <div class="flex items-baseline justify-between">
@@ -111,10 +111,10 @@ const myName = await getMyName(Astro);
     </div>
     <div class="flex items-center justify-center">
       <ResumePicture
-        class="!h-44 rounded-none"
+        class="h-44! rounded-none"
         top={false}
         aspect="3/4"
-        outerProps={{ class: "!m-0" }}
+        outerProps={{ class: "m-0!" }}
       />
     </div>
   </div>

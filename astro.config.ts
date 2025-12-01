@@ -6,7 +6,7 @@ import { remarkCreated, remarkMinutesRead } from "./src/integrations/remark";
 
 import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 
 import node from "@astrojs/node";
 import sitemap from "@astrojs/sitemap";
@@ -64,7 +64,6 @@ export default defineConfig({
   },
 
   integrations: [
-    tailwind(),
     mdx(),
     partytown({ config: { forward: ["umami.track"] } }),
     sentry({
@@ -91,6 +90,9 @@ export default defineConfig({
     }),
     sitemap(),
   ],
+  vite: {
+    plugins: [tailwindcss()],
+  },
 
   markdown: {
     remarkPlugins: [remarkMinutesRead, remarkCreated, remarkMath],
@@ -110,6 +112,7 @@ export default defineConfig({
   adapter: node({
     mode: "standalone",
   }),
+
   build: {
     client: "./",
   },
