@@ -91,7 +91,8 @@ export default defineConfig({
     sitemap(),
   ],
   vite: {
-    plugins: [tailwindcss()],
+    //! TODO REMOVE THIS HOTFIX WHEN TYPES ARE FIXED IN TAILWINDCSS VITE PLUGIN
+    plugins: [tailwindcss() as any],
   },
 
   markdown: {
