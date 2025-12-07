@@ -27,7 +27,7 @@ const { class: className = "", ...props } = Astro.props;
       "--tw-translate-y",
       `-${scrollPercent * parallaxSpeed}rem`
     );
-    container.style.translate = `var(--tw-translate-x) var(--tw-translate-y)`;
+    container.style.translate = `var(--tw-translate-x, 0) var(--tw-translate-y)`;
   };
 
   let containers: NodeListOf<HTMLElement>;
