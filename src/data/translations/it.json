@@ -1747,8 +1747,8 @@
     "translation": "CV",
     "api": "deepl"
   },
-  "Supporting development of two ERPs in the retail and wholesale sectors, simplified legacy codebases and DevOps to improve maintainability and development speed, and fixed security vulnerabilities in legacy systems": {
-    "translation": "Supporto allo sviluppo di due ERP nei settori della vendita al dettaglio e all&#x27;ingrosso, semplificazione dei codici legacy e DevOps per migliorare la manutenibilità e la velocità di sviluppo, risoluzione delle vulnerabilità di sicurezza nei sistemi legacy.",
+  "Supporting development of 2 ERPs in the retail and wholesale sectors, simplified legacy codebases and DevOps to improve maintainability and development speed, and fixed security vulnerabilities in legacy systems": {
+    "translation": "Supportando lo sviluppo di 2 ERP nei settori della vendita al dettaglio e all'ingrosso, semplificato codici legacy e DevOps per migliorare la manutenibilità e la velocità di sviluppo, risolto vulnerabilità di sicurezza nei sistemi legacy.",
     "api": "deepl"
   }
 }
