@@ -3074,5 +3074,17 @@
   "present": {
     "translation": "現在",
     "api": "deepl"
+  },
+  "Developing front and back end of web applications and maintaining and modernizing legacy systems": {
+    "translation": "ウェブアプリケーションのフロントエンドおよびバックエンドの開発、ならびにレガシーシステムの保守および近代化",
+    "api": "deepl"
+  },
+  "Supporting development of two ERPs in the retail and wholesale sectors": {
+    "translation": "小売業および卸売業における二つのERPシステムの開発を支援いたします。",
+    "api": "deepl"
+  },
+  "Simplified legacy codebases and DevOps to improve maintainability and development speed": {
+    "translation": "レガシーコードベースとDevOpsを簡素化し、保守性と開発速度を向上させます",
+    "api": "deepl"
   }
 }
