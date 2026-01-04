@@ -1,7 +1,7 @@
 import { Octokit } from "@octokit/rest";
 import { GITHUB_TOKEN } from "astro:env/server";
-import { execSync } from "child_process";
 import sodium from "libsodium-wrappers";
+import { execSync } from "node:child_process";
 
 export async function updateGithubSecret(
   secretName: string,

@@ -1,16 +1,14 @@
-- id: Career break
-  translateId: true
-  start: 2022-03-01
+- id: Terya S.p.A.
+  start: 2025-12-15
+  team: 100
   tech:
-    - C++
-    - Unreal Engine
+    - C#
     - Python
     - agile
     - TDD
     - SQL
     - NoSQL
     - AWS
-    - Edgegap
     - CI \ CD
     - mobile
     - full stack
@@ -18,26 +16,56 @@
     - Photoshop
     - Illustrator
   skills:
-    - job: reskill as game developer
+    - job: full stack programmer
       tasks:
-        - leading development of game projects in Unreal Engine and Unity
-        - designing and programming game systems
+        - developing front and back end of web applications
+        - maintaining and modernizing legacy systems
       achievements:
-        - developed 1 published award-winning game, 6 prototypes, and 1 game AI framework tool with teams of 5-25 people
-        - thoroughly studied the entire game development pipeline, specializing in the technical side
+        - supporting development of two ERPs in the retail and wholesale sectors
+        - simplified legacy codebases and DevOps to improve maintainability and development speed
+        - fixed security vulnerabilities in legacy systems
 
-    - job: reskill as C++ programmer
-      tasks:
-        - programming low-latency systems in C++
-      achievements:
-        - developed complex physics systems in C++ 20
-        - programmed multithreaded realtime online systems using RPC over UDP
+# - id: Career break
+#   translateId: true
+#   start: 2022-03-01
+#   end: 2025-12-14
+#   tech:
+#     - C++
+#     - Unreal Engine
+#     - Python
+#     - agile
+#     - TDD
+#     - SQL
+#     - NoSQL
+#     - AWS
+#     - Edgegap
+#     - CI \ CD
+#     - mobile
+#     - full stack
+#     - Excel
+#     - Photoshop
+#     - Illustrator
+#   skills:
+#     - job: reskill as game developer
+#       tasks:
+#         - leading development of game projects in Unreal Engine and Unity
+#         - designing and programming game systems
+#       achievements:
+#         - developed 1 published award-winning game, 6 prototypes, and 1 game AI framework tool with teams of 5-25 people
+#         - thoroughly studied the entire game development pipeline, specializing in the technical side
 
-    - job: upskill as full stack programmer
-      tasks:
-        - programming full stack cloud-based web apps
-      achievements:
-        - developed 2 LLM-powered web apps with Vue, Astro, Node, PostgreSQL, and AWS
+#     - job: reskill as C++ programmer
+#       tasks:
+#         - programming low-latency systems in C++
+#       achievements:
+#         - developed complex physics systems in C++ 20
+#         - programmed multithreaded realtime online systems using RPC over UDP
+
+#     - job: upskill as full stack programmer
+#       tasks:
+#         - programming full stack cloud-based web apps
+#       achievements:
+#         - developed 2 LLM-powered web apps with Vue, Astro, Node, PostgreSQL, and AWS
 
 - id: INattivo Soc. Cons. a.r.l.
   start: 2021-05-01
