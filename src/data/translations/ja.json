@@ -3086,5 +3086,9 @@
   "Simplified legacy codebases and DevOps to improve maintainability and development speed": {
     "translation": "レガシーコードベースとDevOpsを簡素化し、保守性と開発速度を向上させます",
     "api": "deepl"
+  },
+  "Supporting development of 2 ERPs in the retail and wholesale sectors": {
+    "translation": "小売業および卸売業における2つのERPシステムの開発を支援いたします。",
+    "api": "deepl"
   }
 }
