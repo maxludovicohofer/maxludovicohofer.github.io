@@ -1,6 +1,7 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
 @import "tailwind-scrollbar-hide/v4";
+
+@plugin "@tailwindcss/typography";
 
 @theme {
   --breakpoint-2xl: 1800px;

@@ -170,9 +170,7 @@ export const getTailwindValueFromClassList = (
   classList: string[],
   key: string,
 ) => {
-  const tailwindClass = classList.find((part) =>
-    part.startsWith(key),
-  );
+  const tailwindClass = classList.find((part) => part.startsWith(key));
 
   return tailwindClass && getTailwindClassValue(tailwindClass);
 };
@@ -207,6 +205,8 @@ export const getAspectClass = (
       return "aspect-square";
     case "3/4":
       return "aspect-[3/4]";
+    default:
+      return "aspect-video";
   }
 };
 
