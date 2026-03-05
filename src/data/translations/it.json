@@ -1750,5 +1750,57 @@
   "Supporting development of 2 ERPs in the retail and wholesale sectors, simplified legacy codebases and DevOps to improve maintainability and development speed, and fixed security vulnerabilities in legacy systems": {
     "translation": "Supportando lo sviluppo di 2 ERP nei settori della vendita al dettaglio e all'ingrosso, semplificato codici legacy e DevOps per migliorare la manutenibilità e la velocità di sviluppo, risolto vulnerabilità di sicurezza nei sistemi legacy.",
     "api": "deepl"
+  },
+  "Close up of {}": {
+    "translation": "Primo piano di {}",
+    "api": "deepl"
+  },
+  "technical game designer": {
+    "translation": "progettista tecnico di giochi",
+    "api": "deepl"
+  },
+  "technical level designer": {
+    "translation": "progettista tecnico di livelli",
+    "api": "deepl"
+  },
+  "system programmer": {
+    "translation": "programmatore di sistema",
+    "api": "deepl"
+  },
+  "engine programmer": {
+    "translation": "programmatore di motori",
+    "api": "deepl"
+  },
+  "game backend programmer": {
+    "translation": "Programmatore di backend per videogiochi",
+    "api": "deepl"
+  },
+  "UI programmer": {
+    "translation": "Programmatore UI",
+    "api": "deepl"
+  },
+  "tech lead": {
+    "translation": "responsabile tecnico",
+    "api": "deepl"
+  },
+  "I'm a tech lead with 3 years of professional experience in programming and leadership. I specialize in product management, scrum, and software development": {
+    "translation": "Sono un responsabile tecnico con tre anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato in gestione dei prodotti, scrum e sviluppo di software.",
+    "api": "deepl"
+  },
+  "C++ programmer": {
+    "translation": "Programmatore C++",
+    "api": "deepl"
+  },
+  "I'm a C++ programmer with 3 years of professional experience in programming and leadership. I specialize in low-latency multithreading and cost and performance optimization": {
+    "translation": "Sono un programmatore C++ con tre anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato in multithreading a bassa latenza e nell&#x27;ottimizzazione dei costi e delle prestazioni.",
+    "api": "deepl"
+  },
+  "full stack programmer": {
+    "translation": "programmatore full stack",
+    "api": "deepl"
+  },
+  "I'm a full stack programmer with 3 years of professional experience in programming and leadership. I specialize in progressive web apps, cloud infrastructure, and cost and performance optimization": {
+    "translation": "Sono un programmatore full stack con tre anni di esperienza professionale nella programmazione e nella leadership. Sono specializzato in applicazioni web progressive, infrastrutture cloud e ottimizzazione dei costi e delle prestazioni.",
+    "api": "deepl"
   }
 }
