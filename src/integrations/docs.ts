@@ -184,6 +184,12 @@ export const getAddress = async (astro: AstroGlobal, options?: I18nOptions) => {
   };
 };
 
+export const getProfileImageAlt = async (astro: AstroGlobal) => {
+  const t = i18n(astro);
+  const myName = await getMyName(astro);
+  return t("Close up of {}", { interpolate: myName.translated });
+};
+
 export const getMyName = async (astro: AstroGlobal) => {
   const t = i18n(astro);
   const { surnameFirst, nameSeparator } = getLocaleInfo(astro);

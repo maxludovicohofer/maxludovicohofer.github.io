@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # OAuth
 credentials.json
+
+# AI
+.claude/

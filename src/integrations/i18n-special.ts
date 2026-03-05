@@ -4,6 +4,7 @@ import { defaultLocale, type locales } from "./astro-config";
 export type LocaleInfo = {
   languageName: string;
   nationName: string;
+  territory: string;
   delimiters: string;
   cellphonePrefix: `+${number}`;
   resumeIsCalledCV?: boolean;
@@ -18,6 +19,7 @@ export const localeInfo: Record<(typeof locales)[number], LocaleInfo> = {
   en: {
     languageName: "English",
     nationName: "United States",
+    territory: "US",
     delimiters: ".?!",
     cellphonePrefix: "+1",
     articleForOne: "a",
@@ -27,6 +29,7 @@ export const localeInfo: Record<(typeof locales)[number], LocaleInfo> = {
   ja: {
     languageName: "日本語",
     nationName: "Japan",
+    territory: "JP",
     delimiters: "。？！",
     cellphonePrefix: "+81",
     surnameFirst: true,
@@ -37,6 +40,7 @@ export const localeInfo: Record<(typeof locales)[number], LocaleInfo> = {
   it: {
     languageName: "Italiano",
     nationName: "Italy",
+    territory: "IT",
     delimiters: ".?!",
     cellphonePrefix: "+39",
     articleForOne: "un",

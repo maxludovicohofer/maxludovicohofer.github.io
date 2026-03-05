@@ -1,8 +1,15 @@
 ---
+import GitHubIcon from "@icons/github.svg";
 import LinkedInIcon from "@icons/linkedin.svg";
 import MailIcon from "@icons/mail.svg";
+import { socialLinks } from "@integrations/astro-config";
 import { addBaseToLink, getLinkName } from "@integrations/astro-server";
-import { getMyName, getResumeDocuments, getSummary } from "@integrations/docs";
+import {
+  getMyName,
+  getProfileImageAlt,
+  getResumeDocuments,
+  getSummary,
+} from "@integrations/docs";
 import { i18n } from "@integrations/i18n-server";
 import { getPrintPath } from "@integrations/pdf";
 import ProfilePicture from "@pictures/profile-picture-alt.jpg";
@@ -31,7 +38,7 @@ const documentPageLinks = await Promise.all(
       documentName === "職務経歴書"
         ? viewWorkHistorySentence
         : viewResumeSentence,
-  }))
+  })),
 );
 const documentLinks = documentPageLinks.map(({ path, ...link }) => ({
   path: `/${getPrintPath(path)}`,
@@ -43,6 +50,7 @@ const summary = await getSummary(Astro, true);
 const profilePictureEventName = await getLinkName(Astro, ProfilePicture.src);
 
 const myName = await getMyName(Astro);
+const profileImageAlt = await getProfileImageAlt(Astro);
 
 const iconClass =
   "size-6! drop-shadow-md hover:drop-shadow-lg active:drop-shadow-sm 2xl:size-8!";
@@ -60,7 +68,8 @@ const iconClass =
       ><Media
         src={ProfilePicture}
         class="rounded-full"
-        alt={`Close up of ${myName.rawButOrdered}`}
+        alt={profileImageAlt}
+        altTranslateProps={{ disable: true }}
         loading="eager"
       /></Fullscreenable
     >
@@ -69,9 +78,11 @@ const iconClass =
         >{myName.translated}</Text
       >
       <div class="flex items-center gap-0.5 -ml-0.5 2xl:-ml-1">
-        <Link href="https://linkedin.com/in/maxhofer" class={iconClass}
+        <Link href={socialLinks.linkedin} class={iconClass}
           ><LinkedInIcon /></Link
-        ><Link href={`mailto:${mail}`} class={iconClass}><MailIcon /></Link>
+        >
+        <Link href={socialLinks.github} class={iconClass}><GitHubIcon /></Link>
+        <Link href={`mailto:${mail}`} class={iconClass}><MailIcon /></Link>
       </div>
     </div>
   </div>
@@ -89,7 +100,7 @@ const iconClass =
             >
               <div class="group-hover:animate-pulse">{button}</div>
             </Button>
-          )
+          ),
         )
       }
     </div>

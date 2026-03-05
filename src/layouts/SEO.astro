@@ -1,0 +1,145 @@
+---
+import {
+  defaultLocale,
+  locales,
+  myName as myNameInfo,
+  socialLinks,
+} from "@integrations/astro-config";
+import { getRole } from "@integrations/astro-server";
+import { compactTechList, getTechList } from "@integrations/content";
+import { getMyName, getProfileImageAlt, getSummary } from "@integrations/docs";
+import { addLocaleToLink, getPathWithoutLocale } from "@integrations/i18n";
+import { i18n } from "@integrations/i18n-server";
+import { getCurrentLocale, localeInfo } from "@integrations/i18n-special";
+import { capitalize } from "@integrations/text";
+import ProfilePicture from "@pictures/profile-picture-alt.jpg";
+import type { Dayjs } from "dayjs";
+
+interface Props {
+  title?: string | undefined;
+  description?: string | undefined;
+  articlePublishedDateTime?: Dayjs | undefined;
+}
+
+const { title, description, articlePublishedDateTime } = Astro.props;
+
+const pageType = articlePublishedDateTime ? "article" : "website";
+
+const currentLocale = getCurrentLocale(Astro);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const myName = await getMyName(Astro);
+
+const pageImage = new URL(ProfilePicture.src, Astro.site).href;
+
+const t = i18n(Astro);
+const imageAlt = await getProfileImageAlt(Astro);
+const { role } = await getRole(Astro);
+const jobTitle = capitalize(await t(role.id));
+const summary = await getSummary(Astro, true);
+const knowsAbout = compactTechList(await getTechList(Astro)).map(
+  ({ title }) => title,
+);
+
+const pathWithoutLocale = getPathWithoutLocale(Astro.url.pathname);
+const siteName = `${myNameInfo.name} ${myNameInfo.surname} - Portfolio`;
+
+const formatLocalePath = (locale: keyof typeof localeInfo) =>
+  new URL(addLocaleToLink(pathWithoutLocale, locale), Astro.site).href;
+
+const formatOpenGraphLocale = (locale: keyof typeof localeInfo) =>
+  `${locale}_${localeInfo[locale].territory}`;
+---
+
+<!-- Canonical & Alternates -->
+<link rel="canonical" href={canonicalURL.href} />
+{
+  locales
+    .filter((locale) => locale !== defaultLocale)
+    .map((locale) => (
+      <link rel="alternate" hreflang={locale} href={formatLocalePath(locale)} />
+    ))
+}
+<link
+  rel="alternate"
+  hreflang="x-default"
+  href={formatLocalePath(defaultLocale)}
+/>
+
+<!-- Open Graph -->
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={pageType} />
+<meta property="og:url" content={canonicalURL.href} />
+<meta property="og:image" content={pageImage} />
+<meta property="og:image:alt" content={imageAlt} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content={formatOpenGraphLocale(currentLocale)} />
+{
+  locales
+    .filter((locale) => locale !== currentLocale)
+    .map((locale) => (
+      <meta
+        property="og:locale:alternate"
+        content={formatOpenGraphLocale(locale)}
+      />
+    ))
+}
+{
+  articlePublishedDateTime && (
+    <meta
+      property="article:published_time"
+      content={articlePublishedDateTime.toISOString()}
+    />
+  )
+}
+{
+  pageType === "article" && (
+    <meta property="article:author" content={myName.translated} />
+  )
+}
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={pageImage} />
+<meta name="twitter:image:alt" content={imageAlt} />
+
+<!-- Additional SEO -->
+<meta name="author" content={myName.translated} />
+<meta name="robots" content="index, follow" />
+
+<!-- Linked Data: structured metadata for search engines, using the schema.org vocabulary -->
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: myName.translated,
+    givenName: myNameInfo.name,
+    familyName: myNameInfo.surname,
+    url: Astro.site?.href,
+    image: pageImage,
+    sameAs: Object.values(socialLinks),
+    jobTitle,
+    description: summary,
+    knowsAbout,
+  })}
+/>
+<script
+  is:inline
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: siteName,
+    url: Astro.site?.href,
+    author: {
+      "@type": "Person",
+      name: myName.translated,
+    },
+    inLanguage: locales,
+  })}
+/>

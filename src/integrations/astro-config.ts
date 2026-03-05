@@ -8,5 +8,10 @@ export const defaultLocale = locales[0];
 
 export const myName = { name: "Max Ludovico", surname: "Hofer" };
 
+export const socialLinks = {
+  linkedin: "https://linkedin.com/in/maxhofer",
+  github: "https://github.com/maxludovicohofer",
+};
+
 export const getShortName = (fullName: string[]) =>
   fullName.map((part) => part.split(" ")[0]);

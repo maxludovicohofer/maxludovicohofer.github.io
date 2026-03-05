@@ -4,7 +4,7 @@ import {
   getSortedPosts,
   isLocalizedEntry,
 } from "@integrations/astro-server";
-import { getTitle } from "@integrations/content";
+import { getPublishingDate, getTitle } from "@integrations/content";
 import { getDescription } from "@layouts/document/Document.astro";
 import Page from "@layouts/Page.astro";
 import Post from "@post/Post.astro";
@@ -27,7 +27,7 @@ const otherSlot =
       getPostListThreshold(entry.collection),
       {
         excluded: [entry.id],
-      }
+      },
     )
   ).length > 0
     ? "after"
@@ -40,6 +40,9 @@ const otherSlot =
   noTitleTranslation={Astro.props.titleProps?.translateProps?.disable ??
     noTranslation}
   noDescriptionTranslation={noTranslation}
+  seoProps={{
+    articlePublishedDateTime: getPublishingDate(entry),
+  }}
   ><Post
     fullWidthAfter
     contentProps={{ isLocalized: noTranslation, ...contentProps }}
